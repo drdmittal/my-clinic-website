@@ -34,7 +34,7 @@
         /* Hero Section */
         .hero {
             background: linear-gradient(135deg, #eff6ff 0%, #e0f2fe 100%);
-            padding: 60px 5%; text-align: center;
+            padding: 50px 5%; text-align: center;
         }
         .hero h1 { font-size: 2.2rem; color: #1e3a8a; margin-bottom: 8px; }
         .hero p { font-size: 1.1rem; color: #475569; font-weight: 500; margin-bottom: 20px; }
@@ -44,6 +44,26 @@
         /* Container Section */
         .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
         .section-title { text-align: center; font-size: 1.8rem; color: #1e3a8a; margin-bottom: 30px; position: relative; }
+
+        /* Doctor Profile Card */
+        .doctor-profile-card {
+            background: #ffffff; border-radius: 20px; box-shadow: var(--card-shadow);
+            padding: 30px; border: 1px solid #e2e8f0; margin-bottom: 40px;
+            display: flex; flex-wrap: wrap; gap: 30px; align-items: center;
+        }
+        .doctor-img-container {
+            flex: 1; min-width: 250px; text-align: center;
+        }
+        .doctor-img {
+            width: 220px; height: 220px; border-radius: 50%; object-fit: cover;
+            border: 4px solid var(--primary); box-shadow: 0 8px 16px rgba(37, 99, 235, 0.15);
+        }
+        .doctor-info { flex: 2; min-width: 300px; }
+        .doctor-info h2 { color: #1e3a8a; font-size: 1.8rem; margin-bottom: 5px; }
+        .doctor-info .subhead { color: var(--primary); font-weight: 600; font-size: 1.1rem; margin-bottom: 15px; }
+        .qualification-list { list-style: none; margin-bottom: 20px; }
+        .qualification-list li { margin-bottom: 8px; font-size: 0.95rem; color: #334155; display: flex; align-items: center; gap: 10px; }
+        .qualification-list li i { color: var(--primary); }
 
         /* Embedded Booking Section */
         .booking-card {
@@ -61,6 +81,12 @@
         .info-card:hover { transform: translateY(-4px); }
         .info-card i { font-size: 2.2rem; color: var(--primary); margin-bottom: 12px; }
         .info-card h3 { font-size: 1.2rem; margin-bottom: 10px; color: #0f172a; }
+
+        /* Clinic Address & Map Grid */
+        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        .contact-details { background: var(--light-bg); padding: 30px; border-radius: 20px; border: 1px solid #e2e8f0; }
+        .contact-item { display: flex; gap: 15px; margin-bottom: 20px; align-items: flex-start; }
+        .contact-item i { font-size: 1.3rem; color: var(--primary); margin-top: 4px; }
 
         /* Social Media Connections */
         .social-section { text-align: center; background: #f1f5f9; padding: 50px 20px; margin-top: 50px; }
@@ -84,27 +110,49 @@
     <header>
         <div class="logo"><i class="fa-solid fa-baby"></i> Dr. Dinesh Mittal</div>
         <nav>
+            <a href="#about">About Doctor</a>
             <a href="#book">Book Appointment</a>
             <a href="#services">Services</a>
-            <a href="#health-tips">Parenting Tips</a>
-            <a href="#contact">Contact</a>
+            <a href="#clinic-location">Location</a>
         </nav>
     </header>
 
     <!-- Hero Section -->
     <section class="hero">
         <h1>Dr. Dinesh Mittal</h1>
-        <p>Senior Child Specialist & Pediatrician</p>
+        <p>Senior Child Specialist & Pediatrician in Rohini, Delhi</p>
         <div class="hero-badges">
             <span class="badge"><i class="fa-solid fa-location-dot"></i> Rohini, Delhi</span>
-            <span class="badge"><i class="fa-solid fa-shield-halved"></i> Expert Child Care</span>
+            <span class="badge"><i class="fa-solid fa-user-doctor"></i> Specialized Pediatric Care</span>
             <span class="badge"><i class="fa-solid fa-clock"></i> Easy Online Booking</span>
         </div>
     </section>
 
+    <!-- Doctor Profile Section -->
+    <div class="container" id="about">
+        <div class="doctor-profile-card">
+            <div class="doctor-img-container">
+                <!-- Replace 'doctor-photo.jpg' with your actual image filename or web link -->
+                <img src="https://via.placeholder.com/220" alt="Dr. Dinesh Mittal - Pediatrician in Rohini" class="doctor-img">
+            </div>
+            <div class="doctor-info">
+                <h2>Dr. Dinesh Mittal</h2>
+                <div class="subhead">MBBS, Diploma in Child Health (DCH) | Senior Pediatrician</div>
+                <p style="margin-bottom: 15px; color: #475569; font-size: 0.95rem;">
+                    Dedicated to providing compassionate, evidence-based healthcare for newborns, infants, and growing children in Rohini and North Delhi. Specializing in preventive health, vaccination schedules, growth monitoring, and pediatric disease management.
+                </p>
+                <ul class="qualification-list">
+                    <li><i class="fa-solid fa-circle-check"></i> <strong>Specialization:</strong> Newborn Care, Pediatric Infections, Asthma & Allergies</li>
+                    <li><i class="fa-solid fa-circle-check"></i> <strong>Location:</strong> Rohini Sector 11 / Sector 15, Delhi NCR</li>
+                    <li><i class="fa-solid fa-circle-check"></i> <strong>Languages:</strong> English, Hindi</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
     <!-- Appointment Booking Section (Embedded App) -->
     <div class="container" id="book">
-        <h2 class="section-title">Schedule an Appointment</h2>
+        <h2 class="section-title">Schedule Consultation Appointment</h2>
         <div class="booking-card">
             <iframe src="https://script.google.com/macros/s/AKfycbzZZJon_KvK0ibezOQT0ktfkxIB8-ee_-BnRKra6kvejGrbG1dFjMSD8f9zhR3ZXeWbXA/exec"></iframe>
         </div>
@@ -132,27 +180,50 @@
         </div>
     </div>
 
-    <!-- Imparting Information / Parent Guidance -->
-    <div class="container" id="health-tips">
-        <h2 class="section-title">Parenting & Health Insights</h2>
-        <div class="grid">
-            <div class="info-card">
-                <i class="fa-solid fa-apple-whole"></i>
-                <h3>Child Nutrition Guidance</h3>
-                <p>Customized diet advice for toddlers and young children to tackle picky eating and boost immunity naturally.</p>
+    <!-- Location & Contact Info -->
+    <div class="container" id="clinic-location">
+        <h2 class="section-title">Visit Our Clinic</h2>
+        <div class="contact-grid">
+            <div class="contact-details">
+                <h3 style="color: #1e3a8a; margin-bottom: 20px;">Clinic Information</h3>
+                
+                <div class="contact-item">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <div>
+                        <strong>Clinic Address:</strong><br>
+                        Dr. Dinesh Mittal Child Clinic, Rohini, Delhi - 110085
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <i class="fa-solid fa-clock"></i>
+                    <div>
+                        <strong>Consultation Hours:</strong><br>
+                        Mon - Sat: 10:00 AM - 1:00 PM | 6:00 PM - 8:30 PM<br>
+                        Sunday: 11:00 AM - 12:00 PM
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <i class="fa-solid fa-phone"></i>
+                    <div>
+                        <strong>Contact Number:</strong><br>
+                        +91 98765 43210
+                    </div>
+                </div>
             </div>
-            <div class="info-card">
-                <i class="fa-solid fa-chart-line"></i>
-                <h3>Developmental Milestones</h3>
-                <p>Monitor your child's cognitive, speech, and physical milestones at every stage of growth.</p>
+
+            <!-- Google Map -->
+            <div class="contact-details" style="padding: 10px;">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13998.243555981084!2d77.1025!3d28.7185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjjCsDQzJzA2LjYiTiA3N8KwMDYnMDkuMCJF!5e0!3m2!1sen!2sin!4v1600000000000!5m2!1sen!2sin" width="100%" height="280" style="border:0; border-radius: 12px;" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </div>
     </div>
 
-    <!-- Social Media & Direct Connection -->
+    <!-- Social Media Connections -->
     <section class="social-section" id="contact">
-        <h2>Connect With Our Clinic</h2>
-        <p>Get health updates, emergency help, or leave a review for Dr. Dinesh Mittal</p>
+        <h2>Connect With Dr. Dinesh Mittal</h2>
+        <p>Get health updates, emergency help, or leave a review for our clinic</p>
         <div class="social-links">
             <a href="https://wa.me/919876543210" target="_blank" class="social-btn whatsapp">
                 <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
