@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Dr. Dinesh Mittal | Senior Child Specialist & Pediatrician in Sector 3 Rohini</title>
     <!-- Google Fonts & FontAwesome Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -15,90 +15,128 @@
             --secondary: #0ea5e9;
             --light-bg: #f8fafc;
             --dark-text: #1e293b;
-            --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            --card-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { color: var(--dark-text); background-color: #ffffff; line-height: 1.6; }
+        html { scroll-behavior: smooth; }
+        body { color: var(--dark-text); background-color: #ffffff; line-height: 1.6; -webkit-tap-highlight-color: transparent; }
 
         /* Navigation Header */
         header {
             position: sticky; top: 0; background: #ffffff; z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 15px 5%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 12px 5%;
             display: flex; justify-content: space-between; align-items: center;
         }
-        .logo { font-size: 1.3rem; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 8px; }
-        nav a { text-decoration: none; color: var(--dark-text); font-weight: 600; margin-left: 20px; font-size: 0.95rem; }
+        .logo { font-size: 1.15rem; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 8px; }
+        nav { display: flex; align-items: center; }
+        nav a { text-decoration: none; color: var(--dark-text); font-weight: 600; margin-left: 15px; font-size: 0.85rem; }
         nav a:hover { color: var(--primary); }
+        .header-call-btn {
+            display: none; background: #25d366; color: white; padding: 6px 12px;
+            border-radius: 20px; text-decoration: none; font-size: 0.8rem; font-weight: 600;
+        }
 
         /* Hero Section */
         .hero {
             background: linear-gradient(135deg, #eff6ff 0%, #e0f2fe 100%);
-            padding: 50px 5%; text-align: center;
+            padding: 35px 20px; text-align: center;
         }
-        .hero h1 { font-size: 2.2rem; color: #1e3a8a; margin-bottom: 8px; }
-        .hero p { font-size: 1.1rem; color: #475569; font-weight: 500; margin-bottom: 20px; }
-        .hero-badges { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 25px; }
-        .badge { background: #ffffff; padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; color: var(--primary); box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .hero h1 { font-size: 1.75rem; color: #1e3a8a; margin-bottom: 6px; line-height: 1.25; }
+        .hero p { font-size: 0.95rem; color: #475569; font-weight: 500; margin-bottom: 18px; }
+        .hero-badges { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 15px; }
+        .badge { background: #ffffff; padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; color: var(--primary); box-shadow: 0 2px 5px rgba(0,0,0,0.04); }
 
-        /* Container Section */
-        .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
-        .section-title { text-align: center; font-size: 1.8rem; color: #1e3a8a; margin-bottom: 30px; position: relative; }
+        /* Main Container */
+        .container { max-width: 1100px; margin: 25px auto; padding: 0 16px; }
+        .section-title { text-align: center; font-size: 1.4rem; color: #1e3a8a; margin-bottom: 20px; }
 
         /* Doctor Profile Card */
         .doctor-profile-card {
-            background: #ffffff; border-radius: 20px; box-shadow: var(--card-shadow);
-            padding: 30px; border: 1px solid #e2e8f0; margin-bottom: 40px;
-            display: flex; flex-wrap: wrap; gap: 30px; align-items: center;
+            background: #ffffff; border-radius: 16px; box-shadow: var(--card-shadow);
+            padding: 20px; border: 1px solid #e2e8f0; margin-bottom: 25px;
+            display: flex; flex-direction: column; align-items: center; text-align: center; gap: 15px;
         }
-        .doctor-img-container { flex: 1; min-width: 250px; text-align: center; }
         .doctor-img {
-            width: 220px; height: 220px; border-radius: 50%; object-fit: cover;
-            border: 4px solid var(--primary); box-shadow: 0 8px 16px rgba(37, 99, 235, 0.15);
+            width: 160px; height: 160px; border-radius: 50%; object-fit: cover;
+            border: 3.5px solid var(--primary); box-shadow: 0 6px 12px rgba(37, 99, 235, 0.15);
         }
-        .doctor-info { flex: 2; min-width: 300px; }
-        .doctor-info h2 { color: #1e3a8a; font-size: 1.8rem; margin-bottom: 5px; }
-        .doctor-info .subhead { color: var(--primary); font-weight: 600; font-size: 1.1rem; margin-bottom: 15px; }
-        .qualification-list { list-style: none; margin-bottom: 20px; }
-        .qualification-list li { margin-bottom: 8px; font-size: 0.95rem; color: #334155; display: flex; align-items: center; gap: 10px; }
-        .qualification-list li i { color: var(--primary); }
+        .doctor-info h2 { color: #1e3a8a; font-size: 1.4rem; margin-bottom: 4px; }
+        .doctor-info .subhead { color: var(--primary); font-weight: 600; font-size: 0.95rem; margin-bottom: 12px; }
+        .qualification-list { list-style: none; text-align: left; margin-top: 10px; }
+        .qualification-list li { margin-bottom: 8px; font-size: 0.85rem; color: #334155; display: flex; align-items: flex-start; gap: 8px; }
+        .qualification-list li i { color: var(--primary); margin-top: 3px; }
 
         /* Embedded Booking Section */
         .booking-card {
-            background: #ffffff; border-radius: 20px; box-shadow: var(--card-shadow);
-            padding: 20px; overflow: hidden; border: 1px solid #e2e8f0;
+            background: #ffffff; border-radius: 16px; box-shadow: var(--card-shadow);
+            padding: 10px; overflow: hidden; border: 1px solid #e2e8f0;
         }
-        iframe { width: 100%; height: 780px; border: none; border-radius: 12px; }
+        iframe { width: 100%; height: 750px; border: none; border-radius: 10px; }
 
         /* Info & Health Cards Grid */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
         .info-card {
-            background: var(--light-bg); border-radius: 16px; padding: 25px;
-            border: 1px solid #e2e8f0; transition: transform 0.2s;
+            background: var(--light-bg); border-radius: 14px; padding: 18px;
+            border: 1px solid #e2e8f0; text-align: center;
         }
-        .info-card:hover { transform: translateY(-4px); }
-        .info-card i { font-size: 2.2rem; color: var(--primary); margin-bottom: 12px; }
-        .info-card h3 { font-size: 1.2rem; margin-bottom: 10px; color: #0f172a; }
+        .info-card i { font-size: 1.8rem; color: var(--primary); margin-bottom: 8px; }
+        .info-card h3 { font-size: 1.1rem; margin-bottom: 6px; color: #0f172a; }
+        .info-card p { font-size: 0.85rem; color: #475569; }
 
         /* Contact Section */
-        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
-        .contact-details { background: var(--light-bg); padding: 30px; border-radius: 20px; border: 1px solid #e2e8f0; }
-        .contact-item { display: flex; gap: 15px; margin-bottom: 20px; align-items: flex-start; }
-        .contact-item i { font-size: 1.3rem; color: var(--primary); margin-top: 4px; }
+        .contact-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
+        .contact-details { background: var(--light-bg); padding: 20px; border-radius: 16px; border: 1px solid #e2e8f0; }
+        .contact-item { display: flex; gap: 12px; margin-bottom: 15px; align-items: flex-start; font-size: 0.9rem; }
+        .contact-item i { font-size: 1.1rem; color: var(--primary); margin-top: 3px; }
 
         /* Social Section */
-        .social-section { text-align: center; background: #f1f5f9; padding: 50px 20px; margin-top: 50px; }
-        .social-links { display: flex; justify-content: center; gap: 20px; margin-top: 20px; flex-wrap: wrap; }
+        .social-section { text-align: center; background: #f1f5f9; padding: 35px 16px; margin-top: 35px; }
+        .social-section h2 { font-size: 1.3rem; color: #1e3a8a; }
+        .social-section p { font-size: 0.85rem; color: #475569; }
+        .social-links { display: flex; flex-direction: column; gap: 12px; margin-top: 18px; }
         .social-btn {
-            display: flex; align-items: center; gap: 10px; padding: 12px 24px;
-            border-radius: 30px; text-decoration: none; color: #ffffff; font-weight: 600; font-size: 0.95rem;
+            display: flex; align-items: center; justify-content: center; gap: 10px; padding: 12px 20px;
+            border-radius: 25px; text-decoration: none; color: #ffffff; font-weight: 600; font-size: 0.9rem;
+            width: 100%; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
         .whatsapp { background: #25d366; }
         .google { background: #4285f4; }
         .maps-btn { background: #ea4335; }
-        .social-btn:hover { opacity: 0.9; }
 
-        footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 25px; font-size: 0.85rem; }
+        footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 20px 15px; font-size: 0.8rem; }
+
+        /* Desktop Adjustments */
+        @media (min-width: 768px) {
+            header { padding: 15px 5%; }
+            .logo { font-size: 1.3rem; }
+            nav a { margin-left: 20px; font-size: 0.95rem; }
+            .hero { padding: 50px 5%; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero p { font-size: 1.1rem; }
+            .badge { font-size: 0.85rem; padding: 6px 16px; }
+            .container { margin: 40px auto; padding: 0 20px; }
+            .section-title { font-size: 1.8rem; margin-bottom: 30px; }
+            .doctor-profile-card { flex-direction: row; text-align: left; padding: 30px; gap: 30px; }
+            .doctor-img { width: 200px; height: 200px; }
+            .doctor-info h2 { font-size: 1.8rem; }
+            .doctor-info .subhead { font-size: 1.1rem; }
+            .qualification-list li { font-size: 0.95rem; }
+            .grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+            .info-card { padding: 25px; text-align: left; }
+            .info-card i { font-size: 2.2rem; }
+            .info-card h3 { font-size: 1.2rem; }
+            .info-card p { font-size: 0.9rem; }
+            .contact-grid { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
+            .social-links { flex-direction: row; justify-content: center; }
+            .social-btn { width: auto; }
+        }
+
+        /* Small Mobile Specifics */
+        @media (max-width: 480px) {
+            nav a:not([href="#book"]) { display: none; }
+            .header-call-btn { display: inline-flex; align-items: center; gap: 5px; }
+        }
     </style>
 </head>
 <body>
@@ -107,20 +145,21 @@
     <header>
         <div class="logo"><i class="fa-solid fa-baby"></i> Dr. Dinesh Mittal</div>
         <nav>
-            <a href="#about">About Doctor</a>
-            <a href="#book">Book Appointment</a>
+            <a href="#about">About</a>
+            <a href="#book" style="color: var(--primary); font-weight:700;">Book Now</a>
             <a href="#services">Services</a>
             <a href="#clinic-location">Location</a>
         </nav>
+        <a href="tel:8130521456" class="header-call-btn"><i class="fa-solid fa-phone"></i> Call</a>
     </header>
 
     <!-- Hero Section -->
     <section class="hero">
         <h1>Dr. Dinesh Mittal</h1>
-        <p>Senior Child Specialist & Pediatrician in Sector 3 Rohini, Delhi</p>
+        <p>Senior Child Specialist & Pediatrician in Sector 3 Rohini</p>
         <div class="hero-badges">
-            <span class="badge"><i class="fa-solid fa-location-dot"></i> Sector 3 Rohini, Delhi</span>
-            <span class="badge"><i class="fa-solid fa-user-doctor"></i> Specialized Pediatric Care</span>
+            <span class="badge"><i class="fa-solid fa-location-dot"></i> Sector 3 Rohini</span>
+            <span class="badge"><i class="fa-solid fa-user-doctor"></i> Child Specialist</span>
             <span class="badge"><i class="fa-solid fa-clock"></i> Easy Online Booking</span>
         </div>
     </section>
@@ -128,19 +167,17 @@
     <!-- Doctor Profile Section -->
     <div class="container" id="about">
         <div class="doctor-profile-card">
-            <div class="doctor-img-container">
-                <img src="doctor.jpg" alt="Dr. Dinesh Mittal - Pediatrician in Rohini" class="doctor-img" onerror="this.src='https://via.placeholder.com/220?text=Dr.+Dinesh+Mittal'">
-            </div>
+            <img src="doctor.jpg" alt="Dr. Dinesh Mittal - Pediatrician in Rohini" class="doctor-img" onerror="this.src='https://via.placeholder.com/200?text=Dr.+Dinesh+Mittal'">
             <div class="doctor-info">
                 <h2>Dr. Dinesh Mittal</h2>
                 <div class="subhead">Senior Child Specialist & Pediatrician</div>
-                <p style="margin-bottom: 15px; color: #475569; font-size: 0.95rem;">
-                    Dedicated to providing compassionate, evidence-based healthcare for newborns, infants, and growing children in Sector 3 Rohini and Delhi NCR. Specializing in preventive health, WHO vaccination schedules, growth tracking, and pediatric illness management.
+                <p style="color: #475569; font-size: 0.88rem;">
+                    Providing compassionate, evidence-based healthcare for newborns, infants, and growing children in Sector 3 Rohini. Specializing in preventive health, WHO vaccination schedules, growth tracking, and pediatric illness management.
                 </p>
                 <ul class="qualification-list">
-                    <li><i class="fa-solid fa-circle-check"></i> <strong>Services:</strong> Newborn Care, Pediatric Illnesses, Vaccination & Growth Tracking</li>
-                    <li><i class="fa-solid fa-circle-check"></i> <strong>Location:</strong> H-34/69, Sector 3, Rohini, Delhi - 110085</li>
-                    <li><i class="fa-solid fa-circle-check"></i> <strong>Languages:</strong> English, Hindi</li>
+                    <li><i class="fa-solid fa-circle-check"></i> <span><strong>Services:</strong> Newborn Care, Pediatric Illnesses, Vaccination</span></li>
+                    <li><i class="fa-solid fa-circle-check"></i> <span><strong>Location:</strong> H-34/69, Sector 3, Rohini, Delhi</span></li>
+                    <li><i class="fa-solid fa-circle-check"></i> <span><strong>Languages:</strong> English, Hindi</span></li>
                 </ul>
             </div>
         </div>
@@ -148,7 +185,7 @@
 
     <!-- Appointment Booking Section (Embedded App) -->
     <div class="container" id="book">
-        <h2 class="section-title">Schedule Consultation Appointment</h2>
+        <h2 class="section-title">Book Consultation</h2>
         <div class="booking-card">
             <iframe src="https://script.google.com/macros/s/AKfycbzZZJon_KvK0ibezOQT0ktfkxIB8-ee_-BnRKra6kvejGrbG1dFjMSD8f9zhR3ZXeWbXA/exec"></iframe>
         </div>
@@ -161,7 +198,7 @@
             <div class="info-card">
                 <i class="fa-solid fa-syringe"></i>
                 <h3>Vaccination & Immunization</h3>
-                <p>Complete growth tracking and painless WHO-recommended vaccination schedules for newborns and children.</p>
+                <p>Growth tracking and painless WHO-recommended vaccination schedules for newborns and children.</p>
             </div>
             <div class="info-card">
                 <i class="fa-solid fa-stethoscope"></i>
@@ -170,7 +207,7 @@
             </div>
             <div class="info-card">
                 <i class="fa-solid fa-virus-slash"></i>
-                <h3>Infections & Seasonal Illness</h3>
+                <h3>Infections & Illness</h3>
                 <p>Expert evaluation and treatment of pediatric fevers, cough, asthma, allergies, and stomach infections.</p>
             </div>
         </div>
@@ -181,14 +218,13 @@
         <h2 class="section-title">Visit Our Clinic</h2>
         <div class="contact-grid">
             <div class="contact-details">
-                <h3 style="color: #1e3a8a; margin-bottom: 20px;">Clinic Details</h3>
+                <h3 style="color: #1e3a8a; margin-bottom: 15px; font-size: 1.1rem;">Clinic Information</h3>
                 
                 <div class="contact-item">
                     <i class="fa-solid fa-location-dot"></i>
                     <div>
                         <strong>Address:</strong><br>
-                        H-34/69, Sector 3, Rohini,<br>
-                        Delhi - 110085
+                        H-34/69, Sector 3, Rohini, Delhi - 110085
                     </div>
                 </div>
 
@@ -212,9 +248,9 @@
 
             <!-- Google Map Direction Card -->
             <div class="contact-details" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: #eff6ff;">
-                <i class="fa-solid fa-map-location-dot" style="font-size: 3rem; color: var(--primary); margin-bottom: 15px;"></i>
-                <h3 style="color: #1e3a8a; margin-bottom: 10px;">Get Driving Directions</h3>
-                <p style="color: #475569; font-size: 0.9rem; margin-bottom: 20px;">Tap below to open Google Maps directly to Dr. Dinesh Mittal Child Clinic in Sector 3 Rohini.</p>
+                <i class="fa-solid fa-map-location-dot" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 12px;"></i>
+                <h3 style="color: #1e3a8a; margin-bottom: 8px; font-size: 1.1rem;">Driving Directions</h3>
+                <p style="color: #475569; font-size: 0.85rem; margin-bottom: 15px;">Tap below to open Google Maps directly to our clinic in Sector 3 Rohini.</p>
                 <a href="https://maps.app.goo.gl/tW6fDW25fgrrA86P6" target="_blank" class="social-btn maps-btn">
                     <i class="fa-solid fa-diamond-turn-right"></i> Open Location in Google Maps
                 </a>
@@ -224,21 +260,21 @@
 
     <!-- Social Media Connections -->
     <section class="social-section" id="contact">
-        <h2>Connect With Dr. Dinesh Mittal</h2>
+        <h2>Connect With Us</h2>
         <p>Get health updates or reach out to our clinic directly</p>
         <div class="social-links">
             <a href="https://wa.me/918130521456" target="_blank" class="social-btn whatsapp">
                 <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
             </a>
             <a href="https://maps.app.goo.gl/tW6fDW25fgrrA86P6" target="_blank" class="social-btn google">
-                <i class="fa-brands fa-google"></i> Google Maps Listing
+                <i class="fa-brands fa-google"></i> Google Maps Profile
             </a>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 Dr. Dinesh Mittal - Pediatric Care Clinic, Sector 3 Rohini, Delhi. All Rights Reserved.</p>
+        <p>&copy; 2026 Dr. Dinesh Mittal - Pediatric Care Clinic, Sector 3 Rohini, Delhi.</p>
     </footer>
 
 </body>
