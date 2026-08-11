@@ -5,169 +5,178 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Dr. Dinesh Mittal | Senior Child Specialist & Pediatrician in Sector 3 Rohini</title>
     <!-- Google Fonts & FontAwesome Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            --primary: #2563eb;
-            --primary-hover: #1d4ed8;
-            --secondary: #0ea5e9;
-            --light-bg: #f8fafc;
-            --dark-text: #1e293b;
-            --card-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+            --brand-primary: #0284c7;       /* Soft Sky Blue */
+            --brand-secondary: #0d9488;     /* Mint Teal */
+            --brand-accent: #f59e0b;        /* Warm Sunny Amber */
+            --brand-soft-bg: #f0fdf4;       /* Gentle Mint Tint */
+            --dark-text: #0f172a;           /* Deep Navy Pro Text */
+            --muted-text: #475569;
+            --card-shadow: 0 10px 25px -5px rgba(13, 148, 136, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
         html { scroll-behavior: smooth; }
-        body { color: var(--dark-text); background-color: #ffffff; line-height: 1.6; -webkit-tap-highlight-color: transparent; }
+        body { color: var(--dark-text); background-color: #fafafa; line-height: 1.6; -webkit-tap-highlight-color: transparent; }
 
-        /* Navigation Header */
+        /* Clean Header */
         header {
             position: sticky; top: 0; background: #ffffff; z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 12px 16px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.04); padding: 14px 6%;
             display: flex; justify-content: space-between; align-items: center;
         }
-        .logo { font-size: 1.1rem; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 6px; }
-        nav { display: flex; align-items: center; gap: 10px; }
-        nav a { text-decoration: none; color: var(--dark-text); font-weight: 600; font-size: 0.85rem; cursor: pointer; }
-        nav a:hover { color: var(--primary); }
+        .logo { font-family: 'Fredoka', cursive; font-size: 1.35rem; font-weight: 600; color: var(--brand-primary); display: flex; align-items: center; gap: 8px; }
+        .logo i { color: var(--brand-accent); font-size: 1.4rem; }
+        
+        nav { display: flex; align-items: center; gap: 20px; }
+        nav a { text-decoration: none; color: var(--dark-text); font-weight: 600; font-size: 0.9rem; transition: color 0.2s; cursor: pointer; }
+        nav a:hover { color: var(--brand-primary); }
+        
         .book-tab-btn {
-            background: var(--primary); color: #ffffff !important; padding: 6px 12px;
-            border-radius: 20px; transition: background 0.2s; font-size: 0.8rem; font-weight: 600;
+            background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
+            color: #ffffff !important; padding: 10px 20px; border-radius: 30px;
+            font-size: 0.88rem; font-weight: 700; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
+            transition: transform 0.2s, box-shadow 0.2s; display: inline-flex; align-items: center; gap: 8px;
         }
-        .book-tab-btn:hover { background: var(--primary-hover) !important; }
+        .book-tab-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(2, 132, 199, 0.35); }
 
-        /* Hero Section */
+        /* Warm Hero Section */
         .hero {
-            background: linear-gradient(135deg, #eff6ff 0%, #e0f2fe 100%);
-            padding: 35px 16px; text-align: center;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f0fdf4 100%);
+            padding: 50px 6% 60px; text-align: center; position: relative; overflow: hidden;
         }
-        .hero h1 { font-size: 1.6rem; color: #1e3a8a; margin-bottom: 6px; line-height: 1.25; }
-        .hero p { font-size: 0.9rem; color: #475569; font-weight: 500; margin-bottom: 16px; }
-        .hero-badges { display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; margin-bottom: 18px; }
-        .badge { background: #ffffff; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; color: var(--primary); box-shadow: 0 2px 5px rgba(0,0,0,0.04); }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 6px; background: #ffffff;
+            color: var(--brand-secondary); padding: 6px 16px; border-radius: 20px;
+            font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+            margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .hero h1 { font-family: 'Fredoka', cursive; font-size: 2.2rem; color: #0c4a6e; margin-bottom: 10px; line-height: 1.2; }
+        .hero p { font-size: 1.05rem; color: var(--muted-text); font-weight: 500; max-width: 650px; margin: 0 auto 25px; }
         
         .hero-cta-btn {
-            display: inline-flex; align-items: center; gap: 8px; background: var(--primary);
-            color: #ffffff; padding: 12px 22px; border-radius: 30px; font-weight: 600;
-            font-size: 0.9rem; text-decoration: none; cursor: pointer; border: none;
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3); transition: transform 0.2s;
+            display: inline-flex; align-items: center; gap: 10px; background: var(--brand-accent);
+            color: #ffffff; padding: 14px 30px; border-radius: 30px; font-weight: 700;
+            font-size: 1rem; text-decoration: none; cursor: pointer; border: none;
+            box-shadow: 0 6px 18px rgba(245, 158, 11, 0.35); transition: all 0.2s ease;
         }
-        .hero-cta-btn:hover { transform: translateY(-2px); background: var(--primary-hover); }
+        .hero-cta-btn:hover { transform: translateY(-2px); background: #d97706; }
 
-        /* Main Container */
-        .container { max-width: 1100px; margin: 25px auto; padding: 0 16px; }
-        .section-title { text-align: center; font-size: 1.3rem; color: #1e3a8a; margin-bottom: 20px; }
+        /* Container Section */
+        .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
+        .section-title { font-family: 'Fredoka', cursive; text-align: center; font-size: 1.8rem; color: #0c4a6e; margin-bottom: 30px; }
 
-        /* Doctor Profile Card */
+        /* Professional Doctor Card */
         .doctor-profile-card {
-            background: #ffffff; border-radius: 16px; box-shadow: var(--card-shadow);
-            padding: 20px; border: 1px solid #e2e8f0; margin-bottom: 25px;
-            display: flex; flex-direction: column; align-items: center; text-align: center; gap: 15px;
+            background: #ffffff; border-radius: 24px; box-shadow: var(--card-shadow);
+            padding: 35px; border: 1px solid #f1f5f9; margin-bottom: 30px;
+            display: flex; flex-wrap: wrap; gap: 35px; align-items: center;
         }
+        .doctor-img-box { position: relative; flex: 0 0 200px; margin: 0 auto; }
         .doctor-img {
-            width: 150px; height: 150px; border-radius: 50%; object-fit: cover;
-            border: 3.5px solid var(--primary); box-shadow: 0 6px 12px rgba(37, 99, 235, 0.15);
+            width: 200px; height: 200px; border-radius: 50%; object-fit: cover;
+            border: 5px solid #ffffff; box-shadow: 0 8px 20px rgba(13, 148, 136, 0.2);
         }
-        .doctor-info h2 { color: #1e3a8a; font-size: 1.3rem; margin-bottom: 4px; }
-        .doctor-info .subhead { color: var(--primary); font-weight: 600; font-size: 0.9rem; margin-bottom: 12px; }
-        .qualification-list { list-style: none; text-align: left; margin-top: 10px; }
-        .qualification-list li { margin-bottom: 8px; font-size: 0.85rem; color: #334155; display: flex; align-items: flex-start; gap: 8px; }
-        .qualification-list li i { color: var(--primary); margin-top: 3px; }
+        .doctor-info { flex: 1; min-width: 280px; }
+        .doctor-info h2 { font-family: 'Fredoka', cursive; color: #0c4a6e; font-size: 1.75rem; margin-bottom: 4px; }
+        .doctor-info .subhead { color: var(--brand-secondary); font-weight: 700; font-size: 1rem; margin-bottom: 15px; }
+        .doctor-info p { color: var(--muted-text); font-size: 0.95rem; margin-bottom: 18px; }
+        
+        .qualification-list { list-style: none; }
+        .qualification-list li { margin-bottom: 10px; font-size: 0.9rem; color: #334155; display: flex; align-items: center; gap: 10px; }
+        .qualification-list li i { color: var(--brand-secondary); font-size: 1.1rem; }
 
-        /* Info & Health Cards Grid */
-        .grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
+        /* Clinic Showcase Banner */
+        .clinic-showcase {
+            background: linear-gradient(rgba(12, 74, 110, 0.75), rgba(13, 148, 136, 0.75)), url('https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&w=1200&q=80') center/cover;
+            border-radius: 24px; color: #ffffff; padding: 45px 30px; text-align: center; margin-bottom: 40px;
+            box-shadow: var(--card-shadow);
+        }
+        .clinic-showcase h3 { font-family: 'Fredoka', cursive; font-size: 1.8rem; margin-bottom: 10px; }
+        .clinic-showcase p { font-size: 1rem; max-width: 600px; margin: 0 auto; opacity: 0.95; }
+
+        /* Services Grid */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
         .info-card {
-            background: var(--light-bg); border-radius: 14px; padding: 18px;
-            border: 1px solid #e2e8f0; text-align: center;
+            background: #ffffff; border-radius: 20px; padding: 28px;
+            border: 1px solid #f1f5f9; box-shadow: var(--card-shadow); transition: transform 0.2s;
+            text-align: left; position: relative; overflow: hidden;
         }
-        .info-card i { font-size: 1.8rem; color: var(--primary); margin-bottom: 8px; }
-        .info-card h3 { font-size: 1.05rem; margin-bottom: 6px; color: #0f172a; }
-        .info-card p { font-size: 0.85rem; color: #475569; }
+        .info-card:hover { transform: translateY(-4px); }
+        .info-card i { font-size: 2.2rem; color: var(--brand-primary); margin-bottom: 15px; display: inline-block; }
+        .info-card h3 { font-size: 1.15rem; margin-bottom: 8px; color: #0c4a6e; }
+        .info-card p { font-size: 0.9rem; color: var(--muted-text); }
+        .card-img { width: 100%; height: 140px; object-fit: cover; border-radius: 12px; margin-bottom: 15px; }
 
-        /* Contact Section */
-        .contact-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
-        .contact-details { background: var(--light-bg); padding: 20px; border-radius: 16px; border: 1px solid #e2e8f0; }
-        .contact-item { display: flex; gap: 12px; margin-bottom: 15px; align-items: flex-start; font-size: 0.88rem; }
-        .contact-item i { font-size: 1.1rem; color: var(--primary); margin-top: 3px; }
+        /* Location Grid */
+        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+        .contact-details { background: #ffffff; padding: 28px; border-radius: 20px; border: 1px solid #f1f5f9; box-shadow: var(--card-shadow); }
+        .contact-item { display: flex; gap: 14px; margin-bottom: 18px; align-items: flex-start; font-size: 0.92rem; }
+        .contact-item i { font-size: 1.2rem; color: var(--brand-primary); margin-top: 3px; }
 
         /* Social Section */
-        .social-section { text-align: center; background: #f1f5f9; padding: 35px 16px; margin-top: 35px; }
-        .social-section h2 { font-size: 1.25rem; color: #1e3a8a; }
-        .social-section p { font-size: 0.85rem; color: #475569; }
-        .social-links { display: flex; flex-direction: column; gap: 12px; margin-top: 18px; }
+        .social-section { text-align: center; background: #f0f9ff; padding: 45px 20px; margin-top: 50px; border-radius: 30px 30px 0 0; }
+        .social-section h2 { font-family: 'Fredoka', cursive; font-size: 1.5rem; color: #0c4a6e; }
+        .social-section p { font-size: 0.9rem; color: var(--muted-text); }
+        .social-links { display: flex; justify-content: center; gap: 15px; margin-top: 20px; flex-wrap: wrap; }
         .social-btn {
-            display: flex; align-items: center; justify-content: center; gap: 10px; padding: 12px 20px;
-            border-radius: 25px; text-decoration: none; color: #ffffff; font-weight: 600; font-size: 0.9rem;
-            width: 100%; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            display: inline-flex; align-items: center; gap: 10px; padding: 12px 24px;
+            border-radius: 30px; text-decoration: none; color: #ffffff; font-weight: 700; font-size: 0.9rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: opacity 0.2s;
         }
-        .whatsapp { background: #25d366; }
+        .whatsapp { background: #10b981; }
         .google { background: #4285f4; }
         .maps-btn { background: #ea4335; }
+        .social-btn:hover { opacity: 0.9; }
 
-        /* --- APPOINTMENT MODAL POPUP (HIDDEN BY DEFAULT) --- */
+        /* --- APPOINTMENT MODAL POPUP --- */
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 23, 42, 0.8); z-index: 2000;
-            justify-content: center; align-items: center; padding: 10px;
-            backdrop-filter: blur(4px);
+            background: rgba(15, 23, 42, 0.75); z-index: 2000;
+            justify-content: center; align-items: center; padding: 12px;
+            backdrop-filter: blur(5px);
         }
         .modal-content {
-            background: #ffffff; width: 100%; max-width: 700px; max-height: 90vh; border-radius: 16px;
-            overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.25); position: relative;
-            display: flex; flex-direction: column; animation: popIn 0.25s ease-out;
+            background: #ffffff; width: 100%; max-width: 680px; max-height: 92vh; border-radius: 24px;
+            overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); position: relative;
+            display: flex; flex-direction: column; animation: popIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
         @keyframes popIn {
-            from { transform: scale(0.9); opacity: 0; }
+            from { transform: scale(0.92); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
         }
         .modal-header {
-            background: var(--light-bg); padding: 12px 16px; display: flex;
+            background: #f8fafc; padding: 16px 22px; display: flex;
             justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0;
         }
-        .modal-header h3 { font-size: 1rem; color: #1e3a8a; display: flex; align-items: center; gap: 6px; }
+        .modal-header h3 { font-family: 'Fredoka', cursive; font-size: 1.15rem; color: #0c4a6e; display: flex; align-items: center; gap: 8px; }
         .close-modal-btn {
-            background: none; border: none; font-size: 1.6rem; color: #64748b;
-            cursor: pointer; padding: 0 4px; line-height: 1;
+            background: #f1f5f9; border: none; font-size: 1.2rem; color: #64748b;
+            width: 32px; height: 32px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center;
         }
-        .close-modal-btn:hover { color: #0f172a; }
-        .modal-body { padding: 5px; flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
-        .modal-body iframe { width: 100%; height: 680px; border: none; border-radius: 10px; display: block; }
+        .close-modal-btn:hover { background: #e2e8f0; color: #0f172a; }
+        .modal-body { padding: 8px; flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+        .modal-body iframe { width: 100%; height: 680px; border: none; border-radius: 16px; display: block; }
 
-        footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 20px 15px; font-size: 0.8rem; }
+        footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 22px 15px; font-size: 0.85rem; }
 
-        /* Desktop Adjustments */
-        @media (min-width: 768px) {
-            header { padding: 15px 5%; }
-            .logo { font-size: 1.3rem; }
-            nav a { margin-left: 15px; font-size: 0.95rem; }
-            .book-tab-btn { font-size: 0.9rem; padding: 8px 16px; }
-            .hero { padding: 50px 5%; }
-            .hero h1 { font-size: 2.2rem; }
-            .hero p { font-size: 1.1rem; }
-            .badge { font-size: 0.85rem; padding: 6px 16px; }
-            .container { margin: 40px auto; padding: 0 20px; }
-            .section-title { font-size: 1.8rem; margin-bottom: 30px; }
-            .doctor-profile-card { flex-direction: row; text-align: left; padding: 30px; gap: 30px; }
-            .doctor-img { width: 200px; height: 200px; }
-            .doctor-info h2 { font-size: 1.8rem; }
-            .doctor-info .subhead { font-size: 1.1rem; }
-            .qualification-list li { font-size: 0.95rem; }
-            .grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
-            .info-card { padding: 25px; text-align: left; }
-            .info-card i { font-size: 2.2rem; }
-            .info-card h3 { font-size: 1.2rem; }
-            .info-card p { font-size: 0.9rem; }
-            .contact-grid { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
-            .social-links { flex-direction: row; justify-content: center; }
-            .social-btn { width: auto; }
-            .modal-body iframe { height: 720px; }
-        }
-
-        /* Hide text links on narrow screens, keep booking button */
-        @media (max-width: 580px) {
+        /* Mobile Responsive Adjustments */
+        @media (max-width: 640px) {
+            header { padding: 12px 16px; }
+            .logo { font-size: 1.15rem; }
             nav a.nav-link { display: none; }
+            .hero { padding: 35px 16px; }
+            .hero h1 { font-size: 1.65rem; }
+            .hero p { font-size: 0.92rem; }
+            .doctor-profile-card { padding: 22px; text-align: center; gap: 20px; }
+            .qualification-list { text-align: left; }
+            .clinic-showcase { padding: 30px 20px; }
+            .clinic-showcase h3 { font-size: 1.4rem; }
+            .social-btn { width: 100%; justify-content: center; }
         }
     </style>
 </head>
@@ -175,9 +184,9 @@
 
     <!-- Header Navigation -->
     <header>
-        <div class="logo"><i class="fa-solid fa-baby"></i> Dr. Dinesh Mittal</div>
+        <div class="logo"><i class="fa-solid fa-shapes"></i> Dr. Dinesh Mittal</div>
         <nav>
-            <a href="#about" class="nav-link">About</a>
+            <a href="#about" class="nav-link">About Doctor</a>
             <a href="#services" class="nav-link">Services</a>
             <a href="#clinic-location" class="nav-link">Location</a>
             <a onclick="openBookingModal()" class="book-tab-btn"><i class="fa-solid fa-calendar-check"></i> Book Appointment</a>
@@ -186,55 +195,59 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <h1>Dr. Dinesh Mittal</h1>
-        <p>Senior Child Specialist & Pediatrician in Sector 3 Rohini</p>
-        <div class="hero-badges">
-            <span class="badge"><i class="fa-solid fa-location-dot"></i> Sector 3 Rohini</span>
-            <span class="badge"><i class="fa-solid fa-user-doctor"></i> Child Specialist</span>
-            <span class="badge"><i class="fa-solid fa-clock"></i> Quick Online Booking</span>
-        </div>
+        <div class="hero-badge"><i class="fa-solid fa-star"></i> Senior Child Specialist in Rohini</div>
+        <h1>Compassionate Care for Your Little Ones</h1>
+        <p>Specialized newborn care, WHO vaccination schedules, and expert growth monitoring in Sector 3 Rohini, Delhi.</p>
         <button onclick="openBookingModal()" class="hero-cta-btn">
-            <i class="fa-solid fa-calendar-check"></i> Book Appointment
+            <i class="fa-solid fa-calendar-plus"></i> Schedule Consultation
         </button>
     </section>
 
     <!-- Doctor Profile Section -->
     <div class="container" id="about">
         <div class="doctor-profile-card">
-            <img src="doctor.jpg" alt="Dr. Dinesh Mittal - Pediatrician in Rohini" class="doctor-img" onerror="this.src='https://via.placeholder.com/200?text=Dr.+Dinesh+Mittal'">
+            <div class="doctor-img-box">
+                <img src="doctor.jpg" alt="Dr. Dinesh Mittal - Pediatrician" class="doctor-img" onerror="this.src='https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=400&q=80'">
+            </div>
             <div class="doctor-info">
                 <h2>Dr. Dinesh Mittal</h2>
                 <div class="subhead">Senior Child Specialist & Pediatrician</div>
-                <p style="color: #475569; font-size: 0.88rem;">
-                    Providing compassionate, evidence-based healthcare for newborns, infants, and growing children in Sector 3 Rohini. Specializing in preventive health, WHO vaccination schedules, growth tracking, and pediatric illness management.
+                <p>
+                    Dedicated to providing evidence-based healthcare for newborns, infants, and growing children. Our clinic creates a friendly, comfortable environment to ensure your child receives gentle and precise treatment.
                 </p>
                 <ul class="qualification-list">
-                    <li><i class="fa-solid fa-circle-check"></i> <span><strong>Services:</strong> Newborn Care, Pediatric Illnesses, Vaccination</span></li>
-                    <li><i class="fa-solid fa-circle-check"></i> <span><strong>Location:</strong> H-34/69, Sector 3, Rohini, Delhi</span></li>
-                    <li><i class="fa-solid fa-circle-check"></i> <span><strong>Languages:</strong> English, Hindi</span></li>
+                    <li><i class="fa-solid fa-circle-check"></i> <span><strong>Services:</strong> Newborn Care, Pediatric Illnesses, Immunization</span></li>
+                    <li><i class="fa-solid fa-circle-check"></i> <span><strong>Location:</strong> H-34/69, Sector 3, Rohini, Delhi - 110085</span></li>
+                    <li><i class="fa-solid fa-circle-check"></i> <span><strong>Languages Spoken:</strong> English, Hindi</span></li>
                 </ul>
             </div>
+        </div>
+
+        <!-- Pediatric Feature Banner -->
+        <div class="clinic-showcase">
+            <h3>Child-Friendly & Caring Environment</h3>
+            <p>Every consultation is tailored to put both parents and children at ease with gentle examinations and clear guidance.</p>
         </div>
     </div>
 
     <!-- Clinic Services Section -->
     <div class="container" id="services">
-        <h2 class="section-title">Comprehensive Child Services</h2>
+        <h2 class="section-title">Pediatric Services</h2>
         <div class="grid">
             <div class="info-card">
-                <i class="fa-solid fa-syringe"></i>
+                <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=500&q=80" alt="Vaccination" class="card-img">
                 <h3>Vaccination & Immunization</h3>
-                <p>Growth tracking and painless WHO-recommended vaccination schedules for newborns and children.</p>
+                <p>WHO-recommended vaccination schedules with growth and development tracking for newborns and children.</p>
             </div>
             <div class="info-card">
-                <i class="fa-solid fa-stethoscope"></i>
+                <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&w=500&q=80" alt="Newborn Care" class="card-img">
                 <h3>Newborn & Infant Care</h3>
-                <p>Specialized clinical care for infant growth, feeding advice, colic management, and jaundice screening.</p>
+                <p>Clinical evaluation for infant growth, feeding advice, colic relief, and jaundice screening.</p>
             </div>
             <div class="info-card">
-                <i class="fa-solid fa-virus-slash"></i>
-                <h3>Infections & Illness</h3>
-                <p>Expert evaluation and treatment of pediatric fevers, cough, asthma, allergies, and stomach infections.</p>
+                <img src="https://images.unsplash.com/photo-1631815588090-d4bfec5b1cdb?auto=format&fit=crop&w=500&q=80" alt="Pediatric Consultation" class="card-img">
+                <h3>Infections & Seasonal Care</h3>
+                <p>Treatment of childhood fevers, coughs, asthma, allergies, and stomach infections.</p>
             </div>
         </div>
     </div>
@@ -244,7 +257,7 @@
         <h2 class="section-title">Visit Our Clinic</h2>
         <div class="contact-grid">
             <div class="contact-details">
-                <h3 style="color: #1e3a8a; margin-bottom: 15px; font-size: 1.1rem;">Clinic Information</h3>
+                <h3 style="color: #0c4a6e; margin-bottom: 20px; font-size: 1.15rem; font-family: 'Fredoka', cursive;">Clinic Details</h3>
                 
                 <div class="contact-item">
                     <i class="fa-solid fa-location-dot"></i>
@@ -272,11 +285,11 @@
                 </div>
             </div>
 
-            <!-- Google Map Direction Card -->
-            <div class="contact-details" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: #eff6ff;">
-                <i class="fa-solid fa-map-location-dot" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 12px;"></i>
-                <h3 style="color: #1e3a8a; margin-bottom: 8px; font-size: 1.1rem;">Driving Directions</h3>
-                <p style="color: #475569; font-size: 0.85rem; margin-bottom: 15px;">Tap below to open Google Maps directly to our clinic in Sector 3 Rohini.</p>
+            <!-- Driving Directions Card -->
+            <div class="contact-details" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: #f0fdf4;">
+                <i class="fa-solid fa-map-location-dot" style="font-size: 2.8rem; color: var(--brand-secondary); margin-bottom: 12px;"></i>
+                <h3 style="color: #0c4a6e; margin-bottom: 8px; font-size: 1.15rem; font-family: 'Fredoka', cursive;">Driving Directions</h3>
+                <p style="color: var(--muted-text); font-size: 0.88rem; margin-bottom: 18px;">Tap below to open Google Maps directly to our clinic in Sector 3 Rohini.</p>
                 <a href="https://maps.app.goo.gl/tW6fDW25fgrrA86P6" target="_blank" class="social-btn maps-btn">
                     <i class="fa-solid fa-diamond-turn-right"></i> Open Location in Google Maps
                 </a>
@@ -293,7 +306,7 @@
                 <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
             </a>
             <a href="https://maps.app.goo.gl/tW6fDW25fgrrA86P6" target="_blank" class="social-btn google">
-                <i class="fa-brands fa-google"></i> Google Maps Profile
+                <i class="fa-brands fa-google"></i> Google Maps Listing
             </a>
         </div>
     </section>
@@ -307,7 +320,7 @@
     <div id="bookingModal" class="modal-overlay" onclick="closeModalOnOverlay(event)">
         <div class="modal-content">
             <div class="modal-header">
-                <h3><i class="fa-solid fa-calendar-check" style="color: var(--primary);"></i> Book Consultation</h3>
+                <h3><i class="fa-solid fa-calendar-check" style="color: var(--brand-primary);"></i> Book Consultation</h3>
                 <button class="close-modal-btn" onclick="closeBookingModal()">&times;</button>
             </div>
             <div class="modal-body">
@@ -320,12 +333,12 @@
     <script>
         function openBookingModal() {
             document.getElementById('bookingModal').style.display = 'flex';
-            document.body.style.overflow = 'hidden'; // Lock background scrolling on mobile
+            document.body.style.overflow = 'hidden';
         }
 
         function closeBookingModal() {
             document.getElementById('bookingModal').style.display = 'none';
-            document.body.style.overflow = 'auto'; // Restore background scrolling
+            document.body.style.overflow = 'auto';
         }
 
         function closeModalOnOverlay(event) {
