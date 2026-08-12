@@ -14,7 +14,7 @@
             --brand-secondary: #0d9488;     /* Mint Teal */
             --brand-accent: #f59e0b;        /* Warm Sunny Amber */
             --brand-soft-bg: #f0fdf4;       /* Gentle Mint Tint */
-            --dark-text: #0f172a;           /* Deep Navy Pro Text */
+            --dark-text: #0f172a;           /* Deep Navy Text */
             --muted-text: #475569;
             --card-shadow: 0 10px 25px -5px rgba(13, 148, 136, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
         }
@@ -44,7 +44,7 @@
         }
         .book-tab-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(2, 132, 199, 0.35); }
 
-        /* Warm Hero Section */
+        /* Hero Section */
         .hero {
             background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f0fdf4 100%);
             padding: 50px 6% 60px; text-align: center; position: relative; overflow: hidden;
@@ -70,7 +70,7 @@
         .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
         .section-title { font-family: 'Fredoka', cursive; text-align: center; font-size: 1.8rem; color: #0c4a6e; margin-bottom: 30px; }
 
-        /* Professional Doctor Card */
+        /* Doctor Profile Card */
         .doctor-profile-card {
             background: #ffffff; border-radius: 24px; box-shadow: var(--card-shadow);
             padding: 35px; border: 1px solid #f1f5f9; margin-bottom: 30px;
@@ -90,16 +90,7 @@
         .qualification-list li { margin-bottom: 10px; font-size: 0.9rem; color: #334155; display: flex; align-items: center; gap: 10px; }
         .qualification-list li i { color: var(--brand-secondary); font-size: 1.1rem; }
 
-        /* Clinic Showcase Banner */
-        .clinic-showcase {
-            background: linear-gradient(rgba(12, 74, 110, 0.75), rgba(13, 148, 136, 0.75)), url('https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&w=1200&q=80') center/cover;
-            border-radius: 24px; color: #ffffff; padding: 45px 30px; text-align: center; margin-bottom: 40px;
-            box-shadow: var(--card-shadow);
-        }
-        .clinic-showcase h3 { font-family: 'Fredoka', cursive; font-size: 1.8rem; margin-bottom: 10px; }
-        .clinic-showcase p { font-size: 1rem; max-width: 600px; margin: 0 auto; opacity: 0.95; }
-
-        /* Services Grid */
+        /* Grid Layouts */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
         .info-card {
             background: #ffffff; border-radius: 20px; padding: 28px;
@@ -107,10 +98,29 @@
             text-align: left; position: relative; overflow: hidden;
         }
         .info-card:hover { transform: translateY(-4px); }
-        .info-card i { font-size: 2.2rem; color: var(--brand-primary); margin-bottom: 15px; display: inline-block; }
         .info-card h3 { font-size: 1.15rem; margin-bottom: 8px; color: #0c4a6e; }
         .info-card p { font-size: 0.9rem; color: var(--muted-text); }
-        .card-img { width: 100%; height: 140px; object-fit: cover; border-radius: 12px; margin-bottom: 15px; }
+        .card-img { width: 100%; height: 160px; object-fit: cover; border-radius: 12px; margin-bottom: 15px; }
+
+        /* Blog Specific Styles */
+        .blog-card {
+            background: #ffffff; border-radius: 20px; border: 1px solid #f1f5f9;
+            box-shadow: var(--card-shadow); overflow: hidden; display: flex; flex-direction: column;
+            transition: transform 0.2s;
+        }
+        .blog-card:hover { transform: translateY(-4px); }
+        .blog-content { padding: 20px; display: flex; flex-direction: column; flex: 1; }
+        .blog-tag {
+            align-self: flex-start; background: var(--brand-soft-bg); color: var(--brand-secondary);
+            font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 12px; margin-bottom: 10px;
+        }
+        .blog-title { font-family: 'Fredoka', cursive; font-size: 1.15rem; color: #0c4a6e; margin-bottom: 8px; line-height: 1.3; }
+        .blog-snippet { font-size: 0.88rem; color: var(--muted-text); margin-bottom: 15px; flex: 1; }
+        .read-btn {
+            background: none; border: none; color: var(--brand-primary); font-weight: 700;
+            font-size: 0.88rem; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; padding: 0;
+        }
+        .read-btn:hover { color: #0369a1; }
 
         /* Location Grid */
         .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
@@ -131,17 +141,16 @@
         .whatsapp { background: #10b981; }
         .google { background: #4285f4; }
         .maps-btn { background: #ea4335; }
-        .social-btn:hover { opacity: 0.9; }
 
-        /* --- APPOINTMENT MODAL POPUP --- */
+        /* --- POPUP MODALS --- */
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(15, 23, 42, 0.75); z-index: 2000;
-            justify-content: center; align-items: center; padding: 12px;
+            justify-content: center; align-items: center; padding: 16px;
             backdrop-filter: blur(5px);
         }
         .modal-content {
-            background: #ffffff; width: 100%; max-width: 680px; max-height: 92vh; border-radius: 24px;
+            background: #ffffff; width: 100%; max-width: 680px; max-height: 90vh; border-radius: 24px;
             overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); position: relative;
             display: flex; flex-direction: column; animation: popIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -159,7 +168,7 @@
             width: 32px; height: 32px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center;
         }
         .close-modal-btn:hover { background: #e2e8f0; color: #0f172a; }
-        .modal-body { padding: 8px; flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+        .modal-body { padding: 22px; flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; font-size: 0.95rem; color: #334155; line-height: 1.7; }
         .modal-body iframe { width: 100%; height: 680px; border: none; border-radius: 16px; display: block; }
 
         footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 22px 15px; font-size: 0.85rem; }
@@ -174,8 +183,6 @@
             .hero p { font-size: 0.92rem; }
             .doctor-profile-card { padding: 22px; text-align: center; gap: 20px; }
             .qualification-list { text-align: left; }
-            .clinic-showcase { padding: 30px 20px; }
-            .clinic-showcase h3 { font-size: 1.4rem; }
             .social-btn { width: 100%; justify-content: center; }
         }
     </style>
@@ -188,6 +195,7 @@
         <nav>
             <a href="#about" class="nav-link">About Doctor</a>
             <a href="#services" class="nav-link">Services</a>
+            <a href="#blog" class="nav-link">Parenting Blog</a>
             <a href="#clinic-location" class="nav-link">Location</a>
             <a onclick="openBookingModal()" class="book-tab-btn"><i class="fa-solid fa-calendar-check"></i> Book Appointment</a>
         </nav>
@@ -222,15 +230,9 @@
                 </ul>
             </div>
         </div>
-
-        <!-- Pediatric Feature Banner -->
-        <div class="clinic-showcase">
-            <h3>Child-Friendly & Caring Environment</h3>
-            <p>Every consultation is tailored to put both parents and children at ease with gentle examinations and clear guidance.</p>
-        </div>
     </div>
 
-    <!-- Clinic Services Section -->
+    <!-- Services Section -->
     <div class="container" id="services">
         <h2 class="section-title">Pediatric Services</h2>
         <div class="grid">
@@ -249,6 +251,47 @@
                 <h3>Infections & Seasonal Care</h3>
                 <p>Treatment of childhood fevers, coughs, asthma, allergies, and stomach infections.</p>
             </div>
+        </div>
+    </div>
+
+    <!-- NEW BLOG SECTION -->
+    <div class="container" id="blog">
+        <h2 class="section-title">Parenting & Child Health Blog</h2>
+        <div class="grid">
+            
+            <!-- Blog Article 1 -->
+            <div class="blog-card">
+                <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=500&q=80" alt="Vaccination Guide" class="card-img" style="margin-bottom:0; border-radius: 0;">
+                <div class="blog-content">
+                    <span class="blog-tag">Immunization</span>
+                    <h3 class="blog-title">Understanding Painless vs Painful Vaccines for Babies</h3>
+                    <p class="blog-snippet">Learn the key differences between acellular and cellular DTP vaccines to make informed choices for your newborn.</p>
+                    <button onclick="openBlogModal('blog1')" class="read-btn">Read Full Article <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- Blog Article 2 -->
+            <div class="blog-card">
+                <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=500&q=80" alt="Newborn Care Tips" class="card-img" style="margin-bottom:0; border-radius: 0;">
+                <div class="blog-content">
+                    <span class="blog-tag">Newborn Care</span>
+                    <h3 class="blog-title">Essential Newborn Care Tips for First-Time Parents</h3>
+                    <p class="blog-snippet">Important pediatrician guidance on infant feeding, sleep routines, cord care, and warning signs in the first 30 days.</p>
+                    <button onclick="openBlogModal('blog2')" class="read-btn">Read Full Article <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- Blog Article 3 -->
+            <div class="blog-card">
+                <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&w=500&q=80" alt="Managing Fever" class="card-img" style="margin-bottom:0; border-radius: 0;">
+                <div class="blog-content">
+                    <span class="blog-tag">Childhood Health</span>
+                    <h3 class="blog-title">How to Safely Manage High Fever in Toddlers at Home</h3>
+                    <p class="blog-snippet">A step-by-step guide for parents on temperature monitoring, hydration, sponge bathing, and when to seek medical help.</p>
+                    <button onclick="openBlogModal('blog3')" class="read-btn">Read Full Article <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -317,20 +360,63 @@
     </footer>
 
     <!-- POPUP APPOINTMENT MODAL -->
-    <div id="bookingModal" class="modal-overlay" onclick="closeModalOnOverlay(event)">
+    <div id="bookingModal" class="modal-overlay" onclick="closeModalOnOverlay(event, 'bookingModal')">
         <div class="modal-content">
             <div class="modal-header">
                 <h3><i class="fa-solid fa-calendar-check" style="color: var(--brand-primary);"></i> Book Consultation</h3>
                 <button class="close-modal-btn" onclick="closeBookingModal()">&times;</button>
             </div>
-            <div class="modal-body">
+            <div style="padding: 8px; flex: 1; overflow-y: auto;">
                 <iframe src="https://script.google.com/macros/s/AKfycbzZZJon_KvK0ibezOQT0ktfkxIB8-ee_-BnRKra6kvejGrbG1dFjMSD8f9zhR3ZXeWbXA/exec"></iframe>
             </div>
         </div>
     </div>
 
-    <!-- JAVASCRIPT FOR MODAL INTERACTION -->
+    <!-- POPUP BLOG MODAL -->
+    <div id="blogModal" class="modal-overlay" onclick="closeModalOnOverlay(event, 'blogModal')">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="blogModalTitle"><i class="fa-solid fa-newspaper" style="color: var(--brand-secondary);"></i> Article</h3>
+                <button class="close-modal-btn" onclick="closeBlogModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="blogModalContent">
+                <!-- Dynamic Article Content Appears Here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT FOR MODALS & BLOG DATA -->
     <script>
+        const blogArticles = {
+            blog1: {
+                title: "Painless vs Painful Vaccines for Babies",
+                content: `
+                    <p><strong>Understanding the Difference:</strong> When scheduling your baby's vaccination, you will often be given the choice between "painless" (DTaP) and "painful" (DTwP) vaccines.</p><br>
+                    <p><strong>1. Painful Vaccine (DTwP):</strong> Contains whole cell pertussis bacteria. It provides slightly stronger, longer-lasting immunity but commonly causes mild fever, swelling, and irritability for 24-48 hours after administration.</p><br>
+                    <p><strong>2. Painless Vaccine (DTaP):</strong> Contains only acellular components of pertussis. It significantly reduces post-vaccination fever and redness, making it gentler on the infant.</p><br>
+                    <p><strong>Pediatric Advice:</strong> Both vaccines offer excellent protection against Diphtheria, Tetanus, and Pertussis. Consult Dr. Dinesh Mittal at our Sector 3 Rohini clinic to choose the best schedule tailored for your child.</p>
+                `
+            },
+            blog2: {
+                title: "Essential Newborn Care Tips for First-Time Parents",
+                content: `
+                    <p><strong>Bringing Your Newborn Home:</strong> The first month with a newborn involves learning feeding cues, sleep patterns, and hygienic care.</p><br>
+                    <p><strong>1. Umbilical Cord Care:</strong> Keep the cord stump clean and dry. Avoid applying alcohol or ointments unless specifically prescribed. It usually falls off naturally within 7–14 days.</p><br>
+                    <p><strong>2. Feeding & Hydration:</strong> Newborns feed every 2 to 3 hours. Breast milk or recommended formula provides complete nutrition; avoid giving plain water to infants under 6 months.</p><br>
+                    <p><strong>3. When to Consult a Pediatrician:</strong> Contact our clinic immediately if you observe a fever above 100.4°F, persistent refusal to feed, lethargy, or yellowing skin (jaundice).</p>
+                `
+            },
+            blog3: {
+                title: "How to Safely Manage High Fever in Toddlers",
+                content: `
+                    <p><strong>Managing Fever Calmly:</strong> Fever is a natural sign that your child's body is fighting off an infection.</p><br>
+                    <p><strong>1. Keep the Child Hydrated:</strong> Offer frequent sips of water, ORS, coconut water, or warm soups to prevent dehydration.</p><br>
+                    <p><strong>2. Lukewarm Sponge Bathing:</strong> If the temperature remains high, wipe your child's body with a cloth soaked in lukewarm (not cold) water for 10-15 minutes.</p><br>
+                    <p><strong>3. Medication Safety:</strong> Only give Paracetamol or pediatric antipyretics in the exact dosage recommended for your child's body weight by Dr. Dinesh Mittal.</p>
+                `
+            }
+        };
+
         function openBookingModal() {
             document.getElementById('bookingModal').style.display = 'flex';
             document.body.style.overflow = 'hidden';
@@ -341,9 +427,25 @@
             document.body.style.overflow = 'auto';
         }
 
-        function closeModalOnOverlay(event) {
-            if (event.target.id === 'bookingModal') {
-                closeBookingModal();
+        function openBlogModal(articleKey) {
+            const article = blogArticles[articleKey];
+            if (article) {
+                document.getElementById('blogModalTitle').innerHTML = '<i class="fa-solid fa-newspaper" style="color: var(--brand-secondary);"></i> ' + article.title;
+                document.getElementById('blogModalContent').innerHTML = article.content;
+                document.getElementById('blogModal').style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeBlogModal() {
+            document.getElementById('blogModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function closeModalOnOverlay(event, modalId) {
+            if (event.target.id === modalId) {
+                if (modalId === 'bookingModal') closeBookingModal();
+                if (modalId === 'blogModal') closeBlogModal();
             }
         }
     </script>
