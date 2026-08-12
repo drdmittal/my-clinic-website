@@ -152,6 +152,16 @@
         .social-google { background: #4285f4; }
         .social-whatsapp { background: #10b981; }
 
+        /* Vaccine Table Styling */
+        .vaccine-table {
+            width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.88rem;
+        }
+        .vaccine-table th, .vaccine-table td {
+            border: 1px solid #e2e8f0; padding: 10px 12px; text-align: left;
+        }
+        .vaccine-table th { background-color: var(--brand-soft-bg); color: var(--brand-secondary); font-weight: 700; }
+        .vaccine-table tr:nth-child(even) { background-color: #f8fafc; }
+
         /* --- POPUP MODALS --- */
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -160,7 +170,7 @@
             backdrop-filter: blur(5px);
         }
         .modal-content {
-            background: #ffffff; width: 100%; max-width: 680px; max-height: 90vh; border-radius: 24px;
+            background: #ffffff; width: 100%; max-width: 750px; max-height: 90vh; border-radius: 24px;
             overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); position: relative;
             display: flex; flex-direction: column; animation: popIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -194,6 +204,8 @@
             .doctor-profile-card { padding: 22px; text-align: center; gap: 20px; }
             .qualification-list { text-align: left; }
             .social-grid { grid-template-columns: 1fr; }
+            .vaccine-table { font-size: 0.8rem; }
+            .vaccine-table th, .vaccine-table td { padding: 8px 6px; }
         }
     </style>
 </head>
@@ -250,7 +262,7 @@
             <div class="info-card">
                 <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=500&q=80" alt="Vaccination" class="card-img">
                 <h3>Vaccination & Immunization</h3>
-                <p>WHO-recommended vaccination schedules with growth and development tracking for newborns and children.</p>
+                <p>WHO & IAP-recommended vaccination schedules with growth and development tracking for newborns and children.</p>
             </div>
             <div class="info-card">
                 <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&w=500&q=80" alt="Newborn Care" class="card-img">
@@ -267,9 +279,20 @@
 
     <!-- BLOG SECTION -->
     <div class="container" id="blog">
-        <h2 class="section-title">Parenting & Child Health Blog</h2>
+        <h2 class="section-title">Parenting & Health Reference</h2>
         <div class="grid">
             
+            <!-- IAP VACCINATION SCHEDULE CARD -->
+            <div class="blog-card" style="border: 2px solid var(--brand-secondary);">
+                <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=500&q=80" alt="IAP Immunization Schedule" class="card-img" style="margin-bottom:0; border-radius: 0;">
+                <div class="blog-content">
+                    <span class="blog-tag" style="background: var(--brand-secondary); color: white;">Essential Reference</span>
+                    <h3 class="blog-title">IAP Immunization Schedule (Age-Wise Guide)</h3>
+                    <p class="blog-snippet">Official age-by-age vaccination reference chart recommended by the Indian Academy of Pediatrics (IAP) from birth up to 18 years.</p>
+                    <button onclick="openBlogModal('iapSchedule')" class="read-btn" style="color: var(--brand-secondary);"><i class="fa-solid fa-table-list"></i> View Complete Schedule <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+
             <!-- Blog Article 1 -->
             <div class="blog-card">
                 <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=500&q=80" alt="Vaccination Guide" class="card-img" style="margin-bottom:0; border-radius: 0;">
@@ -408,7 +431,7 @@
     <div id="blogModal" class="modal-overlay" onclick="closeModalOnOverlay(event, 'blogModal')">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 id="blogModalTitle"><i class="fa-solid fa-newspaper" style="color: var(--brand-secondary);"></i> Article</h3>
+                <h3 id="blogModalTitle"><i class="fa-solid fa-newspaper" style="color: var(--brand-secondary);"></i> Reference</h3>
                 <button class="close-modal-btn" onclick="closeBlogModal()">&times;</button>
             </div>
             <div class="modal-body" id="blogModalContent">
@@ -420,6 +443,81 @@
     <!-- JAVASCRIPT FOR MODALS & BLOG DATA -->
     <script>
         const blogArticles = {
+            iapSchedule: {
+                title: "IAP Recommended Immunization Schedule",
+                content: `
+                    <p><strong>Indian Academy of Pediatrics (IAP) Vaccination Chart:</strong> This age-wise vaccination schedule serves as an essential reference guide for parents to ensure timely immunization against preventable diseases.</p>
+                    
+                    <table class="vaccine-table">
+                        <thead>
+                            <tr>
+                                <th>Age</th>
+                                <th>Recommended Vaccines</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>At Birth</strong></td>
+                                <td>BCG, OPV 0, Hepatitis B (1st dose)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>6 Weeks</strong></td>
+                                <td>DTwP / DTaP 1, IPV 1, Hep B 2, Hib 1, Rotavirus 1, PCV 1</td>
+                            </tr>
+                            <tr>
+                                <td><strong>10 Weeks</strong></td>
+                                <td>DTwP / DTaP 2, IPV 2, Hib 2, Rotavirus 2, PCV 2</td>
+                            </tr>
+                            <tr>
+                                <td><strong>14 Weeks</strong></td>
+                                <td>DTwP / DTaP 3, IPV 3, Hib 3, Rotavirus 3, PCV 3</td>
+                            </tr>
+                            <tr>
+                                <td><strong>6 Months</strong></td>
+                                <td>Influenza (1st Dose), Hepatitis B 3</td>
+                            </tr>
+                            <tr>
+                                <td><strong>7 Months</strong></td>
+                                <td>Influenza (2nd Dose)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>6 - 9 Months</strong></td>
+                                <td>Typhoid Conjugate Vaccine</td>
+                            </tr>
+                            <tr>
+                                <td><strong>9 Months</strong></td>
+                                <td>MMR 1 (Measles, Mumps, Rubella)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>12 Months</strong></td>
+                                <td>Hepatitis A (1st Dose)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>15 Months</strong></td>
+                                <td>MMR 2, Varicella (Chickenpox 1st Dose), PCV Booster</td>
+                            </tr>
+                            <tr>
+                                <td><strong>16 - 18 Months</strong></td>
+                                <td>DTwP / DTaP Booster 1, IPV Booster 1, Hib Booster</td>
+                            </tr>
+                            <tr>
+                                <td><strong>18 - 19 Months</strong></td>
+                                <td>Hepatitis A (2nd Dose), Varicella 2</td>
+                            </tr>
+                            <tr>
+                                <td><strong>4 - 6 Years</strong></td>
+                                <td>DTwP / DTaP Booster 2, IPV Booster 2, MMR 3</td>
+                            </tr>
+                            <tr>
+                                <td><strong>10 - 12 Years</strong></td>
+                                <td>Tdap / Td, HPV (for girls & boys)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                    <p><em>Note: Annual Influenza (flu) vaccines are recommended every year up to 5 years of age. Please consult Dr. Dinesh Mittal for individual catch-up schedules or specialized vaccines.</em></p>
+                `
+            },
             blog1: {
                 title: "Painless vs Painful Vaccines for Babies",
                 content: `
