@@ -128,19 +128,29 @@
         .contact-item { display: flex; gap: 14px; margin-bottom: 18px; align-items: flex-start; font-size: 0.92rem; }
         .contact-item i { font-size: 1.2rem; color: var(--brand-primary); margin-top: 3px; }
 
-        /* Social Section */
-        .social-section { text-align: center; background: #f0f9ff; padding: 45px 20px; margin-top: 50px; border-radius: 30px 30px 0 0; }
-        .social-section h2 { font-family: 'Fredoka', cursive; font-size: 1.5rem; color: #0c4a6e; }
-        .social-section p { font-size: 0.9rem; color: var(--muted-text); }
-        .social-links { display: flex; justify-content: center; gap: 15px; margin-top: 20px; flex-wrap: wrap; }
-        .social-btn {
-            display: inline-flex; align-items: center; gap: 10px; padding: 12px 24px;
-            border-radius: 30px; text-decoration: none; color: #ffffff; font-weight: 700; font-size: 0.9rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: opacity 0.2s;
+        /* Social Section Styling */
+        .social-section { text-align: center; background: #f0f9ff; padding: 50px 20px; margin-top: 50px; border-radius: 30px 30px 0 0; }
+        .social-section h2 { font-family: 'Fredoka', cursive; font-size: 1.6rem; color: #0c4a6e; margin-bottom: 6px; }
+        .social-section p { font-size: 0.92rem; color: var(--muted-text); max-width: 550px; margin: 0 auto; }
+        
+        .social-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;
+            max-width: 950px; margin: 25px auto 0;
         }
-        .whatsapp { background: #10b981; }
-        .google { background: #4285f4; }
-        .maps-btn { background: #ea4335; }
+        .social-card {
+            display: flex; align-items: center; gap: 12px; padding: 14px 20px;
+            border-radius: 18px; text-decoration: none; color: #ffffff; font-weight: 700; font-size: 0.92rem;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.08); transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .social-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.12); }
+        .social-card i { font-size: 1.6rem; }
+
+        /* Official Social Platform Colors */
+        .social-instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+        .social-youtube { background: #ff0000; }
+        .social-facebook { background: #1877f2; }
+        .social-google { background: #4285f4; }
+        .social-whatsapp { background: #10b981; }
 
         /* --- POPUP MODALS --- */
         .modal-overlay {
@@ -183,7 +193,7 @@
             .hero p { font-size: 0.92rem; }
             .doctor-profile-card { padding: 22px; text-align: center; gap: 20px; }
             .qualification-list { text-align: left; }
-            .social-btn { width: 100%; justify-content: center; }
+            .social-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -196,6 +206,7 @@
             <a href="#about" class="nav-link">About Doctor</a>
             <a href="#services" class="nav-link">Services</a>
             <a href="#blog" class="nav-link">Parenting Blog</a>
+            <a href="#social-connect" class="nav-link">Social & Reviews</a>
             <a href="#clinic-location" class="nav-link">Location</a>
             <a onclick="openBookingModal()" class="book-tab-btn"><i class="fa-solid fa-calendar-check"></i> Book Appointment</a>
         </nav>
@@ -254,7 +265,7 @@
         </div>
     </div>
 
-    <!-- NEW BLOG SECTION -->
+    <!-- BLOG SECTION -->
     <div class="container" id="blog">
         <h2 class="section-title">Parenting & Child Health Blog</h2>
         <div class="grid">
@@ -291,16 +302,18 @@
                     <button onclick="openBlogModal('blog3')" class="read-btn">Read Full Article <i class="fa-solid fa-arrow-right"></i></button>
                 </div>
             </div>
-<!-- Blog Article 4 -->
-<div class="blog-card">
-    <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=500&q=80" alt="Monsoon Influenza Guide" class="card-img" style="margin-bottom:0; border-radius: 0;">
-    <div class="blog-content">
-        <span class="blog-tag">Seasonal Health</span>
-        <h3 class="blog-title">Monsoon Influenza in Delhi: Parent Guide</h3>
-        <p class="blog-snippet">Key facts on causes, symptoms, home precautions, and when to visit our clinic for seasonal flu in children.</p>
-        <button onclick="openBlogModal('blog4')" class="read-btn">Read Full Article <i class="fa-solid fa-arrow-right"></i></button>
-    </div>
-</div>
+
+            <!-- Blog Article 4 -->
+            <div class="blog-card">
+                <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=500&q=80" alt="Monsoon Influenza Guide" class="card-img" style="margin-bottom:0; border-radius: 0;">
+                <div class="blog-content">
+                    <span class="blog-tag">Seasonal Health</span>
+                    <h3 class="blog-title">Monsoon Influenza in Delhi: Parent Guide</h3>
+                    <p class="blog-snippet">Key facts on causes, symptoms, home precautions, and when to visit our clinic for seasonal flu in children.</p>
+                    <button onclick="openBlogModal('blog4')" class="read-btn">Read Full Article <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -342,23 +355,33 @@
                 <i class="fa-solid fa-map-location-dot" style="font-size: 2.8rem; color: var(--brand-secondary); margin-bottom: 12px;"></i>
                 <h3 style="color: #0c4a6e; margin-bottom: 8px; font-size: 1.15rem; font-family: 'Fredoka', cursive;">Driving Directions</h3>
                 <p style="color: var(--muted-text); font-size: 0.88rem; margin-bottom: 18px;">Tap below to open Google Maps directly to our clinic in Sector 3 Rohini.</p>
-                <a href="https://maps.app.goo.gl/tW6fDW25fgrrA86P6" target="_blank" class="social-btn maps-btn">
+                <a href="https://maps.app.goo.gl/tW6fDW25fgrrA86P6" target="_blank" class="social-card social-google" style="justify-content: center;">
                     <i class="fa-solid fa-diamond-turn-right"></i> Open Location in Google Maps
                 </a>
             </div>
         </div>
     </div>
 
-    <!-- Social Media Connections -->
-    <section class="social-section" id="contact">
-        <h2>Connect With Us</h2>
-        <p>Get health updates or reach out to our clinic directly</p>
-        <div class="social-links">
-            <a href="https://wa.me/918130521456" target="_blank" class="social-btn whatsapp">
-                <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+    <!-- OFFICIAL SOCIAL MEDIA & REVIEWS SECTION -->
+    <section class="social-section" id="social-connect">
+        <h2>Connect With Dr. Dinesh Mittal</h2>
+        <p>Follow our official social media handles for child health tips, video updates, or leave a review on Google.</p>
+        
+        <div class="social-grid">
+            <a href="https://www.instagram.com/dr_dinesh_mittal_child_clinic?igsh=MWZwY3JqOTlubjltMg==" target="_blank" class="social-card social-instagram">
+                <i class="fa-brands fa-instagram"></i> Instagram Profile
             </a>
-            <a href="https://maps.app.goo.gl/tW6fDW25fgrrA86P6" target="_blank" class="social-btn google">
-                <i class="fa-brands fa-google"></i> Google Maps Listing
+            <a href="https://youtube.com/@drdmittal?si=-D_1Fmy_6ksCxw1L" target="_blank" class="social-card social-youtube">
+                <i class="fa-brands fa-youtube"></i> YouTube Channel
+            </a>
+            <a href="https://www.facebook.com/share/1Thf9ecpvw/" target="_blank" class="social-card social-facebook">
+                <i class="fa-brands fa-facebook"></i> Facebook Page
+            </a>
+            <a href="https://share.google/fvwftbJACAKZVwtuy" target="_blank" class="social-card social-google">
+                <i class="fa-brands fa-google"></i> Leave Google Review
+            </a>
+            <a href="https://wa.me/918130521456" target="_blank" class="social-card social-whatsapp">
+                <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
             </a>
         </div>
     </section>
