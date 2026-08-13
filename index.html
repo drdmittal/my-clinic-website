@@ -157,7 +157,7 @@
         .vaccine-table th { background-color: var(--brand-soft-bg); color: var(--brand-secondary); font-weight: 700; }
         .vaccine-table tr:nth-child(even) { background-color: #f8fafc; }
 
-        /* Native Booking Form Styles */
+        /* Form Controls */
         .form-group { margin-bottom: 16px; }
         .form-group label { font-size: 0.88rem; font-weight: 600; color: #0c4a6e; display: block; margin-bottom: 6px; }
         .form-group input[type="text"], .form-group input[type="tel"], .form-group input[type="date"] {
@@ -185,6 +185,15 @@
         .cal-btn {
             display: inline-flex; align-items: center; gap: 8px; background: #4285f4; color: white; padding: 12px 20px; border-radius: 25px; text-decoration: none; font-weight: 700; font-size: 0.9rem; margin-top: 15px; box-shadow: 0 4px 12px rgba(66, 133, 244, 0.3);
         }
+
+        /* Loading Spinner */
+        .loading-spinner {
+            grid-column: span 3; text-align: center; padding: 25px 10px; color: var(--brand-primary); font-weight: 600; font-size: 0.9rem;
+        }
+        .spinner {
+            display: inline-block; width: 24px; height: 24px; border: 3px solid rgba(2, 132, 199, 0.2); border-radius: 50%; border-top-color: var(--brand-primary); animation: spin 0.8s linear infinite; margin-bottom: 8px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
         /* Modal Popups */
         .modal-overlay {
@@ -466,7 +475,9 @@
 
                     <div class="form-group">
                         <label><i class="fa-solid fa-clock"></i> Select Time Slot</label>
-                        <div id="slotsContainer" class="slots-grid">Loading available slots...</div>
+                        <div id="slotsContainer" class="slots-grid">
+                            <div class="loading-spinner"><div class="spinner"></div><br>Loading available slots...</div>
+                        </div>
                         <input type="hidden" id="selectedSlot" required>
                     </div>
 
@@ -562,13 +573,11 @@
             document.body.style.overflow = 'auto';
         }
 
-        // JSONP Fetch to bypass browser CORS blockage
         function fetchNativeSchedule() {
             const dateVal = document.getElementById("appointmentDate").value;
             const container = document.getElementById("slotsContainer");
-            container.innerHTML = "Loading slots...";
+            container.innerHTML = '<div class="loading-spinner"><div class="spinner"></div><br>Loading available slots...</div>';
 
-            // Clean up existing JSONP script tag if present
             const oldScript = document.getElementById("jsonpScript");
             if (oldScript) oldScript.remove();
 
@@ -655,7 +664,6 @@
             const date = document.getElementById("appointmentDate").value;
             const slot = document.getElementById("selectedSlot").value;
 
-            // Submit via form-urlencoded to prevent CORS preflight block
             const formBody = `name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&date=${encodeURIComponent(date)}&slot=${encodeURIComponent(slot)}`;
 
             fetch(SCRIPT_URL, {
