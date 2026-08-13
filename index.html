@@ -4,10 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Dr. Dinesh Mittal | Senior Child Specialist & Pediatrician in Sector 3 Rohini</title>
-    <!-- Google Fonts & FontAwesome Icons -->
+    <meta name="description" content="Senior Child Specialist & Pediatrician in Sector 3 Rohini, Delhi. Expert newborn care, WHO & IAP vaccination, growth monitoring, and pediatric consultations.">
+    <link rel="canonical" href="https://childspecialistroheni.com/" />
+
+    <!-- Favicon Icons -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🩺</text></svg>">
+
+    <!-- Performance: Preconnect & Font Swap -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
+    <!-- Schema.org MedicalBusiness / Physician JSON-LD for Google SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Physician",
+      "name": "Dr. Dinesh Mittal",
+      "image": "https://childspecialistroheni.com/doctor.jpg",
+      "@id": "https://childspecialistroheni.com/#physician",
+      "url": "https://childspecialistroheni.com",
+      "telephone": "+918130521456",
+      "priceRange": "₹₹",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "H-34/69, Sector 3, Rohini",
+        "addressLocality": "Rohini",
+        "addressRegion": "Delhi",
+        "postalCode": "110085",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 28.7041,
+        "longitude": 77.1025
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          "opens": "10:00",
+          "closes": "13:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          "opens": "18:00",
+          "closes": "20:30"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Sunday"],
+          "opens": "11:00",
+          "closes": "12:00"
+        }
+      ],
+      "medicalSpecialty": "Pediatric",
+      "sameAs": [
+        "https://www.instagram.com/dr_dinesh_mittal_child_clinic",
+        "https://youtube.com/@drdmittal",
+        "https://www.facebook.com/share/1Thf9ecpvw/"
+      ]
+    }
+    </script>
+
     <style>
         :root {
             --brand-primary: #0284c7;       /* Soft Sky Blue */
@@ -21,9 +82,9 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
         html { scroll-behavior: smooth; }
-        body { color: var(--dark-text); background-color: #fafafa; line-height: 1.6; -webkit-tap-highlight-color: transparent; }
+        body { color: var(--dark-text); background-color: #fafafa; line-height: 1.6; -webkit-tap-highlight-color: transparent; padding-bottom: 70px; }
 
-        /* Clean Header */
+        /* Header Navigation */
         header {
             position: sticky; top: 0; background: #ffffff; z-index: 1000;
             box-shadow: 0 2px 15px rgba(0,0,0,0.04); padding: 14px 6%;
@@ -66,7 +127,7 @@
         }
         .hero-cta-btn:hover { transform: translateY(-2px); background: #d97706; }
 
-        /* Container Section */
+        /* Container & Section Titles */
         .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
         .section-title { font-family: 'Fredoka', cursive; text-align: center; font-size: 1.8rem; color: #0c4a6e; margin-bottom: 30px; }
 
@@ -80,6 +141,7 @@
         .doctor-img {
             width: 200px; height: 200px; border-radius: 50%; object-fit: cover;
             border: 5px solid #ffffff; box-shadow: 0 8px 20px rgba(13, 148, 136, 0.2);
+            aspect-ratio: 1 / 1;
         }
         .doctor-info { flex: 1; min-width: 280px; }
         .doctor-info h2 { font-family: 'Fredoka', cursive; color: #0c4a6e; font-size: 1.75rem; margin-bottom: 4px; }
@@ -100,9 +162,9 @@
         .info-card:hover { transform: translateY(-4px); }
         .info-card h3 { font-size: 1.15rem; margin-bottom: 8px; color: #0c4a6e; }
         .info-card p { font-size: 0.9rem; color: var(--muted-text); }
-        .card-img { width: 100%; height: 160px; object-fit: cover; border-radius: 12px; margin-bottom: 15px; }
+        .card-img { width: 100%; height: 160px; object-fit: cover; border-radius: 12px; margin-bottom: 15px; aspect-ratio: 16 / 9; }
 
-        /* Blog Specific Styles */
+        /* Blog Section Styles */
         .blog-card {
             background: #ffffff; border-radius: 20px; border: 1px solid #f1f5f9;
             box-shadow: var(--card-shadow); overflow: hidden; display: flex; flex-direction: column;
@@ -157,7 +219,7 @@
         .vaccine-table th { background-color: var(--brand-soft-bg); color: var(--brand-secondary); font-weight: 700; }
         .vaccine-table tr:nth-child(even) { background-color: #f8fafc; }
 
-        /* --- POPUP MODALS --- */
+        /* POPUP MODALS */
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(15, 23, 42, 0.75); z-index: 2000;
@@ -165,7 +227,7 @@
             backdrop-filter: blur(5px);
         }
         .modal-content {
-            background: #ffffff; width: 100%; max-width: 700px; height: 88vh; border-radius: 24px;
+            background: #ffffff; width: 100%; max-width: 720px; height: 88vh; border-radius: 24px;
             overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); position: relative;
             display: flex; flex-direction: column; animation: popIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -174,19 +236,50 @@
             to { transform: scale(1); opacity: 1; }
         }
         .modal-header {
-            background: #f8fafc; padding: 14px 20px; display: flex;
+            background: #f8fafc; padding: 16px 22px; display: flex;
             justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; flex-shrink: 0;
         }
-        .modal-header h3 { font-family: 'Fredoka', cursive; font-size: 1.15rem; color: #0c4a6e; display: flex; align-items: center; gap: 8px; }
+        .modal-header h3 { font-family: 'Fredoka', cursive; font-size: 1.2rem; color: #0c4a6e; display: flex; align-items: center; gap: 8px; }
         .close-modal-btn {
             background: #f1f5f9; border: none; font-size: 1.2rem; color: #64748b;
             width: 32px; height: 32px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center;
         }
         .close-modal-btn:hover { background: #e2e8f0; color: #0f172a; }
-        .modal-body { padding: 0; flex: 1; overflow: hidden; display: flex; flex-direction: column; }
+        .modal-body { padding: 25px; flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; font-size: 0.95rem; color: #334155; line-height: 1.75; }
         .modal-body iframe { width: 100%; height: 100%; border: none; flex: 1; display: block; }
 
-        footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 22px 15px; font-size: 0.85rem; }
+        /* Article Formatting Inside Popup */
+        .article-section-title { font-family: 'Fredoka', cursive; color: #0c4a6e; font-size: 1.15rem; margin: 18px 0 8px; }
+        .article-cta-box {
+            background: var(--brand-soft-bg); border: 1px solid #bbf7d0; border-radius: 16px;
+            padding: 18px; margin-top: 22px; text-align: center;
+        }
+        .article-cta-btn {
+            display: inline-flex; align-items: center; gap: 8px; background: var(--brand-primary);
+            color: white; padding: 10px 22px; border-radius: 25px; font-weight: 700;
+            font-size: 0.9rem; border: none; cursor: pointer; margin-top: 10px;
+        }
+
+        /* MOBILE STICKY FLOATING ACTION BAR */
+        .mobile-bottom-bar {
+            display: none; position: fixed; bottom: 0; left: 0; width: 100%;
+            background: #ffffff; border-top: 1px solid #e2e8f0; padding: 10px 16px;
+            z-index: 1500; box-shadow: 0 -4px 15px rgba(0,0,0,0.06);
+            justify-content: space-between; gap: 10px;
+        }
+        .mobile-bar-btn {
+            flex: 1; padding: 12px 10px; border-radius: 25px; text-decoration: none;
+            font-weight: 700; font-size: 0.88rem; display: flex; align-items: center;
+            justify-content: center; gap: 8px; border: none; cursor: pointer;
+        }
+        .btn-call { background: #f1f5f9; color: #0c4a6e; }
+        .btn-book { background: var(--brand-accent); color: #ffffff; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3); }
+
+        footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 22px 15px 85px 15px; font-size: 0.85rem; }
+
+        @media (min-width: 641px) {
+            footer { padding-bottom: 22px; }
+        }
 
         @media (max-width: 640px) {
             header { padding: 12px 16px; }
@@ -201,6 +294,8 @@
             
             .modal-overlay { padding: 0; }
             .modal-content { height: 100vh; max-height: 100vh; border-radius: 0; }
+            .modal-body { padding: 18px; }
+            .mobile-bottom-bar { display: flex; }
         }
     </style>
 </head>
@@ -233,7 +328,7 @@
     <div class="container" id="about">
         <div class="doctor-profile-card">
             <div class="doctor-img-box">
-                <img src="doctor.jpg" alt="Dr. Dinesh Mittal - Pediatrician" class="doctor-img" onerror="this.src='https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=400&q=80'">
+                <img src="doctor.jpg" alt="Dr. Dinesh Mittal - Pediatrician in Rohini" class="doctor-img" onerror="this.src='https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=400&q=80'">
             </div>
             <div class="doctor-info">
                 <h2>Dr. Dinesh Mittal</h2>
@@ -255,17 +350,17 @@
         <h2 class="section-title">Pediatric Services</h2>
         <div class="grid">
             <div class="info-card">
-                <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=500&q=80" alt="Vaccination" class="card-img">
+                <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=500&q=80" alt="Child Vaccination Clinic" class="card-img">
                 <h3>Vaccination & Immunization</h3>
                 <p>WHO & IAP-recommended vaccination schedules with growth and development tracking for newborns and children.</p>
             </div>
             <div class="info-card">
-                <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&w=500&q=80" alt="Newborn Care" class="card-img">
+                <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&w=500&q=80" alt="Newborn and Infant Healthcare" class="card-img">
                 <h3>Newborn & Infant Care</h3>
                 <p>Clinical evaluation for infant growth, feeding advice, colic relief, and jaundice screening.</p>
             </div>
             <div class="info-card">
-                <img src="https://images.unsplash.com/photo-1631815588090-d4bfec5b1cdb?auto=format&fit=crop&w=500&q=80" alt="Pediatric Consultation" class="card-img">
+                <img src="https://images.unsplash.com/photo-1631815588090-d4bfec5b1cdb?auto=format&fit=crop&w=500&q=80" alt="Pediatric Medical Consultation" class="card-img">
                 <h3>Infections & Seasonal Care</h3>
                 <p>Treatment of childhood fevers, coughs, asthma, allergies, and stomach infections.</p>
             </div>
@@ -279,7 +374,7 @@
             
             <!-- IAP VACCINATION SCHEDULE CARD -->
             <div class="blog-card" style="border: 2px solid var(--brand-secondary);">
-                <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=500&q=80" alt="IAP Immunization Schedule" class="card-img" style="margin-bottom:0; border-radius: 0;">
+                <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=500&q=80" alt="IAP Immunization Schedule Reference" class="card-img" style="margin-bottom:0; border-radius: 0;">
                 <div class="blog-content">
                     <span class="blog-tag" style="background: var(--brand-secondary); color: white;">Essential Reference</span>
                     <h3 class="blog-title">IAP Immunization Schedule (Age-Wise Guide)</h3>
@@ -290,7 +385,7 @@
 
             <!-- Blog Article 1 -->
             <div class="blog-card">
-                <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=500&q=80" alt="Vaccination Guide" class="card-img" style="margin-bottom:0; border-radius: 0;">
+                <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=500&q=80" alt="Painless vs Painful Vaccine Guide" class="card-img" style="margin-bottom:0; border-radius: 0;">
                 <div class="blog-content">
                     <span class="blog-tag">Immunization</span>
                     <h3 class="blog-title">Understanding Painless vs Painful Vaccines for Babies</h3>
@@ -301,7 +396,7 @@
 
             <!-- Blog Article 2 -->
             <div class="blog-card">
-                <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=500&q=80" alt="Newborn Care Tips" class="card-img" style="margin-bottom:0; border-radius: 0;">
+                <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=500&q=80" alt="Newborn Care Advice" class="card-img" style="margin-bottom:0; border-radius: 0;">
                 <div class="blog-content">
                     <span class="blog-tag">Newborn Care</span>
                     <h3 class="blog-title">Essential Newborn Care Tips for First-Time Parents</h3>
@@ -312,7 +407,7 @@
 
             <!-- Blog Article 3 -->
             <div class="blog-card">
-                <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&w=500&q=80" alt="Managing Fever" class="card-img" style="margin-bottom:0; border-radius: 0;">
+                <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&w=500&q=80" alt="Managing Fever in Toddlers" class="card-img" style="margin-bottom:0; border-radius: 0;">
                 <div class="blog-content">
                     <span class="blog-tag">Childhood Health</span>
                     <h3 class="blog-title">How to Safely Manage High Fever in Toddlers at Home</h3>
@@ -323,7 +418,7 @@
 
             <!-- Blog Article 4 -->
             <div class="blog-card">
-                <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=500&q=80" alt="Monsoon Influenza Guide" class="card-img" style="margin-bottom:0; border-radius: 0;">
+                <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=500&q=80" alt="Monsoon Seasonal Flu Guide" class="card-img" style="margin-bottom:0; border-radius: 0;">
                 <div class="blog-content">
                     <span class="blog-tag">Seasonal Health</span>
                     <h3 class="blog-title">Monsoon Influenza in Delhi: Parent Guide</h3>
@@ -409,6 +504,12 @@
         <p>&copy; 2026 Dr. Dinesh Mittal - Pediatric Care Clinic, Sector 3 Rohini, Delhi.</p>
     </footer>
 
+    <!-- STICKY MOBILE BOTTOM BAR -->
+    <div class="mobile-bottom-bar">
+        <a href="tel:+918130521456" class="mobile-bar-btn btn-call"><i class="fa-solid fa-phone"></i> Call Clinic</a>
+        <button onclick="openBookingModal()" class="mobile-bar-btn btn-book"><i class="fa-solid fa-calendar-check"></i> Book Online</button>
+    </div>
+
     <!-- POPUP APPOINTMENT MODAL -->
     <div id="bookingModal" class="modal-overlay" onclick="closeModalOnOverlay(event, 'bookingModal')">
         <div class="modal-content">
@@ -416,7 +517,7 @@
                 <h3><i class="fa-solid fa-calendar-check" style="color: var(--brand-primary);"></i> Book Consultation</h3>
                 <button class="close-modal-btn" onclick="closeBookingModal()">&times;</button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="padding: 0;">
                 <iframe src="https://script.google.com/macros/s/AKfycbzZZJon_KvK0ibezOQT0ktfkxIB8-ee_-BnRKra6kvejGrbG1dFjMSD8f9zhR3ZXeWbXA/exec"></iframe>
             </div>
         </div>
@@ -426,47 +527,199 @@
     <div id="blogModal" class="modal-overlay" onclick="closeModalOnOverlay(event, 'blogModal')">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 id="blogModalTitle"><i class="fa-solid fa-newspaper" style="color: var(--brand-secondary);"></i> Reference</h3>
+                <h3 id="blogModalTitle"><i class="fa-solid fa-newspaper" style="color: var(--brand-secondary);"></i> Health Article</h3>
                 <button class="close-modal-btn" onclick="closeBlogModal()">&times;</button>
             </div>
-            <div class="modal-body" id="blogModalContent" style="padding: 22px; overflow-y: auto;">
+            <div class="modal-body" id="blogModalContent">
                 <!-- Dynamic Article Content Appears Here -->
             </div>
         </div>
     </div>
 
-    <!-- JAVASCRIPT -->
+    <!-- JAVASCRIPT FOR MODALS & RICH BLOG CONTENT -->
     <script>
         const blogArticles = {
             iapSchedule: {
                 title: "IAP Recommended Immunization Schedule",
                 content: `
-                    <p><strong>Indian Academy of Pediatrics (IAP) Vaccination Chart:</strong> Age-wise vaccination schedule reference guide for parents.</p>
+                    <p><strong>Indian Academy of Pediatrics (IAP) Vaccination Chart:</strong> This age-wise vaccination schedule serves as an essential reference guide for parents to ensure timely immunization against preventable diseases.</p>
+                    
                     <table class="vaccine-table">
-                        <thead><tr><th>Age</th><th>Recommended Vaccines</th></tr></thead>
+                        <thead>
+                            <tr>
+                                <th>Age</th>
+                                <th>Recommended Vaccines</th>
+                            </tr>
+                        </thead>
                         <tbody>
-                            <tr><td><strong>At Birth</strong></td><td>BCG, OPV 0, Hepatitis B (1st dose)</td></tr>
-                            <tr><td><strong>6 Weeks</strong></td><td>DTwP / DTaP 1, IPV 1, Hep B 2, Hib 1, Rotavirus 1, PCV 1</td></tr>
-                            <tr><td><strong>10 Weeks</strong></td><td>DTwP / DTaP 2, IPV 2, Hib 2, Rotavirus 2, PCV 2</td></tr>
-                            <tr><td><strong>14 Weeks</strong></td><td>DTwP / DTaP 3, IPV 3, Hib 3, Rotavirus 3, PCV 3</td></tr>
-                            <tr><td><strong>6 Months</strong></td><td>Influenza (1st Dose), Hepatitis B 3</td></tr>
-                            <tr><td><strong>7 Months</strong></td><td>Influenza (2nd Dose)</td></tr>
-                            <tr><td><strong>6 - 9 Months</strong></td><td>Typhoid Conjugate Vaccine</td></tr>
-                            <tr><td><strong>9 Months</strong></td><td>MMR 1 (Measles, Mumps, Rubella)</td></tr>
-                            <tr><td><strong>12 Months</strong></td><td>Hepatitis A (1st Dose)</td></tr>
-                            <tr><td><strong>15 Months</strong></td><td>MMR 2, Varicella (Chickenpox 1st Dose), PCV Booster</td></tr>
-                            <tr><td><strong>16 - 18 Months</strong></td><td>DTwP / DTaP Booster 1, IPV Booster 1, Hib Booster</td></tr>
-                            <tr><td><strong>18 - 19 Months</strong></td><td>Hepatitis A (2nd Dose), Varicella 2</td></tr>
-                            <tr><td><strong>4 - 6 Years</strong></td><td>DTwP / DTaP Booster 2, IPV Booster 2, MMR 3</td></tr>
-                            <tr><td><strong>10 - 12 Years</strong></td><td>Tdap / Td, HPV (for girls & boys)</td></tr>
+                            <tr>
+                                <td><strong>At Birth</strong></td>
+                                <td>BCG, OPV 0, Hepatitis B (1st dose)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>6 Weeks</strong></td>
+                                <td>DTwP / DTaP 1, IPV 1, Hep B 2, Hib 1, Rotavirus 1, PCV 1</td>
+                            </tr>
+                            <tr>
+                                <td><strong>10 Weeks</strong></td>
+                                <td>DTwP / DTaP 2, IPV 2, Hib 2, Rotavirus 2, PCV 2</td>
+                            </tr>
+                            <tr>
+                                <td><strong>14 Weeks</strong></td>
+                                <td>DTwP / DTaP 3, IPV 3, Hib 3, Rotavirus 3, PCV 3</td>
+                            </tr>
+                            <tr>
+                                <td><strong>6 Months</strong></td>
+                                <td>Influenza (1st Dose), Hepatitis B 3</td>
+                            </tr>
+                            <tr>
+                                <td><strong>7 Months</strong></td>
+                                <td>Influenza (2nd Dose)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>6 - 9 Months</strong></td>
+                                <td>Typhoid Conjugate Vaccine</td>
+                            </tr>
+                            <tr>
+                                <td><strong>9 Months</strong></td>
+                                <td>MMR 1 (Measles, Mumps, Rubella)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>12 Months</strong></td>
+                                <td>Hepatitis A (1st Dose)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>15 Months</strong></td>
+                                <td>MMR 2, Varicella (Chickenpox 1st Dose), PCV Booster</td>
+                            </tr>
+                            <tr>
+                                <td><strong>16 - 18 Months</strong></td>
+                                <td>DTwP / DTaP Booster 1, IPV Booster 1, Hib Booster</td>
+                            </tr>
+                            <tr>
+                                <td><strong>18 - 19 Months</strong></td>
+                                <td>Hepatitis A (2nd Dose), Varicella 2</td>
+                            </tr>
+                            <tr>
+                                <td><strong>4 - 6 Years</strong></td>
+                                <td>DTwP / DTaP Booster 2, IPV Booster 2, MMR 3</td>
+                            </tr>
+                            <tr>
+                                <td><strong>10 - 12 Years</strong></td>
+                                <td>Tdap / Td, HPV (for girls & boys)</td>
+                            </tr>
                         </tbody>
                     </table>
+                    <br>
+                    <p style="font-size: 0.88rem; color: #64748b;"><em>Note: Annual Influenza (flu) vaccines are recommended every year up to 5 years of age. Please consult Dr. Dinesh Mittal for individual catch-up schedules or specialized vaccines.</em></p>
+                    
+                    <div class="article-cta-box">
+                        <p style="font-weight: 600; color: #0c4a6e;">Need to check your child's vaccination status?</p>
+                        <button onclick="closeBlogModal(); openBookingModal();" class="article-cta-btn"><i class="fa-solid fa-calendar-check"></i> Book Vaccination Consultation</button>
+                    </div>
                 `
             },
-            blog1: { title: "Painless vs Painful Vaccines for Babies", content: `<p>Consult Dr. Dinesh Mittal to decide between DTaP (Painless) and DTwP (Painful) vaccines for your infant.</p>` },
-            blog2: { title: "Essential Newborn Care Tips for First-Time Parents", content: `<p>Focus on cord care, proper feeding schedules, and keeping your newborn warm and comfortable.</p>` },
-            blog3: { title: "How to Safely Manage High Fever in Toddlers", content: `<p>Keep toddlers hydrated, sponge with lukewarm water, and follow exact prescribed Paracetamol dosages.</p>` },
-            blog4: { title: "Monsoon Influenza in Delhi: Parent Guide", content: `<p>Protect your child against flu with yearly vaccination, hand washing, and rest at home when sick.</p>` }
+            blog1: {
+                title: "Understanding Painless vs Painful Vaccines for Babies",
+                content: `
+                    <p>When scheduling your baby's vaccination, you will often be given the choice between "painless" (DTaP) and "painful" (DTwP) vaccines. Understanding the key clinical differences helps parents choose with confidence.</p>
+                    
+                    <h4 class="article-section-title">1. Painful Vaccine (DTwP - Whole Cell Pertussis)</h4>
+                    <p>• Contains whole inactivated pertussis bacteria.<br>
+                    • Provides robust, long-lasting immunity against Diphtheria, Tetanus, and Pertussis.<br>
+                    • Common Side Effects: Often causes moderate fever, swelling at the injection site, and fussiness for 24-48 hours.</p>
+                    
+                    <h4 class="article-section-title">2. Painless Vaccine (DTaP - Acellular Pertussis)</h4>
+                    <p>• Contains only specific purified protein components of the pertussis bacteria.<br>
+                    • Provides strong protection while significantly minimizing post-vaccination side effects.<br>
+                    • Advantage: Very low incidence of post-shot fever and pain, making it gentler for sensitive infants.</p>
+                    
+                    <h4 class="article-section-title">Pediatric Guidance from Dr. Dinesh Mittal</h4>
+                    <p>Both vaccine options are safe, effective, and approved by the Indian Academy of Pediatrics (IAP). If your baby has a history of high fever convulsions or severe discomfort, the painless option may be recommended. Visit our Sector 3 Rohini clinic to discuss the best choice for your baby.</p>
+
+                    <div class="article-cta-box">
+                        <p style="font-weight: 600; color: #0c4a6e;">Have questions about your baby's next shot?</p>
+                        <button onclick="closeBlogModal(); openBookingModal();" class="article-cta-btn"><i class="fa-solid fa-calendar-check"></i> Consult Dr. Dinesh Mittal</button>
+                    </div>
+                `
+            },
+            blog2: {
+                title: "Essential Newborn Care Tips for First-Time Parents",
+                content: `
+                    <p>Bringing your newborn home is an exciting milestone, but first-time parents often feel overwhelmed by daily care routines. Here are vital pediatrician-approved guidelines for the first 30 days:</p>
+                    
+                    <h4 class="article-section-title">1. Umbilical Cord Stump Care</h4>
+                    <p>• Keep the stump clean, dry, and exposed to air.<br>
+                    • Avoid applying alcohol, antiseptic powders, or oils unless prescribed.<br>
+                    • The stump usually dries up and falls off naturally within 7 to 14 days.</p>
+                    
+                    <h4 class="article-section-title">2. Feeding & Hydration</h4>
+                    <p>• Feed on demand, typically every 2 to 3 hours (8–12 times per day).<br>
+                    • Exclusive breastfeeding is recommended for the first 6 months. Do not give plain water or honey to newborns.</p>
+                    
+                    <h4 class="article-section-title">3. Proper Sleep & Temperature Management</h4>
+                    <p>• Always place your baby on their back to sleep on a firm, flat mattress free of loose blankets or heavy pillows.<br>
+                    • Dress the baby in one extra layer of clothing relative to adults to maintain ideal body warmth.</p>
+                    
+                    <h4 class="article-section-title">When to Contact Our Clinic Immediately</h4>
+                    <p>Seek prompt medical attention if you observe a fever above 100.4°F, persistent refusal to feed, yellowing of skin or eyes (jaundice), or severe lethargy.</p>
+
+                    <div class="article-cta-box">
+                        <p style="font-weight: 600; color: #0c4a6e;">Schedule your newborn's routine health checkup:</p>
+                        <button onclick="closeBlogModal(); openBookingModal();" class="article-cta-btn"><i class="fa-solid fa-calendar-check"></i> Book Newborn Checkup</button>
+                    </div>
+                `
+            },
+            blog3: {
+                title: "How to Safely Manage High Fever in Toddlers at Home",
+                content: `
+                    <p>A sudden fever in a toddler can be alarming, but fever itself is a natural, healthy immune response helping your child fight off an infection. Here is how to manage it safely:</p>
+                    
+                    <h4 class="article-section-title">1. Keep Your Child Hydrated</h4>
+                    <p>Offer frequent small sips of water, ORS solutions, clear soups, coconut water, or milk. Hydration is key to preventing fatigue and complications during fever.</p>
+                    
+                    <h4 class="article-section-title">2. Lukewarm Sponge Bathing</h4>
+                    <p>• If the temperature rises above 101°F and the child is uncomfortable, sponge their body with lukewarm (not cold) water for 10–15 minutes.<br>
+                    • Avoid ice water or cold baths, as shivering actually raises internal body temperature.</p>
+                    
+                    <h4 class="article-section-title">3. Safe Medication Practices</h4>
+                    <p>• Administer Paracetamol only in the exact dosage prescribed for your child’s body weight by your pediatrician.<br>
+                    • Never give aspirin or unprescribed adult antipyretics to toddlers.</p>
+                    
+                    <h4 class="article-section-title">Warning Signs Requiring Urgent Medical Evaluation</h4>
+                    <p>Visit Dr. Dinesh Mittal immediately if the fever persists for more than 3 consecutive days, or if your child exhibits difficulty breathing, extreme drowsiness, stiff neck, or vomiting everything they drink.</p>
+
+                    <div class="article-cta-box">
+                        <p style="font-weight: 600; color: #0c4a6e;">If fever persists beyond 48-72 hours, get expert care:</p>
+                        <button onclick="closeBlogModal(); openBookingModal();" class="article-cta-btn"><i class="fa-solid fa-calendar-check"></i> Schedule Doctor Visit</button>
+                    </div>
+                `
+            },
+            blog4: {
+                title: "Monsoon Influenza in Delhi: Parent Guide",
+                content: `
+                    <p>Monsoon weather in Delhi brings welcome relief from summer heat, but high humidity and temperature drops also lead to a seasonal spike in viral influenza infections among children.</p>
+                    
+                    <h4 class="article-section-title">Key Symptoms of Seasonal Flu</h4>
+                    <p>• Sudden high fever with chills.<br>
+                    • Dry cough, sore throat, or nasal congestion.<br>
+                    • Marked body fatigue, muscle pain, and appetite loss.<br>
+                    • Occasional stomach pain, vomiting, or loose stools in younger toddlers.</p>
+                    
+                    <h4 class="article-section-title">Essential Home Precautions</h4>
+                    <p><strong>1. Hand Hygiene:</strong> Teach kids to wash hands with soap for at least 20 seconds before eating and after returning from school.<br>
+                    <strong>2. Yearly Flu Vaccination:</strong> The annual influenza vaccine provides strong defense against circulating seasonal strains and is recommended for children above 6 months.<br>
+                    <strong>3. Stay Rested at Home:</strong> Keep sick children home from school or day care until they have been fever-free for at least 24 hours to prevent spreading viral germs.</p>
+                    
+                    <h4 class="article-section-title">When to Seek Medical Attention</h4>
+                    <p>Consult Dr. Dinesh Mittal if fever remains high after 3 days, if your child develops rapid or wheezing breathing, or shows signs of severe dehydration (dry lips, crying without tears, or low urine output).</p>
+
+                    <div class="article-cta-box">
+                        <p style="font-weight: 600; color: #0c4a6e;">Protect your child with the yearly seasonal flu shot:</p>
+                        <button onclick="closeBlogModal(); openBookingModal();" class="article-cta-btn"><i class="fa-solid fa-calendar-check"></i> Book Flu Vaccination</button>
+                    </div>
+                `
+            }
         };
 
         function openBookingModal() {
