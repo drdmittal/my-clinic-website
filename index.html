@@ -145,7 +145,6 @@
         .social-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.12); }
         .social-card i { font-size: 1.6rem; }
 
-        /* Official Social Platform Colors */
         .social-instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
         .social-youtube { background: #ff0000; }
         .social-facebook { background: #1877f2; }
@@ -153,16 +152,41 @@
         .social-whatsapp { background: #10b981; }
 
         /* Vaccine Table Styling */
-        .vaccine-table {
-            width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.88rem;
-        }
-        .vaccine-table th, .vaccine-table td {
-            border: 1px solid #e2e8f0; padding: 10px 12px; text-align: left;
-        }
+        .vaccine-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.88rem; }
+        .vaccine-table th, .vaccine-table td { border: 1px solid #e2e8f0; padding: 10px 12px; text-align: left; }
         .vaccine-table th { background-color: var(--brand-soft-bg); color: var(--brand-secondary); font-weight: 700; }
         .vaccine-table tr:nth-child(even) { background-color: #f8fafc; }
 
-        /* --- POPUP MODALS --- */
+        /* NATIVE BOOKING FORM STYLING (NO IFRAME, NO DISCLAIMER) */
+        .form-group { margin-bottom: 16px; }
+        .form-group label { font-size: 0.88rem; font-weight: 600; color: #0c4a6e; display: block; margin-bottom: 6px; }
+        .form-group input[type="text"], .form-group input[type="tel"], .form-group input[type="date"] {
+            width: 100%; padding: 12px; border: 1.5px solid #cbd5e1; border-radius: 12px; font-size: 0.95rem; outline: none;
+        }
+        .form-group input:focus { border-color: var(--brand-primary); }
+        .notice-box { background: #fef3c7; border: 1px solid #f59e0b; color: #92400e; padding: 10px 14px; border-radius: 12px; font-size: 0.85rem; margin-bottom: 14px; display: none; }
+        
+        .slots-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 8px; max-height: 240px; overflow-y: auto; padding-right: 2px; }
+        .slot-btn {
+            padding: 10px 6px; border-radius: 10px; border: 1.5px solid #cbd5e1; background: #f8fafc; font-size: 0.82rem; font-weight: 600; text-align: center; cursor: pointer; transition: all 0.2s;
+        }
+        .slot-btn.available { border-color: #10b981; background: #ecfdf5; color: #065f46; }
+        .slot-btn.selected { border-color: var(--brand-primary); background: var(--brand-primary); color: #ffffff !important; }
+        .slot-btn.full { border-color: #f43f5e; background: #fff1f2; color: #9f1239; cursor: not-allowed; opacity: 0.65; }
+        
+        .native-submit-btn {
+            width: 100%; background: var(--brand-primary); color: white; border: none; padding: 14px; border-radius: 12px; font-size: 1rem; font-weight: 700; cursor: pointer; margin-top: 18px;
+        }
+        .native-submit-btn:disabled { background: #94a3b8; cursor: not-allowed; }
+
+        .native-success-card { display: none; text-align: center; padding: 25px 15px; background: #f0fdf4; border-radius: 16px; border: 1px solid #bbf7d0; }
+        .native-success-card i { font-size: 3rem; color: #10b981; margin-bottom: 12px; }
+        .native-success-card h3 { color: #065f46; font-size: 1.3rem; margin-bottom: 8px; }
+        .cal-btn {
+            display: inline-flex; align-items: center; gap: 8px; background: #4285f4; color: white; padding: 12px 20px; border-radius: 25px; text-decoration: none; font-weight: 700; font-size: 0.9rem; margin-top: 15px; box-shadow: 0 4px 12px rgba(66, 133, 244, 0.3);
+        }
+
+        /* POPUP MODALS */
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(15, 23, 42, 0.75); z-index: 2000;
@@ -170,7 +194,7 @@
             backdrop-filter: blur(5px);
         }
         .modal-content {
-            background: #ffffff; width: 100%; max-width: 750px; height: 88vh; border-radius: 24px;
+            background: #ffffff; width: 100%; max-width: 600px; max-height: 90vh; border-radius: 24px;
             overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); position: relative;
             display: flex; flex-direction: column; animation: popIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -179,7 +203,7 @@
             to { transform: scale(1); opacity: 1; }
         }
         .modal-header {
-            background: #f8fafc; padding: 14px 20px; display: flex;
+            background: #f8fafc; padding: 16px 22px; display: flex;
             justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; flex-shrink: 0;
         }
         .modal-header h3 { font-family: 'Fredoka', cursive; font-size: 1.15rem; color: #0c4a6e; display: flex; align-items: center; gap: 8px; }
@@ -188,8 +212,7 @@
             width: 32px; height: 32px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center;
         }
         .close-modal-btn:hover { background: #e2e8f0; color: #0f172a; }
-        .modal-body { padding: 0; flex: 1; overflow: hidden; display: flex; flex-direction: column; }
-        .modal-body iframe { width: 100%; height: 100%; border: none; flex: 1; display: block; }
+        .modal-body { padding: 22px; flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; font-size: 0.95rem; color: #334155; line-height: 1.7; }
 
         footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 22px 15px; font-size: 0.85rem; }
 
@@ -204,13 +227,10 @@
             .doctor-profile-card { padding: 22px; text-align: center; gap: 20px; }
             .qualification-list { text-align: left; }
             .social-grid { grid-template-columns: 1fr; }
-            .vaccine-table { font-size: 0.8rem; }
-            .vaccine-table th, .vaccine-table td { padding: 8px 6px; }
-
-            /* Full Screen Appointment Popup on Mobile */
+            .slots-grid { grid-template-columns: repeat(2, 1fr); }
+            
             .modal-overlay { padding: 0; }
             .modal-content { height: 100vh; max-height: 100vh; border-radius: 0; }
-            .modal-body { padding: 0; }
         }
     </style>
 </head>
@@ -419,7 +439,7 @@
         <p>&copy; 2026 Dr. Dinesh Mittal - Pediatric Care Clinic, Sector 3 Rohini, Delhi.</p>
     </footer>
 
-    <!-- POPUP APPOINTMENT MODAL -->
+    <!-- NATIVE APPOINTMENT MODAL (NO IFRAME / NO DISCLAIMER) -->
     <div id="bookingModal" class="modal-overlay" onclick="closeModalOnOverlay(event, 'bookingModal')">
         <div class="modal-content">
             <div class="modal-header">
@@ -427,7 +447,41 @@
                 <button class="close-modal-btn" onclick="closeBookingModal()">&times;</button>
             </div>
             <div class="modal-body">
-                <iframe src="https://script.google.com/macros/s/AKfycbzZZJon_KvK0ibezOQT0ktfkxIB8-ee_-BnRKra6kvejGrbG1dFjMSD8f9zhR3ZXeWbXA/exec"></iframe>
+                <div id="noticeBox" class="notice-box"></div>
+
+                <form id="nativeBookingForm" onsubmit="handleNativeSubmit(event)">
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-user"></i> Patient Name</label>
+                        <input type="text" id="patientName" required placeholder="Enter child's full name">
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-phone"></i> Mobile Number</label>
+                        <input type="tel" id="patientPhone" required pattern="[0-9]{10}" placeholder="10-digit mobile number">
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-calendar"></i> Select Date</label>
+                        <input type="date" id="appointmentDate" onchange="fetchNativeSchedule()">
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-clock"></i> Select Time Slot</label>
+                        <div id="slotsContainer" class="slots-grid">Loading available slots...</div>
+                        <input type="hidden" id="selectedSlot" required>
+                    </div>
+
+                    <button type="submit" id="submitBtn" class="native-submit-btn" disabled>Confirm Booking</button>
+                </form>
+
+                <div id="successCard" class="native-success-card">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <h3>Appointment Confirmed!</h3>
+                    <p id="successMsg" style="color: #334155; font-size: 0.9rem;"></p>
+                    <a id="calLink" href="#" target="_blank" class="cal-btn">
+                        <i class="fa-solid fa-calendar-plus"></i> Add to Google Calendar
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -439,140 +493,200 @@
                 <h3 id="blogModalTitle"><i class="fa-solid fa-newspaper" style="color: var(--brand-secondary);"></i> Reference</h3>
                 <button class="close-modal-btn" onclick="closeBlogModal()">&times;</button>
             </div>
-            <div class="modal-body" id="blogModalContent" style="padding: 22px; overflow-y: auto;">
+            <div class="modal-body" id="blogModalContent">
                 <!-- Dynamic Article Content Appears Here -->
             </div>
         </div>
     </div>
 
-    <!-- JAVASCRIPT FOR MODALS & BLOG DATA -->
+    <!-- JAVASCRIPT FOR NATIVE FORM, MODALS & BLOG DATA -->
     <script>
+        // Replace with your Google Apps Script Web App URL
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzZZJon_KvK0ibezOQT0ktfkxIB8-ee_-BnRKra6kvejGrbG1dFjMSD8f9zhR3ZXeWbXA/exec";
+
+        const defaultSlots = [
+            "10:00 AM", "10:15 AM", "10:30 AM", "10:45 AM",
+            "11:00 AM", "11:15 AM", "11:30 AM", "11:45 AM",
+            "06:00 PM", "06:15 PM", "06:30 PM", "06:45 PM",
+            "07:00 PM", "07:15 PM", "07:30 PM", "07:45 PM"
+        ];
+
         const blogArticles = {
             iapSchedule: {
                 title: "IAP Recommended Immunization Schedule",
                 content: `
-                    <p><strong>Indian Academy of Pediatrics (IAP) Vaccination Chart:</strong> This age-wise vaccination schedule serves as an essential reference guide for parents to ensure timely immunization against preventable diseases.</p>
-                    
+                    <p><strong>Indian Academy of Pediatrics (IAP) Vaccination Chart:</strong> Age-wise vaccination schedule reference guide for parents.</p>
                     <table class="vaccine-table">
-                        <thead>
-                            <tr>
-                                <th>Age</th>
-                                <th>Recommended Vaccines</th>
-                            </tr>
-                        </thead>
+                        <thead><tr><th>Age</th><th>Recommended Vaccines</th></tr></thead>
                         <tbody>
-                            <tr>
-                                <td><strong>At Birth</strong></td>
-                                <td>BCG, OPV 0, Hepatitis B (1st dose)</td>
-                            </tr>
-                            <tr>
-                                <td><strong>6 Weeks</strong></td>
-                                <td>DTwP / DTaP 1, IPV 1, Hep B 2, Hib 1, Rotavirus 1, PCV 1</td>
-                            </tr>
-                            <tr>
-                                <td><strong>10 Weeks</strong></td>
-                                <td>DTwP / DTaP 2, IPV 2, Hib 2, Rotavirus 2, PCV 2</td>
-                            </tr>
-                            <tr>
-                                <td><strong>14 Weeks</strong></td>
-                                <td>DTwP / DTaP 3, IPV 3, Hib 3, Rotavirus 3, PCV 3</td>
-                            </tr>
-                            <tr>
-                                <td><strong>6 Months</strong></td>
-                                <td>Influenza (1st Dose), Hepatitis B 3</td>
-                            </tr>
-                            <tr>
-                                <td><strong>7 Months</strong></td>
-                                <td>Influenza (2nd Dose)</td>
-                            </tr>
-                            <tr>
-                                <td><strong>6 - 9 Months</strong></td>
-                                <td>Typhoid Conjugate Vaccine</td>
-                            </tr>
-                            <tr>
-                                <td><strong>9 Months</strong></td>
-                                <td>MMR 1 (Measles, Mumps, Rubella)</td>
-                            </tr>
-                            <tr>
-                                <td><strong>12 Months</strong></td>
-                                <td>Hepatitis A (1st Dose)</td>
-                            </tr>
-                            <tr>
-                                <td><strong>15 Months</strong></td>
-                                <td>MMR 2, Varicella (Chickenpox 1st Dose), PCV Booster</td>
-                            </tr>
-                            <tr>
-                                <td><strong>16 - 18 Months</strong></td>
-                                <td>DTwP / DTaP Booster 1, IPV Booster 1, Hib Booster</td>
-                            </tr>
-                            <tr>
-                                <td><strong>18 - 19 Months</strong></td>
-                                <td>Hepatitis A (2nd Dose), Varicella 2</td>
-                            </tr>
-                            <tr>
-                                <td><strong>4 - 6 Years</strong></td>
-                                <td>DTwP / DTaP Booster 2, IPV Booster 2, MMR 3</td>
-                            </tr>
-                            <tr>
-                                <td><strong>10 - 12 Years</strong></td>
-                                <td>Tdap / Td, HPV (for girls & boys)</td>
-                            </tr>
+                            <tr><td><strong>At Birth</strong></td><td>BCG, OPV 0, Hepatitis B (1st dose)</td></tr>
+                            <tr><td><strong>6 Weeks</strong></td><td>DTwP / DTaP 1, IPV 1, Hep B 2, Hib 1, Rotavirus 1, PCV 1</td></tr>
+                            <tr><td><strong>10 Weeks</strong></td><td>DTwP / DTaP 2, IPV 2, Hib 2, Rotavirus 2, PCV 2</td></tr>
+                            <tr><td><strong>14 Weeks</strong></td><td>DTwP / DTaP 3, IPV 3, Hib 3, Rotavirus 3, PCV 3</td></tr>
+                            <tr><td><strong>6 Months</strong></td><td>Influenza (1st Dose), Hepatitis B 3</td></tr>
+                            <tr><td><strong>7 Months</strong></td><td>Influenza (2nd Dose)</td></tr>
+                            <tr><td><strong>6 - 9 Months</strong></td><td>Typhoid Conjugate Vaccine</td></tr>
+                            <tr><td><strong>9 Months</strong></td><td>MMR 1 (Measles, Mumps, Rubella)</td></tr>
+                            <tr><td><strong>12 Months</strong></td><td>Hepatitis A (1st Dose)</td></tr>
+                            <tr><td><strong>15 Months</strong></td><td>MMR 2, Varicella (Chickenpox 1st Dose), PCV Booster</td></tr>
+                            <tr><td><strong>16 - 18 Months</strong></td><td>DTwP / DTaP Booster 1, IPV Booster 1, Hib Booster</td></tr>
+                            <tr><td><strong>18 - 19 Months</strong></td><td>Hepatitis A (2nd Dose), Varicella 2</td></tr>
+                            <tr><td><strong>4 - 6 Years</strong></td><td>DTwP / DTaP Booster 2, IPV Booster 2, MMR 3</td></tr>
+                            <tr><td><strong>10 - 12 Years</strong></td><td>Tdap / Td, HPV (for girls & boys)</td></tr>
                         </tbody>
                     </table>
-                    <br>
-                    <p><em>Note: Annual Influenza (flu) vaccines are recommended every year up to 5 years of age. Please consult Dr. Dinesh Mittal for individual catch-up schedules or specialized vaccines.</em></p>
                 `
             },
             blog1: {
                 title: "Painless vs Painful Vaccines for Babies",
-                content: `
-                    <p><strong>Understanding the Difference:</strong> When scheduling your baby's vaccination, you will often be given the choice between "painless" (DTaP) and "painful" (DTwP) vaccines.</p><br>
-                    <p><strong>1. Painful Vaccine (DTwP):</strong> Contains whole cell pertussis bacteria. It provides slightly stronger, longer-lasting immunity but commonly causes mild fever, swelling, and irritability for 24-48 hours after administration.</p><br>
-                    <p><strong>2. Painless Vaccine (DTaP):</strong> Contains only acellular components of pertussis. It significantly reduces post-vaccination fever and redness, making it gentler on the infant.</p><br>
-                    <p><strong>Pediatric Advice:</strong> Both vaccines offer excellent protection against Diphtheria, Tetanus, and Pertussis. Consult Dr. Dinesh Mittal at our Sector 3 Rohini clinic to choose the best schedule tailored for your child.</p>
-                `
+                content: `<p><strong>Understanding the Difference:</strong> When scheduling your baby's vaccination, choose between DTaP (Painless) and DTwP (Painful) options after consulting Dr. Dinesh Mittal.</p>`
             },
             blog2: {
                 title: "Essential Newborn Care Tips for First-Time Parents",
-                content: `
-                    <p><strong>Bringing Your Newborn Home:</strong> The first month with a newborn involves learning feeding cues, sleep patterns, and hygienic care.</p><br>
-                    <p><strong>1. Umbilical Cord Care:</strong> Keep the cord stump clean and dry. Avoid applying alcohol or ointments unless specifically prescribed. It usually falls off naturally within 7–14 days.</p><br>
-                    <p><strong>2. Feeding & Hydration:</strong> Newborns feed every 2 to 3 hours. Breast milk or recommended formula provides complete nutrition; avoid giving plain water to infants under 6 months.</p><br>
-                    <p><strong>3. When to Consult a Pediatrician:</strong> Contact our clinic immediately if you observe a fever above 100.4°F, persistent refusal to feed, lethargy, or yellowing skin (jaundice).</p>
-                `
+                content: `<p><strong>Bringing Your Newborn Home:</strong> Focus on umbilical cord care, infant feeding cycles, and tracking healthy growth milestones.</p>`
             },
             blog3: {
                 title: "How to Safely Manage High Fever in Toddlers",
-                content: `
-                    <p><strong>Managing Fever Calmly:</strong> Fever is a natural sign that your child's body is fighting off an infection.</p><br>
-                    <p><strong>1. Keep the Child Hydrated:</strong> Offer frequent sips of water, ORS, coconut water, or warm soups to prevent dehydration.</p><br>
-                    <p><strong>2. Lukewarm Sponge Bathing:</strong> If the temperature remains high, wipe your child's body with a cloth soaked in lukewarm (not cold) water for 10-15 minutes.</p><br>
-                    <p><strong>3. Medication Safety:</strong> Only give Paracetamol or pediatric antipyretics in the exact dosage recommended for your child's body weight by Dr. Dinesh Mittal.</p>
-                `
+                content: `<p><strong>Managing Fever Calmly:</strong> Keep toddlers hydrated, use lukewarm sponge baths, and administer exact weight-based Paracetamol doses.</p>`
             },
             blog4: {
                 title: "Monsoon Influenza in Delhi: Parent Guide",
-                content: `
-                    <p><strong>Understanding Seasonal Flu in Delhi:</strong> The seasonal shift and monsoon weather bring an increase in viral flu infections among school-going children and infants in North Delhi.</p><br>
-                    <p><strong>Common Symptoms:</strong> Sudden high fever, dry cough, runny nose, body aches, fatigue, and occasional stomach upset or vomiting.</p><br>
-                    <p><strong>Essential Precautions:</strong><br>
-                    • Ensure frequent handwashing with soap.<br>
-                    • Keep annual flu vaccinations up to date (recommended for kids 6 months and older).<br>
-                    • Ensure good fluid intake and adequate sleep.<br>
-                    • Keep sick children rested at home to avoid spreading germs at school.</p><br>
-                    <p><strong>When to Consult Dr. Dinesh Mittal:</strong> Visit our Sector 3 Rohini clinic if fever persists beyond 3 days, if your child experiences breathing difficulty, stops drinking fluids, or shows extreme lethargy.</p>
-                `
+                content: `<p><strong>Understanding Seasonal Flu in Delhi:</strong> Protect children with good hand hygiene, annual flu shots, and adequate rest.</p>`
             }
         };
+
+        // Set Default Date (Tomorrow if after 8 PM)
+        document.addEventListener("DOMContentLoaded", function() {
+            const now = new Date();
+            if (now.getHours() >= 20) {
+                now.setDate(now.getDate() + 1);
+            }
+            const dateStr = now.toISOString().split('T')[0];
+            document.getElementById("appointmentDate").value = dateStr;
+        });
 
         function openBookingModal() {
             document.getElementById('bookingModal').style.display = 'flex';
             document.body.style.overflow = 'hidden';
+            fetchNativeSchedule();
         }
 
         function closeBookingModal() {
             document.getElementById('bookingModal').style.display = 'none';
             document.body.style.overflow = 'auto';
+        }
+
+        function fetchNativeSchedule() {
+            const dateVal = document.getElementById("appointmentDate").value;
+            const container = document.getElementById("slotsContainer");
+            container.innerHTML = "Loading slots...";
+
+            fetch(`${SCRIPT_URL}?date=${dateVal}`)
+                .then(res => res.json())
+                .then(data => renderNativeSlots(data))
+                .catch(err => {
+                    container.innerHTML = "Unable to load slots. Please check internet connection.";
+                });
+        }
+
+        function isTimePassed(slotStr, curHour, curMin) {
+            const match = slotStr.match(/(\d+):(\d+)\s*(AM|PM)/i);
+            if (!match) return false;
+            let hrs = parseInt(match[1], 10);
+            let mins = parseInt(match[2], 10);
+            let ampm = match[3].toUpperCase();
+            if (ampm === "PM" && hrs < 12) hrs += 12;
+            if (ampm === "AM" && hrs === 12) hrs = 0;
+            if (hrs < curHour) return true;
+            if (hrs === curHour && mins <= curMin) return true;
+            return false;
+        }
+
+        function renderNativeSlots(data) {
+            const container = document.getElementById("slotsContainer");
+            container.innerHTML = "";
+            document.getElementById("selectedSlot").value = "";
+            document.getElementById("submitBtn").disabled = true;
+
+            if (data.notice) {
+                const noticeBox = document.getElementById("noticeBox");
+                noticeBox.innerText = data.notice;
+                noticeBox.style.display = "block";
+            }
+
+            let allSlots = [...defaultSlots];
+            if (data.extraSlots && data.extraSlots.length > 0) {
+                allSlots = [...allSlots, ...data.extraSlots];
+            }
+
+            let visibleSlots = 0;
+
+            allSlots.forEach(slot => {
+                if (data.isToday && isTimePassed(slot, data.currentHour, data.currentMinute)) {
+                    return;
+                }
+
+                visibleSlots++;
+                const count = data.counts[slot] || 0;
+                const btn = document.createElement("div");
+                btn.className = "slot-btn";
+
+                if (count >= 2) {
+                    btn.classList.add("full");
+                    btn.innerText = slot + " (Full)";
+                } else {
+                    btn.classList.add("available");
+                    btn.innerText = slot;
+                    btn.onclick = function() {
+                        document.querySelectorAll(".slot-btn").forEach(b => b.classList.remove("selected"));
+                        btn.classList.add("selected");
+                        document.getElementById("selectedSlot").value = slot;
+                        document.getElementById("submitBtn").disabled = false;
+                    };
+                }
+                container.appendChild(btn);
+            });
+
+            if (visibleSlots === 0) {
+                container.innerHTML = "<div style='grid-column: span 3; text-align: center; color: #64748b; font-size: 0.85rem; padding: 15px;'>No remaining slots for today. Please choose another date.</div>";
+            }
+        }
+
+        function handleNativeSubmit(e) {
+            e.preventDefault();
+            const btn = document.getElementById("submitBtn");
+            btn.disabled = true;
+            btn.innerText = "Processing...";
+
+            const payload = {
+                name: document.getElementById("patientName").value,
+                phone: document.getElementById("patientPhone").value,
+                date: document.getElementById("appointmentDate").value,
+                slot: document.getElementById("selectedSlot").value
+            };
+
+            fetch(SCRIPT_URL, {
+                method: "POST",
+                body: JSON.stringify(payload)
+            })
+            .then(res => res.json())
+            .then(res => {
+                if (res.status === "success") {
+                    document.getElementById("nativeBookingForm").style.display = "none";
+                    document.getElementById("successMsg").innerText = `Appointment set for ${payload.date} at ${payload.slot}.`;
+                    document.getElementById("calLink").href = res.calLink;
+                    document.getElementById("successCard").style.display = "block";
+                } else {
+                    alert(res.message);
+                    btn.disabled = false;
+                    btn.innerText = "Confirm Booking";
+                }
+            })
+            .catch(err => {
+                alert("Error submitting booking. Please try again.");
+                btn.disabled = false;
+                btn.innerText = "Confirm Booking";
+            });
         }
 
         function openBlogModal(articleKey) {
