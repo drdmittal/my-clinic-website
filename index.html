@@ -170,7 +170,7 @@
             backdrop-filter: blur(5px);
         }
         .modal-content {
-            background: #ffffff; width: 100%; max-width: 750px; max-height: 90vh; border-radius: 24px;
+            background: #ffffff; width: 100%; max-width: 750px; height: 88vh; border-radius: 24px;
             overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); position: relative;
             display: flex; flex-direction: column; animation: popIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -179,8 +179,8 @@
             to { transform: scale(1); opacity: 1; }
         }
         .modal-header {
-            background: #f8fafc; padding: 16px 22px; display: flex;
-            justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0;
+            background: #f8fafc; padding: 14px 20px; display: flex;
+            justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; flex-shrink: 0;
         }
         .modal-header h3 { font-family: 'Fredoka', cursive; font-size: 1.15rem; color: #0c4a6e; display: flex; align-items: center; gap: 8px; }
         .close-modal-btn {
@@ -188,12 +188,12 @@
             width: 32px; height: 32px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center;
         }
         .close-modal-btn:hover { background: #e2e8f0; color: #0f172a; }
-        .modal-body { padding: 22px; flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; font-size: 0.95rem; color: #334155; line-height: 1.7; }
-        .modal-body iframe { width: 100%; height: 680px; border: none; border-radius: 16px; display: block; }
+        .modal-body { padding: 0; flex: 1; overflow: hidden; display: flex; flex-direction: column; }
+        .modal-body iframe { width: 100%; height: 100%; border: none; flex: 1; display: block; }
 
         footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 22px 15px; font-size: 0.85rem; }
 
-        /* Mobile Responsive Adjustments */
+        /* FULL SCREEN MOBILE MODAL OPTIMIZATION */
         @media (max-width: 640px) {
             header { padding: 12px 16px; }
             .logo { font-size: 1.15rem; }
@@ -206,6 +206,11 @@
             .social-grid { grid-template-columns: 1fr; }
             .vaccine-table { font-size: 0.8rem; }
             .vaccine-table th, .vaccine-table td { padding: 8px 6px; }
+
+            /* Full Screen Appointment Popup on Mobile */
+            .modal-overlay { padding: 0; }
+            .modal-content { height: 100vh; max-height: 100vh; border-radius: 0; }
+            .modal-body { padding: 0; }
         }
     </style>
 </head>
@@ -421,7 +426,7 @@
                 <h3><i class="fa-solid fa-calendar-check" style="color: var(--brand-primary);"></i> Book Consultation</h3>
                 <button class="close-modal-btn" onclick="closeBookingModal()">&times;</button>
             </div>
-            <div style="padding: 8px; flex: 1; overflow-y: auto;">
+            <div class="modal-body">
                 <iframe src="https://script.google.com/macros/s/AKfycbzZZJon_KvK0ibezOQT0ktfkxIB8-ee_-BnRKra6kvejGrbG1dFjMSD8f9zhR3ZXeWbXA/exec"></iframe>
             </div>
         </div>
@@ -434,7 +439,7 @@
                 <h3 id="blogModalTitle"><i class="fa-solid fa-newspaper" style="color: var(--brand-secondary);"></i> Reference</h3>
                 <button class="close-modal-btn" onclick="closeBlogModal()">&times;</button>
             </div>
-            <div class="modal-body" id="blogModalContent">
+            <div class="modal-body" id="blogModalContent" style="padding: 22px; overflow-y: auto;">
                 <!-- Dynamic Article Content Appears Here -->
             </div>
         </div>
