@@ -157,45 +157,7 @@
         .vaccine-table th { background-color: var(--brand-soft-bg); color: var(--brand-secondary); font-weight: 700; }
         .vaccine-table tr:nth-child(even) { background-color: #f8fafc; }
 
-        /* Form Controls */
-        .form-group { margin-bottom: 16px; }
-        .form-group label { font-size: 0.88rem; font-weight: 600; color: #0c4a6e; display: block; margin-bottom: 6px; }
-        .form-group input[type="text"], .form-group input[type="tel"], .form-group input[type="date"] {
-            width: 100%; padding: 12px; border: 1.5px solid #cbd5e1; border-radius: 12px; font-size: 0.95rem; outline: none;
-        }
-        .form-group input:focus { border-color: var(--brand-primary); }
-        .notice-box { background: #fef3c7; border: 1px solid #f59e0b; color: #92400e; padding: 10px 14px; border-radius: 12px; font-size: 0.85rem; margin-bottom: 14px; display: none; }
-        
-        .slots-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 8px; max-height: 240px; overflow-y: auto; padding-right: 2px; }
-        .slot-btn {
-            padding: 10px 6px; border-radius: 10px; border: 1.5px solid #cbd5e1; background: #f8fafc; font-size: 0.82rem; font-weight: 600; text-align: center; cursor: pointer; transition: all 0.2s;
-        }
-        .slot-btn.available { border-color: #10b981; background: #ecfdf5; color: #065f46; }
-        .slot-btn.selected { border-color: var(--brand-primary); background: var(--brand-primary); color: #ffffff !important; }
-        .slot-btn.full { border-color: #f43f5e; background: #fff1f2; color: #9f1239; cursor: not-allowed; opacity: 0.65; }
-        
-        .native-submit-btn {
-            width: 100%; background: var(--brand-primary); color: white; border: none; padding: 14px; border-radius: 12px; font-size: 1rem; font-weight: 700; cursor: pointer; margin-top: 18px;
-        }
-        .native-submit-btn:disabled { background: #94a3b8; cursor: not-allowed; }
-
-        .native-success-card { display: none; text-align: center; padding: 25px 15px; background: #f0fdf4; border-radius: 16px; border: 1px solid #bbf7d0; }
-        .native-success-card i { font-size: 3rem; color: #10b981; margin-bottom: 12px; }
-        .native-success-card h3 { color: #065f46; font-size: 1.3rem; margin-bottom: 8px; }
-        .cal-btn {
-            display: inline-flex; align-items: center; gap: 8px; background: #4285f4; color: white; padding: 12px 20px; border-radius: 25px; text-decoration: none; font-weight: 700; font-size: 0.9rem; margin-top: 15px; box-shadow: 0 4px 12px rgba(66, 133, 244, 0.3);
-        }
-
-        /* Loading Spinner */
-        .loading-spinner {
-            grid-column: span 3; text-align: center; padding: 25px 10px; color: var(--brand-primary); font-weight: 600; font-size: 0.9rem;
-        }
-        .spinner {
-            display: inline-block; width: 24px; height: 24px; border: 3px solid rgba(2, 132, 199, 0.2); border-radius: 50%; border-top-color: var(--brand-primary); animation: spin 0.8s linear infinite; margin-bottom: 8px;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        /* Modal Popups */
+        /* --- POPUP MODALS --- */
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(15, 23, 42, 0.75); z-index: 2000;
@@ -203,7 +165,7 @@
             backdrop-filter: blur(5px);
         }
         .modal-content {
-            background: #ffffff; width: 100%; max-width: 600px; max-height: 90vh; border-radius: 24px;
+            background: #ffffff; width: 100%; max-width: 700px; height: 88vh; border-radius: 24px;
             overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); position: relative;
             display: flex; flex-direction: column; animation: popIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -212,7 +174,7 @@
             to { transform: scale(1); opacity: 1; }
         }
         .modal-header {
-            background: #f8fafc; padding: 16px 22px; display: flex;
+            background: #f8fafc; padding: 14px 20px; display: flex;
             justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; flex-shrink: 0;
         }
         .modal-header h3 { font-family: 'Fredoka', cursive; font-size: 1.15rem; color: #0c4a6e; display: flex; align-items: center; gap: 8px; }
@@ -221,7 +183,8 @@
             width: 32px; height: 32px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center;
         }
         .close-modal-btn:hover { background: #e2e8f0; color: #0f172a; }
-        .modal-body { padding: 22px; flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; font-size: 0.95rem; color: #334155; line-height: 1.7; }
+        .modal-body { padding: 0; flex: 1; overflow: hidden; display: flex; flex-direction: column; }
+        .modal-body iframe { width: 100%; height: 100%; border: none; flex: 1; display: block; }
 
         footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 22px 15px; font-size: 0.85rem; }
 
@@ -235,7 +198,6 @@
             .doctor-profile-card { padding: 22px; text-align: center; gap: 20px; }
             .qualification-list { text-align: left; }
             .social-grid { grid-template-columns: 1fr; }
-            .slots-grid { grid-template-columns: repeat(2, 1fr); }
             
             .modal-overlay { padding: 0; }
             .modal-content { height: 100vh; max-height: 100vh; border-radius: 0; }
@@ -447,7 +409,7 @@
         <p>&copy; 2026 Dr. Dinesh Mittal - Pediatric Care Clinic, Sector 3 Rohini, Delhi.</p>
     </footer>
 
-    <!-- NATIVE APPOINTMENT MODAL (NO IFRAME / NO DISCLAIMER) -->
+    <!-- POPUP APPOINTMENT MODAL -->
     <div id="bookingModal" class="modal-overlay" onclick="closeModalOnOverlay(event, 'bookingModal')">
         <div class="modal-content">
             <div class="modal-header">
@@ -455,43 +417,7 @@
                 <button class="close-modal-btn" onclick="closeBookingModal()">&times;</button>
             </div>
             <div class="modal-body">
-                <div id="noticeBox" class="notice-box"></div>
-
-                <form id="nativeBookingForm" onsubmit="handleNativeSubmit(event)">
-                    <div class="form-group">
-                        <label><i class="fa-solid fa-user"></i> Patient Name</label>
-                        <input type="text" id="patientName" required placeholder="Enter child's full name">
-                    </div>
-
-                    <div class="form-group">
-                        <label><i class="fa-solid fa-phone"></i> Mobile Number</label>
-                        <input type="tel" id="patientPhone" required pattern="[0-9]{10}" placeholder="10-digit mobile number">
-                    </div>
-
-                    <div class="form-group">
-                        <label><i class="fa-solid fa-calendar"></i> Select Date</label>
-                        <input type="date" id="appointmentDate" onchange="fetchNativeSchedule()">
-                    </div>
-
-                    <div class="form-group">
-                        <label><i class="fa-solid fa-clock"></i> Select Time Slot</label>
-                        <div id="slotsContainer" class="slots-grid">
-                            <div class="loading-spinner"><div class="spinner"></div><br>Loading available slots...</div>
-                        </div>
-                        <input type="hidden" id="selectedSlot" required>
-                    </div>
-
-                    <button type="submit" id="submitBtn" class="native-submit-btn" disabled>Confirm Booking</button>
-                </form>
-
-                <div id="successCard" class="native-success-card">
-                    <i class="fa-solid fa-circle-check"></i>
-                    <h3>Appointment Confirmed!</h3>
-                    <p id="successMsg" style="color: #334155; font-size: 0.9rem;"></p>
-                    <a id="calLink" href="#" target="_blank" class="cal-btn">
-                        <i class="fa-solid fa-calendar-plus"></i> Add to Google Calendar
-                    </a>
-                </div>
+                <iframe src="https://script.google.com/macros/s/AKfycbzZZJon_KvK0ibezOQT0ktfkxIB8-ee_-BnRKra6kvejGrbG1dFjMSD8f9zhR3ZXeWbXA/exec"></iframe>
             </div>
         </div>
     </div>
@@ -503,7 +429,7 @@
                 <h3 id="blogModalTitle"><i class="fa-solid fa-newspaper" style="color: var(--brand-secondary);"></i> Reference</h3>
                 <button class="close-modal-btn" onclick="closeBlogModal()">&times;</button>
             </div>
-            <div class="modal-body" id="blogModalContent">
+            <div class="modal-body" id="blogModalContent" style="padding: 22px; overflow-y: auto;">
                 <!-- Dynamic Article Content Appears Here -->
             </div>
         </div>
@@ -511,15 +437,6 @@
 
     <!-- JAVASCRIPT -->
     <script>
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzZZJon_KvK0ibezOQT0ktfkxIB8-ee_-BnRKra6kvejGrbG1dFjMSD8f9zhR3ZXeWbXA/exec";
-
-        const defaultSlots = [
-            "10:00 AM", "10:15 AM", "10:30 AM", "10:45 AM",
-            "11:00 AM", "11:15 AM", "11:30 AM", "11:45 AM",
-            "06:00 PM", "06:15 PM", "06:30 PM", "06:45 PM",
-            "07:00 PM", "07:15 PM", "07:30 PM", "07:45 PM"
-        ];
-
         const blogArticles = {
             iapSchedule: {
                 title: "IAP Recommended Immunization Schedule",
@@ -552,143 +469,14 @@
             blog4: { title: "Monsoon Influenza in Delhi: Parent Guide", content: `<p>Protect your child against flu with yearly vaccination, hand washing, and rest at home when sick.</p>` }
         };
 
-        // Initialize Default Date
-        document.addEventListener("DOMContentLoaded", function() {
-            const now = new Date();
-            if (now.getHours() >= 20) {
-                now.setDate(now.getDate() + 1);
-            }
-            const dateStr = now.toISOString().split('T')[0];
-            document.getElementById("appointmentDate").value = dateStr;
-        });
-
         function openBookingModal() {
             document.getElementById('bookingModal').style.display = 'flex';
             document.body.style.overflow = 'hidden';
-            fetchNativeSchedule();
         }
 
         function closeBookingModal() {
             document.getElementById('bookingModal').style.display = 'none';
             document.body.style.overflow = 'auto';
-        }
-
-        function fetchNativeSchedule() {
-            const dateVal = document.getElementById("appointmentDate").value;
-            const container = document.getElementById("slotsContainer");
-            container.innerHTML = '<div class="loading-spinner"><div class="spinner"></div><br>Loading available slots...</div>';
-
-            const oldScript = document.getElementById("jsonpScript");
-            if (oldScript) oldScript.remove();
-
-            const script = document.createElement("script");
-            script.id = "jsonpScript";
-            script.src = `${SCRIPT_URL}?date=${dateVal}&callback=handleScheduleData`;
-            script.onerror = function() {
-                container.innerHTML = "<div style='grid-column: span 3; text-align: center; color: #e11d48; padding: 10px;'>Unable to load slots. Please check connection.</div>";
-            };
-            document.body.appendChild(script);
-        }
-
-        function handleScheduleData(data) {
-            const container = document.getElementById("slotsContainer");
-            container.innerHTML = "";
-            document.getElementById("selectedSlot").value = "";
-            document.getElementById("submitBtn").disabled = true;
-
-            if (data.notice) {
-                const noticeBox = document.getElementById("noticeBox");
-                noticeBox.innerText = data.notice;
-                noticeBox.style.display = "block";
-            }
-
-            let allSlots = [...defaultSlots];
-            if (data.extraSlots && data.extraSlots.length > 0) {
-                allSlots = [...allSlots, ...data.extraSlots];
-            }
-
-            let visibleSlots = 0;
-
-            allSlots.forEach(slot => {
-                if (data.isToday && isTimePassed(slot, data.currentHour, data.currentMinute)) {
-                    return;
-                }
-
-                visibleSlots++;
-                const count = data.counts[slot] || 0;
-                const btn = document.createElement("div");
-                btn.className = "slot-btn";
-
-                if (count >= 2) {
-                    btn.classList.add("full");
-                    btn.innerText = slot + " (Full)";
-                } else {
-                    btn.classList.add("available");
-                    btn.innerText = slot;
-                    btn.onclick = function() {
-                        document.querySelectorAll(".slot-btn").forEach(b => b.classList.remove("selected"));
-                        btn.classList.add("selected");
-                        document.getElementById("selectedSlot").value = slot;
-                        document.getElementById("submitBtn").disabled = false;
-                    };
-                }
-                container.appendChild(btn);
-            });
-
-            if (visibleSlots === 0) {
-                container.innerHTML = "<div style='grid-column: span 3; text-align: center; color: #64748b; font-size: 0.85rem; padding: 15px;'>No remaining slots for today. Please choose another date.</div>";
-            }
-        }
-
-        function isTimePassed(slotStr, curHour, curMin) {
-            const match = slotStr.match(/(\d+):(\d+)\s*(AM|PM)/i);
-            if (!match) return false;
-            let hrs = parseInt(match[1], 10);
-            let mins = parseInt(match[2], 10);
-            let ampm = match[3].toUpperCase();
-            if (ampm === "PM" && hrs < 12) hrs += 12;
-            if (ampm === "AM" && hrs === 12) hrs = 0;
-            if (hrs < curHour) return true;
-            if (hrs === curHour && mins <= curMin) return true;
-            return false;
-        }
-
-        function handleNativeSubmit(e) {
-            e.preventDefault();
-            const btn = document.getElementById("submitBtn");
-            btn.disabled = true;
-            btn.innerText = "Processing...";
-
-            const name = document.getElementById("patientName").value;
-            const phone = document.getElementById("patientPhone").value;
-            const date = document.getElementById("appointmentDate").value;
-            const slot = document.getElementById("selectedSlot").value;
-
-            const formBody = `name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&date=${encodeURIComponent(date)}&slot=${encodeURIComponent(slot)}`;
-
-            fetch(SCRIPT_URL, {
-                method: "POST",
-                headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: formBody
-            })
-            .then(res => res.json())
-            .then(res => {
-                if (res.status === "success") {
-                    document.getElementById("nativeBookingForm").style.display = "none";
-                    document.getElementById("successMsg").innerText = `Appointment set for ${date} at ${slot}.`;
-                    document.getElementById("calLink").href = res.calLink;
-                    document.getElementById("successCard").style.display = "block";
-                } else {
-                    alert(res.message);
-                    btn.disabled = false;
-                    btn.innerText = "Confirm Booking";
-                }
-            })
-            .catch(err => {
-                alert("Error submitting booking. Please try again.");
-                btn.disabled = false;
-                btn.innerText = "Confirm Booking";
-            });
         }
 
         function openBlogModal(articleKey) {
