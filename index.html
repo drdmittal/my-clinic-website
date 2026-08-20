@@ -49,16 +49,17 @@
   ]
 }
 </script>
-    <head><!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-768Y52R8SC"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-768Y52R8SC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-  gtag('config', 'G-768Y52R8SC');
-</script>
-     
+      gtag('config', 'G-768Y52R8SC');
+    </script>
+      
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Dr. Dinesh Mittal | Senior Child Specialist & Pediatrician in Sector 3 Rohini</title>
@@ -151,7 +152,7 @@
         .logo { font-family: 'Fredoka', cursive; font-size: 1.35rem; font-weight: 600; color: var(--brand-primary); display: flex; align-items: center; gap: 8px; }
         .logo i { color: var(--brand-accent); font-size: 1.4rem; }
         
-        nav { display: flex; align-items: center; gap: 20px; }
+        nav { display: flex; align-items: center; gap: 18px; }
         nav a { text-decoration: none; color: var(--dark-text); font-weight: 600; font-size: 0.9rem; transition: color 0.2s; cursor: pointer; }
         nav a:hover { color: var(--brand-primary); }
         
@@ -221,6 +222,48 @@
         .info-card h3 { font-size: 1.15rem; margin-bottom: 8px; color: #0c4a6e; }
         .info-card p { font-size: 0.9rem; color: var(--muted-text); }
         .card-img { width: 100%; height: 180px; object-fit: cover; border-radius: 12px; margin-bottom: 15px; aspect-ratio: 16 / 9; }
+
+        /* SCREENER TOOL STYLES */
+        .screener-card {
+            background: #ffffff; border-radius: 24px; box-shadow: var(--card-shadow);
+            border: 1.5px solid #e0f2fe; padding: 32px 24px; margin-bottom: 40px;
+        }
+        .screener-header { text-align: center; margin-bottom: 22px; }
+        .screener-badge {
+            display: inline-flex; align-items: center; gap: 6px; background: #e0f2fe;
+            color: var(--brand-primary); padding: 5px 14px; border-radius: 16px;
+            font-size: 0.76rem; font-weight: 700; text-transform: uppercase; margin-bottom: 8px;
+        }
+        .screener-title { font-family: 'Fredoka', cursive; font-size: 1.65rem; color: #0c4a6e; margin-bottom: 4px; }
+        .screener-subtitle { font-size: 0.88rem; color: var(--muted-text); }
+
+        .screener-inputs-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px;
+            background: #f8fafc; padding: 20px; border-radius: 16px; border: 1px solid #e2e8f0; margin-bottom: 22px;
+        }
+        .screener-field label { font-size: 0.82rem; font-weight: 700; color: #0c4a6e; display: block; margin-bottom: 5px; }
+        .screener-select, .screener-input {
+            width: 100%; padding: 10px 12px; border: 1.5px solid #cbd5e1; border-radius: 10px; font-size: 0.92rem; outline: none; background: #ffffff;
+        }
+        .screener-select:focus, .screener-input:focus { border-color: var(--brand-primary); }
+
+        .results-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .result-box { background: #ffffff; border-radius: 16px; padding: 20px; border: 1.5px solid #e2e8f0; }
+        .result-box h4 { font-family: 'Fredoka', cursive; font-size: 1.15rem; color: #0c4a6e; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+
+        .flag-card {
+            padding: 12px 14px; border-radius: 12px; margin-bottom: 10px; font-size: 0.86rem; line-height: 1.45; display: flex; gap: 10px; align-items: flex-start;
+        }
+        .flag-card i { font-size: 1.1rem; margin-top: 2px; flex-shrink: 0; }
+        .flag-green { background: #f0fdf4; border: 1px solid #86efac; color: #166534; }
+        .flag-green i { color: #16a34a; }
+        .flag-yellow { background: #fffbeb; border: 1px solid #fde047; color: #854d0e; }
+        .flag-yellow i { color: #ca8a04; }
+        .flag-red { background: #fef2f2; border: 1px solid #fca5a5; color: #991b1b; }
+        .flag-red i { color: #dc2626; }
+        .iap-ref-badge {
+            display: inline-block; background: #e0f2fe; color: #0369a1; font-weight: 700; font-size: 0.75rem; padding: 3px 8px; border-radius: 6px; margin-bottom: 8px;
+        }
 
         /* Blog Section Styles */
         .blog-card {
@@ -365,6 +408,7 @@
         <nav>
             <a href="#about" class="nav-link">About Doctor</a>
             <a href="#services" class="nav-link">Services</a>
+            <a href="#growth-screener" class="nav-link">Growth Screener</a>
             <a href="#blog" class="nav-link">Parenting Blog</a>
             <a href="#social-connect" class="nav-link">Social & Reviews</a>
             <a href="#clinic-location" class="nav-link">Location</a>
@@ -377,9 +421,14 @@
         <div class="hero-badge"><i class="fa-solid fa-star"></i> Senior Child Specialist in Rohini</div>
         <h1>Compassionate Care for Your Little Ones</h1>
         <p>Specialized newborn care, WHO vaccination schedules, and expert growth monitoring in Sector 3 Rohini, Delhi.</p>
-        <button onclick="openBookingModal()" class="hero-cta-btn">
-            <i class="fa-solid fa-calendar-plus"></i> Schedule Consultation
-        </button>
+        <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
+            <button onclick="openBookingModal()" class="hero-cta-btn">
+                <i class="fa-solid fa-calendar-plus"></i> Schedule Consultation
+            </button>
+            <a href="#growth-screener" class="hero-cta-btn" style="background:#0284c7; box-shadow: 0 6px 18px rgba(2, 132, 199, 0.35);">
+                <i class="fa-solid fa-chart-line"></i> Growth & Milestones
+            </a>
+        </div>
     </section>
 
     <!-- Doctor Profile Section -->
@@ -422,6 +471,87 @@
                 <h3>Infections & Seasonal Care</h3>
                 <p>Treatment of childhood fevers, coughs, asthma, allergies, and stomach infections.</p>
             </div>
+        </div>
+    </div>
+
+    <!-- INTERACTIVE GROWTH, DEVELOPMENT & PARENTING SCREENER -->
+    <div class="container" id="growth-screener">
+        <div class="screener-card">
+            <div class="screener-header">
+                <span class="screener-badge"><i class="fa-solid fa-chart-line"></i> Pediatric Clinical Tool</span>
+                <h2 class="screener-title" id="lblTitle">Child Growth, Height & Development Screener</h2>
+                <p class="screener-subtitle" id="lblSubtitle">IAP Growth Charts, Tanner Genetic Height Formula & Trivandrum Developmental Screening (TDSC).</p>
+            </div>
+
+            <!-- Inputs Grid -->
+            <div class="screener-inputs-grid">
+                <div class="screener-field">
+                    <label><i class="fa-solid fa-language"></i> <span id="lblLang">Language (Bhasha)</span></label>
+                    <select id="screenerLang" class="screener-select" onchange="runScreener()" style="border-color: #0284c7; font-weight:700; background:#f0f9ff;">
+                        <option value="hinglish" selected>Hinglish (बोलचाल की भाषा)</option>
+                        <option value="english">English (Standard)</option>
+                    </select>
+                </div>
+
+                <div class="screener-field">
+                    <label><i class="fa-solid fa-cake-candles"></i> <span id="lblAge">Child's Age (Umar)</span></label>
+                    <select id="screenerAge" class="screener-select" onchange="runScreener()">
+                        <option value="3m">3 Months (3 Mahine)</option>
+                        <option value="6m">6 Months (6 Mahine)</option>
+                        <option value="9m">9 Months (9 Mahine)</option>
+                        <option value="12m" selected>12 Months (1 Saal)</option>
+                        <option value="18m">18 Months (Dedh Saal)</option>
+                        <option value="24m">24 Months (2 Saal)</option>
+                        <option value="3y">3 Years (3 Saal)</option>
+                        <option value="4y">4 Years (4 Saal)</option>
+                        <option value="5y">5 Years (5 Saal)</option>
+                        <option value="6y">6 Years (6 Saal)</option>
+                        <option value="7y">7 Years (7 Saal)</option>
+                        <option value="8y">8 Years (8 Saal)</option>
+                        <option value="9y">9 Years (9 Saal)</option>
+                        <option value="10y">10 Years (10 Saal)</option>
+                        <option value="11y">11 Years (11 Saal)</option>
+                        <option value="12y">12 Years (12 Saal)</option>
+                        <option value="13y">13 Years (13 Saal)</option>
+                        <option value="14y">14 Years (14 Saal)</option>
+                        <option value="15y">15 Years (15 Saal)</option>
+                        <option value="16y">16 Years (16 Saal)</option>
+                        <option value="17y">17 Years (17 Saal)</option>
+                        <option value="18y">18 Years (18 Saal)</option>
+                    </select>
+                </div>
+
+                <div class="screener-field">
+                    <label><i class="fa-solid fa-venus-mars"></i> <span id="lblGender">Gender</span></label>
+                    <select id="screenerGender" class="screener-select" onchange="runScreener()">
+                        <option value="boy">Boy (Ladka)</option>
+                        <option value="girl">Girl (Ladki)</option>
+                    </select>
+                </div>
+
+                <div class="screener-field">
+                    <label><i class="fa-solid fa-weight-scale"></i> <span id="lblWeight">Current Weight (kg)</span></label>
+                    <input type="number" id="screenerWeight" class="screener-input" step="0.1" placeholder="e.g. 9.5" oninput="runScreener()">
+                </div>
+
+                <div class="screener-field">
+                    <label><i class="fa-solid fa-ruler-vertical"></i> <span id="lblHeight">Current Height (cm)</span></label>
+                    <input type="number" id="screenerHeight" class="screener-input" step="0.5" placeholder="e.g. 75" oninput="runScreener()">
+                </div>
+
+                <div class="screener-field">
+                    <label><i class="fa-solid fa-person"></i> <span id="lblFather">Father's Height</span> <small style="color:#64748b;">(Optional, cm)</small></label>
+                    <input type="number" id="fatherHeight" class="screener-input" step="1" placeholder="e.g. 175" oninput="runScreener()">
+                </div>
+
+                <div class="screener-field">
+                    <label><i class="fa-solid fa-person-dress"></i> <span id="lblMother">Mother's Height</span> <small style="color:#64748b;">(Optional, cm)</small></label>
+                    <input type="number" id="motherHeight" class="screener-input" step="1" placeholder="e.g. 160" oninput="runScreener()">
+                </div>
+            </div>
+
+            <!-- Dynamic Output Container -->
+            <div id="screenerResults"></div>
         </div>
     </div>
 
@@ -594,8 +724,375 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT FOR MODALS & RICH BLOG CONTENT -->
+    <!-- JAVASCRIPT FOR SCREENER, MODALS & RICH BLOG CONTENT -->
     <script>
+        // Dual-Language Milestone & Parenting Database (Hinglish & English)
+        const milestoneDatabase = {
+          "3m": {
+            name: { hi: "3 Months (3 Mahine)", en: "3 Months" },
+            iap: { boy: { minW: 5.0, maxW: 7.2, minH: 57, maxH: 63 }, girl: { minW: 4.5, maxW: 6.8, minH: 56, maxH: 62 } },
+            green: {
+              hi: ["Godi mein pakadne par gardan (neck) sambhalne lagta hai", "Aapko dekh kar muskuraata hai (Social Smile)", "Moving cheezon ko aankhon se follow karta hai", "Aawazein nikaalta hai ('Cooing' sounds)"],
+              en: ["Holds head steady when supported upright", "Responsive social smile to parents", "Follows moving objects with eyes past midline", "Makes cooing and gurgling sounds"]
+            },
+            yellow: {
+              hi: ["Gardan abhi bhi peeche jhul rahi hai", "Aawaz par dhyan nahi deta"],
+              en: ["Partial head lag still present when pulled to sit", "Inconsistent response to sounds or voices"]
+            },
+            red: {
+              hi: ["Gardan bilkul nahi thehra paata", "Smile bilkul nahi karta", "Light ya cheezon ko follow nahi karta"],
+              en: ["Complete head lag; cannot lift head in tummy time", "Does not smile at voices or faces", "Does not visually fixate or track moving light"]
+            },
+            parentTips: {
+              nutrition: { hi: "Sirf aur sirf Maa ka Doodh (Exclusive Breastfeeding) ya Formula. Paani, ghutti bilkul na dein. Vitamin D3 drops (400 IU) daily regular dein.", en: "Exclusive breastfeeding or formula milk only. No water, ghutti, or animal milk. Give 400 IU Vitamin D3 drops daily." },
+              safety: { hi: "Bacche ko bed/sofa par akela na chodein (girne ka khatra). Hamesha peeth ke bal sulaayein (SIDS bachav).", en: "Never leave baby unattended on elevated beds or sofas (fall risk). Always place on back to sleep." },
+              play: { hi: "Daily 5-10 minute 'Tummy Time' (pet ke bal litana) dein. Bacchon se aamne-saamne baatein karein.", en: "Provide 5-10 minutes of supervised Tummy Time daily. Talk and make eye contact frequently." },
+              care: { hi: "Aankhon mein kajal ya kaan mein tel bilkul na daalein.", en: "Avoid putting kajal in eyes or oil in ears/nose. Keep umbilical area dry." }
+            }
+          },
+          "6m": {
+            name: { hi: "6 Months (6 Mahine)", en: "6 Months" },
+            iap: { boy: { minW: 6.5, maxW: 9.0, minH: 64, maxH: 70 }, girl: { minW: 5.8, maxW: 8.5, minH: 62, maxH: 68 } },
+            green: {
+              hi: ["Pet se peeth par palti (roll over) maar leta hai", "Sahara lekar baithne lagta hai", "Cheezon ko ek haath se doosre haath mein pakadta hai", "'Ba-ba', 'Da-da' bolta hai (babbling)"],
+              en: ["Rolls over front to back and back to front", "Sits with brief hand support (tripod posture)", "Transfers objects between hands", "Babbles consonant sounds ('ba-ba', 'da-da')"]
+            },
+            yellow: {
+              hi: ["Roll over nahi kar pata", "Khilono ko pakadne ke liye haath aage nahi badhaata"],
+              en: ["Cannot roll over in both directions", "Does not reach for offered toys"]
+            },
+            red: {
+              hi: ["Sahara dene par bhi baith nahi paata", "Sharir bohot akadta hai", "Naam pukarne par nahi dekhta"],
+              en: ["Cannot sit even with support", "Persistently clenched fists / stiff posture", "Does not turn towards sound or name"]
+            },
+            parentTips: {
+              nutrition: { hi: "Semi-solid khana shuru karein: Moong dal khichdi, mashed kela, suji kheer. Namak aur cheeni 1 saal tak bilkul na daalein.", en: "Start complementary feeding: Mashed khichdi, banana, purees. Zero added sugar or salt before 1 year." },
+              safety: { hi: "Chhoti cheezein (coins, battery) door rakhein. Walker ka use bilkul na karein.", en: "Keep small choking hazards away. Do not use baby walkers (fall and injury risk)." },
+              play: { hi: "Colorful khilone samne rakhein. Peek-a-boo (aankh-micholi) khele.", en: "Place toys just out of reach to encourage reaching. Play interactive games like peek-a-boo." },
+              care: { hi: "Pehle daant aane par soft silicone brush se safai karein.", en: "Clean emerging milk teeth twice daily using a soft silicone finger brush." }
+            }
+          },
+          "9m": {
+            name: { hi: "9 Months (9 Mahine)", en: "9 Months" },
+            iap: { boy: { minW: 7.5, maxW: 10.2, minH: 68, maxH: 74 }, girl: { minW: 6.8, maxW: 9.8, minH: 66, maxH: 73 } },
+            green: {
+              hi: ["Bina sahare acche se baithta hai", "Ghutanon ke bal rengta (crawling) hai", "Angoothe aur ungli se cheezein uthata hai (Pincer grasp)", "Apna naam pehchaanta hai"],
+              en: ["Sits steadily without any support", "Crawls on hands and knees", "Picks up small objects with thumb and index finger", "Responds to own name and understands 'No'"]
+            },
+            yellow: {
+              hi: ["Bina sahare baithne mein ladkhadata hai", "Babbling band ya kam hai"],
+              en: ["Needs support to maintain sitting balance", "Infrequent or limited vocal babbling"]
+            },
+            red: {
+              hi: ["Akele baith nahi pata", "Pairon par khada nahi hota", "Mummy-Papa ko dekh kar khushi nahi dikhata"],
+              en: ["Cannot sit independently", "Cannot bear weight on legs when supported", "Shows no joyful recognition of parents"]
+            },
+            parentTips: {
+              nutrition: { hi: "Mashed khana din mein 3 baar: Dalia, boiled sabziyan, paneer mash, boiled anda. Finger foods introduce karein.", en: "Offer 3 balanced semi-solid meals daily (dalia, vegetables, paneer, egg). Introduce soft finger foods." },
+              safety: { hi: "Ghar ko child-proof karein: Switch board cover karein, stairs par gate lagayein.", en: "Child-proof the home: Cover electrical sockets, install stair gates, keep floor buckets dry." },
+              play: { hi: "Bartan aur soft balls ke saath floor par khelne dein. Screen bilkul zero rakhein.", en: "Encourage floor exploration with stacking cups and soft balls. Zero screen time (TV/Mobiles)." },
+              care: { hi: "9 mahine par MR/MMR aur Vitamin A dose clinic par lagwayein.", en: "Administer MR/MMR-1 and Vitamin A dose at the clinic." }
+            }
+          },
+          "12m": {
+            name: { hi: "12 Months (1 Saal)", en: "12 Months (1 Year)" },
+            iap: { boy: { minW: 8.4, maxW: 11.5, minH: 72, maxH: 79 }, girl: { minW: 7.8, maxW: 11.0, minH: 70, maxH: 78 } },
+            green: {
+              hi: ["Furniture pakad kar chalta hai (Cruising)", "1-2 saaf shabd bolta hai ('Mama', 'Papa')", "Tata / Bye-bye karta hai", "Ungli se ishara karta hai (Pointing)"],
+              en: ["Cruises holding furniture / stands briefly alone", "Says 1-2 meaningful words ('Mama', 'Papa')", "Waves bye-bye and claps hands", "Points to objects with index finger"]
+            },
+            yellow: {
+              hi: ["Furniture pakad kar khada nahi hota", "Ek bhi shabd nahi bolta"],
+              en: ["Does not pull to stand with furniture", "No single meaningful words spoken"]
+            },
+            red: {
+              hi: ["Khade hone ki koshish nahi karta", "Ishara karke kuch nahi maangta", "Pehle seekhi cheezein bhool raha hai"],
+              en: ["Cannot crawl or bear weight", "Does not point or use gestures", "Loss of previously acquired vocal/motor skills"]
+            },
+            parentTips: {
+              nutrition: { hi: "Ghar ka normal khana khilayein. Din mein 3 meals + 2 snacks. Cow milk start kar sakte hain (max 400ml/day).", en: "Offer standard home food (mild spices). 3 meals + 2 healthy snacks. Cow's milk acceptable (max 400ml/day)." },
+              safety: { hi: "Garam chai, cooker aur press ko table ke kinare na rakhein.", en: "Keep hot beverages, irons, and sharp utensils away from counter edges (burn prevention)." },
+              play: { hi: "Picture books dikhakar naam batayein. Ball throw-catch practice karein.", en: "Read simple picture board books together. Practice rolling and throwing soft balls." },
+              care: { hi: "1st birthday par MMR-1, Varicella aur Hepatitis-A vaccine review karein.", en: "Review 1st birthday vaccines: MMR, Varicella (Chickenpox), Hepatitis-A & PCV Booster." }
+            }
+          },
+          "18m": {
+            name: { hi: "18 Months (Dedh Saal)", en: "18 Months (1.5 Years)" },
+            iap: { boy: { minW: 9.8, maxW: 13.2, minH: 79, maxH: 87 }, girl: { minW: 9.2, maxW: 12.6, minH: 77, maxH: 86 } },
+            green: {
+              hi: ["Akele daudta aur chalta hai", "6 se 10 clear words bolta hai", "Blocks ka tower banata hai", "Chammach se khana khata hai"],
+              en: ["Walks steadily and runs independently", "Speaks 6 to 10 clear words", "Stacks 2-3 blocks and scribbles", "Uses spoon with minimal spilling"]
+            },
+            yellow: {
+              hi: ["Chalte hue ladkhadata hai", "4 se kam shabd bolta hai"],
+              en: ["Unsteady gait with frequent falls", "Speaks fewer than 4 clear words"]
+            },
+            red: {
+              hi: ["Akele chal nahi paata", "Bolta nahi hai", "Simple instruction nahi samajhta"],
+              en: ["Cannot walk independently", "No spoken words or communicative gestures", "Does not understand simple 1-step verbal commands"]
+            },
+            parentTips: {
+              nutrition: { hi: "Iron-rich diet dein: Palak, chana, beetroot, daal, anda. Chips aur packaged juices se door rakhein.", en: "Focus on iron-rich foods (spinach, lentils, eggs, dates). Avoid packaged juices and chips." },
+              safety: { hi: "Dawaaiyan aur phenyl locked drawer mein rakhein. Balcony railing par mesh lagwayein.", en: "Keep all medications and cleaning chemicals locked. Secure balcony railings and windows." },
+              play: { hi: "Building blocks aur crayons dein. Roz park le jaakar outdoor play karwayein.", en: "Encourage drawing with large crayons and stacking blocks. Provide daily outdoor park play." },
+              care: { hi: "18 mahine par DPT Booster-1 aur Polio booster check karein.", en: "Administer DPT Booster-1 and Polio booster at clinic." }
+            }
+          },
+          "24m": {
+            name: { hi: "24 Months (2 Saal)", en: "24 Months (2 Years)" },
+            iap: { boy: { minW: 10.8, maxW: 14.8, minH: 83, maxH: 93 }, girl: { minW: 10.2, maxW: 14.2, minH: 82, maxH: 92 } },
+            green: {
+              hi: ["Bhaagta hai aur football kick karta hai", "2 shabdon ke sentences bolta hai ('Doodh do')", "2-step instructions follow karta hai"],
+              en: ["Runs well and kicks a ball forward", "Speaks 2-word spontaneous phrases ('Drink milk')", "Follows 2-step instructions and builds tower of 4-6 blocks"]
+            },
+            yellow: {
+              hi: ["Sirf single words bolta hai", "Pretend play nahi karta"],
+              en: ["Speaks only single words (no phrases)", "Does not engage in simple pretend play"]
+            },
+            red: {
+              hi: ["Daud ya jump nahi kar paata", "Eye contact bilkul nahi karta aur naam par response nahi deta"],
+              en: ["Cannot run or jump", "No eye contact and fails to respond to name (Autism screening flag)"]
+            },
+            parentTips: {
+              nutrition: { hi: "Self-feeding encourage karein. Doodh bottle se band karke glass/cup se pilayein.", en: "Promote self-feeding. Transition completely away from feeding bottles to open cups." },
+              safety: { hi: "Paani ki bucket/tub hamesha dhak kar rakhein (Drowning hazard).", en: "Keep buckets/washrooms closed (drowning prevention). Install door pinch guards." },
+              play: { hi: "Role play games khele (doctor-set, kitchen-set). Mobile screen 0-15 mins max.", en: "Engage in imaginative pretend play. Screen limit strictly under 15 minutes of video calls." },
+              care: { hi: "Daytime potty training shuru karein (no scolding).", en: "Gently initiate daytime toilet training with positive reinforcement (no punishment)." }
+            }
+          },
+          "3y": { name: { hi: "3 Years (3 Saal)", en: "3 Years" }, iap: { boy: { minW: 12.5, maxW: 17.5, minH: 90, maxH: 101 }, girl: { minW: 12.0, maxW: 17.0, minH: 89, maxH: 100 } }, green: { hi: ["Tricycle chala leta hai", "3-4 shabdon ke sentences bolta hai", "Circle draw karta hai", "Daytime toilet control seekh leta hai"], en: ["Pedals tricycle and climbs stairs alternating feet", "Speaks 3-4 word sentences clearly", "Copies a circle and recognizes colors", "Daytime toilet control achieved"] }, yellow: { hi: ["Aawaz saaf nahi hai", "Circle draw nahi kar pata"], en: ["Speech unclear to strangers (under 50%)", "Difficulty interacting with peers; cannot copy circle"] }, red: { hi: ["Seedhi chadhne mein dikkat", "Severe violent tantrums", "Laar (drooling) tapakti rehti hai"], en: ["Cannot climb stairs or run", "Extreme separation anxiety or violent tantrums", "Frequent drooling/unintelligible speech"] }, parentTips: { nutrition: { hi: "Picky eating aam hai. Force feed na karein. Paneer, curd aur fruits add karein.", en: "Do not force feed during picky eating phases. Offer nutrient-dense curd, paneer, and fruits." }, safety: { hi: "Road safety sikhayein. Safe touch and unsafe touch ka pehla lesson dein.", en: "Teach basic road safety (holding hands) and introduce the concept of Safe vs Unsafe touch." }, play: { hi: "Puzzles aur coloring books dein. Har raat 1 bedtime story zaroor sunayein.", en: "Introduce shape puzzles and coloring. Read a moral bedtime story every night." }, care: { hi: "Subah aur raat brush karne ki aadat daalein.", en: "Brush teeth twice daily with a pea-sized fluoridated toothpaste." } } },
+          "4y": { name: { hi: "4 Years (4 Saal)", en: "4 Years" }, iap: { boy: { minW: 14.0, maxW: 20.0, minH: 97, maxH: 108 }, girl: { minW: 13.5, maxW: 19.5, minH: 96, maxH: 107 } }, green: { hi: ["Ek pair par jump karta hai", "Chhoti kahaniyan sunata hai", "Insaan ki drawing mein 3-4 body parts banata hai", "Button lagana seekhta hai"], en: ["Hops on one foot and catches bounced ball", "Tells sequential stories and asks questions", "Draws a person with 2-4 body parts", "Dresses and buttons clothing with minimal help"] }, yellow: { hi: ["Bolte waqt bohot atakta (stuttering) hai", "Button nahi laga pata"], en: ["Significant stuttering in speech", "Struggles with buttons and zippers"] }, red: { hi: ["Jump nahi kar paata", "Dusre bacchon ko ignore karta hai"], en: ["Cannot jump or throw ball overhand", "Ignores other children outside household", "Fails to grasp simple prepositions"] }, parentTips: { nutrition: { hi: "Cold drinks aur packaged juice band karein. Calcium ke liye doodh aur badam dein.", en: "Eliminate sugary soda and packed drinks. Provide calcium via dairy, sesame, and almonds." }, safety: { hi: "Car mein seatbelt aur cycle par helmet zaroor pehanayein.", en: "Enforce bicycle helmets and rear car seatbelts at all times." }, play: { hi: "Pre-school rhymes aur counting. Screen strictly under 30 mins/day.", en: "Pre-school rhymes and counting games. Screen time strictly under 30 mins/day." }, care: { hi: "4-5 saal par DPT Booster-2 aur Typhoid booster lagwayein.", en: "Administer DPT Booster-2 and Typhoid conjugate booster." } } },
+          "5y": { name: { hi: "5 Years (5 Saal)", en: "5 Years" }, iap: { boy: { minW: 15.5, maxW: 22.5, minH: 103, maxH: 115 }, girl: { minW: 15.0, maxW: 22.0, minH: 102, maxH: 114 } }, green: { hi: ["Rassi kood leta hai", "Clearly baat karta hai", "Triangle copy karta hai aur naam likhta hai", "Rules follow karta hai"], en: ["Skips smoothly and balances on one foot for 5+ sec", "Speaks fluent sentences in past/future tense", "Copies triangles and writes name", "Understands game rules and cooperates"] }, yellow: { hi: ["5 minute bhi focus nahi kar pata", "Pencil grip ulti rehti hai"], en: ["Cannot sustain attention for 5 minutes", "Poor/awkward pencil grip"] }, red: { hi: ["Apna naam/address nahi bata pata", "Aggressive behavior"], en: ["Cannot state full name or follow 3-step directions", "Excessive violent aggression or social withdrawal"] }, parentTips: { nutrition: { hi: "Balanced thali: 50% sabzi/salad, 25% protein (dal/paneer/egg), 25% roti/rice.", en: "Follow balanced plate: 50% veggies/salad, 25% protein (dal/paneer/egg), 25% whole grains." }, safety: { hi: "Emergency contact number yaad karwayein.", en: "Teach memorization of parent's phone number and home address." }, play: { hi: "Board games (Ludo, Snakes & Ladders) se patience sikhayein. Daily 1 hr ground play.", en: "Play turn-taking board games (Ludo, Chess). Minimum 1 hour outdoor physical play." }, care: { hi: "School se pehle eye (vision) aur hearing checkup karwayein.", en: "Complete routine vision and hearing screening prior to formal school admission." } } },
+          "6y": { name: { hi: "6 Years (6 Saal)", en: "6 Years" }, iap: { boy: { minW: 17.0, maxW: 25.5, minH: 109, maxH: 122 }, girl: { minW: 16.5, maxW: 25.0, minH: 108, maxH: 121 } }, green: { hi: ["Two-wheel cycle chala leta hai", "Simple words padhta aur likhta hai", "Time ka concept samajhta hai"], en: ["Rides 2-wheel bicycle", "Reads simple phonics and writes full name", "Understands days, weeks, and basic time"] }, yellow: { hi: ["3-letter words padhne mein struggle", "Ball catch coordination weak hai"], en: ["Struggles with simple 3-letter phonetic words", "Poor ball catching coordination"] }, red: { hi: ["School mein learning delays", "Severe behavioral outbursts"], en: ["Marked academic learning delay", "Severe uncontrolled behavioral outbursts"] }, parentTips: { nutrition: { hi: "Breakfast skip na karne dein. Nuts (badam, akhrot) daily dein.", en: "Never skip breakfast. Include soaked almonds and walnuts daily." }, safety: { hi: "Stranger danger aur school bus safety samjhayein.", en: "Teach stranger safety and bus boarding precautions." }, play: { hi: "Sports (skating, swimming, karate) encourage karein.", en: "Encourage structured sports (skating, swimming, martial arts)." }, care: { hi: "Permanent molars (daant) aane par hygiene par dhyan dein.", en: "Ensure proper brushing for erupting 6-year permanent molars." } } },
+          "7y": { name: { hi: "7 Years (7 Saal)", en: "7 Years" }, iap: { boy: { minW: 19.0, maxW: 29.0, minH: 115, maxH: 128 }, girl: { minW: 18.5, maxW: 28.5, minH: 114, maxH: 127 } }, green: { hi: ["Chapter books padhta hai", "Shoelaces baandhta hai", "Sports mein rules follow karta hai"], en: ["Reads chapter books", "Ties shoelaces independently", "Follows sports rules and shows fair play"] }, yellow: { hi: ["Math ya reading mein consistent problem", "Fine motor skills weak"], en: ["Persistent reading or basic math difficulties", "Fine motor coordination deficits"] }, red: { hi: ["Social isolation", "Reading bilkul nahi kar pa raha"], en: ["Extreme social isolation", "Severe phonics/reading regression"] }, parentTips: { nutrition: { hi: "Tiffin mein homemade rolls, sprout chaat, paneer tikka pack karein.", en: "Pack nutritious homemade tiffins (sprout chaat, paneer wraps) instead of packaged snacks." }, safety: { hi: "Gadgets par parental locks lagayein.", en: "Enable parental controls on internet and gaming devices." }, play: { hi: "Creative hobbies: Drawing, music, Lego building.", en: "Encourage creative hobbies (music, Lego engineering, sketching)." }, care: { hi: "School bag ka wazan body weight ke 10% se zyada na ho.", en: "Ensure school backpack weight does not exceed 10% of body weight." } } },
+          "8y": { name: { hi: "8 Years (8 Saal)", en: "8 Years" }, iap: { boy: { minW: 21.0, maxW: 33.0, minH: 120, maxH: 134 }, girl: { minW: 20.5, maxW: 32.5, minH: 119, maxH: 133 } }, green: { hi: ["Team sports mein active", "Logic samajhta hai", "Independent study karta hai"], en: ["Active in team sports", "Understands logical cause and effect", "Completes homework with minimal supervision"] }, yellow: { hi: ["Multiple subjects mein academic fall", "Bohot clumsy/girna"], en: ["Multi-subject academic decline", "Noticeable motor clumsiness"] }, red: { hi: ["Dost banane mein complete failure", "Behavioral regression"], en: ["Inability to form or sustain peer friendships", "Severe emotional regression"] }, parentTips: { nutrition: { hi: "Sunlight exposure (subah 20 minute) for Vitamin D. Junk food max 1 bar/week.", en: "Encourage 20 minutes morning sun exposure for Vitamin D. Junk food max once weekly." }, safety: { hi: "Cycle riding safe lanes mein helmet ke saath.", en: "Mandatory helmet use during neighborhood cycling." }, play: { hi: "Cricket, football, badminton se discipline sikhayein.", en: "Team games (cricket, badminton, football) to foster resilience." }, care: { hi: "Screen time strictly max 1 hr/day.", en: "Enforce strict 1 hour non-academic screen limit per day." } } },
+          "9y": { name: { hi: "9 Years (9 Saal)", en: "9 Years" }, iap: { boy: { minW: 23.0, maxW: 38.0, minH: 125, maxH: 140 }, girl: { minW: 22.5, maxW: 37.5, minH: 124, maxH: 139 } }, green: { hi: ["Homework khud manage karta hai", "Strong stamina", "Gehre dost banata hai"], en: ["Manages chores and homework independently", "Strong physical endurance", "Forms close, loyal peer friendships"] }, yellow: { hi: ["Short attention span", "Emotional outbursts"], en: ["Short attention span; frequent academic frustration", "Difficulty regulating anger"] }, red: { hi: ["School jane se mana karna", "Severe anxiety"], en: ["School refusal or severe generalized anxiety", "Lack of basic cognitive reasoning"] }, parentTips: { nutrition: { hi: "Protein snacks: Roasted makhana, chana chaat, boiled eggs, paneer.", en: "Offer healthy protein snacks: Roasted makhana, boiled eggs, chana, paneer cubes." }, safety: { hi: "Online gaming mein strangers se baat na karne ka rule.", en: "Set strict boundaries against voice-chatting with strangers in online games." }, play: { hi: "Science experiments aur gardening.", en: "Hands-on science kits, gardening, and household chores." }, care: { hi: "Self-esteem badhayein; marks ko lekar compare na karein.", en: "Nurture self-esteem; avoid comparing academic marks with peers." } } },
+          "10y": { name: { hi: "10 Years (10 Saal)", en: "10 Years" }, iap: { boy: { minW: 25.5, maxW: 43.0, minH: 130, maxH: 146 }, girl: { minW: 25.0, maxW: 43.5, minH: 129, maxH: 146 } }, green: { hi: ["Early growth spurt", "Logical thinking", "Complex projects handle karta hai"], en: ["Early pubertal growth onset (especially girls)", "Strong abstract and logical reasoning", "Handles multi-step academic projects"] }, yellow: { hi: ["Comprehension gap", "Routine change par panic"], en: ["Reading comprehension gap", "High anxiety during routine changes"] }, red: { hi: ["Severe mood swings, depression, sudden academic failure"], en: ["Severe mood disturbances, depression, abrupt school failure"] }, parentTips: { nutrition: { hi: "Girls mein iron requirement badhti hai: Jaggery (gud), chana, palak.", en: "Increase iron-rich foods (spinach, jaggery, legumes) for growing girls." }, safety: { hi: "Road crossing aur fire safety rules.", en: "Teach independent pedestrian crossing and basic fire safety." }, play: { hi: "Athletics, swimming, outdoor cycling.", en: "Encourage endurance athletics, swimming, and cycling." }, care: { hi: "9-14 saal par Cervical Cancer (HPV) vaccine discuss karein.", en: "Discuss Cervical Cancer (HPV) vaccine for girls aged 9-14 years." } } },
+          "11y": { name: { hi: "11 Years (11 Saal)", en: "11 Years" }, iap: { boy: { minW: 28.0, maxW: 48.0, minH: 135, maxH: 152 }, girl: { minW: 28.0, maxW: 49.0, minH: 135, maxH: 153 } }, green: { hi: ["Rapid physical growth", "Abstract concepts samajhta hai", "Dosto ko value deta hai"], en: ["Rapid adolescent growth spurt", "Understands abstract ideas and moral values", "Strongly values peer group collaboration"] }, yellow: { hi: ["Body image/looks ko lekar complex", "Study pressure"], en: ["Body image insecurities", "Difficulty coping with middle-school workload"] }, red: { hi: ["Extreme isolation, continuous sadness"], en: ["Extreme social withdrawal, persistent clinical sadness"] }, parentTips: { nutrition: { hi: "Calcium rich diet (curd, milk, ragi) for bone growth.", en: "Ensure adequate calcium and Vitamin D (milk, curd, ragi) for skeletal mineralization." }, safety: { hi: "Bullying awareness: Openly parents se share karne ki aadat daalein.", en: "Foster open communication regarding bullying or peer pressure." }, play: { hi: "Public speaking, sports, coding.", en: "Support debate clubs, competitive athletics, coding, and creative arts." }, care: { hi: "Personal hygiene aur daily skin care basics samjhayein.", en: "Teach adolescent personal hygiene, daily bathing, and basic skincare." } } },
+          "12y": { name: { hi: "12 Years (12 Saal)", en: "12 Years" }, iap: { boy: { minW: 31.0, maxW: 54.0, minH: 140, maxH: 159 }, girl: { minW: 31.5, maxW: 55.0, minH: 141, maxH: 159 } }, green: { hi: ["Secondary sexual changes appear", "Moral values", "Independent planning"], en: ["Clear secondary sexual characteristics developing", "Forms personal identity and ethical reasoning", "Organizes long-term schedules and sports"] }, yellow: { hi: ["Study motivation fall", "Late night screen addiction"], en: ["Lack of academic motivation", "Late night phone use disrupting sleep"] }, red: { hi: ["Self-harm thoughts, severe anxiety attacks"], en: ["Signs of bullying, self-harm ideation, severe clinical anxiety"] }, parentTips: { nutrition: { hi: "Water intake 2.5-3 L/day. Fast food strictly monitor karein.", en: "Maintain 2.5-3L water intake daily. Limit fast food and fried items." }, safety: { hi: "Digital hygiene: Sote waqt phone room se bahar charge karein.", en: "Charge smartphones outside the bedroom at night. Screen curfew 1 hr before bed." }, play: { hi: "Team tournaments, music band, hiking.", en: "Encourage sports tournaments, musical instruments, and group leadership." }, care: { hi: "Girls ko menstrual hygiene openly educate karein.", en: "Educate girls about menstrual health and hygiene with compassion." } } },
+          "13y": { name: { hi: "13 Years (13 Saal - Teenage)", en: "13 Years (Adolescence)" }, iap: { boy: { minW: 35.0, maxW: 60.0, minH: 146, maxH: 166 }, girl: { minW: 35.5, maxW: 60.5, minH: 146, maxH: 164 } }, green: { hi: ["Major growth spurt", "Abstract thinking", "Strong individual identity"], en: ["Major growth spurt in height and mass", "Advanced hypothetical reasoning", "Strong individual personality and career interests"] }, yellow: { hi: ["Grades drop, chronic fatigue", "Erratic eating habits"], en: ["Noticeable academic drop", "Chronic tiredness and erratic dietary patterns"] }, red: { hi: ["Substance exposure risk, severe depression"], en: ["Risk of substance exposure (vaping/tobacco), clinical depression"] }, parentTips: { nutrition: { hi: "High calorie nutrient-dense home food. Protein (1g/kg body weight).", en: "Nutrient-dense home cooked meals with 1g/kg protein intake for active growth." }, safety: { hi: "Peer pressure: 'NO' bolna sikhayein (smoking/vaping avoidance).", en: "Empower teens to resist peer pressure regarding smoking, vaping, or substance use." }, play: { hi: "Competitive sports, gym under guidance.", en: "Structured sports, supervised fitness training, or dramatic arts." }, care: { hi: "Teenager se friend ki tarah baat karein. Taane na maarein.", en: "Listen empathetically like a trusted mentor; avoid frequent criticism." } } },
+          "14y": { name: { hi: "14 Years (14 Saal)", en: "14 Years" }, iap: { boy: { minW: 39.0, maxW: 66.0, minH: 153, maxH: 173 }, girl: { minW: 39.5, maxW: 65.0, minH: 150, maxH: 167 } }, green: { hi: ["Boys voice change & peak growth", "Mature decision making", "High sports coordination"], en: ["Peak height velocity in boys; voice deepening", "Mature decision making and abstract logic", "Refined motor and sports coordination"] }, yellow: { hi: ["Body dysmorphia", "Exam stress control na hona"], en: ["Body image distress", "Difficulty handling high school academic pressure"] }, red: { hi: ["Complete academic breakdown, extreme aggression"], en: ["Complete academic disengagement, severe mood or anxiety disorders"] }, parentTips: { nutrition: { hi: "Pimple prevention: Oily junk food kam karein, salads badhayein.", en: "Reduce greasy junk food to manage acne; increase fresh raw salads and water." }, safety: { hi: "Social media privacy settings monitor karein.", en: "Review social media privacy settings and address cyber safety." }, play: { hi: "Daily 45 minutes vigorous workout.", en: "Ensure minimum 45 minutes of vigorous cardiovascular physical activity daily." }, care: { hi: "Tetanus & Diphtheria (Tdap booster) dose lagwayein.", en: "Administer Tetanus & Diphtheria (Tdap booster) at clinic." } } },
+          "15y": { name: { hi: "15 Years (15 Saal)", en: "15 Years" }, iap: { boy: { minW: 44.0, maxW: 72.0, minH: 160, maxH: 178 }, girl: { minW: 43.0, maxW: 68.0, minH: 152, maxH: 169 } }, green: { hi: ["Adult physical stamina", "Career goals planning", "Emotional self-regulation"], en: ["Adult physical proportions and endurance", "Plans long-term academic/career goals", "Demonstrates emotional self-regulation"] }, yellow: { hi: ["Sleep cycle reverse hona", "Sedentary weight gain"], en: ["Reversed sleep cycles (late nights)", "Sedentary lifestyle causing weight gain"] }, red: { hi: ["Clinical depression, eating disorders"], en: ["Clinical depression, self-harm signs, or eating disorders (anorexia/bulimia)"] }, parentTips: { nutrition: { hi: "Omega-3 (walnuts, flaxseeds), light digestible meals during exam prep.", en: "Provide brain-healthy Omega-3 fats (walnuts, flaxseeds) and light nutritious meals." }, safety: { hi: "Underage driving strictly zero tolerance.", en: "Zero tolerance for underage two-wheeler or four-wheeler driving." }, play: { hi: "Sports, running, coding marathons.", en: "Engage in competitive sports, running, or intellectual challenges." }, care: { hi: "8 ghante ki uninterrupted night sleep ensure karein.", en: "Prioritize 8 hours of uninterrupted sleep for neurological consolidation." } } },
+          "16y": { name: { hi: "16 Years (16 Saal)", en: "16 Years" }, iap: { boy: { minW: 49.0, maxW: 77.0, minH: 165, maxH: 182 }, girl: { minW: 46.0, maxW: 71.0, minH: 153, maxH: 170 } }, green: { hi: ["Adult stature achieved", "Career clarity", "Mature empathy"], en: ["Near adult height achieved in girls; boys continue muscle building", "Focused career goals and intellectual maturity", "Mature social empathy and responsibility"] }, yellow: { hi: ["Exam stress se headache/acidity", "Poor posture"], en: ["Exam stress triggering somatization (headache, acidity)", "Poor study posture"] }, red: { hi: ["Severe psychiatric distress"], en: ["Severe clinical depression or complete social withdrawal"] }, parentTips: { nutrition: { hi: "Iron, Zinc and Multivitamins through natural foods (sprouts, nuts, paneer).", en: "Ensure zinc, iron, and multivitamins via whole sprouts, nuts, and dairy." }, safety: { hi: "Mental health: Roz 15 minute bina lecture ke sunein.", en: "Provide non-judgmental emotional support. Listen for 15 mins daily without lecturing." }, play: { hi: "Trekking, swimming, badminton, gym.", en: "Trekking, gym workouts with proper form, swimming, or sports leagues." }, care: { hi: "Ergonomic study table & chair setup.", en: "Ensure ergonomic chair and desk setup to protect the spine during long study hours." } } },
+          "17y": { name: { hi: "17 Years (17 Saal)", en: "17 Years" }, iap: { boy: { minW: 53.0, maxW: 81.0, minH: 168, maxH: 184 }, girl: { minW: 48.0, maxW: 73.0, minH: 154, maxH: 171 } }, green: { hi: ["Full biological maturation", "Independent career prep", "Social adaptation"], en: ["Full biological maturity", "Independent career preparation and critical thinking", "Healthy social adaptation"] }, yellow: { hi: ["Sleep deprivation from studies", "Zero exercise"], en: ["Chronic study-induced sleep deprivation", "Lack of regular physical exercise"] }, red: { hi: ["Severe panic attacks, severe depression"], en: ["Severe panic attacks, clinical depression requiring medical care"] }, parentTips: { nutrition: { hi: "Hydration, antioxidant fruits, limit excessive caffeine/coffee.", en: "Hydration and fresh fruits; restrict high caffeine/energy drink intake." }, safety: { hi: "Mindfulness and stress management.", en: "Encourage mindfulness and deep-breathing techniques for entrance exam stress." }, play: { hi: "Weekend sports leagues, healthy friend circles.", en: "Maintain healthy social circles and weekend recreational games." }, care: { hi: "Competitive exam stress handling support.", en: "Provide reassurance and mental health support during competitive exam phases." } } },
+          "18y": { name: { hi: "18 Years (18 Saal - Adult)", en: "18 Years (Adult Transition)" }, iap: { boy: { minW: 56.0, maxW: 84.0, minH: 170, maxH: 186 }, girl: { minW: 49.0, maxW: 75.0, minH: 154, maxH: 172 } }, green: { hi: ["Full adult maturity", "College/Career readiness", "Responsible lifestyle management"], en: ["Full adult biological and physical maturity", "Readiness for college, career, and independent life", "Responsible personal health and nutrition habits"] }, yellow: { hi: ["Metabolic strain, unmanaged adult transition stress", "Postural back pain"], en: ["Metabolic lifestyle strain", "Unmanaged stress during adulthood transition"] }, red: { hi: ["Severe psychiatric conditions, addiction crisis"], en: ["Severe clinical psychiatric disorders or substance dependence"] }, parentTips: { nutrition: { hi: "Lifelong healthy eating: Low sugar, high fiber, wholesome diet.", en: "Establish lifelong healthy habits: Low sugar, high fiber, wholesome whole foods." }, safety: { hi: "Responsible legal citizen awareness, safe driving.", en: "Safe driving responsibility, legal rights awareness, and health insurance basics." }, play: { hi: "Lifelong fitness routine (running, yoga, sports).", en: "Establish a lifelong physical exercise routine (gym, running, yoga)." }, care: { hi: "Transition from pediatric to adult physician care guidance.", en: "Smooth transition from pediatric care to adult medical consultation." } } }
+        };
+
+        function runScreener() {
+          const lang = document.getElementById("screenerLang").value;
+          const ageKey = document.getElementById("screenerAge").value;
+          const gender = document.getElementById("screenerGender").value;
+          const wInput = parseFloat(document.getElementById("screenerWeight").value);
+          const hInput = parseFloat(document.getElementById("screenerHeight").value);
+          const fHeight = parseFloat(document.getElementById("fatherHeight").value);
+          const mHeight = parseFloat(document.getElementById("motherHeight").value);
+
+          if (lang === "english") {
+            document.getElementById("lblTitle").innerText = "Child Growth, Height & Development Screener";
+            document.getElementById("lblSubtitle").innerText = "IAP Growth Charts, Tanner Genetic Height Formula & Trivandrum Developmental Screening (TDSC).";
+            document.getElementById("lblAge").innerText = "Child's Age";
+            document.getElementById("lblGender").innerText = "Child's Gender";
+            document.getElementById("lblWeight").innerText = "Current Weight (kg)";
+            document.getElementById("lblHeight").innerText = "Current Height (cm)";
+            document.getElementById("lblFather").innerText = "Father's Height";
+            document.getElementById("lblMother").innerText = "Mother's Height";
+          } else {
+            document.getElementById("lblTitle").innerText = "Child Growth, Height & Development Screener";
+            document.getElementById("lblSubtitle").innerText = "IAP Growth Charts, Tanner Genetic Height Formula & Trivandrum Developmental Screening (TDSC) in Hinglish.";
+            document.getElementById("lblAge").innerText = "Bacche Ki Umar (Age)";
+            document.getElementById("lblGender").innerText = "Gender";
+            document.getElementById("lblWeight").innerText = "Current Weight (kg)";
+            document.getElementById("lblHeight").innerText = "Current Height (cm)";
+            document.getElementById("lblFather").innerText = "Father's Height";
+            document.getElementById("lblMother").innerText = "Mother's Height";
+          }
+
+          const data = milestoneDatabase[ageKey];
+          const ageName = data.name[lang === "english" ? "en" : "hi"];
+          const ref = data.iap[gender];
+
+          let growthHtml = "";
+          let wStatus = "";
+          let hStatus = "";
+
+          if (!isNaN(wInput)) {
+            if (wInput < ref.minW) {
+              wStatus = lang === "english" 
+                ? `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>Weight (${wInput} kg): Underweight range.</strong> Standard IAP healthy range: ${ref.minW} – ${ref.maxW} kg. Consult Dr. Dinesh Mittal for dietary review.</div></div>`
+                : `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>Wazan (${wInput} kg): Underweight range.</strong> Standard IAP healthy range: ${ref.minW} – ${ref.maxW} kg. Diet review ke liye Dr. Dinesh Mittal se consult karein.</div></div>`;
+            } else if (wInput > ref.maxW) {
+              wStatus = lang === "english"
+                ? `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>Weight (${wInput} kg): Above 97th percentile.</strong> Exceeds typical IAP range (${ref.minW} – ${ref.maxW} kg). Balance nutrition and physical activity.</div></div>`
+                : `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>Wazan (${wInput} kg): Above 97th percentile.</strong> Healthy IAP range (${ref.minW} – ${ref.maxW} kg) se zyada hai. Diet aur physical activity balance karein.</div></div>`;
+            } else {
+              wStatus = lang === "english"
+                ? `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>Weight (${wInput} kg): Normal & Healthy.</strong> Well aligned with standard IAP range (${ref.minW} – ${ref.maxW} kg).</div></div>`
+                : `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>Wazan (${wInput} kg): Bilkul Sahi & Healthy.</strong> IAP benchmark (${ref.minW} – ${ref.maxW} kg) ke mutabik bilkul normal hai.</div></div>`;
+            }
+          }
+
+          if (!isNaN(hInput)) {
+            if (hInput < ref.minH) {
+              hStatus = lang === "english"
+                ? `<div class="flag-card flag-red"><i class="fa-solid fa-circle-exclamation"></i> <div><strong>Height (${hInput} cm): Below 3rd percentile.</strong> Below expected IAP range (${ref.minH} – ${ref.maxH} cm). Linear growth evaluation advised.</div></div>`
+                : `<div class="flag-card flag-red"><i class="fa-solid fa-circle-exclamation"></i> <div><strong>Kadd/Height (${hInput} cm): 3rd Percentile se kam.</strong> Expected IAP range (${ref.minH} – ${ref.maxH} cm) se chhota hai. Linear growth checkup zaroori hai.</div></div>`;
+            } else if (hInput > ref.maxH) {
+              hStatus = lang === "english"
+                ? `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>Height (${hInput} cm): Above Average.</strong> Exceeds typical 97th percentile range (${ref.minH} – ${ref.maxH} cm).</div></div>`
+                : `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>Kadd/Height (${hInput} cm): Above Average.</strong> Standard IAP range (${ref.minH} – ${ref.maxH} cm) se bohot acchi height gain hai.</div></div>`;
+            } else {
+              hStatus = lang === "english"
+                ? `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>Height (${hInput} cm): Ideal Growth Track.</strong> Perfectly tracking on IAP growth charts (${ref.minH} – ${ref.maxH} cm).</div></div>`
+                : `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>Kadd/Height (${hInput} cm): Ideal Growth Track.</strong> Standard IAP charts (${ref.minH} – ${ref.maxH} cm) ke hisab se perfectly on track hai.</div></div>`;
+            }
+          }
+
+          let mphHtml = "";
+          if (!isNaN(fHeight) && !isNaN(mHeight)) {
+            let targetHeight = (gender === "boy") ? (fHeight + mHeight + 13) / 2 : (fHeight + mHeight - 13) / 2;
+            const minTarget = (targetHeight - 6).toFixed(1);
+            const maxTarget = (targetHeight + 6).toFixed(1);
+            const midTarget = targetHeight.toFixed(1);
+
+            if (lang === "english") {
+              mphHtml = `
+                <div style="background: #eff6ff; border: 1.5px solid #bfdbfe; border-radius: 12px; padding: 14px; margin-top: 12px;">
+                  <div style="font-weight: 700; color: #1e40af; font-size: 0.9rem; margin-bottom: 6px;">
+                    <i class="fa-solid fa-dna"></i> Genetic Mid-Parental Target Adult Height (Tanner Formula)
+                  </div>
+                  <div style="font-size: 0.86rem; color: #1e3a8a; line-height: 1.5;">
+                    • Projected Adult Target Height: <strong>${midTarget} cm</strong><br>
+                    • Target Genetic Range (±6 cm): <strong>${minTarget} cm – ${maxTarget} cm</strong><br>
+                    <span style="font-size: 0.8rem; color: #3b82f6; display: inline-block; margin-top: 4px;">
+                      ${!isNaN(hInput) && hInput < ref.minH ? "⚠️ Current height is trailing relative to parental genetic potential. Clinic checkup recommended." : "✔ Current growth trajectory aligns well with parental genetic potential."}
+                    </span>
+                  </div>
+                </div>
+              `;
+            } else {
+              mphHtml = `
+                <div style="background: #eff6ff; border: 1.5px solid #bfdbfe; border-radius: 12px; padding: 14px; margin-top: 12px;">
+                  <div style="font-weight: 700; color: #1e40af; font-size: 0.9rem; margin-bottom: 6px;">
+                    <i class="fa-solid fa-dna"></i> Genetic Mid-Parental Height Potential (Tanner Formula)
+                  </div>
+                  <div style="font-size: 0.86rem; color: #1e3a8a; line-height: 1.5;">
+                    • Expected Adult Target Height: <strong>${midTarget} cm</strong><br>
+                    • Target Genetic Range (±6 cm): <strong>${minTarget} cm – ${maxTarget} cm</strong><br>
+                    <span style="font-size: 0.8rem; color: #3b82f6; display: inline-block; margin-top: 4px;">
+                      ${!isNaN(hInput) && hInput < ref.minH ? "⚠️ Bacche ki current growth genetic potential se thodi peeche chal rahi hai. Clinic checkup recommended." : "✔ Current growth trajectory parents ke genetic frame ke saath bilkul sahi match kar rahi hai."}
+                    </span>
+                  </div>
+                </div>
+              `;
+            }
+          }
+
+          const genderTitle = (gender === "boy") ? (lang === "english" ? "BOY" : "LADKA") : (lang === "english" ? "GIRL" : "LADKI");
+          const emptyWText = lang === "english" ? "Enter current weight above for instant assessment." : "Upar wazan enter karein instant check ke liye.";
+          const emptyHText = lang === "english" ? "Enter current height above for instant assessment." : "Upar height enter karein instant check ke liye.";
+
+          growthHtml = `
+            <div class="result-box">
+              <h4><i class="fa-solid fa-ruler-combined" style="color: var(--brand-primary);"></i> ${lang === "english" ? "IAP Growth & Target Height Assessment" : "IAP Growth & Target Height Assessment"}</h4>
+              <span class="iap-ref-badge">IAP Standard (${ageName} - ${genderTitle})</span>
+              <p style="font-size:0.84rem; color:#64748b; margin-bottom:10px;">
+                ${lang === "english" ? "Standard Healthy Range:" : "Healthy Standard Range:"} 
+                ${lang === "english" ? "Weight:" : "Wazan:"} <strong>${ref.minW}–${ref.maxW} kg</strong> | 
+                ${lang === "english" ? "Height:" : "Kadd:"} <strong>${ref.minH}–${ref.maxH} cm</strong>
+              </p>
+              ${wStatus || `<p style="font-size:0.82rem; color:#94a3b8;">${emptyWText}</p>`}
+              ${hStatus || `<p style="font-size:0.82rem; color:#94a3b8;">${emptyHText}</p>`}
+              ${mphHtml}
+            </div>
+          `;
+
+          const listLang = lang === "english" ? "en" : "hi";
+          let greenList = data.green[listLang].map(item => `<li>${item}</li>`).join("");
+          let yellowList = data.yellow[listLang].map(item => `<li>${item}</li>`).join("");
+          let redList = data.red[listLang].map(item => `<li>${item}</li>`).join("");
+
+          let devHtml = `
+            <div class="result-box">
+              <h4><i class="fa-solid fa-brain" style="color: #0284c7;"></i> Trivandrum Developmental Screening (TDSC)</h4>
+              
+              <div class="flag-card flag-green">
+                <i class="fa-solid fa-circle-check"></i>
+                <div>
+                  <strong>🟢 ${lang === "english" ? "Green Flags (Expected Milestones):" : "Green Flags (Is Umar Ke Normal Milestones):"}</strong>
+                  <ul style="margin-top:4px; padding-left:16px;">${greenList}</ul>
+                </div>
+              </div>
+
+              <div class="flag-card flag-yellow">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <div>
+                  <strong>🟡 ${lang === "english" ? "Yellow Flags (Monitor Closely):" : "Yellow Flags (Dhyan Dein & Monitor Karein):"}</strong>
+                  <ul style="margin-top:4px; padding-left:16px;">${yellowList}</ul>
+                </div>
+              </div>
+
+              <div class="flag-card flag-red">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <div>
+                  <strong>🔴 ${lang === "english" ? "Red Flags (Pediatric Review Advised):" : "Red Flags (Turant Doctor Ko Dikhayein):"}</strong>
+                  <ul style="margin-top:4px; padding-left:16px;">${redList}</ul>
+                </div>
+              </div>
+            </div>
+          `;
+
+          const tips = data.parentTips;
+          let tipsHtml = `
+            <div class="result-box" style="grid-column: 1 / -1; background: #faf5ff; border: 1.5px solid #e9d5ff;">
+              <h4 style="color: #6b21a8;"><i class="fa-solid fa-heart-pulse"></i> ${ageName} ${lang === "english" ? "Parenting & Care Guide" : "Parenting & Care Guide (Mata-Pita Ke Liye Khaas Salah)"}</h4>
+              
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 12px;">
+                <div style="background:#ffffff; padding:14px; border-radius:12px; border:1px solid #f3e8ff;">
+                  <strong style="color:#7e22ce; font-size:0.88rem; display:block; margin-bottom:4px;"><i class="fa-solid fa-apple-whole"></i> ${lang === "english" ? "Nutrition & Diet Requirements:" : "Khurak & Poshan (Nutrition):"}</strong>
+                  <p style="font-size:0.84rem; color:#4b5563; line-height:1.45;">${tips.nutrition[listLang]}</p>
+                </div>
+
+                <div style="background:#ffffff; padding:14px; border-radius:12px; border:1px solid #f3e8ff;">
+                  <strong style="color:#b91c1c; font-size:0.88rem; display:block; margin-bottom:4px;"><i class="fa-solid fa-shield-halved"></i> ${lang === "english" ? "Child Safety & Accident Prevention:" : "Suraksha & Durghatna Bachav (Safety):"}</strong>
+                  <p style="font-size:0.84rem; color:#4b5563; line-height:1.45;">${tips.safety[listLang]}</p>
+                </div>
+
+                <div style="background:#ffffff; padding:14px; border-radius:12px; border:1px solid #f3e8ff;">
+                  <strong style="color:#0369a1; font-size:0.88rem; display:block; margin-bottom:4px;"><i class="fa-solid fa-puzzle-piece"></i> ${lang === "english" ? "Play, Brain & Cognitive Stimulation:" : "Khel, Dhyan & Brain Development:"}</strong>
+                  <p style="font-size:0.84rem; color:#4b5563; line-height:1.45;">${tips.play[listLang]}</p>
+                </div>
+
+                <div style="background:#ffffff; padding:14px; border-radius:12px; border:1px solid #f3e8ff;">
+                  <strong style="color:#15803d; font-size:0.88rem; display:block; margin-bottom:4px;"><i class="fa-solid fa-stethoscope"></i> ${lang === "english" ? "Vaccine & Doctor Care Tip:" : "Doctor's Care & Vaccine Tip:"}</strong>
+                  <p style="font-size:0.84rem; color:#4b5563; line-height:1.45;">${tips.care[listLang]}</p>
+                </div>
+              </div>
+
+              <div style="text-align:center; margin-top:18px;">
+                <button onclick="openBookingModal()" class="hero-cta-btn" style="padding: 10px 24px; font-size: 0.9rem; background:#0284c7; box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);">
+                  <i class="fa-solid fa-calendar-check"></i> Book Consultation with Dr. Dinesh Mittal
+                </button>
+              </div>
+            </div>
+          `;
+
+          document.getElementById("screenerResults").innerHTML = `
+            <div class="results-grid">
+              ${growthHtml}
+              ${devHtml}
+              ${tipsHtml}
+            </div>
+          `;
+        }
+
+        // Initialize Screener on DOM Load
+        document.addEventListener("DOMContentLoaded", function() {
+          if (document.getElementById("screenerAge")) {
+            runScreener();
+          }
+        });
+
+        // Blog Articles Data
         const blogArticles = {
             iapSchedule: {
                 title: "IAP Recommended Immunization Schedule",
@@ -812,6 +1309,5 @@
             }
         }
     </script>
-
 </body>
 </html>
