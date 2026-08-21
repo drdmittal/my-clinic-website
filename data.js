@@ -1,7 +1,8 @@
 // ==========================================================
 // CLINIC DATA REPOSITORY (data.js)
-// Contains: IAP Growth Standards (with 2-18y BMI Cutoffs), 
-// Developmental Milestones, Adolescent FAQs, and Blog Articles
+// Contains: IAP Growth Standards, Developmental Milestones,
+// IYCF Weaning Engine (with YouTube links), 18-Month Toilet 
+// Training Protocol, Adolescent FAQs & Blog Articles
 // ==========================================================
 
 const milestoneDatabase = {
@@ -52,7 +53,7 @@ const milestoneDatabase = {
       nutrition: { en: "Continue exclusive breastfeeding.", hi: "केवल स्तनपान जारी रखें।" },
       safety: { en: "Never leave baby unattended on a bed or sofa.", hi: "बच्चे को बेड पर अकेला न छोड़ें।" },
       play: { en: "Tummy time 3-5 minutes while awake and supervised.", hi: "जागते समय पेट के बल लिटाएं (टमी टाइम)।" },
-      care: { en: "6th, 10th, 14th week primary vaccination schedule.", hi: "प्राथमिक टीकाकरण शेड्यूल पूरा करें।" }
+      care: { en: "6th, 10th, 14th week primary vaccination schedule.", hi: "प्राथमिक टीकाकरण पूरा करें।" }
     }
   },
   "6m": {
@@ -74,7 +75,7 @@ const milestoneDatabase = {
       hi: ["करवट न बदल पाना", "शरीर बहुत अकड़ा या ढीला होना", "कोई आवाज न निकालना"]
     },
     parentTips: {
-      nutrition: { en: "Start home-cooked mashed weaning foods (moong dal khichdi, suji kheer, fruit purees).", hi: "घर का बना मसला हुआ भोजन शुरू करें (खिचड़ी, सूजी, फल)।" },
+      nutrition: { en: "Start home-cooked mashed complementary feeding at completed 180 days.", hi: "180 दिन पूरे होने पर घर का बना मसला हुआ भोजन शुरू करें।" },
       safety: { en: "Baby proof low shelves and sharp edges as crawling approaches.", hi: "फर्श और कोनों की सुरक्षा सुनिश्चित करें।" },
       play: { en: "Read colorful picture books and play peek-a-boo.", hi: "रंगीन किताबें दिखाएं और बात करें।" },
       care: { en: "Flu (Influenza) and Typhoid conjugate vaccination review.", hi: "इन्फ्लूएंजा व टाइफाइड टीकों का समय।" }
@@ -165,18 +166,12 @@ const milestoneDatabase = {
       en: ["Combines 2 words ('want milk')", "Runs and kicks ball", "Follows 2-step instructions"],
       hi: ["2 शब्द जोड़कर बोलना ('दूध चाहिए')", "दौड़ना और गेंद को किक मारना", "सरल निर्देश मानना"]
     },
-    yellow: {
-      en: ["Picky eating phases; occasional thumb sucking"],
-      hi: ["खाने में नखरे करना"]
-    },
-    red: {
-      en: ["No 2-word phrases", "Cannot jump or climb stairs with help", "Lack of social engagement/eye contact"],
-      hi: ["2 शब्द जोड़कर न बोल पाना", "आँखों में आँखें डालकर बात न करना (Autism Screen)"]
-    },
+    yellow: { en: ["Picky eating phases; occasional thumb sucking"], hi: ["खाने में नखरे करना"] },
+    red: { en: ["No 2-word phrases", "Lack of social eye contact"], hi: ["2 शब्द जोड़कर न बोल पाना", "आँखों में आँखें डालकर बात न करना"] },
     parentTips: {
       nutrition: { en: "Whole fruits over fruit juices. Balanced iron and calcium intake.", hi: "जूस की जगह साबुत ताजे फल दें। दूध 400ml तक सीमित।" },
       safety: { en: "Supervise closely near hot kitchen utensils, buckets, and water tanks.", hi: "पानी की बाल्टी व गर्म बर्तनों से दूर रखें।" },
-      play: { en: "Pretend play (kitchen set, doctor set, toy animals). Zero screen time.", hi: "रोल-प्ले खिलौने दें। मोबाइल स्क्रीन से बचाएं।" },
+      play: { en: "Pretend play (kitchen set, doctor set). Zero screen time.", hi: "रोल-प्ले खिलौने दें। स्क्रीन से बचाएं।" },
       care: { en: "Typhoid Booster, Hepatitis-A dose-2 review.", hi: "टाइफाइड व हेपेटाइटिस-ए की दूसरी खुराक।" }
     }
   },
@@ -186,22 +181,13 @@ const milestoneDatabase = {
       boy: { minW: 11.3, maxW: 17.5, minH: 89.0, maxH: 101.5, minBmi: 13.8, ovBmi: 17.1, obBmi: 18.3 },
       girl: { minW: 10.8, maxW: 17.2, minH: 88.0, maxH: 100.5, minBmi: 13.5, ovBmi: 16.9, obBmi: 18.1 }
     },
-    green: {
-      en: ["Speaks in full 3-4 word sentences", "Pedals tricycle", "Understands 'mine' and 'yours'"],
-      hi: ["3-4 शब्दों के वाक्य बोलना", "ट्राइसाइकिल चलाना", "'मेरा' और 'तुम्हारा' समझना"]
-    },
-    yellow: {
-      en: ["Occasional stuttering during rapid excitement"],
-      hi: ["उत्तेजना में कभी-कभार हकलाना"]
-    },
-    red: {
-      en: ["Unclear speech that family cannot understand", "Cannot balance on one foot briefly", "Does not engage with other children"],
-      hi: ["बोली बिल्कुल समझ न आना", "बच्चों के साथ न खेलना"]
-    },
+    green: { en: ["Speaks in full 3-4 word sentences", "Pedals tricycle"], hi: ["3-4 शब्दों के वाक्य बोलना", "ट्राइसाइकिल चलाना"] },
+    yellow: { en: ["Occasional stuttering during rapid excitement"], hi: ["उत्तेजना में कभी-कभार हकलाना"] },
+    red: { en: ["Unclear speech that family cannot understand"], hi: ["बोली बिल्कुल समझ न आना"] },
     parentTips: {
-      nutrition: { en: "Incorporate soaked nuts, paneer, curd, and seasonal leafy greens.", hi: "दही, पनीर, भीगे मेवे व हरी सब्जियां दें।" },
-      safety: { en: "Teach basic street road safety and crossing habits.", hi: "सड़क सुरक्षा की आदतें सिखाएं।" },
-      play: { en: "Clay modelling, crayon coloring, outdoor park play daily.", hi: "रोज 1 घंटा पार्क में खेलकूद जरूरी।" },
+      nutrition: { en: "Soaked nuts, paneer, curd, and seasonal leafy greens.", hi: "दही, पनीर, भीगे मेवे व हरी सब्जियां दें।" },
+      safety: { en: "Teach basic street road safety.", hi: "सड़क सुरक्षा की आदतें सिखाएं।" },
+      play: { en: "Clay modelling, outdoor park play daily.", hi: "रोज 1 घंटा पार्क में खेलकूद जरूरी।" },
       care: { en: "Annual vision screen and dental checkup.", hi: "आँखों व दांतों की वार्षिक जांच।" }
     }
   },
@@ -211,22 +197,13 @@ const milestoneDatabase = {
       boy: { minW: 12.7, maxW: 20.3, minH: 95.0, maxH: 108.5, minBmi: 13.5, ovBmi: 16.9, obBmi: 18.2 },
       girl: { minW: 12.3, maxW: 20.1, minH: 94.0, maxH: 107.5, minBmi: 13.3, ovBmi: 16.8, obBmi: 18.0 }
     },
-    green: {
-      en: ["Draws a person with 2-4 body parts", "Hops on one foot", "Tells short stories"],
-      hi: ["इंसान का चित्र बनाना", "एक पैर पर कूदना", "छोटी कहानियां सुनाना"]
-    },
-    yellow: {
-      en: ["Imaginary fears (monsters, dark rooms)"],
-      hi: ["अंधेरे या काल्पनिक चीजों से डरना"]
-    },
-    red: {
-      en: ["Cannot draw a circle or cross", "Frequent bedwetting without daytime control", "Severe aggression"],
-      hi: ["गोला न बना पाना", "अत्यधिक आक्रामक व्यवहार"]
-    },
+    green: { en: ["Draws a person with 2-4 body parts", "Hops on one foot"], hi: ["इंसान का चित्र बनाना", "एक पैर पर कूदना"] },
+    yellow: { en: ["Imaginary fears (monsters, dark rooms)"], hi: ["अंधेरे से डरना"] },
+    red: { en: ["Cannot draw a circle or cross", "Severe aggression"], hi: ["गोला न बना पाना"] },
     parentTips: {
       nutrition: { en: "Limit processed packaged snacks, chips, and colas.", hi: "चिप्स, बिस्कुट व पैकेज्ड स्नैक्स बंद करें।" },
-      safety: { en: "Teach child's full name, parents' mobile numbers, and 'good touch/bad touch'.", hi: "माता-पिता का फोन नंबर व गुड/बैड टच सिखाएं।" },
-      play: { en: "Roleplay, puzzles, running and obstacle sports.", hi: "पहेलियां व खेलकूद।" },
+      safety: { en: "Teach parents' mobile numbers and good touch/bad touch.", hi: "माता-पिता का फोन नंबर व गुड/बैड टच सिखाएं।" },
+      play: { en: "Roleplay, puzzles, running sports.", hi: "पहेलियां व खेलकूद।" },
       care: { en: "Preparation for 4.5-5 year DTP booster & MMR booster.", hi: "5 वर्ष के बूस्टर टीकों की तैयारी।" }
     }
   },
@@ -236,22 +213,13 @@ const milestoneDatabase = {
       boy: { minW: 14.1, maxW: 23.2, minH: 101.0, maxH: 115.5, minBmi: 13.4, ovBmi: 16.8, obBmi: 18.3 },
       girl: { minW: 13.7, maxW: 23.1, minH: 100.0, maxH: 114.5, minBmi: 13.2, ovBmi: 16.7, obBmi: 18.2 }
     },
-    green: {
-      en: ["Counts 10 or more objects", "Skips and somersaults", "Dresses independently"],
-      hi: ["10 तक गिनती गिनना", "खुद कपड़े पहनना", "अच्छी तरह उछलना-कूदना"]
-    },
-    yellow: {
-      en: ["Temporary bedtime delay resistance"],
-      hi: ["सोने में थोड़ा आनाकानी करना"]
-    },
-    red: {
-      en: ["Extreme difficulty focusing for 5 minutes", "Unable to brush teeth/wash hands independently", "Speech articulation defects"],
-      hi: ["5 मिनट भी ध्यान न लगना (ADHD Screen)", "बोलने में गंभीर लड़खड़ाहट"]
-    },
+    green: { en: ["Counts 10 or more objects", "Dresses independently"], hi: ["10 तक गिनती गिनना", "खुद कपड़े पहनना"] },
+    yellow: { en: ["Bedtime delay resistance"], hi: ["सोने में थोड़ा आनाकानी करना"] },
+    red: { en: ["Extreme difficulty focusing for 5 minutes (ADHD Screen)"], hi: ["5 मिनट भी ध्यान न लगना"] },
     parentTips: {
-      nutrition: { en: "Protein-rich breakfast (eggs, sprouted moong, dal cheela).", hi: "प्रोटीन युक्त नाश्ता (अंडा, चीला, स्प्राउट्स)।" },
+      nutrition: { en: "Protein-rich breakfast (eggs, cheela, sprouts).", hi: "प्रोटीन युक्त नाश्ता लें।" },
       safety: { en: "Always insist on helmets for bicycling.", hi: "साइकिल चलाते समय हेलमेट जरूर पहनाएं।" },
-      play: { en: "Encourage team sports and swimming.", hi: "तैराकी व ग्रुप गेम्स को बढ़ावा दें।" },
+      play: { en: "Swimming and team games.", hi: "तैराकी व ग्रुप गेम्स।" },
       care: { en: "DTP-Booster 2, OPV Booster, Varicella Booster.", hi: "डीटीपी और चेचक का दूसरा बूस्टर डोज।" }
     }
   },
@@ -261,23 +229,14 @@ const milestoneDatabase = {
       boy: { minW: 15.6, maxW: 26.5, minH: 107.0, maxH: 122.0, minBmi: 13.3, ovBmi: 17.0, obBmi: 18.6 },
       girl: { minW: 15.1, maxW: 26.4, minH: 106.0, maxH: 121.0, minBmi: 13.1, ovBmi: 16.9, obBmi: 18.5 }
     },
-    green: {
-      en: ["Reads simple 3-4 letter words", "Ties shoelaces with guidance", "Understands rules of board games"],
-      hi: ["सरल शब्द पढ़ना", "खेल के नियम समझना", "जूते के फीते बांधना"]
-    },
-    yellow: {
-      en: ["School adjustment stress or sibling rivalry"],
-      hi: ["स्कूल के नए माहौल में हल्का तनाव"]
-    },
-    red: {
-      en: ["Cannot copy letters/numbers", "Frequent clumsiness and tripping over flat ground", "Extreme difficulty making friends"],
-      hi: ["अक्षर न लिख पाना", "बार-बार गिरना, मित्र न बना पाना"]
-    },
+    green: { en: ["Reads simple words", "Ties shoelaces"], hi: ["सरल शब्द पढ़ना", "जूते के फीते बांधना"] },
+    yellow: { en: ["School adjustment stress"], hi: ["स्कूल का हल्का तनाव"] },
+    red: { en: ["Cannot copy letters/numbers"], hi: ["अक्षर न लिख पाना"] },
     parentTips: {
-      nutrition: { en: "Balanced tiffin: Roti rolls, homemade vegetable cutlets, nuts.", hi: "घर का बना पौष्टिक स्कूल टिफिन दें।" },
-      safety: { en: "Educate on digital screen limits (maximum 1 hour educational screen).", hi: "मोबाइल का प्रयोग 1 घंटे से कम रखें।" },
-      play: { en: "Football, martial arts, classical/modern dance for posture.", hi: "मार्शल आर्ट्स, फुटबॉल या डांस क्लास।" },
-      care: { en: "Annual vision acuity test before primary school sessions.", hi: "कक्षा में बैठने से पहले आँखों की जांच।" }
+      nutrition: { en: "Nutritious home-cooked tiffin.", hi: "घर का बना पौष्टिक स्कूल टिफिन दें।" },
+      safety: { en: "Screen time under 1 hour daily.", hi: "मोबाइल का प्रयोग 1 घंटे से कम रखें।" },
+      play: { en: "Football, martial arts, dance.", hi: "मार्शल आर्ट्स, फुटबॉल या डांस।" },
+      care: { en: "Annual vision acuity test before primary school.", hi: "आँखों की नियमित जांच।" }
     }
   },
   "7y": {
@@ -286,23 +245,14 @@ const milestoneDatabase = {
       boy: { minW: 17.2, maxW: 30.1, minH: 112.5, maxH: 128.5, minBmi: 13.4, ovBmi: 17.3, obBmi: 19.1 },
       girl: { minW: 16.6, maxW: 30.0, minH: 111.5, maxH: 127.5, minBmi: 13.2, ovBmi: 17.2, obBmi: 19.0 }
     },
-    green: {
-      en: ["Understands cause-and-effect", "Rides 2-wheel bicycle without stabilizers", "Fluent reading"],
-      hi: ["2-पहिया साइकिल चलाना", "धाराप्रवाह पढ़ना", "कारण व प्रभाव समझना"]
-    },
-    yellow: {
-      en: ["Competitive frustration when losing games"],
-      hi: ["खेल में हारने पर उदास होना"]
-    },
-    red: {
-      en: ["Cannot read simple 1st-grade sentences (Dyslexia screen)", "Severe posture slouching", "Persistent daytime urinary urgency"],
-      hi: ["सरल वाक्य न पढ़ पाना, रीढ़ में झुकाव"]
-    },
+    green: { en: ["Understands cause-and-effect", "Rides 2-wheel bike"], hi: ["2-पहिया साइकिल चलाना", "तार्किक समझ"] },
+    yellow: { en: ["Competitive frustration when losing"], hi: ["खेल में हारने पर उदास होना"] },
+    red: { en: ["Cannot read simple sentences (Dyslexia screen)"], hi: ["सरल वाक्य न पढ़ पाना"] },
     parentTips: {
-      nutrition: { en: "Ensure adequate calcium and vitamin D through sunlight exposure & dairy.", hi: "धूप में खेल और कैल्शियम युक्त आहार।" },
-      safety: { en: "Ensure ergonomic study table posture to avoid early neck strain.", hi: "पढ़ाई के समय बैठने की सही मुद्रा।" },
-      play: { en: "Chess, table tennis, swimming, outdoor running.", hi: "शतरंज, टेबल टेनिस, दौड़।" },
-      care: { en: "Influenza annual dose booster for school-going children.", hi: "वार्षिक फ्लू का टीका।" }
+      nutrition: { en: "Calcium & Vitamin D through sunlight & dairy.", hi: "धूप में खेल और कैल्शियम युक्त आहार।" },
+      safety: { en: "Ergonomic study desk posture.", hi: "पढ़ाई के समय बैठने की सही मुद्रा।" },
+      play: { en: "Chess, table tennis, outdoor running.", hi: "शतरंज, टेबल टेनिस, दौड़।" },
+      care: { en: "Annual influenza vaccine booster.", hi: "वार्षिक फ्लू का टीका।" }
     }
   },
   "8y": {
@@ -311,23 +261,14 @@ const milestoneDatabase = {
       boy: { minW: 19.0, maxW: 34.2, minH: 118.0, maxH: 134.5, minBmi: 13.5, ovBmi: 17.7, obBmi: 19.7 },
       girl: { minW: 18.3, maxW: 34.0, minH: 117.0, maxH: 134.0, minBmi: 13.4, ovBmi: 17.6, obBmi: 19.6 }
     },
-    green: {
-      en: ["Understands money values", "Fine motor skills (skilled drawing/craft)", "Participates in team games"],
-      hi: ["पैसे का हिसाब समझना", "चित्रकला व क्राफ्ट", "टीम स्पोर्ट्स में भाग लेना"]
-    },
-    yellow: {
-      en: ["Desire for peer acceptance & brand comparisons"],
-      hi: ["दोस्तों के साथ तुलना करने की आदत"]
-    },
-    red: {
-      en: ["Signs of early puberty: breast budding in girls <8y, testicular enlargement in boys <9y (Precocious Puberty Alert)", "Severe learning gaps"],
-      hi: ["8 वर्ष से पहले स्तन वृद्धि या 9 वर्ष से पहले यौवन लक्षण (Precocious Puberty)"]
-    },
+    green: { en: ["Understands money values", "Fine motor crafts"], hi: ["पैसे का हिसाब समझना", "क्राफ्ट व कला"] },
+    yellow: { en: ["Desire for peer brand comparisons"], hi: ["दोस्तों से तुलना की आदत"] },
+    red: { en: ["Precocious puberty signs: breast buds <8y or testes <9y"], hi: ["8 वर्ष से पहले स्तन वृद्धि या 9 वर्ष से पहले यौवन लक्षण"] },
     parentTips: {
-      nutrition: { en: "Avoid bakery products with palm oil & trans-fats to prevent early obesity.", hi: "तली-भुनी चीजें व बेकरी प्रोडक्ट्स बंद करें।" },
-      safety: { en: "Supervise online games and internet connectivity strictly.", hi: "इंटरनेट व ऑनलाइन गेमिंग पर कड़ी निगरानी रखें।" },
-      play: { en: "Minimum 60 minutes vigorous outdoor play daily.", hi: "रोज कम से कम 60 मिनट तेज खेलकूद।" },
-      care: { en: "Growth velocity monitoring: Child should gain 5-6 cm height/year.", hi: "कद कम से कम 5-6 सेमी प्रति वर्ष बढ़ना चाहिए।" }
+      nutrition: { en: "Avoid bakery products and trans-fats to prevent early obesity.", hi: "तली-भुनी चीजें व बेकरी बंद करें।" },
+      safety: { en: "Strict internet supervision.", hi: "इंटरनेट पर कड़ी निगरानी रखें।" },
+      play: { en: "Minimum 60 mins vigorous sport daily.", hi: "रोज 60 मिनट तेज खेलकूद।" },
+      care: { en: "Annual height velocity check (5-6 cm/year).", hi: "कद कम से कम 5-6 सेमी/वर्ष बढ़ना चाहिए।" }
     }
   },
   "9y": {
@@ -336,23 +277,14 @@ const milestoneDatabase = {
       boy: { minW: 21.0, maxW: 39.0, minH: 123.0, maxH: 140.5, minBmi: 13.7, ovBmi: 18.2, obBmi: 20.4 },
       girl: { minW: 20.3, maxW: 38.8, minH: 122.5, maxH: 140.5, minBmi: 13.6, ovBmi: 18.1, obBmi: 20.3 }
     },
-    green: {
-      en: ["Independent school homework completion", "Strong logical thinking", "Solid peer friendships"],
-      hi: ["स्वयं गृहकार्य करना", "तार्किक सोच", "अच्छी सामाजिक मित्रता"]
-    },
-    yellow: {
-      en: ["Occasional moodiness before adolescent transition"],
-      hi: ["हल्का चिड़चिड़ापन (हार्मोनल बदलाव की शुरुआत)"]
-    },
-    red: {
-      en: ["Height dropping across percentiles on growth charts", "School refusal and anxiety"],
-      hi: ["कद का अचानक रुकना या घटना, स्कूल जाने से अत्यधिक घबराहट"]
-    },
+    green: { en: ["Independent homework", "Strong friendships"], hi: ["स्वयं गृहकार्य करना", "अच्छी सामाजिक मित्रता"] },
+    yellow: { en: ["Moodiness before puberty transition"], hi: ["हल्का चिड़चिड़ापन"] },
+    red: { en: ["Height percentile falling on growth charts"], hi: ["कद का अचानक रुकना या गिरना"] },
     parentTips: {
-      nutrition: { en: "High fiber diet: Salads before meals, sprouted grains, millets (ragi, jowar).", hi: "भोजन से पहले सलाद, बाजरा व रागी शामिल करें।" },
-      safety: { en: "Keep open channels of communication regarding school bullying.", hi: "स्कूल व दोस्तों की बातें रोजाना सुनें।" },
-      play: { en: "Badminton, basketball, cycling for bone mineralization.", hi: "बैडमिंटन, बास्केटबॉल व साइकिलिंग।" },
-      care: { en: "Preparation for HPV vaccine eligibility starting at 9 years for girls.", hi: "9 वर्ष से बालिकाओं हेतु HPV (सर्वाइकल कैंसर) टीका।" }
+      nutrition: { en: "High fiber diet (salads, millets, sprouts).", hi: "भोजन में सलाद, बाजरा व रागी शामिल करें।" },
+      safety: { en: "Open discussions regarding school bullying.", hi: "स्कूल व दोस्तों की बातें रोजाना सुनें।" },
+      play: { en: "Badminton, basketball, cycling.", hi: "बैडमिंटन, बास्केटबॉल व साइकिलिंग।" },
+      care: { en: "HPV vaccine eligibility starting at 9 years for girls.", hi: "9 वर्ष से बालिकाओं हेतु HPV टीका।" }
     }
   },
   "10y": {
@@ -362,26 +294,17 @@ const milestoneDatabase = {
       girl: { minW: 22.5, maxW: 44.3, minH: 128.0, maxH: 147.0, minBmi: 13.9, ovBmi: 18.7, obBmi: 21.1 }
     },
     tanner: {
-      girl: { stage: "Tanner Stage 1-2 (Adrenarche / Thelarche)", green: "Early breast budding (thelarche) between 8-12 years is normal.", yellow: "Rapid weight gain accelerating breast fat deposition.", red: "Absence of any secondary sexual traits by 13 years (Delayed Puberty)." },
-      boy: { stage: "Tanner Stage 1 (Pre-pubertal)", green: "Normal testicular volume 1-3 ml. Growth rate steady at 5 cm/year.", yellow: "Weight creeping up with reduced physical sports.", red: "Early testicular enlargement >4ml before 9 years." }
+      girl: { stage: "Tanner Stage 1-2 (Thelarche)", green: "Early breast budding (thelarche) between 8-12y is normal.", yellow: "Rapid weight gain.", red: "Absence of any secondary sexual traits by 13y." },
+      boy: { stage: "Tanner Stage 1", green: "Testicular volume 1-3 ml. Steady growth at 5 cm/yr.", yellow: "Weight creeping up.", red: "Testicular enlargement >4ml before 9y." }
     },
-    green: {
-      en: ["Abstract reasoning develops", "Maintains personal hygiene routines independently"],
-      hi: ["व्यक्तिगत स्वच्छता का ध्यान रखना, अमूर्त विचार समझना"]
-    },
-    yellow: {
-      en: ["Body image consciousness beginnings"],
-      hi: ["शारीरिक रूप-रंग को लेकर सचेत होना"]
-    },
-    red: {
-      en: ["Severe linear growth plateau (<4 cm/year)", "Persistent fatigue or pallor (Anemia)"],
-      hi: ["साल में 4 सेमी से कम कद बढ़ना, अत्यधिक थकान (खून की कमी)"]
-    },
+    green: { en: ["Abstract reasoning develops"], hi: ["तार्किक व अमूर्त सोच का विकास"] },
+    yellow: { en: ["Body image consciousness"], hi: ["शारीरिक रूप-रंग को लेकर सचेत होना"] },
+    red: { en: ["Growth plateau (<4 cm/yr)", "Persistent fatigue/pallor"], hi: ["साल में 4 सेमी से कम कद बढ़ना, अत्यधिक थकान"] },
     parentTips: {
-      nutrition: { en: "Prevent childhood obesity by eliminating liquid sugars (sweetened sodas, packaged juices).", hi: "मीठे पेय व कोल्ड ड्रिंक्स पूरी तरह बंद करें।" },
-      safety: { en: "Educate on online privacy, passwords, and cyber safety.", hi: "सोशल मीडिया व साइबर सुरक्षा के नियम तय करें।" },
-      play: { en: "Athletics, swimming, yoga for flexibility.", hi: "एथलेटिक्स, योग व तैराकी।" },
-      care: { en: "HPV Vaccine (2-dose schedule at 0 and 6 months) for adolescent girls.", hi: "बालिकाओं के लिए एचपीवी (सर्वाइकल कैंसर) वैक्सीन का सर्वोत्तम समय।" }
+      nutrition: { en: "Zero sweetened sodas to prevent childhood obesity.", hi: "मीठे पेय व कोल्ड ड्रिंक्स पूरी तरह बंद करें।" },
+      safety: { en: "Cyber safety and digital boundaries.", hi: "सोशल मीडिया व साइबर सुरक्षा के नियम तय करें।" },
+      play: { en: "Athletics, swimming, yoga.", hi: "एथलेटिक्स, योग व तैराकी।" },
+      care: { en: "HPV Vaccine (2-dose schedule at 0 and 6 months) for girls.", hi: "बालिकाओं हेतु एचपीवी (सर्वाइकल कैंसर) वैक्सीन।" }
     }
   },
   "11y": {
@@ -391,26 +314,17 @@ const milestoneDatabase = {
       girl: { minW: 25.1, maxW: 50.3, minH: 134.0, maxH: 154.0, minBmi: 14.3, ovBmi: 19.4, obBmi: 22.0 }
     },
     tanner: {
-      girl: { stage: "Tanner Stage 2 (Thelarche & Pubarche)", green: "Breast buds enlarge, fine pubic hair appears. Linear growth spurt starts.", yellow: "Mild breast tenderness during budding.", red: "Menarche starting before 10 years without medical review." },
-      boy: { stage: "Tanner Stage 2 (Gonadarche)", green: "Testicular volume increases to 4-8 ml. Scrotum thins and reddens.", yellow: "Temporary pubertal gynecomastia (breast gland swelling in boys).", red: "No testicular enlargement by 14 years." }
+      girl: { stage: "Tanner Stage 2", green: "Breast buds enlarge, fine pubic hair. Growth spurt starts.", yellow: "Mild breast tenderness.", red: "Menarche starting before 10y without review." },
+      boy: { stage: "Tanner Stage 2", green: "Testicular volume increases to 4-8 ml.", yellow: "Temporary pubertal gynecomastia.", red: "No testicular enlargement by 14y." }
     },
-    green: {
-      en: ["Understands complex moral values", "Stronger peer allegiances", "Height spurt beginning in girls"],
-      hi: ["लड़कियों में कद की तेज बढ़ोत्तरी (Growth Spurt) की शुरुआत"]
-    },
-    yellow: {
-      en: ["Frequent emotional sensitivity or mood swings"],
-      hi: ["भावनात्मक उतार-चढ़ाव (मूड स्विंग्स)"]
-    },
-    red: {
-      en: ["Eating disorder signs (extreme fasting, skipping meals)", "Excessive social isolation"],
-      hi: ["खाना छोड़ना, वजन घटाने का अत्यधिक जुनून (Eating Disorder)"]
-    },
+    green: { en: ["Height spurt beginning in girls"], hi: ["लड़कियों में ग्रोथ स्पर्ट की शुरुआत"] },
+    yellow: { en: ["Emotional mood swings"], hi: ["भावनात्मक उतार-चढ़ाव"] },
+    red: { en: ["Eating disorder signs", "Excessive isolation"], hi: ["खाना छोड़ना, वजन घटाने का अत्यधिक जुनून"] },
     parentTips: {
-      nutrition: { en: "Iron-rich foods (jaggery, spinach, raisins, lentils) + Vitamin C for absorption.", hi: "आयरन व विटामिन सी युक्त आहार (गुड़, पालक, दालें)।" },
-      safety: { en: "Open, confidential conversations at home regarding bodily puberty changes.", hi: "घर पर शारीरिक बदलावों पर खुलकर दोस्ताना चर्चा करें।" },
-      play: { en: "Aerobic sports for cardiovascular fitness.", hi: "हृदय स्वास्थ्य हेतु एरोबिक खेल।" },
-      care: { en: "Tdap (Tetanus, reduced Diphtheria, Pertussis) booster dose between 10-12 years.", hi: "10-12 वर्ष पर Tdap बूस्टर का टीका अवश्य लगवाएं।" }
+      nutrition: { en: "Iron-rich foods (jaggery, spinach, raisins, lentils) + Vitamin C.", hi: "आयरन व विटामिन सी युक्त आहार।" },
+      safety: { en: "Open puberty discussions at home.", hi: "घर पर शारीरिक बदलावों पर चर्चा करें।" },
+      play: { en: "Cardiovascular endurance sports.", hi: "हृदय स्वास्थ्य हेतु एरोबिक खेल।" },
+      care: { en: "Tdap booster dose between 10-12 years.", hi: "10-12 वर्ष पर Tdap बूस्टर टीका लगवाएं।" }
     }
   },
   "12y": {
@@ -420,26 +334,17 @@ const milestoneDatabase = {
       girl: { minW: 28.2, maxW: 56.4, minH: 140.0, maxH: 160.5, minBmi: 14.8, ovBmi: 20.1, obBmi: 22.8 }
     },
     tanner: {
-      girl: { stage: "Tanner Stage 3", green: "Breast contour and areola enlarge. Peak height velocity (8 cm/year).", yellow: "Irregular cycles in first 1-2 years post menarche.", red: "Excessive facial hair, severe acne, or acanthosis nigricans (PCOS risk)." },
-      boy: { stage: "Tanner Stage 2-3", green: "Penile lengthening begins, darker pubic hair, voice starts cracking.", yellow: "Mild pubertal gynecomastia (normal if painless and small).", red: "No signs of genital pubertal changes." }
+      girl: { stage: "Tanner Stage 3", green: "Peak height velocity (8 cm/year).", yellow: "Irregular cycles in first 1-2 years post menarche.", red: "Hirsutism, severe cystic acne, or acanthosis nigricans (PCOS)." },
+      boy: { stage: "Tanner Stage 2-3", green: "Penile lengthening, darker pubic hair, voice cracking.", yellow: "Mild pubertal gynecomastia disc.", red: "No genital pubertal changes." }
     },
-    green: {
-      en: ["Capable of long-term planning", "Critical analytical thinking"],
-      hi: ["गहरी तार्किक व विश्लेषणात्मक सोच का विकास"]
-    },
-    yellow: {
-      en: ["Mild skin breakouts (pubertal acne)"],
-      hi: ["चेहरे पर हल्के कील-मुंहासे (Acne)"]
-    },
-    red: {
-      en: ["Dark velvety skin patches on neck/armpits (Acanthosis Nigricans - Insulin Resistance)", "Severe spinal curvature (Scoliosis)"],
-      hi: ["गर्दन पर काली मोटी परत (इंसुलिन रेजिस्टेंस व डायबिटीज का पूर्व संकेत)"]
-    },
+    green: { en: ["Critical analytical thinking"], hi: ["विश्लेषणात्मक सोच"] },
+    yellow: { en: ["Mild pubertal acne breakouts"], hi: ["चेहरे पर हल्के कील-मुंहासे"] },
+    red: { en: ["Acanthosis Nigricans (dark velvety neck patches)"], hi: ["गर्दन पर काली मोटी परत"] },
     parentTips: {
-      nutrition: { en: "Ensure 1000 mg dietary calcium daily for peak bone mass.", hi: "मजबूत हड्डियों के लिए 1000mg दैनिक कैल्शियम।" },
-      safety: { en: "Educate against unsupervised consumption of gym protein shakes/steroids.", hi: "जिम सप्लीमेंट्स व प्रोटीन पाउडर से दूर रखें।" },
-      play: { en: "Regular sports to combat sedentary screen posture.", hi: "नियमित स्पोर्ट्स खेलें।" },
-      care: { en: "Annual spine examination for scoliosis and thyroid checkup if lethargic.", hi: "रीढ़ व थायरॉइड की नियमित जांच।" }
+      nutrition: { en: "1000 mg dietary calcium daily for bones.", hi: "मजबूत हड्डियों के लिए 1000mg कैल्शियम।" },
+      safety: { en: "Zero gym protein powders or supplements.", hi: "जिम सप्लीमेंट्स से दूर रखें।" },
+      play: { en: "Combat desk slouching with sports.", hi: "नियमित स्पोर्ट्स खेलें।" },
+      care: { en: "Annual spine examination for scoliosis.", hi: "रीढ़ व थायरॉइड की नियमित जांच।" }
     }
   },
   "13y": {
@@ -449,26 +354,17 @@ const milestoneDatabase = {
       girl: { minW: 31.8, maxW: 62.1, minH: 145.0, maxH: 165.0, minBmi: 15.3, ovBmi: 20.9, obBmi: 23.6 }
     },
     tanner: {
-      girl: { stage: "Tanner Stage 3-4 (Menarche Transition)", green: "Menarche typically occurs ~2 years post breast budding (Average 12.5y).", yellow: "Cycle lengths varying between 21 to 45 days initially.", red: "Menarche not achieved by 15 years (Primary Amenorrhea)." },
-      boy: { stage: "Tanner Stage 3", green: "Testicular volume 10-12 ml. Peak growth velocity starting (9-10 cm/year).", yellow: "Transient nocturnal emissions (wet dreams).", red: "Failure of growth spurt onset." }
+      girl: { stage: "Tanner Stage 3-4", green: "Menarche occurs ~2y post thelarche.", yellow: "Cycle lengths 21-45 days.", red: "Menarche not achieved by 15y." },
+      boy: { stage: "Tanner Stage 3", green: "Testicular volume 10-12 ml. Peak growth begins (9-10 cm/yr).", yellow: "Transient nocturnal emissions.", red: "Failure of growth spurt onset." }
     },
-    green: {
-      en: ["Forms strong personal identity", "Capable of complex problem solving"],
-      hi: ["स्वतंत्र पहचान का निर्माण, गंभीर विषयों पर समझ"]
-    },
-    yellow: {
-      en: ["Desire for extreme privacy from family"],
-      hi: ["अत्यधिक प्राइवेसी की मांग"]
-    },
-    red: {
-      en: ["Depression symptoms: withdrawal, drop in grades, sleep reversal", "Extreme underweight/overweight"],
-      hi: ["गंभीर अवसाद, पढ़ाई में अचानक गिरावट, वजन में भारी असंतुलन"]
-    },
+    green: { en: ["Forms personal identity"], hi: ["स्वतंत्र पहचान का निर्माण"] },
+    yellow: { en: ["Desire for privacy"], hi: ["प्राइवेसी की मांग"] },
+    red: { en: ["Depression symptoms, severe weight imbalance"], hi: ["गंभीर अवसाद, वजन असंतुलन"] },
     parentTips: {
-      nutrition: { en: "High zinc and protein diet for peak pubertal growth spurt.", hi: "जिंक व प्रोटीन युक्त आहार (दालें, अंडे, नट्स)।" },
-      safety: { en: "Ensure 8-9 hours of uninterrupted night sleep for growth hormone secretion.", hi: "ग्रोथ हार्मोन के लिए रात में 8-9 घंटे की गहरी नींद।" },
-      play: { en: "Strength and endurance training with bodyweight exercises.", hi: "बॉडीवेट एक्सरसाइज व दौड़।" },
-      care: { en: "Complete any missed catch-up vaccines (Hepatitis-B, Varicella, MMR).", hi: "छूटे हुए टीकों का कैच-अप पूरा करें।" }
+      nutrition: { en: "High zinc and protein diet for peak growth.", hi: "जिंक व प्रोटीन युक्त आहार।" },
+      safety: { en: "8-9 hours deep sleep for growth hormone release.", hi: "ग्रोथ हार्मोन हेतु 8-9 घंटे की नींद।" },
+      play: { en: "Bodyweight strength exercises.", hi: "बॉडीवेट एक्सरसाइज व दौड़।" },
+      care: { en: "Catch-up vaccines review.", hi: "छूटे हुए टीकों का कैच-अप पूरा करें।" }
     }
   },
   "14y": {
@@ -478,26 +374,17 @@ const milestoneDatabase = {
       girl: { minW: 35.5, maxW: 67.0, minH: 148.5, maxH: 167.5, minBmi: 15.8, ovBmi: 21.6, obBmi: 24.3 }
     },
     tanner: {
-      girl: { stage: "Tanner Stage 4", green: "Areola forms secondary mound above breast contour. Cycles regularize.", yellow: "Mild premenstrual cramping (dysmenorrhea).", red: "Severe incapacitating pelvic pain or bleeding lasting >8 days." },
-      boy: { stage: "Tanner Stage 4", green: "Testicular volume 12-15 ml, axillary hair, prominent Adam's apple, deepening voice.", yellow: "Mild facial acne.", red: "Testicular volume remains <4 ml." }
+      girl: { stage: "Tanner Stage 4", green: "Cycles regularize.", yellow: "Mild cramping.", red: "Incapacitating pelvic pain or bleeding >8 days." },
+      boy: { stage: "Tanner Stage 4", green: "Voice deepening, axillary hair.", yellow: "Mild facial acne.", red: "Testicular volume remains <4 ml." }
     },
-    green: {
-      en: ["Abstract conceptualization", "Career and scholastic focus"],
-      hi: ["भविष्य व करियर के प्रति सजगता"]
-    },
-    yellow: {
-      en: ["Academic examination stress"],
-      hi: ["परीक्षाओं को लेकर तनाव"]
-    },
-    red: {
-      en: ["Chronic heavy menstrual bleeding leading to severe anemia", "High blood pressure during pediatric screen"],
-      hi: ["पीरियड्स में अत्यधिक रक्तस्राव, कम उम्र में हाई ब्लड प्रेशर"]
-    },
+    green: { en: ["Career focus"], hi: ["भविष्य के प्रति सजगता"] },
+    yellow: { en: ["Exam stress"], hi: ["परीक्षाओं का तनाव"] },
+    red: { en: ["Chronic heavy bleeding causing anemia"], hi: ["पीरियड्स में अत्यधिक रक्तस्राव"] },
     parentTips: {
-      nutrition: { en: "Avoid skipping breakfast; eliminate fast-food trans-fats.", hi: "नाश्ता कभी न छोड़ें, जंक फूड से बचें।" },
-      safety: { en: "Encourage stress resilience and mindfulness.", hi: "मानसिक तनाव प्रबंधन और ध्यान सिखाएं।" },
-      play: { en: "Competitive team sports or athletic track disciplines.", hi: "प्रतिस्पर्धी खेलकूद।" },
-      care: { en: "Annual blood pressure, hemoglobin, and BMI screening.", hi: "ब्लड प्रेशर, हीमोग्लोबिन व बीएमआई की वार्षिक जांच।" }
+      nutrition: { en: "Never skip breakfast; avoid trans-fats.", hi: "नाश्ता कभी न छोड़ें।" },
+      safety: { en: "Stress resilience and mindfulness.", hi: "तनाव प्रबंधन सिखाएं।" },
+      play: { en: "Competitive team athletics.", hi: "प्रतिस्पर्धी खेलकूद।" },
+      care: { en: "Annual blood pressure & hemoglobin screen.", hi: "ब्लड प्रेशर व हीमोग्लोबिन जांच।" }
     }
   },
   "15y": {
@@ -507,26 +394,17 @@ const milestoneDatabase = {
       girl: { minW: 38.8, maxW: 71.0, minH: 150.5, maxH: 169.0, minBmi: 16.3, ovBmi: 22.2, obBmi: 24.9 }
     },
     tanner: {
-      girl: { stage: "Tanner Stage 4-5", green: "Adult breast contour. Linear growth begins tapering off (epiphyseal fusion).", yellow: "Weight fluctuations with board exam study hours.", red: "Amenorrhea >90 days after regular periods began (Secondary Amenorrhea)." },
-      boy: { stage: "Tanner Stage 4-5", green: "Adult pubic hair distribution, facial hair on upper lip, masculine muscle bulk.", yellow: "Voice cracking resolving into adult pitch.", red: "Height lagging far behind family mid-parental potential." }
+      girl: { stage: "Tanner Stage 4-5", green: "Height velocity tapers.", yellow: "Study weight fluctuations.", red: "Secondary Amenorrhea >90 days." },
+      boy: { stage: "Tanner Stage 4-5", green: "Adult male musculature, mustache.", yellow: "Voice cracking resolving.", red: "Height lagging far below genetic potential." }
     },
-    green: {
-      en: ["Full social autonomy", "Clear analytical reasoning"],
-      hi: ["पूर्ण सामाजिक व बौद्धिक परिपक्वता"]
-    },
-    yellow: {
-      en: ["Late night study screen fatigue"],
-      hi: ["देर रात तक पढ़ने से आँखों में थकान"]
-    },
-    red: {
-      en: ["Complete absence of pubertal development", "Severe hypertension or dyslipidemia"],
-      hi: ["यौवन विकास का पूर्ण अभाव, कोलेस्ट्रॉल असंतुलन"]
-    },
+    green: { en: ["Full social autonomy"], hi: ["पूर्ण सामाजिक परिपक्वता"] },
+    yellow: { en: ["Study screen fatigue"], hi: ["स्क्रीन से थकान"] },
+    red: { en: ["Absence of pubertal development, hypertension"], hi: ["यौवन विकास का अभाव, हाई बीपी"] },
     parentTips: {
-      nutrition: { en: "Balanced whole foods; adequate hydration (2.5L water daily).", hi: "संतुलित आहार व दिन में 2.5 लीटर पानी।" },
-      safety: { en: "Enforce strict zero-tobacco, zero-vape, zero-alcohol policies.", hi: "धूम्रपान, वेपिंग व नशे से सख्त बचाव।" },
-      play: { en: "Regular gym fitness or sports under certified trainer.", hi: "प्रमाणित ट्रेनर की देखरेख में फिटनेस।" },
-      care: { en: "Comprehensive adolescent health checkup with Dr. Dinesh Mittal.", hi: "किशोरावस्था संपूर्ण स्वास्थ्य जांच।" }
+      nutrition: { en: "2.5L daily hydration; balanced whole foods.", hi: "दिन में 2.5 लीटर पानी लें।" },
+      safety: { en: "Strict zero-tobacco, zero-vape policy.", hi: "धूम्रपान व वेपिंग से सख्त बचाव।" },
+      play: { en: "Certified trainer fitness or athletics.", hi: "प्रमाणित ट्रेनर की देखरेख में फिटनेस।" },
+      care: { en: "Comprehensive adolescent health review.", hi: "किशोरावस्था संपूर्ण स्वास्थ्य जांच।" }
     }
   },
   "16y": {
@@ -536,17 +414,17 @@ const milestoneDatabase = {
       girl: { minW: 41.5, maxW: 74.0, minH: 151.5, maxH: 170.0, minBmi: 16.7, ovBmi: 22.7, obBmi: 25.4 }
     },
     tanner: {
-      girl: { stage: "Tanner Stage 5 (Adult)", green: "Adult female contour. Final adult height reached (~98%).", yellow: "Mild premenstrual syndrome (PMS).", red: "Hirsutism (male-pattern body hair), rapid unexplained weight gain." },
-      boy: { stage: "Tanner Stage 5", green: "Testicular volume 15-25 ml, adult male musculature, facial beard growth.", yellow: "Acne breakouts on back/shoulders.", red: "Testicular volume <10 ml (Hypogonadism screen)." }
+      girl: { stage: "Tanner Stage 5 (Adult)", green: "Final adult height reached (~98%).", yellow: "Mild PMS.", red: "Hirsutism and rapid unexplained weight gain." },
+      boy: { stage: "Tanner Stage 5", green: "Testicular volume 15-25 ml, adult male build.", yellow: "Acne on back.", red: "Testicular volume <10 ml." }
     },
-    green: { en: ["Adult cognitive and moral reasoning"], hi: ["वयस्क बौद्धिक क्षमता"] },
-    yellow: { en: ["Career entrance exam stress"], hi: ["प्रतियोगी परीक्षाओं का मानसिक दबाव"] },
-    red: { en: ["Severe metabolic syndrome (BMI >27 with high BP/triglycerides)"], hi: ["मेटाबॉलिक सिंड्रोम (मोटापा, बीपी व शुगर जोखिम)"] },
+    green: { en: ["Adult cognitive reasoning"], hi: ["वयस्क बौद्धिक क्षमता"] },
+    yellow: { en: ["Entrance examination stress"], hi: ["प्रतियोगी परीक्षाओं का दबाव"] },
+    red: { en: ["Severe metabolic syndrome (BMI >27 with high BP/lipids)"], hi: ["मेटाबॉलिक सिंड्रोम (मोटापा, बीपी जोखिम)"] },
     parentTips: {
-      nutrition: { en: "Avoid crash diets; maintain complex carbs, lean proteins, and healthy fats.", hi: "क्रैश डाइटिंग न करें, संतुलित पोषण लें।" },
-      safety: { en: "Educate on road safety; strict no underage motorized driving without license.", hi: "बिना ड्राइविंग लाइसेंस वाहन चलाने से रोकें।" },
-      play: { en: "Daily 45 minutes of cardiovascular/aerobic exercise.", hi: "प्रतिदिन 45 मिनट कार्डियो/व्यायाम।" },
-      care: { en: "Lipid profile and fasting sugar check if family history of early diabetes/cardiac disease.", hi: "शुगर व लिपिड प्रोफाइल की निवारक जांच।" }
+      nutrition: { en: "Avoid crash diets; maintain balanced nutrition.", hi: "क्रैश डाइटिंग न करें।" },
+      safety: { en: "Strict no underage motorized driving.", hi: "बिना लाइसेंस वाहन न चलाएं।" },
+      play: { en: "45 mins aerobic exercise daily.", hi: "प्रतिदिन 45 मिनट व्यायाम।" },
+      care: { en: "Lipid profile and fasting sugar check if family history.", hi: "शुगर व लिपिड प्रोफाइल की जांच।" }
     }
   },
   "17y": {
@@ -556,17 +434,17 @@ const milestoneDatabase = {
       girl: { minW: 43.5, maxW: 76.5, minH: 152.0, maxH: 170.5, minBmi: 17.0, ovBmi: 23.0, obBmi: 25.8 }
     },
     tanner: {
-      girl: { stage: "Tanner Stage 5 (Adult)", green: "Complete adult maturity. Epiphyses fused.", yellow: "Occasional stress-induced cycle delays.", red: "Persistent severe oligomenorrhea or pelvic pain." },
-      boy: { stage: "Tanner Stage 5", green: "Final linear growth completion (growth plates fusing).", yellow: "Postural stiffness from prolonged desk study.", red: "Complete absence of facial/body hair and low energy." }
+      girl: { stage: "Tanner Stage 5 (Adult)", green: "Complete maturity. Epiphyses fused.", yellow: "Stress cycle delays.", red: "Persistent severe oligomenorrhea." },
+      boy: { stage: "Tanner Stage 5", green: "Linear growth completion.", yellow: "Desk study stiffness.", red: "Absence of facial/body hair and low energy." }
     },
-    green: { en: ["Fully mature decision making"], hi: ["परिपक्व निर्णय क्षमता"] },
-    yellow: { en: ["Pre-college anxiety"], hi: ["कॉलेज दाखिले को लेकर चिंता"] },
-    red: { en: ["Severe obesity (BMI >97th centile) risking fatty liver & hypertension"], hi: ["गंभीर मोटापा (फैटी लिवर व हाई बीपी जोखिम)"] },
+    green: { en: ["Mature decision making"], hi: ["परिपक्व निर्णय क्षमता"] },
+    yellow: { en: ["Pre-college anxiety"], hi: ["कॉलेज दाखिले की चिंता"] },
+    red: { en: ["Severe obesity (BMI >97th centile) risking fatty liver"], hi: ["गंभीर मोटापा (फैटी लिवर जोखिम)"] },
     parentTips: {
-      nutrition: { en: "Emphasize home food; avoid late-night junk ordering.", hi: "घर का ताजा भोजन, देर रात जंक फूड से बचाव।" },
-      safety: { en: "Mental health check-ins and open emotional support.", hi: "मानसिक स्वास्थ्य व भावनात्मक संबल दें।" },
-      play: { en: "Yoga, gym training, swimming, cycling.", hi: "योग, जिम, तैराकी।" },
-      care: { en: "Pre-college vaccination review (Meningococcal, Tdap booster, MMR).", hi: "कॉलेज से पूर्व आवश्यक टीकों की समीक्षा।" }
+      nutrition: { en: "Fresh home food; avoid late-night junk delivery.", hi: "घर का ताजा भोजन लें।" },
+      safety: { en: "Mental health and emotional support.", hi: "मानसिक स्वास्थ्य संबल दें।" },
+      play: { en: "Yoga, gym, swimming, cycling.", hi: "योग, जिम, तैराकी।" },
+      care: { en: "Pre-college vaccines (Meningococcal, Tdap booster, MMR).", hi: "कॉलेज पूर्व टीकों की समीक्षा।" }
     }
   },
   "18y": {
@@ -576,165 +454,378 @@ const milestoneDatabase = {
       girl: { minW: 45.0, maxW: 78.5, minH: 152.5, maxH: 171.0, minBmi: 17.2, ovBmi: 23.3, obBmi: 26.1 }
     },
     tanner: {
-      girl: { stage: "Tanner Stage 5 (Adult)", green: "Adult physiological and reproductive maturity.", yellow: "Desk-bound lifestyle during college.", red: "Polycystic ovarian syndrome (PCOS) symptoms." },
-      boy: { stage: "Tanner Stage 5 (Adult)", green: "Full adult male stature, voice, and muscle mass achieved.", yellow: "Sedentary study routine.", red: "Growth plate unfused with delayed sexual maturation." }
+      girl: { stage: "Tanner Stage 5 (Adult)", green: "Adult reproductive maturity.", yellow: "Desk-bound college routine.", red: "PCOS symptoms." },
+      boy: { stage: "Tanner Stage 5 (Adult)", green: "Full adult stature achieved.", yellow: "Sedentary study habits.", red: "Delayed maturity." }
     },
     green: { en: ["Complete adult independence"], hi: ["पूर्ण वयस्क स्वावलंबन"] },
-    yellow: { en: ["Transition to university life"], hi: ["उच्च शिक्षा जीवन में सामंजस्य"] },
+    yellow: { en: ["University transition"], hi: ["उच्च शिक्षा में सामंजस्य"] },
     red: { en: ["Metabolic syndrome, high uric acid, early hypertension"], hi: ["यूरिक एसिड, बीपी या फैटी लिवर की समस्या"] },
     parentTips: {
-      nutrition: { en: "Lifelong heart-healthy diet: Low glycemic index, high fiber, unsaturated fats.", hi: "हृदय-स्वस्थ आहार: कम चीनी, अधिक फाइबर।" },
-      safety: { en: "Safe driving habits and zero substance abuse.", hi: "सुरक्षित ड्राइविंग व नशे से दूरी।" },
-      play: { en: "Lifetime commitment to 150 minutes of physical activity weekly.", hi: "साप्ताहिक 150 मिनट शारीरिक गतिविधि।" },
-      care: { en: "Transition to adult preventative healthcare records.", hi: "वयस्क स्वास्थ्य रिकॉर्ड तैयार रखें।" }
+      nutrition: { en: "Low glycemic index, high fiber, unsaturated healthy fats.", hi: "कम चीनी, अधिक फाइबर व स्वस्थ वसा।" },
+      safety: { en: "Safe driving and zero substance abuse.", hi: "सुरक्षित ड्राइविंग व नशे से दूरी।" },
+      play: { en: "150 minutes physical activity weekly.", hi: "साप्ताहिक 150 मिनट शारीरिक गतिविधि।" },
+      care: { en: "Transition to adult medical records.", hi: "वयस्क स्वास्थ्य रिकॉर्ड तैयार रखें।" }
     }
   }
 };
 
+// ==========================================================
+// IAP IYCF WEANING DATABASE (WITH YOUTUBE VIDEO LINKS)
+// ==========================================================
+const weaningEducationDatabase = {
+  stages: [
+    {
+      stageKey: "stage6",
+      ageRange: { en: "6 - 7 Months (Starter Phase)", hi: "6 - 7 माह (आरंभिक अवस्था)" },
+      consistency: { en: "Smooth, thick purees & mash (falls slowly from spoon, NOT watery).", hi: "गाढ़ा मसला हुआ पेस्ट (चम्मच तिरछी करने पर धीरे गिरे, पानी जैसा पतला न हो)।" },
+      frequency: { en: "1 to 2 small meals per day + frequent on-demand breastfeeding.", hi: "दिन में 1 से 2 बार (2-3 चम्मच से शुरुआत) + माँ का दूध जारी रखें।" },
+      quantity: { en: "Start with 2-3 teaspoons; gradually build up to half a small katori (100 ml) per feed.", hi: "2-3 चम्मच से शुरू कर आधी छोटी कटोरी (100 ml) तक बढ़ाएं।" },
+      ytQuery: "6 month baby food recipes without salt sugar",
+      vegRecipes: [
+        { 
+          name: { en: "Moong Dal & Suji Sheera (No Sugar)", hi: "मूंग दाल व सूजी शीरा (बिना चीनी)" }, 
+          prep: { en: "Roast 1 tbsp suji with 1/2 tsp desi ghee, add cooked yellow moong dal water/mash, cook till smooth.", hi: "1/2 चम्मच देसी घी में 1 चम्मच सूजी भूनें, उबली पीली मूंग दाल का पेस्ट मिलाकर गाढ़ा पकाएं।" },
+          ytUrl: "https://www.youtube.com/results?search_query=6+month+baby+moong+dal+suji+puree+recipe"
+        },
+        { 
+          name: { en: "Steamed Apple & Carrot Puree", hi: "उबला हुआ सेब व गाजर प्यूरी" }, 
+          prep: { en: "Steam 1/2 peeled apple and 1/2 carrot for 10 mins. Puree with fork with 2 drops of ghee.", hi: "सेब व गाजर को 10 मिनट भाप में पकाएं। कांटे से मसलकर 2 बूंद घी मिलाएं।" },
+          ytUrl: "https://www.youtube.com/results?search_query=apple+carrot+puree+for+6+month+baby"
+        },
+        { 
+          name: { en: "Mashed Pumpkin & Moong Dal Mash (Kaddu-Dal)", hi: "कद्दू व मूंग दाल प्यूरी (विटामिन-ए युक्त)" }, 
+          prep: { en: "Steam yellow pumpkin with washed yellow moong dal. Fork mash with 1/2 tsp ghee for calorie density.", hi: "पीले कद्दू को मूंग दाल के साथ उबालें और 1/2 चम्मच देसी घी मिलाकर मसलें।" },
+          ytUrl: "https://www.youtube.com/results?search_query=pumpkin+dal+puree+for+6+month+baby"
+        },
+        { 
+          name: { en: "Steamed Pear & Cardamom Mash", hi: "उबली नाशपाती प्यूरी (इलायची युक्त)" }, 
+          prep: { en: "Peel and steam pear slices for 8 mins. Fork mash with a tiny pinch of roasted cardamom powder for digestion.", hi: "नाशपाती को भाप में पकाकर मसलें और चुटकी भर इलायची पाउडर मिलाएं।" },
+          ytUrl: "https://www.youtube.com/results?search_query=pear+puree+for+baby+6+months"
+        }
+      ],
+      nonVegRecipes: [
+        { 
+          name: { en: "Steamed Egg Yolk Mash (Starter)", hi: "उबले अंडे की जर्दी (Egg Yolk Mash)" }, 
+          prep: { en: "Hard boil an egg (12 mins). Mash 1/4th of the yellow yolk with a few drops of warm breastmilk.", hi: "अंडे को 12 मिनट उबालें। केवल पीली जर्दी (1/4 भाग) लेकर माँ के दूध में मसलें।" },
+          ytUrl: "https://www.youtube.com/results?search_query=egg+yolk+for+6+month+baby+recipe"
+        },
+        { 
+          name: { en: "Clear Chicken Broth with Mashed Potato", hi: "चिकन शोरबा व मसला आलू" }, 
+          prep: { en: "Pressure cook chicken bone-in with mild turmeric. Mix 3 tbsp clear broth with boiled mashed potato.", hi: "हल्दी के साथ चिकन उबालें। इसके 3 चम्मच सूप में उबला आलू मसलकर खिलाएं।" },
+          ytUrl: "https://www.youtube.com/results?search_query=chicken+soup+puree+for+6+month+baby"
+        }
+      ]
+    },
+    {
+      stageKey: "stage8",
+      ageRange: { en: "8 - 9 Months (Lumpy & Finger Food Phase)", hi: "8 - 9 माह (दानेदार व फिंगर फूड अवस्था)" },
+      consistency: { en: "Thick lumpy mashed food, soft finger-sized cooked pieces baby can hold with gums.", hi: "दानेदार मसला हुआ भोजन और हाथ से पकड़ने योग्य नरम टुकड़े (Finger Foods)।" },
+      frequency: { en: "3 main meals per day + 1 healthy mid-day snack + breastfeeding.", hi: "दिन में 3 मुख्य भोजन + 1 हल्का नाश्ता + माँ का दूध।" },
+      quantity: { en: "Half a standard katori (125 ml) per meal.", hi: "आधी मानक कटोरी (125 ml) प्रति भोजन।" },
+      ytQuery: "8 to 9 month baby food recipes homemade hindi",
+      vegRecipes: [
+        { 
+          name: { en: "Mixed Vegetable & Dal Khichdi with Ghee", hi: "सब्जी-दाल खिचड़ी (देसी घी युक्त)" }, 
+          prep: { en: "Cook rice, yellow moong dal, grated lauki & pumpkin with 1/2 tsp ghee & jeera powder.", hi: "चावल, मूंग दाल, कद्दू व लौकी को 1/2 चम्मच घी व जीरे के साथ पकाकर मसलें।" },
+          ytUrl: "https://www.youtube.com/results?search_query=dal+khichdi+for+8+month+baby"
+        },
+        { 
+          name: { en: "Sprouted Ragi (Nachni) & Apple Porridge", hi: "रागी व सेब शीरा (बिना चीनी)" }, 
+          prep: { en: "Cook 1 tbsp sprouted ragi flour in water with 1/2 tsp ghee. Add grated steamed apple.", hi: "1 चम्मच रागी का आटा पानी व घी में पकाएं और घिसा उबला सेब मिलाएं।" },
+          ytUrl: "https://www.youtube.com/results?search_query=ragi+apple+porridge+for+baby+8+months"
+        },
+        { 
+          name: { en: "Lauki & Fresh Paneer Khichdi", hi: "लौकी व ताजा पनीर खिचड़ी" }, 
+          prep: { en: "Pressure-cook rice and dal with peeled lauki. Mash leaving soft lumps and stir in 1 tbsp crumbled paneer.", hi: "दाल-चावल में लौकी पकाएं और ऊपर से 1 चम्मच ताजा मसला पनीर मिलाएं।" },
+          ytUrl: "https://www.youtube.com/results?search_query=paneer+khichdi+for+8+month+baby"
+        },
+        { 
+          name: { en: "Soft Steamed Carrot & Beetroot Sticks (Finger Food)", hi: "गाजर व चुकंदर स्टिक्स (फिंगर फूड)" }, 
+          prep: { en: "Cut carrots into thick 2-inch batons. Steam until soft enough to squash between fingers.", hi: "गाजर को लंबे टुकड़ों में काटें और इतना उबालें कि हाथ से दबाने पर दब जाए।" },
+          ytUrl: "https://www.youtube.com/results?search_query=baby+finger+food+steamed+carrot+sticks"
+        }
+      ],
+      nonVegRecipes: [
+        { 
+          name: { en: "Whole Boiled Egg Mash with Curd", hi: "पूरा उबला अंडा (सफेदी + जर्दी) व दही" }, 
+          prep: { en: "Chop 1/2 hard-boiled whole egg finely, fold into 2 tbsp fresh homemade curd with roasted cumin.", hi: "आधा उबला अंडा बारीक काटकर 2 चम्मच ताजे दही व भुने जीरे के साथ मिलाएं।" },
+          ytUrl: "https://www.youtube.com/results?search_query=boiled+egg+recipes+for+8+month+baby"
+        },
+        { 
+          name: { en: "Shredded Chicken Moong Khichdi", hi: "बारीक चिकन कीमा खिचड़ी" }, 
+          prep: { en: "Cook finely minced shredded chicken breast with rice, yellow moong dal and ghee till tender.", hi: "बारीक चिकन कीमा चावल, मूंग दाल और घी के साथ एकदम नरम पकाएं।" },
+          ytUrl: "https://www.youtube.com/results?search_query=chicken+khichdi+for+8+month+baby"
+        },
+        { 
+          name: { en: "Steamed Deboned Fish & Rice Mash", hi: "कांटा-रहित मछली व चावल मैश" }, 
+          prep: { en: "Steam freshwater fish fillet. Check meticulously for zero bones, mash with rice and ghee.", hi: "कांटे निकालकर मछली को भाप में पकाएं और चावल व घी के साथ मसलें।" },
+          ytUrl: "https://www.youtube.com/results?search_query=fish+mash+for+8+month+baby+recipe"
+        }
+      ]
+    },
+    {
+      stageKey: "stage10",
+      ageRange: { en: "10 - 12 Months (Family Pot Food Transition)", hi: "10 - 12 माह (घर के भोजन की अवस्था)" },
+      consistency: { en: "Finely chopped family food, soft roti pieces soaked in dal, chewable soft bites.", hi: "घर का सामान्य भोजन (हल्के मसाले), दाल में भीगी नरम रोटी, चबाने योग्य नरम टुकड़े।" },
+      frequency: { en: "3 nutritious main meals + 2 healthy finger food snacks + continued breastfeeding.", hi: "3 बार मुख्य भोजन + 2 बार पौष्टिक नाश्ता (फल/चीला) + स्तनपान जारी रखें।" },
+      quantity: { en: "Three-quarters to 1 full standard katori (175 - 200 ml) per meal.", hi: "पौना से 1 पूरी कटोरी (175 - 200 ml) प्रति भोजन।" },
+      ytQuery: "10 to 12 month baby food recipes family meal indian",
+      vegRecipes: [
+        { 
+          name: { en: "Dal-Soaked Soft Roti with Ghee & Curd", hi: "दाल में भीगी नरम रोटी व ताजा दही" }, 
+          prep: { en: "Soak 1/2 fresh whole wheat roti in thick dal with 1 tsp desi ghee for 10 mins. Serve with curd.", hi: "आधी रोटी को गाढ़ी दाल और 1 चम्मच देसी घी में 10 मिनट भिगोकर मसलें। साथ में दही दें।" },
+          ytUrl: "https://www.youtube.com/results?search_query=dal+roti+for+10+month+baby"
+        },
+        { 
+          name: { en: "Moong Dal & Vegetable Dalia (Broken Wheat)", hi: "मूंग दाल व सब्जी दलिया" }, 
+          prep: { en: "Cook roasted dalia with yellow moong dal, grated carrots and peas in light ghee and cumin until soft.", hi: "भुना दलिया मूंग दाल व गाजर के साथ घी व जीरे में एकदम नरम पकाएं।" },
+          ytUrl: "https://www.youtube.com/results?search_query=vegetable+daliya+for+10+month+baby"
+        },
+        { 
+          name: { en: "Besan & Paneer Vegetable Cheela", hi: "बेसन व पनीर का पौष्टिक चीला" }, 
+          prep: { en: "Make small bite-sized soft cheelas with grated carrot & paneer cooked in light ghee.", hi: "बारीक घिसी गाजर व पनीर मिलाकर तवे पर देसी घी में नरम छोटे चीले बनाएं।" },
+          ytUrl: "https://www.youtube.com/results?search_query=paneer+besan+cheela+for+baby"
+        },
+        { 
+          name: { en: "Curd Idli Bites with Desi Ghee", hi: "दही इडली बाइट्स (देसी घी युक्त)" }, 
+          prep: { en: "Steam soft rice-urad idlis. Cut into bite-sized finger squares, dip in curd with drops of ghee.", hi: "नरम इडली के छोटे चौकोर टुकड़े काटें, ताजे दही व 2 बूंद घी में मिलाकर दें।" },
+          ytUrl: "https://www.youtube.com/results?search_query=idli+for+10+month+baby"
+        }
+      ],
+      nonVegRecipes: [
+        { 
+          name: { en: "Egg Bhurji (Scrambled) with Soft Roti", hi: "अंडा भुर्जी व नरम रोटी" }, 
+          prep: { en: "Scramble 1 whole egg in 1/2 tsp ghee with finely chopped tomatoes and coriander (no salt/chili). Serve with soft roti.", hi: "टमाटर व धनिए के साथ 1 अंडा घी में भूनें (बिना नमक/मिर्च) और नरम रोटी के साथ दें।" },
+          ytUrl: "https://www.youtube.com/results?search_query=egg+bhurji+for+10+month+baby+without+salt"
+        },
+        { 
+          name: { en: "Chicken Keema & Vegetable Roti Mash", hi: "चिकन कीमा व सब्जी रोटी मैश" }, 
+          prep: { en: "Cook tender chicken mince with mild cumin and turmeric. Mix with soft roti soaked in mild gravy.", hi: "चिकन कीमा हल्दी-जीरे में पकाएं और दाल/ग्रेवी में भीगी नरम रोटी के साथ खिलाएं।" },
+          ytUrl: "https://www.youtube.com/results?search_query=chicken+keema+for+10+month+baby"
+        }
+      ]
+    }
+  ]
+};
+
+// ==========================================================
+// 18-MONTH TOILET TRAINING PROTOCOL DATABASE (IAP GUIDELINES)
+// ==========================================================
+const toiletTrainingDatabase = {
+  title: {
+    en: "18-Month Pediatric Toilet Training Guide (Readiness & Step-by-Step Protocol)",
+    hi: "18 माह का शिशु: टॉयलेट ट्रेनिंग के नियम एवं संपूर्ण मार्गदर्शन"
+  },
+  intro: {
+    en: "At 18 months, many toddlers begin showing the physiological and neurological readiness required for toilet learning. Rather than rigid schedules, pediatricians recommend a child-oriented approach based on readiness signals.",
+    hi: "18 माह की उम्र में बच्चे शारीरिक और मानसिक रूप से शौच नियंत्रण (Toilet Training) के संकेत देने लगते हैं। जबरदस्ती करने के बजाय बच्चे के स्वाभाविक संकेतों के अनुसार सिखाना सबसे सफल रहता है।"
+  },
+  readinessSigns: {
+    en: [
+      "Stays dry for at least 2 consecutive hours during the day or wakes up dry from naps.",
+      "Has predictable, regular bowel movements at specific times of the day.",
+      "Expresses facial discomfort, grunts, or gestures when the diaper is wet or soiled.",
+      "Can walk independently, pull pants up and down with minimal assistance, and sit steadily.",
+      "Understands simple 2-step instructions (e.g., 'Sit on the potty chair', 'Bring the toy')."
+    ],
+    hi: [
+      "दिन में कम से कम 2 घंटे तक डायपर सूखा रहना या दोपहर की नींद के बाद सूखा उठना।",
+      "शौच का एक निश्चित समय होना (जैसे नाश्ते के बाद)।",
+      "डायपर गीला या गंदा होने पर खींचना, रोना या असहजता जताना।",
+      "स्वतंत्र रूप से चलना, पैंट नीचे-ऊपर करने में हाथ लगाना और 5 मिनट बैठ पाना।",
+      "सरल 2-स्टेप निर्देश समझना (जैसे: 'पॉटी चेयर पर बैठो', 'खिलौना लाओ')।"
+    ]
+  },
+  steps: [
+    {
+      num: 1,
+      title: { en: "Introduce the Child-Sized Potty Chair", hi: "बाल-अनुकूल पॉटी सीट (Potty Chair) से परिचय" },
+      desc: { 
+        en: "Place a small, stable potty chair on the floor in the living area or bathroom. Let the toddler sit on it fully clothed first while reading stories to remove any fear or hesitation.",
+        hi: "कमरे या बाथरूम में बच्चे के आकार की पॉटी चेयर रखें। शुरुआत में कपड़े पहने हुए ही उस पर बैठने दें ताकि बच्चे के मन से डर निकल जाए।"
+      }
+    },
+    {
+      num: 2,
+      title: { en: "Establish Timed Gastrocolic Sittings (Post-Meal Routine)", hi: "भोजन के 15-20 मिनट बाद बैठाने की आदत (Gastrocolic Reflex)" },
+      desc: {
+        en: "Natural bowel movement reflexes are highest 15-20 minutes after breakfast and lunch. Sit your toddler on the potty for 3 to 5 minutes without pressure or scolding.",
+        hi: "नाश्ते या दोपहर के भोजन के 15-20 मिनट बाद पेट की प्राकृतिक आंतों की गति तेज होती है। इस समय बच्चे को 3-5 मिनट पॉटी पर बैठाएं।"
+      }
+    },
+    {
+      num: 3,
+      title: { en: "Positive Reinforcement & Zero Punishment", hi: "सकारात्मक प्रोत्साहन (Positive Praise)" },
+      desc: {
+        en: "Praise attempts enthusiastically with high-fives or stickers. Never shame, scold, or punish accidents—accidents are an expected natural part of neural bladder learning.",
+        hi: "हर छोटे प्रयास पर ताली बजाकर तारीफ करें। यदि बच्चा कपड़े खराब कर दे, तो कभी न डांटें—यह सीखने का स्वाभाविक हिस्सा है।"
+      }
+    },
+    {
+      num: 4,
+      title: { en: "Switch to Cotton Training Underwear during Daytime", hi: "दिन के समय सूती ट्रेनिंग पैंट का उपयोग" },
+      desc: {
+        en: "Modern diapers absorb wetness so efficiently that children cannot feel the sensation of urination. Cotton training pants help the brain associate wetness with bladder release.",
+        hi: "डायपर गीलापन तुरंत सोख लेते हैं जिससे बच्चे को एहसास नहीं होता। दिन में सूती पैंट पहनाने से बच्चे का दिमाग पेशाब के एहसास को तुरंत पहचानता है।"
+      }
+    }
+  ],
+  donts: {
+    en: [
+      "Never force a crying or resisting toddler to sit on the potty chair (causes stool withholding and severe constipation).",
+      "Never flush the big toilet while the toddler is sitting on it (the loud rushing noise can cause acute phobia).",
+      "Avoid starting toilet training during major life changes (relocation, new sibling birth, high fever illness)."
+    ],
+    hi: [
+      "रोते हुए या जिद्द करते बच्चे को जबरदस्ती पॉटी सीट पर न बैठाएं (इससे बच्चा मल रोक लेता है और कब्ज हो जाती है)।",
+      "बच्चे के बैठे रहने पर फ्लश न चलाएं (तेज आवाज से बच्चा डर सकता है)।",
+      "घर बदलने, नए शिशु के जन्म या बच्चे के बीमार होने के दौरान ट्रेनिंग शुरू न करें।"
+    ]
+  },
+  ytLink: "https://www.youtube.com/results?search_query=toddler+toilet+training+tips+pediatrician+hindi"
+};
+
 // ADOLESCENT HEALTH FAQ DATABASE
 const adolescentFaqDatabase = [
-  // GIRLS HEALTH (10 FAQS)
   {
     category: "girls",
     icon: "fa-solid fa-droplet",
     color: "#db2777",
     q: { en: "1. At what age should a girl have her first period (Menarche)?", hi: "1. लड़कियों में पहला मासिक धर्म (Menarche) किस उम्र में होना चाहिए?" },
-    a: { en: "In Indian girls, menarche typically occurs between 11.5 and 13.5 years (usually about 2 years after breast budding begins). If a girl has not started periods by 15 years, or has no signs of breast development by 13 years, a pediatric endocrinology evaluation is recommended.", hi: "भारतीय लड़कियों में पहला पीरियड आमतौर पर 11.5 से 13.5 वर्ष की उम्र में आता है (स्तन वृद्धि शुरू होने के लगभग 2 साल बाद)। यदि 15 वर्ष तक पीरियड न आए, तो बाल रोग विशेषज्ञ से जांच कराएं।" }
+    a: { en: "In Indian girls, menarche typically occurs between 11.5 and 13.5 years (usually about 2 years after breast budding begins). If a girl has not started periods by 15 years, a pediatric evaluation is recommended.", hi: "भारतीय लड़कियों में पहला पीरियड आमतौर पर 11.5 से 13.5 वर्ष की उम्र में आता है। यदि 15 वर्ष तक न आए, तो डॉक्टर से परामर्श लें।" }
   },
   {
     category: "girls",
     icon: "fa-solid fa-calendar-days",
     color: "#db2777",
     q: { en: "2. Are irregular periods normal in the first 1-2 years?", hi: "2. क्या पहले 1-2 वर्षों में पीरियड्स का अनियमित होना सामान्य है?" },
-    a: { en: "Yes. Due to the immaturity of the hypothalamic-pituitary-ovarian (HPO) axis, cycles are often anovulatory (without egg release). Gaps between 21 to 45 days are common. However, if bleeding lasts more than 8 days or causes severe weakness/pallor, consultation is needed.", hi: "हाँ, शुरुआत में हार्मोनल सिस्टम परिपक्व होने में 1 से 2 साल का समय लगता है। 21 से 45 दिनों का अंतराल सामान्य है। परन्तु यदि ब्लीडिंग 8 दिन से ज्यादा चले या कमजोरी आए, तो डॉक्टर को दिखाएं।" }
+    a: { en: "Yes. Due to the immaturity of the hormonal axis, cycles are often anovulatory. Gaps between 21 to 45 days are common.", hi: "हाँ, शुरुआत में हार्मोनल सिस्टम परिपक्व होने में 1 से 2 साल का समय लगता है। 21 से 45 दिनों का अंतराल सामान्य है।" }
   },
   {
     category: "girls",
     icon: "fa-solid fa-person-arrow-up-from-line",
     color: "#db2777",
     q: { en: "3. Does a girl stop growing taller once periods start?", hi: "3. क्या पीरियड शुरू होने के बाद लड़कियों की लंबाई बढ़ना रुक जाती है?" },
-    a: { en: "No, height growth does not immediately stop. However, it slows down significantly. On average, girls gain about 5 to 7.5 cm (2 to 3 inches) of height in the 1.5 to 2 years following menarche before the bone growth plates (epiphyses) fully fuse.", hi: "नहीं, लंबाई तुरंत नहीं रुकती, लेकिन गति धीमी हो जाती है। पीरियड शुरू होने के बाद औसतन 5 से 7.5 सेमी (2-3 इंच) तक लंबाई और बढ़ती है, जिसके बाद हड्डियों की ग्रोथ प्लेट्स बंद हो जाती हैं।" }
+    a: { en: "No. On average, girls gain about 5 to 7.5 cm (2 to 3 inches) in the 1.5 to 2 years following menarche before growth plates fuse.", hi: "नहीं, लंबाई तुरंत नहीं रुकती। पीरियड शुरू होने के बाद औसतन 5 से 7.5 सेमी (2-3 इंच) तक लंबाई और बढ़ती है।" }
   },
   {
     category: "girls",
     icon: "fa-solid fa-shield-virus",
     color: "#db2777",
     q: { en: "4. Why is the HPV Vaccine critical for teenage girls?", hi: "4. किशोरियों के लिए HPV (सर्वाइकल कैंसर) का टीका क्यों आवश्यक है?" },
-    a: { en: "The HPV (Human Papillomavirus) vaccine prevents >90% of cervical cancers later in life. The Indian Academy of Pediatrics (IAP) strongly recommends it for all girls aged 9 to 14 years (2-dose schedule at 0 and 6 months) for maximum lifetime immune protection.", hi: "एचपीवी टीका भविष्य में गर्भाशय ग्रीवा (Cervical Cancer) के 90% से अधिक मामलों से बचाता है। IAP 9 से 14 वर्ष की बालिकाओं को इसके 2 डोज (0 और 6 माह पर) लगवाने की पुरजोर सिफारिश करता है।" }
+    a: { en: "The HPV vaccine prevents >90% of cervical cancers later in life. Recommended for all girls aged 9 to 14 years (2-dose schedule at 0 and 6 months).", hi: "एचपीवी टीका भविष्य में सर्वाइकल कैंसर से बचाता है। IAP 9 से 14 वर्ष की बालिकाओं को 2 डोज लगवाने की सिफारिश करता है।" }
   },
   {
     category: "girls",
     icon: "fa-solid fa-circle-exclamation",
     color: "#db2777",
-    q: { en: "5. What are early warning signs of PCOS in teen girls?", hi: "5. टीनएज लड़कियों में PCOS (पीसीओएस) के शुरुआती लक्षण क्या हैं?" },
-    a: { en: "Persistent gaps >60 days between periods, excessive male-pattern facial/body hair (hirsutism), severe cystic acne unresponsive to creams, and dark velvety patches on the neck (acanthosis nigricans indicating insulin resistance). Early lifestyle intervention prevents long-term metabolic issues.", hi: "लगातार 60 दिनों से ज्यादा पीरियड न आना, चेहरे पर अनचाहे बाल, गंभीर मुंहासे और गर्दन पर काली मोटी त्वचा (इंसुलिन रेजिस्टेंस) पीसीओएस के मुख्य संकेत हैं।" }
+    q: { en: "5. What are early warning signs of PCOS in teen girls?", hi: "5. टीनएज लड़कियों में PCOS के शुरुआती लक्षण क्या हैं?" },
+    a: { en: "Gaps >60 days between periods, male-pattern facial hair, severe cystic acne, and dark velvety patches on the neck (Acanthosis Nigricans).", hi: "लगातार 60 दिनों से ज्यादा पीरियड न आना, चेहरे पर बाल और गर्दन पर काली मोटी त्वचा पीसीओएस के मुख्य संकेत हैं।" }
   },
   {
     category: "girls",
     icon: "fa-solid fa-capsules",
     color: "#db2777",
-    q: { en: "6. How to identify and prevent Anemia in teenage girls?", hi: "6. किशोरियों में खून की कमी (एनीमिया) की पहचान और रोकथाम कैसे करें?" },
-    a: { en: "Symptoms include fatigue, pale conjunctiva/nails, dizziness, poor academic concentration, and brittle nails. Prevention requires iron-rich foods (jaggery, spinach, raisins, lentils) combined with Vitamin C, and annual hemoglobin checks.", hi: "थकान, पीलापन, चक्कर आना और पढ़ाई में ध्यान न लगना एनीमिया के लक्षण हैं। गुड़, पालक, मेवे व दालों के साथ वार्षिक हीमोग्लोबिन जांच आवश्यक है।" }
+    q: { en: "6. How to identify and prevent Anemia in teenage girls?", hi: "6. किशोरियों में खून की कमी (एनीमिया) की पहचान कैसे करें?" },
+    a: { en: "Fatigue, pale nails, dizziness, poor concentration. Prevent with iron-rich foods (jaggery, spinach, raisins, lentils) + Vitamin C and annual checks.", hi: "थकान, पीलापन व पढ़ाई में ध्यान न लगना एनीमिया के लक्षण हैं। गुड़, पालक व दालों के साथ वार्षिक हीमोग्लोबिन जांच आवश्यक है।" }
   },
   {
     category: "girls",
     icon: "fa-solid fa-bed",
     color: "#db2777",
     q: { en: "7. Is severe period pain (Dysmenorrhea) normal?", hi: "7. क्या माहवारी के दौरान अत्यधिक पेट दर्द सामान्य है?" },
-    a: { en: "Mild lower abdominal cramping due to uterine prostaglandins is common. However, severe pain that causes school absenteeism, vomiting, or does not respond to simple warm compresses/pediatrician-prescribed analgesics requires clinical review.", hi: "हल्का दर्द सामान्य है, लेकिन अगर दर्द के कारण स्कूल छूटे, उल्टी हो या बिस्तर से न उठा जाए, तो डॉक्टर से परामर्श लें।" }
+    a: { en: "Mild cramping is common. Severe pain causing school absenteeism or vomiting requires clinical review.", hi: "हल्का दर्द सामान्य है, लेकिन अगर दर्द के कारण स्कूल छूटे या उल्टी हो, तो डॉक्टर से परामर्श लें।" }
   },
   {
     category: "girls",
     icon: "fa-solid fa-hand-holding-heart",
     color: "#db2777",
     q: { en: "8. What is the safest menstrual hygiene practice for teens?", hi: "8. टीनएजर्स के लिए सुरक्षित माहवारी स्वच्छता क्या है?" },
-    a: { en: "Change sanitary pads every 4 to 6 hours regardless of flow volume. Wash only with plain clean water (avoid harsh perfumed chemical intimate washes), wear breathable cotton underwear, and dispose of pads wrapped in paper.", hi: "पैड को हर 4-6 घंटे में बदलें, केवल सादे पानी से सफाई रखें, खुशबूदार केमिकल वाश से बचें और सूती इनरवेयर पहनें।" }
+    a: { en: "Change sanitary pads every 4 to 6 hours. Wash with plain clean water; avoid perfumed chemical intimate washes.", hi: "पैड को हर 4-6 घंटे में बदलें, केवल सादे पानी से सफाई रखें और सूती इनरवेयर पहनें।" }
   },
   {
     category: "girls",
     icon: "fa-solid fa-bowl-rice",
     color: "#db2777",
     q: { en: "9. How to handle extreme dieting or body image anxiety?", hi: "9. वजन घटाने के लिए खाना छोड़ने की आदत को कैसे संभालें?" },
-    a: { en: "Crash dieting during puberty deprives bones and brain of critical calcium, zinc, and iron, leading to amenorrhea and stunted height. Emphasize strength, active sports, and nutritious meals rather than body weight numbers.", hi: "किशोरावस्था में डाइटिंग करने से हड्डियों व दिमाग का विकास रुक सकता है। वजन के बजाय पौष्टिक भोजन और खेलकूद पर ध्यान दें।" }
+    a: { en: "Crash dieting deprives bones and brain of critical calcium, zinc, and iron. Emphasize sports and balanced meals.", hi: "किशोरावस्था में डाइटिंग से हड्डियों का विकास रुक सकता है। पौष्टिक भोजन और खेलकूद पर ध्यान दें।" }
   },
   {
     category: "girls",
     icon: "fa-solid fa-shield-halved",
     color: "#db2777",
     q: { en: "10. What is Precocious (Early) Puberty in girls?", hi: "10. बालिकाओं में समय पूर्व यौवन (Precocious Puberty) क्या है?" },
-    a: { en: "Breast budding or pubic hair before 8 years of age is defined as precocious puberty. It can cause early growth plate fusion leading to significantly short adult stature. It requires immediate pediatric hormone assessment.", hi: "8 वर्ष से पहले स्तन वृद्धि या यौवन लक्षण आना समय पूर्व यौवन है। इससे आगे चलकर बच्चे का कद छोटा रह सकता है, अतः तुरंत डॉक्टर को दिखाएं।" }
+    a: { en: "Breast budding or pubic hair before 8 years of age is defined as precocious puberty. It requires immediate pediatric hormone assessment.", hi: "8 वर्ष से पहले स्तन वृद्धि या यौवन लक्षण आना समय पूर्व यौवन है, अतः तुरंत डॉक्टर को दिखाएं।" }
   },
-
-  // BOYS HEALTH (10 FAQS)
   {
     category: "boys",
     icon: "fa-solid fa-mars",
     color: "#2563eb",
-    q: { en: "11. When does puberty start in boys and what is the first sign?", hi: "11. लड़कों में यौवन (Puberty) किस उम्र में शुरू होता है और पहला लक्षण क्या है?" },
-    a: { en: "Puberty in boys typically begins between 9.5 and 13.5 years. The very first physical sign is testicular enlargement (>4 ml volume), followed by scrotal thinning, penile growth, pubic hair, and eventually the voice crack.", hi: "लड़कों में प्यूबर्टी 9.5 से 13.5 वर्ष के बीच शुरू होती है। सबसे पहला लक्षण अंडकोष (Testes) के आकार में वृद्धि होना है, जिसके बाद कद व आवाज में बदलाव आता है।" }
+    q: { en: "11. When does puberty start in boys and what is the first sign?", hi: "11. लड़कों में यौवन किस उम्र में शुरू होता है और पहला लक्षण क्या है?" },
+    a: { en: "Puberty typically begins between 9.5 and 13.5 years. The first physical sign is testicular enlargement (>4 ml volume).", hi: "लड़कों में प्यूबर्टी 9.5 से 13.5 वर्ष के बीच शुरू होती है। सबसे पहला लक्षण अंडकोष के आकार में वृद्धि होना है।" }
   },
   {
     category: "boys",
     icon: "fa-solid fa-arrow-trend-up",
     color: "#2563eb",
     q: { en: "12. When do boys experience their peak height growth spurt?", hi: "12. लड़कों की लंबाई सबसे तेजी से किस उम्र में बढ़ती है?" },
-    a: { en: "Boys have their peak growth spurt about 2 years later than girls, typically between 13 and 15.5 years (Tanner Stage 3-4). During this peak, boys can grow 9 to 11 cm in a single year, provided nutrition and sleep are optimal.", hi: "लड़कों का ग्रोथ स्पर्ट 13 से 15.5 वर्ष के बीच आता है। इस दौरान लड़के 1 साल में 9 से 11 सेमी तक लंबे हो सकते हैं।" }
+    a: { en: "Boys have peak height spurt between 13 and 15.5 years (Tanner Stage 3-4), growing 9 to 11 cm in a single year with adequate nutrition and sleep.", hi: "लड़कों का ग्रोथ स्पर्ट 13 से 15.5 वर्ष के बीच आता है। इस दौरान वे 1 साल में 9 से 11 सेमी तक बढ़ सकते हैं।" }
   },
   {
     category: "boys",
     icon: "fa-solid fa-microphone",
     color: "#2563eb",
-    q: { en: "13. Why does a teenage boy's voice crack and deepen?", hi: "13. टीनएज में लड़कों की आवाज भारी क्यों होती है या फटने क्यों लगती है?" },
-    a: { en: "Testosterone causes rapid enlargement of the larynx (voice box) and lengthening of the vocal cords, creating the 'Adam's apple'. As muscles adapt to this rapid growth, temporary cracking occurs between ages 12 to 14 before stabilizing.", hi: "टेस्टोस्टेरोन हार्मोन के प्रभाव से वोकल कॉर्ड्स और लेरिंक्स (कंठ) का आकार बढ़ता है। मांसपेशियों के ढलने के दौरान कुछ समय आवाज भारी या फटने लगती है।" }
+    q: { en: "13. Why does a teenage boy's voice crack and deepen?", hi: "13. टीनएज में लड़कों की आवाज भारी क्यों होती है?" },
+    a: { en: "Testosterone causes rapid enlargement of the larynx (voice box) and lengthening of the vocal cords. Cracking occurs temporarily between 12-14y.", hi: "टेस्टोस्टेरोन से वोकल कॉर्ड्स का आकार बढ़ता है, जिससे कुछ समय आवाज भारी या फटने लगती है।" }
   },
   {
     category: "boys",
     icon: "fa-solid fa-heart-pulse",
     color: "#2563eb",
-    q: { en: "14. Is breast swelling (Gynecomastia) normal in teenage boys?", hi: "14. क्या टीनएज लड़कों में छाती में हल्की गांठ या उभार सामान्य है?" },
-    a: { en: "Yes! Up to 50-60% of boys develop temporary pubertal gynecomastia (a tender, marble-sized disc under the nipple) due to transient estrogen-testosterone imbalances around ages 12-14. It naturally resolves on its own in 12-18 months.", hi: "हाँ, 12 से 14 वर्ष की उम्र में हार्मोनल असंतुलन से 50% लड़कों में छाती के नीचे हल्की गांठ बन जाती है, जो 1 से 1.5 साल में अपने आप ठीक हो जाती है।" }
+    q: { en: "14. Is breast swelling (Gynecomastia) normal in teenage boys?", hi: "14. क्या टीनएज लड़कों में छाती में हल्की गांठ सामान्य है?" },
+    a: { en: "Yes. Up to 50-60% of boys develop temporary pubertal gynecomastia due to transient hormonal imbalances. It resolves naturally in 12-18 months.", hi: "हाँ, 12 से 14 वर्ष में हार्मोनल असंतुलन से 50% लड़कों में हल्की गांठ बन जाती है, जो 1 से 1.5 साल में ठीक हो जाती है।" }
   },
   {
     category: "boys",
     icon: "fa-solid fa-moon",
     color: "#2563eb",
-    q: { en: "15. Are nocturnal emissions ('wet dreams') normal in boys?", hi: "15. क्या लड़कों में नाइटफॉल (Nocturnal Emissions) होना सामान्य है?" },
-    a: { en: "Completely normal and healthy. As testosterone stimulates semen production, the body releases excess fluid naturally during sleep dreams. It is a normal physiological milestone and causes no physical harm or weakness.", hi: "यह पूर्णतः प्राकृतिक और स्वस्थ शारीरिक क्रिया है। इससे शरीर में कोई कमजोरी नहीं आती। यह प्यूबर्टी का सामान्य हिस्सा है।" }
+    q: { en: "15. Are nocturnal emissions ('wet dreams') normal in boys?", hi: "15. क्या लड़कों में नाइटफॉल होना सामान्य है?" },
+    a: { en: "Completely normal and healthy physiological milestone. It causes zero weakness or physical harm.", hi: "यह पूर्णतः प्राकृतिक और स्वस्थ शारीरिक क्रिया है। इससे कोई कमजोरी नहीं आती।" }
   },
   {
     category: "boys",
     icon: "fa-solid fa-dumbbell",
     color: "#2563eb",
     q: { en: "16. Is heavy gym weightlifting safe before age 16?", hi: "16. क्या 16 साल से पहले जिम में भारी वजन उठाना सुरक्षित है?" },
-    a: { en: "Heavy maximal weightlifting and spinal compression exercises (heavy squats, overhead presses) should be avoided before growth plates fuse. Bodyweight exercises (pushups, pullups, swimming, athletics) build superior functional strength safely.", hi: "हड्डियों की ग्रोथ प्लेट्स बंद होने से पहले बहुत भारी वजन उठाना रीढ़ और जोड़ों के लिए हानिकारक हो सकता है। बॉडीवेट एक्सरसाइज और खेलकूद सबसे सुरक्षित हैं।" }
+    a: { en: "Heavy maximal weightlifting should be avoided before growth plates fuse. Bodyweight exercises (pushups, pullups, swimming) build superior strength safely.", hi: "ग्रोथ प्लेट्स बंद होने से पहले भारी वजन उठाना रीढ़ के लिए हानिकारक हो सकता है। बॉडीवेट एक्सरसाइज सबसे सुरक्षित हैं।" }
   },
   {
     category: "boys",
     icon: "fa-solid fa-ban",
     color: "#2563eb",
-    q: { en: "17. Why are gym protein powders and supplements risky for teens?", hi: "17. जिम प्रोटीन शेक व सप्लीमेंट्स टीनएजर्स के लिए हानिकारक क्यों हो सकते हैं?" },
-    a: { en: "Unregulated gym powders often contain artificial additives, excess sodium, or hidden anabolic steroids that strain teenage kidneys and livers. Real food (eggs, paneer, sprouts, milk, nuts) fulfills 100% of daily athletic protein requirements.", hi: "बाजारू प्रोटीन पाउडर से किडनी व लिवर पर अतिरिक्त दबाव पड़ता है। घर का भोजन (अंडा, पनीर, स्प्राउट्स, दालें, दूध) मांसपेशियों के विकास के लिए पर्याप्त है।" }
+    q: { en: "17. Why are gym protein powders risky for teens?", hi: "17. जिम प्रोटीन शेक टीनएजर्स के लिए हानिकारक क्यों हैं?" },
+    a: { en: "Unregulated powders often strain teenage kidneys and livers. Real food (eggs, paneer, sprouts, milk, nuts) fulfills 100% of athletic protein needs.", hi: "बाजारू प्रोटीन पाउडर से किडनी पर दबाव पड़ता है। घर का भोजन (अंडा, पनीर, स्प्राउट्स) पर्याप्त है।" }
   },
   {
     category: "boys",
     icon: "fa-solid fa-bed",
     color: "#2563eb",
     q: { en: "18. How does deep sleep impact a boy's height growth?", hi: "18. गहरी नींद लड़कों की लंबाई बढ़ाने में कैसे मदद करती है?" },
-    a: { en: "Over 70% of human Growth Hormone (GH) is pulsatile-secreted during Stage 3-4 Slow Wave deep sleep between 10 PM and 4 AM. Chronic late-night mobile phone browsing suppresses GH release and stunts potential adult height.", hi: "ग्रोथ हार्मोन का 70% स्राव रात में गहरी नींद के दौरान होता है। देर रात तक मोबाइल चलाने से लंबाई पर सीधा नकारात्मक प्रभाव पड़ता है।" }
+    a: { en: "Over 70% of human Growth Hormone is released during deep sleep between 10 PM and 4 AM. Late-night mobile browsing suppresses growth.", hi: "ग्रोथ हार्मोन का 70% स्राव रात में गहरी नींद में होता है। देर रात मोबाइल चलाने से लंबाई पर बुरा असर पड़ता है।" }
   },
   {
     category: "boys",
     icon: "fa-solid fa-clock-rotate-left",
     color: "#2563eb",
-    q: { en: "19. What is Constitutional Delay of Growth & Puberty (Late Bloomers)?", hi: "19. देर से प्यूबर्टी आना (Constitutional Delay) क्या होता है?" },
-    a: { en: "Common in boys where puberty starts late (after 14y) with a delayed bone age. Often runs in families (father was a late bloomer). These boys catch up completely and reach their normal genetic adult height by age 18-19.", hi: "कुछ लड़कों में आनुवंशिक कारणों से प्यूबर्टी देर से (14 वर्ष के बाद) शुरू होती है। वे 18-19 साल तक अपना पूरा जेनेटिक कद हासिल कर लेते हैं।" }
+    q: { en: "19. What is Constitutional Delay of Growth (Late Bloomers)?", hi: "19. देर से प्यूबर्टी आना (Constitutional Delay) क्या होता है?" },
+    a: { en: "Common genetic trait where puberty starts late (after 14y). These boys catch up completely and reach normal adult height by 18-19y.", hi: "कुछ लड़कों में प्यूबर्टी देर से शुरू होती है। वे 18-19 साल तक अपना पूरा जेनेटिक कद हासिल कर लेते हैं।" }
   },
   {
     category: "boys",
     icon: "fa-solid fa-shield-virus",
     color: "#2563eb",
     q: { en: "20. What critical vaccines do teenage boys need?", hi: "20. टीनएज लड़कों को कौन से टीके लगवाने चाहिए?" },
-    a: { en: "1. Tdap Booster (at 10-12 years for Tetanus, Diphtheria, Pertussis). 2. Annual Influenza vaccine. 3. Catch-up Hepatitis-B, MMR, and Chickenpox if doses were missed during infancy.", hi: "1. 10-12 वर्ष पर Tdap बूस्टर। 2. वार्षिक फ्लू का टीका। 3. बचपन में छूटे हुए हेपेटाइटिस-बी, एमएमआर और चेचक के टीके।" }
+    a: { en: "1. Tdap Booster (at 10-12y). 2. Annual Influenza vaccine. 3. Catch-up Hepatitis-B, MMR, and Varicella.", hi: "1. 10-12 वर्ष पर Tdap बूस्टर। 2. वार्षिक फ्लू का टीका। 3. छूटे हुए हेपेटाइटिस-बी और चेचक के टीके।" }
   }
 ];
 
@@ -778,11 +869,9 @@ const blogArticles = {
       <h4 class="article-section-title">The Scientific Difference</h4>
       <p>The difference lies in the <strong>Pertussis (Whooping Cough)</strong> component of the 6-in-1 / DTP vaccine:</p>
       <ul>
-        <li><strong>Conventional (DTwP / "Painful"):</strong> Contains whole-cell killed pertussis bacteria. It triggers a strong immune response, often accompanied by 24-48 hours of high fever, irritability, and local injection-site swelling.</li>
+        <li><strong>Conventional (DTwP / "Painful"):</strong> Contains whole-cell killed pertussis bacteria. It triggers a strong immune response, often accompanied by 24-48 hours of high fever and local swelling.</li>
         <li><strong>Acellular (DTaP / "Painless"):</strong> Contains only purified pertussis antigens. It causes significantly less fever and discomfort while providing protective immunity.</li>
       </ul>
-      <h4 class="article-section-title">Which One is Recommended by IAP?</h4>
-      <p>Both vaccines provide protective efficacy against whooping cough. Acellular (painless) vaccines are preferred by parents seeking minimal post-vaccination fever, while whole-cell vaccines are widely used in universal public health programs. Dr. Dinesh Mittal evaluates each child's health history to advise the most appropriate option.</p>
       <div class="article-cta-box">
         <p>Have questions regarding your infant's upcoming vaccination schedule?</p>
         <button onclick="closeBlogModal(); openBookingModal();" class="article-cta-btn"><i class="fa-solid fa-calendar-check"></i> Book Vaccine Appointment</button>
@@ -796,11 +885,7 @@ const blogArticles = {
       <h4 class="article-section-title">1. Feeding Schedules</h4>
       <p>Feed on demand (every 2 to 3 hours). A well-hydrated infant should pass urine at least 6 to 8 times in 24 hours and regain birth weight by day 10 to 14.</p>
       <h4 class="article-section-title">2. Umbilical Cord Hygiene</h4>
-      <p>Keep the umbilical cord stump strictly dry and clean. Avoid applying oil, turmeric, or powders. It will naturally dry and detach within 7 to 14 days.</p>
-      <h4 class="article-section-title">3. Safe Sleep Protocol (SIDS Prevention)</h4>
-      <p>Always place your baby on their back on a firm mattress. Keep the crib free of loose pillows, blankets, and heavy quilts.</p>
-      <h4 class="article-section-title">4. Red Flag Warnings</h4>
-      <p>Consult our clinic immediately if you notice lethargy, poor sucking, fast breathing (>60 breaths/min), or deep yellow jaundice extending down to the palms and soles.</p>
+      <p>Keep the umbilical cord stump strictly dry and clean. Avoid applying oil, turmeric, or powders.</p>
       <div class="article-cta-box">
         <p>Schedule your newborn checkup with Dr. Dinesh Mittal in Sector 3 Rohini.</p>
         <button onclick="closeBlogModal(); openBookingModal();" class="article-cta-btn"><i class="fa-solid fa-calendar-check"></i> Schedule Newborn Checkup</button>
@@ -814,11 +899,7 @@ const blogArticles = {
       <h4 class="article-section-title">1. Accurate Temperature Measurement</h4>
       <p>Use a digital axillary thermometer under the armpit. A reading above 100.4°F (38°C) is considered fever.</p>
       <h4 class="article-section-title">2. Lukewarm Sponge Bathing</h4>
-      <p>Use normal tap/lukewarm water on a soft cloth to gently sponge the forehead, neck, and limbs. <strong>Never use ice water or alcohol rubs</strong>, as they cause shivering and rebound spikes.</p>
-      <h4 class="article-section-title">3. Medication Safety</h4>
-      <p>Administer only pediatrician-prescribed Paracetamol drops/syrups according to your child's exact weight, not age. Never give Aspirin or self-medicate with over-the-counter combinations.</p>
-      <h4 class="article-section-title">4. When to Seek Urgent Medical Care</h4>
-      <p>Visit our clinic immediately if fever exceeds 102°F for >48 hours, or if the child develops a stiff neck, seizures (febrile fit), vomiting, or extreme lethargy.</p>
+      <p>Use normal tap/lukewarm water on a soft cloth. <strong>Never use ice water or alcohol rubs</strong>.</p>
       <div class="article-cta-box">
         <p>Need urgent advice for persistent childhood fever?</p>
         <button onclick="closeBlogModal(); openBookingModal();" class="article-cta-btn"><i class="fa-solid fa-calendar-check"></i> Book Consultation</button>
@@ -831,12 +912,6 @@ const blogArticles = {
       <p>During the monsoon and seasonal transitions in Delhi NCR, pediatric clinics see a surge in viral influenza, RSV, and throat infections.</p>
       <h4 class="article-section-title">Common Symptoms</h4>
       <p>Sudden high fever, running nose, dry cough, throat pain, body aches, and loss of appetite.</p>
-      <h4 class="article-section-title">Preventive Measures</h4>
-      <ul>
-        <li>Annual IAP Influenza vaccination for all children above 6 months of age.</li>
-        <li>Frequent hand washing after returning from school or playground.</li>
-        <li>Adequate warm hydration (soups, boiled water, home-cooked light meals).</li>
-      </ul>
       <div class="article-cta-box">
         <p>Protect your child with the latest annual quadrivalent flu vaccine at our Rohini clinic.</p>
         <button onclick="closeBlogModal(); openBookingModal();" class="article-cta-btn"><i class="fa-solid fa-calendar-check"></i> Book Flu Vaccination</button>
