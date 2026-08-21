@@ -576,3 +576,271 @@ const blogArticles = {
     `
   }
 };
+// ==========================================
+// 3. ADOLESCENT FAQS DATABASE (GIRLS & BOYS)
+// ==========================================
+const adolescentFaqDatabase = [
+  // --- GIRLS' FAQS ---
+  {
+    category: "girls",
+    icon: "fa-solid fa-venus",
+    color: "#db2777",
+    q: {
+      en: "Is it normal for menstrual periods to be irregular during the first 1-2 years after menarche?",
+      hi: "क्या पहले 1-2 वर्षों में मासिक धर्म (Periods) का अनियमित होना सामान्य है?"
+    },
+    a: {
+      en: "Yes. The Hypothalamic-Pituitary-Ovarian (HPO) hormonal axis takes 12 to 24 months to mature, resulting in common anovulatory (irregular) cycles. However, consult Dr. Dinesh Mittal if bleeding lasts >7 days, requires pad changes every 1-2 hours, or cycle gap is <21 days.",
+      hi: "हाँ। पहले 1-2 वर्षों में हार्मोनल संतुलन परिपक्व होने में 12 से 24 माह का समय लगता है, जिससे मासिक धर्म का अनियमित होना सामान्य है। लेकिन यदि रक्तस्राव 7 दिन से अधिक रहे या हर 1-2 घंटे में पैड बदलना पड़े, तो चिकित्सीय परामर्श लें।"
+    }
+  },
+  {
+    category: "girls",
+    icon: "fa-solid fa-venus",
+    color: "#db2777",
+    q: {
+      en: "How can teenage girls safely manage severe period pain (Dysmenorrhea)?",
+      hi: "किशोरियों में माहवारी के असहनीय दर्द (Period Cramps) से सुरक्षित राहत कैसे पाएं?"
+    },
+    a: {
+      en: "Primary dysmenorrhea is caused by uterine prostaglandins. Safe relief includes hot water bottle fermentation, proper hydration, magnesium-rich foods (almonds, bananas), and pediatric-prescribed antispasmodics (like Mefenamic acid). Avoid self-medicating with unprescribed painkillers.",
+      hi: "यह दर्द गर्भाशय में प्रोस्टाग्लैंडीन हार्मोन के कारण होता है। गर्म पानी की सिकाई, पर्याप्त पानी पीना, बादाम व केले का सेवन और डॉक्टर द्वारा सुझाई गई दर्द निवारक दवा से सुरक्षित राहत मिलती है।"
+    }
+  },
+  {
+    category: "girls",
+    icon: "fa-solid fa-venus",
+    color: "#db2777",
+    q: {
+      en: "What are the early red flags of Polycystic Ovary Syndrome (PCOS) in teenage girls?",
+      hi: "किशोरियों में पीसीओएस (PCOS / PCOD) के शुरुआती चेतावनी संकेत क्या हैं?"
+    },
+    a: {
+      en: "Warning signs include persistently irregular cycles beyond 2 years post-menarche, severe cystic acne along the jawline, excess coarse facial/body hair (hirsutism), and dark velvety skin patches on the neck (Acanthosis Nigricans). Early dietary management prevents metabolic strain.",
+      hi: "2 वर्ष बाद भी लगातार पीरियड्स का रुक-रुक कर आना, चेहरे/गर्दन पर अत्यधिक मुँहासे, चेहरे पर अनचाहे बाल (Hirsutism) और गर्दन पर कालापन पीसीओएस के लक्षण हो सकते हैं। समय पर जांच व खानपान में सुधार आवश्यक है।"
+    }
+  },
+  {
+    category: "girls",
+    icon: "fa-solid fa-venus",
+    color: "#db2777",
+    q: {
+      en: "Is white vaginal discharge (Leukorrhea) normal before or between periods?",
+      hi: "क्या सफेद पानी (White Discharge / Leukorrhea) आना सामान्य है?"
+    },
+    a: {
+      en: "Clear, odorless, or whitish discharge is a normal physiological sign of estrogen stimulation—often starting 6-12 months before menarche. However, if discharge turns yellowish-green, curd-like, causes itching or foul odor, it indicates an infection needing pediatric review.",
+      hi: "हल्का सफेद, बिना गंध वाला स्राव सामान्य एस्ट्रोजन हार्मोन का संकेत है। लेकिन यदि स्राव में दुर्गंध हो, खुजली हो, या रंग पीला/हरा हो तो यह संक्रमण (Infection) का संकेत है।"
+    }
+  },
+  {
+    category: "girls",
+    icon: "fa-solid fa-venus",
+    color: "#db2777",
+    q: {
+      en: "What is the recommended HPV (Cervical Cancer) vaccination schedule for girls?",
+      hi: "बालिकाओं के लिए सर्वाइकल कैंसर (HPV Vaccine) टीका कब लगवाना चाहिए?"
+    },
+    a: {
+      en: "The Indian Academy of Pediatrics (IAP) strongly recommends the HPV vaccine for girls aged 9 to 14 years as a 2-dose schedule (0 and 6 months). It provides lifelong protection against high-risk strains causing cervical cancer.",
+      hi: "IAP अनुसार 9 से 14 वर्ष की बालिकाओं को 6 माह के अंतराल पर HPV के 2 टीके लगवाने चाहिए। यह जीवनभर सर्वाइकल कैंसर से सुरक्षा प्रदान करता है।"
+    }
+  },
+  {
+    category: "girls",
+    icon: "fa-solid fa-venus",
+    color: "#db2777",
+    q: {
+      en: "When should parents consult for Delayed Puberty or Primary Amenorrhea in a girl?",
+      hi: "लड़कियों में प्यूबर्टी की देरी (Delayed Puberty) कब मानी जाती है?"
+    },
+    a: {
+      en: "Consult a pediatrician if: (1) Zero breast development by age 13, or (2) Menstruation has not started by age 15 despite breast development, or (3) More than 3 years have passed since breast budding without menarche.",
+      hi: "यदि 13 वर्ष तक स्तनों का कोई विकास न हो, या 15 वर्ष की आयु तक मासिक धर्म शुरू न हुआ हो, तो तुरंत बाल रोग विशेषज्ञ से हार्मोनल जांच कराएं।"
+    }
+  },
+  {
+    category: "girls",
+    icon: "fa-solid fa-venus",
+    color: "#db2777",
+    q: {
+      en: "How can adolescent girls prevent and manage Iron-Deficiency Anemia?",
+      hi: "किशोरियों में खून की कमी (एनीमिया / Anemia) से कैसे बचें?"
+    },
+    a: {
+      en: "Menstrual blood loss and growth spurts increase iron requirements. Include गुड़ (jaggery), भुना चना (roasted grams), पालक (spinach), अनार (pomegranate), and citrus fruits (Vitamin C for iron absorption). Annual hemoglobin checks are recommended.",
+      hi: "माहवारी के कारण आयरन की कमी हो सकती है। आहार में गुड़, चना, पालक, चुकंदर और विटामिन-सी युक्त फल शामिल करें। वर्ष में एक बार हीमोग्लोबिन जांच अवश्य कराएं।"
+    }
+  },
+  {
+    category: "girls",
+    icon: "fa-solid fa-venus",
+    color: "#db2777",
+    q: {
+      en: "What are essential menstrual hygiene practices to prevent urinary infections?",
+      hi: "माहवारी के दौरान संक्रमण से बचाव हेतु कौन सी सावधानियां जरूरी हैं?"
+    },
+    a: {
+      en: "Change sanitary pads every 4-6 hours. Avoid synthetic tight underwear and chemical-heavy intimate washes. Always wash the genital area from front to back with plain clean water.",
+      hi: "सैनिटरी पैड को हर 4 से 6 घंटे में बदलें। केवल सादे पानी से आगे से पीछे की ओर सफाई करें और अत्यधिक टाइट कपड़े पहनने से बचें।"
+    }
+  },
+  {
+    category: "girls",
+    icon: "fa-solid fa-venus",
+    color: "#db2777",
+    q: {
+      en: "How should parents handle premenstrual mood swings and irritability (PMS)?",
+      hi: "माहवारी से पहले अत्यधिक चिड़चिड़ापन और मूड स्विंग्स (PMS) को कैसे संभालें?"
+    },
+    a: {
+      en: "Premenstrual Syndrome (PMS) is driven by progesterone drops. Support your teen with regular 30-min physical exercise, limiting high-salt/sugar snacks, ensuring 8 hours of sleep, and providing empathetic emotional reassurance.",
+      hi: "हार्मोनल बदलावों के कारण यह सामान्य है। नियमित 30 मिनट का व्यायाम, कम नमक व कम चीनी वाला भोजन और भरपूर 8 घंटे की नींद से इसमें काफी सुधार होता है।"
+    }
+  },
+  {
+    category: "girls",
+    icon: "fa-solid fa-venus",
+    color: "#db2777",
+    q: {
+      en: "My daughter is skipping meals and obsessed with weight. What should we do?",
+      hi: "किशोरी यदि खाना छोड़कर डाइटिंग करे और वजन को लेकर अत्यधिक चिंतित रहे तो क्या करें?"
+    },
+    a: {
+      en: "Avoid criticizing weight or physical appearance. Shift home conversations to stamina, bone strength, and immunity. If meal-skipping persists, seek clinical evaluation to prevent eating disorders (Anorexia/Bulimia).",
+      hi: "शारीरिक स्वरूप पर टिप्पणी करने से बचें। पोषण और ऊर्जा पर ध्यान दें। यदि भोजन छोड़ने की आदत जारी रहे, तो समय रहते बाल रोग विशेषज्ञ से परामर्श लें।"
+    }
+  },
+
+  // --- BOYS' FAQS ---
+  {
+    category: "boys",
+    icon: "fa-solid fa-mars",
+    color: "#2563eb",
+    q: {
+      en: "When do teenage boys hit their peak height growth spurt?",
+      hi: "लड़कों में लंबाई का सबसे तीव्र विकास (Growth Spurt) किस उम्र में होता है?"
+    },
+    a: {
+      en: "Boys experience their Peak Height Velocity (PHV) later than girls—typically between 13.5 and 15.5 years (Tanner Stage 4), gaining 8-12 cm in a single year. Adequate protein, calcium, Vitamin D, and 8+ hours of sleep are vital.",
+      hi: "लड़कों की लंबाई सबसे तेजी से 13.5 से 15.5 वर्ष (Tanner Stage 4) की उम्र में बढ़ती है (सालाना 8-12 सेमी)। इस दौरान प्रोटीन, कैल्शियम और 8 घंटे की नींद अत्यंत महत्वपूर्ण है।"
+    }
+  },
+  {
+    category: "boys",
+    icon: "fa-solid fa-mars",
+    color: "#2563eb",
+    q: {
+      en: "My son's chest feels tender and swollen under the nipples. Is this normal?",
+      hi: "लड़कों की छाती में हल्की गांठ या दर्द (Pubertal Gynecomastia) क्या सामान्य है?"
+    },
+    a: {
+      en: "Yes. Pubertal Gynecomastia affects up to 50-60% of adolescent boys aged 12-14 due to temporary testosterone-estrogen fluctuations. It is completely benign and typically resolves on its own within 12-18 months.",
+      hi: "हाँ। 12 से 14 वर्ष की उम्र में हार्मोनल बदलाव के कारण लगभग 50% लड़कों में छाती में हल्का दर्द या सूजन आ सकती है। यह पूरी तरह सामान्य है और 12-18 माह में स्वतः ठीक हो जाती है।"
+    }
+  },
+  {
+    category: "boys",
+    icon: "fa-solid fa-mars",
+    color: "#2563eb",
+    q: {
+      en: "What are wet dreams (nocturnal emissions), and how should parents reassure boys?",
+      hi: "स्वप्नदोष (Nocturnal Emissions / Wet Dreams) क्या है और इसे कैसे समझें?"
+    },
+    a: {
+      en: "Nocturnal emissions are involuntary releases of semen during sleep. They are a healthy, normal sign that the testes and prostate are functioning properly under testosterone. Reassure your son that this is a natural biological milestone.",
+      hi: "सोते समय वीर्य का स्खलन होना एक पूर्णतः प्राकृतिक और स्वस्थ जैविक प्रक्रिया है। यह दर्शाता है कि शरीर में टेस्टोस्टेरोन हार्मोन का सामान्य विकास हो रहा है।"
+    }
+  },
+  {
+    category: "boys",
+    icon: "fa-solid fa-mars",
+    color: "#2563eb",
+    q: {
+      en: "When is puberty considered delayed in adolescent boys?",
+      hi: "लड़कों में किशोरावस्था की देरी (Delayed Puberty) कब मानी जाती है?"
+    },
+    a: {
+      en: "Delayed puberty is diagnosed when there is no increase in testicular volume (<4 mL) by age 14, or if >4.5 years elapse between the first genital changes and full maturity. A pediatric endocrine evaluation rules out hormone deficits.",
+      hi: "यदि 14 वर्ष की आयु तक अंडकोष (Testes) के आकार में कोई वृद्धि शुरू न हो, तो बाल रोग विशेषज्ञ से हार्मोनल मूल्यांकन कराना आवश्यक है।"
+    }
+  },
+  {
+    category: "boys",
+    icon: "fa-solid fa-mars",
+    color: "#2563eb",
+    q: {
+      en: "Why does a teenage boy's voice crack and deepen, and how long does it last?",
+      hi: "लड़कों की आवाज भारी होना और फटना (Voice Cracking) कितने समय तक रहता है?"
+    },
+    a: {
+      en: "Testosterone causes the vocal cords to thicken and the larynx to enlarge (creating the Adam's apple, Tanner Stage 3-4). The vocal muscles adapt over 6-12 months, after which the adult voice stabilizes.",
+      hi: "टेस्टोस्टेरोन हार्मोन के कारण स्वरयंत्र (Larynx / Adam's Apple) का आकार बढ़ता है। 6 से 12 महीने में आवाज पूरी तरह स्थिर व भारी हो जाती है।"
+    }
+  },
+  {
+    category: "boys",
+    icon: "fa-solid fa-mars",
+    color: "#2563eb",
+    q: {
+      en: "How should teenage boys manage severe facial, chest, and back acne?",
+      hi: "लड़कों में चेहरे और पीठ पर होने वाले जिद्दी मुँहासों (Acne) का सही उपचार क्या है?"
+    },
+    a: {
+      en: "Wash face twice daily with a salicylic acid cleanser, shower promptly after sports, avoid squeezing pimples (prevents permanent scarring), and use pediatric-prescribed topical retinoids or benzoyl peroxide for persistent cysts.",
+      hi: "दिन में दो बार माइल्ड फेसवॉश करें, खेलकूद के तुरंत बाद स्नान करें और मुँहासे बिल्कुल न फोड़ें। अत्यधिक दानों के लिए डॉक्टर द्वारा सुझाई गई क्रीम का इस्तेमाल करें।"
+    }
+  },
+  {
+    category: "boys",
+    icon: "fa-solid fa-mars",
+    color: "#2563eb",
+    q: {
+      en: "What are the emergency warning signs of Testicular Pain or Torsion?",
+      hi: "अंडकोष में अचानक तेज दर्द (Testicular Torsion) के खतरे के संकेत क्या हैं?"
+    },
+    a: {
+      en: "🚨 Medical Emergency: Any sudden, severe one-sided scrotal pain, swelling, or vomiting requires immediate hospital evaluation within 4-6 hours to prevent testicular damage due to twisted blood supply.",
+      hi: "🚨 आपातकालीन संकेत: अंडकोष में अचानक असहनीय दर्द, सूजन या उल्टी होना आपातकाल (Testicular Torsion) हो सकता है। 4 से 6 घंटे के भीतर अस्पताल पहुंचना अनिवार्य है।"
+    }
+  },
+  {
+    category: "boys",
+    icon: "fa-solid fa-mars",
+    color: "#2563eb",
+    q: {
+      en: "Is gym workout, resistance training, and weightlifting safe for teens aged 14 to 18?",
+      hi: "क्या 14-18 वर्ष के किशोरों के लिए जिम और वेट ट्रेनिंग सुरक्षित है?"
+    },
+    a: {
+      en: "Supervised resistance training with bodyweight exercises and proper form builds peak bone density and posture. However, maximal heavy lifting with poor form and synthetic supplements/steroids must be strictly avoided.",
+      hi: "उचित मार्गदर्शन और सही पोस्चर के साथ किया गया व्यायाम सुरक्षित है और हड्डियों को मजबूत बनाता है। अत्यधिक भारी वजन और बिना डॉक्टरी सलाह के सप्लीमेंट्स से बचें।"
+    }
+  },
+  {
+    category: "boys",
+    icon: "fa-solid fa-mars",
+    color: "#2563eb",
+    q: {
+      en: "How can parents correct poor posture, slouching, and 'tech neck' in growing boys?",
+      hi: "लड़कों में झुककर बैठने (Slouching) और पीठ दर्द की समस्या को कैसे सुधारें?"
+    },
+    a: {
+      en: "Rapid skeletal growth combined with mobile use causes thoracic strain. Keep computer screens at eye level, limit continuous sitting to 45 minutes, encourage swimming/cycling, and keep school bags under 10% of body weight.",
+      hi: "कंप्यूटर स्क्रीन को आंखों के स्तर पर रखें, स्कूल बैग का वजन शरीर के वजन के 10% से कम रखें और तैराकी या साइकिलिंग जैसी गतिविधियों से रीढ़ को सीधा रखने में मदद मिलती है।"
+    }
+  },
+  {
+    category: "boys",
+    icon: "fa-solid fa-mars",
+    color: "#2563eb",
+    q: {
+      en: "How can parents protect teenage boys from peer pressure regarding vaping, smoking, or alcohol?",
+      hi: "किशोरों को गलत संगत और नशे (Vaping, Smoking) से कैसे सुरक्षित रखें?"
+    },
+    a: {
+      en: "Educate teens transparently on irreversible lung damage and nicotine addiction. Teach practical, confident refusal lines ('I have football practice tomorrow, I will pass') so they resist pressure without losing social confidence.",
+      hi: "वेपिंग और धूम्रपान के नुकसानों पर खुलकर और दोस्ताना माहौल में बात करें। बच्चे को आत्मविश्वास से 'ना' कहना सिखाएं ताकि वे दोस्तों के दबाव में न आएं।"
+    }
+  }
+];
