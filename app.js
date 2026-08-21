@@ -1,9 +1,7 @@
 // ==========================================================
 // CLINIC APPLICATION ENGINE (app.js)
-// Handles: Growth Screener, Tanner Puberty, FAQs & Popups
 // ==========================================================
 
-// 1. MAIN SCREENER RUNNER
 function runScreener() {
   const langEl = document.getElementById("screenerLang");
   const ageEl = document.getElementById("screenerAge");
@@ -16,7 +14,7 @@ function runScreener() {
 
   if (!ageEl || !genderEl || !resultsContainer) return;
   if (typeof milestoneDatabase === "undefined") {
-    console.error("data.js is not loaded or milestoneDatabase is missing.");
+    console.error("milestoneDatabase is missing.");
     return;
   }
 
@@ -28,7 +26,6 @@ function runScreener() {
   const fHeight = fatherEl ? parseFloat(fatherEl.value) : NaN;
   const mHeight = motherEl ? parseFloat(motherEl.value) : NaN;
 
-  // Dynamic UI Form Labels
   const lblTitle = document.getElementById("lblTitle");
   const lblSubtitle = document.getElementById("lblSubtitle");
   const lblLang = document.getElementById("lblLang");
@@ -73,7 +70,6 @@ function runScreener() {
   let wStatus = "";
   let hStatus = "";
 
-  // Weight Evaluation
   if (!isNaN(wInput) && ref) {
     if (wInput < ref.minW) {
       wStatus = lang === "english" 
@@ -90,7 +86,6 @@ function runScreener() {
     }
   }
 
-  // Height Evaluation
   if (!isNaN(hInput) && ref) {
     if (hInput < ref.minH) {
       hStatus = lang === "english"
@@ -107,7 +102,6 @@ function runScreener() {
     }
   }
 
-  // Mid-Parental Height (MPH) Formula
   let mphHtml = "";
   if (!isNaN(fHeight) && !isNaN(mHeight)) {
     const targetHeight = (gender === "boy") ? (fHeight + mHeight + 13) / 2 : (fHeight + mHeight - 13) / 2;
@@ -167,13 +161,11 @@ function runScreener() {
     </div>
   `;
 
-  // Milestones List
   const listLang = lang === "english" ? "en" : "hi";
   const greenList = (data.green && data.green[listLang]) ? data.green[listLang].map(item => `<li>${item}</li>`).join("") : "";
   const yellowList = (data.yellow && data.yellow[listLang]) ? data.yellow[listLang].map(item => `<li>${item}</li>`).join("") : "";
   const redList = (data.red && data.red[listLang]) ? data.red[listLang].map(item => `<li>${item}</li>`).join("") : "";
 
-  // Tanner Puberty Section (8y to 18y)
   let tannerHtml = "";
   if (data.tanner && data.tanner[gender]) {
     const tInfo = data.tanner[gender];
@@ -204,7 +196,6 @@ function runScreener() {
   const devHtml = `
     <div class="result-box">
       <h4><i class="fa-solid fa-brain" style="color: #0284c7;"></i> ${lang === "english" ? "Developmental Milestones & Screening" : "विकासात्मक मील के पत्थर एवं जांच"}</h4>
-      
       <div class="flag-card flag-green">
         <i class="fa-solid fa-circle-check"></i>
         <div>
@@ -212,7 +203,6 @@ function runScreener() {
           <ul style="margin-top:4px; padding-left:16px;">${greenList}</ul>
         </div>
       </div>
-
       <div class="flag-card flag-yellow">
         <i class="fa-solid fa-triangle-exclamation"></i>
         <div>
@@ -220,7 +210,6 @@ function runScreener() {
           <ul style="margin-top:4px; padding-left:16px;">${yellowList}</ul>
         </div>
       </div>
-
       <div class="flag-card flag-red">
         <i class="fa-solid fa-circle-exclamation"></i>
         <div>
@@ -228,12 +217,10 @@ function runScreener() {
           <ul style="margin-top:4px; padding-left:16px;">${redList}</ul>
         </div>
       </div>
-
       ${tannerHtml}
     </div>
   `;
 
-  // Weaning Card at 6 Months
   let weaningBox = "";
   if (ageKey === "6m") {
     if (lang === "english") {
@@ -263,36 +250,29 @@ function runScreener() {
     }
   }
 
-  // Parenting Tips Box
   const tips = data.parentTips || { nutrition: {}, safety: {}, play: {}, care: {} };
   const tipsHtml = `
     <div class="result-box" style="grid-column: 1 / -1; background: #faf5ff; border: 1.5px solid #e9d5ff;">
       <h4 style="color: #6b21a8;"><i class="fa-solid fa-heart-pulse"></i> ${ageName} ${lang === "english" ? "Parenting & Care Guide" : "अभिभावक देखभाल मार्गदर्शन (Parenting Guide)"}</h4>
-      
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 12px;">
         <div style="background:#ffffff; padding:14px; border-radius:12px; border:1px solid #f3e8ff;">
           <strong style="color:#7e22ce; font-size:0.88rem; display:block; margin-bottom:4px;"><i class="fa-solid fa-apple-whole"></i> ${lang === "english" ? "Nutrition & Diet Requirements:" : "खुराक एवं पोषण (Nutrition):"}</strong>
           <p style="font-size:0.84rem; color:#4b5563; line-height:1.45;">${tips.nutrition[listLang] || ""}</p>
         </div>
-
         <div style="background:#ffffff; padding:14px; border-radius:12px; border:1px solid #f3e8ff;">
           <strong style="color:#b91c1c; font-size:0.88rem; display:block; margin-bottom:4px;"><i class="fa-solid fa-shield-halved"></i> ${lang === "english" ? "Child Safety & Accident Prevention:" : "सुरक्षा एवं दुर्घटना से बचाव (Safety):"}</strong>
           <p style="font-size:0.84rem; color:#4b5563; line-height:1.45;">${tips.safety[listLang] || ""}</p>
         </div>
-
         <div style="background:#ffffff; padding:14px; border-radius:12px; border:1px solid #f3e8ff;">
           <strong style="color:#0369a1; font-size:0.88rem; display:block; margin-bottom:4px;"><i class="fa-solid fa-puzzle-piece"></i> ${lang === "english" ? "Play, Brain & Cognitive Stimulation:" : "खेल, संवाद एवं मानसिक विकास:"}</strong>
           <p style="font-size:0.84rem; color:#4b5563; line-height:1.45;">${tips.play[listLang] || ""}</p>
         </div>
-
         <div style="background:#ffffff; padding:14px; border-radius:12px; border:1px solid #f3e8ff;">
           <strong style="color:#15803d; font-size:0.88rem; display:block; margin-bottom:4px;"><i class="fa-solid fa-stethoscope"></i> ${lang === "english" ? "Vaccine & Doctor Care Tip:" : "टीकाकरण एवं चिकित्सकीय सलाह:"}</strong>
           <p style="font-size:0.84rem; color:#4b5563; line-height:1.45;">${tips.care[listLang] || ""}</p>
         </div>
       </div>
-
       ${weaningBox}
-
       <div style="text-align:center; margin-top:18px;">
         <button onclick="openBookingModal()" class="hero-cta-btn" style="padding: 10px 24px; font-size: 0.9rem; background:#0284c7; box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);">
           <i class="fa-solid fa-calendar-check"></i> ${lang === "english" ? "Book Consultation with Dr. Dinesh Mittal" : "डॉ. दिनेश मित्तल से परामर्श बुक करें"}
@@ -312,7 +292,6 @@ function runScreener() {
   renderAdolescentFaqs();
 }
 
-// 2. ADOLESCENT FAQS ACCORDION RENDERER
 function renderAdolescentFaqs() {
   const container = document.getElementById("faqAccordionContainer");
   if (!container || typeof adolescentFaqDatabase === "undefined") return;
@@ -339,7 +318,6 @@ function renderAdolescentFaqs() {
   container.innerHTML = html;
 }
 
-// 3. FAQ ACCORDION INTERACTION
 function toggleFaq(button) {
   const item = button.closest('.faq-item');
   if (!item) return;
@@ -372,7 +350,6 @@ function filterFaq(category) {
   });
 }
 
-// 4. MODAL POPUP CONTROLLERS
 function openBookingModal() {
   const modal = document.getElementById('bookingModal');
   if (modal) {
@@ -419,7 +396,6 @@ function closeModalOnOverlay(event, modalId) {
   }
 }
 
-// 5. AUTO-INITIALIZATION ON PAGE LOAD
 document.addEventListener("DOMContentLoaded", function() {
   runScreener();
   renderAdolescentFaqs();
