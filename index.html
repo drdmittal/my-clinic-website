@@ -190,18 +190,33 @@
         .info-card p { font-size: 0.88rem; color: var(--muted-text); }
         .card-img { width: 100%; height: 175px; object-fit: cover; border-radius: 12px; margin-bottom: 14px; aspect-ratio: 16 / 9; }
 
+        /* COLLAPSIBLE TOOL WRAPPER STYLES */
         .screener-card {
             background: #ffffff; border-radius: 24px; box-shadow: var(--card-shadow);
-            border: 1.5px solid #e0f2fe; padding: 28px 20px; margin-bottom: 35px;
+            border: 2px solid #bae6fd; overflow: hidden; margin-bottom: 35px;
         }
-        .screener-header { text-align: center; margin-bottom: 20px; }
+        .screener-toggle-header {
+            width: 100%; background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: none; padding: 20px 24px; text-align: left; cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center; gap: 14px;
+            transition: background 0.2s ease;
+        }
+        .screener-toggle-header:hover { background: #e0f2fe; }
+        .screener-toggle-icon {
+            font-size: 1.6rem; color: var(--brand-primary); transition: transform 0.25s ease;
+        }
+        .screener-content-body {
+            padding: 24px 20px;
+        }
+
         .screener-badge {
-            display: inline-flex; align-items: center; gap: 6px; background: #e0f2fe;
+            display: inline-flex; align-items: center; gap: 6px; background: #ffffff;
             color: var(--brand-primary); padding: 4px 12px; border-radius: 16px;
-            font-size: 0.75rem; font-weight: 700; text-transform: uppercase; margin-bottom: 8px;
+            font-size: 0.75rem; font-weight: 700; text-transform: uppercase; margin-bottom: 6px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
         }
-        .screener-title { font-family: 'Fredoka', cursive; font-size: 1.6rem; color: #0c4a6e; margin-bottom: 4px; }
-        .screener-subtitle { font-size: 0.85rem; color: var(--muted-text); }
+        .screener-title { font-family: 'Fredoka', cursive; font-size: 1.45rem; color: #0c4a6e; margin-bottom: 2px; }
+        .screener-subtitle { font-size: 0.84rem; color: var(--muted-text); }
 
         .screener-inputs-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px;
@@ -272,9 +287,6 @@
         .contact-item { display: flex; gap: 12px; margin-bottom: 16px; align-items: flex-start; font-size: 0.9rem; }
         .contact-item i { font-size: 1.15rem; color: var(--brand-primary); margin-top: 3px; }
 
-        /* ========================================================== */
-        /* AESTHETIC & COMPACT SOCIAL BADGES SECTION                  */
-        /* ========================================================== */
         .aesthetic-social-section {
             text-align: center; background: #ffffff; border-top: 1px solid #f1f5f9;
             padding: 35px 20px 25px; margin-top: 40px;
@@ -384,7 +396,9 @@
             .hero-doctor-img { width: 110px; height: 110px; }
             .doctor-hero-name { font-size: 1.2rem; }
 
-            .screener-card { padding: 20px 14px; }
+            .screener-toggle-header { padding: 16px 14px; }
+            .screener-title { font-size: 1.2rem; }
+            .screener-content-body { padding: 18px 12px; }
             .screener-inputs-grid { grid-template-columns: 1fr; }
             .screener-select, .screener-input { font-size: 1rem; padding: 12px; }
             
@@ -403,7 +417,7 @@
         <nav class="desktop-nav">
             <a href="#about">About Doctor</a>
             <a href="#services">Services</a>
-            <a href="#growth-screener" style="color: var(--brand-primary); font-weight: 700;">
+            <a href="#growth-screener" onclick="expandGrowthTool()" style="color: var(--brand-primary); font-weight: 700;">
                 <i class="fa-solid fa-chart-line"></i> Growth & Development
             </a>
             <a href="#adolescent-care">Adolescent Care</a>
@@ -421,7 +435,7 @@
     <div id="mobileDrawer" class="mobile-nav-drawer">
         <a href="#about" onclick="toggleMobileDrawer()"><i class="fa-solid fa-user-doctor"></i> About Dr. Dinesh Mittal</a>
         <a href="#services" onclick="toggleMobileDrawer()"><i class="fa-solid fa-stethoscope"></i> Pediatric Services</a>
-        <a href="#growth-screener" onclick="toggleMobileDrawer()" style="color: var(--brand-primary);"><i class="fa-solid fa-chart-line"></i> Check Growth & Development</a>
+        <a href="#growth-screener" onclick="toggleMobileDrawer(); expandGrowthTool();" style="color: var(--brand-primary);"><i class="fa-solid fa-chart-line"></i> Check Growth & Development</a>
         <a href="#adolescent-care" onclick="toggleMobileDrawer()"><i class="fa-solid fa-person-shelter"></i> Adolescent & Teen FAQs</a>
         <a href="#blog" onclick="toggleMobileDrawer()"><i class="fa-solid fa-newspaper"></i> Parenting & Vaccine Blog</a>
         <a href="#clinic-location" onclick="toggleMobileDrawer()"><i class="fa-solid fa-location-dot"></i> Clinic Location & Hours</a>
@@ -439,7 +453,7 @@
                     <button onclick="openBookingModal()" class="hero-cta-btn">
                         <i class="fa-solid fa-calendar-plus"></i> Book Consultation
                     </button>
-                    <a href="#growth-screener" class="hero-cta-btn" style="background: #0284c7; box-shadow: 0 6px 18px rgba(2, 132, 199, 0.35); text-decoration: none;">
+                    <a href="#growth-screener" onclick="expandGrowthTool()" class="hero-cta-btn" style="background: #0284c7; box-shadow: 0 6px 18px rgba(2, 132, 199, 0.35); text-decoration: none;">
                         <i class="fa-solid fa-chart-line"></i> Check Growth & Development
                     </a>
                 </div>
@@ -469,7 +483,7 @@
                 </div>
                 <h3>Check Child Growth & Development</h3>
                 <p>Instantly evaluate IAP weight/length percentiles, developmental milestones (🟢 🟡 🔴), pubertal staging, and genetic target adult height.</p>
-                <a href="#growth-screener" class="read-btn" style="color: var(--brand-primary); margin-top: 10px; text-decoration: none;">
+                <a href="#growth-screener" onclick="expandGrowthTool()" class="read-btn" style="color: var(--brand-primary); margin-top: 10px; text-decoration: none;">
                     Launch Tool (0m - 18y) <i class="fa-solid fa-arrow-right"></i>
                 </a>
             </div>
@@ -492,83 +506,92 @@
         </div>
     </div>
 
-    <!-- GROWTH & DEVELOPMENT SCREENER TOOL -->
+    <!-- COLLAPSIBLE GROWTH & DEVELOPMENT SCREENER TOOL -->
     <div class="container" id="growth-screener">
         <div class="screener-card">
-            <div class="screener-header">
-                <span class="screener-badge"><i class="fa-solid fa-chart-line"></i> Pediatric Clinical Tool</span>
-                <h2 class="screener-title" id="lblTitle">Check Your Child's Growth & Development</h2>
-                <p class="screener-subtitle" id="lblSubtitle">IAP Growth Charts, Tanner Pubertal Staging, Genetic Height Formula & Developmental Milestones.</p>
+            
+            <!-- Clickable Accordion Header -->
+            <button type="button" class="screener-toggle-header" onclick="toggleGrowthTool()">
+                <div>
+                    <span class="screener-badge"><i class="fa-solid fa-chart-line"></i> Pediatric Clinical Tool</span>
+                    <h2 class="screener-title" id="lblTitle">Check Your Child's Growth & Development</h2>
+                    <p class="screener-subtitle" id="lblSubtitle">Tap to open IAP Growth Charts, Tanner Pubertal Staging, Genetic Height Formula & Developmental Milestones.</p>
+                </div>
+                <i id="growthToggleIcon" class="fa-solid fa-circle-chevron-down screener-toggle-icon"></i>
+            </button>
+
+            <!-- Collapsible Body (Hidden by Default) -->
+            <div id="growthToolBody" class="screener-content-body" style="display: none;">
+                <div class="screener-inputs-grid">
+                    <div class="screener-field">
+                        <label><i class="fa-solid fa-language"></i> <span id="lblLang">Select Language</span></label>
+                        <select id="screenerLang" class="screener-select" onchange="runScreener()" style="border-color: #0284c7; font-weight:700; background:#f0f9ff;">
+                            <option value="english" selected>English (Standard)</option>
+                            <option value="hindi">हिन्दी (Hindi)</option>
+                        </select>
+                    </div>
+
+                    <div class="screener-field">
+                        <label><i class="fa-solid fa-cake-candles"></i> <span id="lblAge">Child's Age</span></label>
+                        <select id="screenerAge" class="screener-select" onchange="runScreener()">
+                            <option value="0m" selected>Newborn (0 - 30 Days)</option>
+                            <option value="3m">3 Months</option>
+                            <option value="6m">6 Months (Weaning Stage)</option>
+                            <option value="9m">9 Months</option>
+                            <option value="12m">12 Months (1 Year)</option>
+                            <option value="18m">18 Months (1.5 Years)</option>
+                            <option value="24m">24 Months (2 Years)</option>
+                            <option value="3y">3 Years</option>
+                            <option value="4y">4 Years</option>
+                            <option value="5y">5 Years</option>
+                            <option value="6y">6 Years</option>
+                            <option value="7y">7 Years</option>
+                            <option value="8y">8 Years</option>
+                            <option value="9y">9 Years</option>
+                            <option value="10y">10 Years</option>
+                            <option value="11y">11 Years</option>
+                            <option value="12y">12 Years</option>
+                            <option value="13y">13 Years</option>
+                            <option value="14y">14 Years</option>
+                            <option value="15y">15 Years</option>
+                            <option value="16y">16 Years</option>
+                            <option value="17y">17 Years</option>
+                            <option value="18y">18 Years</option>
+                        </select>
+                    </div>
+
+                    <div class="screener-field">
+                        <label><i class="fa-solid fa-venus-mars"></i> <span id="lblGender">Child's Gender</span></label>
+                        <select id="screenerGender" class="screener-select" onchange="runScreener()">
+                            <option value="boy">Boy</option>
+                            <option value="girl">Girl</option>
+                        </select>
+                    </div>
+
+                    <div class="screener-field">
+                        <label><i class="fa-solid fa-weight-scale"></i> <span id="lblWeight">Current Weight (kg)</span></label>
+                        <input type="number" id="screenerWeight" class="screener-input" step="0.1" placeholder="e.g. 3.2" oninput="runScreener()">
+                    </div>
+
+                    <div class="screener-field">
+                        <label><i class="fa-solid fa-ruler-vertical"></i> <span id="lblHeight">Length / Height (cm)</span></label>
+                        <input type="number" id="screenerHeight" class="screener-input" step="0.5" placeholder="e.g. 50" oninput="runScreener()">
+                    </div>
+
+                    <div class="screener-field">
+                        <label><i class="fa-solid fa-person"></i> <span id="lblFather">Father's Height</span> <small style="color:#64748b;">(Optional, cm)</small></label>
+                        <input type="number" id="fatherHeight" class="screener-input" step="1" placeholder="e.g. 175" oninput="runScreener()">
+                    </div>
+
+                    <div class="screener-field">
+                        <label><i class="fa-solid fa-person-dress"></i> <span id="lblMother">Mother's Height</span> <small style="color:#64748b;">(Optional, cm)</small></label>
+                        <input type="number" id="motherHeight" class="screener-input" step="1" placeholder="e.g. 160" oninput="runScreener()">
+                    </div>
+                </div>
+
+                <div id="screenerResults"></div>
             </div>
 
-            <div class="screener-inputs-grid">
-                <div class="screener-field">
-                    <label><i class="fa-solid fa-language"></i> <span id="lblLang">Select Language</span></label>
-                    <select id="screenerLang" class="screener-select" onchange="runScreener()" style="border-color: #0284c7; font-weight:700; background:#f0f9ff;">
-                        <option value="english" selected>English (Standard)</option>
-                        <option value="hindi">हिन्दी (Hindi)</option>
-                    </select>
-                </div>
-
-                <div class="screener-field">
-                    <label><i class="fa-solid fa-cake-candles"></i> <span id="lblAge">Child's Age</span></label>
-                    <select id="screenerAge" class="screener-select" onchange="runScreener()">
-                        <option value="0m" selected>Newborn (0 - 30 Days)</option>
-                        <option value="3m">3 Months</option>
-                        <option value="6m">6 Months (Weaning Stage)</option>
-                        <option value="9m">9 Months</option>
-                        <option value="12m">12 Months (1 Year)</option>
-                        <option value="18m">18 Months (1.5 Years)</option>
-                        <option value="24m">24 Months (2 Years)</option>
-                        <option value="3y">3 Years</option>
-                        <option value="4y">4 Years</option>
-                        <option value="5y">5 Years</option>
-                        <option value="6y">6 Years</option>
-                        <option value="7y">7 Years</option>
-                        <option value="8y">8 Years</option>
-                        <option value="9y">9 Years</option>
-                        <option value="10y">10 Years</option>
-                        <option value="11y">11 Years</option>
-                        <option value="12y">12 Years</option>
-                        <option value="13y">13 Years</option>
-                        <option value="14y">14 Years</option>
-                        <option value="15y">15 Years</option>
-                        <option value="16y">16 Years</option>
-                        <option value="17y">17 Years</option>
-                        <option value="18y">18 Years</option>
-                    </select>
-                </div>
-
-                <div class="screener-field">
-                    <label><i class="fa-solid fa-venus-mars"></i> <span id="lblGender">Child's Gender</span></label>
-                    <select id="screenerGender" class="screener-select" onchange="runScreener()">
-                        <option value="boy">Boy</option>
-                        <option value="girl">Girl</option>
-                    </select>
-                </div>
-
-                <div class="screener-field">
-                    <label><i class="fa-solid fa-weight-scale"></i> <span id="lblWeight">Current Weight (kg)</span></label>
-                    <input type="number" id="screenerWeight" class="screener-input" step="0.1" placeholder="e.g. 3.2" oninput="runScreener()">
-                </div>
-
-                <div class="screener-field">
-                    <label><i class="fa-solid fa-ruler-vertical"></i> <span id="lblHeight">Length / Height (cm)</span></label>
-                    <input type="number" id="screenerHeight" class="screener-input" step="0.5" placeholder="e.g. 50" oninput="runScreener()">
-                </div>
-
-                <div class="screener-field">
-                    <label><i class="fa-solid fa-person"></i> <span id="lblFather">Father's Height</span> <small style="color:#64748b;">(Optional, cm)</small></label>
-                    <input type="number" id="fatherHeight" class="screener-input" step="1" placeholder="e.g. 175" oninput="runScreener()">
-                </div>
-
-                <div class="screener-field">
-                    <label><i class="fa-solid fa-person-dress"></i> <span id="lblMother">Mother's Height</span> <small style="color:#64748b;">(Optional, cm)</small></label>
-                    <input type="number" id="motherHeight" class="screener-input" step="1" placeholder="e.g. 160" oninput="runScreener()">
-                </div>
-            </div>
-
-            <div id="screenerResults"></div>
         </div>
     </div>
 
@@ -757,6 +780,7 @@
         </div>
     </div>
 
+    <!-- TOGGLE SCRIPT FOR COLLAPSIBLE TOOL & MOBILE DRAWER -->
     <script>
       function toggleMobileDrawer() {
         const drawer = document.getElementById("mobileDrawer");
@@ -764,12 +788,29 @@
           drawer.style.display = (drawer.style.display === "flex") ? "none" : "flex";
         }
       }
+
+      function toggleGrowthTool() {
+        const body = document.getElementById("growthToolBody");
+        const icon = document.getElementById("growthToggleIcon");
+        if (!body) return;
+        
+        const isOpen = (body.style.display === "block");
+        body.style.display = isOpen ? "none" : "block";
+        if (icon) {
+          icon.style.transform = isOpen ? "rotate(0deg)" : "rotate(180deg)";
+        }
+      }
+
+      function expandGrowthTool() {
+        const body = document.getElementById("growthToolBody");
+        const icon = document.getElementById("growthToggleIcon");
+        if (body) body.style.display = "block";
+        if (icon) icon.style.transform = "rotate(180deg)";
+      }
     </script>
 
-    <!-- ================================================== -->
-    <!-- EXTERNAL DATA & LOGIC MODULES                      -->
-    <!-- ================================================== -->
-    <script defer src="data.js?v=6"></script>
-    <script defer src="app.js?v=6"></script>
+    <!-- EXTERNAL MODULAR SCRIPTS -->
+    <script defer src="data.js?v=7"></script>
+    <script defer src="app.js?v=7"></script>
 </body>
 </html>
