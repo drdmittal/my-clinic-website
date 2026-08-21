@@ -69,7 +69,7 @@
     <!-- Favicon Icons -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🩺</text></svg>">
 
-    <!-- Performance: Preconnect & Fonts -->
+    <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -610,75 +610,13 @@
 
         <!-- Filter Buttons (All / Girls / Boys) -->
         <div style="display: flex; justify-content: center; gap: 8px; margin-bottom: 20px; flex-wrap: wrap;">
-          <button onclick="filterFaq('all')" class="faq-filter-btn active-filter" id="btn-all">All Questions</button>
-          <button onclick="filterFaq('girls')" class="faq-filter-btn" id="btn-girls"><i class="fa-solid fa-venus"></i> Girls' Health</button>
-          <button onclick="filterFaq('boys')" class="faq-filter-btn" id="btn-boys"><i class="fa-solid fa-mars"></i> Boys' Health</button>
+          <button onclick="filterFaq('all')" class="faq-filter-btn active-filter" id="btn-all">All Questions (20)</button>
+          <button onclick="filterFaq('girls')" class="faq-filter-btn" id="btn-girls"><i class="fa-solid fa-venus"></i> Girls' Health (10)</button>
+          <button onclick="filterFaq('boys')" class="faq-filter-btn" id="btn-boys"><i class="fa-solid fa-mars"></i> Boys' Health (10)</button>
         </div>
 
-        <!-- FAQ Accordion List -->
-        <div class="faq-container">
-          
-          <div class="faq-item faq-all">
-            <button class="faq-question" onclick="toggleFaq(this)">
-              <span><i class="fa-regular fa-circle-question" style="color:#0284c7;"></i> At what age does puberty typically start, and when is it a red flag?</span>
-              <i class="fa-solid fa-chevron-down faq-icon"></i>
-            </button>
-            <div class="faq-answer">
-              <p>In girls, normal puberty onset is between <strong>8 and 13 years</strong> (breast buds). In boys, it begins between <strong>9 and 14 years</strong> (testicular enlargement >= 4 mL). If changes start before age 8 in girls or age 9 in boys (<strong>Precocious Puberty</strong>), or if there are zero signs by age 13 in girls or 14 in boys (<strong>Delayed Puberty</strong>), prompt pediatric evaluation is advised.</p>
-            </div>
-          </div>
-
-          <div class="faq-item faq-all faq-girls">
-            <button class="faq-question" onclick="toggleFaq(this)">
-              <span><i class="fa-solid fa-venus" style="color:#db2777;"></i> Are irregular periods normal in the first 1-2 years after menarche?</span>
-              <i class="fa-solid fa-chevron-down faq-icon"></i>
-            </button>
-            <div class="faq-answer">
-              <p>Yes. The hormonal feedback loop takes 12 to 24 months to mature, causing natural cycle fluctuations. However, consult Dr. Dinesh Mittal if bleeding lasts >7 days, requires pad changes every 1-2 hours, or is accompanied by severe debilitating pain.</p>
-            </div>
-          </div>
-
-          <div class="faq-item faq-all faq-girls">
-            <button class="faq-question" onclick="toggleFaq(this)">
-              <span><i class="fa-solid fa-venus" style="color:#db2777;"></i> What are the early signs of PCOS in teenage girls?</span>
-              <i class="fa-solid fa-chevron-down faq-icon"></i>
-            </button>
-            <div class="faq-answer">
-              <p>Warning signs include persistent irregular cycles beyond 2 years post-menarche, severe cystic acne, excess facial/body hair growth (hirsutism), and dark velvety patches on the neck (Acanthosis Nigricans). Early lifestyle and medical intervention prevent long-term metabolic strain.</p>
-            </div>
-          </div>
-
-          <div class="faq-item faq-all faq-boys">
-            <button class="faq-question" onclick="toggleFaq(this)">
-              <span><i class="fa-solid fa-mars" style="color:#2563eb;"></i> My son's chest feels tender/swollen. Is pubertal gynecomastia normal?</span>
-              <i class="fa-solid fa-chevron-down faq-icon"></i>
-            </button>
-            <div class="faq-answer">
-              <p>Yes. Temporary breast tissue swelling (<strong>Physiological Pubertal Gynecomastia</strong>) affects up to 50% of adolescent boys around ages 12-14 due to temporary hormone shifts. It is benign and typically resolves spontaneously within 12-18 months without treatment.</p>
-            </div>
-          </div>
-
-          <div class="faq-item faq-all faq-boys">
-            <button class="faq-question" onclick="toggleFaq(this)">
-              <span><i class="fa-solid fa-mars" style="color:#2563eb;"></i> When do teenage boys hit their main height growth spurt?</span>
-              <i class="fa-solid fa-chevron-down faq-icon"></i>
-            </button>
-            <div class="faq-answer">
-              <p>Boys hit their Peak Height Velocity (PHV) relatively late—typically between <strong>13.5 and 15.5 years (Tanner Stage 4)</strong>, gaining 8-12 cm in a single year. Adequate sleep (8+ hours), dietary protein, and Vitamin D are crucial during this window.</p>
-            </div>
-          </div>
-
-          <div class="faq-item faq-all">
-            <button class="faq-question" onclick="toggleFaq(this)">
-              <span><i class="fa-solid fa-syringe" style="color:#10b981;"></i> Which vaccines are necessary for teens aged 10 to 18?</span>
-              <i class="fa-solid fa-chevron-down faq-icon"></i>
-            </button>
-            <div class="faq-answer">
-              <p>The Indian Academy of Pediatrics (IAP) recommends: (1) <strong>Tdap booster</strong> at 10-12 years, (2) <strong>HPV (Cervical cancer) vaccine</strong> for girls and boys aged 9-14 years, and (3) annual influenza shots or catch-up Hepatitis A/Varicella doses.</p>
-            </div>
-          </div>
-
-        </div>
+        <!-- Dynamic FAQ Container (Loaded from data.js & app.js) -->
+        <div class="faq-container" id="faqAccordionContainer"></div>
 
         <!-- Consultation Banner -->
         <div style="text-align:center; margin-top:22px; padding:16px; background:#f0fdf4; border-radius:16px; border:1px solid #bbf7d0;">
