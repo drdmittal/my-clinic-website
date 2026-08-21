@@ -6,8 +6,8 @@
   "@context": "https://schema.org",
   "@type": "Physician",
   "name": "Dr. Dinesh Mittal - Senior Child Specialist & Pediatrician",
-  "image": "https://childspecialistrohini.com/images/doctor.jpg",
-  "@id": "https://childspecialistrohini.com",
+  "image": "https://childspecialistrohini.com/doctor.jpg",
+  "@id": "https://childspecialistrohini.com/#physician",
   "url": "https://childspecialistrohini.com",
   "telephone": "+918130521456",
   "priceRange": "₹₹",
@@ -24,6 +24,14 @@
     "latitude": 28.7080828,
     "longitude": 77.1078816
   },
+  "medicalSpecialty": "Pediatric",
+  "areaServed": [
+    "Rohini Sector 3", "Rohini Sector 4", "Rohini Sector 5", "Rohini Sector 6",
+    "Rohini Sector 7", "Rohini Sector 8", "Rohini Sector 9", "Rohini Sector 11",
+    "Rohini Sector 13", "Rohini Sector 14", "Rohini Sector 15", "Rohini Sector 20",
+    "Rohini Sector 21", "Rohini Sector 22", "Rohini Sector 23", "Rohini Sector 24",
+    "Prashant Vihar", "Pitampura", "Vijay Vihar", "Nangloi", "North West Delhi", "Delhi NCR"
+  ],
   "openingHoursSpecification": [
     {
       "@type": "OpeningHoursSpecification",
@@ -62,9 +70,15 @@
       
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Dr. Dinesh Mittal | Senior Child Specialist & Pediatrician in Sector 3 Rohini</title>
-    <meta name="description" content="Senior Child Specialist & Pediatrician in Sector 3 Rohini, Delhi. Expert newborn care, WHO & IAP vaccination, child growth monitoring, and pediatric consultations.">
+    <title>Dr. Dinesh Mittal | Best Child Specialist & Pediatrician in Rohini, Delhi</title>
+    <meta name="description" content="Senior Pediatrician & Child Specialist in Rohini (Sec 3-24), Pitampura, Prashant Vihar & North Delhi. Expert newborn care, WHO/IAP vaccination & child growth screening.">
     <link rel="canonical" href="https://childspecialistrohini.com/" />
+
+    <!-- Geo Tags for Google Local Search -->
+    <meta name="geo.region" content="IN-DL" />
+    <meta name="geo.placename" content="Rohini, New Delhi" />
+    <meta name="geo.position" content="28.708083;77.107882" />
+    <meta name="ICBM" content="28.708083, 77.107882" />
 
     <!-- Favicon Icons -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🩺</text></svg>">
@@ -74,59 +88,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Schema.org Physician JSON-LD -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Physician",
-      "name": "Dr. Dinesh Mittal",
-      "image": "https://childspecialistrohini.com/doctor.jpg",
-      "@id": "https://childspecialistrohini.com/#physician",
-      "url": "https://childspecialistrohini.com",
-      "telephone": "+918130521456",
-      "priceRange": "₹₹",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "H-34/69, Sector 3, Rohini",
-        "addressLocality": "Rohini",
-        "addressRegion": "Delhi",
-        "postalCode": "110085",
-        "addressCountry": "IN"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 28.7041,
-        "longitude": 77.1025
-      },
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-          "opens": "10:00",
-          "closes": "13:00"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-          "opens": "18:00",
-          "closes": "20:30"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Sunday"],
-          "opens": "11:00",
-          "closes": "12:00"
-        }
-      ],
-      "medicalSpecialty": "Pediatric",
-      "sameAs": [
-        "https://www.instagram.com/dr_dinesh_mittal_child_clinic",
-        "https://youtube.com/@drdmittal",
-        "https://www.facebook.com/share/1Thf9ecpvw/"
-      ]
-    }
-    </script>
 
     <style>
         :root {
@@ -158,7 +119,7 @@
         .book-tab-btn {
             background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
             color: #ffffff !important; padding: 9px 18px; border-radius: 30px;
-            font-size: 0.88rem; font-weight: 700; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
+            font-size: 0.86rem; font-weight: 700; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
             transition: transform 0.2s, box-shadow 0.2s; display: inline-flex; align-items: center; gap: 6px;
         }
         .book-tab-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(2, 132, 199, 0.35); }
@@ -288,11 +249,6 @@
         .faq-item.active { border-color: var(--brand-primary); background: #f8fafc; }
         .faq-item.active .faq-icon { transform: rotate(180deg); color: var(--brand-primary); }
 
-        .faq-filter-btn {
-          background: #f1f5f9; border: 1.5px solid #cbd5e1; padding: 7px 16px; border-radius: 20px; font-size: 0.82rem; font-weight: 600; cursor: pointer; color: #334155; transition: all 0.2s;
-        }
-        .faq-filter-btn.active-filter { background: var(--brand-primary); color: #ffffff; border-color: var(--brand-primary); }
-
         .blog-card {
             background: #ffffff; border-radius: 20px; border: 1px solid #f1f5f9;
             box-shadow: var(--card-shadow); overflow: hidden; display: flex; flex-direction: column;
@@ -316,27 +272,37 @@
         .contact-item { display: flex; gap: 12px; margin-bottom: 16px; align-items: flex-start; font-size: 0.9rem; }
         .contact-item i { font-size: 1.15rem; color: var(--brand-primary); margin-top: 3px; }
 
-        .social-section { text-align: center; background: #f0f9ff; padding: 45px 20px; margin-top: 40px; border-radius: 30px 30px 0 0; }
-        .social-section h2 { font-family: 'Fredoka', cursive; font-size: 1.6rem; color: #0c4a6e; margin-bottom: 6px; }
-        .social-section p { font-size: 0.9rem; color: var(--muted-text); max-width: 550px; margin: 0 auto; }
-        
-        .social-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px;
-            max-width: 950px; margin: 22px auto 0;
+        /* ========================================================== */
+        /* AESTHETIC & COMPACT SOCIAL BADGES SECTION                  */
+        /* ========================================================== */
+        .aesthetic-social-section {
+            text-align: center; background: #ffffff; border-top: 1px solid #f1f5f9;
+            padding: 35px 20px 25px; margin-top: 40px;
         }
-        .social-card {
-            display: flex; align-items: center; gap: 10px; padding: 12px 18px;
-            border-radius: 16px; text-decoration: none; color: #ffffff; font-weight: 700; font-size: 0.88rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.2s;
+        .aesthetic-social-section h3 {
+            font-family: 'Fredoka', cursive; font-size: 1.3rem; color: #0c4a6e; margin-bottom: 4px;
         }
-        .social-card:hover { transform: translateY(-2px); }
-        .social-card i { font-size: 1.4rem; }
+        .aesthetic-social-section p {
+            font-size: 0.84rem; color: var(--muted-text); margin-bottom: 18px;
+        }
+        .social-pill-container {
+            display: flex; justify-content: center; align-items: center;
+            gap: 12px; flex-wrap: wrap; max-width: 650px; margin: 0 auto;
+        }
+        .social-pill {
+            display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px;
+            border-radius: 30px; text-decoration: none; color: #ffffff; font-weight: 700;
+            font-size: 0.82rem; transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+        .social-pill:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.12); }
+        .social-pill i { font-size: 1.05rem; }
 
-        .social-instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
-        .social-youtube { background: #ff0000; }
-        .social-facebook { background: #1877f2; }
-        .social-google { background: #4285f4; }
-        .social-whatsapp { background: #10b981; }
+        .pill-instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+        .pill-youtube { background: #e11d48; }
+        .pill-facebook { background: #1d4ed8; }
+        .pill-google { background: #0284c7; }
+        .pill-whatsapp { background: #059669; }
 
         .vaccine-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.85rem; }
         .vaccine-table th, .vaccine-table td { border: 1px solid #e2e8f0; padding: 9px 10px; text-align: left; }
@@ -434,7 +400,6 @@
     <header>
         <div class="logo"><i class="fa-solid fa-shapes"></i> Dr. Dinesh Mittal</div>
         
-        <!-- Desktop Nav -->
         <nav class="desktop-nav">
             <a href="#about">About Doctor</a>
             <a href="#services">Services</a>
@@ -447,13 +412,12 @@
             <a onclick="openBookingModal()" class="book-tab-btn"><i class="fa-solid fa-calendar-check"></i> Book Appointment</a>
         </nav>
 
-        <!-- Mobile Hamburger Button -->
         <button class="mobile-menu-toggle" onclick="toggleMobileDrawer()" aria-label="Toggle navigation">
             <i class="fa-solid fa-bars"></i>
         </button>
     </header>
 
-    <!-- Mobile Drawer -->
+    <!-- Mobile Drawer Navigation -->
     <div id="mobileDrawer" class="mobile-nav-drawer">
         <a href="#about" onclick="toggleMobileDrawer()"><i class="fa-solid fa-user-doctor"></i> About Dr. Dinesh Mittal</a>
         <a href="#services" onclick="toggleMobileDrawer()"><i class="fa-solid fa-stethoscope"></i> Pediatric Services</a>
@@ -481,7 +445,6 @@
                 </div>
             </div>
 
-            <!-- Doctor Showcase Card -->
             <div class="hero-doctor-side">
                 <div class="doctor-hero-card">
                     <img src="doctor.jpg" alt="Dr. Dinesh Mittal - Pediatrician in Rohini" class="hero-doctor-img" onerror="this.src='https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=400&q=80'">
@@ -538,7 +501,6 @@
                 <p class="screener-subtitle" id="lblSubtitle">IAP Growth Charts, Tanner Pubertal Staging, Genetic Height Formula & Developmental Milestones.</p>
             </div>
 
-            <!-- Inputs Grid -->
             <div class="screener-inputs-grid">
                 <div class="screener-field">
                     <label><i class="fa-solid fa-language"></i> <span id="lblLang">Select Language</span></label>
@@ -606,12 +568,11 @@
                 </div>
             </div>
 
-            <!-- Dynamic Output Container -->
             <div id="screenerResults"></div>
         </div>
     </div>
 
-    <!-- ADOLESCENT HEALTH & PUBERTY FAQ SECTION -->
+    <!-- ADOLESCENT HEALTH & PUBERTY GUIDANCE SECTION -->
     <div class="container" id="adolescent-care">
       <div style="background: #ffffff; border-radius: 24px; box-shadow: var(--card-shadow); border: 1.5px solid #e0f2fe; padding: 28px 20px; margin-bottom: 35px;">
         
@@ -627,17 +588,8 @@
           </p>
         </div>
 
-        <!-- Filter Buttons (All / Girls / Boys) -->
-        <div style="display: flex; justify-content: center; gap: 8px; margin-bottom: 18px; flex-wrap: wrap;">
-          <button onclick="filterFaq('all')" class="faq-filter-btn active-filter" id="btn-all">All Questions (20)</button>
-          <button onclick="filterFaq('girls')" class="faq-filter-btn" id="btn-girls"><i class="fa-solid fa-venus"></i> Girls' Health (10)</button>
-          <button onclick="filterFaq('boys')" class="faq-filter-btn" id="btn-boys"><i class="fa-solid fa-mars"></i> Boys' Health (10)</button>
-        </div>
-
-        <!-- Dynamic FAQ Container -->
         <div class="faq-container" id="faqAccordionContainer"></div>
 
-        <!-- Consultation Banner -->
         <div style="text-align:center; margin-top:20px; padding:16px; background:#f0fdf4; border-radius:16px; border:1px solid #bbf7d0;">
           <p style="font-size:0.88rem; color:#166534; font-weight:600; margin-bottom:8px;">Have specific concerns regarding your teenager's growth, puberty, or nutrition?</p>
           <button onclick="openBookingModal()" class="hero-cta-btn" style="padding: 10px 22px; font-size: 0.88rem;">
@@ -704,6 +656,29 @@
         </div>
     </div>
 
+    <!-- LOCAL SEO: AREAS & LOCALITIES SERVED -->
+    <div class="container" id="areas-served" style="margin-top: 15px; margin-bottom: 25px;">
+      <div style="background: #ffffff; border-radius: 20px; padding: 22px 18px; border: 1.5px solid #e0f2fe; box-shadow: var(--card-shadow); text-align: center;">
+        <h3 style="font-family: 'Fredoka', cursive; font-size: 1.25rem; color: #0c4a6e; margin-bottom: 8px;">
+          <i class="fa-solid fa-map-location-dot" style="color: var(--brand-primary);"></i> Serving Families Across Rohini & North-West Delhi
+        </h3>
+        <p style="font-size: 0.85rem; color: var(--muted-text); max-width: 800px; margin: 0 auto 12px;">
+          Centrally located in <strong>Sector 3 Rohini</strong>, our pediatric clinic provides newborn care, vaccination, and child healthcare services to parents visiting from:
+        </p>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; max-width: 900px; margin: 0 auto;">
+          <span style="background: #f0fdf4; color: #166534; padding: 4px 10px; border-radius: 14px; font-size: 0.78rem; font-weight: 600; border: 1px solid #bbf7d0;">Rohini Sec 3, 4, 5, 6</span>
+          <span style="background: #f0fdf4; color: #166534; padding: 4px 10px; border-radius: 14px; font-size: 0.78rem; font-weight: 600; border: 1px solid #bbf7d0;">Rohini Sec 7, 8, 9, 11</span>
+          <span style="background: #f0fdf4; color: #166534; padding: 4px 10px; border-radius: 14px; font-size: 0.78rem; font-weight: 600; border: 1px solid #bbf7d0;">Rohini Sec 13, 14, 15</span>
+          <span style="background: #f0fdf4; color: #166534; padding: 4px 10px; border-radius: 14px; font-size: 0.78rem; font-weight: 600; border: 1px solid #bbf7d0;">Rohini Sec 20, 21, 22, 23, 24</span>
+          <span style="background: #eff6ff; color: #1e40af; padding: 4px 10px; border-radius: 14px; font-size: 0.78rem; font-weight: 600; border: 1px solid #bfdbfe;">Pitampura</span>
+          <span style="background: #eff6ff; color: #1e40af; padding: 4px 10px; border-radius: 14px; font-size: 0.78rem; font-weight: 600; border: 1px solid #bfdbfe;">Prashant Vihar</span>
+          <span style="background: #eff6ff; color: #1e40af; padding: 4px 10px; border-radius: 14px; font-size: 0.78rem; font-weight: 600; border: 1px solid #bfdbfe;">Vijay Vihar</span>
+          <span style="background: #eff6ff; color: #1e40af; padding: 4px 10px; border-radius: 14px; font-size: 0.78rem; font-weight: 600; border: 1px solid #bfdbfe;">Nangloi</span>
+          <span style="background: #eff6ff; color: #1e40af; padding: 4px 10px; border-radius: 14px; font-size: 0.78rem; font-weight: 600; border: 1px solid #bfdbfe;">North Delhi & NCR</span>
+        </div>
+      </div>
+    </div>
+
     <!-- Location & Contact -->
     <div class="container" id="clinic-location">
         <h2 class="section-title">Visit Our Clinic</h2>
@@ -728,22 +703,23 @@
                 <i class="fa-solid fa-map-location-dot" style="font-size: 2.8rem; color: var(--brand-secondary); margin-bottom: 12px;"></i>
                 <h3 style="color: #0c4a6e; margin-bottom: 8px; font-size: 1.15rem; font-family: 'Fredoka', cursive;">Driving Directions</h3>
                 <p style="color: var(--muted-text); font-size: 0.88rem; margin-bottom: 16px;">Tap below to open Google Maps directly to our clinic in Sector 3 Rohini.</p>
-                <a href="https://maps.app.goo.gl/tW6fDW25fgrrA86P6" target="_blank" class="social-card social-google" style="justify-content: center;">
+                <a href="https://maps.app.goo.gl/tW6fDW25fgrrA86P6" target="_blank" class="social-pill pill-google" style="justify-content: center; padding: 12px 20px; font-size: 0.9rem;">
                     <i class="fa-solid fa-diamond-turn-right"></i> Open Location in Google Maps
                 </a>
             </div>
         </div>
     </div>
 
-    <section class="social-section" id="social-connect">
-        <h2>Connect With Dr. Dinesh Mittal</h2>
-        <p>Follow our official social media handles for child health tips, video updates, or leave a review on Google.</p>
-        <div class="social-grid">
-            <a href="https://www.instagram.com/dr_dinesh_mittal_child_clinic?igsh=MWZwY3JqOTlubjltMg==" target="_blank" class="social-card social-instagram"><i class="fa-brands fa-instagram"></i> Instagram Profile</a>
-            <a href="https://youtube.com/@drdmittal?si=-D_1Fmy_6ksCxw1L" target="_blank" class="social-card social-youtube"><i class="fa-brands fa-youtube"></i> YouTube Channel</a>
-            <a href="https://www.facebook.com/share/1Thf9ecpvw/" target="_blank" class="social-card social-facebook"><i class="fa-brands fa-facebook"></i> Facebook Page</a>
-            <a href="https://share.google/fvwftbJACAKZVwtuy" target="_blank" class="social-card social-google"><i class="fa-brands fa-google"></i> Leave Google Review</a>
-            <a href="https://wa.me/918130521456" target="_blank" class="social-card social-whatsapp"><i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp</a>
+    <!-- AESTHETIC SOCIAL CONNECT ROW -->
+    <section class="aesthetic-social-section" id="social-connect">
+        <h3>Connect With Dr. Dinesh Mittal</h3>
+        <p>Follow our channels for health tips, updates, or to leave a review.</p>
+        <div class="social-pill-container">
+            <a href="https://www.instagram.com/dr_dinesh_mittal_child_clinic?igsh=MWZwY3JqOTlubjltMg==" target="_blank" class="social-pill pill-instagram"><i class="fa-brands fa-instagram"></i> Instagram</a>
+            <a href="https://youtube.com/@drdmittal?si=-D_1Fmy_6ksCxw1L" target="_blank" class="social-pill pill-youtube"><i class="fa-brands fa-youtube"></i> YouTube</a>
+            <a href="https://www.facebook.com/share/1Thf9ecpvw/" target="_blank" class="social-pill pill-facebook"><i class="fa-brands fa-facebook"></i> Facebook</a>
+            <a href="https://share.google/fvwftbJACAKZVwtuy" target="_blank" class="social-pill pill-google"><i class="fa-brands fa-google"></i> Review Us</a>
+            <a href="https://wa.me/918130521456" target="_blank" class="social-pill pill-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
         </div>
     </section>
 
@@ -793,7 +769,7 @@
     <!-- ================================================== -->
     <!-- EXTERNAL DATA & LOGIC MODULES                      -->
     <!-- ================================================== -->
-    <script defer src="data.js?v=4"></script>
-    <script defer src="app.js?v=4"></script>
+    <script defer src="data.js?v=6"></script>
+    <script defer src="app.js?v=6"></script>
 </body>
 </html>
