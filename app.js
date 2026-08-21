@@ -1,7 +1,7 @@
 // ==========================================================
 // CLINIC APPLICATION ENGINE (app.js)
-// Advanced Auxology: IAP Percentiles, Mid-Parental Target &
-// Genetic Centile Disparity / Discordance Screener
+// Advanced Auxology: IAP BMI-for-Age (Obesity / Overweight / 
+// Underweight), Growth Percentiles & Mid-Parental Target Screener
 // ==========================================================
 
 // 1. MAIN SCREENER RUNNER
@@ -40,11 +40,11 @@ function runScreener() {
   const lblFather = document.getElementById("lblFather");
   const lblMother = document.getElementById("lblMother");
 
-  const isBaby = (ageKey === "0m" || ageKey === "3m" || ageKey === "6m" || ageKey === "9m" || ageKey === "12m");
+  const isBaby = (ageKey === "0m" || ageKey === "3m" || ageKey === "6m" || ageKey === "9m" || ageKey === "12m" || ageKey === "18m");
 
   if (lang === "english") {
     if (lblTitle) lblTitle.innerText = "Check Your Child's Growth & Development";
-    if (lblSubtitle) lblSubtitle.innerText = "IAP Growth Charts, Tanner Pubertal Staging, Genetic Target Height & Developmental Milestones.";
+    if (lblSubtitle) lblSubtitle.innerText = "IAP BMI-for-Age (Obesity Screen), Tanner Staging, Genetic Target Height & Milestones.";
     if (lblLang) lblLang.innerText = "Select Language";
     if (lblAge) lblAge.innerText = "Child's Age";
     if (lblGender) lblGender.innerText = "Child's Gender";
@@ -54,7 +54,7 @@ function runScreener() {
     if (lblMother) lblMother.innerText = "Mother's Height";
   } else {
     if (lblTitle) lblTitle.innerText = "बच्चे की वृद्धि और विकास की जांच (Check Child's Growth & Development)";
-    if (lblSubtitle) lblSubtitle.innerText = "IAP ग्रोथ चार्ट, टैनर प्यूबर्टल स्टेजिंग, जेनेटिक हाइट फॉर्मूला एवं विकासात्मक स्केल आधारित।";
+    if (lblSubtitle) lblSubtitle.innerText = "IAP बीएमआई चार्ट (मोटापा जांच), टैनर स्टेजिंग, जेनेटिक हाइट फॉर्मूला एवं विकासात्मक स्केल।";
     if (lblLang) lblLang.innerText = "भाषा चुनें (Language)";
     if (lblAge) lblAge.innerText = "बच्चे की उम्र (Age)";
     if (lblGender) lblGender.innerText = "लिंग (Gender)";
@@ -73,6 +73,7 @@ function runScreener() {
   let growthHtml = "";
   let wStatus = "";
   let hStatus = "";
+  let bmiStatus = "";
 
   // -------------------------------------------------------------
   // 1. Weight Evaluation
@@ -80,48 +81,45 @@ function runScreener() {
   if (!isNaN(wInput) && ref) {
     if (wInput < ref.minW) {
       wStatus = lang === "english" 
-        ? `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>Weight (${wInput} kg): Below 3rd percentile.</strong> Standard IAP range: ${ref.minW} – ${ref.maxW} kg. Consult Dr. Dinesh Mittal for dietary & nutritional evaluation.</div></div>`
-        : `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>वजन (${wInput} kg): 3वें परसेंटाइल से कम (Underweight)।</strong> मानक IAP सीमा: ${ref.minW} – ${ref.maxW} kg। पोषण समीक्षा हेतु डॉ. दिनेश मित्तल से परामर्श लें।</div></div>`;
+        ? `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>Weight (${wInput} kg): Below 3rd percentile.</strong> Standard IAP range: ${ref.minW} – ${ref.maxW} kg. Consult Dr. Dinesh Mittal for nutritional review.</div></div>`
+        : `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>वजन (${wInput} kg): 3वें परसेंटाइल से कम (Underweight)।</strong> मानक IAP सीमा: ${ref.minW} – ${ref.maxW} kg। पोषण समीक्षा आवश्यक है।</div></div>`;
     } else if (wInput > ref.maxW) {
       wStatus = lang === "english"
-        ? `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>Weight (${wInput} kg): Above 97th percentile.</strong> Exceeds typical IAP range (${ref.minW} – ${ref.maxW} kg). Diet & activity moderation recommended.</div></div>`
-        : `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>वजन (${wInput} kg): 97वें परसेंटाइल से अधिक।</strong> मानक IAP सीमा (${ref.minW} – ${ref.maxW} kg) से अधिक है। पोषण व गतिविधि संतुलित करें।</div></div>`;
+        ? `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>Weight (${wInput} kg): Above 97th percentile.</strong> Exceeds typical population range (${ref.minW} – ${ref.maxW} kg). Diet & activity review advised.</div></div>`
+        : `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>वजन (${wInput} kg): 97वें परसेंटाइल से अधिक।</strong> मानक IAP सीमा (${ref.minW} – ${ref.maxW} kg) से अधिक है।</div></div>`;
     } else {
       wStatus = lang === "english"
-        ? `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>Weight (${wInput} kg): Normal & Healthy.</strong> Well aligned with standard IAP population range (${ref.minW} – ${ref.maxW} kg).</div></div>`
+        ? `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>Weight (${wInput} kg): Normal & Healthy.</strong> Aligned with standard IAP population range (${ref.minW} – ${ref.maxW} kg).</div></div>`
         : `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>वजन (${wInput} kg): बिल्कुल सामान्य एवं स्वस्थ।</strong> IAP मानक सीमा (${ref.minW} – ${ref.maxW} kg) के अनुसार उत्तम है।</div></div>`;
     }
   }
 
   // -------------------------------------------------------------
-  // 2. Auxological Height Z-Score & Mid-Parental Discrepancy Calculation
+  // 2. Auxological Height Z-Score & Mid-Parental Discrepancy
   // -------------------------------------------------------------
   let childHeightZ = 0;
   let targetAdultZ = 0;
   let hasHeightDiscrepancy = false;
-  let discrepancySeverity = "none"; // 'severe', 'moderate', 'none'
+  let discrepancySeverity = "none";
   let targetHeight = NaN;
 
   if (ref) {
     const meanH = (ref.minH + ref.maxH) / 2;
-    const sdH = (ref.maxH - ref.minH) / 3.76; // Approx 3rd to 97th centile is +/- 1.88 SD
+    const sdH = (ref.maxH - ref.minH) / 3.76;
     if (!isNaN(hInput)) {
       childHeightZ = (hInput - meanH) / sdH;
     }
   }
 
-  // Mid-Parental Height (Tanner Formula) & Adult Genetic Z-Score
+  // Mid-Parental Height (Tanner Formula)
   if (!isNaN(fHeight) && !isNaN(mHeight)) {
     targetHeight = (gender === "boy") ? (fHeight + mHeight + 13) / 2 : (fHeight + mHeight - 13) / 2;
-    
-    // Adult IAP Reference: Boys Mean ~174.5 cm (SD ~6.5), Girls Mean ~161.5 cm (SD ~6.0)
     const adultMean = (gender === "boy") ? 174.5 : 161.5;
     const adultSD = (gender === "boy") ? 6.5 : 6.0;
     targetAdultZ = (targetHeight - adultMean) / adultSD;
 
-    // Disparity Evaluation: Difference between Child Z-Score and Target Genetic Z-Score
     if (!isNaN(hInput) && ref) {
-      const zDiff = targetAdultZ - childHeightZ; // Positive means child is lagging below genetic target
+      const zDiff = targetAdultZ - childHeightZ;
       if (zDiff >= 2.0) {
         hasHeightDiscrepancy = true;
         discrepancySeverity = "severe";
@@ -136,30 +134,59 @@ function runScreener() {
   if (!isNaN(hInput) && ref) {
     if (hInput < ref.minH) {
       hStatus = lang === "english"
-        ? `<div class="flag-card flag-red"><i class="fa-solid fa-circle-exclamation"></i> <div><strong>Length/Height (${hInput} cm): Below 3rd percentile (Short Stature).</strong> Below population norm (${ref.minH} – ${ref.maxH} cm). Medical evaluation advised.</div></div>`
+        ? `<div class="flag-card flag-red"><i class="fa-solid fa-circle-exclamation"></i> <div><strong>Length/Height (${hInput} cm): Below 3rd percentile (Short Stature).</strong> Below population norm (${ref.minH} – ${ref.maxH} cm). Growth velocity evaluation advised.</div></div>`
         : `<div class="flag-card flag-red"><i class="fa-solid fa-circle-exclamation"></i> <div><strong>लंबाई / कद (${hInput} cm): 3वें परसेंटाइल से कम (Short Stature)।</strong> मानक IAP सीमा (${ref.minH} – ${ref.maxH} cm) से कम है। चिकित्सीय जांच आवश्यक है।</div></div>`;
     } else if (hasHeightDiscrepancy && discrepancySeverity === "severe") {
-      // THE FIX: Population normal (e.g., 10th-25th centile), but severe genetic mismatch!
       hStatus = lang === "english"
-        ? `<div class="flag-card flag-red"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>Height (${hInput} cm): Genetic Target Discrepancy Alert!</strong> Although within broad population percentiles, child's height is significantly lagging (>2 Standard Deviations below) their parental genetic potential. Pediatric growth velocity evaluation recommended.</div></div>`
-        : `<div class="flag-card flag-red"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>लंबाई (${hInput} cm): जेनेटिक क्षमता से गंभीर अंतर (Discrepancy Alert)!</strong> यद्यपि लंबाई सामान्य जनसंख्या सीमा में है, परन्तु माता-पिता की अनुवांशिक लंबाई के अनुपात में काफी कम है (>2 SD अंतर)। विकास गति (Growth Velocity) जांच आवश्यक है।</div></div>`;
+        ? `<div class="flag-card flag-red"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>Height (${hInput} cm): Genetic Target Discrepancy Alert!</strong> Child tracks >2 Standard Deviations below parental genetic potential. Pediatric evaluation advised.</div></div>`
+        : `<div class="flag-card flag-red"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>लंबाई (${hInput} cm): जेनेटिक क्षमता से गंभीर अंतर (Discrepancy Alert)!</strong> माता-पिता की अनुवांशिक लंबाई के अनुपात में काफी कम है (>2 SD अंतर)।</div></div>`;
     } else if (hasHeightDiscrepancy && discrepancySeverity === "moderate") {
       hStatus = lang === "english"
-        ? `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>Height (${hInput} cm): Trailing Relative to Parental Target.</strong> Child's height tracks below their mid-parental genetic centile channel (~1.5 SD difference). Growth velocity monitoring recommended.</div></div>`
-        : `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>लंबाई (${hInput} cm): जेनेटिक लक्ष्य से धीमी गति।</strong> बच्चे का कद माता-पिता की संभावित जेनेटिक क्षमता से कम गति से बढ़ रहा है। 6 माह में पुनः जांच कराएं।</div></div>`;
+        ? `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>Height (${hInput} cm): Trailing Relative to Parental Target.</strong> Tracks below mid-parental genetic centile channel (~1.5 SD difference).</div></div>`
+        : `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>लंबाई (${hInput} cm): जेनेटिक लक्ष्य से धीमी गति।</strong> बच्चे का कद माता-पिता की संभावित जेनेटिक क्षमता से कम गति से बढ़ रहा है।</div></div>`;
     } else if (hInput > ref.maxH) {
       hStatus = lang === "english"
         ? `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>Length/Height (${hInput} cm): Above Average (>97th percentile).</strong> Robust linear growth above population average (${ref.minH} – ${ref.maxH} cm).</div></div>`
-        : `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>लंबाई / कद (${hInput} cm): औसत से अधिक (>97वां परसेंटाइल)।</strong> IAP मानक सीमा (${ref.minH} – ${ref.maxH} cm) से उत्तम विकास।</div></div>`;
+        : `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>लंबाई / कद (${hInput} cm): औसत से अधिक (>97वां परसेंटाइल)।</strong> उत्तम विकास।</div></div>`;
     } else {
       hStatus = lang === "english"
         ? `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>Length/Height (${hInput} cm): Normal & Harmonious.</strong> Tracking well within expected population and genetic target parameters (${ref.minH} – ${ref.maxH} cm).</div></div>`
-        : `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>लंबाई / कद (${hInput} cm): आदर्श विकास क्रम।</strong> IAP ग्रोथ चार्ट (${ref.minH} – ${ref.maxH} cm) व आनुवंशिक लक्ष्य के अनुरूप है।</div></div>`;
+        : `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>लंबाई / कद (${hInput} cm): आदर्श विकास क्रम।</strong> IAP ग्रोथ चार्ट व आनुवंशिक लक्ष्य के अनुरूप है।</div></div>`;
     }
   }
 
   // -------------------------------------------------------------
-  // 3. Mid-Parental Height Output Box
+  // 3. IAP BMI-FOR-AGE EVALUATION (Ages 2 to 18 Years)
+  // -------------------------------------------------------------
+  if (!isNaN(wInput) && !isNaN(hInput) && ref && ref.minBmi) {
+    const heightInMeters = hInput / 100;
+    const calcBmi = (wInput / (heightInMeters * heightInMeters)).toFixed(1);
+
+    if (calcBmi < ref.minBmi) {
+      // Underweight / Wasting (< 3rd percentile)
+      bmiStatus = lang === "english"
+        ? `<div class="flag-card flag-red" style="background:#fff1f2; border-color:#fecdd3; color:#9f1239;"><i class="fa-solid fa-circle-exclamation"></i> <div><strong>BMI (${calcBmi} kg/m²): Underweight / Thinness (<3rd Percentile).</strong> Below healthy IAP range (Normal: ${ref.minBmi} – ${ref.ovBmi}). Comprehensive dietary & calorie-density plan advised by Dr. Dinesh Mittal.</div></div>`
+        : `<div class="flag-card flag-red" style="background:#fff1f2; border-color:#fecdd3; color:#9f1239;"><i class="fa-solid fa-circle-exclamation"></i> <div><strong>बीएमआई (${calcBmi} kg/m²): कम वजन / कुपोषण (<3वां परसेंटाइल)।</strong> सामान्य IAP सीमा: ${ref.minBmi} – ${ref.ovBmi} kg/m²। पोषण सुधार हेतु क्लिनिक परामर्श लें।</div></div>`;
+    } else if (calcBmi >= ref.obBmi) {
+      // Obese (>= 27th adult equivalent / > 95th percentile)
+      bmiStatus = lang === "english"
+        ? `<div class="flag-card flag-red" style="background:#fef2f2; border-color:#f87171; color:#991b1b;"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>BMI (${calcBmi} kg/m²): Childhood Obesity (≥95th Percentile / IAP 27-Equivalent).</strong> Elevated metabolic risk (insulin resistance, fatty liver, hypertension). Structured lifestyle, zero-sugar, and pediatric endocrine guidance recommended.</div></div>`
+        : `<div class="flag-card flag-red" style="background:#fef2f2; border-color:#f87171; color:#991b1b;"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>बीएमआई (${calcBmi} kg/m²): बाल मोटापा - Childhood Obesity (≥95वां परसेंटाइल)।</strong> उच्च मेटाबॉलिक जोखिम (इंसुलिन रेजिस्टेंस, फैटी लिवर)। तत्काल जीवनशैली सुधार व डॉक्टर से परामर्श लें।</div></div>`;
+    } else if (calcBmi >= ref.ovBmi) {
+      // Overweight (>= 23rd adult equivalent / > 75th percentile)
+      bmiStatus = lang === "english"
+        ? `<div class="flag-card flag-yellow" style="background:#fffbeb; border-color:#fde047; color:#854d0e;"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>BMI (${calcBmi} kg/m²): Overweight (≥75th Percentile / IAP 23-Equivalent).</strong> Exceeds normal threshold (${ref.ovBmi} kg/m²). Limit processed snacks/sugars and ensure 60 mins active sports daily.</div></div>`
+        : `<div class="flag-card flag-yellow" style="background:#fffbeb; border-color:#fde047; color:#854d0e;"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>बीएमआई (${calcBmi} kg/m²): अधिक वजन - Overweight (≥75वां परसेंटाइल)।</strong> सामान्य सीमा (${ref.minBmi} – ${ref.ovBmi}) से अधिक है। जंक फूड बंद करें व रोज 1 घंटा खेलकूद सुनिश्चित करें।</div></div>`;
+    } else {
+      // Normal BMI
+      bmiStatus = lang === "english"
+        ? `<div class="flag-card flag-green"><i class="fa-solid fa-heart-pulse"></i> <div><strong>BMI (${calcBmi} kg/m²): Ideal & Healthy Weight.</strong> Perfectly tracking in healthy IAP percentile channels (${ref.minBmi} – ${ref.ovBmi} kg/m²).</div></div>`
+        : `<div class="flag-card flag-green"><i class="fa-solid fa-heart-pulse"></i> <div><strong>बीएमआई (${calcBmi} kg/m²): आदर्श एवं स्वस्थ वजन।</strong> IAP मानक अनुसार बिल्कुल सही सीमा (${ref.minBmi} – ${ref.ovBmi} kg/m²) में है।</div></div>`;
+    }
+  }
+
+  // -------------------------------------------------------------
+  // 4. Mid-Parental Height Output Box
   // -------------------------------------------------------------
   let mphHtml = "";
   if (!isNaN(targetHeight)) {
@@ -171,11 +198,11 @@ function runScreener() {
     if (!isNaN(hInput) && ref) {
       if (discrepancySeverity === "severe") {
         targetAnalysisText = lang === "english"
-          ? `<span style="color: #b91c1c; font-weight:700; display:block; margin-top:6px;">⚠️ Clinical Note: Parents are tall/high-percentile, but the child is tracking on lower percentiles. This genetic discordance warrants evaluation for hidden nutritional, celiac, thyroid, or growth-hormone factors.</span>`
-          : `<span style="color: #b91c1c; font-weight:700; display:block; margin-top:6px;">⚠️ चिकित्सीय संकेत: माता-पिता का कद ऊंचा है, परन्तु बच्चा निचले परसेंटाइल पर चल रहा है। यह जेनेटिक असंतुलन पोषण, थायरॉइड, सीलिएक या ग्रोथ हार्मोन की विस्तृत जांच का संकेत देता है।</span>`;
+          ? `<span style="color: #b91c1c; font-weight:700; display:block; margin-top:6px;">⚠️ Clinical Note: Parents are tall/high-percentile, but the child is tracking on lower percentiles. Evaluation for nutritional, celiac, thyroid, or growth-hormone factors advised.</span>`
+          : `<span style="color: #b91c1c; font-weight:700; display:block; margin-top:6px;">⚠️ चिकित्सीय संकेत: माता-पिता का कद ऊंचा है, परन्तु बच्चा निचले परसेंटाइल पर चल रहा है। विस्तृत चिकित्सीय जांच आवश्यक है।</span>`;
       } else if (discrepancySeverity === "moderate") {
         targetAnalysisText = lang === "english"
-          ? `<span style="color: #b45309; font-weight:600; display:block; margin-top:6px;">🟡 Clinical Note: Child is tracking slightly below genetic mid-parental potential. Chart growth velocity every 3-6 months.</span>`
+          ? `<span style="color: #b45309; font-weight:600; display:block; margin-top:6px;">🟡 Clinical Note: Child tracks slightly below genetic target. Chart growth velocity every 3-6 months.</span>`
           : `<span style="color: #b45309; font-weight:600; display:block; margin-top:6px;">🟡 चिकित्सीय संकेत: बच्चा जेनेटिक लक्ष्य से थोड़ा धीमा है। हर 3 से 6 महीने में विकास दर मापें।</span>`;
       } else {
         targetAnalysisText = lang === "english"
@@ -214,12 +241,12 @@ function runScreener() {
   }
 
   const genderTitle = (gender === "boy") ? (lang === "english" ? "BOY" : "बालक") : (lang === "english" ? "GIRL" : "बालिका");
-  const emptyWText = lang === "english" ? "Enter current weight above for instant assessment." : "त्वरित मूल्यांकन हेतु ऊपर वजन दर्ज करें।";
-  const emptyHText = lang === "english" ? "Enter current height/length above for instant assessment." : "त्वरित मूल्यांकन हेतु ऊपर लंबाई दर्ज करें।";
+  const emptyWText = lang === "english" ? "Enter weight above for instant percentile assessment." : "त्वरित मूल्यांकन हेतु ऊपर वजन दर्ज करें।";
+  const emptyHText = lang === "english" ? "Enter height/length above for instant percentile assessment." : "त्वरित मूल्यांकन हेतु ऊपर लंबाई दर्ज करें।";
 
   growthHtml = `
     <div class="result-box">
-      <h4><i class="fa-solid fa-ruler-combined" style="color: var(--brand-primary);"></i> ${lang === "english" ? "IAP Growth & Auxological Target Assessment" : "IAP ग्रोथ एवं संभावित कद मूल्यांकन"}</h4>
+      <h4><i class="fa-solid fa-ruler-combined" style="color: var(--brand-primary);"></i> ${lang === "english" ? "IAP Growth & BMI Assessment" : "IAP ग्रोथ एवं बीएमआई मूल्यांकन"}</h4>
       <span class="iap-ref-badge">IAP Standard (${ageName} - ${genderTitle})</span>
       <p style="font-size:0.84rem; color:#64748b; margin-bottom:10px;">
         ${lang === "english" ? "Population 3rd–97th Range:" : "सामान्य स्वस्थ सीमा:"} 
@@ -228,12 +255,13 @@ function runScreener() {
       </p>
       ${wStatus || `<p style="font-size:0.82rem; color:#94a3b8;">${emptyWText}</p>`}
       ${hStatus || `<p style="font-size:0.82rem; color:#94a3b8;">${emptyHText}</p>`}
+      ${bmiStatus}
       ${mphHtml}
     </div>
   `;
 
   // -------------------------------------------------------------
-  // 4. Milestones & Tanner Pubertal Staging
+  // 5. Milestones & Tanner Pubertal Staging
   // -------------------------------------------------------------
   const listLang = lang === "english" ? "en" : "hi";
   const greenList = (data.green && data.green[listLang]) ? data.green[listLang].map(item => `<li>${item}</li>`).join("") : "";
@@ -349,7 +377,7 @@ function runScreener() {
       ${weaningBox}
       <div style="text-align:center; margin-top:18px;">
         <button onclick="openBookingModal()" class="hero-cta-btn" style="padding: 10px 24px; font-size: 0.9rem; background:#0891b2; box-shadow: 0 4px 14px rgba(8, 145, 178, 0.35);">
-          <i class="fa-solid fa-calendar-check"></i> ${lang === "english" ? "Book Growth Evaluation with Dr. Dinesh Mittal" : "डॉ. दिनेश मित्तल से विकास मूल्यांकन बुक करें"}
+          <i class="fa-solid fa-calendar-check"></i> ${lang === "english" ? "Book Growth & BMI Consultation with Dr. Dinesh Mittal" : "डॉ. दिनेश मित्तल से विकास एवं बीएमआई परामर्श बुक करें"}
         </button>
       </div>
     </div>
