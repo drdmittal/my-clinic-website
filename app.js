@@ -1,46 +1,81 @@
-// ==========================================
-// 1. SCREENER CALCULATION & RENDERING
-// ==========================================
+// ==========================================================
+// CLINIC APPLICATION ENGINE (app.js)
+// Handles: Growth Screener, Tanner Puberty, FAQs & Popups
+// ==========================================================
+
+// 1. MAIN SCREENER RUNNER
 function runScreener() {
-  const lang = document.getElementById("screenerLang").value;
-  const ageKey = document.getElementById("screenerAge").value;
-  const gender = document.getElementById("screenerGender").value;
-  const wInput = parseFloat(document.getElementById("screenerWeight").value);
-  const hInput = parseFloat(document.getElementById("screenerHeight").value);
-  const fHeight = parseFloat(document.getElementById("fatherHeight").value);
-  const mHeight = parseFloat(document.getElementById("motherHeight").value);
+  // Safe element retrieval
+  const langEl = document.getElementById("screenerLang");
+  const ageEl = document.getElementById("screenerAge");
+  const genderEl = document.getElementById("screenerGender");
+  const weightEl = document.getElementById("screenerWeight");
+  const heightEl = document.getElementById("screenerHeight");
+  const fatherEl = document.getElementById("fatherHeight");
+  const motherEl = document.getElementById("motherHeight");
+  const resultsContainer = document.getElementById("screenerResults");
+
+  if (!ageEl || !genderEl || !resultsContainer) return;
+  if (typeof milestoneDatabase === "undefined") {
+    console.error("data.js is not loaded or milestoneDatabase is missing.");
+    return;
+  }
+
+  const lang = langEl ? langEl.value : "english";
+  const ageKey = ageEl.value;
+  const gender = genderEl.value;
+  const wInput = weightEl ? parseFloat(weightEl.value) : NaN;
+  const hInput = heightEl ? parseFloat(heightEl.value) : NaN;
+  const fHeight = fatherEl ? parseFloat(fatherEl.value) : NaN;
+  const mHeight = motherEl ? parseFloat(motherEl.value) : NaN;
+
+  // Dynamic UI Form Labels
+  const lblTitle = document.getElementById("lblTitle");
+  const lblSubtitle = document.getElementById("lblSubtitle");
+  const lblLang = document.getElementById("lblLang");
+  const lblAge = document.getElementById("lblAge");
+  const lblGender = document.getElementById("lblGender");
+  const lblWeight = document.getElementById("lblWeight");
+  const lblHeight = document.getElementById("lblHeight");
+  const lblFather = document.getElementById("lblFather");
+  const lblMother = document.getElementById("lblMother");
+
+  const isBaby = (ageKey === "0m" || ageKey === "3m" || ageKey === "6m" || ageKey === "9m" || ageKey === "12m");
 
   if (lang === "english") {
-    document.getElementById("lblTitle").innerText = "Child Growth, Tanner Puberty & Development Screener";
-    document.getElementById("lblSubtitle").innerText = "IAP Growth Charts, Tanner Pubertal Staging, Genetic Height Formula & Developmental Milestones.";
-    document.getElementById("lblLang").innerText = "Select Language";
-    document.getElementById("lblAge").innerText = "Child's Age";
-    document.getElementById("lblGender").innerText = "Child's Gender";
-    document.getElementById("lblWeight").innerText = "Current Weight (kg)";
-    document.getElementById("lblHeight").innerText = (ageKey === "0m" || ageKey === "3m" || ageKey === "6m" || ageKey === "9m" || ageKey === "12m") ? "Current Length (cm)" : "Current Height (cm)";
-    document.getElementById("lblFather").innerText = "Father's Height";
-    document.getElementById("lblMother").innerText = "Mother's Height";
+    if (lblTitle) lblTitle.innerText = "Child Growth, Tanner Puberty & Development Screener";
+    if (lblSubtitle) lblSubtitle.innerText = "IAP Growth Charts, Tanner Pubertal Staging, Genetic Height Formula & Developmental Milestones.";
+    if (lblLang) lblLang.innerText = "Select Language";
+    if (lblAge) lblAge.innerText = "Child's Age";
+    if (lblGender) lblGender.innerText = "Child's Gender";
+    if (lblWeight) lblWeight.innerText = "Current Weight (kg)";
+    if (lblHeight) lblHeight.innerText = isBaby ? "Length (cm)" : "Height (cm)";
+    if (lblFather) lblFather.innerText = "Father's Height";
+    if (lblMother) lblMother.innerText = "Mother's Height";
   } else {
-    document.getElementById("lblTitle").innerText = "शिशु विकास, टैनर किशोरावस्था एवं मील के पत्थर (Screener)";
-    document.getElementById("lblSubtitle").innerText = "IAP ग्रोथ चार्ट, टैनर प्यूबर्टल स्टेजिंग, जेनेटिक हाइट फॉर्मूला एवं विकासात्मक स्केल आधारित।";
-    document.getElementById("lblLang").innerText = "भाषा चुनें (Language)";
-    document.getElementById("lblAge").innerText = "बच्चे की उम्र (Age)";
-    document.getElementById("lblGender").innerText = "लिंग (Gender)";
-    document.getElementById("lblWeight").innerText = "वर्तमान वजन (kg)";
-    document.getElementById("lblHeight").innerText = (ageKey === "0m" || ageKey === "3m" || ageKey === "6m" || ageKey === "9m" || ageKey === "12m") ? "वर्तमान लंबाई (cm)" : "वर्तमान कद (cm)";
-    document.getElementById("lblFather").innerText = "पिता की लंबाई";
-    document.getElementById("lblMother").innerText = "माता की लंबाई";
+    if (lblTitle) lblTitle.innerText = "शिशु विकास, टैनर किशोरावस्था एवं मील के पत्थर (Screener)";
+    if (lblSubtitle) lblSubtitle.innerText = "IAP ग्रोथ चार्ट, टैनर प्यूबर्टल स्टेजिंग, जेनेटिक हाइट फॉर्मूला एवं विकासात्मक स्केल आधारित।";
+    if (lblLang) lblLang.innerText = "भाषा चुनें (Language)";
+    if (lblAge) lblAge.innerText = "बच्चे की उम्र (Age)";
+    if (lblGender) lblGender.innerText = "लिंग (Gender)";
+    if (lblWeight) lblWeight.innerText = "वर्तमान वजन (kg)";
+    if (lblHeight) lblHeight.innerText = isBaby ? "वर्तमान लंबाई (cm)" : "वर्तमान कद (cm)";
+    if (lblFather) lblFather.innerText = "पिता की लंबाई";
+    if (lblMother) lblMother.innerText = "माता की लंबाई";
   }
 
   const data = milestoneDatabase[ageKey];
-  const ageName = data.name[lang === "english" ? "en" : "hi"];
-  const ref = data.iap[gender];
+  if (!data) return;
+
+  const ageName = data.name ? (data.name[lang === "english" ? "en" : "hi"] || "") : "";
+  const ref = data.iap ? data.iap[gender] : null;
 
   let growthHtml = "";
   let wStatus = "";
   let hStatus = "";
 
-  if (!isNaN(wInput)) {
+  // Weight Evaluation
+  if (!isNaN(wInput) && ref) {
     if (wInput < ref.minW) {
       wStatus = lang === "english" 
         ? `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>Weight (${wInput} kg): Below 3rd percentile.</strong> Standard IAP healthy range: ${ref.minW} – ${ref.maxW} kg. Consult Dr. Dinesh Mittal for dietary review.</div></div>`
@@ -56,7 +91,8 @@ function runScreener() {
     }
   }
 
-  if (!isNaN(hInput)) {
+  // Height Evaluation
+  if (!isNaN(hInput) && ref) {
     if (hInput < ref.minH) {
       hStatus = lang === "english"
         ? `<div class="flag-card flag-red"><i class="fa-solid fa-circle-exclamation"></i> <div><strong>Length/Height (${hInput} cm): Below 3rd percentile.</strong> Below expected IAP range (${ref.minH} – ${ref.maxH} cm). Linear growth evaluation advised.</div></div>`
@@ -72,9 +108,10 @@ function runScreener() {
     }
   }
 
+  // Mid-Parental Height (MPH) Formula
   let mphHtml = "";
   if (!isNaN(fHeight) && !isNaN(mHeight)) {
-    let targetHeight = (gender === "boy") ? (fHeight + mHeight + 13) / 2 : (fHeight + mHeight - 13) / 2;
+    const targetHeight = (gender === "boy") ? (fHeight + mHeight + 13) / 2 : (fHeight + mHeight - 13) / 2;
     const minTarget = (targetHeight - 6).toFixed(1);
     const maxTarget = (targetHeight + 6).toFixed(1);
     const midTarget = targetHeight.toFixed(1);
@@ -89,7 +126,7 @@ function runScreener() {
             • Projected Adult Target Height: <strong>${midTarget} cm</strong><br>
             • Target Genetic Range (±6 cm): <strong>${minTarget} cm – ${maxTarget} cm</strong><br>
             <span style="font-size: 0.8rem; color: #3b82f6; display: inline-block; margin-top: 4px;">
-              ${!isNaN(hInput) && hInput < ref.minH ? "⚠️ Current height is trailing relative to parental genetic potential. Clinic checkup recommended." : "✔ Current growth trajectory aligns well with parental genetic potential."}
+              ${(!isNaN(hInput) && ref && hInput < ref.minH) ? "⚠️ Current height is trailing relative to parental genetic potential. Clinic checkup recommended." : "✔ Current growth trajectory aligns well with parental genetic potential."}
             </span>
           </div>
         </div>
@@ -104,7 +141,7 @@ function runScreener() {
             • संभावित वयस्क लक्ष्य लंबाई: <strong>${midTarget} cm</strong><br>
             • आनुवंशिक सीमा (±6 cm): <strong>${minTarget} cm – ${maxTarget} cm</strong><br>
             <span style="font-size: 0.8rem; color: #3b82f6; display: inline-block; margin-top: 4px;">
-              ${!isNaN(hInput) && hInput < ref.minH ? "⚠️ बच्चे की वर्तमान लंबाई माता-पिता की आनुवंशिक क्षमता से कम चल रही है। क्लिनिक परामर्श लें।" : "✔ वर्तमान विकास गति माता-पिता की आनुवंशिक कद-काठी के अनुरूप है।"}
+              ${(!isNaN(hInput) && ref && hInput < ref.minH) ? "⚠️ बच्चे की वर्तमान लंबाई माता-पिता की आनुवंशिक क्षमता से कम चल रही है। क्लिनिक परामर्श लें।" : "✔ वर्तमान विकास गति माता-पिता की आनुवंशिक कद-काठी के अनुरूप है।"}
             </span>
           </div>
         </div>
@@ -122,8 +159,8 @@ function runScreener() {
       <span class="iap-ref-badge">IAP Standard (${ageName} - ${genderTitle})</span>
       <p style="font-size:0.84rem; color:#64748b; margin-bottom:10px;">
         ${lang === "english" ? "Standard Healthy Range:" : "सामान्य स्वस्थ सीमा:"} 
-        ${lang === "english" ? "Weight:" : "वजन:"} <strong>${ref.minW}–${ref.maxW} kg</strong> | 
-        ${lang === "english" ? "Length/Height:" : "लंबाई/कद:"} <strong>${ref.minH}–${ref.maxH} cm</strong>
+        ${lang === "english" ? "Weight:" : "वजन:"} <strong>${ref ? ref.minW : "" }–${ref ? ref.maxW : "" } kg</strong> | 
+        ${lang === "english" ? "Length/Height:" : "लंबाई/कद:"} <strong>${ref ? ref.minH : "" }–${ref ? ref.maxH : "" } cm</strong>
       </p>
       ${wStatus || `<p style="font-size:0.82rem; color:#94a3b8;">${emptyWText}</p>`}
       ${hStatus || `<p style="font-size:0.82rem; color:#94a3b8;">${emptyHText}</p>`}
@@ -131,11 +168,13 @@ function runScreener() {
     </div>
   `;
 
+  // Milestones List
   const listLang = lang === "english" ? "en" : "hi";
-  let greenList = data.green[listLang].map(item => `<li>${item}</li>`).join("");
-  let yellowList = data.yellow[listLang].map(item => `<li>${item}</li>`).join("");
-  let redList = data.red[listLang].map(item => `<li>${item}</li>`).join("");
+  const greenList = (data.green && data.green[listLang]) ? data.green[listLang].map(item => `<li>${item}</li>`).join("") : "";
+  const yellowList = (data.yellow && data.yellow[listLang]) ? data.yellow[listLang].map(item => `<li>${item}</li>`).join("") : "";
+  const redList = (data.red && data.red[listLang]) ? data.red[listLang].map(item => `<li>${item}</li>`).join("") : "";
 
+  // Tanner Puberty Section (8y to 18y)
   let tannerHtml = "";
   if (data.tanner && data.tanner[gender]) {
     const tInfo = data.tanner[gender];
@@ -163,7 +202,7 @@ function runScreener() {
     `;
   }
 
-  let devHtml = `
+  const devHtml = `
     <div class="result-box">
       <h4><i class="fa-solid fa-brain" style="color: #0284c7;"></i> ${lang === "english" ? "Developmental Milestones & Screening" : "विकासात्मक मील के पत्थर एवं जांच"}</h4>
       
@@ -195,6 +234,7 @@ function runScreener() {
     </div>
   `;
 
+  // Weaning Card at 6 Months
   let weaningBox = "";
   if (ageKey === "6m") {
     if (lang === "english") {
@@ -202,10 +242,10 @@ function runScreener() {
         <div class="feeding-protocol-box">
           <h5><i class="fa-solid fa-bowl-food"></i> Detailed 6-Month Weaning & Feeding Protocol</h5>
           <ul>
-            <li><strong>How to Start:</strong> Start with 1-2 teaspoons once daily when baby is alert and not overly hungry. Gradually increase to 2 small meals per day.</li>
-            <li><strong>Ideal Starter Foods:</strong> Well-cooked, smooth yellow moong dal water/khichdi, single-grain sooji kheer (cooked in water or pumped breastmilk), mashed ripe banana, boiled and puréed apple/pear, or steamed mashed carrot.</li>
-            <li><strong>The 3-Day Rule:</strong> Introduce only ONE new food item at a time. Wait for 3 consecutive days to check for allergies, skin rashes, or loose stools before introducing the next food item.</li>
-            <li><strong>Foods Strictly Avoided:</strong> NO cow's milk, buffalo milk, honey (risk of infant botulism), added table salt, or refined white sugar before 1 year of age.</li>
+            <li><strong>How to Start:</strong> Start with 1-2 teaspoons once daily. Gradually increase to 2 small meals per day.</li>
+            <li><strong>Ideal Starter Foods:</strong> Well-cooked yellow moong dal khichdi, sooji kheer, mashed banana, boiled apple puree, steamed carrot.</li>
+            <li><strong>The 3-Day Rule:</strong> Introduce only ONE new food at a time for 3 days to monitor allergies.</li>
+            <li><strong>Foods Strictly Avoided:</strong> NO cow's milk, honey, added salt, or sugar before 1 year.</li>
           </ul>
         </div>
       `;
@@ -214,40 +254,41 @@ function runScreener() {
         <div class="feeding-protocol-box">
           <h5><i class="fa-solid fa-bowl-food"></i> 6 माह पर ऊपरी आहार (Weaning) की संपूर्ण विधि</h5>
           <ul>
-            <li><strong>शुरुआत कैसे करें:</strong> दिन में एक बार 1-2 चम्मच से शुरुआत करें जब बच्चा शांत व भूखा हो। धीरे-धीरे मात्रा बढ़ाकर दिन में 2 बार करें।</li>
-            <li><strong>सर्वोत्तम प्रारंभिक आहार:</strong> अच्छी तरह पकी मूंग दाल की पतली खिचड़ी, सूजी की पतली खीर (पानी या माँ के दूध में पकी), मसला हुआ पका केला, उबला व मसला हुआ सेब (Apple Puree) अथवा उबली गाजर की प्यूरी।</li>
-            <li><strong>3-दिन का नियम (3-Day Rule):</strong> एक समय में केवल एक नया भोजन शुरू करें। 3 दिनों तक लगातार वही दें ताकि किसी भी एलर्जी, पेट खराबी या चकत्तों की पहचान हो सके।</li>
-            <li><strong>पूर्णतः वर्जित चीजें:</strong> 1 वर्ष तक गाय/भैंस का दूध, शहद (Infant Botulism का खतरा), नमक एवं अतिरिक्त चीनी बिल्कुल न दें।</li>
+            <li><strong>शुरुआत कैसे करें:</strong> दिन में एक बार 1-2 चम्मच से शुरुआत करें। धीरे-धीरे मात्रा बढ़ाकर दिन में 2 बार करें।</li>
+            <li><strong>सर्वोत्तम प्रारंभिक आहार:</strong> मूंग दाल की पतली खिचड़ी, सूजी की खीर, मसला केला, उबला व मसला हुआ सेब (Apple Puree)।</li>
+            <li><strong>3-दिन का नियम:</strong> एक समय में केवल एक नया भोजन 3 दिन तक दें ताकि एलर्जी की पहचान हो सके।</li>
+            <li><strong>पूर्णतः वर्जित चीजें:</strong> 1 वर्ष तक गाय/भैंस का दूध, शहद, नमक एवं अतिरिक्त चीनी बिल्कुल न दें।</li>
           </ul>
         </div>
       `;
     }
   }
 
-  const tips = data.parentTips;
-  let tipsHtml = `
+  // Parenting Tips Box
+  const tips = data.parentTips || { nutrition: {}, safety: {}, play: {}, care: {} };
+  const tipsHtml = `
     <div class="result-box" style="grid-column: 1 / -1; background: #faf5ff; border: 1.5px solid #e9d5ff;">
       <h4 style="color: #6b21a8;"><i class="fa-solid fa-heart-pulse"></i> ${ageName} ${lang === "english" ? "Parenting & Care Guide" : "अभिभावक देखभाल मार्गदर्शन (Parenting Guide)"}</h4>
       
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 12px;">
         <div style="background:#ffffff; padding:14px; border-radius:12px; border:1px solid #f3e8ff;">
           <strong style="color:#7e22ce; font-size:0.88rem; display:block; margin-bottom:4px;"><i class="fa-solid fa-apple-whole"></i> ${lang === "english" ? "Nutrition & Diet Requirements:" : "खुराक एवं पोषण (Nutrition):"}</strong>
-          <p style="font-size:0.84rem; color:#4b5563; line-height:1.45;">${tips.nutrition[listLang]}</p>
+          <p style="font-size:0.84rem; color:#4b5563; line-height:1.45;">${tips.nutrition[listLang] || ""}</p>
         </div>
 
         <div style="background:#ffffff; padding:14px; border-radius:12px; border:1px solid #f3e8ff;">
           <strong style="color:#b91c1c; font-size:0.88rem; display:block; margin-bottom:4px;"><i class="fa-solid fa-shield-halved"></i> ${lang === "english" ? "Child Safety & Accident Prevention:" : "सुरक्षा एवं दुर्घटना से बचाव (Safety):"}</strong>
-          <p style="font-size:0.84rem; color:#4b5563; line-height:1.45;">${tips.safety[listLang]}</p>
+          <p style="font-size:0.84rem; color:#4b5563; line-height:1.45;">${tips.safety[listLang] || ""}</p>
         </div>
 
         <div style="background:#ffffff; padding:14px; border-radius:12px; border:1px solid #f3e8ff;">
           <strong style="color:#0369a1; font-size:0.88rem; display:block; margin-bottom:4px;"><i class="fa-solid fa-puzzle-piece"></i> ${lang === "english" ? "Play, Brain & Cognitive Stimulation:" : "खेल, संवाद एवं मानसिक विकास:"}</strong>
-          <p style="font-size:0.84rem; color:#4b5563; line-height:1.45;">${tips.play[listLang]}</p>
+          <p style="font-size:0.84rem; color:#4b5563; line-height:1.45;">${tips.play[listLang] || ""}</p>
         </div>
 
         <div style="background:#ffffff; padding:14px; border-radius:12px; border:1px solid #f3e8ff;">
           <strong style="color:#15803d; font-size:0.88rem; display:block; margin-bottom:4px;"><i class="fa-solid fa-stethoscope"></i> ${lang === "english" ? "Vaccine & Doctor Care Tip:" : "टीकाकरण एवं चिकित्सकीय सलाह:"}</strong>
-          <p style="font-size:0.84rem; color:#4b5563; line-height:1.45;">${tips.care[listLang]}</p>
+          <p style="font-size:0.84rem; color:#4b5563; line-height:1.45;">${tips.care[listLang] || ""}</p>
         </div>
       </div>
 
@@ -261,27 +302,28 @@ function runScreener() {
     </div>
   `;
 
-  document.getElementById("screenerResults").innerHTML = `
+  resultsContainer.innerHTML = `
     <div class="results-grid">
       ${growthHtml}
       ${devHtml}
       ${tipsHtml}
     </div>
   `;
+
+  renderAdolescentFaqs();
 }
 
-// ==========================================
-// RENDER DYNAMIC ADOLESCENT FAQS
-// ==========================================
+// 2. ADOLESCENT FAQS ACCORDION RENDERER
 function renderAdolescentFaqs() {
   const container = document.getElementById("faqAccordionContainer");
   if (!container || typeof adolescentFaqDatabase === "undefined") return;
 
-  const lang = document.getElementById("screenerLang") ? document.getElementById("screenerLang").value : "english";
+  const langEl = document.getElementById("screenerLang");
+  const lang = langEl ? langEl.value : "english";
   const listLang = (lang === "hindi") ? "hi" : "en";
 
   let html = "";
-  adolescentFaqDatabase.forEach((faq, index) => {
+  adolescentFaqDatabase.forEach((faq) => {
     html += `
       <div class="faq-item faq-all faq-${faq.category}">
         <button class="faq-question" onclick="toggleFaq(this)">
@@ -298,55 +340,87 @@ function renderAdolescentFaqs() {
   container.innerHTML = html;
 }
 
-// Re-render FAQs when language dropdown changes
-const originalRunScreener = window.runScreener;
-window.runScreener = function() {
-  if (originalRunScreener) originalRunScreener();
-  renderAdolescentFaqs();
-};
+// 3. FAQ ACCORDION INTERACTION
+function toggleFaq(button) {
+  const item = button.parentElement;
+  const answer = item.querySelector('.faq-answer');
+  const isActive = item.classList.contains('active');
 
-document.addEventListener("DOMContentLoaded", function() {
-  renderAdolescentFaqs();
-});
+  document.querySelectorAll('.faq-item').forEach(el => {
+    el.classList.remove('active');
+    const a = el.querySelector('.faq-answer');
+    if (a) a.style.display = 'none';
+  });
 
-// ==========================================
-// 3. MODAL HANDLERS
-// ==========================================
+  if (!isActive && answer) {
+    item.classList.add('active');
+    answer.style.display = 'block';
+  }
+}
+
+function filterFaq(category) {
+  document.querySelectorAll('.faq-filter-btn').forEach(b => b.classList.remove('active-filter'));
+  const targetBtn = document.getElementById('btn-' + category);
+  if (targetBtn) targetBtn.classList.add('active-filter');
+
+  document.querySelectorAll('.faq-item').forEach(item => {
+    if (category === 'all' || item.classList.contains('faq-' + category)) {
+      item.style.display = 'block';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+}
+
+// 4. MODAL POPUP CONTROLLERS
 function openBookingModal() {
-  document.getElementById('bookingModal').style.display = 'flex';
-  document.body.style.overflow = 'hidden';
+  const modal = document.getElementById('bookingModal');
+  if (modal) {
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
 }
 
 function closeBookingModal() {
-  document.getElementById('bookingModal').style.display = 'none';
-  document.body.style.overflow = 'auto';
+  const modal = document.getElementById('bookingModal');
+  if (modal) {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
 }
 
 function openBlogModal(articleKey) {
+  if (typeof blogArticles === "undefined") return;
   const article = blogArticles[articleKey];
-  if (article) {
-    document.getElementById('blogModalTitle').innerHTML = '<i class="fa-solid fa-newspaper" style="color: var(--brand-secondary);"></i> ' + article.title;
-    document.getElementById('blogModalContent').innerHTML = article.content;
-    document.getElementById('blogModal').style.display = 'flex';
+  const titleEl = document.getElementById('blogModalTitle');
+  const contentEl = document.getElementById('blogModalContent');
+  const modal = document.getElementById('blogModal');
+
+  if (article && titleEl && contentEl && modal) {
+    titleEl.innerHTML = '<i class="fa-solid fa-newspaper" style="color: var(--brand-secondary);"></i> ' + article.title;
+    contentEl.innerHTML = article.content;
+    modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
   }
 }
 
 function closeBlogModal() {
-  document.getElementById('blogModal').style.display = 'none';
-  document.body.style.overflow = 'auto';
+  const modal = document.getElementById('blogModal');
+  if (modal) {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
 }
 
 function closeModalOnOverlay(event, modalId) {
-  if (event.target.id === modalId) {
+  if (event.target && event.target.id === modalId) {
     if (modalId === 'bookingModal') closeBookingModal();
     if (modalId === 'blogModal') closeBlogModal();
   }
 }
 
-// Auto-run screener on page load
+// 5. AUTO-INITIALIZATION ON PAGE LOAD
 document.addEventListener("DOMContentLoaded", function() {
-  if (document.getElementById("screenerAge")) {
-    runScreener();
-  }
+  runScreener();
+  renderAdolescentFaqs();
 });
