@@ -5,7 +5,6 @@
 
 // 1. MAIN SCREENER RUNNER
 function runScreener() {
-  // Safe element retrieval
   const langEl = document.getElementById("screenerLang");
   const ageEl = document.getElementById("screenerAge");
   const genderEl = document.getElementById("screenerGender");
@@ -325,12 +324,12 @@ function renderAdolescentFaqs() {
   let html = "";
   adolescentFaqDatabase.forEach((faq) => {
     html += `
-      <div class="faq-item faq-all faq-${faq.category}">
-        <button class="faq-question" onclick="toggleFaq(this)">
-          <span><i class="${faq.icon}" style="color:${faq.color};"></i> ${faq.q[listLang]}</span>
+      <div class="faq-item faq-all faq-${faq.category}" style="display: block;">
+        <button class="faq-question" type="button" onclick="toggleFaq(this)">
+          <span><i class="${faq.icon}" style="color:${faq.color}; margin-right: 8px;"></i> ${faq.q[listLang]}</span>
           <i class="fa-solid fa-chevron-down faq-icon"></i>
         </button>
-        <div class="faq-answer">
+        <div class="faq-answer" style="display: none;">
           <p>${faq.a[listLang]}</p>
         </div>
       </div>
@@ -342,7 +341,8 @@ function renderAdolescentFaqs() {
 
 // 3. FAQ ACCORDION INTERACTION
 function toggleFaq(button) {
-  const item = button.parentElement;
+  const item = button.closest('.faq-item');
+  if (!item) return;
   const answer = item.querySelector('.faq-answer');
   const isActive = item.classList.contains('active');
 
