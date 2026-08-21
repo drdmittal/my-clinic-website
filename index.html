@@ -300,10 +300,41 @@
             font-size: 0.88rem; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; padding: 0;
         }
 
-        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 22px; }
+        /* Clinic Details & Map Grid */
+        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 22px; }
         .contact-details { background: #ffffff; padding: 26px; border-radius: 24px; border: 1px solid #f1f5f9; box-shadow: var(--card-shadow); }
         .contact-item { display: flex; gap: 12px; margin-bottom: 16px; align-items: flex-start; font-size: 0.9rem; }
         .contact-item i { font-size: 1.15rem; color: var(--brand-primary); margin-top: 3px; }
+
+        /* Embedded Interactive Map Card */
+        .map-card-wrapper {
+            background: #ffffff; padding: 18px; border-radius: 24px; border: 1.5px solid #e0f2fe;
+            box-shadow: var(--card-shadow); display: flex; flex-direction: column; gap: 12px;
+        }
+        .embedded-map-iframe {
+            width: 100%; height: 250px; border: none; border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .map-action-btn {
+            background: linear-gradient(135deg, #0e7490, #0891b2);
+            color: #ffffff !important;
+            padding: 12px 18px;
+            border-radius: 14px;
+            font-size: 0.92rem;
+            font-weight: 700;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 14px rgba(8, 145, 178, 0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .map-action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(8, 145, 178, 0.4);
+            color: #ffffff !important;
+        }
 
         /* Subtle Local SEO Styles */
         .lowkey-seo-section {
@@ -570,7 +601,7 @@
                             <option value="4y">4 Years</option>
                             <option value="5y">5 Years</option>
                             <option value="6y">6 Years</option>
-                            <option value="7y">7 Years</option>
+                            <option set="7y" value="7y">7 Years</option>
                             <option value="8y">8 Years</option>
                             <option value="9y">9 Years</option>
                             <option value="10y">10 Years</option>
@@ -713,10 +744,12 @@
         </div>
     </div>
 
-    <!-- Location & Contact -->
+    <!-- Location & Direct Map Section -->
     <div class="container" id="clinic-location">
         <h2 class="section-title">Visit Our Clinic</h2>
         <div class="contact-grid">
+            
+            <!-- Address & Hours Card -->
             <div class="contact-details">
                 <h3 style="color: #083344; margin-bottom: 18px; font-size: 1.15rem; font-family: 'Fredoka', cursive;">Clinic Details</h3>
                 <div class="contact-item">
@@ -729,22 +762,29 @@
                 </div>
                 <div class="contact-item">
                     <i class="fa-solid fa-phone"></i>
-                    <div><strong>Phone / Mobile:</strong><br>+91 81305 21456</div>
+                    <div><strong>Phone / Mobile:</strong><br><a href="tel:+918130521456" style="color:#0891b2; text-decoration:none; font-weight:700;">+91 81305 21456</a></div>
                 </div>
             </div>
 
-            <div class="contact-details" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: #f0fdfa;">
-                <i class="fa-solid fa-map-location-dot" style="font-size: 2.8rem; color: var(--brand-secondary); margin-bottom: 12px;"></i>
-                <h3 style="color: #083344; margin-bottom: 8px; font-size: 1.15rem; font-family: 'Fredoka', cursive;">Driving Directions</h3>
-                <p style="color: var(--muted-text); font-size: 0.88rem; margin-bottom: 16px;">Tap below to open Google Maps directly to our clinic in Sector 3 Rohini.</p>
-                <a href="https://maps.app.goo.gl/tW6fDW25fgrrA86P6" target="_blank" class="social-pill pill-google" style="justify-content: center; padding: 12px 22px; font-size: 0.9rem; min-height: 48px;">
-                    <i class="fa-solid fa-diamond-turn-right"></i> Open Location in Google Maps
+            <!-- Direct Embedded Google Map Card with High Contrast Action -->
+            <div class="map-card-wrapper">
+                <iframe 
+                    class="embedded-map-iframe"
+                    src="https://maps.google.com/maps?q=28.7080828,77.1078816&hl=en&z=16&output=embed"
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade"
+                    title="Clinic Location Map - Dr Dinesh Mittal Rohini Sector 3">
+                </iframe>
+                <a href="https://maps.app.goo.gl/tW6fDW25fgrrA86P6" target="_blank" rel="noopener noreferrer" class="map-action-btn">
+                    <i class="fa-solid fa-diamond-turn-right" style="font-size:1.1rem;"></i> Open Directions in Google Maps
                 </a>
             </div>
+
         </div>
     </div>
 
-    <!-- SUBTLE & LOW-KEY LOCAL SEO SECTION (BUDH VIHAR ADDED) -->
+    <!-- Low-Key Local SEO Section -->
     <div class="lowkey-seo-section">
         <p class="lowkey-seo-text">
             Consultation and vaccination services accessible for families in Rohini (Sectors 3 to 24), Pitampura, Prashant Vihar, Vijay Vihar, Budh Vihar, Nangloi & North Delhi.
@@ -893,7 +933,7 @@
     </script>
 
     <!-- EXTERNAL MODULAR SCRIPTS -->
-    <script defer src="data.js?v=17"></script>
-    <script defer src="app.js?v=17"></script>
+    <script defer src="data.js?v=18"></script>
+    <script defer src="app.js?v=18"></script>
 </body>
 </html>
