@@ -1,7 +1,9 @@
 // ==========================================================
 // CLINIC APPLICATION ENGINE (app.js)
+// Handles: Growth Screener, Tanner Puberty, FAQs & Popups
 // ==========================================================
 
+// 1. MAIN SCREENER RUNNER
 function runScreener() {
   const langEl = document.getElementById("screenerLang");
   const ageEl = document.getElementById("screenerAge");
@@ -14,7 +16,7 @@ function runScreener() {
 
   if (!ageEl || !genderEl || !resultsContainer) return;
   if (typeof milestoneDatabase === "undefined") {
-    console.error("milestoneDatabase is missing.");
+    console.error("data.js is not loaded or milestoneDatabase is missing.");
     return;
   }
 
@@ -26,6 +28,7 @@ function runScreener() {
   const fHeight = fatherEl ? parseFloat(fatherEl.value) : NaN;
   const mHeight = motherEl ? parseFloat(motherEl.value) : NaN;
 
+  // Dynamic UI Form Labels
   const lblTitle = document.getElementById("lblTitle");
   const lblSubtitle = document.getElementById("lblSubtitle");
   const lblLang = document.getElementById("lblLang");
@@ -39,7 +42,7 @@ function runScreener() {
   const isBaby = (ageKey === "0m" || ageKey === "3m" || ageKey === "6m" || ageKey === "9m" || ageKey === "12m");
 
   if (lang === "english") {
-    if (lblTitle) lblTitle.innerText = "Child Growth, Tanner Puberty & Development Screener";
+    if (lblTitle) lblTitle.innerText = "Check Your Child's Growth & Development";
     if (lblSubtitle) lblSubtitle.innerText = "IAP Growth Charts, Tanner Pubertal Staging, Genetic Height Formula & Developmental Milestones.";
     if (lblLang) lblLang.innerText = "Select Language";
     if (lblAge) lblAge.innerText = "Child's Age";
@@ -49,7 +52,7 @@ function runScreener() {
     if (lblFather) lblFather.innerText = "Father's Height";
     if (lblMother) lblMother.innerText = "Mother's Height";
   } else {
-    if (lblTitle) lblTitle.innerText = "शिशु विकास, टैनर किशोरावस्था एवं मील के पत्थर (Screener)";
+    if (lblTitle) lblTitle.innerText = "बच्चे की वृद्धि और विकास की जांच (Check Child's Growth & Development)";
     if (lblSubtitle) lblSubtitle.innerText = "IAP ग्रोथ चार्ट, टैनर प्यूबर्टल स्टेजिंग, जेनेटिक हाइट फॉर्मूला एवं विकासात्मक स्केल आधारित।";
     if (lblLang) lblLang.innerText = "भाषा चुनें (Language)";
     if (lblAge) lblAge.innerText = "बच्चे की उम्र (Age)";
@@ -70,6 +73,7 @@ function runScreener() {
   let wStatus = "";
   let hStatus = "";
 
+  // Weight Evaluation
   if (!isNaN(wInput) && ref) {
     if (wInput < ref.minW) {
       wStatus = lang === "english" 
@@ -86,6 +90,7 @@ function runScreener() {
     }
   }
 
+  // Height Evaluation
   if (!isNaN(hInput) && ref) {
     if (hInput < ref.minH) {
       hStatus = lang === "english"
@@ -102,6 +107,7 @@ function runScreener() {
     }
   }
 
+  // Mid-Parental Height (MPH) Formula
   let mphHtml = "";
   if (!isNaN(fHeight) && !isNaN(mHeight)) {
     const targetHeight = (gender === "boy") ? (fHeight + mHeight + 13) / 2 : (fHeight + mHeight - 13) / 2;
@@ -292,6 +298,7 @@ function runScreener() {
   renderAdolescentFaqs();
 }
 
+// 2. ADOLESCENT FAQS ACCORDION RENDERER
 function renderAdolescentFaqs() {
   const container = document.getElementById("faqAccordionContainer");
   if (!container || typeof adolescentFaqDatabase === "undefined") return;
@@ -318,6 +325,7 @@ function renderAdolescentFaqs() {
   container.innerHTML = html;
 }
 
+// 3. FAQ ACCORDION INTERACTION
 function toggleFaq(button) {
   const item = button.closest('.faq-item');
   if (!item) return;
@@ -350,6 +358,7 @@ function filterFaq(category) {
   });
 }
 
+// 4. MODAL POPUP CONTROLLERS
 function openBookingModal() {
   const modal = document.getElementById('bookingModal');
   if (modal) {
@@ -396,6 +405,7 @@ function closeModalOnOverlay(event, modalId) {
   }
 }
 
+// 5. AUTO-INITIALIZATION ON PAGE LOAD
 document.addEventListener("DOMContentLoaded", function() {
   runScreener();
   renderAdolescentFaqs();
