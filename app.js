@@ -271,36 +271,43 @@ function runScreener() {
 }
 
 // ==========================================
-// 2. FAQ ACCORDION & FILTER LOGIC
+// RENDER DYNAMIC ADOLESCENT FAQS
 // ==========================================
-function toggleFaq(button) {
-  const item = button.parentElement;
-  const answer = item.querySelector('.faq-answer');
-  const isActive = item.classList.contains('active');
+function renderAdolescentFaqs() {
+  const container = document.getElementById("faqAccordionContainer");
+  if (!container || typeof adolescentFaqDatabase === "undefined") return;
 
-  document.querySelectorAll('.faq-item').forEach(el => {
-    el.classList.remove('active');
-    el.querySelector('.faq-answer').style.display = 'none';
+  const lang = document.getElementById("screenerLang") ? document.getElementById("screenerLang").value : "english";
+  const listLang = (lang === "hindi") ? "hi" : "en";
+
+  let html = "";
+  adolescentFaqDatabase.forEach((faq, index) => {
+    html += `
+      <div class="faq-item faq-all faq-${faq.category}">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span><i class="${faq.icon}" style="color:${faq.color};"></i> ${faq.q[listLang]}</span>
+          <i class="fa-solid fa-chevron-down faq-icon"></i>
+        </button>
+        <div class="faq-answer">
+          <p>${faq.a[listLang]}</p>
+        </div>
+      </div>
+    `;
   });
 
-  if (!isActive) {
-    item.classList.add('active');
-    answer.style.display = 'block';
-  }
+  container.innerHTML = html;
 }
 
-function filterFaq(category) {
-  document.querySelectorAll('.faq-filter-btn').forEach(b => b.classList.remove('active-filter'));
-  document.getElementById('btn-' + category).classList.add('active-filter');
+// Re-render FAQs when language dropdown changes
+const originalRunScreener = window.runScreener;
+window.runScreener = function() {
+  if (originalRunScreener) originalRunScreener();
+  renderAdolescentFaqs();
+};
 
-  document.querySelectorAll('.faq-item').forEach(item => {
-    if (category === 'all' || item.classList.contains('faq-' + category)) {
-      item.style.display = 'block';
-    } else {
-      item.style.display = 'none';
-    }
-  });
-}
+document.addEventListener("DOMContentLoaded", function() {
+  renderAdolescentFaqs();
+});
 
 // ==========================================
 // 3. MODAL HANDLERS
