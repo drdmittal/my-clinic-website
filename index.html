@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Dr. Dinesh Mittal | Child Specialist & Pediatrician in Rohini, Delhi</title>
     <meta name="description" content="Dr. Dinesh Mittal, MBBS, DCH (DMC/R/00668). Child Specialist & Pediatrician in Sector 3 Rohini, New Delhi. Clinical newborn care, IAP vaccination schedules & growth screening.">
     <link rel="canonical" href="https://childspecialistrohini.com/" />
@@ -75,30 +75,6 @@
             "latitude": 28.7080828,
             "longitude": 77.1078816
           },
-          "areaServed": [
-            { "@type": "AdministrativeArea", "name": "Rohini Sector 3" },
-            { "@type": "AdministrativeArea", "name": "Rohini Sector 4" },
-            { "@type": "AdministrativeArea", "name": "Rohini Sector 5" },
-            { "@type": "AdministrativeArea", "name": "Rohini Sector 6" },
-            { "@type": "AdministrativeArea", "name": "Rohini Sector 7" },
-            { "@type": "AdministrativeArea", "name": "Rohini Sector 8" },
-            { "@type": "AdministrativeArea", "name": "Rohini Sector 9" },
-            { "@type": "AdministrativeArea", "name": "Rohini Sector 11" },
-            { "@type": "AdministrativeArea", "name": "Rohini Sector 13" },
-            { "@type": "AdministrativeArea", "name": "Rohini Sector 14" },
-            { "@type": "AdministrativeArea", "name": "Rohini Sector 15" },
-            { "@type": "AdministrativeArea", "name": "Rohini Sector 20" },
-            { "@type": "AdministrativeArea", "name": "Rohini Sector 21" },
-            { "@type": "AdministrativeArea", "name": "Rohini Sector 22" },
-            { "@type": "AdministrativeArea", "name": "Rohini Sector 23" },
-            { "@type": "AdministrativeArea", "name": "Rohini Sector 24" },
-            { "@type": "AdministrativeArea", "name": "Pitampura" },
-            { "@type": "AdministrativeArea", "name": "Prashant Vihar" },
-            { "@type": "AdministrativeArea", "name": "Vijay Vihar" },
-            { "@type": "AdministrativeArea", "name": "Budh Vihar" },
-            { "@type": "AdministrativeArea", "name": "Nangloi" },
-            { "@type": "AdministrativeArea", "name": "North West Delhi" }
-          ],
           "openingHoursSpecification": [
             {
               "@type": "OpeningHoursSpecification",
@@ -205,7 +181,7 @@
             background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
             color: #ffffff !important; padding: 9px 20px; border-radius: 30px;
             font-size: 0.86rem; font-weight: 700; box-shadow: 0 4px 14px rgba(8, 145, 178, 0.25);
-            transition: transform 0.2s, box-shadow 0.2s; display: inline-flex; align-items: center; gap: 6px;
+            transition: transform 0.2s, box-shadow 0.2s; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;
         }
         .book-tab-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(8, 145, 178, 0.35); }
 
@@ -341,10 +317,9 @@
             background: #f8fafc; padding: 20px; border-radius: 20px; border: 1px solid #e2e8f0; margin-bottom: 20px;
         }
         .screener-field label { font-size: 0.8rem; font-weight: 700; color: #083344; display: block; margin-bottom: 6px; }
-     .screener-select, .screener-input {
-    width: 100%; min-height: 48px; padding: 10px 14px; border: 1.5px solid #cbd5e1;
-    border-radius: 12px; font-size: 16px; outline: none; background: #ffffff;
-}
+        .screener-select, .screener-input {
+            width: 100%; min-height: 48px; padding: 10px 14px; border: 1.5px solid #cbd5e1;
+            border-radius: 12px; font-size: 16px; outline: none; background: #ffffff;
         }
         .screener-select:focus, .screener-input:focus { border-color: var(--brand-primary); }
 
@@ -377,12 +352,14 @@
         .faq-item.active { border-color: var(--brand-primary); background: #f8fafc; }
         .faq-item.active .faq-icon { transform: rotate(180deg); color: var(--brand-primary); }
 
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
         .blog-card {
             background: #ffffff; border-radius: 24px; border: 1px solid #f1f5f9;
             box-shadow: var(--card-shadow); overflow: hidden; display: flex; flex-direction: column;
             transition: all 0.25s ease;
         }
         .blog-card:hover { transform: translateY(-4px); box-shadow: var(--card-shadow-hover); }
+        .card-img { width: 100%; height: 180px; object-fit: cover; }
         .blog-content { padding: 20px; display: flex; flex-direction: column; flex: 1; }
         .blog-tag {
             align-self: flex-start; background: #f0fdfa; color: var(--brand-secondary);
@@ -402,32 +379,19 @@
 
         /* Subtle Local SEO Styles */
         .lowkey-seo-section {
-            background: transparent;
-            padding: 10px 15px;
-            text-align: center;
-            margin: 15px auto;
-            max-width: 900px;
+            background: transparent; padding: 10px 15px; text-align: center; margin: 15px auto; max-width: 900px;
         }
-        .lowkey-seo-text {
-            font-size: 0.78rem;
-            color: #94a3b8;
-            line-height: 1.5;
-        }
+        .lowkey-seo-text { font-size: 0.78rem; color: #94a3b8; line-height: 1.5; }
 
         /* Social Connect Row */
         .aesthetic-social-section {
             text-align: center; background: #ffffff; border-top: 1px solid #f1f5f9;
             padding: 38px 20px 28px; margin-top: 40px;
         }
-        .aesthetic-social-section h3 {
-            font-family: 'Fredoka', cursive; font-size: 1.35rem; color: #083344; margin-bottom: 4px;
-        }
-        .aesthetic-social-section p {
-            font-size: 0.85rem; color: var(--muted-text); margin-bottom: 20px;
-        }
+        .aesthetic-social-section h3 { font-family: 'Fredoka', cursive; font-size: 1.35rem; color: #083344; margin-bottom: 4px; }
+        .aesthetic-social-section p { font-size: 0.85rem; color: var(--muted-text); margin-bottom: 20px; }
         .social-pill-container {
-            display: flex; justify-content: center; align-items: center;
-            gap: 10px; flex-wrap: wrap; max-width: 650px; margin: 0 auto;
+            display: flex; justify-content: center; align-items: center; gap: 10px; flex-wrap: wrap; max-width: 650px; margin: 0 auto;
         }
         .social-pill {
             display: inline-flex; align-items: center; gap: 8px; padding: 9px 18px;
@@ -443,8 +407,7 @@
         .pill-facebook { background: #1d4ed8; }
         .pill-whatsapp { background: #059669; }
 
-        /* Modals & Full Height Mobile Iframe */
-        /* High-Stability Responsive Modals */
+        /* Modals */
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(15, 23, 42, 0.75); z-index: 2000;
@@ -452,7 +415,7 @@
             backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
         }
         .modal-content {
-            background: #ffffff; width: 100%; max-width: 680px; height: 85vh; max-height: 720px; min-height: 520px;
+            background: #ffffff; width: 100%; max-width: 680px; max-height: 90vh;
             border-radius: 24px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3);
             position: relative; display: flex; flex-direction: column;
             animation: popIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
@@ -462,24 +425,16 @@
             to { transform: scale(1); opacity: 1; }
         }
         .modal-header {
-            background: #f8fafc; padding: 12px 18px; display: flex;
+            background: #f8fafc; padding: 14px 20px; display: flex;
             justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; flex-shrink: 0;
         }
-        .modal-header h3 { font-family: 'Fredoka', cursive; font-size: 1.1rem; color: #083344; display: flex; align-items: center; gap: 8px; margin: 0; }
-        .modal-header-actions { display: flex; align-items: center; gap: 8px; }
-        .modal-action-btn {
-            background: #f1f5f9; border: 1px solid #e2e8f0; color: #475569; padding: 6px 12px;
-            border-radius: 20px; font-size: 0.76rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;
-            transition: all 0.2s ease;
-        }
-        .modal-action-btn:hover { background: #e0f2fe; color: #0369a1; }
+        .modal-header h3 { font-family: 'Fredoka', cursive; font-size: 1.15rem; color: #083344; display: flex; align-items: center; gap: 8px; margin: 0; }
         .close-modal-btn {
             background: #f1f5f9; border: none; font-size: 1.2rem; color: #64748b;
             width: 32px; height: 32px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center;
         }
         .close-modal-btn:hover { background: #fee2e2; color: #dc2626; }
-        .modal-body { padding: 0; flex: 1; display: flex; flex-direction: column; overflow: hidden; background: #ffffff; }
-        .modal-body iframe { width: 100%; height: 100%; border: none; flex: 1; display: block; }
+        .modal-body { padding: 22px; flex: 1; overflow-y: auto; font-size: 0.92rem; color: #334155; line-height: 1.6; }
 
         /* Mobile Bottom Bar */
         .mobile-bottom-bar {
@@ -601,7 +556,7 @@
         </div>
     </section>
 
- <!-- Services Section -->
+    <!-- Services Section -->
     <div class="container" id="services" style="margin-top: 25px; margin-bottom: 25px;">
         <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 12px;">
             <div>
@@ -782,20 +737,21 @@
       </div>
     </div>
 
-    <!-- BLOG SECTION (WITH DEDICATED ARTICLE URL ROUTING) -->
+    <!-- BLOG SECTION -->
     <div class="container" id="blog">
         <h2 class="section-title">Parenting & Health Reference</h2>
         <div class="grid">
+            
             <div class="blog-card" style="border: 2px solid var(--brand-secondary);">
                 <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=600&q=80" alt="IAP Immunization Schedule Reference" width="600" height="338" class="card-img" loading="lazy" decoding="async">
                 <div class="blog-content">
                     <span class="blog-tag" style="background: var(--brand-secondary); color: white;">Essential Reference</span>
                     <h3 class="blog-title">IAP Immunization Schedule (Age-Wise Guide)</h3>
                     <p class="blog-snippet">Official age-by-age vaccination reference chart recommended by the Indian Academy of Pediatrics (IAP) from birth up to 18 years.</p>
-<a href="iap-immunization-schedule.html" class="read-btn" style="text-decoration: none; color: var(--brand-secondary);"><i class="fa-solid fa-table-list"></i> View Complete Schedule <i class="fa-solid fa-arrow-right"></i></a>
+                    <a href="iap-immunization-schedule.html" class="read-btn" style="text-decoration: none; color: var(--brand-secondary);"><i class="fa-solid fa-table-list"></i> View Complete Schedule <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
             </div>
 
-            <!-- Standalone Direct-Link Blog Card -->
             <div class="blog-card">
                 <img src="https://images.unsplash.com/photo-1531983412531-1f49a365ffed?auto=format&fit=crop&w=600&q=80" alt="Painless vs Painful Infant Vaccination" width="600" height="338" class="card-img" loading="lazy" decoding="async">
                 <div class="blog-content">
@@ -812,26 +768,30 @@
                     <span class="blog-tag">Newborn Care</span>
                     <h3 class="blog-title">Essential Newborn Care Tips for First-Time Parents</h3>
                     <p class="blog-snippet">Important pediatrician guidance on infant feeding, sleep routines, cord care, and warning signs in the first 30 days.</p>
-<a href="newborn-care-guide.html" class="read-btn" style="text-decoration: none;">Read Full Article <i class="fa-solid fa-arrow-right"></i></a>
+                    <a href="newborn-care-guide.html" class="read-btn" style="text-decoration: none;">Read Full Article <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
-<div class="blog-card">
+            </div>
+
+            <div class="blog-card">
                 <img src="https://images.unsplash.com/photo-1543332164-6e82f355badc?auto=format&fit=crop&w=600&q=80" alt="Managing Fever in Indian Toddler" width="600" height="338" class="card-img" loading="lazy" decoding="async">
                 <div class="blog-content">
                     <span class="blog-tag">Childhood Health</span>
                     <h3 class="blog-title">How to Safely Manage High Fever in Toddlers at Home</h3>
                     <p class="blog-snippet">A step-by-step guide for parents on temperature monitoring, hydration, sponge bathing, and when to seek medical help.</p>
-<a href="child-fever-management-guide.html" class="read-btn" style="text-decoration: none;">Read Full Article <i class="fa-solid fa-arrow-right"></i></a>
+                    <a href="child-fever-management-guide.html" class="read-btn" style="text-decoration: none;">Read Full Article <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
             </div>
- <div class="blog-card">
+
+            <div class="blog-card">
                 <img src="https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=600&q=80" alt="Monsoon Influenza Care for Children" width="600" height="338" class="card-img" loading="lazy" decoding="async">
                 <div class="blog-content">
                     <span class="blog-tag">Seasonal Health</span>
                     <h3 class="blog-title">Monsoon Influenza in Delhi: Parent Guide</h3>
                     <p class="blog-snippet">Key facts on causes, symptoms, home precautions, and when to visit our clinic for seasonal flu in children.</p>
-<a href="monsoon-flu-care-children.html" class="read-btn" style="text-decoration: none;">Read Full Article <i class="fa-solid fa-arrow-right"></i></a>
+                    <a href="monsoon-flu-care-children.html" class="read-btn" style="text-decoration: none;">Read Full Article <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
             </div>
-        </div>
-    <!-- Screen Time Guide Card -->
+
             <div class="blog-card">
                 <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=600&q=80" alt="Reducing screen time and mobile phone addiction in children" width="600" height="338" class="card-img" loading="lazy" decoding="async">
                 <div class="blog-content">
@@ -841,9 +801,11 @@
                     <a href="reduce-screen-time-in-children.html" class="read-btn" style="text-decoration: none;">Read Full Article <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
             </div>
+
+        </div>
     </div>
 
- <!-- Location & Contact -->
+    <!-- Location & Contact -->
     <div class="container" id="clinic-location">
         <h2 class="section-title">Visit Our Clinic</h2>
         <div class="contact-grid">
@@ -922,7 +884,7 @@
         <button onclick="openBookingModal()" class="mobile-bar-btn btn-book"><i class="fa-solid fa-calendar-check"></i> Book Online</button>
     </div>
 
-  <!-- Native Fast Booking Modal -->
+    <!-- Native Fast Booking Modal -->
     <div id="bookingModal" class="modal-overlay" onclick="closeModalOnOverlay(event, 'bookingModal')">
         <div class="modal-content" style="max-width: 540px; height: auto; max-height: 90vh; border-radius: 24px;">
             <div class="modal-header">
@@ -991,7 +953,6 @@
             </div>
         </div>
     </div>
-    </div>
 
     <!-- Blog Modal -->
     <div id="blogModal" class="modal-overlay" onclick="closeModalOnOverlay(event, 'blogModal')">
@@ -1042,9 +1003,7 @@
         </div>
     </div>
 
-                
-
-    <!-- TOGGLE SCRIPT FOR COLLAPSIBLE TOOL & MOBILE DRAWER -->
+    <!-- CORE JAVASCRIPT FUNCTIONS -->
     <script>
       function toggleMobileDrawer() {
         const drawer = document.getElementById("mobileDrawer");
@@ -1071,8 +1030,53 @@
         if (body) body.style.display = "block";
         if (icon) icon.style.transform = "rotate(180deg)";
       }
-    </script>
-<script>
+
+      function openBookingModal() {
+        const modal = document.getElementById('bookingModal');
+        if (modal) {
+          modal.style.display = 'flex';
+          document.body.style.overflow = 'hidden';
+        }
+      }
+
+      function closeBookingModal() {
+        const modal = document.getElementById('bookingModal');
+        if (modal) {
+          modal.style.display = 'none';
+          document.body.style.overflow = 'auto';
+        }
+      }
+
+      function openDisclaimerModal() {
+        const modal = document.getElementById('disclaimerModal');
+        if (modal) { modal.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+      }
+
+      function closeDisclaimerModal() {
+        const modal = document.getElementById('disclaimerModal');
+        if (modal) { modal.style.display = 'none'; document.body.style.overflow = 'auto'; }
+      }
+
+      function openPrivacyModal() {
+        const modal = document.getElementById('privacyModal');
+        if (modal) { modal.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+      }
+
+      function closePrivacyModal() {
+        const modal = document.getElementById('privacyModal');
+        if (modal) { modal.style.display = 'none'; document.body.style.overflow = 'auto'; }
+      }
+
+      function closeModalOnOverlay(e, modalId) {
+        if (e.target && e.target.id === modalId) {
+          const modal = document.getElementById(modalId);
+          if (modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+          }
+        }
+      }
+
       async function handleNativeBooking(e) {
         e.preventDefault();
         const btn = document.getElementById('bkSubmitBtn');
@@ -1128,31 +1132,9 @@
         }
       }
     </script>
-    <!-- EXTERNAL MODULAR SCRIPTS (v=21 CACHE BUSTER) -->
+
+    <!-- EXTERNAL MODULAR SCRIPTS -->
     <script defer src="data.js?v=21"></script>
     <script defer src="app.js?v=21"></script>
 </body>
-                function openBookingModal() {
-        const modal = document.getElementById('bookingModal');
-        if (modal) {
-          modal.style.display = 'flex';
-          document.body.style.overflow = 'hidden'; /* Locks background scroll */
-        }
-      }
-      function closeBookingModal() {
-        const modal = document.getElementById('bookingModal');
-        if (modal) {
-          modal.style.display = 'none';
-          document.body.style.overflow = 'auto'; /* Restores scroll */
-        }
-      }
-      function closeModalOnOverlay(e, modalId) {
-        if (e.target && e.target.id === modalId) {
-          const modal = document.getElementById(modalId);
-          if (modal) {
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-          }
-        }
-      }
 </html>
