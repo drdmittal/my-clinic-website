@@ -1026,4 +1026,27 @@
     <script defer src="data.js?v=21"></script>
     <script defer src="app.js?v=21"></script>
 </body>
+                function openBookingModal() {
+        const modal = document.getElementById('bookingModal');
+        if (modal) {
+          modal.style.display = 'flex';
+          document.body.style.overflow = 'hidden'; /* Locks background scroll */
+        }
+      }
+      function closeBookingModal() {
+        const modal = document.getElementById('bookingModal');
+        if (modal) {
+          modal.style.display = 'none';
+          document.body.style.overflow = 'auto'; /* Restores scroll */
+        }
+      }
+      function closeModalOnOverlay(e, modalId) {
+        if (e.target && e.target.id === modalId) {
+          const modal = document.getElementById(modalId);
+          if (modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+          }
+        }
+      }
 </html>
