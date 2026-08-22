@@ -1,7 +1,7 @@
 // ==========================================================
 // CLINIC DATA REPOSITORY (data.js)
 // Trivandrum Development Screening Chart (TDSC) Milestones,
-// IAP Growth Percentiles, IYCF Weaning Engine & Adolescent FAQs
+// IAP Growth Standards, IYCF Weaning Engine, Toilet Training & FAQs
 // ==========================================================
 
 const milestoneDatabase = {
@@ -31,71 +31,71 @@ const milestoneDatabase = {
     }
   },
   "3m": {
-    name: { en: "3 Months (TDSC Milestone)", hi: "3 माह (TDSC स्केल)" },
+    name: { en: "3 Months (TDSC)", hi: "3 माह (TDSC)" },
     iap: {
       boy: { minW: 5.0, maxW: 7.9, minH: 57.0, maxH: 65.0 },
       girl: { minW: 4.5, maxW: 7.4, minH: 55.5, maxH: 63.5 }
     },
     green: {
-      en: ["Social smile in response to voice/face", "Follows moving pencil/face 180° with eyes", "Holds head steady with minimal bobbing when upright"],
+      en: ["Social smile in response to voice/face", "Follows moving objects 180° with eyes", "Holds head steady when upright in lap"],
       hi: ["चेहरा या आवाज सुनकर मुस्कुराना (Social Smile)", "चीजों को आँखों से 180° तक देखना", "गोदी में लेने पर गर्दन स्थिर रखना"]
     },
     yellow: {
       en: ["Mild head lag when pulled to sit (normal up to 3.8 months)", "Spitting up milk without weight loss"],
-      hi: ["हाथ पकड़कर बैठाने पर गर्दन में हल्का झुकाव (3.8 माह तक सामान्य)", "हल्का दूध पलटना"]
+      hi: ["हाथ पकड़कर बैठाने पर गर्दन में हल्का झुकाव", "हल्का दूध पलटना"]
     },
     red: {
-      en: ["Complete absence of social smile by 3 months", "Does not focus or follow faces/objects", "Extreme neck and limb stiffness or floppiness"],
-      hi: ["3 माह तक बिल्कुल न मुस्कुराना", "नजरें न मिलाना या चेहरे को न देखना", "शरीर अत्यधिक अकड़ा या ढीला होना"]
+      en: ["Complete absence of social smile by 3 months", "Does not focus or follow faces/objects", "Extreme neck/limb stiffness or floppiness"],
+      hi: ["3 माह तक बिल्कुल न मुस्कुराना", "नजरें न मिलाना", "शरीर अत्यधिक अकड़ा या ढीला होना"]
     },
     parentTips: {
       nutrition: { en: "Continue exclusive breastfeeding.", hi: "केवल स्तनपान जारी रखें।" },
-      safety: { en: "Never leave baby unattended on elevated surfaces.", hi: "बच्चे को बेड या सोफे पर अकेला न छोड़ें।" },
-      play: { en: "Supervised tummy time 3-5 minutes while baby is awake.", hi: "जागते समय पेट के बल लिटाएं (टमी टाइम)।" },
-      care: { en: "Primary infant vaccination series (6, 10, 14 weeks).", hi: "प्राथमिक टीकाकरण शेड्यूल पूरा करें।" }
+      safety: { en: "Never leave baby unattended on beds or sofas.", hi: "बच्चे को बेड पर अकेला न छोड़ें।" },
+      play: { en: "Supervised tummy time 3-5 minutes while awake.", hi: "जागते समय पेट के बल लिटाएं (टमी टाइम)।" },
+      care: { en: "Primary immunization series (6, 10, 14 weeks).", hi: "प्राथमिक टीकाकरण शेड्यूल पूरा करें।" }
     }
   },
   "6m": {
-    name: { en: "6 Months (TDSC / Weaning Stage)", hi: "6 माह (TDSC / ऊपरी आहार)" },
+    name: { en: "6 Months (TDSC / Weaning)", hi: "6 माह (TDSC / ऊपरी आहार)" },
     iap: {
       boy: { minW: 6.4, maxW: 9.7, minH: 63.0, maxH: 71.5 },
       girl: { minW: 5.8, maxW: 9.2, minH: 61.0, maxH: 70.0 }
     },
     green: {
-      en: ["Rolls over from back to stomach (TDSC: 4.8m)", "Sits with light support/tripod", "Transfers toys from one hand to the other (TDSC: 6-7m)", "Babbles monosyllables ('ba-ba', 'da-da')"],
-      hi: ["पीठ से पेट के बल करवट बदलना (Roll Over)", "हल्के सहारे से बैठना", "एक हाथ से दूसरे हाथ में खिलौना लेना", "आवाजें निकालना ('बा-बा', 'दा-दा')"]
+      en: ["Rolls over from back to stomach", "Sits with light support/tripod", "Transfers toys from one hand to the other", "Babbles monosyllables ('ba-ba', 'da-da')"],
+      hi: ["पीठ से पेट के बल करवट बदलना", "सहारे से बैठना", "एक हाथ से दूसरे हाथ में खिलौना लेना", "आवाजें निकालना ('बा-बा', 'दा-दा')"]
     },
     yellow: {
-      en: ["Reluctance to initial solid food textures", "Teething gum itching"],
+      en: ["Reluctance to initial solid food textures", "Teething gum discomfort"],
       hi: ["ऊपरी आहार शुरू करने में थोड़ी हिचकिचाहट", "मसूड़ों में खुजली"]
     },
     red: {
       en: ["Cannot hold head steady or roll over", "Does not reach for or grasp objects", "No vocalizations or response to sounds"],
-      hi: ["गर्दन बिल्कुल न रुकना या करवट न बदलना", "चीजों को पकड़ने की कोशिश न करना", "आवाज पर प्रतिक्रिया न देना"]
+      hi: ["गर्दन बिल्कुल न रुकना या करवट न बदलना", "चीजें न पकड़ना", "आवाज पर प्रतिक्रिया न देना"]
     },
     parentTips: {
       nutrition: { en: "Start home-cooked mashed complementary feeding at completed 180 days.", hi: "180 दिन पूरे होने पर घर का बना मसला हुआ भोजन शुरू करें।" },
-      safety: { en: "Childproof low furniture as crawling approaches.", hi: "कोनों व बिजली के बोर्ड सुरक्षित करें।" },
-      play: { en: "Interactive peek-a-boo and reading colorful books.", hi: "बातें करें और रंगीन किताबें दिखाएं।" },
+      safety: { en: "Childproof low shelves as crawling approaches.", hi: "कोनों व बिजली के बोर्ड सुरक्षित करें।" },
+      play: { en: "Interactive peek-a-boo and picture books.", hi: "बातें करें और रंगीन किताबें दिखाएं।" },
       care: { en: "Flu (Influenza) and Typhoid vaccine review.", hi: "इन्फ्लूएंजा व टाइफाइड टीकों का समय।" }
     }
   },
   "9m": {
-    name: { en: "9 Months (TDSC Milestone)", hi: "9 माह (TDSC स्केल)" },
+    name: { en: "9 Months (TDSC)", hi: "9 माह (TDSC)" },
     iap: {
       boy: { minW: 7.2, maxW: 10.9, minH: 67.5, maxH: 76.0 },
       girl: { minW: 6.6, maxW: 10.4, minH: 65.5, maxH: 74.5 }
     },
     green: {
-      en: ["Sits steadily without support (TDSC: 8-9m)", "Crawls/creeps on hands and knees", "Picks small pieces with index finger and thumb (Pincer Grasp)", "Responds to own name"],
-      hi: ["बिना सहारे बैठना", "घुटनों के बल चलना (Crawling)", "उंगली और अंगूठे से छोटी चीज पकड़ना (Pincer Grasp)", "अपना नाम सुनकर प्रतिक्रिया देना"]
+      en: ["Sits steadily without support", "Crawls/creeps on hands and knees", "Picks small pieces with index finger and thumb (Pincer Grasp)", "Responds to own name"],
+      hi: ["बिना सहारे बैठना", "घुटनों के बल चलना (Crawling)", "उंगली और अंगूठे से छोटी चीज पकड़ना (Pincer Grasp)", "अपना नाम सुनकर देखना"]
     },
     yellow: {
-      en: ["Stranger anxiety and clinginess with mother (normal developmental milestone)"],
-      hi: ["अजनबियों को देखकर रोना व डरना (सामान्य विकास चरण)"]
+      en: ["Stranger anxiety and clinginess with parents (normal developmental milestone)"],
+      hi: ["अजनबियों को देखकर रोना (सामान्य विकास चरण)"]
     },
     red: {
-      en: ["Cannot sit without support", "Does not bear weight on legs when held upright", "Does not respond to name or make eye contact"],
+      en: ["Cannot sit without support", "Does not bear weight on legs when supported", "Does not respond to name or make eye contact"],
       hi: ["बिना सहारे न बैठ पाना", "पैरों पर वजन न लेना", "नाम पुकारने पर न देखना"]
     },
     parentTips: {
@@ -112,12 +112,12 @@ const milestoneDatabase = {
       girl: { minW: 7.1, maxW: 11.3, minH: 69.0, maxH: 79.0 }
     },
     green: {
-      en: ["Stands with support / cruising along furniture (TDSC: 11-12m)", "Speaks 1-2 meaningful words with intent ('Mama', 'Dada')", "Waves 'bye-bye' and claps hands", "Releases objects into container voluntarily"],
+      en: ["Stands with support / cruising along furniture", "Speaks 1-2 meaningful words with intent ('Mama', 'Dada')", "Waves 'bye-bye' and claps hands", "Releases objects into container voluntarily"],
       hi: ["सहारे से खड़ा होना / फर्नीचर पकड़कर चलना", "1-2 अर्थपूर्ण शब्द बोलना ('मम्मा', 'पापा')", "'बाय-बाय' करना व ताली बजाना", "चीजों को डिब्बे में डालना"]
     },
     yellow: {
       en: ["Not walking independently yet (normal walking window is up to 15 months)"],
-      hi: ["स्वतंत्र रूप से न चलना (15 माह तक बिना सहारे चलना सामान्य है)"]
+      hi: ["स्वतंत्र रूप से न चलना (15 माह तक सामान्य है)"]
     },
     red: {
       en: ["Cannot stand even with firm support", "Cannot point with index finger to indicate needs", "Loss of previously learned speech or social words"],
@@ -137,7 +137,7 @@ const milestoneDatabase = {
       girl: { minW: 8.1, maxW: 12.8, minH: 74.5, maxH: 85.0 }
     },
     green: {
-      en: ["Walks steadily without support and climbs steps with help (TDSC: 15-18m)", "Builds tower of 3 cubes", "Vocabulary of 6 to 10 clear words", "Drinks from an open cup and feeds self with spoon"],
+      en: ["Walks steadily without support and climbs steps with help", "Builds tower of 3 cubes", "Vocabulary of 6 to 10 clear words", "Drinks from an open cup and feeds self with spoon"],
       hi: ["बिना सहारे चलना व सहारे से सीढ़ियां चढ़ना", "3 ब्लॉक्स की मीनार बनाना", "6 से 10 साफ शब्द बोलना", "कप से पानी पीना व चम्मच से खाना"]
     },
     yellow: {
@@ -228,7 +228,7 @@ const milestoneDatabase = {
       girl: { minW: 13.7, maxW: 23.1, minH: 100.0, maxH: 114.5, minBmi: 13.2, ovBmi: 16.7, obBmi: 18.2 }
     },
     green: {
-      en: ["Counts 10 or more objects accurately", "Skips and somersaults", "Copies a triangle (TDSC: 5y)", "Dresses and buttons clothes completely independently"],
+      en: ["Counts 10 or more objects accurately", "Skips and somersaults", "Copies a triangle", "Dresses and buttons clothes completely independently"],
       hi: ["10 तक गिनती गिनना", "त्रिभुज (Triangle) बनाना", "कपड़ों के बटन लगाना", "अच्छी तरह उछलना-कूदना"]
     },
     yellow: { en: ["Bedtime delay resistance"], hi: ["सोने में आनाकानी करना"] },
@@ -314,7 +314,7 @@ const milestoneDatabase = {
       girl: { minW: 22.5, maxW: 44.3, minH: 128.0, maxH: 147.0, minBmi: 13.9, ovBmi: 18.7, obBmi: 21.1 }
     },
     tanner: {
-      girl: { stage: "Tanner Stage 1-2 (Thelarche)", green: "Early breast budding (thelarche) between 8-12y is normal.", yellow: "Rapid weight gain.", red: "Absence of any secondary sexual traits by 13y." },
+      girl: { stage: "Tanner Stage 1-2 (Thelarche)", green: "Early breast budding between 8-12y is normal.", yellow: "Rapid weight gain.", red: "Absence of any secondary sexual traits by 13y." },
       boy: { stage: "Tanner Stage 1", green: "Testicular volume 1-3 ml. Steady growth at 5 cm/yr.", yellow: "Weight creeping up.", red: "Testicular enlargement >4ml before 9y." }
     },
     green: { en: ["Abstract reasoning develops"], hi: ["तार्किक व अमूर्त सोच का विकास"] },
@@ -324,7 +324,7 @@ const milestoneDatabase = {
       nutrition: { en: "Zero sweetened sodas to prevent childhood obesity.", hi: "मीठे पेय व कोल्ड ड्रिंक्स पूरी तरह बंद करें।" },
       safety: { en: "Cyber safety and digital boundaries.", hi: "सोशल मीडिया व साइबर सुरक्षा के नियम तय करें।" },
       play: { en: "Athletics, swimming, yoga.", hi: "एथलेटिक्स, योग व तैराकी।" },
-      care: { en: "HPV Vaccine (2-dose schedule at 0 and 6 months) for girls.", hi: "बालिकाओं हेतु एचपीवी (सर्वाइकल कैंसर) वैक्सीन।" }
+      care: { en: "HPV Vaccine (2-dose schedule at 0 and 6 months) for girls.", hi: "बालिकाओं हेतु एचपीवी वैक्सीन।" }
     }
   },
   "11y": {
@@ -339,7 +339,7 @@ const milestoneDatabase = {
     },
     green: { en: ["Height spurt beginning in girls"], hi: ["लड़कियों में ग्रोथ स्पर्ट की शुरुआत"] },
     yellow: { en: ["Emotional mood swings"], hi: ["भावनात्मक उतार-चढ़ाव"] },
-    red: { en: ["Eating disorder signs", "Excessive isolation"], hi: ["खाना छोड़ना, वजन घटाने का अत्यधिक जुनून"] },
+    red: { en: ["Eating disorder signs", "Excessive isolation"], hi: ["खाना छोड़ना, अत्यधिक डाइटिंग"] },
     parentTips: {
       nutrition: { en: "Iron-rich foods (jaggery, spinach, raisins, lentils) + Vitamin C.", hi: "आयरन व विटामिन सी युक्त आहार।" },
       safety: { en: "Open puberty discussions at home.", hi: "घर पर शारीरिक बदलावों पर चर्चा करें।" },
@@ -513,12 +513,12 @@ const weaningEducationDatabase = {
           ytUrl: "https://www.youtube.com/results?search_query=apple+carrot+puree+for+6+month+baby"
         },
         { 
-          name: { en: "Mashed Pumpkin & Moong Dal Mash (Kaddu-Dal)", hi: "कद्दू व मूंग दाल प्यूरी (विटामिन-ए युक्त)" }, 
+          name: { en: "Mashed Pumpkin & Moong Dal Mash (Kaddu-Dal)", hi: "कद्दू व मूंग दाल प्यूरी" }, 
           prep: { en: "Steam yellow pumpkin with washed yellow moong dal. Fork mash with 1/2 tsp ghee for calorie density.", hi: "पीले कद्दू को मूंग दाल के साथ उबालें और 1/2 चम्मच देसी घी मिलाकर मसलें।" },
           ytUrl: "https://www.youtube.com/results?search_query=pumpkin+dal+puree+for+6+month+baby"
         },
         { 
-          name: { en: "Steamed Pear & Cardamom Mash", hi: "उबली नाशपाती प्यूरी (इलायची युक्त)" }, 
+          name: { en: "Steamed Pear & Cardamom Mash", hi: "उबली नाशपाती प्यूरी" }, 
           prep: { en: "Peel and steam pear slices for 8 mins. Fork mash with a tiny pinch of roasted cardamom powder for digestion.", hi: "नाशपाती को भाप में पकाकर मसलें और चुटकी भर इलायची पाउडर मिलाएं।" },
           ytUrl: "https://www.youtube.com/results?search_query=pear+puree+for+baby+6+months"
         }
@@ -567,7 +567,7 @@ const weaningEducationDatabase = {
       ],
       nonVegRecipes: [
         { 
-          name: { en: "Whole Boiled Egg Mash with Curd", hi: "पूरा उबला अंडा (सफेदी + जर्दी) व दही" }, 
+          name: { en: "Whole Boiled Egg Mash with Curd", hi: "पूरा उबला अंडा व दही" }, 
           prep: { en: "Chop 1/2 hard-boiled whole egg finely, fold into 2 tbsp fresh homemade curd with roasted cumin.", hi: "आधा उबला अंडा बारीक काटकर 2 चम्मच ताजे दही व भुने जीरे के साथ मिलाएं।" },
           ytUrl: "https://www.youtube.com/results?search_query=boiled+egg+recipes+for+8+month+baby"
         },
@@ -633,73 +633,73 @@ const weaningEducationDatabase = {
 // ==========================================================
 const toiletTrainingDatabase = {
   title: {
-    en: "18-Month Pediatric Toilet Training Guide (Readiness & Step-by-Step Protocol)",
-    hi: "18 माह का शिशु: टॉयलेट ट्रेनिंग के नियम एवं संपूर्ण मार्गदर्शन"
+    en: "18-Month Pediatric Toilet Training Guide (Readiness & Protocol)",
+    hi: "18 माह का शिशु: टॉयलेट ट्रेनिंग के नियम एवं मार्गदर्शन"
   },
   intro: {
-    en: "At 18 months, many toddlers begin showing the physiological and neurological readiness required for toilet learning. Rather than rigid schedules, pediatricians recommend a child-oriented approach based on readiness signals.",
-    hi: "18 माह की उम्र में बच्चे शारीरिक और मानसिक रूप से शौच नियंत्रण (Toilet Training) के संकेत देने लगते हैं। जबरदस्ती करने के बजाय बच्चे के स्वाभाविक संकेतों के अनुसार सिखाना सबसे सफल रहता है।"
+    en: "At 18 months, many toddlers begin showing physiological and neurological readiness for toilet training. Pediatricians recommend a child-oriented approach based on readiness signals.",
+    hi: "18 माह की उम्र में बच्चे शारीरिक और मानसिक रूप से शौच नियंत्रण (Toilet Training) के संकेत देने लगते हैं। स्वाभाविक संकेतों के अनुसार सिखाना सबसे सफल रहता है।"
   },
   readinessSigns: {
     en: [
       "Stays dry for at least 2 consecutive hours during the day or wakes up dry from naps.",
       "Has predictable, regular bowel movements at specific times of the day.",
-      "Expresses facial discomfort, grunts, or gestures when the diaper is wet or soiled.",
-      "Can walk independently, pull pants up and down with minimal assistance, and sit steadily.",
-      "Understands simple 2-step instructions (e.g., 'Sit on the potty chair', 'Bring the toy')."
+      "Expresses facial discomfort, grunts, or gestures when diaper is wet or soiled.",
+      "Can walk independently, pull pants up/down with minimal help, and sit steadily.",
+      "Understands simple 2-step instructions (e.g., 'Sit on potty chair', 'Bring toy')."
     ],
     hi: [
-      "दिन में कम से कम 2 घंटे तक डायपर सूखा रहना या दोपहर की नींद के बाद सूखा उठना।",
+      "दिन में कम से कम 2 घंटे तक डायपर सूखा रहना या नींद के बाद सूखा उठना।",
       "शौच का एक निश्चित समय होना (जैसे नाश्ते के बाद)।",
-      "डायपर गीला या गंदा होने पर खींचना, रोना या असहजता जताना।",
-      "स्वतंत्र रूप से चलना, पैंट नीचे-ऊपर करने में हाथ लगाना और 5 मिनट बैठ पाना।",
-      "सरल 2-स्टेप निर्देश समझना (जैसे: 'पॉटी चेयर पर बैठो', 'खिलौना लाओ')।"
+      "डायपर गीला होने पर खींचना या असहजता जताना।",
+      "स्वतंत्र रूप से चलना और पैंट नीचे-ऊपर करने में हाथ लगाना।",
+      "सरल 2-स्टेप निर्देश समझना।"
     ]
   },
   steps: [
     {
       num: 1,
-      title: { en: "Introduce the Child-Sized Potty Chair", hi: "बाल-अनुकूल पॉटी सीट (Potty Chair) से परिचय" },
+      title: { en: "Introduce the Child-Sized Potty Chair", hi: "बाल-अनुकूल पॉटी सीट से परिचय" },
       desc: { 
-        en: "Place a small, stable potty chair on the floor in the living area or bathroom. Let the toddler sit on it fully clothed first while reading stories to remove any fear or hesitation.",
-        hi: "कमरे या बाथरूम में बच्चे के आकार की पॉटी चेयर रखें। शुरुआत में कपड़े पहने हुए ही उस पर बैठने दें ताकि बच्चे के मन से डर निकल जाए।"
+        en: "Place a small, stable potty chair on the floor. Let the toddler sit on it fully clothed first while reading stories to remove any fear.",
+        hi: "कमरे में बच्चे के आकार की पॉटी चेयर रखें। शुरुआत में कपड़े पहने हुए ही उस पर बैठने दें ताकि डर निकल जाए।"
       }
     },
     {
       num: 2,
-      title: { en: "Establish Timed Gastrocolic Sittings (Post-Meal Routine)", hi: "भोजन के 15-20 मिनट बाद बैठाने की आदत (Gastrocolic Reflex)" },
+      title: { en: "Establish Timed Sittings (Post-Meal Routine)", hi: "भोजन के 15-20 मिनट बाद बैठाने की आदत" },
       desc: {
-        en: "Natural bowel movement reflexes are highest 15-20 minutes after breakfast and lunch. Sit your toddler on the potty for 3 to 5 minutes without pressure or scolding.",
-        hi: "नाश्ते या दोपहर के भोजन के 15-20 मिनट बाद पेट की प्राकृतिक आंतों की गति तेज होती है। इस समय बच्चे को 3-5 मिनट पॉटी पर बैठाएं।"
+        en: "Bowel reflexes are highest 15-20 minutes after breakfast and lunch. Sit your toddler on the potty for 3 to 5 minutes without pressure.",
+        hi: "भोजन के 15-20 मिनट बाद पेट की प्राकृतिक गति तेज होती है। इस समय बच्चे को 3-5 मिनट पॉटी पर बैठाएं।"
       }
     },
     {
       num: 3,
       title: { en: "Positive Reinforcement & Zero Punishment", hi: "सकारात्मक प्रोत्साहन (Positive Praise)" },
       desc: {
-        en: "Praise attempts enthusiastically with high-fives or stickers. Never shame, scold, or punish accidents—accidents are an expected natural part of neural bladder learning.",
-        hi: "हर छोटे प्रयास पर ताली बजाकर तारीफ करें। यदि बच्चा कपड़े खराब कर दे, तो कभी न डांटें—यह सीखने का स्वाभाविक हिस्सा है।"
+        en: "Praise attempts enthusiastically with high-fives. Never shame or scold accidents—accidents are an expected part of bladder learning.",
+        hi: "हर छोटे प्रयास पर तारीफ करें। कपड़े खराब होने पर कभी न डांटें—यह सीखने का स्वाभाविक हिस्सा है।"
       }
     },
     {
       num: 4,
       title: { en: "Switch to Cotton Training Underwear during Daytime", hi: "दिन के समय सूती ट्रेनिंग पैंट का उपयोग" },
       desc: {
-        en: "Modern diapers absorb wetness so efficiently that children cannot feel the sensation of urination. Cotton training pants help the brain associate wetness with bladder release.",
-        hi: "डायपर गीलापन तुरंत सोख लेते हैं जिससे बच्चे को एहसास नहीं होता। दिन में सूती पैंट पहनाने से बच्चे का दिमाग पेशाब के एहसास को तुरंत पहचानता है।"
+        en: "Cotton training pants help the toddler's brain associate the wet sensation with bladder release, unlike modern super-absorbent diapers.",
+        hi: "दिन में सूती पैंट पहनाने से बच्चे का दिमाग पेशाब के एहसास को तुरंत पहचानता है।"
       }
     }
   ],
   donts: {
     en: [
-      "Never force a crying or resisting toddler to sit on the potty chair (causes stool withholding and severe constipation).",
-      "Never flush the big toilet while the toddler is sitting on it (the loud rushing noise can cause acute phobia).",
-      "Avoid starting toilet training during major life changes (relocation, new sibling birth, high fever illness)."
+      "Never force a crying or resisting toddler to sit on the potty chair (causes stool withholding and constipation).",
+      "Never flush the big toilet while the toddler is sitting on it (loud rushing noise can cause acute phobia).",
+      "Avoid starting toilet training during major life disruptions or fever illness."
     ],
     hi: [
-      "रोते हुए या जिद्द करते बच्चे को जबरदस्ती पॉटी सीट पर न बैठाएं (इससे बच्चा मल रोक लेता है और कब्ज हो जाती है)।",
-      "बच्चे के बैठे रहने पर फ्लश न चलाएं (तेज आवाज से बच्चा डर सकता है)।",
-      "घर बदलने, नए शिशु के जन्म या बच्चे के बीमार होने के दौरान ट्रेनिंग शुरू न करें।"
+      "रोते हुए बच्चे को जबरदस्ती पॉटी सीट पर न बैठाएं (इससे कब्ज हो सकती है)।",
+      "बच्चे के बैठे रहने पर फ्लश न चलाएं।",
+      "बच्चे के बीमार होने के दौरान ट्रेनिंग शुरू न करें।"
     ]
   },
   ytLink: "https://www.youtube.com/results?search_query=toddler+toilet+training+tips+pediatrician+hindi"
