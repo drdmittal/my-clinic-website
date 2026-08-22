@@ -1,7 +1,7 @@
 // ==========================================================
 // CLINIC APPLICATION ENGINE (app.js)
-// IAP Auxology, BMI-for-Age, IYCF Weaning Engine (with YouTube Links),
-// 18-Month Toilet Training Protocol, Adolescent FAQs & Popup Engine
+// IAP Growth Standards, Tanner Formula for Mid-Parental Height,
+// IAP BMI-for-Age, Weaning Guide, Toilet Protocol & Adolescent FAQs
 // ==========================================================
 
 let currentDietPreference = "veg"; // 'veg' or 'nonveg'
@@ -31,8 +31,6 @@ function runScreener() {
   const fHeight = fatherEl ? parseFloat(fatherEl.value) : NaN;
   const mHeight = motherEl ? parseFloat(motherEl.value) : NaN;
 
-  const isBaby = (ageKey === "0m" || ageKey === "3m" || ageKey === "6m" || ageKey === "9m" || ageKey === "12m" || ageKey === "18m");
-
   const data = milestoneDatabase[ageKey];
   if (!data) return;
 
@@ -61,7 +59,7 @@ function runScreener() {
     }
   }
 
-  // 2. Auxological Height & Mid-Parental Discrepancy
+  // 2. Auxological Height & Mid-Parental Discrepancy Calculation
   let childHeightZ = 0;
   let targetAdultZ = 0;
   let hasHeightDiscrepancy = false;
@@ -87,33 +85,34 @@ function runScreener() {
       if (zDiff >= 2.0) {
         hasHeightDiscrepancy = true;
         discrepancySeverity = "severe";
-      } else if (zDiff >= 1.4) {
+      } else if (zDiff >= 1.35) {
         hasHeightDiscrepancy = true;
         discrepancySeverity = "moderate";
       }
     }
   }
 
+  // Synchronized Population Height Output
   if (!isNaN(hInput) && ref) {
     if (hInput < ref.minH) {
       hStatus = lang === "english"
-        ? `<div class="flag-card flag-red"><i class="fa-solid fa-circle-exclamation"></i> <div><strong>Length/Height (${hInput} cm): Below 3rd percentile (Short Stature).</strong> Growth evaluation advised.</div></div>`
+        ? `<div class="flag-card flag-red"><i class="fa-solid fa-circle-exclamation"></i> <div><strong>Length/Height (${hInput} cm): Below 3rd percentile (Short Stature).</strong> Below population norm (${ref.minH} – ${ref.maxH} cm). Linear growth evaluation advised.</div></div>`
         : `<div class="flag-card flag-red"><i class="fa-solid fa-circle-exclamation"></i> <div><strong>लंबाई / कद (${hInput} cm): 3वें परसेंटाइल से कम (Short Stature)।</strong> चिकित्सीय जांच आवश्यक है।</div></div>`;
     } else if (hasHeightDiscrepancy && discrepancySeverity === "severe") {
       hStatus = lang === "english"
-        ? `<div class="flag-card flag-red"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>Height (${hInput} cm): Genetic Target Discrepancy Alert!</strong> Child tracks >2 SD below parental genetic potential. Pediatric growth evaluation advised.</div></div>`
+        ? `<div class="flag-card flag-red"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>Height (${hInput} cm): Genetic Target Discrepancy Alert!</strong> Child tracks >2 Standard Deviations below parental genetic potential. Pediatric growth velocity evaluation recommended.</div></div>`
         : `<div class="flag-card flag-red"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>लंबाई (${hInput} cm): जेनेटिक क्षमता से गंभीर अंतर (Discrepancy Alert)!</strong> माता-पिता के कद के अनुपात में काफी कम है (>2 SD अंतर)।</div></div>`;
     } else if (hasHeightDiscrepancy && discrepancySeverity === "moderate") {
       hStatus = lang === "english"
-        ? `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>Height (${hInput} cm): Trailing Relative to Parental Target.</strong> Tracks below mid-parental genetic channel (~1.5 SD difference).</div></div>`
-        : `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>लंबाई (${hInput} cm): जेनेटिक लक्ष्य से धीमी गति।</strong> बच्चे का कद संभावित जेनेटिक क्षमता से कम गति से बढ़ रहा है।</div></div>`;
+        ? `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>Height (${hInput} cm): Trailing Relative to Parental Target.</strong> Tracks below mid-parental genetic channel (~1.5 SD difference). Growth velocity monitoring advised.</div></div>`
+        : `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>लंबाई (${hInput} cm): जेनेटिक लक्ष्य से धीमी गति।</strong> बच्चे का कद संभावित जेनेटिक क्षमता से कम गति से बढ़ रहा है। 6 माह में पुनः जांच कराएं।</div></div>`;
     } else if (hInput > ref.maxH) {
       hStatus = lang === "english"
         ? `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>Length/Height (${hInput} cm): Above Average (>97th percentile).</strong> Robust growth (${ref.minH} – ${ref.maxH} cm).</div></div>`
         : `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>लंबाई / कद (${hInput} cm): औसत से अधिक (>97वां परसेंटाइल)।</strong> उत्तम विकास।</div></div>`;
     } else {
       hStatus = lang === "english"
-        ? `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>Length/Height (${hInput} cm): Normal & Harmonious.</strong> Tracking well (${ref.minH} – ${ref.maxH} cm).</div></div>`
+        ? `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>Length/Height (${hInput} cm): Normal & Harmonious.</strong> Tracking well within expected population parameters (${ref.minH} – ${ref.maxH} cm).</div></div>`
         : `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>लंबाई / कद (${hInput} cm): आदर्श विकास क्रम।</strong> IAP मानक अनुसार सही है।</div></div>`;
     }
   }
@@ -142,7 +141,7 @@ function runScreener() {
     }
   }
 
-  // 4. Mid-Parental Height Output
+  // 4. Synchronized Mid-Parental Height Output Box (Tanner Formula)
   let mphHtml = "";
   if (!isNaN(targetHeight)) {
     const minTarget = (targetHeight - 6).toFixed(1);
@@ -150,11 +149,25 @@ function runScreener() {
     const midTarget = targetHeight.toFixed(1);
 
     let targetAnalysisText = "";
+    let boxBorderColor = "#99f6e4";
+    let boxBgColor = "#f0fdfa";
+    let boxTitleColor = "#0f766e";
+
     if (!isNaN(hInput) && ref) {
       if (discrepancySeverity === "severe") {
+        boxBgColor = "#fef2f2";
+        boxBorderColor = "#fca5a5";
+        boxTitleColor = "#991b1b";
         targetAnalysisText = lang === "english"
-          ? `<span style="color: #b91c1c; font-weight:700; display:block; margin-top:6px;">⚠️ Clinical Note: Parents are tall, but child tracks on lower percentiles. Evaluation for nutritional, thyroid, celiac, or growth hormone factors advised.</span>`
-          : `<span style="color: #b91c1c; font-weight:700; display:block; margin-top:6px;">⚠️ चिकित्सीय संकेत: माता-पिता का कद ऊंचा है, परन्तु बच्चा निचले परसेंटाइल पर चल रहा है। विस्तृत चिकित्सीय जांच आवश्यक है।</span>`;
+          ? `<span style="color: #b91c1c; font-weight:700; display:block; margin-top:6px;">⚠️ Clinical Note: Parents are tall/high-percentile, but the child is tracking significantly below genetic target (>2 SD difference). Evaluation for thyroid, celiac, nutrition, or growth hormone factors advised.</span>`
+          : `<span style="color: #b91c1c; font-weight:700; display:block; margin-top:6px;">⚠️ चिकित्सीय संकेत: माता-पिता का कद ऊंचा है, परन्तु बच्चा आनुवंशिक लक्ष्य से काफी नीचे चल रहा है (>2 SD अंतर)। विस्तृत चिकित्सीय जांच आवश्यक है।</span>`;
+      } else if (discrepancySeverity === "moderate") {
+        boxBgColor = "#fffbeb";
+        boxBorderColor = "#fde047";
+        boxTitleColor = "#854d0e";
+        targetAnalysisText = lang === "english"
+          ? `<span style="color: #b45309; font-weight:700; display:block; margin-top:6px;">🟡 Clinical Note: Child's linear growth is trailing below parental genetic potential (~1.5 SD difference). Growth velocity monitoring recommended every 3-6 months.</span>`
+          : `<span style="color: #b45309; font-weight:700; display:block; margin-top:6px;">🟡 चिकित्सीय संकेत: बच्चे का कद माता-पिता की आनुवंशिक क्षमता से कम गति से बढ़ रहा है (~1.5 SD अंतर)। विकास दर की नियमित निगरानी करें।</span>`;
       } else {
         targetAnalysisText = lang === "english"
           ? `<span style="color: #15803d; font-weight:600; display:block; margin-top:6px;">✔ Child's trajectory is well-harmonized with parental genetic target.</span>`
@@ -163,9 +176,9 @@ function runScreener() {
     }
 
     mphHtml = `
-      <div style="background: ${hasHeightDiscrepancy ? '#fef2f2' : '#f0fdfa'}; border: 1.5px solid ${hasHeightDiscrepancy ? '#fca5a5' : '#99f6e4'}; border-radius: 14px; padding: 14px; margin-top: 12px;">
-        <div style="font-weight: 700; color: ${hasHeightDiscrepancy ? '#991b1b' : '#0f766e'}; font-size: 0.9rem; margin-bottom: 4px;">
-          <i class="fa-solid fa-dna"></i> ${lang === "english" ? "Mid-Parental Target Adult Height (Tanner-IAP Formula)" : "आनुवंशिक संभावित वयस्क लंबाई (Tanner Formula)"}
+      <div style="background: ${boxBgColor}; border: 1.5px solid ${boxBorderColor}; border-radius: 14px; padding: 14px; margin-top: 12px;">
+        <div style="font-weight: 700; color: ${boxTitleColor}; font-size: 0.9rem; margin-bottom: 4px;">
+          <i class="fa-solid fa-dna"></i> ${lang === "english" ? "Mid-Parental Target Adult Height (Tanner Formula)" : "आनुवंशिक संभावित वयस्क लंबाई (Tanner Formula)"}
         </div>
         <div style="font-size: 0.86rem; color: #334155; line-height: 1.5;">
           • ${lang === "english" ? "Projected Adult Genetic Target" : "संभावित वयस्क लक्ष्य लंबाई"}: <strong>${midTarget} cm</strong><br>
@@ -630,6 +643,8 @@ function closeModalOnOverlay(event, modalId) {
   if (event.target && event.target.id === modalId) {
     if (modalId === 'bookingModal') closeBookingModal();
     if (modalId === 'blogModal') closeBlogModal();
+    if (modalId === 'disclaimerModal') closeDisclaimerModal();
+    if (modalId === 'privacyModal') closePrivacyModal();
   }
 }
 
