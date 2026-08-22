@@ -922,15 +922,24 @@
         <button onclick="openBookingModal()" class="mobile-bar-btn btn-book"><i class="fa-solid fa-calendar-check"></i> Book Online</button>
     </div>
 
-    <!-- Booking Modal -->
+   <!-- Booking Modal (Ultra-Smooth Desktop & Mobile) -->
     <div id="bookingModal" class="modal-overlay" onclick="closeModalOnOverlay(event, 'bookingModal')">
         <div class="modal-content">
             <div class="modal-header">
                 <h3><i class="fa-solid fa-calendar-check" style="color: var(--brand-primary);"></i> Book Consultation</h3>
-                <button class="close-modal-btn" onclick="closeBookingModal()">&times;</button>
+                <div class="modal-header-actions">
+                    <a href="https://script.google.com/macros/s/AKfycbzZZJon_KvK0ibezOQT0ktfkxIB8-ee_-BnRKra6kvejGrbG1dFjMSD8f9zhR3ZXeWbXA/exec" target="_blank" class="modal-action-btn" title="Open form in dedicated full-page view">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Full Screen
+                    </a>
+                    <button class="close-modal-btn" onclick="closeBookingModal()">&times;</button>
+                </div>
             </div>
             <div class="modal-body">
-                <iframe src="https://script.google.com/macros/s/AKfycbzZZJon_KvK0ibezOQT0ktfkxIB8-ee_-BnRKra6kvejGrbG1dFjMSD8f9zhR3ZXeWbXA/exec"></iframe>
+                <iframe 
+                    src="https://script.google.com/macros/s/AKfycbzZZJon_KvK0ibezOQT0ktfkxIB8-ee_-BnRKra6kvejGrbG1dFjMSD8f9zhR3ZXeWbXA/exec"
+                    allow="clipboard-write"
+                    loading="eager">
+                </iframe>
             </div>
         </div>
     </div>
