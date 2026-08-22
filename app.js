@@ -1,316 +1,354 @@
 // ==========================================================
 // CLINIC APPLICATION ENGINE (app.js)
-// Complete Error-Guarded Growth Screener, TDSC Milestones,
-// Tanner Formula, IAP BMI-for-Age, Weaning & Toilet Modules
+// Dynamic Length/Height, TDSC Milestones, Tanner MPH,
+// IAP BMI-for-Age, Weaning & Toilet Protocols, Modal Controls
 // ==========================================================
 
 let currentDietPreference = "veg"; // 'veg' or 'nonveg'
 
-// 1. MAIN SCREENER RUNNER (ERROR-GUARDED)
+// 1. MAIN SCREENER RUNNER
 function runScreener() {
-  try {
-    const langEl = document.getElementById("screenerLang");
-    const ageEl = document.getElementById("screenerAge");
-    const genderEl = document.getElementById("screenerGender");
-    const weightEl = document.getElementById("screenerWeight");
-    const heightEl = document.getElementById("screenerHeight");
-    const fatherEl = document.getElementById("fatherHeight");
-    const motherEl = document.getElementById("motherHeight");
-    const resultsContainer = document.getElementById("screenerResults");
+  const langEl = document.getElementById("screenerLang");
+  const ageEl = document.getElementById("screenerAge");
+  const genderEl = document.getElementById("screenerGender");
+  const weightEl = document.getElementById("screenerWeight");
+  const heightEl = document.getElementById("screenerHeight");
+  const fatherEl = document.getElementById("fatherHeight");
+  const motherEl = document.getElementById("motherHeight");
+  const resultsContainer = document.getElementById("screenerResults");
 
-    if (!ageEl || !genderEl || !resultsContainer) return;
-    if (typeof milestoneDatabase === "undefined") {
-      console.warn("data.js is loading or missing.");
-      return;
+  if (!ageEl || !genderEl || !resultsContainer) return;
+  if (typeof milestoneDatabase === "undefined") {
+    console.error("data.js is not loaded or milestoneDatabase is missing.");
+    return;
+  }
+
+  const lang = langEl ? langEl.value : "english";
+  const ageKey = ageEl.value;
+  const gender = genderEl.value;
+  const wInput = weightEl ? parseFloat(weightEl.value) : NaN;
+  const hInput = heightEl ? parseFloat(heightEl.value) : NaN;
+  const fHeight = fatherEl ? parseFloat(fatherEl.value) : NaN;
+  const mHeight = motherEl ? parseFloat(motherEl.value) : NaN;
+
+  // Dynamic UI Form Labels & Measurement Name (Length vs Height)
+  const lblTitle = document.getElementById("lblTitle");
+  const lblSubtitle = document.getElementById("lblSubtitle");
+  const lblLang = document.getElementById("lblLang");
+  const lblAge = document.getElementById("lblAge");
+  const lblGender = document.getElementById("lblGender");
+  const lblWeight = document.getElementById("lblWeight");
+  const lblHeight = document.getElementById("lblHeight");
+  const lblFather = document.getElementById("lblFather");
+  const lblMother = document.getElementById("lblMother");
+
+  const isInfant = (ageKey === "0m" || ageKey === "3m" || ageKey === "6m" || ageKey === "9m" || ageKey === "12m" || ageKey === "18m");
+
+  if (lang === "english") {
+    if (lblTitle) lblTitle.innerText = "Check Your Child's Growth & Development";
+    if (lblSubtitle) lblSubtitle.innerText = "IAP Growth Charts, BMI-for-Age, Tanner Pubertal Staging & Developmental Milestones.";
+    if (lblLang) lblLang.innerText = "Select Language";
+    if (lblAge) lblAge.innerText = "Child's Age";
+    if (lblGender) lblGender.innerText = "Child's Gender";
+    if (lblWeight) lblWeight.innerText = "Current Weight (kg)";
+    if (lblHeight) lblHeight.innerText = isInfant ? "Current Length (cm)" : "Current Height (cm)";
+    if (lblFather) lblFather.innerText = "Father's Height";
+    if (lblMother) lblMother.innerText = "Mother's Height";
+  } else {
+    if (lblTitle) lblTitle.innerText = "बच्चे की वृद्धि और विकास की जांच (Check Child's Growth & Development)";
+    if (lblSubtitle) lblSubtitle.innerText = "IAP बीएमआई चार्ट, टैनर स्टेजिंग, जेनेटिक हाइट फॉर्मूला एवं विकासात्मक स्केल।";
+    if (lblLang) lblLang.innerText = "भाषा चुनें (Language)";
+    if (lblAge) lblAge.innerText = "बच्चे की उम्र (Age)";
+    if (lblGender) lblGender.innerText = "लिंग (Gender)";
+    if (lblWeight) lblWeight.innerText = "वर्तमान वजन (kg)";
+    if (lblHeight) lblHeight.innerText = isInfant ? "वर्तमान लंबाई (cm)" : "वर्तमान कद (cm)";
+    if (lblFather) lblFather.innerText = "पिता की लंबाई";
+    if (lblMother) lblMother.innerText = "माता की लंबाई";
+  }
+
+  const data = milestoneDatabase[ageKey];
+  if (!data) return;
+
+  const ageName = data.name ? (data.name[lang === "english" ? "en" : "hi"] || "") : "";
+  const ref = data.iap ? data.iap[gender] : null;
+
+  let growthHtml = "";
+  let wStatus = "";
+  let hStatus = "";
+  let bmiStatus = "";
+
+  // 1. Weight Evaluation
+  if (!isNaN(wInput) && ref) {
+    if (wInput < ref.minW) {
+      wStatus = lang === "english" 
+        ? `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>Weight (${wInput} kg): Below 3rd percentile.</strong> Standard IAP healthy range: ${ref.minW} – ${ref.maxW} kg. Consult your pediatrician for dietary and growth review.</div></div>`
+        : `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>वजन (${wInput} kg): 3वें परसेंटाइल से कम।</strong> मानक IAP सीमा: ${ref.minW} – ${ref.maxW} kg। पोषण व विकास समीक्षा हेतु बाल रोग विशेषज्ञ से परामर्श लें।</div></div>`;
+    } else if (wInput > ref.maxW) {
+      wStatus = lang === "english"
+        ? `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>Weight (${wInput} kg): Above 97th percentile.</strong> Exceeds typical population range (${ref.minW} – ${ref.maxW} kg). Consult your pediatrician for balanced dietary guidance.</div></div>`
+        : `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>वजन (${wInput} kg): 97वें परसेंटाइल से अधिक।</strong> मानक IAP सीमा (${ref.minW} – ${ref.maxW} kg) से अधिक है। संतुलित आहार हेतु डॉक्टर से परामर्श लें।</div></div>`;
+    } else {
+      wStatus = lang === "english"
+        ? `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>Weight (${wInput} kg): Normal & Healthy.</strong> Aligned with standard IAP population range (${ref.minW} – ${ref.maxW} kg).</div></div>`
+        : `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>वजन (${wInput} kg): बिल्कुल सामान्य एवं स्वस्थ।</strong> IAP मानक सीमा (${ref.minW} – ${ref.maxW} kg) के अनुसार सही है।</div></div>`;
     }
+  }
 
-    const lang = langEl ? langEl.value : "english";
-    const ageKey = ageEl.value || "0m";
-    const gender = genderEl.value || "boy";
-    const wInput = weightEl && weightEl.value !== "" ? parseFloat(weightEl.value) : NaN;
-    const hInput = heightEl && heightEl.value !== "" ? parseFloat(heightEl.value) : NaN;
-    const fHeight = fatherEl && fatherEl.value !== "" ? parseFloat(fatherEl.value) : NaN;
-    const mHeight = motherEl && motherEl.value !== "" ? parseFloat(motherEl.value) : NaN;
+  // 2. Auxological Height & Mid-Parental Discrepancy Calculation
+  let childHeightZ = 0;
+  let targetAdultZ = 0;
+  let hasHeightDiscrepancy = false;
+  let discrepancyType = "none"; // 'lagging-severe', 'lagging-moderate', 'exceeding', 'none'
+  let targetHeight = NaN;
 
-    const data = milestoneDatabase[ageKey];
-    if (!data) return;
+  if (ref) {
+    const meanH = (ref.minH + ref.maxH) / 2;
+    const sdH = (ref.maxH - ref.minH) / 3.76;
+    if (!isNaN(hInput)) {
+      childHeightZ = (hInput - meanH) / sdH;
+    }
+  }
 
-    const ageName = data.name ? (data.name[lang === "english" ? "en" : "hi"] || "") : "";
-    const ref = (data.iap && data.iap[gender]) ? data.iap[gender] : null;
+  if (!isNaN(fHeight) && !isNaN(mHeight)) {
+    targetHeight = (gender === "boy") ? (fHeight + mHeight + 13) / 2 : (fHeight + mHeight - 13) / 2;
+    const adultMean = (gender === "boy") ? 174.5 : 161.5;
+    const adultSD = (gender === "boy") ? 6.5 : 6.0;
+    targetAdultZ = (targetHeight - adultMean) / adultSD;
 
-    let growthHtml = "";
-    let wStatus = "";
-    let hStatus = "";
-    let bmiStatus = "";
-
-    // 1. Weight Evaluation
-    if (!isNaN(wInput) && ref && ref.minW && ref.maxW) {
-      if (wInput < ref.minW) {
-        wStatus = lang === "english" 
-          ? `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>Weight (${wInput} kg): Below 3rd percentile.</strong> Standard IAP healthy range: ${ref.minW} – ${ref.maxW} kg. Consult your pediatrician for dietary and growth review.</div></div>`
-          : `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>वजन (${wInput} kg): 3वें परसेंटाइल से कम।</strong> मानक IAP सीमा: ${ref.minW} – ${ref.maxW} kg। पोषण व विकास समीक्षा हेतु बाल रोग विशेषज्ञ से परामर्श लें।</div></div>`;
-      } else if (wInput > ref.maxW) {
-        wStatus = lang === "english"
-          ? `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>Weight (${wInput} kg): Above 97th percentile.</strong> Exceeds typical population range (${ref.minW} – ${ref.maxW} kg). Consult your pediatrician for balanced dietary guidance.</div></div>`
-          : `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>वजन (${wInput} kg): 97वें परसेंटाइल से अधिक।</strong> मानक IAP सीमा (${ref.minW} – ${ref.maxW} kg) से अधिक है। डॉक्टर से परामर्श लें।</div></div>`;
-      } else {
-        wStatus = lang === "english"
-          ? `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>Weight (${wInput} kg): Normal & Healthy.</strong> Aligned with standard IAP population range (${ref.minW} – ${ref.maxW} kg).</div></div>`
-          : `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>वजन (${wInput} kg): बिल्कुल सामान्य एवं स्वस्थ।</strong> IAP मानक सीमा (${ref.minW} – ${ref.maxW} kg) के अनुसार सही है।</div></div>`;
+    if (!isNaN(hInput) && ref) {
+      const zDiff = targetAdultZ - childHeightZ;
+      if (zDiff >= 2.0) {
+        hasHeightDiscrepancy = true;
+        discrepancyType = "lagging-severe";
+      } else if (zDiff >= 1.35) {
+        hasHeightDiscrepancy = true;
+        discrepancyType = "lagging-moderate";
+      } else if (zDiff <= -1.5) {
+        hasHeightDiscrepancy = true;
+        discrepancyType = "exceeding";
       }
     }
+  }
 
-    // 2. Auxological Height & Mid-Parental Discrepancy Calculation
-    let childHeightZ = 0;
-    let targetAdultZ = 0;
-    let hasHeightDiscrepancy = false;
-    let discrepancySeverity = "none";
-    let targetHeight = NaN;
+  // Synchronized Population Height Output
+  const measurementWord = isInfant ? (lang === "english" ? "Length" : "लंबाई") : (lang === "english" ? "Height" : "कद");
 
-    if (ref && ref.minH && ref.maxH) {
-      const meanH = (ref.minH + ref.maxH) / 2;
-      const sdH = (ref.maxH - ref.minH) / 3.76;
-      if (!isNaN(hInput) && sdH > 0) {
-        childHeightZ = (hInput - meanH) / sdH;
-      }
+  if (!isNaN(hInput) && ref) {
+    if (hInput < ref.minH) {
+      hStatus = lang === "english"
+        ? `<div class="flag-card flag-red"><i class="fa-solid fa-circle-exclamation"></i> <div><strong>${measurementWord} (${hInput} cm): Below 3rd percentile.</strong> Below population norm (${ref.minH} – ${ref.maxH} cm). Please consult your pediatrician for in-person clinical evaluation.</div></div>`
+        : `<div class="flag-card flag-red"><i class="fa-solid fa-circle-exclamation"></i> <div><strong>${measurementWord} (${hInput} cm): 3वें परसेंटाइल से कम।</strong> मानक IAP सीमा (${ref.minH} – ${ref.maxH} cm) से कम है। चिकित्सीय परामर्श लें।</div></div>`;
+    } else if (hasHeightDiscrepancy && discrepancyType === "lagging-severe") {
+      hStatus = lang === "english"
+        ? `<div class="flag-card flag-red"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>${measurementWord} (${hInput} cm): Trailing Parental Genetic Potential.</strong> Child tracks significantly below their family target channel (>2 SD). Please consult your pediatrician for growth assessment.</div></div>`
+        : `<div class="flag-card flag-red"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>${measurementWord} (${hInput} cm): आनुवंशिक क्षमता से कम।</strong> बच्चे का कद माता-पिता की संभावित जेनेटिक क्षमता से कम है (>2 SD)। बाल रोग विशेषज्ञ से परामर्श लें।</div></div>`;
+    } else if (hasHeightDiscrepancy && discrepancyType === "lagging-moderate") {
+      hStatus = lang === "english"
+        ? `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>${measurementWord} (${hInput} cm): Trailing Relative to Parental Target.</strong> Tracks slightly below mid-parental genetic channel. Growth monitoring with your pediatrician advised.</div></div>`
+        : `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>${measurementWord} (${hInput} cm): जेनेटिक लक्ष्य से धीमी गति।</strong> बच्चे का कद संभावित जेनेटिक क्षमता से थोड़ा धीमा है। डॉक्टर से नियमित निगरानी कराएं।</div></div>`;
+    } else if (hInput > ref.maxH) {
+      hStatus = lang === "english"
+        ? `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>${measurementWord} (${hInput} cm): Above Average (>97th percentile).</strong> Robust growth tracking well (${ref.minH} – ${ref.maxH} cm).</div></div>`
+        : `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>${measurementWord} (${hInput} cm): औसत से अधिक (>97वां परसेंटाइल)।</strong> उत्तम विकास।</div></div>`;
+    } else {
+      hStatus = lang === "english"
+        ? `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>${measurementWord} (${hInput} cm): Normal & Healthy.</strong> Tracking well within expected population and genetic parameters (${ref.minH} – ${ref.maxH} cm).</div></div>`
+        : `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>${measurementWord} (${hInput} cm): आदर्श विकास क्रम।</strong> IAP मानक अनुसार सही है।</div></div>`;
     }
+  }
 
-    if (!isNaN(fHeight) && !isNaN(mHeight)) {
-      targetHeight = (gender === "boy") ? (fHeight + mHeight + 13) / 2 : (fHeight + mHeight - 13) / 2;
-      const adultMean = (gender === "boy") ? 174.5 : 161.5;
-      const adultSD = (gender === "boy") ? 6.5 : 6.0;
-      targetAdultZ = (targetHeight - adultMean) / adultSD;
-
-      if (!isNaN(hInput) && ref) {
-        const zDiff = targetAdultZ - childHeightZ;
-        if (zDiff >= 2.0) {
-          hasHeightDiscrepancy = true;
-          discrepancySeverity = "severe";
-        } else if (zDiff >= 1.35) {
-          hasHeightDiscrepancy = true;
-          discrepancySeverity = "moderate";
-        } else if (zDiff <= -1.5) {
-          hasHeightDiscrepancy = true;
-          discrepancySeverity = "exceeding";
-        }
-      }
-    }
-
-    // Synchronized Population Height Output
-    if (!isNaN(hInput) && ref && ref.minH && ref.maxH) {
-      if (hInput < ref.minH) {
-        hStatus = lang === "english"
-          ? `<div class="flag-card flag-red"><i class="fa-solid fa-circle-exclamation"></i> <div><strong>Length/Height (${hInput} cm): Below 3rd percentile.</strong> Below population norm (${ref.minH} – ${ref.maxH} cm). Please consult your pediatrician for in-person clinical evaluation.</div></div>`
-          : `<div class="flag-card flag-red"><i class="fa-solid fa-circle-exclamation"></i> <div><strong>लंबाई / कद (${hInput} cm): 3वें परसेंटाइल से कम।</strong> मानक IAP सीमा (${ref.minH} – ${ref.maxH} cm) से कम है। चिकित्सीय परामर्श लें।</div></div>`;
-      } else if (hasHeightDiscrepancy && discrepancySeverity === "severe") {
-        hStatus = lang === "english"
-          ? `<div class="flag-card flag-red"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>Height (${hInput} cm): Trailing Parental Genetic Potential.</strong> Child's height tracks below family mid-parental target channel (>2 SD). Please consult your pediatrician for clinical growth evaluation.</div></div>`
-          : `<div class="flag-card flag-red"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>लंबाई (${hInput} cm): आनुवंशिक क्षमता से कम (>2 SD)।</strong> बच्चे का कद माता-पिता के जेनेटिक लक्ष्य से कम है। बाल रोग विशेषज्ञ से परामर्श लें।</div></div>`;
-      } else if (hasHeightDiscrepancy && discrepancySeverity === "moderate") {
-        hStatus = lang === "english"
-          ? `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>Height (${hInput} cm): Trailing Relative to Parental Target.</strong> Tracks slightly below mid-parental genetic channel (~1.5 SD). Growth monitoring with your pediatrician advised.</div></div>`
-          : `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>लंबाई (${hInput} cm): जेनेटिक लक्ष्य से धीमी गति (~1.5 SD)।</strong> डॉक्टर से नियमित निगरानी कराएं।</div></div>`;
-      } else if (hInput > ref.maxH) {
-        hStatus = lang === "english"
-          ? `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>Length/Height (${hInput} cm): Above Average (>97th percentile).</strong> Robust growth tracking well (${ref.minH} – ${ref.maxH} cm).</div></div>`
-          : `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>लंबाई / कद (${hInput} cm): औसत से अधिक (>97वां परसेंटाइल)।</strong> उत्तम विकास।</div></div>`;
-      } else {
-        hStatus = lang === "english"
-          ? `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>Length/Height (${hInput} cm): Normal & Healthy.</strong> Tracking well within expected parameters (${ref.minH} – ${ref.maxH} cm).</div></div>`
-          : `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>लंबाई / कद (${hInput} cm): आदर्श विकास क्रम।</strong> IAP मानक अनुसार सही है।</div></div>`;
-      }
-    }
-
-    // 3. IAP BMI-for-Age (Ages 2 to 18y)
-    if (!isNaN(wInput) && !isNaN(hInput) && ref && ref.minBmi) {
+  // 3. IAP BMI-for-Age (Ages 2 to 18 Years)
+  if (!isNaN(wInput) && !isNaN(hInput)) {
+    if (ref && ref.minBmi) {
       const heightInMeters = hInput / 100;
       const calcBmi = (wInput / (heightInMeters * heightInMeters)).toFixed(1);
 
       if (calcBmi < ref.minBmi) {
         bmiStatus = lang === "english"
-          ? `<div class="flag-card flag-red" style="background:#fff1f2; border-color:#fecdd3; color:#9f1239;"><i class="fa-solid fa-circle-exclamation"></i> <div><strong>BMI (${calcBmi} kg/m²): Underweight (<3rd Percentile).</strong> Below healthy IAP range (${ref.minBmi} – ${ref.ovBmi}). Consult your pediatrician for dietary review.</div></div>`
-          : `<div class="flag-card flag-red" style="background:#fff1f2; border-color:#fecdd3; color:#9f1239;"><i class="fa-solid fa-circle-exclamation"></i> <div><strong>बीएमआई (${calcBmi} kg/m²): कम वजन (<3वां परसेंटाइल)।</strong> मानक सीमा (${ref.minBmi} – ${ref.ovBmi}) से कम। डॉक्टर से परामर्श लें।</div></div>`;
+          ? `<div class="flag-card flag-red" style="background:#fff1f2; border-color:#fecdd3; color:#9f1239;"><i class="fa-solid fa-circle-exclamation"></i> <div><strong>BMI (${calcBmi} kg/m²): Underweight (<3rd Percentile).</strong> Below healthy IAP range (${ref.minBmi} – ${ref.ovBmi}). Consult your pediatrician for dietary and nutritional review.</div></div>`
+          : `<div class="flag-card flag-red" style="background:#fff1f2; border-color:#fecdd3; color:#9f1239;"><i class="fa-solid fa-circle-exclamation"></i> <div><strong>बीएमआई (${calcBmi} kg/m²): कम वजन (<3वां परसेंटाइल)।</strong> मानक सीमा (${ref.minBmi} – ${ref.ovBmi}) से कम। पोषण समीक्षा हेतु डॉक्टर से परामर्श लें।</div></div>`;
       } else if (calcBmi >= ref.obBmi) {
         bmiStatus = lang === "english"
-          ? `<div class="flag-card flag-red" style="background:#fef2f2; border-color:#f87171; color:#991b1b;"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>BMI (${calcBmi} kg/m²): Significantly Above Average (≥95th Percentile).</strong> Exceeds normal threshold. Consult your pediatrician for balanced lifestyle guidance.</div></div>`
-          : `<div class="flag-card flag-red" style="background:#fef2f2; border-color:#f87171; color:#991b1b;"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>बीएमआई (${calcBmi} kg/m²): सामान्य से अधिक (≥95वां परसेंटाइल)।</strong> बाल रोग विशेषज्ञ से परामर्श लें।</div></div>`;
+          ? `<div class="flag-card flag-red" style="background:#fef2f2; border-color:#f87171; color:#991b1b;"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>BMI (${calcBmi} kg/m²): Significantly Above Average (≥95th Percentile).</strong> Exceeds normal thresholds. Consult your pediatrician for structured lifestyle and activity guidance.</div></div>`
+          : `<div class="flag-card flag-red" style="background:#fef2f2; border-color:#f87171; color:#991b1b;"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>बीएमआई (${calcBmi} kg/m²): सामान्य से अधिक (≥95वां परसेंटाइल)।</strong> जीवनशैली व आहार परामर्श हेतु बाल रोग विशेषज्ञ से मिलें।</div></div>`;
       } else if (calcBmi >= ref.ovBmi) {
         bmiStatus = lang === "english"
-          ? `<div class="flag-card flag-yellow" style="background:#fffbeb; border-color:#fde047; color:#854d0e;"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>BMI (${calcBmi} kg/m²): Above Normal Range (≥75th Percentile).</strong> Exceeds standard threshold (${ref.ovBmi} kg/m²). Pediatric review for balanced nutrition advised.</div></div>`
-          : `<div class="flag-card flag-yellow" style="background:#fffbeb; border-color:#fde047; color:#854d0e;"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>बीएमआई (${calcBmi} kg/m²): मानक सीमा से अधिक (≥75वां परसेंटाइल)।</strong> डॉक्टर से सलाह लें।</div></div>`;
+          ? `<div class="flag-card flag-yellow" style="background:#fffbeb; border-color:#fde047; color:#854d0e;"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>BMI (${calcBmi} kg/m²): Above Normal Range (≥75th Percentile).</strong> Exceeds standard threshold (${ref.ovBmi} kg/m²). Pediatric review for balanced nutrition and active play recommended.</div></div>`
+          : `<div class="flag-card flag-yellow" style="background:#fffbeb; border-color:#fde047; color:#854d0e;"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>बीएमआई (${calcBmi} kg/m²): मानक सीमा से अधिक (≥75वां परसेंटाइल)।</strong> संतुलित आहार व नियमित खेलकूद हेतु डॉक्टर से सलाह लें।</div></div>`;
       } else {
         bmiStatus = lang === "english"
           ? `<div class="flag-card flag-green"><i class="fa-solid fa-heart-pulse"></i> <div><strong>BMI (${calcBmi} kg/m²): Ideal & Healthy Weight.</strong> Tracking in normal IAP percentiles (${ref.minBmi} – ${ref.ovBmi} kg/m²).</div></div>`
           : `<div class="flag-card flag-green"><i class="fa-solid fa-heart-pulse"></i> <div><strong>बीएमआई (${calcBmi} kg/m²): आदर्श एवं स्वस्थ वजन।</strong> IAP मानक अनुसार सही सीमा में है।</div></div>`;
       }
-    } else if (!isNaN(wInput) && !isNaN(hInput) && ref && !ref.minBmi) {
-      // Under 2 years Note
-      bmiStatus = lang === "english"
-        ? `<div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:12px; padding:10px 12px; font-size:0.82rem; color:#166534; margin-bottom:10px;"><i class="fa-solid fa-circle-check"></i> Weight-for-length evaluated. Formal BMI-for-Age tracking begins at 2 years per IAP standards.</div>`
-        : `<div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:12px; padding:10px 12px; font-size:0.82rem; color:#166534; margin-bottom:10px;"><i class="fa-solid fa-circle-check"></i> वजन व लंबाई का अनुपात सामान्य है। IAP अनुसार बीएमआई चार्ट 2 वर्ष से लागू होता है।</div>`;
-    }
-
-    // 4. Synchronized Mid-Parental Height Box (Tanner Formula)
-    let mphHtml = "";
-    if (!isNaN(targetHeight)) {
-      const minTarget = (targetHeight - 6).toFixed(1);
-      const maxTarget = (targetHeight + 6).toFixed(1);
-      const midTarget = targetHeight.toFixed(1);
-
-      let targetAnalysisText = "";
-      let boxBorderColor = "#99f6e4";
-      let boxBgColor = "#f0fdfa";
-      let boxTitleColor = "#0f766e";
-
-      if (!isNaN(hInput) && ref) {
-        if (discrepancySeverity === "severe") {
-          boxBgColor = "#fef2f2";
-          boxBorderColor = "#fca5a5";
-          boxTitleColor = "#991b1b";
-          targetAnalysisText = lang === "english"
-            ? `<span style="color: #b91c1c; font-weight:700; display:block; margin-top:6px;">⚠️ Clinical Guidance: Child's current height is trailing below parental genetic potential. Please consult your pediatrician for in-person clinical evaluation and growth charting.</span>`
-            : `<span style="color: #b91c1c; font-weight:700; display:block; margin-top:6px;">⚠️ चिकित्सीय मार्गदर्शन: बच्चे की लंबाई आनुवंशिक क्षमता से कम चल रही है। विस्तृत जांच हेतु बाल रोग विशेषज्ञ से परामर्श लें।</span>`;
-        } else if (discrepancySeverity === "moderate") {
-          boxBgColor = "#fffbeb";
-          boxBorderColor = "#fde047";
-          boxTitleColor = "#854d0e";
-          targetAnalysisText = lang === "english"
-            ? `<span style="color: #b45309; font-weight:700; display:block; margin-top:6px;">🟡 Clinical Guidance: Child's linear growth is tracking slightly below parental genetic target. Regular follow-up with your pediatrician is advised.</span>`
-            : `<span style="color: #b45309; font-weight:700; display:block; margin-top:6px;">🟡 चिकित्सीय मार्गदर्शन: बच्चे का विकास क्रम आनुवंशिक लक्ष्य से थोड़ा धीमा है। डॉक्टर से नियमित जांच कराएं।</span>`;
-        } else if (discrepancySeverity === "exceeding") {
-          boxBgColor = "#f0fdf4";
-          boxBorderColor = "#86efac";
-          boxTitleColor = "#166534";
-          targetAnalysisText = lang === "english"
-            ? `<span style="color: #15803d; font-weight:600; display:block; margin-top:6px;">✔ Child's growth is robust and tracking above the mid-parental genetic projection channel.</span>`
-            : `<span style="color: #15803d; font-weight:600; display:block; margin-top:6px;">✔ बच्चे का विकास माता-पिता की आनुवंशिक क्षमता से अधिक उत्तम गति से बढ़ रहा है।</span>`;
-        } else {
-          targetAnalysisText = lang === "english"
-            ? `<span style="color: #15803d; font-weight:600; display:block; margin-top:6px;">✔ Child's growth trajectory is well-harmonized with parental genetic target height.</span>`
-            : `<span style="color: #15803d; font-weight:600; display:block; margin-top:6px;">✔ बच्चे का विकास क्रम माता-पिता के आनुवंशिक कद के पूर्णतः अनुकूल है।</span>`;
-        }
-      }
-
-      mphHtml = `
-        <div style="background: ${boxBgColor}; border: 1.5px solid ${boxBorderColor}; border-radius: 14px; padding: 14px; margin-top: 12px;">
-          <div style="font-weight: 700; color: ${boxTitleColor}; font-size: 0.9rem; margin-bottom: 4px;">
-            <i class="fa-solid fa-dna"></i> ${lang === "english" ? "Mid-Parental Target Adult Height (Tanner Formula)" : "आनुवंशिक संभावित वयस्क लंबाई (Tanner Formula)"}
-          </div>
-          <div style="font-size: 0.86rem; color: #334155; line-height: 1.5;">
-            • ${lang === "english" ? "Projected Adult Genetic Target" : "संभावित वयस्क लक्ष्य लंबाई"}: <strong>${midTarget} cm</strong><br>
-            • ${lang === "english" ? "Target Genetic Range (±6 cm)" : "आनुवंशिक सीमा (±6 cm)"}: <strong>${minTarget} cm – ${maxTarget} cm</strong>
-            ${targetAnalysisText}
-          </div>
-        </div>
-      `;
-    } else if ((!isNaN(fHeight) && isNaN(mHeight)) || (isNaN(fHeight) && !isNaN(mHeight))) {
-      mphHtml = `
-        <div style="background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 12px; padding: 10px 14px; margin-top: 10px; font-size: 0.8rem; color: #64748b;">
-          <i class="fa-solid fa-circle-info" style="color: #0891b2;"></i> ${lang === "english" ? "Enter both Father's and Mother's height to calculate Mid-Parental Target Range." : "आनुवंशिक लक्ष्य लंबाई हेतु माता और पिता दोनों का कद दर्ज करें।"}
+    } else if (isInfant) {
+      // Infant note (<2 years)
+      bmiStatus = `
+        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:8px 12px; margin-top:6px; font-size:0.78rem; color:#64748b;">
+          <i class="fa-solid fa-circle-info" style="color:var(--brand-primary); margin-right:4px;"></i>
+          ${lang === "english" ? "Note: In infants under 2 years, growth is evaluated via Weight-for-Length charts. Formal BMI-for-Age tracking begins at 2 years per IAP guidelines." : "सूचना: 2 वर्ष से छोटे शिशुओं में लंबाई के अनुपात में वजन देखा जाता है। औपचारिक बीएमआई 2 वर्ष की आयु से लागू होता है।"}
         </div>
       `;
     }
-
-    const genderTitle = (gender === "boy") ? (lang === "english" ? "BOY" : "बालक") : (lang === "english" ? "GIRL" : "बालिका");
-    growthHtml = `
-      <div class="result-box">
-        <h4><i class="fa-solid fa-ruler-combined" style="color: var(--brand-primary);"></i> ${lang === "english" ? "IAP Growth & BMI Assessment" : "IAP ग्रोथ एवं बीएमआई मूल्यांकन"}</h4>
-        <span class="iap-ref-badge">IAP Standard (${ageName} - ${genderTitle})</span>
-        <p style="font-size:0.84rem; color:#64748b; margin-bottom:10px;">
-          ${lang === "english" ? "Population Normal Range:" : "सामान्य स्वस्थ सीमा:"} 
-          ${lang === "english" ? "Weight:" : "वजन:"} <strong>${ref ? ref.minW : "" }–${ref ? ref.maxW : "" } kg</strong> | 
-          ${lang === "english" ? "Length/Height:" : "लंबाई/कद:"} <strong>${ref ? ref.minH : "" }–${ref ? ref.maxH : "" } cm</strong>
-        </p>
-        ${wStatus || `<p style="font-size:0.82rem; color:#94a3b8;">${lang === "english" ? "Enter weight above for percentile evaluation." : "वजन दर्ज करें।"}</p>`}
-        ${hStatus || `<p style="font-size:0.82rem; color:#94a3b8;">${lang === "english" ? "Enter height/length above for evaluation." : "लंबाई दर्ज करें।"}</p>`}
-        ${bmiStatus}
-        ${mphHtml}
-      </div>
-    `;
-
-    // 5. TDSC Milestones & Tanner Staging
-    const listLang = lang === "english" ? "en" : "hi";
-    const greenList = (data.green && data.green[listLang]) ? data.green[listLang].map(item => `<li>${item}</li>`).join("") : "";
-    const yellowList = (data.yellow && data.yellow[listLang]) ? data.yellow[listLang].map(item => `<li>${item}</li>`).join("") : "";
-    const redList = (data.red && data.red[listLang]) ? data.red[listLang].map(item => `<li>${item}</li>`).join("") : "";
-
-    let tannerHtml = "";
-    if (data.tanner && data.tanner[gender]) {
-      const tInfo = data.tanner[gender];
-      tannerHtml = `
-        <div style="background: #fdf4ff; border: 1.5px solid #f0abfc; border-radius: 14px; padding: 14px; margin-top: 14px;">
-          <div style="font-weight: 700; color: #86198f; font-size: 0.9rem; margin-bottom: 6px;">
-            <i class="fa-solid fa-person-arrow-up-from-line"></i> ${lang === "english" ? "Tanner Pubertal Staging" : "टैनर प्यूबर्टल स्टेजिंग"} (${genderTitle})
-          </div>
-          <div style="font-size: 0.84rem; color: #701a75; line-height: 1.45; margin-bottom: 8px;"><strong>Stage:</strong> ${tInfo.stage}</div>
-          <div class="flag-card flag-green" style="margin-bottom: 6px; padding: 8px 10px; font-size: 0.82rem;"><i class="fa-solid fa-circle-check"></i><div><strong>🟢 Timeline:</strong> ${tInfo.green}</div></div>
-          <div class="flag-card flag-yellow" style="margin-bottom: 6px; padding: 8px 10px; font-size: 0.82rem;"><i class="fa-solid fa-triangle-exclamation"></i><div><strong>🟡 Monitor:</strong> ${tInfo.yellow}</div></div>
-          <div class="flag-card flag-red" style="margin-bottom: 0; padding: 8px 10px; font-size: 0.82rem;"><i class="fa-solid fa-circle-exclamation"></i><div><strong>🔴 Alert:</strong> ${tInfo.red}</div></div>
-        </div>
-      `;
-    }
-
-    const devHtml = `
-      <div class="result-box">
-        <h4><i class="fa-solid fa-brain" style="color: #0891b2;"></i> ${lang === "english" ? "Developmental Milestones (TDSC)" : "विकासात्मक मील के पत्थर (TDSC स्केल)"}</h4>
-        <div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i><div><strong>🟢 ${lang === "english" ? "Green Flags:" : "सामान्य मील के पत्थर:"}</strong><ul style="margin-top:4px; padding-left:16px;">${greenList}</ul></div></div>
-        <div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i><div><strong>🟡 ${lang === "english" ? "Yellow Flags:" : "निगरानी योग्य संकेत:"}</strong><ul style="margin-top:4px; padding-left:16px;">${yellowList}</ul></div></div>
-        <div class="flag-card flag-red"><i class="fa-solid fa-circle-exclamation"></i><div><strong>🔴 ${lang === "english" ? "Red Flags (Pediatrician Review):" : "सतर्कता संकेत - डॉक्टर को दिखाएं:"}</strong><ul style="margin-top:4px; padding-left:16px;">${redList}</ul></div></div>
-        ${tannerHtml}
-      </div>
-    `;
-
-    // 6. Educational Modules (Weaning for 6-12m & Toilet Training for 18m-24m)
-    let specialEducationHtml = "";
-    if (ageKey === "6m" || ageKey === "9m" || ageKey === "12m") {
-      specialEducationHtml = renderIapWeaningInteractive(lang);
-    } else if (ageKey === "18m" || ageKey === "24m") {
-      specialEducationHtml = renderToiletTrainingGuide(lang);
-    }
-
-    const tips = data.parentTips || { nutrition: {}, safety: {}, play: {}, care: {} };
-    const tipsHtml = `
-      <div class="result-box" style="grid-column: 1 / -1; background: #faf5ff; border: 1.5px solid #e9d5ff;">
-        <h4 style="color: #6b21a8;"><i class="fa-solid fa-heart-pulse"></i> ${ageName} ${lang === "english" ? "Parenting Guide" : "अभिभावक देखभाल मार्गदर्शन"}</h4>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 12px;">
-          <div style="background:#ffffff; padding:14px; border-radius:12px; border:1px solid #f3e8ff;">
-            <strong style="color:#7e22ce; font-size:0.88rem; display:block; margin-bottom:4px;"><i class="fa-solid fa-apple-whole"></i> ${lang === "english" ? "Nutrition:" : "पोषण:"}</strong>
-            <p style="font-size:0.84rem; color:#4b5563; line-height:1.45;">${tips.nutrition[listLang] || ""}</p>
-          </div>
-          <div style="background:#ffffff; padding:14px; border-radius:12px; border:1px solid #f3e8ff;">
-            <strong style="color:#b91c1c; font-size:0.88rem; display:block; margin-bottom:4px;"><i class="fa-solid fa-shield-halved"></i> ${lang === "english" ? "Child Safety:" : "सुरक्षा:"}</strong>
-            <p style="font-size:0.84rem; color:#4b5563; line-height:1.45;">${tips.safety[listLang] || ""}</p>
-          </div>
-          <div style="background:#ffffff; padding:14px; border-radius:12px; border:1px solid #f3e8ff;">
-            <strong style="color:#0369a1; font-size:0.88rem; display:block; margin-bottom:4px;"><i class="fa-solid fa-puzzle-piece"></i> ${lang === "english" ? "Play & Cognitive:" : "मानसिक विकास:"}</strong>
-            <p style="font-size:0.84rem; color:#4b5563; line-height:1.45;">${tips.play[listLang] || ""}</p>
-          </div>
-          <div style="background:#ffffff; padding:14px; border-radius:12px; border:1px solid #f3e8ff;">
-            <strong style="color:#15803d; font-size:0.88rem; display:block; margin-bottom:4px;"><i class="fa-solid fa-stethoscope"></i> ${lang === "english" ? "Doctor Tip:" : "चिकित्सकीय सलाह:"}</strong>
-            <p style="font-size:0.84rem; color:#4b5563; line-height:1.45;">${tips.care[listLang] || ""}</p>
-          </div>
-        </div>
-        ${specialEducationHtml}
-        <div style="text-align:center; margin-top:18px;">
-          <button onclick="openBookingModal()" class="hero-cta-btn" style="padding: 10px 24px; font-size: 0.9rem; background:#0891b2; box-shadow: 0 4px 14px rgba(8, 145, 178, 0.35);">
-            <i class="fa-solid fa-calendar-check"></i> ${lang === "english" ? "Book Growth Consultation with Dr. Dinesh Mittal" : "डॉ. दिनेश मित्तल से विकास परामर्श बुक करें"}
-          </button>
-        </div>
-      </div>
-    `;
-
-    resultsContainer.innerHTML = `
-      <div class="results-grid">
-        ${growthHtml}
-        ${devHtml}
-        ${tipsHtml}
-      </div>
-    `;
-
-    renderCollapsibleAdolescentSection();
-  } catch (err) {
-    console.error("Error running screener:", err);
   }
+
+  // 4. Synchronized Mid-Parental Height Output Box (Tanner Formula)
+  let mphHtml = "";
+  if (!isNaN(targetHeight)) {
+    const minTarget = (targetHeight - 6).toFixed(1);
+    const maxTarget = (targetHeight + 6).toFixed(1);
+    const midTarget = targetHeight.toFixed(1);
+
+    let targetAnalysisText = "";
+    let boxBorderColor = "#99f6e4";
+    let boxBgColor = "#f0fdfa";
+    let boxTitleColor = "#0f766e";
+
+    if (!isNaN(hInput) && ref) {
+      if (discrepancyType === "lagging-severe") {
+        boxBgColor = "#fef2f2";
+        boxBorderColor = "#fca5a5";
+        boxTitleColor = "#991b1b";
+        targetAnalysisText = lang === "english"
+          ? `<span style="color: #b91c1c; font-weight:700; display:block; margin-top:6px;">⚠️ Clinical Guidance: Child's linear growth is trailing below parental genetic potential (>2 SD). Please consult your pediatrician for detailed in-person clinical evaluation and growth charting.</span>`
+          : `<span style="color: #b91c1c; font-weight:700; display:block; margin-top:6px;">⚠️ चिकित्सीय मार्गदर्शन: बच्चे की वर्तमान लंबाई माता-पिता की आनुवंशिक क्षमता से कम चल रही है (>2 SD)। विस्तृत जांच हेतु बाल रोग विशेषज्ञ से परामर्श लें।</span>`;
+      } else if (discrepancyType === "lagging-moderate") {
+        boxBgColor = "#fffbeb";
+        boxBorderColor = "#fde047";
+        boxTitleColor = "#854d0e";
+        targetAnalysisText = lang === "english"
+          ? `<span style="color: #b45309; font-weight:700; display:block; margin-top:6px;">🟡 Clinical Guidance: Child's linear growth tracks slightly below parental genetic target (~1.5 SD). Regular follow-up with your pediatrician is advised.</span>`
+          : `<span style="color: #b45309; font-weight:700; display:block; margin-top:6px;">🟡 चिकित्सीय मार्गदर्शन: बच्चे का विकास क्रम आनुवंशिक लक्ष्य से थोड़ा धीमा है। डॉक्टर से नियमित जांच कराएं।</span>`;
+      } else if (discrepancyType === "exceeding") {
+        boxBgColor = "#f0fdf4";
+        boxBorderColor = "#86efac";
+        boxTitleColor = "#166534";
+        targetAnalysisText = lang === "english"
+          ? `<span style="color: #15803d; font-weight:600; display:block; margin-top:6px;">✔ Child's linear growth is robust and tracking above the mid-parental genetic projection channel.</span>`
+          : `<span style="color: #15803d; font-weight:600; display:block; margin-top:6px;">✔ बच्चे का शारीरिक विकास माता-पिता की आनुवंशिक संभावना से अधिक उत्तम गति से बढ़ रहा है।</span>`;
+      } else {
+        targetAnalysisText = lang === "english"
+          ? `<span style="color: #15803d; font-weight:600; display:block; margin-top:6px;">✔ Child's growth trajectory is well-harmonized with parental genetic target height.</span>`
+          : `<span style="color: #15803d; font-weight:600; display:block; margin-top:6px;">✔ बच्चे का विकास क्रम माता-पिता के आनुवंशिक कद के पूर्णतः अनुकूल है।</span>`;
+      }
+    }
+
+    mphHtml = `
+      <div style="background: ${boxBgColor}; border: 1.5px solid ${boxBorderColor}; border-radius: 14px; padding: 14px; margin-top: 12px;">
+        <div style="font-weight: 700; color: ${boxTitleColor}; font-size: 0.9rem; margin-bottom: 4px;">
+          <i class="fa-solid fa-dna"></i> ${lang === "english" ? "Mid-Parental Target Adult Height (Tanner Formula)" : "आनुवंशिक संभावित वयस्क लंबाई (Tanner Formula)"}
+        </div>
+        <div style="font-size: 0.86rem; color: #334155; line-height: 1.5;">
+          • ${lang === "english" ? "Projected Adult Genetic Target" : "संभावित वयस्क लक्ष्य लंबाई"}: <strong>${midTarget} cm</strong><br>
+          • ${lang === "english" ? "Target Genetic Range (±6 cm)" : "आनुवंशिक सीमा (±6 cm)"}: <strong>${minTarget} cm – ${maxTarget} cm</strong>
+          ${targetAnalysisText}
+        </div>
+      </div>
+    `;
+  } else if ((!isNaN(fHeight) && isNaN(mHeight)) || (isNaN(fHeight) && !isNaN(mHeight))) {
+    mphHtml = `
+      <div style="background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 12px; padding: 10px 14px; margin-top: 10px; font-size: 0.8rem; color: #64748b;">
+        <i class="fa-solid fa-circle-info" style="color: var(--brand-primary); margin-right: 4px;"></i> ${lang === "english" ? "Enter both Father's and Mother's height above to calculate Mid-Parental Target Height." : "आनुवंशिक लक्ष्य लंबाई की गणना हेतु माता और पिता दोनों का कद दर्ज करें।"}
+      </div>
+    `;
+  }
+
+  const genderTitle = (gender === "boy") ? (lang === "english" ? "BOY" : "बालक") : (lang === "english" ? "GIRL" : "बालिका");
+  growthHtml = `
+    <div class="result-box">
+      <h4><i class="fa-solid fa-ruler-combined" style="color: var(--brand-primary);"></i> ${lang === "english" ? "IAP Growth & BMI Assessment" : "IAP ग्रोथ एवं बीएमआई मूल्यांकन"}</h4>
+      <span class="iap-ref-badge">IAP Standard (${ageName} - ${genderTitle})</span>
+      <p style="font-size:0.84rem; color:#64748b; margin-bottom:10px;">
+        ${lang === "english" ? "Population Normal Range:" : "सामान्य स्वस्थ सीमा:"} 
+        ${lang === "english" ? "Weight:" : "वजन:"} <strong>${ref ? ref.minW : "" }–${ref ? ref.maxW : "" } kg</strong> | 
+        ${measurementWord}: <strong>${ref ? ref.minH : "" }–${ref ? ref.maxH : "" } cm</strong>
+      </p>
+      ${wStatus || `<p style="font-size:0.82rem; color:#94a3b8;">${lang === "english" ? "Enter weight above for percentile evaluation." : "वजन दर्ज करें।"}</p>`}
+      ${hStatus || `<p style="font-size:0.82rem; color:#94a3b8;">${lang === "english" ? "Enter height/length above for evaluation." : "लंबाई दर्ज करें।"}</p>`}
+      ${bmiStatus}
+      ${mphHtml}
+    </div>
+  `;
+
+  // 5. Milestones & Tanner
+  const listLang = lang === "english" ? "en" : "hi";
+  const greenList = (data.green && data.green[listLang]) ? data.green[listLang].map(item => `<li>${item}</li>`).join("") : "";
+  const yellowList = (data.yellow && data.yellow[listLang]) ? data.yellow[listLang].map(item => `<li>${item}</li>`).join("") : "";
+  const redList = (data.red && data.red[listLang]) ? data.red[listLang].map(item => `<li>${item}</li>`).join("") : "";
+
+  let tannerHtml = "";
+  if (data.tanner && data.tanner[gender]) {
+    const tInfo = data.tanner[gender];
+    tannerHtml = `
+      <div style="background: #fdf4ff; border: 1.5px solid #f0abfc; border-radius: 14px; padding: 14px; margin-top: 14px;">
+        <div style="font-weight: 700; color: #86198f; font-size: 0.9rem; margin-bottom: 6px;">
+          <i class="fa-solid fa-person-arrow-up-from-line"></i> ${lang === "english" ? "Tanner Pubertal Staging" : "टैनर प्यूबर्टल स्टेजिंग"} (${genderTitle})
+        </div>
+        <div style="font-size: 0.84rem; color: #701a75; line-height: 1.45; margin-bottom: 8px;"><strong>Stage:</strong> ${tInfo.stage}</div>
+        <div class="flag-card flag-green" style="margin-bottom: 6px; padding: 8px 10px; font-size: 0.82rem;"><i class="fa-solid fa-circle-check"></i><div><strong>🟢 Timeline:</strong> ${tInfo.green}</div></div>
+        <div class="flag-card flag-yellow" style="margin-bottom: 6px; padding: 8px 10px; font-size: 0.82rem;"><i class="fa-solid fa-triangle-exclamation"></i><div><strong>🟡 Monitor:</strong> ${tInfo.yellow}</div></div>
+        <div class="flag-card flag-red" style="margin-bottom: 0; padding: 8px 10px; font-size: 0.82rem;"><i class="fa-solid fa-circle-exclamation"></i><div><strong>🔴 Alert:</strong> ${tInfo.red}</div></div>
+      </div>
+    `;
+  }
+
+  const devHtml = `
+    <div class="result-box">
+      <h4><i class="fa-solid fa-brain" style="color: #0891b2;"></i> ${lang === "english" ? "Developmental Milestones (TDSC Scale)" : "विकासात्मक मील के पत्थर (TDSC स्केल)"}</h4>
+      <div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i><div><strong>🟢 ${lang === "english" ? "Green Flags:" : "सामान्य मील के पत्थर:"}</strong><ul style="margin-top:4px; padding-left:16px;">${greenList}</ul></div></div>
+      <div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i><div><strong>🟡 ${lang === "english" ? "Yellow Flags:" : "निगरानी योग्य संकेत:"}</strong><ul style="margin-top:4px; padding-left:16px;">${yellowList}</ul></div></div>
+      <div class="flag-card flag-red"><i class="fa-solid fa-circle-exclamation"></i><div><strong>🔴 ${lang === "english" ? "Red Flags (Pediatrician Review):" : "सतर्कता संकेत - डॉक्टर को दिखाएं:"}</strong><ul style="margin-top:4px; padding-left:16px;">${redList}</ul></div></div>
+      ${tannerHtml}
+    </div>
+  `;
+
+  // 6. Educational Modules (Weaning for 6-12m & Toilet Training for 18m-24m)
+  let specialEducationHtml = "";
+  if (ageKey === "6m" || ageKey === "9m" || ageKey === "12m") {
+    specialEducationHtml = renderIapWeaningInteractive(lang);
+  } else if (ageKey === "18m" || ageKey === "24m") {
+    specialEducationHtml = renderToiletTrainingGuide(lang);
+  }
+
+  const tips = data.parentTips || { nutrition: {}, safety: {}, play: {}, care: {} };
+  const tipsHtml = `
+    <div class="result-box" style="grid-column: 1 / -1; background: #faf5ff; border: 1.5px solid #e9d5ff;">
+      <h4 style="color: #6b21a8;"><i class="fa-solid fa-heart-pulse"></i> ${ageName} ${lang === "english" ? "Parenting Guide" : "अभिभावक देखभाल मार्गदर्शन"}</h4>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 12px;">
+        <div style="background:#ffffff; padding:14px; border-radius:12px; border:1px solid #f3e8ff;">
+          <strong style="color:#7e22ce; font-size:0.88rem; display:block; margin-bottom:4px;"><i class="fa-solid fa-apple-whole"></i> ${lang === "english" ? "Nutrition:" : "पोषण:"}</strong>
+          <p style="font-size:0.84rem; color:#4b5563; line-height:1.45;">${tips.nutrition[listLang] || ""}</p>
+        </div>
+        <div style="background:#ffffff; padding:14px; border-radius:12px; border:1px solid #f3e8ff;">
+          <strong style="color:#b91c1c; font-size:0.88rem; display:block; margin-bottom:4px;"><i class="fa-solid fa-shield-halved"></i> ${lang === "english" ? "Child Safety:" : "सुरक्षा:"}</strong>
+          <p style="font-size:0.84rem; color:#4b5563; line-height:1.45;">${tips.safety[listLang] || ""}</p>
+        </div>
+        <div style="background:#ffffff; padding:14px; border-radius:12px; border:1px solid #f3e8ff;">
+          <strong style="color:#0369a1; font-size:0.88rem; display:block; margin-bottom:4px;"><i class="fa-solid fa-puzzle-piece"></i> ${lang === "english" ? "Play & Cognitive:" : "मानसिक विकास:"}</strong>
+          <p style="font-size:0.84rem; color:#4b5563; line-height:1.45;">${tips.play[listLang] || ""}</p>
+        </div>
+        <div style="background:#ffffff; padding:14px; border-radius:12px; border:1px solid #f3e8ff;">
+          <strong style="color:#15803d; font-size:0.88rem; display:block; margin-bottom:4px;"><i class="fa-solid fa-stethoscope"></i> ${lang === "english" ? "Doctor Tip:" : "चिकित्सकीय सलाह:"}</strong>
+          <p style="font-size:0.84rem; color:#4b5563; line-height:1.45;">${tips.care[listLang] || ""}</p>
+        </div>
+      </div>
+      ${specialEducationHtml}
+      <div style="text-align:center; margin-top:18px;">
+        <button onclick="openBookingModal()" class="hero-cta-btn" style="padding: 10px 24px; font-size: 0.9rem; background:#0891b2; box-shadow: 0 4px 14px rgba(8, 145, 178, 0.35);">
+          <i class="fa-solid fa-calendar-check"></i> ${lang === "english" ? "Book Growth Consultation with Dr. Dinesh Mittal" : "डॉ. दिनेश मित्तल से विकास परामर्श बुक करें"}
+        </button>
+      </div>
+    </div>
+  `;
+
+  resultsContainer.innerHTML = `
+    <div class="results-grid">
+      ${growthHtml}
+      ${devHtml}
+      ${tipsHtml}
+    </div>
+  `;
+
+  renderCollapsibleAdolescentSection();
 }
 
 // 2. INTERACTIVE IAP WEANING GENERATOR (WITH YOUTUBE BADGES)
@@ -624,7 +662,7 @@ function toggleFaq(button) {
   }
 }
 
-// 5. MODAL POPUP CONTROLLERS
+// 5. MODAL POPUP CONTROLLERS (WITH BODY SCROLL LOCK)
 function openBookingModal() {
   const modal = document.getElementById('bookingModal');
   if (modal) {
@@ -664,6 +702,38 @@ function closeBlogModal() {
   }
 }
 
+function openDisclaimerModal() {
+  const modal = document.getElementById('disclaimerModal');
+  if (modal) {
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeDisclaimerModal() {
+  const modal = document.getElementById('disclaimerModal');
+  if (modal) {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
+}
+
+function openPrivacyModal() {
+  const modal = document.getElementById('privacyModal');
+  if (modal) {
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closePrivacyModal() {
+  const modal = document.getElementById('privacyModal');
+  if (modal) {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
+}
+
 function closeModalOnOverlay(event, modalId) {
   if (event.target && event.target.id === modalId) {
     if (modalId === 'bookingModal') closeBookingModal();
@@ -673,7 +743,7 @@ function closeModalOnOverlay(event, modalId) {
   }
 }
 
-// 6. AUTO INITIALIZATION
+// 6. AUTO INITIALIZATION ON PAGE LOAD
 document.addEventListener("DOMContentLoaded", function() {
   runScreener();
   renderCollapsibleAdolescentSection();
