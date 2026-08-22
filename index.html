@@ -407,7 +407,7 @@
         .pill-facebook { background: #1d4ed8; }
         .pill-whatsapp { background: #059669; }
 
-        /* Modals */
+        /* Stable Modals */
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(15, 23, 42, 0.75); z-index: 2000;
@@ -415,7 +415,7 @@
             backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
         }
         .modal-content {
-            background: #ffffff; width: 100%; max-width: 680px; max-height: 90vh;
+            background: #ffffff; width: 100%; max-width: 660px; height: 86vh; max-height: 680px; min-height: 520px;
             border-radius: 24px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3);
             position: relative; display: flex; flex-direction: column;
             animation: popIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
@@ -425,16 +425,24 @@
             to { transform: scale(1); opacity: 1; }
         }
         .modal-header {
-            background: #f8fafc; padding: 14px 20px; display: flex;
+            background: #f8fafc; padding: 12px 18px; display: flex;
             justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; flex-shrink: 0;
         }
-        .modal-header h3 { font-family: 'Fredoka', cursive; font-size: 1.15rem; color: #083344; display: flex; align-items: center; gap: 8px; margin: 0; }
+        .modal-header h3 { font-family: 'Fredoka', cursive; font-size: 1.1rem; color: #083344; display: flex; align-items: center; gap: 8px; margin: 0; }
+        .modal-header-actions { display: flex; align-items: center; gap: 8px; }
+        .modal-action-btn {
+            background: #f0fdfa; border: 1px solid #99f6e4; color: #0f766e; padding: 6px 12px;
+            border-radius: 20px; font-size: 0.76rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;
+            transition: all 0.2s ease;
+        }
+        .modal-action-btn:hover { background: #ccfbf1; color: #115e59; }
         .close-modal-btn {
             background: #f1f5f9; border: none; font-size: 1.2rem; color: #64748b;
             width: 32px; height: 32px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center;
         }
         .close-modal-btn:hover { background: #fee2e2; color: #dc2626; }
-        .modal-body { padding: 22px; flex: 1; overflow-y: auto; font-size: 0.92rem; color: #334155; line-height: 1.6; }
+        .modal-body { padding: 0; flex: 1; display: flex; flex-direction: column; overflow: hidden; background: #ffffff; position: relative; }
+        .modal-body iframe { width: 100%; height: 100%; border: none; flex: 1; display: block; }
 
         /* Mobile Bottom Bar */
         .mobile-bottom-bar {
@@ -884,126 +892,65 @@
         <button onclick="openBookingModal()" class="mobile-bar-btn btn-book"><i class="fa-solid fa-calendar-check"></i> Book Online</button>
     </div>
 
-    <!-- Native Fast Booking Modal -->
+    <!-- Booking Modal (Original Familiar Slot Booking System) -->
     <div id="bookingModal" class="modal-overlay" onclick="closeModalOnOverlay(event, 'bookingModal')">
-        <div class="modal-content" style="max-width: 540px; height: auto; max-height: 90vh; border-radius: 24px;">
+        <div class="modal-content">
             <div class="modal-header">
-                <h3><i class="fa-solid fa-calendar-check" style="color: var(--brand-primary);"></i> Book Consultation</h3>
-                <button class="close-modal-btn" onclick="closeBookingModal()">&times;</button>
+                <h3><i class="fa-solid fa-calendar-check" style="color: var(--brand-primary);"></i> Book Consultation Slot</h3>
+                <div class="modal-header-actions">
+                    <a href="https://script.google.com/macros/s/AKfycbzZZJon_KvK0ibezOQT0ktfkxIB8-ee_-BnRKra6kvejGrbG1dFjMSD8f9zhR3ZXeWbXA/exec" target="_blank" class="modal-action-btn" title="Open full screen in dedicated browser tab">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Open Full View
+                    </a>
+                    <button class="close-modal-btn" onclick="closeBookingModal()">&times;</button>
+                </div>
             </div>
             
-            <div class="modal-body" style="padding: 22px; overflow-y: auto;">
-                <form id="clinicBookingForm" onsubmit="handleNativeBooking(event)">
-                    <div style="display: flex; flex-direction: column; gap: 14px;">
-                        
-                        <div>
-                            <label style="font-size: 0.82rem; font-weight: 700; color: #083344; display: block; margin-bottom: 4px;">Parent / Guardian Name *</label>
-                            <input type="text" id="bkParentName" required placeholder="e.g. Rahul Sharma" class="screener-input" style="min-height: 44px; font-size: 15px;">
-                        </div>
-
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-                            <div>
-                                <label style="font-size: 0.82rem; font-weight: 700; color: #083344; display: block; margin-bottom: 4px;">Contact Number *</label>
-                                <input type="tel" id="bkPhone" required pattern="[0-9]{10}" placeholder="10-digit Mobile" class="screener-input" style="min-height: 44px; font-size: 15px;">
-                            </div>
-                            <div>
-                                <label style="font-size: 0.82rem; font-weight: 700; color: #083344; display: block; margin-bottom: 4px;">Child's Age *</label>
-                                <input type="text" id="bkChildAge" required placeholder="e.g. 6 Months / 4 Yrs" class="screener-input" style="min-height: 44px; font-size: 15px;">
-                            </div>
-                        </div>
-
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-                            <div>
-                                <label style="font-size: 0.82rem; font-weight: 700; color: #083344; display: block; margin-bottom: 4px;">Preferred Date *</label>
-                                <input type="date" id="bkDate" required class="screener-input" style="min-height: 44px; font-size: 15px;">
-                            </div>
-                            <div>
-                                <label style="font-size: 0.82rem; font-weight: 700; color: #083344; display: block; margin-bottom: 4px;">Preferred Slot *</label>
-                                <select id="bkSlot" required class="screener-select" style="min-height: 44px; font-size: 15px;">
-                                    <option value="Morning (10:00 AM - 1:00 PM)">Morning (10:00 AM - 1:00 PM)</option>
-                                    <option value="Evening (6:00 PM - 8:30 PM)">Evening (6:00 PM - 8:30 PM)</option>
-                                    <option value="Sunday (11:00 AM - 12:00 PM)">Sunday (11:00 AM - 12:00 PM)</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div>
-                            <label style="font-size: 0.82rem; font-weight: 700; color: #083344; display: block; margin-bottom: 4px;">Reason for Visit (Optional)</label>
-                            <select id="bkReason" class="screener-select" style="min-height: 44px; font-size: 15px;">
-                                <option value="Routine Checkup / Illness">Child Illness / Fever / General Checkup</option>
-                                <option value="Vaccination">Vaccination / Immunization</option>
-                                <option value="Newborn Care">Newborn Care / Feeding Evaluation</option>
-                                <option value="Growth & Milestones">Growth & Milestone Assessment</option>
-                                <option value="Adolescent Consultation">Adolescent Health Consultation</option>
-                            </select>
-                        </div>
-
-                        <div id="bookingStatusMsg" style="display: none; padding: 10px; border-radius: 10px; font-size: 0.85rem; text-align: center;"></div>
-
-                        <button type="submit" id="bkSubmitBtn" class="hero-cta-btn" style="width: 100%; border-radius: 14px; min-height: 48px; font-size: 0.95rem; margin-top: 4px;">
-                            <i class="fa-solid fa-paper-plane"></i> Confirm & Submit Appointment
-                        </button>
-
-                        <div style="text-align: center; font-size: 0.76rem; color: #64748b;">
-                            <i class="fa-solid fa-shield-halved" style="color: var(--brand-primary);"></i> Clinic location: H-34/69, Sector 3, Rohini, Delhi | Call: +91 81305 21456
-                        </div>
-
-                    </div>
-                </form>
+            <div class="modal-body">
+                <iframe 
+                    id="bookingIframe"
+                    src="https://script.google.com/macros/s/AKfycbzZZJon_KvK0ibezOQT0ktfkxIB8-ee_-BnRKra6kvejGrbG1dFjMSD8f9zhR3ZXeWbXA/exec"
+                    allow="clipboard-write"
+                    loading="lazy">
+                </iframe>
             </div>
         </div>
     </div>
 
-    <!-- Blog Modal -->
-    <div id="blogModal" class="modal-overlay" onclick="closeModalOnOverlay(event, 'blogModal')">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="blogModalTitle"><i class="fa-solid fa-newspaper" style="color: var(--brand-secondary);"></i> Health Article</h3>
-                <button class="close-modal-btn" onclick="closeBlogModal()">&times;</button>
-            </div>
-            <div class="modal-body" id="blogModalContent"></div>
-        </div>
-    </div>
-
-    <!-- Statutory Medical Disclaimer & Terms of Use Modal -->
+    <!-- Statutory Medical Disclaimer Modal -->
     <div id="disclaimerModal" class="modal-overlay" onclick="closeModalOnOverlay(event, 'disclaimerModal')">
-        <div class="modal-content">
+        <div class="modal-content" style="height: auto; max-height: 85vh;">
             <div class="modal-header">
-                <h3><i class="fa-solid fa-shield-halved" style="color: var(--brand-primary);"></i> Medical Disclaimer & Terms of Use</h3>
+                <h3><i class="fa-solid fa-shield-halved" style="color: var(--brand-primary);"></i> Medical Disclaimer</h3>
                 <button class="close-modal-btn" onclick="closeDisclaimerModal()">&times;</button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="padding: 22px; overflow-y: auto;">
                 <h4 style="color:#083344; margin-bottom:6px; font-family:'Fredoka',cursive;">1. Nature of Website Content</h4>
-                <p style="margin-bottom:12px; font-size:0.86rem; color:#475569;">The content, clinical growth calculators, BMI screening tools, complementary feeding protocols, toilet training guides, and adolescent health FAQs published on this website (<strong>childspecialistrohini.com</strong>) are intended solely for <strong>public educational purposes and informational guidance</strong>. They do not constitute formal medical diagnosis, treatment advice, or a physician-patient relationship.</p>
+                <p style="margin-bottom:12px; font-size:0.86rem; color:#475569;">The content and growth screening tools on this website (<strong>childspecialistrohini.com</strong>) are intended solely for educational guidance and do not replace formal clinical consultation.</p>
                 
-                <h4 style="color:#083344; margin-bottom:6px; font-family:'Fredoka',cursive;">2. Medical Emergency Notice</h4>
-                <p style="margin-bottom:12px; font-size:0.86rem; color:#475569;">This website and its digital tools are not designed for acute pediatric emergencies. If your child is experiencing breathing distress, cyanosis, high unremitting fever, continuous convulsions, or extreme lethargy, immediately visit the nearest pediatric emergency department or hospital.</p>
+                <h4 style="color:#083344; margin-bottom:6px; font-family:'Fredoka',cursive;">2. Medical Emergencies</h4>
+                <p style="margin-bottom:12px; font-size:0.86rem; color:#475569;">In acute pediatric emergencies (severe respiratory distress, continuous fits, high fever lethargy), immediately visit the nearest pediatric emergency hospital.</p>
 
-                <h4 style="color:#083344; margin-bottom:6px; font-family:'Fredoka',cursive;">3. Registered Medical Practitioner Details</h4>
-                <p style="margin-bottom:12px; font-size:0.86rem; color:#475569;"><strong>Practitioner:</strong> Dr. Dinesh Mittal<br><strong>Qualifications:</strong> MBBS, DCH (Diploma in Child Health)<br><strong>Medical Council Registration:</strong> Delhi Medical Council (DMC/R/00668)<br><strong>Clinic Location:</strong> House No. 69, Pocket H-34, Sector 3, Rohini, New Delhi - 110085.</p>
-
-                <h4 style="color:#083344; margin-bottom:6px; font-family:'Fredoka',cursive;">4. National Medical Commission (NMC) Compliance</h4>
-                <p style="font-size:0.86rem; color:#475569;">In strict accordance with the NMC Registered Medical Practitioner Regulations, this platform does not publish comparative superlative claims, unverified testimonials, or commercial promotions.</p>
+                <h4 style="color:#083344; margin-bottom:6px; font-family:'Fredoka',cursive;">3. Doctor Credentials</h4>
+                <p style="font-size:0.86rem; color:#475569;"><strong>Dr. Dinesh Mittal</strong> (MBBS, DCH) | Delhi Medical Council Reg: <strong>DMC/R/00668</strong></p>
             </div>
         </div>
     </div>
 
     <!-- Privacy Policy Modal -->
     <div id="privacyModal" class="modal-overlay" onclick="closeModalOnOverlay(event, 'privacyModal')">
-        <div class="modal-content">
+        <div class="modal-content" style="height: auto; max-height: 85vh;">
             <div class="modal-header">
                 <h3><i class="fa-solid fa-lock" style="color: var(--brand-secondary);"></i> Privacy Policy</h3>
                 <button class="close-modal-btn" onclick="closePrivacyModal()">&times;</button>
             </div>
-            <div class="modal-body">
-                <h4 style="color:#083344; margin-bottom:6px; font-family:'Fredoka',cursive;">Patient Data Privacy & Confidentiality</h4>
-                <p style="margin-bottom:12px; font-size:0.86rem; color:#475569;">We are committed to maintaining the confidentiality of all patient inquiries. Any personal information (e.g., parent name, phone number, child age) submitted through the appointment booking interface is used strictly to coordinate in-person clinic appointments at our Sector 3 Rohini clinic.</p>
-                <p style="font-size:0.86rem; color:#475569;">We do not sell, rent, or distribute patient contact details to third-party marketing agencies under any circumstances.</p>
+            <div class="modal-body" style="padding: 22px; overflow-y: auto;">
+                <h4 style="color:#083344; margin-bottom:6px; font-family:'Fredoka',cursive;">Patient Confidentiality</h4>
+                <p style="font-size:0.86rem; color:#475569;">Information provided during appointment booking is strictly used to coordinate clinical visits at our Sector 3 Rohini clinic. We never share patient data with third parties.</p>
             </div>
         </div>
     </div>
 
-    <!-- CORE JAVASCRIPT FUNCTIONS -->
+    <!-- CORE SCRIPTS -->
     <script>
       function toggleMobileDrawer() {
         const drawer = document.getElementById("mobileDrawer");
@@ -1074,61 +1021,6 @@
             modal.style.display = 'none';
             document.body.style.overflow = 'auto';
           }
-        }
-      }
-
-      async function handleNativeBooking(e) {
-        e.preventDefault();
-        const btn = document.getElementById('bkSubmitBtn');
-        const status = document.getElementById('bookingStatusMsg');
-        
-        btn.disabled = true;
-        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting...';
-        status.style.display = 'none';
-
-        const payload = {
-          parentName: document.getElementById('bkParentName').value,
-          phone: document.getElementById('bkPhone').value,
-          childAge: document.getElementById('bkChildAge').value,
-          preferredDate: document.getElementById('bkDate').value,
-          preferredSlot: document.getElementById('bkSlot').value,
-          reason: document.getElementById('bkReason').value
-        };
-
-        const googleScriptURL = 'https://script.google.com/macros/s/AKfycbzZZJon_KvK0ibezOQT0ktfkxIB8-ee_-BnRKra6kvejGrbG1dFjMSD8f9zhR3ZXeWbXA/exec';
-
-        try {
-          await fetch(googleScriptURL, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-          });
-
-          status.style.display = 'block';
-          status.style.background = '#f0fdf4';
-          status.style.color = '#166534';
-          status.style.border = '1px solid #86efac';
-          status.innerHTML = '<i class="fa-solid fa-circle-check"></i> <strong>Appointment Request Received!</strong><br>Our clinic will confirm your slot shortly via call / SMS.';
-          
-          document.getElementById('clinicBookingForm').reset();
-          btn.innerHTML = '<i class="fa-solid fa-check"></i> Submitted Successfully';
-          
-          setTimeout(() => {
-            closeBookingModal();
-            btn.disabled = false;
-            btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Confirm & Submit Appointment';
-            status.style.display = 'none';
-          }, 3500);
-
-        } catch (err) {
-          status.style.display = 'block';
-          status.style.background = '#fef2f2';
-          status.style.color = '#991b1b';
-          status.style.border = '1px solid #fca5a5';
-          status.innerHTML = 'Unable to submit online. Please call us directly at <strong>+91 81305 21456</strong>.';
-          btn.disabled = false;
-          btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Try Again';
         }
       }
     </script>
