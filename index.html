@@ -597,37 +597,57 @@
         </div>
     </section>
 
-    <!-- Services Section -->
-    <div class="container" id="services">
-        <h2 class="section-title">Pediatric Clinical Services</h2>
-        <div class="grid">
-            <div class="info-card" style="border: 2px solid #7dd3fc; background: #f0fdfa;">
-                <img src="https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=600&q=80" alt="Child Growth & Development Screening" width="600" height="338" class="card-img" loading="lazy" decoding="async">
-                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
-                    <span class="blog-tag" style="background: var(--brand-primary); color: #ffffff; margin-bottom: 0;">Clinical Tool</span>
-                    <i class="fa-solid fa-chart-simple" style="color: var(--brand-primary); font-size: 1.2rem;"></i>
+ <!-- Services Section -->
+    <div class="container" id="services" style="margin-top: 25px; margin-bottom: 25px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 12px;">
+            <div>
+                <span style="font-size: 0.75rem; font-weight: 700; color: var(--brand-primary); text-transform: uppercase; letter-spacing: 0.5px;">Clinical Care</span>
+                <h2 style="font-family: 'Fredoka', cursive; font-size: 1.45rem; color: #083344; margin: 0;">Pediatric Services</h2>
+            </div>
+            <a onclick="openBookingModal()" style="font-size: 0.82rem; font-weight: 700; color: var(--brand-primary); text-decoration: none; cursor: pointer;">
+                Book Appointment <i class="fa-solid fa-chevron-right" style="font-size: 0.7rem;"></i>
+            </a>
+        </div>
+
+        <div class="compact-services-grid">
+            <div class="service-mini-card">
+                <div class="service-icon-box icon-teal">
+                    <i class="fa-solid fa-syringe"></i>
                 </div>
-                <h3>Check Child Growth & Development</h3>
-                <p>Evaluate IAP percentiles, BMI-for-Age (obesity screen), developmental milestones (🟢 🟡 🔴), Tanner staging, and target adult height.</p>
-                <a href="#growth-screener" onclick="expandGrowthTool()" class="read-btn" style="color: var(--brand-primary); margin-top: 10px;">
-                    Launch Tool (0m - 18y) <i class="fa-solid fa-arrow-right"></i>
-                </a>
+                <div class="service-text">
+                    <h3>Vaccination</h3>
+                    <p>WHO & IAP cold-chain vaccines.</p>
+                </div>
             </div>
 
-            <div class="info-card">
-                <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&w=600&q=80" alt="Indian Mother and Child Vaccination" width="600" height="338" class="card-img" loading="lazy" decoding="async">
-                <h3>Vaccination & Immunization</h3>
-                <p>WHO & IAP-recommended vaccination schedules with growth and development tracking for newborns and children.</p>
+            <div class="service-mini-card">
+                <div class="service-icon-box icon-blue">
+                    <i class="fa-solid fa-baby"></i>
+                </div>
+                <div class="service-text">
+                    <h3>Newborn Care</h3>
+                    <p>Growth, feeding & jaundice checks.</p>
+                </div>
             </div>
-            <div class="info-card">
-                <img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?auto=format&fit=crop&w=600&q=80" alt="Newborn Indian Infant Care" width="600" height="338" class="card-img" loading="lazy" decoding="async">
-                <h3>Newborn & Infant Care</h3>
-                <p>Clinical evaluation for infant growth, feeding advice, colic relief, and jaundice screening.</p>
+
+            <div class="service-mini-card">
+                <div class="service-icon-box icon-amber">
+                    <i class="fa-solid fa-stethoscope"></i>
+                </div>
+                <div class="service-text">
+                    <h3>Fevers & Infections</h3>
+                    <p>Seasonal viral, flu & asthma care.</p>
+                </div>
             </div>
-            <div class="info-card">
-                <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=600&q=80" alt="Pediatric Consultation for Child Illnesses" width="600" height="338" class="card-img" loading="lazy" decoding="async">
-                <h3>Infections & Seasonal Care</h3>
-                <p>Treatment of childhood fevers, coughs, asthma, allergies, and stomach infections.</p>
+
+            <div class="service-mini-card">
+                <div class="service-icon-box icon-purple">
+                    <i class="fa-solid fa-person-shelter"></i>
+                </div>
+                <div class="service-text">
+                    <h3>Adolescent Health</h3>
+                    <p>Puberty & growth spurt counseling.</p>
+                </div>
             </div>
         </div>
     </div>
