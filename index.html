@@ -8,22 +8,67 @@
     <link rel="canonical" href="https://childspecialistrohini.com/" />
 
     <!-- Google Structured Data / Local SEO Schema -->
-    <script type="application/ld+json">
+    <!-- Google Structured Data / Multi-Entity Medical Clinic Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
     {
-      "@context": "https://schema.org",
-      "@type": "Physician",
+      "@type": ["MedicalClinic", "Physician"],
+      "@id": "https://childspecialistrohini.com/#clinic",
       "name": "Dr. Dinesh Mittal - Child Specialist & Pediatrician",
+      "legalName": "Dr. Dinesh Mittal Child Clinic",
       "image": "https://childspecialistrohini.com/doctor.jpg",
-      "@id": "https://childspecialistrohini.com/#physician",
       "url": "https://childspecialistrohini.com",
       "telephone": "+918130521456",
       "priceRange": "₹₹",
+      "keywords": "pediatrician, child specialist, vaccination, newborn care, child clinic, child doctor, infant immunization, growth screening, adolescent care, pediatrician in Rohini, child clinic Sector 3 Rohini",
+      "knowsAbout": [
+        "Pediatrics",
+        "Child Health",
+        "Newborn Care",
+        "Childhood Vaccination & Immunization",
+        "Child Growth & Development Monitoring",
+        "Adolescent Medicine",
+        "Infant Nutrition & Complementary Feeding",
+        "Pediatric Infection & Fever Management"
+      ],
+      "medicalSpecialty": [
+        "https://schema.org/Pediatric"
+      ],
+      "availableService": [
+        {
+          "@type": "MedicalProcedure",
+          "name": "Pediatric Vaccination & Immunization",
+          "description": "WHO and IAP recommended vaccination and immunization schedules for newborns, infants, toddlers, and teenagers."
+        },
+        {
+          "@type": "MedicalProcedure",
+          "name": "Newborn & Infant Care",
+          "description": "Comprehensive clinical newborn evaluation, infant growth tracking, feeding advice, and jaundice screening."
+        },
+        {
+          "@type": "MedicalProcedure",
+          "name": "Child Growth & Development Screening",
+          "description": "IAP percentile tracking, BMI-for-Age obesity screening, Tanner pubertal staging, and developmental milestone assessment."
+        },
+        {
+          "@type": "MedicalProcedure",
+          "name": "Adolescent Health Consultation",
+          "description": "Puberty guidance, growth spurt evaluation, and confidential adolescent wellness counseling."
+        },
+        {
+          "@type": "MedicalProcedure",
+          "name": "Treatment of Childhood Illnesses & Fevers",
+          "description": "Diagnosis and management of seasonal fevers, viral infections, cough, asthma, and stomach ailments in children."
+        }
+      ],
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "House No. 69, Pocket H-34, Sector 3",
         "addressLocality": "Rohini, New Delhi",
-        "postalCode": "110085",
         "addressRegion": "Delhi",
+        "postalCode": "110085",
         "addressCountry": "IN"
       },
       "geo": {
@@ -31,13 +76,29 @@
         "latitude": 28.7080828,
         "longitude": 77.1078816
       },
-      "medicalSpecialty": "Pediatric",
       "areaServed": [
-        "Rohini Sector 3", "Rohini Sector 4", "Rohini Sector 5", "Rohini Sector 6",
-        "Rohini Sector 7", "Rohini Sector 8", "Rohini Sector 9", "Rohini Sector 11",
-        "Rohini Sector 13", "Rohini Sector 14", "Rohini Sector 15", "Rohini Sector 20",
-        "Rohini Sector 21", "Rohini Sector 22", "Rohini Sector 23", "Rohini Sector 24",
-        "Prashant Vihar", "Pitampura", "Vijay Vihar", "Budh Vihar", "Nangloi", "North West Delhi", "Delhi NCR"
+        { "@type": "AdministrativeArea", "name": "Rohini Sector 3" },
+        { "@type": "AdministrativeArea", "name": "Rohini Sector 4" },
+        { "@type": "AdministrativeArea", "name": "Rohini Sector 5" },
+        { "@type": "AdministrativeArea", "name": "Rohini Sector 6" },
+        { "@type": "AdministrativeArea", "name": "Rohini Sector 7" },
+        { "@type": "AdministrativeArea", "name": "Rohini Sector 8" },
+        { "@type": "AdministrativeArea", "name": "Rohini Sector 9" },
+        { "@type": "AdministrativeArea", "name": "Rohini Sector 11" },
+        { "@type": "AdministrativeArea", "name": "Rohini Sector 13" },
+        { "@type": "AdministrativeArea", "name": "Rohini Sector 14" },
+        { "@type": "AdministrativeArea", "name": "Rohini Sector 15" },
+        { "@type": "AdministrativeArea", "name": "Rohini Sector 20" },
+        { "@type": "AdministrativeArea", "name": "Rohini Sector 21" },
+        { "@type": "AdministrativeArea", "name": "Rohini Sector 22" },
+        { "@type": "AdministrativeArea", "name": "Rohini Sector 23" },
+        { "@type": "AdministrativeArea", "name": "Rohini Sector 24" },
+        { "@type": "AdministrativeArea", "name": "Pitampura" },
+        { "@type": "AdministrativeArea", "name": "Prashant Vihar" },
+        { "@type": "AdministrativeArea", "name": "Vijay Vihar" },
+        { "@type": "AdministrativeArea", "name": "Budh Vihar" },
+        { "@type": "AdministrativeArea", "name": "Nangloi" },
+        { "@type": "AdministrativeArea", "name": "North West Delhi" }
       ],
       "openingHoursSpecification": [
         {
@@ -60,10 +121,28 @@
         }
       ],
       "sameAs": [
-        "https://maps.google.com/maps?cid=443935828544249238"
+        "https://maps.google.com/maps?cid=443935828544249238",
+        "https://www.instagram.com/dr_dinesh_mittal_child_clinic",
+        "https://youtube.com/@drdmittal"
       ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://childspecialistrohini.com/#physician-profile",
+      "name": "Dr. Dinesh Mittal",
+      "jobTitle": "Child Specialist & Pediatrician",
+      "hasCredential": {
+        "@type": "EducationalOccupationalCredential",
+        "credentialCategory": "degree",
+        "name": "MBBS, DCH"
+      },
+      "worksFor": {
+        "@id": "https://childspecialistrohini.com/#clinic"
+      }
     }
-    </script>
+  ]
+}
+</script>
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-768Y52R8SC"></script>
