@@ -56,5 +56,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
+<!-- Dengue in Children Guide -->
+  <url>
+    <loc>https://childspecialistrohini.com/dengue-in-children-delhi.html</loc>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
