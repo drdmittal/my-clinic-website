@@ -1,8 +1,7 @@
 // ==========================================================
 // CLINIC DATA REPOSITORY (data.js)
-// Contains: IAP Growth Standards, Developmental Milestones,
-// IYCF Weaning Engine (with YouTube links), 18-Month Toilet 
-// Training Protocol, Adolescent FAQs & Blog Articles
+// Trivandrum Development Screening Chart (TDSC) Milestones,
+// IAP Growth Percentiles, IYCF Weaning Engine & Adolescent FAQs
 // ==========================================================
 
 const milestoneDatabase = {
@@ -13,182 +12,191 @@ const milestoneDatabase = {
       girl: { minW: 2.4, maxW: 4.1, minH: 45.0, maxH: 53.0 }
     },
     green: {
-      en: ["Focuses on mother's face", "Startles to loud sounds", "Strong sucking reflex"],
-      hi: ["माँ के चेहरे पर ध्यान देना", "तेज आवाज पर चौंकना", "दूध पीने का मजबूत रिफ्लेक्स"]
+      en: ["Startles or blinks to sudden loud sounds", "Turns head to side when lying on stomach", "Strong sucking and rooting reflex"],
+      hi: ["अचानक तेज आवाज पर चौंकना या पलकें झपकाना", "पेट के बल लिटाने पर सिर को एक तरफ मोड़ना", "स्तनपान हेतु मजबूत चूसने का रिफ्लेक्स"]
     },
     yellow: {
-      en: ["Mild physiological jaundice clearing", "Passing urine <6 times daily"],
-      hi: ["हल्का पीलिया जो कम हो रहा हो", "दिन में 6 बार से कम पेशाब करना"]
+      en: ["Uneven sleep patterns", "Occasional transient squint (normal in first weeks)"],
+      hi: ["नींद का अनियमित चक्र", "कभी-कभार आँखों का हल्का तिरछा होना (शुरुआती हफ्तों में सामान्य)"]
     },
     red: {
-      en: ["Poor feeding or lethargy", "Deep yellow jaundice on soles", "Fever or low temperature"],
-      hi: ["दूध न पीना या अत्यधिक सुस्ती", "पैरों के तलवों तक गहरा पीलिया", "तेज बुखार या शरीर ठंडा पड़ना"]
+      en: ["Poor sucking, lethargy, or extreme floppiness", "Deep yellow jaundice on palms/soles", "Fever or low body temperature"],
+      hi: ["दूध न पीना, अत्यधिक सुस्ती या शरीर बिल्कुल ढीला पड़ना", "हथेलियों या तलवों तक गहरा पीलिया", "बुखार या शरीर ठंडा पड़ना"]
     },
     parentTips: {
       nutrition: { en: "Exclusive breastfeeding on demand (8-12 times in 24 hours).", hi: "केवल माँ का दूध (24 घंटे में 8-12 बार)।" },
-      safety: { en: "Always place baby on back to sleep. Keep crib free of loose bedding.", hi: "बच्चे को हमेशा पीठ के बल सुलाएं।" },
-      play: { en: "Gentle skin-to-skin touch and soothing voice.", hi: "कंगारू मदर केयर और धीमी आवाज में बातें करें।" },
-      care: { en: "BCG, OPV-0, and Hepatitis-B at birth.", hi: "जन्म के समय बीसीजी, पोलियो और हेपेटाइटिस-बी।" }
+      safety: { en: "Always place baby on back to sleep on a firm flat mattress.", hi: "बच्चे को हमेशा पीठ के बल सुलाएं।" },
+      play: { en: "Gentle skin-to-skin kangaroo touch and soft maternal voice.", hi: "कंगारू मदर केयर और धीमी आवाज में बातें करें।" },
+      care: { en: "BCG, OPV-0, and Hepatitis-B birth dose.", hi: "जन्म के समय बीसीजी, पोलियो और हेपेटाइटिस-बी।" }
     }
   },
   "3m": {
-    name: { en: "3 Months", hi: "3 माह" },
+    name: { en: "3 Months (TDSC Milestone)", hi: "3 माह (TDSC स्केल)" },
     iap: {
       boy: { minW: 5.0, maxW: 7.9, minH: 57.0, maxH: 65.0 },
       girl: { minW: 4.5, maxW: 7.4, minH: 55.5, maxH: 63.5 }
     },
     green: {
-      en: ["Holds head steady when supported", "Social smile", "Follows moving objects 180°"],
-      hi: ["गर्दन संभालना", "पहचान कर मुस्कुराना", "चीजों को आँखों से 180° देखना"]
+      en: ["Social smile in response to voice/face", "Follows moving pencil/face 180° with eyes", "Holds head steady with minimal bobbing when upright"],
+      hi: ["चेहरा या आवाज सुनकर मुस्कुराना (Social Smile)", "चीजों को आँखों से 180° तक देखना", "गोदी में लेने पर गर्दन स्थिर रखना"]
     },
     yellow: {
-      en: ["Frequent spitting up without weight loss", "Uneven sleep cycles"],
-      hi: ["हल्का दूध पलटना (वजन सही रहे तो)", "अनियमित नींद"]
+      en: ["Mild head lag when pulled to sit (normal up to 3.8 months)", "Spitting up milk without weight loss"],
+      hi: ["हाथ पकड़कर बैठाने पर गर्दन में हल्का झुकाव (3.8 माह तक सामान्य)", "हल्का दूध पलटना"]
     },
     red: {
-      en: ["No head control", "Does not respond to loud sounds", "Does not make eye contact"],
-      hi: ["गर्दन बिल्कुल न रुकना", "आवाज पर प्रतिक्रिया न देना", "नजरें न मिलाना"]
+      en: ["Complete absence of social smile by 3 months", "Does not focus or follow faces/objects", "Extreme neck and limb stiffness or floppiness"],
+      hi: ["3 माह तक बिल्कुल न मुस्कुराना", "नजरें न मिलाना या चेहरे को न देखना", "शरीर अत्यधिक अकड़ा या ढीला होना"]
     },
     parentTips: {
       nutrition: { en: "Continue exclusive breastfeeding.", hi: "केवल स्तनपान जारी रखें।" },
-      safety: { en: "Never leave baby unattended on a bed or sofa.", hi: "बच्चे को बेड पर अकेला न छोड़ें।" },
-      play: { en: "Tummy time 3-5 minutes while awake and supervised.", hi: "जागते समय पेट के बल लिटाएं (टमी टाइम)।" },
-      care: { en: "6th, 10th, 14th week primary vaccination schedule.", hi: "प्राथमिक टीकाकरण पूरा करें।" }
+      safety: { en: "Never leave baby unattended on elevated surfaces.", hi: "बच्चे को बेड या सोफे पर अकेला न छोड़ें।" },
+      play: { en: "Supervised tummy time 3-5 minutes while baby is awake.", hi: "जागते समय पेट के बल लिटाएं (टमी टाइम)।" },
+      care: { en: "Primary infant vaccination series (6, 10, 14 weeks).", hi: "प्राथमिक टीकाकरण शेड्यूल पूरा करें।" }
     }
   },
   "6m": {
-    name: { en: "6 Months (Weaning Stage)", hi: "6 माह (ऊपरी आहार शुरुआत)" },
+    name: { en: "6 Months (TDSC / Weaning Stage)", hi: "6 माह (TDSC / ऊपरी आहार)" },
     iap: {
       boy: { minW: 6.4, maxW: 9.7, minH: 63.0, maxH: 71.5 },
       girl: { minW: 5.8, maxW: 9.2, minH: 61.0, maxH: 70.0 }
     },
     green: {
-      en: ["Sits with support", "Transfers objects hand-to-hand", "Babbles ('ba-ba', 'da-da')"],
-      hi: ["सहारे से बैठना", "एक हाथ से दूसरे हाथ में खिलौना लेना", "बड़बड़ाना (बा-बा, दा-दा)"]
+      en: ["Rolls over from back to stomach (TDSC: 4.8m)", "Sits with light support/tripod", "Transfers toys from one hand to the other (TDSC: 6-7m)", "Babbles monosyllables ('ba-ba', 'da-da')"],
+      hi: ["पीठ से पेट के बल करवट बदलना (Roll Over)", "हल्के सहारे से बैठना", "एक हाथ से दूसरे हाथ में खिलौना लेना", "आवाजें निकालना ('बा-बा', 'दा-दा')"]
     },
     yellow: {
-      en: ["Initial reluctance to solid textures", "Teething gum discomfort"],
-      hi: ["ऊपरी आहार शुरू करने में थोड़ी हिचकिचाहट", "दांत निकलने पर मसूड़ों में खुजली"]
+      en: ["Reluctance to initial solid food textures", "Teething gum itching"],
+      hi: ["ऊपरी आहार शुरू करने में थोड़ी हिचकिचाहट", "मसूड़ों में खुजली"]
     },
     red: {
-      en: ["Cannot roll over", "Extreme stiffness or floppiness", "No babbling sounds"],
-      hi: ["करवट न बदल पाना", "शरीर बहुत अकड़ा या ढीला होना", "कोई आवाज न निकालना"]
+      en: ["Cannot hold head steady or roll over", "Does not reach for or grasp objects", "No vocalizations or response to sounds"],
+      hi: ["गर्दन बिल्कुल न रुकना या करवट न बदलना", "चीजों को पकड़ने की कोशिश न करना", "आवाज पर प्रतिक्रिया न देना"]
     },
     parentTips: {
       nutrition: { en: "Start home-cooked mashed complementary feeding at completed 180 days.", hi: "180 दिन पूरे होने पर घर का बना मसला हुआ भोजन शुरू करें।" },
-      safety: { en: "Baby proof low shelves and sharp edges as crawling approaches.", hi: "फर्श और कोनों की सुरक्षा सुनिश्चित करें।" },
-      play: { en: "Read colorful picture books and play peek-a-boo.", hi: "रंगीन किताबें दिखाएं और बात करें।" },
-      care: { en: "Flu (Influenza) and Typhoid conjugate vaccination review.", hi: "इन्फ्लूएंजा व टाइफाइड टीकों का समय।" }
+      safety: { en: "Childproof low furniture as crawling approaches.", hi: "कोनों व बिजली के बोर्ड सुरक्षित करें।" },
+      play: { en: "Interactive peek-a-boo and reading colorful books.", hi: "बातें करें और रंगीन किताबें दिखाएं।" },
+      care: { en: "Flu (Influenza) and Typhoid vaccine review.", hi: "इन्फ्लूएंजा व टाइफाइड टीकों का समय।" }
     }
   },
   "9m": {
-    name: { en: "9 Months", hi: "9 माह" },
+    name: { en: "9 Months (TDSC Milestone)", hi: "9 माह (TDSC स्केल)" },
     iap: {
       boy: { minW: 7.2, maxW: 10.9, minH: 67.5, maxH: 76.0 },
       girl: { minW: 6.6, maxW: 10.4, minH: 65.5, maxH: 74.5 }
     },
     green: {
-      en: ["Sits without support", "Crawls on belly/hands", "Pincer grasp (picks small objects)"],
-      hi: ["बिना सहारे बैठना", "घुटनों के बल चलना", "उंगलियों से छोटी चीज पकड़ना"]
+      en: ["Sits steadily without support (TDSC: 8-9m)", "Crawls/creeps on hands and knees", "Picks small pieces with index finger and thumb (Pincer Grasp)", "Responds to own name"],
+      hi: ["बिना सहारे बैठना", "घुटनों के बल चलना (Crawling)", "उंगली और अंगूठे से छोटी चीज पकड़ना (Pincer Grasp)", "अपना नाम सुनकर प्रतिक्रिया देना"]
     },
     yellow: {
-      en: ["Stranger anxiety (crying when seeing unfamiliar people)"],
-      hi: ["अजनबियों को देखकर डरना (सामान्य विकास चरण)"]
+      en: ["Stranger anxiety and clinginess with mother (normal developmental milestone)"],
+      hi: ["अजनबियों को देखकर रोना व डरना (सामान्य विकास चरण)"]
     },
     red: {
-      en: ["Cannot sit steadily", "Does not bear weight on legs", "Does not respond to name"],
+      en: ["Cannot sit without support", "Does not bear weight on legs when held upright", "Does not respond to name or make eye contact"],
       hi: ["बिना सहारे न बैठ पाना", "पैरों पर वजन न लेना", "नाम पुकारने पर न देखना"]
     },
     parentTips: {
-      nutrition: { en: "Offer 3 semi-solid meals plus breastfeeding.", hi: "दिन में 3 बार मसला भोजन व स्तनपान।" },
-      safety: { en: "Keep choking hazards (coins, small toys, batteries) strictly away.", hi: "सिक्के, सेल व छोटी चीजें दूर रखें।" },
-      play: { en: "Encourage crawling with soft obstacle courses.", hi: "घुटनों के बल चलने के लिए प्रेरित करें।" },
-      care: { en: "MMR / MR-1 and OPV booster window.", hi: "एमएमआर (खसरा) का पहला टीका।" }
+      nutrition: { en: "3 semi-solid meals + 1 snack + continued breastfeeding.", hi: "दिन में 3 बार मसला भोजन व स्तनपान।" },
+      safety: { en: "Strict avoidance of small choking hazards (coins, batteries, small toy parts).", hi: "सिक्के, सेल व छोटी चीजें दूर रखें।" },
+      play: { en: "Hide-and-seek with toys under light blankets.", hi: "खिलौने छुपाकर खोजने का खेल।" },
+      care: { en: "MMR-1 / MR-1 immunization dose.", hi: "एमएमआर (खसरा) का पहला टीका।" }
     }
   },
   "12m": {
-    name: { en: "12 Months (1 Year)", hi: "12 माह (1 वर्ष)" },
+    name: { en: "12 Months (1 Year - TDSC)", hi: "12 माह (1 वर्ष - TDSC)" },
     iap: {
       boy: { minW: 7.8, maxW: 11.8, minH: 71.0, maxH: 80.5 },
       girl: { minW: 7.1, maxW: 11.3, minH: 69.0, maxH: 79.0 }
     },
     green: {
-      en: ["Stands holding support / taking first steps", "Speaks 1-2 clear words", "Waves 'bye-bye'"],
-      hi: ["सहारे से खड़ा होना / पहला कदम", "1-2 साफ शब्द बोलना", "'बाय-बाय' करना"]
+      en: ["Stands with support / cruising along furniture (TDSC: 11-12m)", "Speaks 1-2 meaningful words with intent ('Mama', 'Dada')", "Waves 'bye-bye' and claps hands", "Releases objects into container voluntarily"],
+      hi: ["सहारे से खड़ा होना / फर्नीचर पकड़कर चलना", "1-2 अर्थपूर्ण शब्द बोलना ('मम्मा', 'पापा')", "'बाय-बाय' करना व ताली बजाना", "चीजों को डिब्बे में डालना"]
     },
     yellow: {
-      en: ["Fussiness with self-feeding spoon practice"],
-      hi: ["चम्मच से खुद खाने में गिराना"]
+      en: ["Not walking independently yet (normal walking window is up to 15 months)"],
+      hi: ["स्वतंत्र रूप से न चलना (15 माह तक बिना सहारे चलना सामान्य है)"]
     },
     red: {
-      en: ["Cannot stand with support", "Cannot point with index finger", "Loss of any previously learned speech"],
-      hi: ["सहारे से भी खड़ा न होना", "उंगली से इशारा न करना", "सीखे हुए शब्द भूल जाना"]
+      en: ["Cannot stand even with firm support", "Cannot point with index finger to indicate needs", "Loss of previously learned speech or social words"],
+      hi: ["सहारे से भी खड़ा न हो पाना", "उंगली से इशारा न करना", "सीखे हुए शब्द भूल जाना"]
     },
     parentTips: {
-      nutrition: { en: "Family pot food (mildly spiced). Can introduce pasteurized cow milk in cup.", hi: "घर का सामान्य सुपाच्य भोजन शुरू करें।" },
-      safety: { en: "Secure stair gates, window grilles, and electrical switchboards.", hi: "सीढ़ियों और बिजली के बोर्ड सुरक्षित करें।" },
-      play: { en: "Stacking cups, large building blocks, push toys.", hi: "ब्लॉक्स जोड़ने वाले खिलौने दें।" },
+      nutrition: { en: "Family pot food (mildly spiced). Can introduce cow milk in open cup.", hi: "घर का सामान्य भोजन शुरू करें।" },
+      safety: { en: "Secure stair gates and window latches.", hi: "सीढ़ियों और खिड़कियों को सुरक्षित करें।" },
+      play: { en: "Stacking rings, large building blocks, push toys.", hi: "ब्लॉक्स जोड़ने वाले खिलौने दें।" },
       care: { en: "Hepatitis-A and Chickenpox (Varicella) vaccination.", hi: "हेपेटाइटिस-ए और चेचक का टीका।" }
     }
   },
   "18m": {
-    name: { en: "18 Months (1.5 Years)", hi: "18 माह (1.5 वर्ष)" },
+    name: { en: "18 Months (1.5 Years - TDSC)", hi: "18 माह (1.5 वर्ष - TDSC)" },
     iap: {
       boy: { minW: 8.8, maxW: 13.3, minH: 76.5, maxH: 86.5 },
       girl: { minW: 8.1, maxW: 12.8, minH: 74.5, maxH: 85.0 }
     },
     green: {
-      en: ["Walks steadily without help", "Vocabulary of 6-10 words", "Drinks from open cup"],
-      hi: ["बिना सहारे चलना व दौड़ना", "6-10 शब्द बोलना", "कप से पानी पीना"]
+      en: ["Walks steadily without support and climbs steps with help (TDSC: 15-18m)", "Builds tower of 3 cubes", "Vocabulary of 6 to 10 clear words", "Drinks from an open cup and feeds self with spoon"],
+      hi: ["बिना सहारे चलना व सहारे से सीढ़ियां चढ़ना", "3 ब्लॉक्स की मीनार बनाना", "6 से 10 साफ शब्द बोलना", "कप से पानी पीना व चम्मच से खाना"]
     },
     yellow: {
-      en: ["Mild toddler tantrums when told 'no'"],
-      hi: ["हल्की जिद्द या नखरे दिखाना (सामान्य व्यवहार)"]
+      en: ["Mild temper tantrums during frustration (normal toddler behavior)"],
+      hi: ["हल्की जिद्द या नखरे दिखाना"]
     },
     red: {
-      en: ["Not walking independently", "Speaks fewer than 4 words", "Does not imitate actions"],
-      hi: ["स्वतंत्र रूप से न चल पाना", "4 से कम शब्द बोलना", "नकल न करना"]
+      en: ["Not walking independently by 18 months", "Speaks fewer than 4 consistent words", "Does not imitate household actions or point to objects"],
+      hi: ["18 माह तक स्वतंत्र रूप से न चल पाना", "4 से कम शब्द बोलना", "नकल न करना या इशारा न करना"]
     },
     parentTips: {
-      nutrition: { en: "3 main balanced meals + 2 healthy finger snacks.", hi: "3 मुख्य भोजन व 2 हल्के पौष्टिक नाश्ते।" },
-      safety: { en: "Store all medicines, cleaning liquids, and detergents locked away.", hi: "दवाएं व फिनाइल ऊंचे लॉकर में रखें।" },
-      play: { en: "Name body parts together; avoid mobile phone screen exposure.", hi: "शरीर के अंगों के नाम सिखाएं; स्क्रीन से दूर रखें।" },
+      nutrition: { en: "3 main meals + 2 healthy fruit/curd snacks.", hi: "3 मुख्य भोजन व 2 पौष्टिक नाश्ते।" },
+      safety: { en: "Store cleaning chemicals and medicines strictly locked away.", hi: "दवाएं व फिनाइल ऊंचे लॉकर में रखें।" },
+      play: { en: "Name body parts and familiar animals. Zero mobile screen time.", hi: "स्क्रीन से दूर रखें; बातें करें।" },
       care: { en: "DTP booster, Hib booster, and IPV booster at 16-18 months.", hi: "डीटीपी व हिब का पहला बूस्टर डोज।" }
     }
   },
   "24m": {
-    name: { en: "24 Months (2 Years)", hi: "24 माह (2 वर्ष)" },
+    name: { en: "24 Months (2 Years - TDSC)", hi: "24 माह (2 वर्ष - TDSC)" },
     iap: {
       boy: { minW: 9.7, maxW: 14.8, minH: 81.5, maxH: 92.5, minBmi: 14.1, ovBmi: 17.5, obBmi: 18.8 },
       girl: { minW: 9.0, maxW: 14.3, minH: 80.0, maxH: 91.5, minBmi: 13.8, ovBmi: 17.3, obBmi: 18.5 }
     },
     green: {
-      en: ["Combines 2 words ('want milk')", "Runs and kicks ball", "Follows 2-step instructions"],
-      hi: ["2 शब्द जोड़कर बोलना ('दूध चाहिए')", "दौड़ना और गेंद को किक मारना", "सरल निर्देश मानना"]
+      en: ["Combines 2 words meaningfully ('want milk', 'big dog')", "Runs steadily and kicks a ball forward", "Builds tower of 6 cubes", "Follows 2-step verbal instructions"],
+      hi: ["2 शब्द जोड़कर बोलना ('दूध दो', 'बड़ी गाड़ी')", "दौड़ना और गेंद को किक मारना", "6 ब्लॉक्स की मीनार बनाना", "सरल 2-स्टेप निर्देश मानना"]
     },
-    yellow: { en: ["Picky eating phases; occasional thumb sucking"], hi: ["खाने में नखरे करना"] },
-    red: { en: ["No 2-word phrases", "Lack of social eye contact"], hi: ["2 शब्द जोड़कर न बोल पाना", "आँखों में आँखें डालकर बात न करना"] },
+    yellow: { en: ["Temporary food pickiness"], hi: ["खाने में नखरे करना"] },
+    red: {
+      en: ["No 2-word meaningful phrases", "Cannot run or jump with both feet", "Lack of social eye contact or shared enjoyment (Autism Screen)"],
+      hi: ["2 शब्द जोड़कर न बोल पाना", "आँखों में आँखें डालकर बात न करना (ऑटिज्म स्क्रीन)"]
+    },
     parentTips: {
-      nutrition: { en: "Whole fruits over fruit juices. Balanced iron and calcium intake.", hi: "जूस की जगह साबुत ताजे फल दें। दूध 400ml तक सीमित।" },
-      safety: { en: "Supervise closely near hot kitchen utensils, buckets, and water tanks.", hi: "पानी की बाल्टी व गर्म बर्तनों से दूर रखें।" },
-      play: { en: "Pretend play (kitchen set, doctor set). Zero screen time.", hi: "रोल-प्ले खिलौने दें। स्क्रीन से बचाएं।" },
-      care: { en: "Typhoid Booster, Hepatitis-A dose-2 review.", hi: "टाइफाइड व हेपेटाइटिस-ए की दूसरी खुराक।" }
+      nutrition: { en: "Whole fruits over juices. Dairy limited to 400ml daily.", hi: "जूस की जगह साबुत ताजे फल दें।" },
+      safety: { en: "Supervise water buckets and kitchen cooking surfaces.", hi: "पानी की बाल्टी व गर्म चीजों से दूर रखें।" },
+      play: { en: "Pretend roleplay and drawing lines. Zero digital screens.", hi: "रोल-प्ले खिलौने दें। स्क्रीन से बचाएं।" },
+      care: { en: "Typhoid booster and Hepatitis-A second dose review.", hi: "टाइफाइड व हेपेटाइटिस-ए की दूसरी खुराक।" }
     }
   },
   "3y": {
-    name: { en: "3 Years", hi: "3 वर्ष" },
+    name: { en: "3 Years (TDSC / Pre-School)", hi: "3 वर्ष (TDSC / प्री-स्कूल)" },
     iap: {
       boy: { minW: 11.3, maxW: 17.5, minH: 89.0, maxH: 101.5, minBmi: 13.8, ovBmi: 17.1, obBmi: 18.3 },
       girl: { minW: 10.8, maxW: 17.2, minH: 88.0, maxH: 100.5, minBmi: 13.5, ovBmi: 16.9, obBmi: 18.1 }
     },
-    green: { en: ["Speaks in full 3-4 word sentences", "Pedals tricycle"], hi: ["3-4 शब्दों के वाक्य बोलना", "ट्राइसाइकिल चलाना"] },
-    yellow: { en: ["Occasional stuttering during rapid excitement"], hi: ["उत्तेजना में कभी-कभार हकलाना"] },
-    red: { en: ["Unclear speech that family cannot understand"], hi: ["बोली बिल्कुल समझ न आना"] },
+    green: {
+      en: ["Speaks in full 3-4 word sentences", "Pedals a tricycle", "Copies a circle with crayon", "Understands concepts of 'mine' and 'yours'"],
+      hi: ["3-4 शब्दों के वाक्य बोलना", "ट्राइसाइकिल चलाना", "गोला (Circle) बनाना", "'मेरा' और 'तुम्हारा' समझना"]
+    },
+    yellow: { en: ["Occasional stuttering during excitement"], hi: ["उत्तेजना में कभी-कभार हकलाना"] },
+    red: {
+      en: ["Unclear speech not understood by family", "Cannot copy a circle or hold crayon", "Does not interact or play with other children"],
+      hi: ["बोली बिल्कुल समझ न आना", "बच्चों के साथ न खेलना"]
+    },
     parentTips: {
-      nutrition: { en: "Soaked nuts, paneer, curd, and seasonal leafy greens.", hi: "दही, पनीर, भीगे मेवे व हरी सब्जियां दें।" },
-      safety: { en: "Teach basic street road safety.", hi: "सड़क सुरक्षा की आदतें सिखाएं।" },
-      play: { en: "Clay modelling, outdoor park play daily.", hi: "रोज 1 घंटा पार्क में खेलकूद जरूरी।" },
-      care: { en: "Annual vision screen and dental checkup.", hi: "आँखों व दांतों की वार्षिक जांच।" }
+      nutrition: { en: "Paneer, curd, soaked nuts, and seasonal vegetables.", hi: "दही, पनीर, भीगे मेवे व हरी सब्जियां दें।" },
+      safety: { en: "Teach street and road safety habits.", hi: "सड़क सुरक्षा सिखाएं।" },
+      play: { en: "Clay modelling, coloring, 60 minutes outdoor park play daily.", hi: "रोज 1 घंटा पार्क में खेलकूद।" },
+      care: { en: "Annual vision acuity and dental checkup.", hi: "आँखों व दांतों की जांच।" }
     }
   },
   "4y": {
@@ -197,14 +205,20 @@ const milestoneDatabase = {
       boy: { minW: 12.7, maxW: 20.3, minH: 95.0, maxH: 108.5, minBmi: 13.5, ovBmi: 16.9, obBmi: 18.2 },
       girl: { minW: 12.3, maxW: 20.1, minH: 94.0, maxH: 107.5, minBmi: 13.3, ovBmi: 16.8, obBmi: 18.0 }
     },
-    green: { en: ["Draws a person with 2-4 body parts", "Hops on one foot"], hi: ["इंसान का चित्र बनाना", "एक पैर पर कूदना"] },
-    yellow: { en: ["Imaginary fears (monsters, dark rooms)"], hi: ["अंधेरे से डरना"] },
-    red: { en: ["Cannot draw a circle or cross", "Severe aggression"], hi: ["गोला न बना पाना"] },
+    green: {
+      en: ["Draws a person with 2-4 body parts", "Hops on one foot steadily", "Tells short stories fluently", "Dresses independently except buttons"],
+      hi: ["इंसान का चित्र बनाना (2-4 अंग)", "एक पैर पर कूदना", "छोटी कहानियां सुनाना", "खुद कपड़े पहनना"]
+    },
+    yellow: { en: ["Imaginary fears of darkness or monsters"], hi: ["अंधेरे से डरना"] },
+    red: {
+      en: ["Cannot draw a cross (+) or circle", "Frequent daytime urinary incontinence", "Extreme aggressive outbursts"],
+      hi: ["प्लस (+) या गोला न बना पाना", "अत्यधिक आक्रामक व्यवहार"]
+    },
     parentTips: {
-      nutrition: { en: "Limit processed packaged snacks, chips, and colas.", hi: "चिप्स, बिस्कुट व पैकेज्ड स्नैक्स बंद करें।" },
-      safety: { en: "Teach parents' mobile numbers and good touch/bad touch.", hi: "माता-पिता का फोन नंबर व गुड/बैड टच सिखाएं।" },
-      play: { en: "Roleplay, puzzles, running sports.", hi: "पहेलियां व खेलकूद।" },
-      care: { en: "Preparation for 4.5-5 year DTP booster & MMR booster.", hi: "5 वर्ष के बूस्टर टीकों की तैयारी।" }
+      nutrition: { en: "Zero processed chips, colas, packaged noodles.", hi: "चिप्स व पैकेज्ड स्नैक्स बंद करें।" },
+      safety: { en: "Teach parent phone numbers and good touch/bad touch.", hi: "माता-पिता का फोन नंबर व गुड/बैड टच सिखाएं।" },
+      play: { en: "Puzzles and running games.", hi: "पहेलियां व खेलकूद।" },
+      care: { en: "Preparation for 4.5-5 year DTP & MMR booster.", hi: "5 वर्ष के बूस्टर टीकों की तैयारी।" }
     }
   },
   "5y": {
@@ -213,12 +227,18 @@ const milestoneDatabase = {
       boy: { minW: 14.1, maxW: 23.2, minH: 101.0, maxH: 115.5, minBmi: 13.4, ovBmi: 16.8, obBmi: 18.3 },
       girl: { minW: 13.7, maxW: 23.1, minH: 100.0, maxH: 114.5, minBmi: 13.2, ovBmi: 16.7, obBmi: 18.2 }
     },
-    green: { en: ["Counts 10 or more objects", "Dresses independently"], hi: ["10 तक गिनती गिनना", "खुद कपड़े पहनना"] },
-    yellow: { en: ["Bedtime delay resistance"], hi: ["सोने में थोड़ा आनाकानी करना"] },
-    red: { en: ["Extreme difficulty focusing for 5 minutes (ADHD Screen)"], hi: ["5 मिनट भी ध्यान न लगना"] },
+    green: {
+      en: ["Counts 10 or more objects accurately", "Skips and somersaults", "Copies a triangle (TDSC: 5y)", "Dresses and buttons clothes completely independently"],
+      hi: ["10 तक गिनती गिनना", "त्रिभुज (Triangle) बनाना", "कपड़ों के बटन लगाना", "अच्छी तरह उछलना-कूदना"]
+    },
+    yellow: { en: ["Bedtime delay resistance"], hi: ["सोने में आनाकानी करना"] },
+    red: {
+      en: ["Cannot focus on a single task for 5 minutes (ADHD screen)", "Severe speech articulation defects", "Cannot wash hands or dry independently"],
+      hi: ["5 मिनट भी ध्यान न लगना (ADHD स्क्रीन)", "बोलने में गंभीर लड़खड़ाहट"]
+    },
     parentTips: {
       nutrition: { en: "Protein-rich breakfast (eggs, cheela, sprouts).", hi: "प्रोटीन युक्त नाश्ता लें।" },
-      safety: { en: "Always insist on helmets for bicycling.", hi: "साइकिल चलाते समय हेलमेट जरूर पहनाएं।" },
+      safety: { en: "Bicycle helmets mandatory.", hi: "साइकिल पर हेलमेट पहनाएं।" },
       play: { en: "Swimming and team games.", hi: "तैराकी व ग्रुप गेम्स।" },
       care: { en: "DTP-Booster 2, OPV Booster, Varicella Booster.", hi: "डीटीपी और चेचक का दूसरा बूस्टर डोज।" }
     }
@@ -229,12 +249,12 @@ const milestoneDatabase = {
       boy: { minW: 15.6, maxW: 26.5, minH: 107.0, maxH: 122.0, minBmi: 13.3, ovBmi: 17.0, obBmi: 18.6 },
       girl: { minW: 15.1, maxW: 26.4, minH: 106.0, maxH: 121.0, minBmi: 13.1, ovBmi: 16.9, obBmi: 18.5 }
     },
-    green: { en: ["Reads simple words", "Ties shoelaces"], hi: ["सरल शब्द पढ़ना", "जूते के फीते बांधना"] },
+    green: { en: ["Reads simple 3-4 letter words", "Ties shoelaces with guidance", "Understands rules of board games"], hi: ["सरल शब्द पढ़ना", "खेल के नियम समझना", "जूते के फीते बांधना"] },
     yellow: { en: ["School adjustment stress"], hi: ["स्कूल का हल्का तनाव"] },
-    red: { en: ["Cannot copy letters/numbers"], hi: ["अक्षर न लिख पाना"] },
+    red: { en: ["Cannot copy letters/numbers", "Frequent clumsiness and tripping over flat ground"], hi: ["अक्षर न लिख पाना", "बार-बार गिरना"] },
     parentTips: {
-      nutrition: { en: "Nutritious home-cooked tiffin.", hi: "घर का बना पौष्टिक स्कूल टिफिन दें।" },
-      safety: { en: "Screen time under 1 hour daily.", hi: "मोबाइल का प्रयोग 1 घंटे से कम रखें।" },
+      nutrition: { en: "Nutritious home-cooked tiffin.", hi: "घर का बना स्कूल टिफिन दें।" },
+      safety: { en: "Screen time under 1 hour daily.", hi: "मोबाइल 1 घंटे से कम रखें।" },
       play: { en: "Football, martial arts, dance.", hi: "मार्शल आर्ट्स, फुटबॉल या डांस।" },
       care: { en: "Annual vision acuity test before primary school.", hi: "आँखों की नियमित जांच।" }
     }
@@ -245,9 +265,9 @@ const milestoneDatabase = {
       boy: { minW: 17.2, maxW: 30.1, minH: 112.5, maxH: 128.5, minBmi: 13.4, ovBmi: 17.3, obBmi: 19.1 },
       girl: { minW: 16.6, maxW: 30.0, minH: 111.5, maxH: 127.5, minBmi: 13.2, ovBmi: 17.2, obBmi: 19.0 }
     },
-    green: { en: ["Understands cause-and-effect", "Rides 2-wheel bike"], hi: ["2-पहिया साइकिल चलाना", "तार्किक समझ"] },
+    green: { en: ["Understands cause-and-effect", "Rides 2-wheel bicycle without stabilizers"], hi: ["2-पहिया साइकिल चलाना", "कारण व प्रभाव समझना"] },
     yellow: { en: ["Competitive frustration when losing"], hi: ["खेल में हारने पर उदास होना"] },
-    red: { en: ["Cannot read simple sentences (Dyslexia screen)"], hi: ["सरल वाक्य न पढ़ पाना"] },
+    red: { en: ["Cannot read simple 1st-grade sentences (Dyslexia screen)"], hi: ["सरल वाक्य न पढ़ पाना"] },
     parentTips: {
       nutrition: { en: "Calcium & Vitamin D through sunlight & dairy.", hi: "धूप में खेल और कैल्शियम युक्त आहार।" },
       safety: { en: "Ergonomic study desk posture.", hi: "पढ़ाई के समय बैठने की सही मुद्रा।" },
@@ -277,7 +297,7 @@ const milestoneDatabase = {
       boy: { minW: 21.0, maxW: 39.0, minH: 123.0, maxH: 140.5, minBmi: 13.7, ovBmi: 18.2, obBmi: 20.4 },
       girl: { minW: 20.3, maxW: 38.8, minH: 122.5, maxH: 140.5, minBmi: 13.6, ovBmi: 18.1, obBmi: 20.3 }
     },
-    green: { en: ["Independent homework", "Strong friendships"], hi: ["स्वयं गृहकार्य करना", "अच्छी सामाजिक मित्रता"] },
+    green: { en: ["Independent homework", "Strong peer friendships"], hi: ["स्वयं गृहकार्य करना", "अच्छी सामाजिक मित्रता"] },
     yellow: { en: ["Moodiness before puberty transition"], hi: ["हल्का चिड़चिड़ापन"] },
     red: { en: ["Height percentile falling on growth charts"], hi: ["कद का अचानक रुकना या गिरना"] },
     parentTips: {
