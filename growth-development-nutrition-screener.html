@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Child Growth, Development & Nutrition Assessment Tool | Dr. Dinesh Mittal</title>
-    <meta name="description" content="Official pediatric clinical screener by Dr. Dinesh Mittal. Evaluate height, weight, BMI, IAP percentiles, mid-parental genetic targets, M-CHAT autism screen, and recipes.">
+    <meta name="description" content="Official pediatric clinical screener by Dr. Dinesh Mittal. Evaluate height, weight, BMI, IAP percentiles, mid-parental genetic targets, full 20-question M-CHAT autism screen, and age-wise recipes.">
     <link rel="canonical" href="https://childspecialistrohini.com/growth-development-nutrition-screener.html" />
 
     <!-- Google tag (gtag.js) -->
@@ -45,7 +45,7 @@
         }
         .lang-switch-btn:hover { background: #ccfbf1; transform: scale(1.04); }
 
-        .article-container { max-width: 900px; margin: 25px auto; padding: 0 16px; }
+        .article-container { max-width: 920px; margin: 25px auto; padding: 0 16px; }
         .article-card { background: #ffffff; border-radius: 26px; padding: 30px 24px; box-shadow: var(--card-shadow); border: 1.5px solid #e0f2fe; }
 
         .breadcrumbs { font-size: 0.82rem; color: #64748b; margin-bottom: 12px; }
@@ -229,154 +229,134 @@
       let toolLang = localStorage.getItem("preferredClinicLang") || "en";
 
       // =========================================================================
-      // 🏥 100% SELF-CONTAINED IAP/WHO CLINICAL DATABASE
+      // 🏥 100% SELF-CONTAINED IAP/WHO CLINICAL DATABASE (COVERS ALL AGES)
       // =========================================================================
       const fallbackClinicalDatabase = {
         "0m": {
           name: { en: "Newborn (0 - 30 Days)", hi: "नवजात शिशु (0-30 दिन)" },
-          iap: {
-            boy: { minW: 2.5, maxW: 4.3, minH: 46.0, maxH: 54.0 },
-            girl: { minW: 2.4, maxW: 4.1, minH: 45.5, maxH: 53.0 }
-          },
-          green: {
-            en: ["Turns head towards sound/mother's voice", "Strong suckling reflex on breast", "Blinks at bright light"],
-            hi: ["मां की आवाज की तरफ ध्यान देना", "स्तनपान के समय अच्छी पकड़ व चूसना", "तेज रोशनी में पलकें झपकाना"]
-          },
-          yellow: {
-            en: ["Difficulty latching or feeding slowly", "Sleeping for >4 hours without feeding"],
-            hi: ["स्तनपान में कठिनाई या बहुत धीमा दूध पीना", "4 घंटे से ज्यादा बिना जागे लगातार सोना"]
-          },
-          red: {
-            en: ["Persistent yellowish eyes/skin (Neonatal Jaundice)", "Poor sucking reflex or weak cry", "Umbilical cord foul discharge or redness"],
-            hi: ["आंखों व त्वचा में पीलापन (पीलिया)", "रोने की कमजोर आवाज या दूध न पीना", "नाभि से मवाद या लालिमा"]
-          },
+          iap: { boy: { minW: 2.5, maxW: 4.3, minH: 46.0, maxH: 54.0 }, girl: { minW: 2.4, maxW: 4.1, minH: 45.5, maxH: 53.0 } },
+          green: { en: ["Turns head towards mother's voice", "Strong suckling reflex on breast", "Blinks at bright light"], hi: ["मां की आवाज की तरफ ध्यान देना", "स्तनपान के समय अच्छी पकड़ व चूसना", "तेज रोशनी में पलकें झपकाना"] },
+          yellow: { en: ["Difficulty latching or feeding very slowly"], hi: ["स्तनपान में कठिनाई या बहुत धीमा दूध पीना"] },
+          red: { en: ["Persistent yellowish eyes/skin (Neonatal Jaundice)", "Poor sucking reflex or weak cry"], hi: ["आंखों व त्वचा में पीलापन (पीलिया)", "रोने की कमजोर आवाज या दूध न पीना"] },
           tips: {
-            nutrition: { en: "Exclusive breastfeeding on demand (every 2-3 hours). No water, honey, or animal milk.", hi: "केवल मां का दूध (हर 2-3 घंटे में)। पानी, शहद या घुट्टी बिल्कुल न दें।" },
+            nutrition: { en: "Exclusive breastfeeding on demand (every 2-3 hours). No water, honey, or ghutti.", hi: "केवल मां का दूध (हर 2-3 घंटे में)। पानी, शहद या घुट्टी बिल्कुल न दें।" },
             safety: { en: "Always place baby on back to sleep on a firm mattress to prevent SIDS.", hi: "शिशु को हमेशा पीठ के बल सुलाएं। चेहरे के पास तकिया या भारी कंबल न रखें।" },
-            play: { en: "Skin-to-skin kangaroo care and soothing eye-to-eye talking.", hi: "कंगारू केयर (मां-शिशु का शारीरिक संपर्क) व कोमल आवाज में बातचीत।" },
+            play: { en: "Skin-to-skin kangaroo mother care, soft gentle singing, and making eye-to-eye contact.", hi: "कंगारू मदर केयर (मां-शिशु का शारीरिक संपर्क), कोमल लोरी और आंखों में देखकर बात करना।" },
             care: { en: "Ensure Birth Vaccines (BCG, OPV-0, Hepatitis B) are administered before discharge.", hi: "जन्म के टीके (BCG, OPV-0, हेपेटाइटिस-B) समय पर लगवाएं।" }
           }
         },
         "3m": {
           name: { en: "3 Months", hi: "3 माह" },
-          iap: {
-            boy: { minW: 5.0, maxW: 7.9, minH: 57.0, maxH: 65.0 },
-            girl: { minW: 4.6, maxW: 7.4, minH: 55.5, maxH: 63.5 }
-          },
-          green: {
-            en: ["Holds head steady when supported", "Social smiling at familiar faces", "Follows moving objects 180 degrees"],
-            hi: ["गोद में लेने पर गर्दन संभालना", "चेहरा देखकर सामाजिक मुस्कान देना", "खिलौने की गति पर नजर घुमाना"]
-          },
+          iap: { boy: { minW: 5.0, maxW: 7.9, minH: 57.0, maxH: 65.0 }, girl: { minW: 4.6, maxW: 7.4, minH: 55.5, maxH: 63.5 } },
+          green: { en: ["Holds head steady when supported", "Social smiling at familiar faces", "Follows moving objects 180 degrees"], hi: ["गोद में लेने पर गर्दन संभालना", "चेहरा देखकर सामाजिक मुस्कान देना", "खिलौने की गति पर नजर घुमाना"] },
           yellow: { en: ["Weak neck support when held upright"], hi: ["गर्दन में ढीलापन महसूस होना"] },
           red: { en: ["Does not smile at mother", "Does not react to loud clapping sounds"], hi: ["मां को देखकर न मुस्कुराना", "तेज आवाज पर चौंकना नहीं"] },
           tips: {
-            nutrition: { en: "Continue exclusive breastfeeding.", hi: "केवल स्तनपान जारी रखें।" },
-            safety: { en: "Supervised tummy time 10-15 mins daily.", hi: "जागते समय रोजाना 10-15 मिनट पेट के बल लिटाएं।" },
-            play: { en: "Colorful rattle tracking and smiling.", hi: "रंग-बिरंगे खिलौने दिखाकर दृष्टि का विकास करें।" },
-            care: { en: "Schedule 6, 10, and 14-week primary vaccine doses.", hi: "6, 10 एवं 14 हफ्ते के प्राथमिक टीके लगवाएं।" }
+            nutrition: { en: "Continue exclusive breastfeeding. Mother should consume calcium & iron-rich foods.", hi: "केवल स्तनपान जारी रखें। मां कैल्शियम व आयरन युक्त पौष्टिक आहार लें।" },
+            safety: { en: "Supervised tummy time 10-15 mins daily on a clean play mat.", hi: "जागते समय रोजाना 10-15 मिनट पेट के बल लिटाएं (Tummy Time)।" },
+            play: { en: "Colorful rattle tracking, making cooing sounds, hanging soft crib mobiles.", hi: "रंग-बिरंगा झुनझुना हिलाकर दृष्टि ट्रैक कराना और हंसमुख बातें करना।" },
+            care: { en: "Schedule 6, 10, and 14-week primary vaccine doses (6-in-1, Rotavirus, PCV).", hi: "6, 10 एवं 14 हफ्ते के प्राथमिक टीके (6-in-1, रोटावायरस, PCV) लगवाएं।" }
           }
         },
         "6m": {
           name: { en: "6 Months (Complementary Feeding Stage)", hi: "6 माह (पूरक आहार - Complementary Feeding)" },
-          iap: {
-            boy: { minW: 6.4, maxW: 9.8, minH: 63.0, maxH: 72.0 },
-            girl: { minW: 5.8, maxW: 9.2, minH: 61.0, maxH: 70.0 }
-          },
-          green: {
-            en: ["Sits with hand support", "Rolls over back to stomach", "Transfers toys from one hand to another"],
-            hi: ["हाथों के सहारे बैठना", "पीठ से पेट के बल पलटना", "एक हाथ से दूसरे हाथ में खिलौना पकड़ना"]
-          },
+          iap: { boy: { minW: 6.4, maxW: 9.8, minH: 63.0, maxH: 72.0 }, girl: { minW: 5.8, maxW: 9.2, minH: 61.0, maxH: 70.0 } },
+          green: { en: ["Sits with hand support", "Rolls over back to stomach", "Transfers toys between hands"], hi: ["हाथों के सहारे बैठना", "पीठ से पेट के बल पलटना", "एक हाथ से दूसरे हाथ में खिलौना पकड़ना"] },
           yellow: { en: ["Stiff legs or reluctance to bear weight"], hi: ["पैरों में अत्यधिक अकड़न"] },
-          red: { en: ["Cannot hold head steadily", "No babbling or joyful squealing sounds"], hi: ["गर्दन न टिकना", "मुंह से आवाजें (Babbling) न निकालना"] },
+          red: { en: ["Cannot hold head steadily", "No babbling sounds ('ba-ba', 'da-da')"], hi: ["गर्दन न टिकना", "मुंह से आवाजें (Babbling) न निकालना"] },
           tips: {
-            nutrition: { en: "Start Complementary Feeding along with breastmilk. Offer fresh home-cooked soft food.", hi: "स्तनपान के साथ पूरक आहार (Complementary Feeding) शुरू करें। घर का ताजा पका हुआ भोजन दें।" },
+            nutrition: { en: "Start Complementary Feeding along with breastmilk. Introduce single grain/veg purees with pure cow ghee.", hi: "स्तनपान के साथ पूरक आहार (Complementary Feeding) शुरू करें: दाल का पानी, मसला केला, सूजी खीर।" },
             safety: { en: "Never leave baby unattended on high beds or sofas.", hi: "बिस्तर या सोफे पर बच्चे को अकेला कभी न छोड़ें।" },
-            play: { en: "Interactive peek-a-boo and tactile toys.", hi: "झांकना-छिपाना (Peek-a-boo) खेल खेलें।" },
+            play: { en: "Peek-a-boo (झांकना-छिपाना), exploring soft teething rings, floor rolling games.", hi: "झांकना-छिपाना (Peek-a-boo) खेल, टीथिंग रिंग और फर्श पर रोलिंग एक्टिविटी।" },
             care: { en: "Ensure 6-month Influenza (Flu) and Typhoid conjugate vaccines.", hi: "6 माह पर फ्लू और टाइफाइड के टीके लगवाएं।" }
           }
         },
         "9m": {
           name: { en: "9 Months", hi: "9 माह" },
-          iap: {
-            boy: { minW: 7.2, maxW: 10.9, minH: 67.5, maxH: 76.5 },
-            girl: { minW: 6.6, maxW: 10.4, minH: 65.5, maxH: 75.0 }
-          },
-          green: {
-            en: ["Sits unsupported without tipping", "Crawls on hands and knees", "Responds to own name"],
-            hi: ["बिना सहारे बैठना", "घुटनों के बल चलना (Crawling)", "अपना नाम पुकारने पर मुड़ना"]
-          },
+          iap: { boy: { minW: 7.2, maxW: 10.9, minH: 67.5, maxH: 76.5 }, girl: { minW: 6.6, maxW: 10.4, minH: 65.5, maxH: 75.0 } },
+          green: { en: ["Sits unsupported without tipping", "Crawls on hands and knees", "Responds to own name"], hi: ["बिना सहारे बैठना", "घुटनों के बल चलना (Crawling)", "अपना नाम पुकारने पर मुड़ना"] },
           yellow: { en: ["Does not sit steadily without pillows"], hi: ["बिना सहारे बैठने में असमर्थ होना"] },
           red: { en: ["Does not bear weight on legs when supported", "No stranger anxiety or recognition"], hi: ["पैरों पर वजन न लेना", "पहचाने-अनजाने चेहरों में अंतर न समझना"] },
           tips: {
-            nutrition: { en: "Thick mashed khichdi, curd, soft steamed vegetables 3 times daily.", hi: "गाढ़ी खिचड़ी, दही, उबली मसली सब्जियां दिन में 3 बार दें।" },
-            safety: { en: "Childproof electrical sockets and remove small choking hazards.", hi: "बिजली के प्लग बंद करें और छोटी वस्तुएं फर्श से हटाएं।" },
-            play: { en: "Hiding toys under cloth and finding them.", hi: "कपड़े के नीचे खिलौना छिपाकर ढूंढने का खेल।" },
+            nutrition: { en: "Thick mashed khichdi, curd, soft steamed vegetables 3 times daily + breastmilk.", hi: "गाढ़ी खिचड़ी, दही, उबली मसली सब्जियां दिन में 3 बार दें + स्तनपान जारी रखें।" },
+            safety: { en: "Childproof electrical sockets, sharp furniture corners, and keep small objects off floor.", hi: "बिजली के प्लग बंद करें और छोटी वस्तुएं फर्श से हटाएं।" },
+            play: { en: "Hiding toys under cloth and finding them, banging soft wooden blocks together.", hi: "कपड़े के नीचे खिलौना छिपाकर ढूंढने का खेल, डिब्बे बजाना।" },
             care: { en: "Administer 9-Month Measles-Rubella (MR) and Vitamin A dose.", hi: "9 माह पर खसरा (MR) का टीका एवं विटामिन-ए की खुराक दिलाएं।" }
           }
         },
         "12m": {
           name: { en: "12 Months (1 Year)", hi: "12 माह (1 वर्ष)" },
-          iap: {
-            boy: { minW: 7.8, maxW: 12.0, minH: 71.0, maxH: 80.5 },
-            girl: { minW: 7.1, maxW: 11.5, minH: 69.0, maxH: 79.0 }
-          },
-          green: {
-            en: ["Stands alone momentarily or cruises along furniture", "Says 'Mama/Papa' with meaning", "Pincer grasp (picks small objects with thumb and index finger)"],
-            hi: ["सहारे से खड़ा होना या चलना", "अर्थ के साथ 'मम्मा/पापा' बोलना", "अंगूठे और उंगली से छोटी चीजें उठाना"]
-          },
+          iap: { boy: { minW: 7.8, maxW: 12.0, minH: 71.0, maxH: 80.5 }, girl: { minW: 7.1, maxW: 11.5, minH: 69.0, maxH: 79.0 } },
+          green: { en: ["Stands alone or cruises along furniture", "Says 'Mama/Papa' meaningfully", "Fine pincer grasp"], hi: ["सहारे से खड़ा होना या चलना", "अर्थ के साथ 'मम्मा/पापा' बोलना", "अंगूठे और उंगली से छोटी चीजें उठाना"] },
           yellow: { en: ["Cannot stand with two-hand support"], hi: ["हाथ पकड़कर भी खड़ा न हो पाना"] },
           red: { en: ["Cannot crawl", "Does not point to objects with index finger"], hi: ["घुटनों के बल न चल पाना", "उंगली से इशारा न करना"] },
           tips: {
-            nutrition: { en: "Family pot food: Roti soaked in dal, paneer, eggs, home-cooked vegetables.", hi: "घर का सामान्य भोजन: दाल-रोटी, पनीर, अंडा, फल।" },
-            safety: { en: "Anchor heavy furniture and keep hot liquids away.", hi: "गर्म चाय-दूध बच्चे की पहुंच से दूर रखें।" },
-            play: { en: "Stacking cups, push-along walking toys.", hi: "खिलौने डिब्बे में डालना और निकालना सिखाएं।" },
+            nutrition: { en: "Family pot food: Soft dal-roti, paneer, egg, fruits. Whole cow's milk up to 400ml/day.", hi: "घर का सामान्य भोजन: दाल-रोटी, पनीर, अंडा, फल। गाय का दूध 400ml तक शुरू कर सकते हैं।" },
+            safety: { en: "Keep hot tea, boiling water, and cleaning liquids out of reach.", hi: "गर्म चाय-दूध व फिनाइल बच्चे की पहुंच से दूर रखें।" },
+            play: { en: "Stacking plastic cups, push-along walking wooden carts, turning picture book pages.", hi: "कप जोड़ना, पहियों वाला खिलौना धकेलना और किताबों में चित्र देखना।" },
             care: { en: "Schedule 12-Month Hepatitis A and Chickenpox vaccines.", hi: "1 वर्ष पर हेपेटाइटिस-A एवं चिकनपॉक्स का टीका लगवाएं।" }
           }
         },
         "18m": {
           name: { en: "18 Months (1.5 Years)", hi: "18 माह (डेढ़ वर्ष)" },
-          iap: {
-            boy: { minW: 8.8, maxW: 13.5, minH: 77.0, maxH: 88.0 },
-            girl: { minW: 8.1, maxW: 13.0, minH: 75.0, maxH: 86.5 }
-          },
-          green: {
-            en: ["Walks independently without falling", "Speaks 6-10 single words", "Drinks from an open cup"],
-            hi: ["बिना गिरे अपने आप चलना", "6 से 10 स्पष्ट शब्द बोलना", "कप से पानी पीना"]
-          },
-          yellow: { en: ["Speaks fewer than 3 words", "Unsteady gait"], hi: ["3 से कम शब्द बोलना"] },
-          red: { en: ["Cannot walk independently", "Does not imitate actions or make eye contact"], hi: ["चल न पाना", "आई-कांटेक्ट न बनाना"] },
+          iap: { boy: { minW: 8.8, maxW: 13.5, minH: 77.0, maxH: 88.0 }, girl: { minW: 8.1, maxW: 13.0, minH: 75.0, maxH: 86.5 } },
+          green: { en: ["Walks independently", "Speaks 6-10 single words", "Drinks from an open cup"], hi: ["बिना गिरे अपने आप चलना", "6 से 10 स्पष्ट शब्द बोलना", "कप से पानी पीना"] },
+          yellow: { en: ["Speaks fewer than 3 words", "Frequent unprovoked falling"], hi: ["3 से कम शब्द बोलना"] },
+          red: { en: ["Cannot walk", "No pointing or eye contact (M-CHAT screen)"], hi: ["चल न पाना", "आई-कांटेक्ट व उंगली से इशारा न करना"] },
           tips: {
-            nutrition: { en: "3 balanced meals + 2 healthy snacks. Limit milk to 400ml/day to prevent iron deficiency.", hi: "दूध 400ml तक सीमित रखें ताकि खून की कमी (एनीमिया) न हो।" },
-            safety: { en: "Lock stair gates and store medicines in high cabinets.", hi: "सीढ़ियों पर गेट लगाएं और दवाइयां ऊंचाई पर ताले में रखें।" },
-            play: { en: "Picture book reading, identifying animals.", hi: "चित्रों वाली किताबों में जानवरों की पहचान कराएं।" },
+            nutrition: { en: "3 balanced meals + 2 healthy fruit/nut snacks. Limit milk to 400ml to prevent anemia.", hi: "दूध 400ml तक सीमित रखें ताकि खून की कमी (एनीमिया) न हो।" },
+            safety: { en: "Lock stair gates and store all medications in high locked cabinets.", hi: "सीढ़ियों पर गेट लगाएं और दवाइयां ऊंचाई पर ताले में रखें।" },
+            play: { en: "Building 4-block towers, kicking small balls, identifying animal sounds ('bow-wow', 'meow').", hi: "4 ब्लॉक्स का टावर बनाना, गेंद को लात मारना और जानवरों की आवाजें निकालना।" },
             care: { en: "Administer 16-18 Month DTP/IPV Booster and MMR-2.", hi: "16-18 माह पर DTP बूस्टर और MMR-2 का टीका लगवाएं।" }
           }
         },
         "24m": {
           name: { en: "24 Months (2 Years)", hi: "24 माह (2 वर्ष)" },
-          iap: {
-            boy: { minW: 9.7, maxW: 15.3, minH: 82.0, maxH: 94.0, minBmi: 14.0, ovBmi: 17.5, obBmi: 19.0 },
-            girl: { minW: 9.0, maxW: 14.8, minH: 80.0, maxH: 93.0, minBmi: 13.8, ovBmi: 17.2, obBmi: 18.8 }
-          },
-          green: {
-            en: ["Runs well and kicks a ball", "Speaks 2-word phrases ('want milk', 'go park')", "Begins daytime potty awareness"],
-            hi: ["दौड़ना व गेंद को किक मारना", "दो शब्दों के वाक्य बोलना ('दूध दो', 'बाहर चलो')", "पॉटी के संकेत समझना"]
-          },
-          yellow: { en: ["Not combining 2 words", "Frequent tipping while running"], hi: ["दो शब्दों को जोड़कर न बोलना"] },
-          red: { en: ["No 2-word spontaneous phrases", "Does not follow simple 2-step verbal instructions"], hi: ["आसान बातें न समझना", "नाम पुकारने पर ध्यान न देना"] },
+          iap: { boy: { minW: 9.7, maxW: 15.3, minH: 82.0, maxH: 94.0, minBmi: 14.0, ovBmi: 17.5, obBmi: 19.0 }, girl: { minW: 9.0, maxW: 14.8, minH: 80.0, maxH: 93.0, minBmi: 13.8, ovBmi: 17.2, obBmi: 18.8 } },
+          green: { en: ["Runs and kicks a ball", "Speaks 2-word phrases ('want milk')", "Potty training awareness"], hi: ["दौड़ना व गेंद किक करना", "दो शब्दों के वाक्य बोलना ('दूध दो')", "पॉटी के संकेत समझना"] },
+          yellow: { en: ["Not combining 2 words spontaneously"], hi: ["दो शब्दों को जोड़कर न बोलना"] },
+          red: { en: ["No 2-word phrases", "Does not follow simple verbal commands"], hi: ["आसान बातें न समझना", "नाम पुकारने पर ध्यान न देना"] },
           tips: {
-            nutrition: { en: "Structured meal times without mobile phone screens.", hi: "मोबाइल दिखाए बिना खाना खिलाने की आदत डालें।" },
-            safety: { en: "Zero screen time under 2 years per pediatric recommendations.", hi: "2 साल से छोटे बच्चों के लिए स्क्रीन (मोबाइल/टीवी) बिल्कुल बंद रखें।" },
-            play: { en: "Building 6-block towers and running outdoors.", hi: "ब्लॉक्स जोड़ना और खुले पार्क में खेलना।" },
+            nutrition: { en: "Structured table meals. Zero screen time during eating.", hi: "मोबाइल दिखाए बिना खाना खिलाने की आदत डालें।" },
+            safety: { en: "Strict zero screen time under 2 years per IAP guidelines.", hi: "2 साल तक स्क्रीन (मोबाइल/टीवी) बिल्कुल बंद रखें।" },
+            play: { en: "Pretend tea party, scribbling with crayons, running on park grass.", hi: "नाटक वाले खेल (गुड़िया को खाना खिलाना), मोम के रंगों से चित्रकारी और पार्क में दौड़ना।" },
             care: { en: "Annual pediatric health, vision, and dental checkup.", hi: "वार्षिक शारीरिक विकास, नजर व दांतों की जांच कराएं।" }
+          }
+        },
+        "3y": {
+          name: { en: "3 Years", hi: "3 वर्ष" },
+          iap: { boy: { minW: 11.3, maxW: 18.0, minH: 89.0, maxH: 103.0, minBmi: 13.8, ovBmi: 17.2, obBmi: 18.6 }, girl: { minW: 10.8, maxW: 17.5, minH: 88.0, maxH: 102.0, minBmi: 13.5, ovBmi: 17.0, obBmi: 18.4 } },
+          green: { en: ["Pedals tricycle", "Speaks in 3-4 word sentences", "Understands sharing concepts"], hi: ["तीन पहियों की साइकिल चलाना", "पूरे वाक्य बोलना", "अपनी-पराई चीजें समझना"] },
+          yellow: { en: ["Speech unintelligible to strangers"], hi: ["बोली में अत्यधिक अस्पष्टता"] },
+          red: { en: ["Cannot climb stairs", "No interactive play with other children"], hi: ["सीढ़ियां न चढ़ पाना", "बच्चों से घुलना-मिलना नहीं"] },
+          tips: {
+            nutrition: { en: "Lentils, roasted chana, almonds, walnuts, seasonal fruits, paneer.", hi: "दाल, भुने चने, बादाम-अखरोट, मौसमी फल और हरी सब्जियां दें।" },
+            safety: { en: "Teach road safety and holding parent hands firmly.", hi: "सड़क पार करते समय हाथ पकड़ने की सीख दें।" },
+            play: { en: "Tricycle riding, clay modeling (Play-Doh), role-playing doctor/teacher.", hi: "साइकिल चलाना, क्ले से आकृतियां बनाना और रोल-प्ले खेल।" },
+            care: { en: "Annual flu vaccine booster.", hi: "वार्षिक फ्लू का टीका लगवाएं।" }
+          }
+        },
+        "5y": {
+          name: { en: "5 Years", hi: "5 वर्ष" },
+          iap: { boy: { minW: 14.2, maxW: 24.0, minH: 101.0, maxH: 118.0, minBmi: 13.5, ovBmi: 16.8, obBmi: 18.5 }, girl: { minW: 13.8, maxW: 23.5, minH: 100.0, maxH: 117.0, minBmi: 13.3, ovBmi: 16.6, obBmi: 18.3 } },
+          green: { en: ["Hops on one foot", "Dresses independently", "Tells descriptive stories"], hi: ["एक पैर पर कूदना", "कपड़े पहनना", "कहानियां सुनाना"] },
+          yellow: { en: ["Difficulty managing buttons or zippers"], hi: ["हाथ के बारीक काम न कर पाना"] },
+          red: { en: ["Cannot draw a person with head and limbs", "Excessive aggressive tantrums"], hi: ["चित्र न बना पाना", "अत्यधिक चिड़चिड़ापन"] },
+          tips: {
+            nutrition: { en: "Avoid ultra-processed chips, sodas, and packaged juices.", hi: "जंक फूड, चिप्स व कोल्ड ड्रिंक्स से बचाएं।" },
+            safety: { en: "Teach good touch / bad touch and emergency contact numbers.", hi: "सुरक्षित व असुरक्षित स्पर्श (Good/Bad Touch) की शिक्षा दें।" },
+            play: { en: "60 mins daily energetic sports: cycling, swimming, football, hopscotch.", hi: "रोजाना 60 मिनट खेलकूद: साइकिलिंग, फुटबॉल, पकड़म-पकड़ाई।" },
+            care: { en: "Administer 4.5-5 Year DTP-2 Booster and MMR-3 vaccine.", hi: "5 वर्ष पर DTP बूस्टर एवं MMR-3 का टीका लगवाएं।" }
           }
         }
       };
 
-      // 🍲 5-7 RICH RECIPES PER CATEGORY
+      // =========================================================================
+      // 🍲 5-7 DOCTOR-CURATED RECIPES PER CATEGORY
+      // =========================================================================
       const recipeLibrary = {
         veg: [
-          { name: { en: "Moong Dal & Sprouted Rice Puree", hi: "मूंग दाल व अंकुरित चावल की प्यूरी" }, desc: { en: "Easy to digest, rich in plant protein and gentle carbs. Add 1/2 tsp pure ghee.", hi: "सुपाच्य प्रोटीन व ऊर्जा से भरपूर। आधा चम्मच शुद्ध देसी घी मिलाएं।" }, yt: "6+month+baby+moong+dal+rice+puree" },
+          { name: { en: "Moong Dal & Sprouted Rice Puree", hi: "मूंग दाल व अंकुरित चावल की प्यूरी" }, desc: { en: "Easy to digest, rich in plant protein and gentle carbs. Add 1/2 tsp pure cow ghee.", hi: "सुपाच्य प्रोटीन व ऊर्जा से भरपूर। आधा चम्मच शुद्ध देसी घी मिलाएं।" }, yt: "6+month+baby+moong+dal+rice+puree" },
           { name: { en: "Sprouted Ragi Porridge (No Added Sugar)", hi: "अंकुरित रागी की पौष्टिक खीर (बिना चीनी)" }, desc: { en: "Rich natural calcium for strong bone development. Naturally sweetened with ripe banana.", hi: "हड्डियों की मजबूती के लिए कैल्शियम से भरपूर। मसले केले से मीठा करें।" }, yt: "ragi+porridge+for+6+month+baby" },
           { name: { en: "Steamed Pumpkin & Carrot Mash", hi: "उबले कद्दू व गाजर की प्यूरी" }, desc: { en: "High in Beta-Carotene (Vitamin A) for clear eyesight and mucosal gut immunity.", hi: "विटामिन-ए से भरपूर, आंखों की रोशनी व पाचन के लिए उत्तम।" }, yt: "pumpkin+carrot+puree+for+baby" },
           { name: { en: "Suji & Green Pea Halwa in Cow Ghee", hi: "सूजी व मटर का हल्का हलवा" }, desc: { en: "Smooth texture; excellent source of dietary energy and plant fibers.", hi: "ऊर्जा व फाइबर से भरपूर, निगलने में आसान।" }, yt: "suji+halwa+for+baby+without+sugar" },
@@ -401,6 +381,32 @@
           { name: { en: "Chicken & Steamed Carrot Puree", hi: "चिकन व गाजर की पौष्टिक प्यूरी" }, desc: { en: "Delicious, naturally sweet savory meal with iron and Vitamin A.", hi: "आयरन और विटामिन-ए से युक्त स्वादिष्ट व सुपाच्य आहार।" }, yt: "chicken+carrot+puree+baby" }
         ]
       };
+
+      // =========================================================================
+      // 🧩 OFFICIAL 20-QUESTION M-CHAT-R™ VALIDATED PROTOCOL
+      // =========================================================================
+      const mchat20Questions = [
+        { id: "m1", q: { en: "If you point at something across the room, does your child look at it? (e.g., if you point at a toy or animal, does child look?)", hi: "यदि आप कमरे में किसी वस्तु (खिलौने या जानवर) की ओर इशारा करते हैं, तो क्या बच्चा उसे देखता है?" }, rev: false },
+        { id: "m2", q: { en: "Have you ever wondered if your child might be deaf or not hearing?", hi: "क्या आपको कभी लगा है कि आपका बच्चा कम सुनता है या बहरा हो सकता है?" }, rev: true },
+        { id: "m3", q: { en: "Does your child play pretend or make-believe? (e.g., pretend to drink from an empty cup, talk on phone, feed doll?)", hi: "क्या बच्चा नाटक वाले खेल खेलता है (जैसे खाली कप से चाय पीना, फोन पर बात करना, गुड़िया को खाना खिलाना)?" }, rev: false },
+        { id: "m4", q: { en: "Does your child like climbing on things? (e.g., furniture, playground equipment, or stairs?)", hi: "क्या बच्चे को सीढ़ियों, सोफे या झूले पर चढ़ना पसंद है?" }, rev: false },
+        { id: "m5", q: { en: "Does your child make unusual finger movements near his or her eyes? (e.g., wiggling fingers close to eyes?)", hi: "क्या बच्चा अपनी आंखों के पास अजीब तरह से उंगलियां या हाथ हिलाता है?" }, rev: true },
+        { id: "m6", q: { en: "Does your child point with one finger to ask for something or to get help? (e.g., pointing to an out-of-reach snack?)", hi: "क्या बच्चा किसी चीज को मांगने या मदद लेने के लिए उंगली से इशारा करता है?" }, rev: false },
+        { id: "m7", q: { en: "Does your child point with one finger to show you something interesting? (e.g., pointing at an airplane in sky?)", hi: "क्या बच्चा कोई रोचक चीज (जैसे उड़ता हवाई जहाज) दिखाने के लिए उंगली से इशारा करता है?" }, rev: false },
+        { id: "m8", q: { en: "Is your child interested in other children? (e.g., does child watch other children, smile at them, go to them?)", hi: "क्या बच्चा दूसरे बच्चों में रुचि दिखाता है (उन्हें देखता है, मुस्कुराता है या पास जाता है)?" }, rev: false },
+        { id: "m9", q: { en: "Does your child show you things by bringing them or holding them up — not to get help, but just to share? (e.g., flower, toy truck?)", hi: "क्या बच्चा आपको अपनी पसंद की चीजें दिखाने लाता है (सिर्फ खुशी बांटने के लिए)?" }, rev: false },
+        { id: "m10", q: { en: "Does your child respond when you call his or her name? (e.g., looks up, talks/babbles, stops what they're doing?)", hi: "क्या बच्चा अपना नाम पुकारने पर मुड़कर देखता है और ध्यान देता है?" }, rev: false },
+        { id: "m11", q: { en: "When you smile at your child, does he or she smile back at you?", hi: "जब आप बच्चे को देखकर मुस्कुराते हैं, तो क्या वह भी आपको देखकर मुस्कुराता है?" }, rev: false },
+        { id: "m12", q: { en: "Does your child get upset by everyday noises? (e.g., screams or cries to vacuum cleaner, blender, loud music?)", hi: "क्या बच्चा रोजमर्रा की आवाजों (मिक्सर, वैक्यूम क्लीनर) से अत्यधिक डरकर रोने लगता है?" }, rev: true },
+        { id: "m13", q: { en: "Does your child walk independently?", hi: "क्या बच्चा बिना सहारे अपने आप चलता है?" }, rev: false },
+        { id: "m14", q: { en: "Does your child look you in the eye when talking, playing, or being dressed?", hi: "क्या बच्चा बात करते समय, खेलते समय या कपड़े बदलते समय आपकी आंखों में देखता है?" }, rev: false },
+        { id: "m15", q: { en: "Does your child try to copy what you do? (e.g., wave bye-bye, clap hands, make funny sounds?)", hi: "क्या बच्चा आपकी नकल करने की कोशिश करता है (बाय-बाय करना, ताली बजाना)?" }, rev: false },
+        { id: "m16", q: { en: "If you turn your head to look at something, does your child look around to see what you are looking at?", hi: "यदि आप किसी तरफ मुड़कर देखते हैं, तो क्या बच्चा भी उधर देखने की कोशिश करता है?" }, rev: false },
+        { id: "m17", q: { en: "Does your child try to get you to watch him or her? (e.g., looks for praise, says 'look at me'?)", hi: "क्या बच्चा आपका ध्यान खींचने की कोशिश करता है (प्रशंसा के लिए आपको देखता है)?" }, rev: false },
+        { id: "m18", q: { en: "Does your child understand when you tell him/her to do something without pointing? (e.g., 'put book on chair')?", hi: "बिना इशारा किए केवल बोलकर कहने पर क्या बच्चा बात समझता है ('किताब कुर्सी पर रखो')?" }, rev: false },
+        { id: "m19", q: { en: "If something new happens, does your child look at your face to see how you feel about it?", hi: "कोई नई घटना होने पर क्या बच्चा आपका चेहरा देखता है कि आप कैसा महसूस कर रहे हैं?" }, rev: false },
+        { id: "m20", q: { en: "Does your child like movement activities? (e.g., being swung or bounced on your knee?)", hi: "क्या बच्चे को गोद में उछलना या झूला झूलना पसंद है?" }, rev: false }
+      ];
 
       function updateMeasurementLabel() {
         const ageKey = document.getElementById("screenerAge").value;
@@ -461,7 +467,7 @@
       }
 
       // =========================================================================
-      // 🍲 COMPLEMENTARY FEEDING MODULE (WITH DROPDOWN & 5-7 RECIPES)
+      // 🍲 COMPLEMENTARY FEEDING MODULE (WITH DROPDOWN & RECIPES)
       // =========================================================================
       function renderComplementaryFeedingModule(lang) {
         const isHi = (lang === "hi");
@@ -553,58 +559,58 @@
       }
 
       // =========================================================================
-      // 🧩 M-CHAT-R AUTISM SCREENING MODULE (18 & 24 MONTHS)
+      // 🧩 FULL 20-QUESTION M-CHAT-R™ ACCORDION (TAP-TO-OPEN AT 18 & 24 MONTHS)
       // =========================================================================
-      const mchatQuestions = [
-        { id: "m1", q: { en: "If you point at something across the room, does your child look at it?", hi: "यदि आप कमरे में किसी वस्तु की ओर इशारा करते हैं, तो क्या आपका बच्चा उसे देखता है?" }, rev: false },
-        { id: "m2", q: { en: "Have you ever wondered if your child might be deaf or not hearing?", hi: "क्या आपको कभी लगा है कि आपका बच्चा कम सुनता है या बहरा हो सकता है?" }, rev: true },
-        { id: "m3", q: { en: "Does your child play pretend (e.g., pretend to drink from an empty cup, talk on toy phone)?", hi: "क्या आपका बच्चा नाटक वाले खेल खेलता है (जैसे खाली कप से चाय पीना, फोन पर बात करना)?" }, rev: false },
-        { id: "m4", q: { en: "Does your child like climbing on things (stairs, furniture)?", hi: "क्या आपका बच्चा सीढ़ियों या सोफे पर चढ़ना पसंद करता है?" }, rev: false },
-        { id: "m5", q: { en: "Does your child make unusual finger movements near their eyes (flapping/waving)?", hi: "क्या आपका बच्चा अपनी आंखों के पास अजीब तरह से उंगलियां या हाथ हिलाता है?" }, rev: true },
-        { id: "m6", q: { en: "Does your child point with one finger to ask for something or to get help?", hi: "क्या आपका बच्चा किसी चीज को मांगने या मदद लेने के लिए उंगली से इशारा करता है?" }, rev: false },
-        { id: "m7", q: { en: "Does your child point with one finger to show you something interesting (e.g., pointing at an airplane)?", hi: "क्या आपका बच्चा कोई रोचक चीज (जैसे उड़ता हवाई जहाज) दिखाने के लिए उंगली से इशारा करता है?" }, rev: false },
-        { id: "m8", q: { en: "Is your child interested in other children (smiles, watches, approaches them)?", hi: "क्या आपका बच्चा दूसरे बच्चों में रुचि दिखाता है (उन्हें देखता है, पास जाता है)?" }, rev: false },
-        { id: "m9", q: { en: "Does your child bring things over to show you (not just to get help)?", hi: "क्या आपका बच्चा आपको अपनी पसंद की चीजें दिखाने लाता है?" }, rev: false },
-        { id: "m10", q: { en: "Does your child respond when you call his/her name (looks up, makes eye contact)?", hi: "क्या आपका बच्चा अपना नाम पुकारने पर मुड़कर देखता है और आई-कांटेक्ट बनाता है?" }, rev: false }
-      ];
-
-      function renderMchatModule(lang) {
+      function renderMchatAccordion(lang) {
         const isHi = (lang === "hi");
-        const questionsHtml = mchatQuestions.map((item, idx) => `
+        const questionsHtml = mchat20Questions.map((item, idx) => `
           <div class="mchat-q-card">
             <span style="font-size:0.84rem; color:#0f172a; flex:1; line-height:1.4;">
-              <strong>${idx+1}.</strong> ${item.q[isHi ? 'hi' : 'en']}
+              <strong>Q${idx+1}.</strong> ${item.q[isHi ? 'hi' : 'en']}
             </span>
             <div style="display:flex; gap:12px; align-items:center;">
-              <label style="font-size:0.82rem; font-weight:700; color:#15803d; cursor:pointer;">
-                <input type="radio" name="${item.id}" value="yes" onchange="calculateMchatScore()" style="margin-right:3px;"> ${isHi ? 'हाँ' : 'Yes'}
+              <label style="font-size:0.84rem; font-weight:700; color:#15803d; cursor:pointer;">
+                <input type="radio" name="${item.id}" value="yes" onchange="calculateMchatScore()" style="margin-right:3px;"> ${isHi ? 'हाँ (Yes)' : 'Yes'}
               </label>
-              <label style="font-size:0.82rem; font-weight:700; color:#b91c1c; cursor:pointer;">
-                <input type="radio" name="${item.id}" value="no" onchange="calculateMchatScore()" style="margin-right:3px;"> ${isHi ? 'नहीं' : 'No'}
+              <label style="font-size:0.84rem; font-weight:700; color:#b91c1c; cursor:pointer;">
+                <input type="radio" name="${item.id}" value="no" onchange="calculateMchatScore()" style="margin-right:3px;"> ${isHi ? 'नहीं (No)' : 'No'}
               </label>
             </div>
           </div>
         `).join("");
 
         return `
-          <div style="background: #f8fafc; border: 2px solid #94a3b8; border-radius: 18px; padding: 18px; margin-top: 18px;">
-            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:12px;">
+          <div style="border: 2px solid #94a3b8; border-radius: 18px; overflow: hidden; background: #ffffff; margin-top: 18px; box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);">
+            <button type="button" onclick="toggleMchatBody()" style="width:100%; background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%); border:none; padding:16px 20px; display:flex; justify-content:space-between; align-items:center; cursor:pointer; text-align:left;">
               <div>
-                <span style="background:#e2e8f0; color:#334155; font-size:0.75rem; font-weight:700; padding:4px 10px; border-radius:12px; display:inline-block; margin-bottom:4px;">
-                  <i class="fa-solid fa-brain"></i> Developmental Autism & Behavioral Screen (M-CHAT-R/F)
+                <span style="background:#0f172a; color:#ffffff; font-size:0.72rem; font-weight:800; padding:3px 8px; border-radius:10px; display:inline-block; margin-bottom:4px; text-transform:uppercase;">
+                  M-CHAT-R™ 20 Questions
                 </span>
-                <h5 style="color: #0f172a; font-family:'Fredoka',cursive; font-size: 1.25rem; margin:0;">
-                  ${isHi ? "18 व 24 माह: M-CHAT विकासात्मक एवं ऑटिज्म व्यवहारिक स्क्रीनिंग" : "18 & 24 Months: M-CHAT-R Developmental Autism Screening"}
+                <h5 style="color: #0f172a; font-family:'Fredoka',cursive; font-size: 1.2rem; margin:0;">
+                  🔍 ${isHi ? "Check Your Child's M-CHAT (18 व 24 माह: ऑटिज्म व विकासात्मक टेस्ट)" : "Check Your Child's M-CHAT (18 & 24 Month Autism & Developmental Screen)"}
                 </h5>
               </div>
+              <i id="mchatChevron" class="fa-solid fa-chevron-down" style="font-size:1.2rem; color:#0f172a; transition:transform 0.25s;"></i>
+            </button>
+
+            <div id="mchatBody" style="display:none; padding:18px; background:#f8fafc; border-top:1px solid #cbd5e1;">
+              <p style="font-size:0.82rem; color:#475569; margin-bottom:14px; line-height:1.5;">
+                ${isHi ? "M-CHAT-R™ 18 से 30 माह के बच्चों के लिए प्रमाणित ऑटिज्म व सामाजिक व्यवहार स्क्रीनिंग टूल है। कृपया सभी 20 प्रश्नों के उत्तर 'हाँ' या 'नहीं' में दें:" : "The Modified Checklist for Autism in Toddlers, Revised (M-CHAT-R) is a 20-item parent-report screening tool for children aged 16 to 30 months. Please answer all 20 questions:"}
+              </p>
+              <div>${questionsHtml}</div>
+              <div id="mchatScoreResult" style="margin-top:14px;"></div>
             </div>
-            <p style="font-size:0.82rem; color:#475569; margin-bottom:12px; line-height:1.45;">
-              ${isHi ? "यह एक मानक विकासात्मक टूल है जो सामाजिक संचार, इशारे समझने और बोलने के संकेतों का मूल्यांकन करता है। कृपया नीचे दिए गए प्रश्नों के उत्तर 'हाँ' या 'नहीं' में दें:" : "Standard clinical screening tool evaluating joint attention, social responsiveness, and early communicative milestones. Please answer below:"}
-            </p>
-            <div>${questionsHtml}</div>
-            <div id="mchatScoreResult" style="margin-top:12px;"></div>
           </div>
         `;
+      }
+
+      function toggleMchatBody() {
+        const body = document.getElementById("mchatBody");
+        const icon = document.getElementById("mchatChevron");
+        if (!body) return;
+        const isOpen = (body.style.display === "block");
+        body.style.display = isOpen ? "none" : "block";
+        if (icon) icon.style.transform = isOpen ? "rotate(0deg)" : "rotate(180deg)";
       }
 
       function calculateMchatScore() {
@@ -612,23 +618,26 @@
         let answeredCount = 0;
         const isHi = (toolLang === "hi");
 
-        mchatQuestions.forEach(item => {
+        mchat20Questions.forEach(item => {
           const selected = document.querySelector(`input[name="${item.id}"]:checked`);
           if (selected) {
             answeredCount++;
             const val = selected.value;
-            if (!item.rev && val === "no") score++;
+            // Scored as At-Risk if:
+            // For items 2, 5, 12 -> YES indicates risk
+            // For all other items -> NO indicates risk
             if (item.rev && val === "yes") score++;
+            if (!item.rev && val === "no") score++;
           }
         });
 
         const container = document.getElementById("mchatScoreResult");
         if (!container) return;
 
-        if (answeredCount < mchatQuestions.length) {
+        if (answeredCount < mchat20Questions.length) {
           container.innerHTML = `
             <div style="background:#fffbeb; border:1px solid #fde047; padding:10px 14px; border-radius:10px; font-size:0.82rem; color:#854d0e;">
-              <i class="fa-solid fa-circle-info"></i> ${isHi ? `कृपया सभी ${mchatQuestions.length} प्रश्नों के उत्तर दें (अभी ${answeredCount} पूर्ण हैं)।` : `Please answer all ${mchatQuestions.length} questions to calculate clinical risk score (${answeredCount}/${mchatQuestions.length} answered).`}
+              <i class="fa-solid fa-circle-info"></i> ${isHi ? `कृपया सभी 20 प्रश्नों के उत्तर दें (अभी ${answeredCount}/20 पूर्ण हैं)।` : `Please answer all 20 questions to calculate score (${answeredCount}/20 completed).`}
             </div>
           `;
           return;
@@ -640,8 +649,8 @@
             <div class="flag-card flag-green">
               <i class="fa-solid fa-circle-check"></i>
               <div>
-                <strong>${isHi ? `M-CHAT स्कोर: ${score} (कम जोखिम - Low Risk)` : `M-CHAT Total Score: ${score} (Low Likelihood)`}</strong><br>
-                ${isHi ? "बच्चे का सामाजिक व्यवहार एवं माइलस्टोन सामान्य रूप से विकसित हो रहे हैं।" : "Child has screened negative. Social communication and milestones are tracking well within standard parameters."}
+                <strong>🟢 ${isHi ? `M-CHAT स्कोर: ${score}/20 (कोई जोखिम नहीं - Low Risk)` : `M-CHAT Total Score: ${score}/20 (Low Risk / Screen Negative)`}</strong><br>
+                ${isHi ? "बच्चा सामान्य विकासात्मक व सामाजिक सीमा में है। किसी विशेष हस्तक्षेप की आवश्यकता नहीं है।" : "Child has screened negative. Social communication, pointing, and joint attention are developing normally."}
               </div>
             </div>
           `;
@@ -650,8 +659,8 @@
             <div class="flag-card flag-yellow">
               <i class="fa-solid fa-triangle-exclamation"></i>
               <div>
-                <strong>${isHi ? `M-CHAT स्कोर: ${score} (मध्यम जोखिम - Moderate Risk)` : `M-CHAT Total Score: ${score} (Moderate Risk)`}</strong><br>
-                ${isHi ? "कुछ सामाजिक व संचार माइलस्टोन में निगरानी की आवश्यकता है। बाल रोग विशेषज्ञ से इन-पर्सन जांच कराएं।" : "Moderate risk flagged. Follow-up clinical developmental surveillance with your pediatrician is advised."}
+                <strong>🟡 ${isHi ? `M-CHAT स्कोर: ${score}/20 (मध्यम जोखिम - Medium / Moderate Risk)` : `M-CHAT Total Score: ${score}/20 (Medium Risk)`}</strong><br>
+                ${isHi ? "कुछ सामाजिक व संचार संकेतों में अतिरिक्त निगरानी आवश्यक है। बाल रोग विशेषज्ञ से इन-पर्सन विकासात्मक परामर्श लें।" : "Child has screened in the moderate risk range. Follow-up clinical screening and developmental surveillance with your pediatrician is advised."}
               </div>
             </div>
           `;
@@ -660,8 +669,8 @@
             <div class="flag-card flag-red">
               <i class="fa-solid fa-circle-exclamation"></i>
               <div>
-                <strong>${isHi ? `M-CHAT स्कोर: ${score} (उच्च सतर्कता - High Risk / Clinical Review)` : `M-CHAT Total Score: ${score} (High Risk / Positive Screen)`}</strong><br>
-                ${isHi ? "शिशु रोग विशेषज्ञ (Dr. Dinesh Mittal) से विस्तृत विकासात्मक व ऑटिज्म मूल्यांकन हेतु परामर्श लें।" : "Immediate pediatric referral and comprehensive developmental evaluation recommended."}
+                <strong>🔴 ${isHi ? `M-CHAT स्कोर: ${score}/20 (उच्च जोखिम - High Risk / Clinical Action Required)` : `M-CHAT Total Score: ${score}/20 (High Risk / Positive Screen)`}</strong><br>
+                ${isHi ? "शिशु एवं बाल रोग विशेषज्ञ (Dr. Dinesh Mittal) से विस्तृत ऑटिज्म व विकासात्मक मूल्यांकन एवं अर्ली इंटरवेंशन हेतु तुरंत परामर्श लें।" : "Immediate pediatric referral and comprehensive developmental diagnostic evaluation recommended to begin early intervention support."}
               </div>
             </div>
           `;
@@ -793,16 +802,16 @@
             }
           }
 
-          // Synchronized Height Output with Mid-Parental Alert
+          // Height Status with Channel Flagging
           if (!isNaN(hInput) && ref) {
             if (hInput < ref.minH) {
               hStatus = toolLang === "en"
-                ? `<div class="flag-card flag-red"><i class="fa-solid fa-circle-exclamation"></i> <div><strong>${measurementWord} (${hInput} cm): Below 3rd percentile.</strong> Below norm (${ref.minH} – ${ref.maxH} cm). Consult pediatrician for clinical checkup.</div></div>`
+                ? `<div class="flag-card flag-red"><i class="fa-solid fa-circle-exclamation"></i> <div><strong>${measurementWord} (${hInput} cm): Below 3rd percentile.</strong> Below population norm (${ref.minH} – ${ref.maxH} cm). Consult pediatrician for clinical checkup.</div></div>`
                 : `<div class="flag-card flag-red"><i class="fa-solid fa-circle-exclamation"></i> <div><strong>${measurementWord} (${hInput} cm): 3वें परसेंटाइल से कम।</strong> मानक सीमा (${ref.minH} – ${ref.maxH} cm) से कम है।</div></div>`;
             } else if (hasHeightDiscrepancy && discrepancyType === "lagging-severe") {
               hStatus = toolLang === "en"
-                ? `<div class="flag-card flag-red"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>${measurementWord} (${hInput} cm): Trailing Parental Genetic Potential (>2 SD).</strong> Even though tracking within broad population averages, child's linear growth lags significantly below parents' tall genetic channel. In-person clinical growth review advised.</div></div>`
-                : `<div class="flag-card flag-red"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>${measurementWord} (${hInput} cm): माता-पिता की आनुवंशिक क्षमता से कम (>2 SD)।</strong> बच्चा सामान्य जनसंख्या सीमा में होने के बावजूद माता-पिता की संभावित लंबी कद-काठी की तुलना में धीमा है। डॉक्टर से जांच कराएं।</div></div>`;
+                ? `<div class="flag-card flag-red"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>${measurementWord} (${hInput} cm): Trailing Parental Genetic Potential (>2 SD).</strong> Even though within broad population percentiles, child lags significantly below tall family genetic target. In-person pediatric growth review advised.</div></div>`
+                : `<div class="flag-card flag-red"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>${measurementWord} (${hInput} cm): माता-पिता की आनुवंशिक क्षमता से कम (>2 SD)।</strong> बच्चा सामान्य सीमा में होने के बावजूद माता-पिता की लंबी कद-काठी की तुलना में धीमा है। डॉक्टर से जांच कराएं।</div></div>`;
             } else if (hasHeightDiscrepancy && discrepancyType === "lagging-moderate") {
               hStatus = toolLang === "en"
                 ? `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>${measurementWord} (${hInput} cm): Trailing Relative to Parental Target (~1.5 SD).</strong> Growth tracks slightly below mid-parental genetic target channel. Growth velocity monitoring recommended.</div></div>`
@@ -895,38 +904,38 @@
             </div>
           `;
 
-          // 6. Parenting Tips
+          // 6. Parenting, Nutrition & Play Guidance
           const nutritionTip = (data.tips && data.tips.nutrition && data.tips.nutrition[listLang]) ? data.tips.nutrition[listLang] : "Balanced age-appropriate nutrition.";
           const safetyTip = (data.tips && data.tips.safety && data.tips.safety[listLang]) ? data.tips.safety[listLang] : "Age-appropriate childproofing.";
-          const playTip = (data.tips && data.tips.play && data.tips.play[listLang]) ? data.tips.play[listLang] : "Encourage interactive play.";
+          const playTip = (data.tips && data.tips.play && data.tips.play[listLang]) ? data.tips.play[listLang] : "Interactive cognitive play.";
           const careTip = (data.tips && data.tips.care && data.tips.care[listLang]) ? data.tips.care[listLang] : "Ensure timely routine immunization.";
 
-          // 7. Interactive Modules (Complementary Feeding, Toilet Training, M-CHAT)
+          // 7. Interactive Modules (Feeding at 6-12m; Toilet Training & Full 20-Q M-CHAT at 18 & 24m)
           let specialInteractiveHtml = "";
           if (ageKey === "6m" || ageKey === "9m" || ageKey === "12m") {
             specialInteractiveHtml = renderComplementaryFeedingModule(listLang);
           } else if (ageKey === "18m" || ageKey === "24m") {
-            specialInteractiveHtml = renderToiletTrainingModule(listLang) + renderMchatModule(listLang);
+            specialInteractiveHtml = renderToiletTrainingModule(listLang) + renderMchatAccordion(listLang);
           }
 
           const tipsHtml = `
             <div class="result-box" style="grid-column: 1 / -1; background: #faf5ff; border: 1.5px solid #e9d5ff;">
-              <h4 style="color: #6b21a8;"><i class="fa-solid fa-heart-pulse"></i> ${ageName} ${toolLang === "en" ? "Parenting & Nutrition Guide" : "अभिभावक देखभाल एवं पोषण मार्गदर्शन"}</h4>
+              <h4 style="color: #6b21a8;"><i class="fa-solid fa-heart-pulse"></i> ${ageName} ${toolLang === "en" ? "Parenting, Nutrition & Play Guide" : "अभिभावक देखभाल, पोषण व खेल मार्गदर्शन"}</h4>
               <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 12px;">
                 <div style="background:#ffffff; padding:14px; border-radius:12px; border:1px solid #f3e8ff;">
                   <strong style="color:#7e22ce; font-size:0.88rem; display:block; margin-bottom:4px;"><i class="fa-solid fa-apple-whole"></i> ${toolLang === "en" ? "Nutrition & Diet:" : "पोषण एवं आहार:"}</strong>
                   <p style="font-size:0.84rem; color:#4b5563; line-height:1.45;">${nutritionTip}</p>
                 </div>
                 <div style="background:#ffffff; padding:14px; border-radius:12px; border:1px solid #f3e8ff;">
+                  <strong style="color:#0369a1; font-size:0.88rem; display:block; margin-bottom:4px;"><i class="fa-solid fa-puzzle-piece"></i> ${toolLang === "en" ? "Play & Cognitive Instruction:" : "खेल एवं मानसिक विकास निर्देश:"}</strong>
+                  <p style="font-size:0.84rem; color:#4b5563; line-height:1.45;">${playTip}</p>
+                </div>
+                <div style="background:#ffffff; padding:14px; border-radius:12px; border:1px solid #f3e8ff;">
                   <strong style="color:#b91c1c; font-size:0.88rem; display:block; margin-bottom:4px;"><i class="fa-solid fa-shield-halved"></i> ${toolLang === "en" ? "Child Safety:" : "सुरक्षा:"}</strong>
                   <p style="font-size:0.84rem; color:#4b5563; line-height:1.45;">${safetyTip}</p>
                 </div>
                 <div style="background:#ffffff; padding:14px; border-radius:12px; border:1px solid #f3e8ff;">
-                  <strong style="color:#0369a1; font-size:0.88rem; display:block; margin-bottom:4px;"><i class="fa-solid fa-puzzle-piece"></i> ${toolLang === "en" ? "Play & Cognitive:" : "मानसिक विकास:"}</strong>
-                  <p style="font-size:0.84rem; color:#4b5563; line-height:1.45;">${playTip}</p>
-                </div>
-                <div style="background:#ffffff; padding:14px; border-radius:12px; border:1px solid #f3e8ff;">
-                  <strong style="color:#15803d; font-size:0.88rem; display:block; margin-bottom:4px;"><i class="fa-solid fa-stethoscope"></i> ${toolLang === "en" ? "Doctor Tip:" : "चिकित्सकीय सलाह:"}</strong>
+                  <strong style="color:#15803d; font-size:0.88rem; display:block; margin-bottom:4px;"><i class="fa-solid fa-stethoscope"></i> ${toolLang === "en" ? "Doctor Clinical Tip:" : "चिकित्सकीय सलाह:"}</strong>
                   <p style="font-size:0.84rem; color:#4b5563; line-height:1.45;">${careTip}</p>
                 </div>
               </div>
