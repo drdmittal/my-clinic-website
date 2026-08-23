@@ -716,33 +716,44 @@
 
         </div>
     </div>
-
-    <!-- ADOLESCENT HEALTH & PUBERTY GUIDANCE SECTION -->
-    <div class="container" id="adolescent-care">
-      <div style="background: #ffffff; border-radius: 26px; box-shadow: var(--card-shadow); border: 1.5px solid #e0f2fe; padding: 28px 22px; margin-bottom: 35px;">
+   <!-- COMPACT ADOLESCENT HEALTH & PUBERTY GUIDANCE -->
+    <div class="container" id="adolescent-care" style="margin-top: 25px; margin-bottom: 25px;">
+      <div style="background: #ffffff; border-radius: 24px; box-shadow: var(--card-shadow); border: 1.5px solid #e0f2fe; padding: 22px 20px;">
         
-        <div style="text-align: center; margin-bottom: 22px;">
-          <span class="screener-badge" style="background: #fdf4ff; color: #a21caf; border-color: #fae8ff;">
-            <i class="fa-solid fa-person-shelter"></i> Ages 10 - 18 Years
-          </span>
-          <h2 style="font-family: 'Fredoka', cursive; font-size: 1.65rem; color: #083344; margin-bottom: 6px;">
-            Adolescent Health & Puberty Guidance
-          </h2>
-          <p style="font-size: 0.88rem; color: var(--muted-text); max-width: 650px; margin: 0 auto;">
-            Pediatric guidance on physical growth spurts, menstrual care, hormonal changes, and adolescent wellness.
-          </p>
+        <!-- Header with Mini Tabs -->
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
+          <div>
+            <span class="screener-badge" style="background: #fdf4ff; color: #a21caf; border-color: #fae8ff; margin-bottom: 4px;">
+              <i class="fa-solid fa-person-shelter"></i> Ages 10 - 18 Years
+            </span>
+            <h2 style="font-family: 'Fredoka', cursive; font-size: 1.35rem; color: #083344; margin: 0;">
+              Adolescent Health & Puberty Guidance
+            </h2>
+          </div>
+
+          <!-- Quick Filter Buttons -->
+          <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+            <button onclick="filterAdolescentFaq('all')" id="tabFaqAll" class="hero-secondary-btn" style="padding: 6px 14px; font-size: 0.78rem; min-height: 32px; background: var(--brand-primary); color: white; border-color: var(--brand-primary);">All (20)</button>
+            <button onclick="filterAdolescentFaq('girls')" id="tabFaqGirls" class="hero-secondary-btn" style="padding: 6px 14px; font-size: 0.78rem; min-height: 32px;"><i class="fa-solid fa-venus" style="color:#db2777;"></i> Girls</button>
+            <button onclick="filterAdolescentFaq('boys')" id="tabFaqBoys" class="hero-secondary-btn" style="padding: 6px 14px; font-size: 0.78rem; min-height: 32px;"><i class="fa-solid fa-mars" style="color:#2563eb;"></i> Boys</button>
+          </div>
         </div>
 
-        <div class="faq-container" id="faqAccordionContainer"></div>
+        <!-- FAQ Container (Compact Scroll/Slice) -->
+        <div class="faq-container" id="faqAccordionContainer" style="gap: 8px;"></div>
 
-        <div style="text-align:center; margin-top:22px; padding:18px; background:#f0fdfa; border-radius:18px; border:1px solid #ccfbf1;">
-          <p style="font-size:0.88rem; color:#0f766e; font-weight:600; margin-bottom:8px;">Have specific concerns regarding your teenager's growth, puberty, or nutrition?</p>
-          <button onclick="openBookingModal()" class="hero-cta-btn" style="padding: 10px 24px; font-size: 0.88rem; min-height: 44px;">
-            <i class="fa-solid fa-calendar-check"></i> Book Confidential Adolescent Consultation
+        <!-- Toggle View More / View Less Button -->
+        <div style="text-align: center; margin-top: 14px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+          <button id="toggleFaqViewBtn" onclick="toggleFaqExpand()" class="hero-secondary-btn" style="padding: 8px 18px; font-size: 0.82rem; min-height: 36px;">
+            <i class="fa-solid fa-chevron-down"></i> <span id="faqBtnLabel">View All 20 Questions</span>
+          </button>
+          <button onclick="openBookingModal()" class="hero-cta-btn" style="padding: 8px 18px; font-size: 0.82rem; min-height: 36px;">
+            <i class="fa-solid fa-calendar-check"></i> Book Confidential Teen Consult
           </button>
         </div>
 
       </div>
+    </div>
     </div>
 <!-- PROMINENT FEATURED BLOG SECTION ON HOMEPAGE -->
     <div class="container" id="blog">
