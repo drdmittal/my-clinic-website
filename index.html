@@ -776,39 +776,24 @@
             </a>
         </div>
     </div>
-
-    <!-- 🌟 CARD 3: ADOLESCENT HEALTH & PUBERTY GUIDANCE (INTERACTIVE FAQ ACCORDION) -->
+<!-- 🌟 CARD 3: ADOLESCENT HEALTH & PUBERTY GUIDANCE (SYMMETRICAL CARD) -->
     <div class="container" id="adolescent-care" style="margin-top: 10px; margin-bottom: 12px;">
         <div class="screener-card" style="margin-bottom: 0;">
-            <div class="screener-toggle-header" style="cursor: default; flex-wrap: wrap;">
+            <a href="adolescent-health-puberty-guide.html" class="screener-toggle-header" style="text-decoration: none; display: flex; justify-content: space-between; align-items: center;">
                 <div>
-                    <span class="screener-badge" style="background: #fdf4ff; color: #a21caf; border-color: #fae8ff;"><i class="fa-solid fa-person-shelter"></i> <span data-i18n="teen_badge">Ages 10 - 18 Years</span></span>
+                    <span class="screener-badge" style="border-color: #fae8ff; background: #fdf4ff; color: #a21caf;">
+                        <i class="fa-solid fa-person-shelter"></i> <span data-i18n="teen_badge">Ages 10 - 18 Years</span>
+                    </span>
                     <h2 class="screener-title" data-i18n="teen_heading">Adolescent Health & Puberty Guidance</h2>
                     <p class="screener-subtitle" data-i18n="teen_sub">Confidential puberty guidance, growth spurt counseling & hormonal wellness.</p>
                 </div>
-                
-                <!-- Quick Category Filter Buttons -->
-                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                    <button onclick="filterAdolescentFaq('all')" id="tabFaqAll" class="hero-secondary-btn" style="padding: 6px 14px; font-size: 0.78rem; min-height: 32px; background: var(--brand-primary); color: white; border-color: var(--brand-primary);" data-i18n="teen_btn_all">All (20)</button>
-                    <button onclick="filterAdolescentFaq('girls')" id="tabFaqGirls" class="hero-secondary-btn" style="padding: 6px 14px; font-size: 0.78rem; min-height: 32px;"><i class="fa-solid fa-venus" style="color:#db2777;"></i> <span data-i18n="teen_btn_girls">Girls</span></button>
-                    <button onclick="filterAdolescentFaq('boys')" id="tabFaqBoys" class="hero-secondary-btn" style="padding: 6px 14px; font-size: 0.78rem; min-height: 32px;"><i class="fa-solid fa-mars" style="color:#2563eb;"></i> <span data-i18n="teen_btn_boys">Boys</span></button>
+                <div class="card-circle-btn">
+                    <i class="fa-solid fa-chevron-right" style="color: var(--brand-primary); font-size: 1.1rem;"></i>
                 </div>
-            </div>
-
-            <!-- Compact FAQ Body -->
-            <div class="screener-content-body" style="background: #ffffff;">
-                <div class="faq-container" id="faqAccordionContainer" style="gap: 8px;"></div>
-                
-                <div style="text-align: center; margin-top: 14px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
-                    <button id="toggleFaqViewBtn" onclick="toggleFaqExpand()" class="hero-secondary-btn" style="padding: 8px 18px; font-size: 0.82rem; min-height: 36px;">
-                        <i class="fa-solid fa-chevron-down"></i> <span id="faqBtnLabel">View All 20 Questions</span>
-                    </button>
-                    <button onclick="openBookingModal()" class="hero-cta-btn" style="padding: 8px 18px; font-size: 0.82rem; min-height: 36px;">
-                        <i class="fa-solid fa-calendar-check"></i> <span data-i18n="teen_book_btn">Book Confidential Teen Consult</span>
-                    </button>
-                </div>
-            </div>
+            </a>
         </div>
+    </div>
+    
     </div>
 
     <!-- 🌟 CARD 4: IAP CHILDHOOD IMMUNIZATION SCHEDULE (0-18 YEARS) -->
