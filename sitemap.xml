@@ -1,84 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  
-  <!-- Homepage -->
   <url>
     <loc>https://childspecialistrohini.com/</loc>
     <lastmod>2026-08-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-
-  <!-- All-Articles Library Page -->
   <url>
     <loc>https://childspecialistrohini.com/blog.html</loc>
     <lastmod>2026-08-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-
-  <!-- 1. IAP Immunization Schedule -->
   <url>
     <loc>https://childspecialistrohini.com/iap-immunization-schedule.html</loc>
     <lastmod>2026-08-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <!-- 2. Painless vs Painful Vaccines -->
   <url>
     <loc>https://childspecialistrohini.com/painless-vs-painful-vaccines.html</loc>
     <lastmod>2026-08-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <!-- 3. Newborn Care Guide -->
   <url>
     <loc>https://childspecialistrohini.com/newborn-care-guide.html</loc>
     <lastmod>2026-08-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <!-- 4. Child High Fever Management Guide -->
   <url>
     <loc>https://childspecialistrohini.com/child-fever-management-guide.html</loc>
     <lastmod>2026-08-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <!-- 5. Monsoon Influenza Care Guide -->
   <url>
     <loc>https://childspecialistrohini.com/monsoon-flu-care-children.html</loc>
     <lastmod>2026-08-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <!-- 6. Reduce Screen Time Guide -->
   <url>
     <loc>https://childspecialistrohini.com/reduce-screen-time-in-children.html</loc>
     <lastmod>2026-08-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <!-- 7. Dengue in Children Guide -->
   <url>
     <loc>https://childspecialistrohini.com/dengue-in-children-delhi.html</loc>
     <lastmod>2026-08-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <!-- 8. Air Purifier & Pollution Guide -->
   <url>
     <loc>https://childspecialistrohini.com/air-purifier-delhi-pollution-children.html</loc>
     <lastmod>2026-08-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
 </urlset>
