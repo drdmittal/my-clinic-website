@@ -1048,5 +1048,20 @@ const siteTranslations = {
     teen_btn_girls: "बालिकाएं (Girls)",
     teen_btn_boys: "बालक (Boys)",
     teen_book_btn: "गोपनीय टीनएज परामर्श बुक करें"
+    // Add inside siteTranslations.en:
+  vax_spotlight_badge: "Essential Clinical Guide",
+  vax_spotlight_title: "Pediatric Vaccine FAQs: A Pediatrician’s Deep Dive for Parents",
+  vax_spotlight_desc: "What if a dose is missed? Can 2-3 vaccines be given on the same day? Learn why cold-chain matters, managing post-shot swelling, and IAP safety facts.",
+  vax_spotlight_btn: "Read Full Vaccine FAQs",
+  vax_spotlight_card_head: "100% Cold-Chain Safety",
+  vax_spotlight_card_sub: "WHO & IAP verified protocols at our Rohini clinic.",
+
+  // Add inside siteTranslations.hi:
+  vax_spotlight_badge: "जरूरी डॉक्टरी गाइड",
+  vax_spotlight_title: "टीकाकरण (Vaccination) से जुड़े जरूरी सवाल व डॉक्टरी जवाब",
+  vax_spotlight_desc: "क्या छूटा हुआ टीका दोबारा शुरू करना पड़ता है? क्या एक साथ 2-3 टीके लग सकते हैं? जानिए कोल्ड-चेन का महत्व और टीके के बाद गांठ व बुखार की सही देखभाल।",
+  vax_spotlight_btn: "संपूर्ण वैक्सीन FAQ पढ़ें",
+  vax_spotlight_card_head: "100% कोल्ड-चेन सुरक्षा",
+  vax_spotlight_card_sub: "WHO एवं IAP प्रमाणित सुरक्षित टीकाकरण।"
   }
 };
