@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>IAP Immunization Schedule (0-18 Years) & Vaccine Guide | Dr. Dinesh Mittal</title>
-    <meta name="description" content="Official IAP Immunization Schedule (0-18y) by Dr. Dinesh Mittal (MBBS, DCH). Complete childhood vaccine chart and Rabies Pre-Exposure Prophylaxis (PrEP) guidance in Delhi NCR.">
+    <title>Official IAP Immunization Schedule (0-18 Yrs) | Dr. Dinesh Mittal</title>
+    <meta name="description" content="Official Indian Academy of Pediatrics (IAP) vaccine chart with age-wise schedule from birth to 18 years by Dr. Dinesh Mittal, Pediatrician Rohini Delhi.">
     <link rel="canonical" href="https://childspecialistrohini.com/iap-immunization-schedule.html" />
 
     <!-- Google Structured Data / MedicalWebPage Schema -->
@@ -14,33 +14,21 @@
       "@type": "MedicalWebPage",
       "@id": "https://childspecialistrohini.com/iap-immunization-schedule.html#webpage",
       "url": "https://childspecialistrohini.com/iap-immunization-schedule.html",
-      "name": "IAP Immunization Schedule & Childhood Vaccination Guide",
-      "description": "Comprehensive IAP vaccine chart, Rabies PrEP protocol, and pediatric immunization guidance by Dr. Dinesh Mittal.",
+      "name": "IAP Immunization Schedule (Age-Wise Pediatric Vaccine Chart)",
+      "description": "Standard immunization timetable approved by the Indian Academy of Pediatrics (IAP) for infants, children and adolescents in India.",
       "about": [
-        { "@type": "MedicalProcedure", "name": "Childhood Immunization" },
-        { "@type": "MedicalProcedure", "name": "Rabies Pre-Exposure Prophylaxis" }
+        { "@type": "MedicalProcedure", "name": "Childhood Immunization Schedule" }
       ],
       "author": {
         "@type": "Person",
         "name": "Dr. Dinesh Mittal",
         "jobTitle": "Child Specialist & Pediatrician",
-        "hasCredential": {
-          "@type": "EducationalOccupationalCredential",
-          "name": "MBBS, DCH"
-        }
+        "hasCredential": { "@type": "EducationalOccupationalCredential", "name": "MBBS, DCH" }
       },
       "publisher": {
         "@type": "MedicalClinic",
         "name": "Dr. Dinesh Mittal Child Clinic",
-        "url": "https://childspecialistrohini.com",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "House No. 69, Pocket H-34, Sector 3",
-          "addressLocality": "Rohini, New Delhi",
-          "postalCode": "110085",
-          "addressRegion": "Delhi",
-          "addressCountry": "IN"
-        }
+        "url": "https://childspecialistrohini.com"
       }
     }
     </script>
@@ -54,16 +42,6 @@
       gtag('config', 'G-768Y52R8SC');
     </script>
 
-    <!-- Geo Tags for Google Local Search -->
-    <meta name="geo.region" content="IN-DL" />
-    <meta name="geo.placename" content="Rohini, New Delhi" />
-    <meta name="geo.position" content="28.708083;77.107882" />
-    <meta name="ICBM" content="28.708083, 77.107882" />
-
-    <!-- Favicon Icons -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🩺</text></svg>">
-
-    <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -76,372 +54,194 @@
             --brand-secondary: #0d9488;
             --brand-accent: #f59e0b;
             --brand-accent-dark: #d97706;
-            --brand-soft-bg: #f0fdfa;
             --dark-text: #0f172a;
             --muted-text: #64748b;
             --card-shadow: 0 12px 32px -4px rgba(8, 145, 178, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', 'Noto Sans Devanagari', sans-serif; }
-        body { color: var(--dark-text); background-color: #f8fafc; line-height: 1.7; padding-bottom: 75px; -webkit-tap-highlight-color: transparent; }
+        body { color: var(--dark-text); background-color: #f8fafc; line-height: 1.7; padding-bottom: 75px; }
 
-        /* Header Navigation */
         header {
             position: sticky; top: 0; background: rgba(255, 255, 255, 0.94); z-index: 1000;
-            backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-            box-shadow: 0 1px 15px rgba(0,0,0,0.04); padding: 12px 5%;
-            display: flex; justify-content: space-between; align-items: center;
+            backdrop-filter: blur(14px); padding: 12px 5%; display: flex; justify-content: space-between; align-items: center;
             border-bottom: 1px solid rgba(226, 232, 240, 0.8);
         }
         .logo { font-family: 'Fredoka', cursive; font-size: 1.35rem; font-weight: 600; color: var(--brand-primary-dark); text-decoration: none; display: flex; align-items: center; gap: 8px; }
         .logo i { color: var(--brand-accent); font-size: 1.35rem; }
 
-        nav.desktop-nav { display: flex; align-items: center; gap: 20px; }
-        nav.desktop-nav a { text-decoration: none; color: #334155; font-weight: 600; font-size: 0.9rem; transition: color 0.2s; }
-        nav.desktop-nav a:hover { color: var(--brand-primary); }
-
-        .book-tab-btn {
-            background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
-            color: #ffffff !important; padding: 9px 20px; border-radius: 30px;
-            font-size: 0.86rem; font-weight: 700; box-shadow: 0 4px 14px rgba(8, 145, 178, 0.25);
-            display: inline-flex; align-items: center; gap: 6px; cursor: pointer; text-decoration: none;
+        .lang-switch-btn {
+            background: #f0fdfa; border: 1.5px solid #99f6e4; color: #0f766e;
+            padding: 6px 14px; border-radius: 20px; font-size: 0.84rem; font-weight: 800;
+            cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
         }
 
-        .mobile-menu-toggle { display: none; background: none; border: none; font-size: 1.4rem; color: #0c4a6e; cursor: pointer; padding: 4px 8px; }
-
-        .mobile-nav-drawer {
-            display: none; position: fixed; top: 60px; left: 0; width: 100%; background: #ffffff;
-            border-bottom: 2px solid #e2e8f0; padding: 18px 24px; z-index: 999;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08); flex-direction: column; gap: 14px;
-        }
-        .mobile-nav-drawer a { text-decoration: none; color: #0f172a; font-weight: 700; font-size: 1rem; padding: 8px 0; border-bottom: 1px solid #f1f5f9; display: flex; align-items: center; gap: 10px; }
-        .mobile-nav-drawer a i { color: var(--brand-primary); width: 20px; }
-
-        /* Article Layout */
-        .article-container { max-width: 860px; margin: 30px auto; padding: 0 16px; }
-        .article-card {
-            background: #ffffff; border-radius: 26px; padding: 32px 28px;
-            box-shadow: var(--card-shadow); border: 1px solid #e2e8f0;
-        }
+        .article-container { max-width: 920px; margin: 30px auto; padding: 0 16px; }
+        .article-card { background: #ffffff; border-radius: 26px; padding: 32px 28px; box-shadow: var(--card-shadow); border: 1px solid #e2e8f0; }
 
         .breadcrumbs { font-size: 0.82rem; color: #64748b; margin-bottom: 14px; }
         .breadcrumbs a { color: var(--brand-primary); text-decoration: none; font-weight: 600; }
 
         .article-title { font-family: 'Fredoka', cursive; font-size: 1.85rem; color: #083344; line-height: 1.3; margin-bottom: 14px; }
-        .author-meta-bar {
-            display: flex; align-items: center; gap: 12px; padding: 12px 0 16px;
-            border-bottom: 1px solid #f1f5f9; margin-bottom: 20px; font-size: 0.84rem; color: var(--muted-text);
-        }
+        .author-meta-bar { display: flex; align-items: center; gap: 12px; padding: 12px 0 16px; border-bottom: 1px solid #f1f5f9; margin-bottom: 20px; font-size: 0.84rem; color: var(--muted-text); }
         .author-img { width: 46px; height: 46px; border-radius: 50%; object-fit: cover; border: 2px solid #bae6fd; }
 
-        .article-featured-img { width: 100%; height: auto; max-height: 360px; object-fit: cover; border-radius: 18px; margin-bottom: 22px; aspect-ratio: 16 / 9; }
+        .vax-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.9rem; }
+        .vax-table th { background: #0891b2; color: #ffffff; text-align: left; padding: 12px 14px; font-weight: 700; }
+        .vax-table td { padding: 12px 14px; border-bottom: 1px solid #e2e8f0; color: #334155; }
+        .vax-table tr:nth-child(even) { background: #f8fafc; }
 
-        h2 { font-family: 'Fredoka', cursive; font-size: 1.35rem; color: #083344; margin: 28px 0 12px; }
-        h3 { font-size: 1.05rem; color: #0e7490; margin: 18px 0 8px; font-weight: 700; }
-        p { font-size: 0.94rem; color: #334155; margin-bottom: 14px; }
-        ul, ol { padding-left: 20px; margin-bottom: 16px; font-size: 0.92rem; color: #334155; }
-        li { margin-bottom: 8px; }
+        .doctor-cta-box { background: linear-gradient(135deg, #f0fdfa 0%, #e0f2fe 100%); border: 2px solid #bae6fd; border-radius: 20px; padding: 22px; text-align: center; margin-top: 30px; }
+        .hero-cta-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(135deg, var(--brand-accent), var(--brand-accent-dark)); color: #ffffff; padding: 12px 24px; border-radius: 30px; font-weight: 700; font-size: 0.92rem; text-decoration: none; cursor: pointer; border: none; }
 
-        /* Responsive Table Wrapper */
-        .table-scroll-container { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 18px 0; border-radius: 14px; border: 1px solid #e2e8f0; }
-        .vaccine-table { width: 100%; border-collapse: collapse; min-width: 580px; font-size: 0.86rem; }
-        .vaccine-table th, .vaccine-table td { border: 1px solid #e2e8f0; padding: 10px 12px; text-align: left; }
-        .vaccine-table th { background: #f0fdfa; color: #0f766e; font-weight: 700; }
-        .vaccine-table tr:nth-child(even) { background: #f8fafc; }
-
-        .info-highlight-box {
-            background: #f0fdfa; border-left: 4px solid var(--brand-secondary);
-            border-radius: 12px; padding: 16px 18px; margin: 20px 0; font-size: 0.92rem; color: #134e4a;
-        }
-
-        .rabies-focus-card {
-            background: #fdf2f8; border: 1.5px solid #fbcfe8;
-            border-radius: 16px; padding: 18px 20px; margin: 20px 0;
-        }
-        .rabies-focus-card h3 { color: #be185d; margin-top: 0; font-size: 1.15rem; display: flex; align-items: center; gap: 8px; }
-
-        .doctor-cta-box {
-            background: linear-gradient(135deg, #f0fdfa 0%, #e0f2fe 100%);
-            border: 2px solid #bae6fd; border-radius: 20px; padding: 22px;
-            text-align: center; margin-top: 30px;
-        }
-        .doctor-cta-box h3 { font-family: 'Fredoka', cursive; color: #083344; font-size: 1.25rem; margin-top: 0; }
-        .doctor-cta-box p { font-size: 0.88rem; color: #475569; max-width: 600px; margin: 0 auto 16px; }
-
-        .hero-cta-btn {
-            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-            background: linear-gradient(135deg, var(--brand-accent), var(--brand-accent-dark));
-            color: #ffffff; padding: 12px 24px; border-radius: 30px; font-weight: 700;
-            font-size: 0.92rem; text-decoration: none; cursor: pointer; border: none; min-height: 46px;
-            box-shadow: 0 6px 18px rgba(245, 158, 11, 0.32);
-        }
-
-        /* Modal Styles */
-        .modal-overlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 23, 42, 0.75); z-index: 2000;
-            justify-content: center; align-items: center; padding: 16px; backdrop-filter: blur(8px);
-        }
-        .modal-content {
-            background: #ffffff; width: 100%; max-width: 720px; height: 88vh; border-radius: 26px;
-            overflow: hidden; display: flex; flex-direction: column;
-        }
-        .modal-header {
-            background: #f8fafc; padding: 14px 20px; display: flex;
-            justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0;
-        }
-        .modal-body { padding: 0; flex: 1; }
-        .modal-body iframe { width: 100%; height: 100%; border: none; }
-        .close-modal-btn {
-            background: #f1f5f9; border: none; font-size: 1.2rem; color: #64748b;
-            width: 34px; height: 34px; border-radius: 50%; cursor: pointer;
-        }
-
-        /* Mobile Fixed Bottom Bar */
-        .mobile-bottom-bar {
-            display: none; position: fixed; bottom: 0; left: 0; width: 100%;
-            background: rgba(255, 255, 255, 0.92); border-top: 1px solid rgba(226, 232, 240, 0.8);
-            padding: 10px 16px; z-index: 1500; box-shadow: 0 -6px 20px rgba(0,0,0,0.06);
-            backdrop-filter: blur(12px); justify-content: space-between; gap: 10px;
-        }
-        .mobile-bar-btn {
-            flex: 1; min-height: 48px; padding: 12px 10px; border-radius: 25px; text-decoration: none;
-            font-weight: 700; font-size: 0.88rem; display: flex; align-items: center; justify-content: center; gap: 8px; border: none; cursor: pointer;
-        }
-        .btn-call { background: #f1f5f9; color: #083344; border: 1px solid #e2e8f0; }
-        .btn-book { background: linear-gradient(135deg, var(--brand-accent), var(--brand-accent-dark)); color: #ffffff; }
-
-        footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 24px 15px 90px 15px; font-size: 0.85rem; }
-
-        @media (min-width: 769px) { footer { padding-bottom: 24px; } }
-        @media (max-width: 768px) {
-            header { padding: 10px 16px; }
-            .logo { font-size: 1.15rem; }
-            nav.desktop-nav { display: none; }
-            .mobile-menu-toggle { display: block; }
-            .article-card { padding: 20px 16px; border-radius: 20px; }
-            .article-title { font-size: 1.5rem; }
-            .mobile-bottom-bar { display: flex; }
-            .modal-overlay { padding: 0; }
-            .modal-content { height: 100vh; max-height: 100vh; border-radius: 0; }
-        }
+        footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 24px 15px; font-size: 0.85rem; margin-top: 40px; }
     </style>
 </head>
 <body>
 
-    <!-- Header Navigation -->
     <header>
         <a href="index.html" class="logo"><i class="fa-solid fa-shapes"></i> Dr. Dinesh Mittal</a>
-        <nav class="desktop-nav">
-            <a href="index.html#about">About Doctor</a>
-            <a href="index.html#growth-screener">Growth Tool</a>
-            <a href="index.html#blog">Articles</a>
-            <a href="index.html#clinic-location">Clinic Location</a>
-            <a onclick="openBookingModal()" class="book-tab-btn"><i class="fa-solid fa-calendar-check"></i> Book Consultation</a>
-        </nav>
-        <button class="mobile-menu-toggle" onclick="toggleMobileDrawer()" aria-label="Toggle navigation">
-            <i class="fa-solid fa-bars"></i>
-        </button>
+        <div style="display: flex; align-items: center; gap: 12px;">
+            <button type="button" onclick="toggleArticleLang()" id="articleLangBtn" class="lang-switch-btn">
+                <i class="fa-solid fa-language"></i> <span id="articleLangText">हिन्दी में देखें</span>
+            </button>
+            <a href="index.html" style="text-decoration: none; color: var(--brand-primary); font-weight: 700; font-size: 0.88rem;">Home</a>
+        </div>
     </header>
 
-    <!-- Mobile Drawer Navigation -->
-    <div id="mobileDrawer" class="mobile-nav-drawer">
-        <a href="index.html#about" onclick="toggleMobileDrawer()"><i class="fa-solid fa-user-doctor"></i> About Dr. Dinesh Mittal</a>
-        <a href="index.html#services" onclick="toggleMobileDrawer()"><i class="fa-solid fa-stethoscope"></i> Pediatric Services</a>
-        <a href="index.html#growth-screener" onclick="toggleMobileDrawer()"><i class="fa-solid fa-chart-line"></i> Check Growth & Milestones</a>
-        <a href="index.html#blog" onclick="toggleMobileDrawer()"><i class="fa-solid fa-newspaper"></i> Parenting & Vaccine Blog</a>
-        <a href="index.html#clinic-location" onclick="toggleMobileDrawer()"><i class="fa-solid fa-location-dot"></i> Clinic Location</a>
-        <a href="tel:+918130521456" style="color: var(--brand-accent);"><i class="fa-solid fa-phone"></i> Call: +91 81305 21456</a>
-    </div>
-
-    <!-- Main Article Body -->
     <main class="article-container">
         <div class="article-card">
             
             <div class="breadcrumbs">
-                <a href="index.html"><i class="fa-solid fa-house"></i> Home</a> &rsaquo; 
-                <a href="index.html#blog">Parenting Blog</a> &rsaquo; 
-                <span>Immunization Schedule</span>
+                <a href="index.html">Home</a> &rsaquo; 
+                <a href="blog.html">Health Library</a> &rsaquo; 
+                <span>IAP Vaccine Chart</span>
             </div>
 
-            <h1 class="article-title">Official IAP Immunization Schedule (0 to 18 Years): Complete Child Vaccine Chart</h1>
+            <!-- ================= ENGLISH VERSION ================= -->
+            <div id="content-en">
+                <h1 class="article-title">Official IAP Immunization Schedule (Indian Academy of Pediatrics)</h1>
 
-            <div class="author-meta-bar">
-                <img src="doctor.jpg" alt="Dr. Dinesh Mittal" class="author-img" onerror="this.src='https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=100&q=80'">
-                <div>
-                    <strong>Dr. Dinesh Mittal, MBBS, DCH</strong><br>
-                    <span>Child Specialist & Pediatrician | Sector 3 Rohini, Delhi</span>
+                <div class="author-meta-bar">
+                    <img src="doctor.jpg" alt="Dr. Dinesh Mittal" class="author-img" onerror="this.src='https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=100&q=80'">
+                    <div>
+                        <strong>Dr. Dinesh Mittal, MBBS, DCH</strong><br>
+                        <span>Child Specialist & Pediatrician | Sector 3 Rohini, Delhi</span>
+                    </div>
+                </div>
+
+                <p>The **Indian Academy of Pediatrics (IAP)** recommends a comprehensive vaccination schedule designed to protect children against severe vaccine-preventable infections from birth to 18 years.</p>
+
+                <div style="overflow-x:auto;">
+                    <table class="vax-table">
+                        <thead>
+                            <tr><th>Age Window</th><th>Recommended Vaccines</th><th>Protects Against</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>At Birth</strong></td><td>BCG, OPV-0, Hepatitis B-1</td><td>Tuberculosis, Polio, Hep-B</td></tr>
+                            <tr><td><strong>6 Weeks</strong></td><td>DTwP/DTaP-1, IPV-1, Hep B-2, Hib-1, Rotavirus-1, PCV-1</td><td>6-in-1 (DTP, Polio, Hib), Diarrhea, Pneumonia</td></tr>
+                            <tr><td><strong>10 Weeks</strong></td><td>DTwP/DTaP-2, IPV-2, Hib-2, Rotavirus-2, PCV-2</td><td>Primary Infant Series Dose 2</td></tr>
+                            <tr><td><strong>14 Weeks</strong></td><td>DTwP/DTaP-3, IPV-3, Hib-3, Rotavirus-3, PCV-3</td><td>Primary Infant Series Completion</td></tr>
+                            <tr><td><strong>6 & 7 Months</strong></td><td>Influenza (Flu) Dose 1 & 2</td><td>Seasonal Viral Flu & Pneumonia</td></tr>
+                            <tr><td><strong>9 Months</strong></td><td>MMR-1, Oral Polio Booster</td><td>Measles, Mumps, Rubella</td></tr>
+                            <tr><td><strong>12 Months</strong></td><td>Hepatitis A (Dose 1)</td><td>Jaundice / Liver Infection</td></tr>
+                            <tr><td><strong>15 Months</strong></td><td>MMR-2, Varicella-1 (Chickenpox), PCV Booster</td><td>Viral Rashes & Pneumococcal Booster</td></tr>
+                            <tr><td><strong>16 - 18 Months</strong></td><td>DTwP/DTaP Booster-1, IPV Booster, Hib Booster</td><td>Toddler Immunity Reinforcement</td></tr>
+                            <tr><td><strong>2 Years</strong></td><td>Typhoid Conjugate Vaccine (TCV)</td><td>Typhoid Fever</td></tr>
+                            <tr><td><strong>4 - 5 Years</strong></td><td>DTwP/DTaP Booster-2, MMR-3, Varicella-2, OPV</td><td>Pre-School Booster Series</td></tr>
+                            <tr><td><strong>9 - 14 Years</strong></td><td>HPV Vaccine (2 Doses for Girls), Tdap Booster</td><td>Cervical Cancer & Tetanus/Whooping Cough</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="doctor-cta-box">
+                    <h3>Due for Your Baby’s Next Vaccine?</h3>
+                    <p>Ensure 100% verified WHO/IAP cold-chain vaccination with Dr. Dinesh Mittal in Sector 3 Rohini.</p>
+                    <a href="index.html#growth-screener" class="hero-cta-btn"><i class="fa-solid fa-calendar-check"></i> Book Vaccination Slot</a>
                 </div>
             </div>
 
-            <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=800&q=80" alt="IAP childhood vaccination and infant immunization chart" class="article-featured-img">
+            <!-- ================= HINDI VERSION (EVERYDAY HINDI) ================= -->
+            <div id="content-hi" style="display: none;">
+                <h1 class="article-title">IAP आधिकारिक टीकाकरण चार्ट (जन्म से 18 वर्ष तक का संपूर्ण शेड्यूल)</h1>
 
-            <p>Immunization is one of the most effective and life-saving health interventions in pediatric medicine. In India, the <strong>Indian Academy of Pediatrics (IAP)</strong> periodically updates evidence-based immunization guidelines to provide comprehensive protection against over 20 vaccine-preventable bacterial and viral diseases from birth through adolescence.</p>
+                <div class="author-meta-bar">
+                    <img src="doctor.jpg" alt="Dr. Dinesh Mittal" class="author-img" onerror="this.src='https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=100&q=80'">
+                    <div>
+                        <strong>डॉ. दिनेश मित्तल, MBBS, DCH</strong><br>
+                        <span>शिशु एवं बाल रोग विशेषज्ञ | सेक्टर 3 रोहिणी, दिल्ली</span>
+                    </div>
+                </div>
 
-            <h2>Age-Wise IAP Immunization Chart</h2>
-            <p>Below is the standard, age-by-age vaccine schedule recommended by the IAP for children in India:</p>
+                <p><strong>इंडियन एकेडमी ऑफ पीडियाट्रिक्स (IAP)</strong> द्वारा प्रमाणित यह टीकाकरण तालिका बच्चे को जन्म से लेकर 18 वर्ष तक गंभीर संक्रामक बीमारियों से पूर्ण सुरक्षा प्रदान करती है।</p>
 
-            <div class="table-scroll-container">
-                <table class="vaccine-table">
-                    <thead>
-                        <tr>
-                            <th>Age Milestone</th>
-                            <th>Recommended Vaccines</th>
-                            <th>Target Illnesses & Diseases Prevented</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>At Birth</strong></td>
-                            <td>BCG, OPV-0, Hepatitis B-1</td>
-                            <td>Tuberculosis, Poliomyelitis, Hepatitis B virus</td>
-                        </tr>
-                        <tr>
-                            <td><strong>6 Weeks</strong></td>
-                            <td>DTwP/DTaP-1, IPV-1, Hep B-2, Hib-1, Rotavirus-1, PCV-1</td>
-                            <td>Diphtheria, Tetanus, Pertussis, Polio, Hib, Rotavirus Diarrhea, Pneumonia</td>
-                        </tr>
-                        <tr>
-                            <td><strong>10 Weeks</strong></td>
-                            <td>DTwP/DTaP-2, IPV-2, Hib-2, Rotavirus-2, PCV-2</td>
-                            <td>Primary Infant Immunization Series (Dose 2)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>14 Weeks</strong></td>
-                            <td>DTwP/DTaP-3, IPV-3, Hib-3, Rotavirus-3, PCV-3</td>
-                            <td>Primary Infant Immunization Completion (Dose 3)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>6 & 7 Months</strong></td>
-                            <td>Influenza (Flu Shot) Dose 1 & 2</td>
-                            <td>Seasonal Quadrivalent Influenza A & B</td>
-                        </tr>
-                        <tr>
-                            <td><strong>9 Months</strong></td>
-                            <td>MMR-1, Typhoid Conjugate (TCV), OPV Booster</td>
-                            <td>Measles, Mumps, Rubella & Enteric Typhoid Fever</td>
-                        </tr>
-                        <tr>
-                            <td><strong>12 Months</strong></td>
-                            <td>Hepatitis A (Live/Inactivated Dose 1), JE (Endemic zones)</td>
-                            <td>Hepatitis A Viral Jaundice & Encephalitis</td>
-                        </tr>
-                        <tr>
-                            <td><strong>15 Months</strong></td>
-                            <td>MMR-2, Varicella-1 (Chickenpox), PCV Booster</td>
-                            <td>Viral Exanthems & Invasive Pneumococcal Disease</td>
-                        </tr>
-                        <tr>
-                            <td><strong>16 - 18 Months</strong></td>
-                            <td>DTwP/DTaP Booster-1, IPV Booster-1, Hib Booster, Hep A-2</td>
-                            <td>Toddler Antibody Reinforcement & Boosters</td>
-                        </tr>
-                        <tr>
-                            <td><strong>2 Years</strong></td>
-                            <td>Typhoid Conjugate Booster (if indicated)</td>
-                            <td>Long-term Enteric Fever Defense</td>
-                        </tr>
-                        <tr>
-                            <td><strong>4 - 5 Years</strong></td>
-                            <td>DTwP/DTaP Booster-2, MMR-3, Varicella-2, OPV</td>
-                            <td>Pre-School Entry Boosters (Pertussis & Chickenpox)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>9 - 14 Years</strong></td>
-                            <td>HPV Vaccine (2 Doses for Girls & Boys), Tdap Booster</td>
-                            <td>Cervical Cancer & Tetanus/Diphtheria/Pertussis Booster</td>
-                        </tr>
-                        <tr>
-                            <td><strong>15 - 18 Years</strong></td>
-                            <td>Td/Tdap Booster, Catch-up Immunizations</td>
-                            <td>Adolescent & Young Adult Protective Immunity</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div style="overflow-x:auto;">
+                    <table class="vax-table">
+                        <thead>
+                            <tr><th>उम्र</th><th>लगने वाले टीके (Vaccines)</th><th>किस बीमारी से बचाव</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>जन्म के समय</strong></td><td>बीसीजी (BCG), पोलियो (OPV-0), हेपेटाइटिस-बी 1</td><td>टीबी, पोलियो व पीलिया</td></tr>
+                            <tr><td><strong>6 हफ्ते (1.5 माह)</strong></td><td>6-in-1 (डीटीपी, पोलियो, हिब), रोटावायरस, न्यूमोकोकल (PCV)</td><td>काली खांसी, टिटनेस, दस्त व निमोनिया</td></tr>
+                            <tr><td><strong>10 हफ्ते (2.5 माह)</strong></td><td>6-in-1 Dose 2, रोटावायरस 2, न्यूमोकोकल 2</td><td>प्राथमिक टीकाकरण की दूसरी खुराक</td></tr>
+                            <tr><td><strong>14 हफ्ते (3.5 माह)</strong></td><td>6-in-1 Dose 3, रोटावायरस 3, न्यूमोकोकल 3</td><td>प्राथमिक सीरीज पूर्ण</td></tr>
+                            <tr><td><strong>6 व 7 माह</strong></td><td>इन्फ्लूएंजा (Flu Vaccine) 2 खुराक</td><td>मौसमी फ्लू व फेफड़ों का संक्रमण</td></tr>
+                            <tr><td><strong>9 माह</strong></td><td>एमएमआर 1 (MMR-1), पोलियो बूस्टर</td><td>खसरा, गलसुआ व रूबेला</td></tr>
+                            <tr><td><strong>12 माह (1 वर्ष)</strong></td><td>हेपेटाइटिस-ए (Hepatitis-A)</td><td>पीलिया व लिवर संक्रमण</td></tr>
+                            <tr><td><strong>15 माह</strong></td><td>एमएमआर 2, चेचक (Chickenpox), न्यूमोकोकल बूस्टर</td><td>चेचक व गंभीर निमोनिया से बचाव</td></tr>
+                            <tr><td><strong>16 से 18 माह</strong></td><td>डीटीपी बूस्टर 1, पोलियो व हिब बूस्टर</td><td>इम्यूनिटी सुदृढ़ीकरण</td></tr>
+                            <tr><td><strong>2 वर्ष</strong></td><td>टाइफाइड (TCV Vaccine)</td><td>मियादी बुखार (टाइफाइड)</td></tr>
+                            <tr><td><strong>4 से 5 वर्ष</strong></td><td>डीटीपी बूस्टर 2, एमएमआर 3, चेचक 2</td><td>स्कूल जाने से पहले का बूस्टर</td></tr>
+                            <tr><td><strong>9 से 14 वर्ष</strong></td><td>एचपीवी टीका (HPV Vaccine - बालिकाओं हेतु), Tdap</td><td>सर्वाइकल कैंसर व टिटनेस से बचाव</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="doctor-cta-box">
+                    <h3>क्या आपके बच्चे का कोई टीका छूट गया है?</h3>
+                    <p>WHO एवं IAP प्रमाणित कोल्ड-चेन सुरक्षित टीकाकरण हेतु डॉ. दिनेश मित्तल से सेक्टर 3 रोहिणी क्लिनिक में परामर्श लें।</p>
+                    <a href="index.html#growth-screener" class="hero-cta-btn"><i class="fa-solid fa-calendar-check"></i> टीकाकरण अपॉइंटमेंट बुक करें</a>
+                </div>
             </div>
 
-            <!-- SPECIAL FOCUS: RABIES PRE-EXPOSURE PROPHYLAXIS -->
-            <div class="rabies-focus-card">
-                <h3><i class="fa-solid fa-paw"></i> Pre-Exposure Prophylaxis (PrEP) for Rabies in Children</h3>
-                <p>Rabies is a 100% fatal viral disease, and children are disproportionately vulnerable to stray animal bites (dogs, cats, monkeys) because of outdoor play and lower height (bites often occur around the face or hands).</p>
-                <ul style="margin-top: 8px; margin-bottom: 0;">
-                    <li><strong>Why Consider Pre-Exposure Prophylaxis (PrEP)?</strong>
-                        <ul>
-                            <li><strong>Eliminates the Need for Rabies Immunoglobulin (RIG):</strong> If an unvaccinated child suffers a severe bite (Category III), costly and scarce Rabies Immunoglobulin (RIG) is mandatory. If the child has received PrEP, <strong>no RIG is ever required</strong>.</li>
-                            <li><strong>Simpler Post-Bite Treatment:</strong> A vaccinated child requires only <strong>2 simple booster shots (on Day 0 and Day 3)</strong> if bitten in the future, with zero need for the full 4 or 5-dose series.</li>
-                            <li><strong>Protects Against Unreported Scratches:</strong> Toddlers often forget to tell parents about minor licks or scratches from stray puppies. PrEP provides continuous background antibodies.</li>
-                        </ul>
-                    </li>
-                    <li><strong>IAP/WHO PrEP Schedule:</strong> Administered as <strong>2 doses intramuscularly (on Day 0 and Day 7)</strong> in the deltoid or anterolateral thigh.</li>
-                </ul>
-            </div>
-
-            <h2>Practical Pediatric Tips for Parents</h2>
-            <div class="info-highlight-box">
-                <strong><i class="fa-solid fa-lightbulb"></i> Essential Vaccination Rules:</strong>
-                <ul style="margin-top: 8px; margin-bottom: 0;">
-                    <li><strong>Managing Post-Vaccine Mild Fever:</strong> Mild fever (99.5°F – 101°F) and local soreness are normal signs that the immune system is creating antibodies. Administer pediatrician-prescribed paracetamol only if the child is uncomfortable. <em>Do not give paracetamol preventively before the injection.</em></li>
-                    <li><strong>Never Restart a Delayed Schedule (Catch-Up Rules):</strong> If your child missed a vaccine dose due to travel or mild illness, <strong>do not restart from dose 1</strong>. Simply continue from the missed dose with your pediatrician's guidance.</li>
-                    <li><strong>Cold-Chain Maintenance:</strong> Always receive vaccines from established pediatric clinics that utilize specialized medical refrigerators (+2°C to +8°C) with continuous digital temperature loggers.</li>
-                    <li><strong>Keep the Physical & Digital Record Safe:</strong> Retain your child's physical vaccination card for school admissions, college documentation, and international travel health clearance.</li>
-                </ul>
-            </div>
-
-            <div class="doctor-cta-box">
-                <h3>Schedule Your Child's Next Vaccine Milestone in Rohini</h3>
-                <p>We provide authentic, certified cold-chain vaccines with growth and development monitoring at our Sector 3 Rohini clinic.</p>
-                <button onclick="openBookingModal()" class="hero-cta-btn">
-                    <i class="fa-solid fa-calendar-check"></i> Book Vaccination Appointment
-                </button>
-            </div>
+            <p style="font-size: 0.76rem; color: #94a3b8; margin-top: 24px; text-align: center;">
+                <strong>Medical Disclaimer:</strong> This schedule is based on Indian Academy of Pediatrics (IAP) clinical guidelines. Please bring your child's immunization card for verification.
+            </p>
 
         </div>
     </main>
 
-    <!-- Footer -->
     <footer>
-        <p><strong>Dr. Dinesh Mittal, MBBS, DCH</strong> | Delhi Medical Council Reg. No: <strong>DMC/R/00668</strong></p>
-        <p style="font-size: 0.78rem; color: #64748b; margin-top: 6px;">&copy; 2026 Dr. Dinesh Mittal Child Clinic. Informational and educational content only.</p>
+        <p><strong>Dr. Dinesh Mittal, MBBS, DCH</strong> | DMC Reg. No: <strong>DMC/R/00668</strong></p>
+        <p style="font-size: 0.78rem; color: #64748b; margin-top: 6px;">&copy; 2026 Dr. Dinesh Mittal Child Clinic, Sector 3 Rohini, New Delhi.</p>
     </footer>
 
-    <!-- Mobile Fixed Bottom Bar -->
-    <div class="mobile-bottom-bar">
-        <a href="tel:+918130521456" class="mobile-bar-btn btn-call"><i class="fa-solid fa-phone"></i> Call Clinic</a>
-        <button onclick="openBookingModal()" class="mobile-bar-btn btn-book"><i class="fa-solid fa-calendar-check"></i> Book Online</button>
-    </div>
-
-    <!-- Booking Modal -->
-    <div id="bookingModal" class="modal-overlay" onclick="closeModalOnOverlay(event)">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 style="font-family:'Fredoka',cursive; color:#083344;"><i class="fa-solid fa-calendar-check" style="color:var(--brand-primary);"></i> Book Consultation</h3>
-                <button class="close-modal-btn" onclick="closeBookingModal()">&times;</button>
-            </div>
-            <div class="modal-body">
-                <iframe src="https://script.google.com/macros/s/AKfycbzZZJon_KvK0ibezOQT0ktfkxIB8-ee_-BnRKra6kvejGrbG1dFjMSD8f9zhR3ZXeWbXA/exec"></iframe>
-            </div>
-        </div>
-    </div>
-
     <script>
-      function toggleMobileDrawer() {
-        const drawer = document.getElementById("mobileDrawer");
-        if (drawer) {
-          drawer.style.display = (drawer.style.display === "flex") ? "none" : "flex";
+      let currentLang = localStorage.getItem("preferredClinicLang") || "en";
+
+      function updateArticleView() {
+        const enBox = document.getElementById("content-en");
+        const hiBox = document.getElementById("content-hi");
+        const btnText = document.getElementById("articleLangText");
+
+        if (currentLang === "hi") {
+          if (enBox) enBox.style.display = "none";
+          if (hiBox) hiBox.style.display = "block";
+          if (btnText) btnText.textContent = "Read in English";
+        } else {
+          if (enBox) enBox.style.display = "block";
+          if (hiBox) hiBox.style.display = "none";
+          if (btnText) btnText.textContent = "हिन्दी में देखें";
         }
       }
 
-      function openBookingModal() {
-        const m = document.getElementById('bookingModal');
-        if (m) { m.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+      function toggleArticleLang() {
+        currentLang = (currentLang === "en") ? "hi" : "en";
+        localStorage.setItem("preferredClinicLang", currentLang);
+        updateArticleView();
       }
-      function closeBookingModal() {
-        const m = document.getElementById('bookingModal');
-        if (m) { m.style.display = 'none'; document.body.style.overflow = 'auto'; }
-      }
-      function closeModalOnOverlay(e) {
-        if (e.target && e.target.id === 'bookingModal') closeBookingModal();
-      }
+
+      document.addEventListener("DOMContentLoaded", updateArticleView);
     </script>
 </body>
 </html>
