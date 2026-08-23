@@ -746,3 +746,51 @@ document.addEventListener("DOMContentLoaded", function() {
   runScreener();
   renderCollapsibleAdolescentSection();
 });
+// ==========================================================
+// GLOBAL BILINGUAL ENGINE (English <-> Hindi)
+// ==========================================================
+let currentGlobalLang = localStorage.getItem("preferredClinicLang") || "en";
+
+function setGlobalLanguage(lang) {
+  currentGlobalLang = lang;
+  localStorage.setItem("preferredClinicLang", lang);
+
+  // 1. Swap all text with data-i18n attributes
+  const elements = document.querySelectorAll("[data-i18n]");
+  if (typeof siteTranslations !== "undefined" && siteTranslations[lang]) {
+    elements.forEach(el => {
+      const key = el.getAttribute("data-i18n");
+      if (siteTranslations[lang][key]) {
+        el.innerHTML = siteTranslations[lang][key];
+      }
+    });
+  }
+
+  // 2. Update button label to offer the other language
+  const desktopBtnText = document.getElementById("langBtnText");
+  const mobileBtnText = document.getElementById("mobileLangBtnText");
+  const nextPrompt = (lang === "en") ? "हिन्दी" : "English";
+
+  if (desktopBtnText) desktopBtnText.textContent = nextPrompt;
+  if (mobileBtnText) mobileBtnText.textContent = nextPrompt;
+
+  // 3. Synchronize Growth Screener Language Dropdown
+  const screenerLangSelect = document.getElementById("screenerLang");
+  if (screenerLangSelect) {
+    screenerLangSelect.value = (lang === "hi") ? "hindi" : "english";
+  }
+
+  // 4. Re-calculate active tools in the selected language
+  if (typeof runScreener === "function") runScreener();
+  if (typeof renderAdolescentFaqs === "function") renderAdolescentFaqs();
+}
+
+function toggleGlobalLanguage() {
+  const nextLang = (currentGlobalLang === "en") ? "hi" : "en";
+  setGlobalLanguage(nextLang);
+}
+
+// Auto-load parent's preferred language when page opens
+document.addEventListener("DOMContentLoaded", () => {
+  setGlobalLanguage(currentGlobalLang);
+});
