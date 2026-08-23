@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Dr. Dinesh Mittal | Child Specialist & Pediatrician in Rohini, Delhi</title>
-    <meta name="description" content="Dr. Dinesh Mittal, MBBS, DCH (DMC/R/00668). Child Specialist & Pediatrician in Sector 3 Rohini, New Delhi. Clinical newborn care, IAP vaccination schedules & growth screening.">
+    <meta name="description" content="Dr. Dinesh Mittal, MBBS, DCH (DMC/R/00668). Child Specialist & Pediatrician in Sector 3 Rohini, New Delhi. Clinical newborn care, IAP vaccination schedules, growth & development screening.">
     <link rel="canonical" href="https://childspecialistrohini.com/" />
 
     <!-- Google Structured Data / Local SEO Schema -->
@@ -48,8 +48,8 @@
             },
             {
               "@type": "MedicalProcedure",
-              "name": "Child Growth & Development Screening",
-              "description": "IAP percentile tracking, BMI-for-Age obesity screening, Tanner pubertal staging, and developmental milestone assessment."
+              "name": "Child Growth, Development & Nutrition Assessment",
+              "description": "IAP percentile tracking, BMI-for-Age obesity screening, TDSC developmental milestones, and IYCF infant feeding guides."
             },
             {
               "@type": "MedicalProcedure",
@@ -59,7 +59,7 @@
             {
               "@type": "MedicalProcedure",
               "name": "Treatment of Childhood Illnesses & Fevers",
-              "description": "Diagnosis and management of seasonal fevers, viral infections, cough, asthma, and stomach ailments in children."
+              "description": "Diagnosis and management of seasonal fevers, dengue, viral infections, cough, asthma, and stomach ailments in children."
             }
           ],
           "address": {
@@ -96,6 +96,7 @@
             }
           ],
           "sameAs": [
+            "https://www.drdineshmittal.com",
             "https://maps.google.com/maps?cid=443935828544249238",
             "https://www.instagram.com/dr_dinesh_mittal_child_clinic",
             "https://youtube.com/@drdmittal"
@@ -341,6 +342,7 @@
             display: inline-block; background: #e0f2fe; color: #0369a1; font-weight: 700; font-size: 0.75rem; padding: 3px 8px; border-radius: 6px; margin-bottom: 8px;
         }
 
+        /* FAQ Component Styles */
         .faq-container { display: flex; flex-direction: column; gap: 10px; }
         .faq-item { border: 1.5px solid #e2e8f0; border-radius: 14px; overflow: hidden; background: #ffffff; transition: all 0.2s ease; }
         .faq-question {
@@ -352,6 +354,7 @@
         .faq-item.active { border-color: var(--brand-primary); background: #f8fafc; }
         .faq-item.active .faq-icon { transform: rotate(180deg); color: var(--brand-primary); }
 
+        /* Blog Section */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
         .blog-card {
             background: #ffffff; border-radius: 24px; border: 1px solid #f1f5f9;
@@ -372,6 +375,7 @@
             font-size: 0.88rem; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; padding: 0; text-decoration: none;
         }
 
+        /* Location Section */
         .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 22px; }
         .contact-details { background: #ffffff; padding: 26px; border-radius: 24px; border: 1px solid #f1f5f9; box-shadow: var(--card-shadow); }
         .contact-item { display: flex; gap: 12px; margin-bottom: 16px; align-items: flex-start; font-size: 0.9rem; }
@@ -407,7 +411,7 @@
         .pill-facebook { background: #1d4ed8; }
         .pill-whatsapp { background: #059669; }
 
-        /* Stable Modals */
+        /* Modals */
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(15, 23, 42, 0.75); z-index: 2000;
@@ -545,7 +549,6 @@
                     </a>
                 </div>
             </div>
-            </div>
 
             <!-- Doctor Profile Card -->
             <div class="hero-doctor-side">
@@ -620,7 +623,7 @@
         </div>
     </div>
 
-    <!-- COLLAPSIBLE GROWTH & DEVELOPMENT SCREENER TOOL -->
+    <!-- COLLAPSIBLE GROWTH, DEVELOPMENT & NUTRITION SCREENER TOOL -->
     <div class="container" id="growth-screener">
         <div class="screener-card">
             
@@ -628,8 +631,8 @@
             <button type="button" class="screener-toggle-header" onclick="toggleGrowthTool()">
                 <div>
                     <span class="screener-badge"><i class="fa-solid fa-chart-line"></i> Pediatric Clinical Tool</span>
-                    <h2 class="screener-title" id="lblTitle">Check Your Child's Growth & Development</h2>
-                    <p class="screener-subtitle" id="lblSubtitle">Tap to open IAP Growth Charts, BMI-for-Age, Tanner Pubertal Staging & Developmental Milestones.</p>
+                    <h2 class="screener-title" id="lblTitle">Growth, Development & Nutrition Assessment</h2>
+                    <p class="screener-subtitle" id="lblSubtitle">Tap to assess IAP Growth Charts, Developmental Milestones (TDSC), IYCF Feeding Guides & Adolescent Puberty.</p>
                 </div>
                 <i id="growthToggleIcon" class="fa-solid fa-circle-chevron-down screener-toggle-icon"></i>
             </button>
@@ -717,7 +720,8 @@
 
         </div>
     </div>
-   <!-- COMPACT ADOLESCENT HEALTH & PUBERTY GUIDANCE -->
+
+    <!-- COMPACT ADOLESCENT HEALTH & PUBERTY GUIDANCE -->
     <div class="container" id="adolescent-care" style="margin-top: 25px; margin-bottom: 25px;">
       <div style="background: #ffffff; border-radius: 24px; box-shadow: var(--card-shadow); border: 1.5px solid #e0f2fe; padding: 22px 20px;">
         
@@ -755,8 +759,8 @@
 
       </div>
     </div>
-    </div>
-<!-- PROMINENT FEATURED BLOG SECTION ON HOMEPAGE -->
+
+    <!-- PROMINENT FEATURED BLOG SECTION ON HOMEPAGE -->
     <div class="container" id="blog">
         <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 18px;">
             <div>
@@ -768,7 +772,7 @@
             </a>
         </div>
 
-        <!-- 🌟 1. PROMINENT SPOTLIGHT BANNER (CHANGE THIS WHEN A NEW BLOG IS RELEASED) -->
+        <!-- 🌟 1. PROMINENT SPOTLIGHT BANNER (LATEST PEDIATRIC GUIDE) -->
         <div style="background: linear-gradient(135deg, #f0fdfa 0%, #e0f2fe 100%); border: 2px solid #38bdf8; border-radius: 24px; padding: 22px; margin-bottom: 20px; box-shadow: 0 10px 25px -5px rgba(8, 145, 178, 0.12); display: flex; flex-wrap: wrap; gap: 20px; align-items: center;">
             <div style="flex: 1; min-width: 260px;">
                 <span style="display: inline-flex; align-items: center; gap: 6px; background: #dc2626; color: #ffffff; padding: 4px 12px; border-radius: 20px; font-size: 0.74rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">
@@ -828,6 +832,7 @@
             </a>
         </div>
     </div>
+
     <!-- Location & Contact -->
     <div class="container" id="clinic-location">
         <h2 class="section-title">Visit Our Clinic</h2>
@@ -907,7 +912,7 @@
         <button onclick="openBookingModal()" class="mobile-bar-btn btn-book"><i class="fa-solid fa-calendar-check"></i> Book Online</button>
     </div>
 
-    <!-- Booking Modal (Original Familiar Slot Booking System) -->
+    <!-- Booking Modal -->
     <div id="bookingModal" class="modal-overlay" onclick="closeModalOnOverlay(event, 'bookingModal')">
         <div class="modal-content">
             <div class="modal-header">
@@ -1041,7 +1046,7 @@
     </script>
 
     <!-- EXTERNAL MODULAR SCRIPTS -->
-    <script defer src="data.js?v=21"></script>
-    <script defer src="app.js?v=21"></script>
+    <script defer src="data.js?v=22"></script>
+    <script defer src="app.js?v=22"></script>
 </body>
 </html>
