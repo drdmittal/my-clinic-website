@@ -1063,5 +1063,20 @@ const siteTranslations = {
   vax_spotlight_btn: "संपूर्ण वैक्सीन FAQ पढ़ें",
   vax_spotlight_card_head: "100% कोल्ड-चेन सुरक्षा",
   vax_spotlight_card_sub: "WHO एवं IAP प्रमाणित सुरक्षित टीकाकरण।"
+// Inside siteTranslations.en:
+  iap_btn_badge: "Official Medical Chart",
+  iap_btn_title: "Official IAP Immunization Schedule (0 to 18 Years)",
+  iap_btn_subtitle: "Tap to view the complete age-by-age vaccine chart approved by Indian Academy of Pediatrics.",
+  blog_btn_badge: "Health Education Library",
+  blog_btn_title: "Parenting & Pediatric Health Insights",
+  blog_btn_subtitle: "Tap to explore all verified medical guides on fever care, infant nutrition, dengue, and air pollution.",
+
+  // Inside siteTranslations.hi:
+  iap_btn_badge: "आधिकारिक टीकाकरण चार्ट",
+  iap_btn_title: "IAP आधिकारिक टीकाकरण तालिका (जन्म से 18 वर्ष)",
+  iap_btn_subtitle: "इंडियन एकेडमी ऑफ पीडियाट्रिक्स द्वारा अनुमोदित संपूर्ण टीकाकरण चार्ट देखने के लिए क्लिक करें।",
+  blog_btn_badge: "स्वास्थ्य मार्गदर्शिका",
+  blog_btn_title: "पेरेंटिंग एवं बाल स्वास्थ्य लेख",
+  blog_btn_subtitle: "बुखार, नवजात देखभाल, डेंगू और प्रदूषण से बचाव से जुड़े सभी सत्यापित लेख पढ़ने के लिए क्लिक करें।",
   }
 };
