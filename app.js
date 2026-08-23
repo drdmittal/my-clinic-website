@@ -1,12 +1,15 @@
 // ==========================================================
 // CLINIC APPLICATION ENGINE (app.js)
 // Dynamic Length/Height, TDSC Milestones, Tanner MPH,
-// IAP BMI-for-Age, Weaning & Toilet Protocols, Modal Controls
+// IAP BMI-for-Age, Weaning & Toilet Protocols, Modal Controls,
+// & Fail-Safe Global Bilingual Engine (English <-> Hindi)
 // ==========================================================
 
 let currentDietPreference = "veg"; // 'veg' or 'nonveg'
 
+// ==========================================================
 // 1. MAIN SCREENER RUNNER
+// ==========================================================
 function runScreener() {
   const langEl = document.getElementById("screenerLang");
   const ageEl = document.getElementById("screenerAge");
@@ -45,8 +48,8 @@ function runScreener() {
   const isInfant = (ageKey === "0m" || ageKey === "3m" || ageKey === "6m" || ageKey === "9m" || ageKey === "12m" || ageKey === "18m");
 
   if (lang === "english") {
-    if (lblTitle) lblTitle.innerText = "Check Your Child's Growth & Development";
-    if (lblSubtitle) lblSubtitle.innerText = "IAP Growth Charts, BMI-for-Age, Tanner Pubertal Staging & Developmental Milestones.";
+    if (lblTitle) lblTitle.innerText = "Growth, Development & Nutrition Assessment";
+    if (lblSubtitle) lblSubtitle.innerText = "Tap to assess IAP Growth Charts, Developmental Milestones (TDSC), IYCF Feeding Guides & Adolescent Puberty.";
     if (lblLang) lblLang.innerText = "Select Language";
     if (lblAge) lblAge.innerText = "Child's Age";
     if (lblGender) lblGender.innerText = "Child's Gender";
@@ -55,8 +58,8 @@ function runScreener() {
     if (lblFather) lblFather.innerText = "Father's Height";
     if (lblMother) lblMother.innerText = "Mother's Height";
   } else {
-    if (lblTitle) lblTitle.innerText = "बच्चे की वृद्धि और विकास की जांच (Check Child's Growth & Development)";
-    if (lblSubtitle) lblSubtitle.innerText = "IAP बीएमआई चार्ट, टैनर स्टेजिंग, जेनेटिक हाइट फॉर्मूला एवं विकासात्मक स्केल।";
+    if (lblTitle) lblTitle.innerText = "शारीरिक विकास, मील के पत्थर एवं पोषण मूल्यांकन";
+    if (lblSubtitle) lblSubtitle.innerText = "IAP ग्रोथ चार्ट, त्रिवेंद्रम विकासात्मक माइलस्टोन (TDSC), और ऊपरी आहार (IYCF) तालिका देखने के लिए क्लिक करें।";
     if (lblLang) lblLang.innerText = "भाषा चुनें (Language)";
     if (lblAge) lblAge.innerText = "बच्चे की उम्र (Age)";
     if (lblGender) lblGender.innerText = "लिंग (Gender)";
@@ -98,7 +101,7 @@ function runScreener() {
   let childHeightZ = 0;
   let targetAdultZ = 0;
   let hasHeightDiscrepancy = false;
-  let discrepancyType = "none"; // 'lagging-severe', 'lagging-moderate', 'exceeding', 'none'
+  let discrepancyType = "none";
   let targetHeight = NaN;
 
   if (ref) {
@@ -130,7 +133,6 @@ function runScreener() {
     }
   }
 
-  // Synchronized Population Height Output
   const measurementWord = isInfant ? (lang === "english" ? "Length" : "लंबाई") : (lang === "english" ? "Height" : "कद");
 
   if (!isNaN(hInput) && ref) {
@@ -181,7 +183,6 @@ function runScreener() {
           : `<div class="flag-card flag-green"><i class="fa-solid fa-heart-pulse"></i> <div><strong>बीएमआई (${calcBmi} kg/m²): आदर्श एवं स्वस्थ वजन।</strong> IAP मानक अनुसार सही सीमा में है।</div></div>`;
       }
     } else if (isInfant) {
-      // Infant note (<2 years)
       bmiStatus = `
         <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:8px 12px; margin-top:6px; font-size:0.78rem; color:#64748b;">
           <i class="fa-solid fa-circle-info" style="color:var(--brand-primary); margin-right:4px;"></i>
@@ -191,7 +192,7 @@ function runScreener() {
     }
   }
 
-  // 4. Synchronized Mid-Parental Height Output Box (Tanner Formula)
+  // 4. Mid-Parental Height Output Box (Tanner Formula)
   let mphHtml = "";
   if (!isNaN(targetHeight)) {
     const minTarget = (targetHeight - 6).toFixed(1);
@@ -334,7 +335,7 @@ function runScreener() {
       ${specialEducationHtml}
       <div style="text-align:center; margin-top:18px;">
         <button onclick="openBookingModal()" class="hero-cta-btn" style="padding: 10px 24px; font-size: 0.9rem; background:#0891b2; box-shadow: 0 4px 14px rgba(8, 145, 178, 0.35);">
-          <i class="fa-solid fa-calendar-check"></i> ${lang === "english" ? "Book Growth Consultation with Dr. Dinesh Mittal" : "डॉ. दिनेश मित्तल से विकास परामर्श बुक करें"}
+          <i class="fa-solid fa-calendar-check"></i> ${lang === "english" ? "Book Consultation with Dr. Dinesh Mittal" : "डॉ. दिनेश मित्तल से परामर्श बुक करें"}
         </button>
       </div>
     </div>
@@ -347,11 +348,11 @@ function runScreener() {
       ${tipsHtml}
     </div>
   `;
-
-  renderCollapsibleAdolescentSection();
 }
 
-// 2. INTERACTIVE IAP WEANING GENERATOR (WITH YOUTUBE BADGES)
+// ==========================================================
+// 2. INTERACTIVE IAP WEANING GENERATOR
+// ==========================================================
 function renderIapWeaningInteractive(lang) {
   if (typeof weaningEducationDatabase === "undefined") return "";
 
@@ -473,7 +474,23 @@ function renderIapWeaningInteractive(lang) {
   `;
 }
 
+function setWeaningDiet(diet) {
+  currentDietPreference = diet;
+  runScreener();
+}
+
+function toggleWeaningAccordion(bodyId, button) {
+  const body = document.getElementById(bodyId);
+  const icon = button.querySelector('.fa-chevron-down');
+  if (!body) return;
+  const isOpen = (body.style.display === "block");
+  body.style.display = isOpen ? "none" : "block";
+  if (icon) icon.style.transform = isOpen ? "rotate(0deg)" : "rotate(180deg)";
+}
+
+// ==========================================================
 // 3. 18-MONTH TOILET TRAINING PROTOCOL GENERATOR
+// ==========================================================
 function renderToiletTrainingGuide(lang) {
   if (typeof toiletTrainingDatabase === "undefined") return "";
 
@@ -547,120 +564,9 @@ function renderToiletTrainingGuide(lang) {
   `;
 }
 
-function setWeaningDiet(diet) {
-  currentDietPreference = diet;
-  runScreener();
-}
-
-function toggleWeaningAccordion(bodyId, button) {
-  const body = document.getElementById(bodyId);
-  const icon = button.querySelector('.fa-chevron-down');
-  if (!body) return;
-  const isOpen = (body.style.display === "block");
-  body.style.display = isOpen ? "none" : "block";
-  if (icon) icon.style.transform = isOpen ? "rotate(0deg)" : "rotate(180deg)";
-}
-
-
 // ==========================================================
-// COMPACT ADOLESCENT FAQ RENDERER & TAB CONTROLLER
+// 4. MODAL POPUP CONTROLLERS (WITH BODY SCROLL LOCK)
 // ==========================================================
-let currentAdolescentFilter = "all";
-let isFaqExpanded = false;
-
-function renderAdolescentFaqs() {
-  const container = document.getElementById("faqAccordionContainer");
-  if (!container || typeof adolescentFaqDatabase === "undefined") return;
-
-  const currentLang = document.getElementById("screenerLang") ? document.getElementById("screenerLang").value : "english";
-  const langKey = (currentLang === "hindi") ? "hi" : "en";
-
-  // Filter by active category tab (All / Girls / Boys)
-  let list = adolescentFaqDatabase;
-  if (currentAdolescentFilter !== "all") {
-    list = list.filter(item => item.category === currentAdolescentFilter);
-  }
-
-  // Show top 4 by default, or all if expanded
-  const visibleList = isFaqExpanded ? list : list.slice(0, 4);
-
-  let html = "";
-  visibleList.forEach((item, index) => {
-    html += `
-      <div class="faq-item" id="faq-item-${index}">
-        <button type="button" class="faq-question" onclick="toggleFaqItem(${index})">
-          <span style="display:flex; align-items:center; gap:8px;">
-            <i class="${item.icon}" style="color: ${item.color};"></i>
-            <span>${item.q[langKey]}</span>
-          </span>
-          <i class="fa-solid fa-chevron-down faq-icon" id="faq-chevron-${index}"></i>
-        </button>
-        <div class="faq-answer" id="faq-ans-${index}">
-          <p style="margin: 0; padding-top: 4px; border-top: 1px dashed #e2e8f0;">${item.a[langKey]}</p>
-        </div>
-      </div>
-    `;
-  });
-
-  container.innerHTML = html;
-
-  // Update button label and icon
-  const btnLabel = document.getElementById("faqBtnLabel");
-  const btnIcon = document.querySelector("#toggleFaqViewBtn i");
-  if (btnLabel && btnIcon) {
-    if (isFaqExpanded) {
-      btnLabel.textContent = (langKey === "hi") ? "कम प्रश्न दिखाएं" : "Show Less";
-      btnIcon.className = "fa-solid fa-chevron-up";
-    } else {
-      btnLabel.textContent = (langKey === "hi") ? `सभी प्रश्न देखें (${list.length})` : `View All ${list.length} Questions`;
-      btnIcon.className = "fa-solid fa-chevron-down";
-    }
-  }
-}
-
-function filterAdolescentFaq(category) {
-  currentAdolescentFilter = category;
-
-  // Highlight active tab
-  ["tabFaqAll", "tabFaqGirls", "tabFaqBoys"].forEach(id => {
-    const btn = document.getElementById(id);
-    if (btn) {
-      btn.style.background = "#ffffff";
-      btn.style.color = "var(--dark-text)";
-      btn.style.borderColor = "#bae6fd";
-    }
-  });
-
-  const activeId = (category === "girls") ? "tabFaqGirls" : (category === "boys") ? "tabFaqBoys" : "tabFaqAll";
-  const activeBtn = document.getElementById(activeId);
-  if (activeBtn) {
-    activeBtn.style.background = "var(--brand-primary)";
-    activeBtn.style.color = "#ffffff";
-    activeBtn.style.borderColor = "var(--brand-primary)";
-  }
-
-  renderAdolescentFaqs();
-}
-
-function toggleFaqExpand() {
-  isFaqExpanded = !isFaqExpanded;
-  renderAdolescentFaqs();
-}
-
-function toggleFaqItem(index) {
-  const ans = document.getElementById(`faq-ans-${index}`);
-  const parent = document.getElementById(`faq-item-${index}`);
-  if (!ans || !parent) return;
-
-  const isOpen = (ans.style.display === "block");
-  ans.style.display = isOpen ? "none" : "block";
-  if (isOpen) {
-    parent.classList.remove("active");
-  } else {
-    parent.classList.add("active");
-  }
-}
-// 5. MODAL POPUP CONTROLLERS (WITH BODY SCROLL LOCK)
 function openBookingModal() {
   const modal = document.getElementById('bookingModal');
   if (modal) {
@@ -671,29 +577,6 @@ function openBookingModal() {
 
 function closeBookingModal() {
   const modal = document.getElementById('bookingModal');
-  if (modal) {
-    modal.style.display = 'none';
-    document.body.style.overflow = 'auto';
-  }
-}
-
-function openBlogModal(articleKey) {
-  if (typeof blogArticles === "undefined") return;
-  const article = blogArticles[articleKey];
-  const titleEl = document.getElementById('blogModalTitle');
-  const contentEl = document.getElementById('blogModalContent');
-  const modal = document.getElementById('blogModal');
-
-  if (article && titleEl && contentEl && modal) {
-    titleEl.innerHTML = '<i class="fa-solid fa-newspaper" style="color: var(--brand-secondary);"></i> ' + article.title;
-    contentEl.innerHTML = article.content;
-    modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-  }
-}
-
-function closeBlogModal() {
-  const modal = document.getElementById('blogModal');
   if (modal) {
     modal.style.display = 'none';
     document.body.style.overflow = 'auto';
@@ -735,250 +618,13 @@ function closePrivacyModal() {
 function closeModalOnOverlay(event, modalId) {
   if (event.target && event.target.id === modalId) {
     if (modalId === 'bookingModal') closeBookingModal();
-    if (modalId === 'blogModal') closeBlogModal();
     if (modalId === 'disclaimerModal') closeDisclaimerModal();
     if (modalId === 'privacyModal') closePrivacyModal();
   }
 }
 
-// 6. AUTO INITIALIZATION ON PAGE LOAD
-document.addEventListener("DOMContentLoaded", function() {
-  runScreener();
-  renderCollapsibleAdolescentSection();
-});
 // ==========================================================
-// 🌐 FAIL-SAFE GLOBAL BILINGUAL ENGINE (English <-> Hindi)
-// ==========================================================
-const siteTranslations = {
-  en: {
-    nav_about: "About Doctor",
-    nav_services: "Services",
-    nav_growth: "Growth, Development & Nutrition",
-    nav_adolescent: "Adolescent Care",
-    nav_blog: "Parenting Blog",
-    nav_location: "Location",
-    btn_book: "Book Consultation",
-    btn_call: "Call Clinic",
-
-    hero_badge: "Child Specialist & Pediatrician",
-    hero_heading: "Compassionate Healthcare For Your Little Ones",
-    hero_sub: "Specialized newborn care, WHO/IAP vaccination schedules, and growth & development monitoring in Sector 3 Rohini, Delhi.",
-    hero_exp: "25+ Yrs Clinical Practice",
-
-    sec_clinical_care: "Clinical Care",
-    sec_services_title: "Pediatric Services",
-    svc_vax_title: "Vaccination",
-    svc_vax_desc: "WHO & IAP cold-chain vaccines.",
-    svc_newborn_title: "Newborn Care",
-    svc_newborn_desc: "Growth, feeding & jaundice checks.",
-    svc_fever_title: "Fevers & Infections",
-    svc_fever_desc: "Seasonal viral, flu & asthma care.",
-    svc_teen_title: "Adolescent Health",
-    svc_teen_desc: "Puberty & growth spurt counseling.",
-
-    screener_badge: "Pediatric Clinical Tool",
-    screener_title: "Growth, Development & Nutrition Assessment",
-    screener_subtitle: "Tap to assess IAP Growth Charts, Developmental Milestones (TDSC), IYCF Feeding Guides & Adolescent Puberty.",
-
-    vax_btn_badge: "Pediatric Vaccination Guide",
-    vax_btn_title: "Childhood Immunization & Vaccine FAQs",
-    vax_btn_subtitle: "Doctor-curated guidance on missed doses, multiple vaccines safety, and post-shot fever care.",
-
-    teen_badge: "Ages 10 - 18 Years",
-    teen_heading: "Adolescent Health & Puberty Guidance",
-    teen_sub: "Confidential puberty guidance, growth spurt counseling & hormonal wellness.",
-    teen_btn_all: "All (20)",
-    teen_btn_girls: "Girls",
-    teen_btn_boys: "Boys",
-    teen_book_btn: "Book Confidential Teen Consult",
-
-    iap_btn_badge: "Vaccine Schedule",
-    iap_btn_title: "IAP Childhood Immunization Schedule (0 to 18 Years)",
-    iap_btn_subtitle: "Age-by-age vaccine guide recommended by the Indian Academy of Pediatrics.",
-
-    blog_btn_badge: "Health Education Library",
-    blog_btn_title: "Parenting & Pediatric Health Insights",
-    blog_btn_subtitle: "Explore clinical health guides on fever care, newborn monitoring, dengue, and winter pollution.",
-
-    blog_badge: "Health Education",
-    blog_heading: "Featured Pediatric Guides",
-    blog_view_all: "View All Guides",
-    blog_featured_badge: "Latest Pediatric Guide",
-    blog_featured_title: "Air Purifiers for Delhi Pollution: A Pediatric Deep Dive & Buying Guide",
-    blog_featured_desc: "Do purifiers truly protect child lungs against winter smog? Learn certified HEPA H13 standards, CADR ratings for Delhi bedrooms, and critical household mistakes that cause purifiers to fail.",
-    blog_read_btn: "Read Full Guide",
-    blog_explore_btn: "Browse All Articles in Health Library",
-
-    loc_title: "Visit Our Clinic",
-    loc_card_title: "Clinic Details",
-    loc_address_label: "Address:",
-    loc_hours_label: "Consultation Hours:",
-    loc_hours_text: "Mon - Sat: 10:00 AM - 1:00 PM | 6:00 PM - 8:30 PM<br>Sunday: 11:00 AM - 12:00 PM",
-    loc_maps_btn: "Open Directions in Google Maps"
-    card_newborn_tag: "Newborn Care",
-    card_newborn_title: "Essential Newborn Care Tips (0-30 Days)",
-    card_newborn_desc: "Pediatric guide on feeding on demand, cord care, jaundice checks & sleep safety.",
-    
-    card_dengue_tag: "Seasonal Alert",
-    card_dengue_title: "Dengue in Children: Symptoms & Home Care",
-    card_dengue_desc: "Parent guide on high fever, platelet facts, and emergency red flags.",
-    
-    card_screen_tag: "Child Development",
-    card_screen_title: "How to Reduce Screen Time in Children",
-    card_screen_desc: "Practical strategies to manage mobile tantrums and establish healthy habits.",
-    
-    blog_read_btn_short: "Read Guide",
-  },
-  hi: {
-    nav_about: "डॉक्टर परिचय",
-    nav_services: "चिकित्सा सेवाएं",
-    nav_growth: "विकास, माइलस्टोन व पोषण",
-    nav_adolescent: "किशोरावस्था परामर्श",
-    nav_blog: "पेरेंटिंग गाइड",
-    nav_location: "क्लिनिक पता",
-    btn_book: "परामर्श स्लॉट बुक करें",
-    btn_call: "कॉल करें",
-
-    hero_badge: "शिशु एवं बाल रोग विशेषज्ञ",
-    hero_heading: "आपके बच्चों के लिए समर्पित एवं अनुभवी बाल चिकित्सा",
-    hero_sub: "नवजात शिशु देखभाल, WHO/IAP टीकाकरण, एवं शारीरिक व मानसिक विकास मूल्यांकन — सेक्टर 3 रोहिणी, दिल्ली।",
-    hero_exp: "25+ वर्षों का नैदानिक अनुभव",
-
-    sec_clinical_care: "बाल स्वास्थ्य सेवाएं",
-    sec_services_title: "प्रमुख चिकित्सा सेवाएं",
-    svc_vax_title: "टीकाकरण (Vaccination)",
-    svc_vax_desc: "WHO एवं IAP प्रमाणित सुरक्षित टीके।",
-    svc_newborn_title: "नवजात देखभाल",
-    svc_newborn_desc: "वजन, पीलिया व स्तनपान जांच।",
-    svc_fever_title: "बुखार व संक्रमण",
-    svc_fever_desc: "मौसमी फ्लू, खांसी व दमा उपचार।",
-    svc_teen_title: "किशोरावस्था स्वास्थ्य",
-    svc_teen_desc: "प्यूबर्टी व लंबाई परामर्श।",
-
-    screener_badge: "बाल विकास जांच टूल",
-    screener_title: "शारीरिक विकास, मील के पत्थर एवं पोषण मूल्यांकन",
-    screener_subtitle: "IAP ग्रोथ चार्ट, त्रिवेंद्रम विकासात्मक माइलस्टोन (TDSC), और ऊपरी आहार (IYCF) तालिका देखने के लिए क्लिक करें।",
-
-    vax_btn_badge: "बाल टीकाकरण गाइड",
-    vax_btn_title: "बच्चों के टीकाकरण से जुड़े जरूरी सवाल व जवाब",
-    vax_btn_subtitle: "छूटे हुए टीके, एक साथ 2-3 टीके व बुखार की सही देखभाल पर डॉक्टरी सलाह पढ़ने के लिए क्लिक करें।",
-
-    teen_badge: "उम्र 10 से 18 वर्ष",
-    teen_heading: "किशोरावस्था स्वास्थ्य एवं प्यूबर्टी मार्गदर्शन",
-    teen_sub: "प्यूबर्टी, शारीरिक बदलाव, लंबाई और हार्मोनल स्वास्थ्य पर गोपनीय डॉक्टरी परामर्श।",
-    teen_btn_all: "सभी (20)",
-    teen_btn_girls: "बालिकाएं (Girls)",
-    teen_btn_boys: "बालक (Boys)",
-    teen_book_btn: "गोपनीय टीनएज परामर्श बुक करें",
-
-    iap_btn_badge: "टीकाकरण तालिका",
-    iap_btn_title: "IAP बाल टीकाकरण तालिका (जन्म से 18 वर्ष)",
-    iap_btn_subtitle: "इंडियन एकेडमी ऑफ पीडियाट्रिक्स द्वारा अनुशंसित उम्र अनुसार टीकाकरण गाइड।",
-
-    blog_btn_badge: "स्वास्थ्य मार्गदर्शिका",
-    blog_btn_title: "पेरेंटिंग एवं बाल स्वास्थ्य लेख",
-    blog_btn_subtitle: "बुखार, नवजात देखभाल, डेंगू और प्रदूषण से बचाव से जुड़े सभी चिकित्सकीय लेख पढ़ने के लिए क्लिक करें।",
-
-    blog_badge: "स्वास्थ्य जागरूकता",
-    blog_heading: "पेरेंटिंग एवं बाल स्वास्थ्य मार्गदर्शन",
-    blog_view_all: "सभी गाइड देखें",
-    blog_featured_badge: "नवीनतम बाल स्वास्थ्य गाइड",
-    blog_featured_title: "दिल्ली के प्रदूषण में क्या एयर प्यूरीफायर खरीदना चाहिए? बाल रोग विशेषज्ञ गाइड",
-    blog_featured_desc: "क्या प्यूरीफायर सचमुच बच्चों के फेफड़ों को बचाते हैं? True HEPA H13 मानक, कमरे के अनुसार CADR रेटिंग, और वे गलतियां जिनसे प्यूरीफायर काम नहीं करता।",
-    blog_read_btn: "पूरी गाइड पढ़ें",
-    blog_explore_btn: "सभी स्वास्थ्य लेख व गाइड देखें",
-
-    loc_title: "क्लिनिक समय व पता",
-    loc_card_title: "क्लिनिक विवरण",
-    loc_address_label: "पता:",
-    loc_hours_label: "परामर्श का समय:",
-    loc_hours_text: "सोमवार - शनिवार: सुबह 10:00 - दोपहर 1:00 | शाम 6:00 - 8:30<br>रविवार: सुबह 11:00 - दोपहर 12:00",
-    loc_maps_btn: "गूगल मैप्स पर रास्ता देखें"
-  card_newborn_tag: "नवजात देखभाल",
-    card_newborn_title: "नवजात शिशु की देखभाल (0-30 दिन जरूरी नियम)",
-    card_newborn_desc: "स्तनपान, नाभि की सफाई, पीलिया की पहचान और सुलाने के सुरक्षित नियमों की डॉक्टरी सलाह।",
-    
-    card_dengue_tag: "मौसमी अलर्ट",
-    card_dengue_title: "बच्चों में डेंगू: लक्षण, प्लेटलेट्स व घरेलू देखभाल",
-    card_dengue_desc: "तेज बुखार, प्लेटलेट्स की सच्चाई और खतरे के लक्षणों पर अभिभावकों के लिए गाइड।",
-    
-    card_screen_tag: "बाल विकास",
-    card_screen_title: "बच्चों में मोबाइल और स्क्रीन की लत कैसे छुड़ाएं?",
-    card_screen_desc: "खाना खाते समय फोन की आदत और रोने-जिद्द करने से निपटने के आसान डॉक्टरी उपाय।",
-    
-    blog_read_btn_short: "गाइड पढ़ें",
-  
-  }
-};
-
-let currentGlobalLang = localStorage.getItem("preferredClinicLang") || "en";
-
-function setGlobalLanguage(lang) {
-  try {
-    currentGlobalLang = lang;
-    localStorage.setItem("preferredClinicLang", lang);
-
-    // 1. Text elements replacement
-    const elements = document.querySelectorAll("[data-i18n]");
-    if (siteTranslations && siteTranslations[lang]) {
-      elements.forEach(el => {
-        const key = el.getAttribute("data-i18n");
-        if (siteTranslations[lang][key]) {
-          el.innerHTML = siteTranslations[lang][key];
-        }
-      });
-    }
-
-    // 2. Button Prompt Text Update
-    const desktopBtnText = document.getElementById("langBtnText");
-    const mobileBtnText = document.getElementById("mobileLangBtnText");
-    const nextPrompt = (lang === "en") ? "हिन्दी" : "English";
-
-    if (desktopBtnText) desktopBtnText.textContent = nextPrompt;
-    if (mobileBtnText) mobileBtnText.textContent = nextPrompt;
-
-    // 3. Sync Growth Screener Select Dropdown
-    const screenerLangSelect = document.getElementById("screenerLang");
-    if (screenerLangSelect) {
-      screenerLangSelect.value = (lang === "hi") ? "hindi" : "english";
-    }
-
-    // 4. Safely trigger growth screener recalculation
-    try {
-      if (typeof runScreener === "function") {
-        runScreener();
-      }
-    } catch (err) {
-      console.warn("runScreener error caught:", err);
-    }
-
-    // 5. Safely trigger adolescent FAQ re-render
-    try {
-      if (typeof renderAdolescentFaqs === "function") {
-        renderAdolescentFaqs();
-      }
-    } catch (err) {
-      console.warn("renderAdolescentFaqs error caught:", err);
-    }
-  } catch (globalErr) {
-    console.error("setGlobalLanguage error:", globalErr);
-  }
-}
-
-function toggleGlobalLanguage() {
-  const nextLang = (currentGlobalLang === "en") ? "hi" : "en";
-  setGlobalLanguage(nextLang);
-}
-
-// Attach directly to window object to prevent scope issues
-window.toggleGlobalLanguage = toggleGlobalLanguage;
-window.setGlobalLanguage = setGlobalLanguage;
-
-// Run on page load
-document.addEventListener("DOMContentLoaded", () => {
-  setGlobalLanguage(currentGlobalLang);
-  // ==========================================================
-// 🌐 FAIL-SAFE GLOBAL BILINGUAL CONTROLLER (English <-> Hindi)
+// 5. 🌐 FAIL-SAFE GLOBAL BILINGUAL ENGINE (English <-> Hindi)
 // ==========================================================
 window.siteTranslations = window.siteTranslations || {
   en: {
@@ -1184,10 +830,12 @@ window.toggleGlobalLanguage = function() {
   window.setGlobalLanguage(nextLang);
 };
 
-// Auto-run on page load
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", () => window.setGlobalLanguage(window.currentGlobalLang));
-} else {
-  window.setGlobalLanguage(window.currentGlobalLang);
-}
+// ==========================================================
+// 6. AUTO INITIALIZATION ON PAGE LOAD
+// ==========================================================
+document.addEventListener("DOMContentLoaded", function() {
+  runScreener();
+  if (typeof window.setGlobalLanguage === "function") {
+    window.setGlobalLanguage(window.currentGlobalLang);
+  }
 });
