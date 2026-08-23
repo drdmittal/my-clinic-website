@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Child Growth, Development & Nutrition Assessment Tool | Dr. Dinesh Mittal</title>
+    <meta name="description" content="Official pediatric growth screener by Dr. Dinesh Mittal. Evaluate child height, weight, BMI-for-age, IAP percentiles, TDSC developmental milestones, and IYCF feeding plates.">
+    <link rel="canonical" href="https://childspecialistrohini.com/growth-development-nutrition-screener.html" />
+
+    <!-- Google Structured Data / MedicalWebPage Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MedicalWebPage",
+      "@id": "https://childspecialistrohini.com/growth-development-nutrition-screener.html#webpage",
+      "url": "https://childspecialistrohini.com/growth-development-nutrition-screener.html",
+      "name": "Child Growth, Development & Nutrition Assessment Tool: A Pediatrician's Clinical Screener",
+      "description": "Interactive pediatric clinical assessment tool utilizing IAP growth charts, TDSC milestones, mid-parental genetic potential, and complementary feeding guides.",
+      "about": [
+        { "@type": "MedicalProcedure", "name": "Child Growth and Development Assessment" }
+      ],
+      "author": {
+        "@type": "Person",
+        "name": "Dr. Dinesh Mittal",
+        "jobTitle": "Child Specialist & Pediatrician",
+        "hasCredential": { "@type": "EducationalOccupationalCredential", "name": "MBBS, DCH" }
+      },
+      "publisher": {
+        "@type": "MedicalClinic",
+        "name": "Dr. Dinesh Mittal Child Clinic",
+        "url": "https://childspecialistrohini.com"
+      }
+    }
+    </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-768Y52R8SC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-768Y52R8SC');
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --brand-primary: #0891b2; --brand-primary-dark: #0e7490; --brand-secondary: #0d9488;
+            --brand-accent: #f59e0b; --brand-accent-dark: #d97706; --dark-text: #0f172a; --muted-text: #64748b;
+            --card-shadow: 0 12px 32px -4px rgba(8, 145, 178, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', 'Noto Sans Devanagari', sans-serif; }
+        body { color: var(--dark-text); background-color: #f8fafc; line-height: 1.65; padding-bottom: 75px; -webkit-tap-highlight-color: transparent; }
+
+        header {
+            position: sticky; top: 0; background: rgba(255, 255, 255, 0.94); z-index: 1000;
+            backdrop-filter: blur(14px); padding: 12px 5%; display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+        }
+        .logo { font-family: 'Fredoka', cursive; font-size: 1.35rem; font-weight: 600; color: var(--brand-primary-dark); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+        .logo i { color: var(--brand-accent); font-size: 1.35rem; }
+
+        .lang-switch-btn {
+            background: #f0fdfa; border: 1.5px solid #99f6e4; color: #0f766e;
+            padding: 6px 14px; border-radius: 20px; font-size: 0.84rem; font-weight: 800;
+            cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s;
+        }
+        .lang-switch-btn:hover { background: #ccfbf1; transform: scale(1.04); }
+
+        .article-container { max-width: 900px; margin: 25px auto; padding: 0 16px; }
+        .article-card { background: #ffffff; border-radius: 26px; padding: 30px 24px; box-shadow: var(--card-shadow); border: 1.5px solid #e0f2fe; }
+
+        .breadcrumbs { font-size: 0.82rem; color: #64748b; margin-bottom: 12px; }
+        .breadcrumbs a { color: var(--brand-primary); text-decoration: none; font-weight: 600; }
+
+        .article-title { font-family: 'Fredoka', cursive; font-size: 1.85rem; color: #083344; line-height: 1.3; margin-bottom: 8px; }
+        .author-meta-bar { display: flex; align-items: center; gap: 12px; padding: 10px 0 16px; border-bottom: 1px solid #f1f5f9; margin-bottom: 20px; font-size: 0.84rem; color: var(--muted-text); }
+        .author-img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid #bae6fd; }
+
+        .screener-inputs-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px;
+            background: #f8fafc; padding: 20px; border-radius: 20px; border: 1.5px solid #e2e8f0; margin-bottom: 20px;
+        }
+        .screener-field label { font-size: 0.82rem; font-weight: 700; color: #083344; display: block; margin-bottom: 6px; }
+        .screener-select, .screener-input {
+            width: 100%; min-height: 48px; padding: 10px 14px; border: 1.5px solid #cbd5e1;
+            border-radius: 12px; font-size: 16px; outline: none; background: #ffffff; font-weight: 600;
+        }
+        .screener-select:focus, .screener-input:focus { border-color: var(--brand-primary); }
+
+        .submit-btn-container { text-align: center; margin: 15px 0 25px; }
+        .submit-btn {
+            background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
+            color: #ffffff; border: none; padding: 14px 34px; border-radius: 30px; font-size: 1.05rem;
+            font-weight: 800; cursor: pointer; box-shadow: 0 6px 18px rgba(8, 145, 178, 0.28);
+            display: inline-flex; align-items: center; gap: 10px; transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(8, 145, 178, 0.38); }
+
+        .results-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; margin-top: 15px; }
+        .result-box { background: #ffffff; border-radius: 18px; padding: 20px; border: 1.5px solid #e2e8f0; box-shadow: 0 4px 14px rgba(8, 145, 178, 0.04); }
+        .result-box h4 { font-family: 'Fredoka', cursive; font-size: 1.15rem; color: #083344; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+
+        .flag-card { padding: 12px 14px; border-radius: 14px; margin-bottom: 10px; font-size: 0.86rem; line-height: 1.45; display: flex; gap: 10px; align-items: flex-start; }
+        .flag-card i { font-size: 1.1rem; margin-top: 2px; flex-shrink: 0; }
+        .flag-green { background: #f0fdf4; border: 1px solid #86efac; color: #166534; }
+        .flag-green i { color: #16a34a; }
+        .flag-yellow { background: #fffbeb; border: 1px solid #fde047; color: #854d0e; }
+        .flag-yellow i { color: #ca8a04; }
+        .flag-red { background: #fef2f2; border: 1px solid #fca5a5; color: #991b1b; }
+        .flag-red i { color: #dc2626; }
+        .iap-ref-badge { display: inline-block; background: #e0f2fe; color: #0369a1; font-weight: 700; font-size: 0.75rem; padding: 3px 8px; border-radius: 6px; margin-bottom: 8px; }
+
+        .doctor-cta-box { background: linear-gradient(135deg, #f0fdfa 0%, #e0f2fe 100%); border: 2px solid #bae6fd; border-radius: 20px; padding: 24px; text-align: center; margin-top: 25px; }
+        .hero-cta-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(135deg, var(--brand-accent), var(--brand-accent-dark)); color: #ffffff; padding: 12px 26px; border-radius: 30px; font-weight: 700; font-size: 0.94rem; text-decoration: none; cursor: pointer; border: none; min-height: 46px; }
+
+        footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 24px 15px; font-size: 0.85rem; margin-top: 40px; }
+        @media (max-width: 768px) { .article-card { padding: 20px 16px; } .article-title { font-size: 1.4rem; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo"><i class="fa-solid fa-shapes"></i> Dr. Dinesh Mittal</a>
+        <div style="display: flex; align-items: center; gap: 12px;">
+            <button type="button" onclick="toggleToolLang()" id="toolLangBtn" class="lang-switch-btn">
+                <i class="fa-solid fa-language"></i> <span id="toolLangText">हिन्दी में पढ़ें</span>
+            </button>
+            <a href="index.html" style="text-decoration: none; color: var(--brand-primary); font-weight: 700; font-size: 0.88rem;">Home</a>
+        </div>
+    </header>
+
+    <main class="article-container">
+        <div class="article-card">
+            
+            <div class="breadcrumbs">
+                <a href="index.html"><i class="fa-solid fa-house"></i> Home</a> &rsaquo; 
+                <span>Growth, Development & Nutrition</span>
+            </div>
+
+            <h1 class="article-title" id="pageTitle">Child Growth, Development & Nutrition Assessment</h1>
+            
+            <div class="author-meta-bar">
+                <img src="doctor.jpg" alt="Dr. Dinesh Mittal" class="author-img" onerror="this.src='https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=100&q=80'">
+                <div>
+                    <strong>Dr. Dinesh Mittal, MBBS, DCH</strong><br>
+                    <span>Child Specialist & Pediatrician | Sector 3 Rohini, Delhi</span>
+                </div>
+            </div>
+
+            <!-- FORM INPUTS -->
+            <form id="growthForm" onsubmit="event.preventDefault(); calculateAndRenderResults();">
+                <div class="screener-inputs-grid">
+                    <div class="screener-field">
+                        <label><i class="fa-solid fa-cake-candles"></i> <span id="lblAge">Child's Age</span></label>
+                        <select id="screenerAge" class="screener-select" onchange="updateMeasurementLabel()">
+                            <option value="0m" selected>Newborn (0 - 30 Days)</option>
+                            <option value="3m">3 Months</option>
+                            <option value="6m">6 Months (Weaning Stage)</option>
+                            <option value="9m">9 Months</option>
+                            <option value="12m">12 Months (1 Year)</option>
+                            <option value="18m">18 Months (Toilet Training Stage)</option>
+                            <option value="24m">24 Months (2 Years)</option>
+                            <option value="3y">3 Years</option>
+                            <option value="4y">4 Years</option>
+                            <option value="5y">5 Years</option>
+                            <option value="6y">6 Years</option>
+                            <option value="7y">7 Years</option>
+                            <option value="8y">8 Years</option>
+                            <option value="9y">9 Years</option>
+                            <option value="10y">10 Years</option>
+                            <option value="11y">11 Years</option>
+                            <option value="12y">12 Years</option>
+                            <option value="13y">13 Years</option>
+                            <option value="14y">14 Years</option>
+                            <option value="15y">15 Years</option>
+                            <option value="16y">16 Years</option>
+                            <option value="17y">17 Years</option>
+                            <option value="18y">18 Years</option>
+                        </select>
+                    </div>
+
+                    <div class="screener-field">
+                        <label><i class="fa-solid fa-venus-mars"></i> <span id="lblGender">Child's Gender</span></label>
+                        <select id="screenerGender" class="screener-select">
+                            <option value="boy">Boy (बालक)</option>
+                            <option value="girl">Girl (बालिका)</option>
+                        </select>
+                    </div>
+
+                    <div class="screener-field">
+                        <label><i class="fa-solid fa-weight-scale"></i> <span id="lblWeight">Current Weight (kg)</span></label>
+                        <input type="number" inputmode="decimal" id="screenerWeight" class="screener-input" step="0.1" placeholder="e.g. 3.2" required>
+                    </div>
+
+                    <div class="screener-field">
+                        <label><i class="fa-solid fa-ruler-vertical"></i> <span id="lblHeight">Current Length (cm)</span></label>
+                        <input type="number" inputmode="decimal" id="screenerHeight" class="screener-input" step="0.5" placeholder="e.g. 50" required>
+                    </div>
+
+                    <div class="screener-field">
+                        <label><i class="fa-solid fa-person"></i> <span id="lblFather">Father's Height</span> <small style="color:#64748b;">(Optional, cm)</small></label>
+                        <input type="number" inputmode="decimal" id="fatherHeight" class="screener-input" step="1" placeholder="e.g. 175">
+                    </div>
+
+                    <div class="screener-field">
+                        <label><i class="fa-solid fa-person-dress"></i> <span id="lblMother">Mother's Height</span> <small style="color:#64748b;">(Optional, cm)</small></label>
+                        <input type="number" inputmode="decimal" id="motherHeight" class="screener-input" step="1" placeholder="e.g. 160">
+                    </div>
+                </div>
+
+                <!-- SUBMIT BUTTON -->
+                <div class="submit-btn-container">
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        <i class="fa-solid fa-calculator"></i> <span>Calculate & Assess Growth</span>
+                    </button>
+                </div>
+            </form>
+
+            <!-- RESULTS SECTION (POPULATES AFTER SUBMIT) -->
+            <div id="resultsAnchor"></div>
+            <div id="screenerResults"></div>
+
+            <div style="margin-top: 20px; padding: 12px 16px; background: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0; text-align: center;">
+                <p style="font-size: 0.76rem; color: #64748b; line-height: 1.5; margin: 0;">
+                    <i class="fa-solid fa-circle-info" style="color: var(--brand-primary); margin-right: 4px;"></i>
+                    <strong>Medical Disclaimer:</strong> This clinical screening tool utilizes standard Indian Academy of Pediatrics (IAP) percentiles for educational guidance. It does not replace a formal medical diagnosis. Please consult Dr. Dinesh Mittal for individual clinical evaluation.
+                </p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <p><strong>Dr. Dinesh Mittal, MBBS, DCH</strong> | Delhi Medical Council Reg. No: <strong>DMC/R/00668</strong></p>
+        <p style="font-size: 0.78rem; color: #64748b; margin-top: 6px;">&copy; 2026 Dr. Dinesh Mittal Child Clinic, Sector 3 Rohini, New Delhi.</p>
+    </footer>
+
+    <!-- EMBEDDED DATA & ENGINE -->
+    <script src="data.js"></script>
+    <script>
+      let toolLang = localStorage.getItem("preferredClinicLang") || "en";
+
+      function updateMeasurementLabel() {
+        const ageKey = document.getElementById("screenerAge").value;
+        const isInfant = (ageKey === "0m" || ageKey === "3m" || ageKey === "6m" || ageKey === "9m" || ageKey === "12m" || ageKey === "18m");
+        const lblHeight = document.getElementById("lblHeight");
+        if (lblHeight) {
+          lblHeight.innerText = isInfant 
+            ? (toolLang === "en" ? "Current Length (cm)" : "वर्तमान लंबाई (cm)") 
+            : (toolLang === "en" ? "Current Height (cm)" : "वर्तमान कद (cm)");
+        }
+      }
+
+      function updateLanguageUI() {
+        const btnText = document.getElementById("toolLangText");
+        const titleEl = document.getElementById("pageTitle");
+        const submitBtnText = document.querySelector("#submitBtn span");
+        const lblAge = document.getElementById("lblAge");
+        const lblGender = document.getElementById("lblGender");
+        const lblWeight = document.getElementById("lblWeight");
+        const lblFather = document.getElementById("lblFather");
+        const lblMother = document.getElementById("lblMother");
+
+        if (toolLang === "hi") {
+          if (btnText) btnText.textContent = "Read in English";
+          if (titleEl) titleEl.textContent = "शारीरिक विकास, मील के पत्थर एवं पोषण मूल्यांकन";
+          if (submitBtnText) submitBtnText.textContent = "शारीरिक विकास एवं पोषण की जांच करें";
+          if (lblAge) lblAge.textContent = "बच्चे की उम्र (Age)";
+          if (lblGender) lblGender.textContent = "लिंग (Gender)";
+          if (lblWeight) lblWeight.textContent = "वर्तमान वजन (kg)";
+          if (lblFather) lblFather.textContent = "पिता की लंबाई (cm)";
+          if (lblMother) lblMother.textContent = "माता की लंबाई (cm)";
+        } else {
+          if (btnText) btnText.textContent = "हिन्दी में पढ़ें";
+          if (titleEl) titleEl.textContent = "Child Growth, Development & Nutrition Assessment";
+          if (submitBtnText) submitBtnText.textContent = "Calculate & Assess Growth";
+          if (lblAge) lblAge.textContent = "Child's Age";
+          if (lblGender) lblGender.textContent = "Child's Gender";
+          if (lblWeight) lblWeight.textContent = "Current Weight (kg)";
+          if (lblFather) lblFather.textContent = "Father's Height (cm)";
+          if (lblMother) lblMother.textContent = "Mother's Height (cm)";
+        }
+        updateMeasurementLabel();
+      }
+
+      function toggleToolLang() {
+        toolLang = (toolLang === "en") ? "hi" : "en";
+        localStorage.setItem("preferredClinicLang", toolLang);
+        updateLanguageUI();
+        // If results are already visible, recalculate in new language
+        if (document.getElementById("screenerResults").innerHTML.trim() !== "") {
+          calculateAndRenderResults();
+        }
+      }
+
+      function calculateAndRenderResults() {
+        const ageKey = document.getElementById("screenerAge").value;
+        const gender = document.getElementById("screenerGender").value || "boy";
+        const wInput = parseFloat(document.getElementById("screenerWeight").value);
+        const hInput = parseFloat(document.getElementById("screenerHeight").value);
+        const fHeight = parseFloat(document.getElementById("fatherHeight").value);
+        const mHeight = parseFloat(document.getElementById("motherHeight").value);
+        const resultsContainer = document.getElementById("screenerResults");
+
+        if (!milestoneDatabase || !milestoneDatabase[ageKey]) return;
+
+        const data = milestoneDatabase[ageKey];
+        const listLang = (toolLang === "hi") ? "hi" : "en";
+        const ageName = (data.name && data.name[listLang]) ? data.name[listLang] : ageKey;
+        const ref = (data.iap && data.iap[gender]) ? data.iap[gender] : null;
+
+        const isInfant = (ageKey === "0m" || ageKey === "3m" || ageKey === "6m" || ageKey === "9m" || ageKey === "12m" || ageKey === "18m");
+        const measurementWord = isInfant ? (toolLang === "en" ? "Length" : "लंबाई") : (toolLang === "en" ? "Height" : "कद");
+
+        let wStatus = "";
+        let hStatus = "";
+        let bmiStatus = "";
+
+        // 1. Weight Evaluation
+        if (!isNaN(wInput) && ref) {
+          if (wInput < ref.minW) {
+            wStatus = toolLang === "en" 
+              ? `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>Weight (${wInput} kg): Below 3rd percentile.</strong> Standard healthy range: ${ref.minW} – ${ref.maxW} kg. Consult pediatrician for dietary review.</div></div>`
+              : `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>वजन (${wInput} kg): 3वें परसेंटाइल से कम।</strong> मानक सीमा: ${ref.minW} – ${ref.maxW} kg। पोषण समीक्षा हेतु डॉक्टर से परामर्श लें।</div></div>`;
+          } else if (wInput > ref.maxW) {
+            wStatus = toolLang === "en"
+              ? `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>Weight (${wInput} kg): Above 97th percentile.</strong> Exceeds typical range (${ref.minW} – ${ref.maxW} kg). Consult pediatrician for balanced diet guidance.</div></div>`
+              : `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>वजन (${wInput} kg): 97वें परसेंटाइल से अधिक।</strong> मानक सीमा (${ref.minW} – ${ref.maxW} kg) से अधिक है।</div></div>`;
+          } else {
+            wStatus = toolLang === "en"
+              ? `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>Weight (${wInput} kg): Normal & Healthy.</strong> Aligned with standard range (${ref.minW} – ${ref.maxW} kg).</div></div>`
+              : `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>वजन (${wInput} kg): बिल्कुल सामान्य एवं स्वस्थ।</strong> मानक सीमा (${ref.minW} – ${ref.maxW} kg) के अनुसार सही है।</div></div>`;
+          }
+        }
+
+        // 2. Height Evaluation
+        if (!isNaN(hInput) && ref) {
+          if (hInput < ref.minH) {
+            hStatus = toolLang === "en"
+              ? `<div class="flag-card flag-red"><i class="fa-solid fa-circle-exclamation"></i> <div><strong>${measurementWord} (${hInput} cm): Below 3rd percentile.</strong> Below norm (${ref.minH} – ${ref.maxH} cm). Consult pediatrician.</div></div>`
+              : `<div class="flag-card flag-red"><i class="fa-solid fa-circle-exclamation"></i> <div><strong>${measurementWord} (${hInput} cm): 3वें परसेंटाइल से कम।</strong> मानक सीमा (${ref.minH} – ${ref.maxH} cm) से कम है।</div></div>`;
+          } else if (hInput > ref.maxH) {
+            hStatus = toolLang === "en"
+              ? `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>${measurementWord} (${hInput} cm): Above Average (>97th percentile).</strong> Robust growth (${ref.minH} – ${ref.maxH} cm).</div></div>`
+              : `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>${measurementWord} (${hInput} cm): उत्तम शारीरिक विकास (>97वां परसेंटाइल)।</strong></div></div>`;
+          } else {
+            hStatus = toolLang === "en"
+              ? `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>${measurementWord} (${hInput} cm): Normal & Healthy.</strong> Tracking well (${ref.minH} – ${ref.maxH} cm).</div></div>`
+              : `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>${measurementWord} (${hInput} cm): आदर्श विकास क्रम।</strong> मानक अनुसार सही है।</div></div>`;
+          }
+        }
+
+        // 3. BMI-for-Age
+        if (!isNaN(wInput) && !isNaN(hInput) && hInput > 0) {
+          const heightInMeters = hInput / 100;
+          const calcBmi = (wInput / (heightInMeters * heightInMeters)).toFixed(1);
+
+          if (ref && ref.minBmi) {
+            if (calcBmi < ref.minBmi) {
+              bmiStatus = toolLang === "en"
+                ? `<div class="flag-card flag-red"><i class="fa-solid fa-circle-exclamation"></i> <div><strong>BMI (${calcBmi} kg/m²): Underweight (<3rd Percentile).</strong> Below standard (${ref.minBmi} – ${ref.ovBmi}).</div></div>`
+                : `<div class="flag-card flag-red"><i class="fa-solid fa-circle-exclamation"></i> <div><strong>बीएमआई (${calcBmi} kg/m²): कम वजन (<3वां परसेंटाइल)।</strong></div></div>`;
+            } else if (calcBmi >= ref.obBmi) {
+              bmiStatus = toolLang === "en"
+                ? `<div class="flag-card flag-red"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>BMI (${calcBmi} kg/m²): Above Healthy Threshold (≥95th Percentile).</strong> Active lifestyle review advised.</div></div>`
+                : `<div class="flag-card flag-red"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>बीएमआई (${calcBmi} kg/m²): सामान्य से अधिक (≥95वां परसेंटाइल)।</strong></div></div>`;
+            } else {
+              bmiStatus = toolLang === "en"
+                ? `<div class="flag-card flag-green"><i class="fa-solid fa-heart-pulse"></i> <div><strong>BMI (${calcBmi} kg/m²): Ideal & Healthy Weight.</strong> Tracking normally (${ref.minBmi} – ${ref.ovBmi} kg/m²).</div></div>`
+                : `<div class="flag-card flag-green"><i class="fa-solid fa-heart-pulse"></i> <div><strong>बीएमआई (${calcBmi} kg/m²): आदर्श एवं स्वस्थ वजन।</strong> सही सीमा में है।</div></div>`;
+            }
+          }
+        }
+
+        // 4. Mid-Parental Height (Tanner Formula)
+        let mphHtml = "";
+        if (!isNaN(fHeight) && !isNaN(mHeight)) {
+          const targetHeight = (gender === "boy") ? (fHeight + mHeight + 13) / 2 : (fHeight + mHeight - 13) / 2;
+          const minTarget = (targetHeight - 6).toFixed(1);
+          const maxTarget = (targetHeight + 6).toFixed(1);
+          const midTarget = targetHeight.toFixed(1);
+
+          mphHtml = `
+            <div style="background: #f0fdfa; border: 1.5px solid #99f6e4; border-radius: 14px; padding: 14px; margin-top: 12px;">
+              <div style="font-weight: 700; color: #0f766e; font-size: 0.9rem; margin-bottom: 4px;">
+                <i class="fa-solid fa-dna"></i> ${toolLang === "en" ? "Mid-Parental Genetic Target Height" : "आनुवंशिक संभावित वयस्क लंबाई"}
+              </div>
+              <div style="font-size: 0.86rem; color: #334155; line-height: 1.5;">
+                • ${toolLang === "en" ? "Projected Adult Height" : "संभावित वयस्क लंबाई"}: <strong>${midTarget} cm</strong><br>
+                • ${toolLang === "en" ? "Target Genetic Range (±6 cm)" : "आनुवंशिक सीमा (±6 cm)"}: <strong>${minTarget} cm – ${maxTarget} cm</strong>
+              </div>
+            </div>
+          `;
+        }
+
+        const genderTitle = (gender === "boy") ? (toolLang === "en" ? "BOY" : "बालक") : (toolLang === "en" ? "GIRL" : "बालिका");
+        const growthHtml = `
+          <div class="result-box">
+            <h4><i class="fa-solid fa-ruler-combined" style="color: var(--brand-primary);"></i> ${toolLang === "en" ? "IAP Growth & BMI Assessment" : "IAP ग्रोथ एवं बीएमआई मूल्यांकन"}</h4>
+            <span class="iap-ref-badge">IAP Standard (${ageName} - ${genderTitle})</span>
+            <p style="font-size:0.84rem; color:#64748b; margin-bottom:10px;">
+              ${toolLang === "en" ? "Standard Healthy Range:" : "सामान्य स्वस्थ सीमा:"} 
+              ${toolLang === "en" ? "Weight:" : "वजन:"} <strong>${ref ? ref.minW : "" }–${ref ? ref.maxW : "" } kg</strong> | 
+              ${measurementWord}: <strong>${ref ? ref.minH : "" }–${ref ? ref.maxH : "" } cm</strong>
+            </p>
+            ${wStatus}
+            ${hStatus}
+            ${bmiStatus}
+            ${mphHtml}
+          </div>
+        `;
+
+        // 5. Milestones Flags
+        const greenItems = (data.green && Array.isArray(data.green[listLang])) ? data.green[listLang] : [];
+        const yellowItems = (data.yellow && Array.isArray(data.yellow[listLang])) ? data.yellow[listLang] : [];
+        const redItems = (data.red && Array.isArray(data.red[listLang])) ? data.red[listLang] : [];
+
+        const greenList = greenItems.map(item => `<li>${item}</li>`).join("");
+        const yellowList = yellowItems.map(item => `<li>${item}</li>`).join("");
+        const redList = redItems.map(item => `<li>${item}</li>`).join("");
+
+        const devHtml = `
+          <div class="result-box">
+            <h4><i class="fa-solid fa-brain" style="color: #0891b2;"></i> ${toolLang === "en" ? "Developmental Milestones (TDSC Scale)" : "विकासात्मक मील के पत्थर (TDSC स्केल)"}</h4>
+            <div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i><div><strong>🟢 ${toolLang === "en" ? "Green Flags (Normal):" : "सामान्य मील के पत्थर:"}</strong><ul style="margin-top:4px; padding-left:16px;">${greenList || '<li>Age milestones tracking well.</li>'}</ul></div></div>
+            <div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i><div><strong>🟡 ${toolLang === "en" ? "Yellow Flags (Monitor):" : "निगरानी योग्य संकेत:"}</strong><ul style="margin-top:4px; padding-left:16px;">${yellowList || '<li>No immediate concerns.</li>'}</ul></div></div>
+            <div class="flag-card flag-red"><i class="fa-solid fa-circle-exclamation"></i><div><strong>🔴 ${toolLang === "en" ? "Red Flags (Doctor Review):" : "सतर्कता संकेत - डॉक्टर को दिखाएं:"}</strong><ul style="margin-top:4px; padding-left:16px;">${redList || '<li>Consult pediatrician if milestones lag.</li>'}</ul></div></div>
+          </div>
+        `;
+
+        // 6. Parenting & Nutrition Guidance
+        const nutritionTip = (data.parentTips && data.parentTips.nutrition && data.parentTips.nutrition[listLang]) ? data.parentTips.nutrition[listLang] : "";
+        const safetyTip = (data.parentTips && data.parentTips.safety && data.parentTips.safety[listLang]) ? data.parentTips.safety[listLang] : "";
+        const playTip = (data.parentTips && data.parentTips.play && data.parentTips.play[listLang]) ? data.parentTips.play[listLang] : "";
+        const careTip = (data.parentTips && data.parentTips.care && data.parentTips.care[listLang]) ? data.parentTips.care[listLang] : "";
+
+        const tipsHtml = `
+          <div class="result-box" style="grid-column: 1 / -1; background: #faf5ff; border: 1.5px solid #e9d5ff;">
+            <h4 style="color: #6b21a8;"><i class="fa-solid fa-heart-pulse"></i> ${ageName} ${toolLang === "en" ? "Parenting & Nutrition Guide" : "अभिभावक देखभाल एवं पोषण मार्गदर्शन"}</h4>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 12px;">
+              <div style="background:#ffffff; padding:14px; border-radius:12px; border:1px solid #f3e8ff;">
+                <strong style="color:#7e22ce; font-size:0.88rem; display:block; margin-bottom:4px;"><i class="fa-solid fa-apple-whole"></i> ${toolLang === "en" ? "Nutrition & Diet:" : "पोषण एवं आहार:"}</strong>
+                <p style="font-size:0.84rem; color:#4b5563; line-height:1.45;">${nutritionTip}</p>
+              </div>
+              <div style="background:#ffffff; padding:14px; border-radius:12px; border:1px solid #f3e8ff;">
+                <strong style="color:#b91c1c; font-size:0.88rem; display:block; margin-bottom:4px;"><i class="fa-solid fa-shield-halved"></i> ${toolLang === "en" ? "Child Safety:" : "सुरक्षा:"}</strong>
+                <p style="font-size:0.84rem; color:#4b5563; line-height:1.45;">${safetyTip}</p>
+              </div>
+              <div style="background:#ffffff; padding:14px; border-radius:12px; border:1px solid #f3e8ff;">
+                <strong style="color:#0369a1; font-size:0.88rem; display:block; margin-bottom:4px;"><i class="fa-solid fa-puzzle-piece"></i> ${toolLang === "en" ? "Play & Cognitive:" : "मानसिक विकास:"}</strong>
+                <p style="font-size:0.84rem; color:#4b5563; line-height:1.45;">${playTip}</p>
+              </div>
+              <div style="background:#ffffff; padding:14px; border-radius:12px; border:1px solid #f3e8ff;">
+                <strong style="color:#15803d; font-size:0.88rem; display:block; margin-bottom:4px;"><i class="fa-solid fa-stethoscope"></i> ${toolLang === "en" ? "Doctor Tip:" : "चिकित्सकीय सलाह:"}</strong>
+                <p style="font-size:0.84rem; color:#4b5563; line-height:1.45;">${careTip}</p>
+              </div>
+            </div>
+            
+            <div class="doctor-cta-box">
+              <h3>${toolLang === "en" ? "Need In-Person Growth & Nutrition Evaluation?" : "शारीरिक विकास या पोषण पर व्यक्तिगत परामर्श हेतु"}</h3>
+              <p>${toolLang === "en" ? "Consult Dr. Dinesh Mittal at our Sector 3 Rohini clinic for clinical percentile charting." : "सेक्टर 3 रोहिणी क्लिनिक में डॉ. दिनेश मित्तल से परामर्श लें।"}</p>
+              <a href="index.html#growth-screener" class="hero-cta-btn"><i class="fa-solid fa-calendar-check"></i> ${toolLang === "en" ? "Book Clinic Consultation" : "परामर्श अपॉइंटमेंट बुक करें"}</a>
+            </div>
+          </div>
+        `;
+
+        resultsContainer.innerHTML = `
+          <div class="results-grid">
+            ${growthHtml}
+            ${devHtml}
+            ${tipsHtml}
+          </div>
+        `;
+
+        // Smooth scroll down to results
+        document.getElementById("resultsAnchor").scrollIntoView({ behavior: "smooth" });
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        updateLanguageUI();
+      });
+    </script>
+</body>
+</html>
