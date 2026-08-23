@@ -561,107 +561,105 @@ function toggleWeaningAccordion(bodyId, button) {
   if (icon) icon.style.transform = isOpen ? "rotate(0deg)" : "rotate(180deg)";
 }
 
-// 4. COLLAPSIBLE ADOLESCENT SECTION
-function renderCollapsibleAdolescentSection() {
+
+// ==========================================================
+// COMPACT ADOLESCENT FAQ RENDERER & TAB CONTROLLER
+// ==========================================================
+let currentAdolescentFilter = "all";
+let isFaqExpanded = false;
+
+function renderAdolescentFaqs() {
   const container = document.getElementById("faqAccordionContainer");
   if (!container || typeof adolescentFaqDatabase === "undefined") return;
 
-  const langEl = document.getElementById("screenerLang");
-  const lang = langEl ? langEl.value : "english";
-  const listLang = (lang === "hindi") ? "hi" : "en";
+  const currentLang = document.getElementById("screenerLang") ? document.getElementById("screenerLang").value : "english";
+  const langKey = (currentLang === "hindi") ? "hi" : "en";
 
-  const girlsFaqs = adolescentFaqDatabase.filter(f => f.category === "girls");
-  const boysFaqs = adolescentFaqDatabase.filter(f => f.category === "boys");
-
-  const girlsHtml = girlsFaqs.map(faq => `
-    <div class="faq-item">
-      <button class="faq-question" type="button" onclick="toggleFaq(this)">
-        <span><i class="${faq.icon}" style="color:${faq.color}; margin-right: 8px;"></i> ${faq.q[listLang]}</span>
-        <i class="fa-solid fa-chevron-down faq-icon"></i>
-      </button>
-      <div class="faq-answer" style="display: none;"><p>${faq.a[listLang]}</p></div>
-    </div>
-  `).join("");
-
-  const boysHtml = boysFaqs.map(faq => `
-    <div class="faq-item">
-      <button class="faq-question" type="button" onclick="toggleFaq(this)">
-        <span><i class="${faq.icon}" style="color:${faq.color}; margin-right: 8px;"></i> ${faq.q[listLang]}</span>
-        <i class="fa-solid fa-chevron-down faq-icon"></i>
-      </button>
-      <div class="faq-answer" style="display: none;"><p>${faq.a[listLang]}</p></div>
-    </div>
-  `).join("");
-
-  container.innerHTML = `
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 10px;">
-      
-      <!-- GIRLS CARD -->
-      <div style="border: 2px solid #f472b6; border-radius: 20px; overflow: hidden; background: #ffffff; box-shadow: 0 4px 15px rgba(244, 114, 182, 0.12);">
-        <button type="button" onclick="toggleGenderBox('girlsContent', this)" style="width: 100%; background: #fdf2f8; border: none; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; text-align: left;">
-          <div>
-            <span style="font-family: 'Fredoka', cursive; font-size: 1.15rem; color: #be185d; display: flex; align-items: center; gap: 8px;">
-              <i class="fa-solid fa-venus"></i> ${lang === "english" ? "Girls' Adolescent Health" : "किशोरियों का स्वास्थ्य एवं विकास"}
-            </span>
-            <small style="color: #9d174d; font-size: 0.8rem; font-weight: 600;">${lang === "english" ? "10 Questions on Menstruation, Hormones & Growth" : "माहवारी, हार्मोन व विकास पर 10 मुख्य प्रश्न"}</small>
-          </div>
-          <i class="fa-solid fa-circle-chevron-down" style="font-size: 1.4rem; color: #db2777; transition: transform 0.25s;"></i>
-        </button>
-        <div id="girlsContent" style="display: none; padding: 14px 12px; background: #fff;">
-          <div class="faq-container">${girlsHtml}</div>
-        </div>
-      </div>
-
-      <!-- BOYS CARD -->
-      <div style="border: 2px solid #60a5fa; border-radius: 20px; overflow: hidden; background: #ffffff; box-shadow: 0 4px 15px rgba(96, 165, 250, 0.12);">
-        <button type="button" onclick="toggleGenderBox('boysContent', this)" style="width: 100%; background: #eff6ff; border: none; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; text-align: left;">
-          <div>
-            <span style="font-family: 'Fredoka', cursive; font-size: 1.15rem; color: #1d4ed8; display: flex; align-items: center; gap: 8px;">
-              <i class="fa-solid fa-mars"></i> ${lang === "english" ? "Boys' Adolescent Health" : "किशोरों का स्वास्थ्य एवं विकास"}
-            </span>
-            <small style="color: #1e40af; font-size: 0.8rem; font-weight: 600;">${lang === "english" ? "10 Questions on Growth Spurts, Voice & Gym Safety" : "कद, आवाज में बदलाव व फिटनेस पर 10 प्रश्न"}</small>
-          </div>
-          <i class="fa-solid fa-circle-chevron-down" style="font-size: 1.4rem; color: #2563eb; transition: transform 0.25s;"></i>
-        </button>
-        <div id="boysContent" style="display: none; padding: 14px 12px; background: #fff;">
-          <div class="faq-container">${boysHtml}</div>
-        </div>
-      </div>
-
-    </div>
-  `;
-}
-
-function toggleGenderBox(contentId, button) {
-  const content = document.getElementById(contentId);
-  const icon = button.querySelector('.fa-circle-chevron-down');
-  if (!content) return;
-  const isOpen = (content.style.display === "block");
-  content.style.display = isOpen ? "none" : "block";
-  if (icon) icon.style.transform = isOpen ? "rotate(0deg)" : "rotate(180deg)";
-}
-
-function toggleFaq(button) {
-  const item = button.closest('.faq-item');
-  if (!item) return;
-  const answer = item.querySelector('.faq-answer');
-  const isActive = item.classList.contains('active');
-
-  const parentBox = item.closest('.faq-container');
-  if (parentBox) {
-    parentBox.querySelectorAll('.faq-item').forEach(el => {
-      el.classList.remove('active');
-      const a = el.querySelector('.faq-answer');
-      if (a) a.style.display = 'none';
-    });
+  // Filter by active category tab (All / Girls / Boys)
+  let list = adolescentFaqDatabase;
+  if (currentAdolescentFilter !== "all") {
+    list = list.filter(item => item.category === currentAdolescentFilter);
   }
 
-  if (!isActive && answer) {
-    item.classList.add('active');
-    answer.style.display = 'block';
+  // Show top 4 by default, or all if expanded
+  const visibleList = isFaqExpanded ? list : list.slice(0, 4);
+
+  let html = "";
+  visibleList.forEach((item, index) => {
+    html += `
+      <div class="faq-item" id="faq-item-${index}">
+        <button type="button" class="faq-question" onclick="toggleFaqItem(${index})">
+          <span style="display:flex; align-items:center; gap:8px;">
+            <i class="${item.icon}" style="color: ${item.color};"></i>
+            <span>${item.q[langKey]}</span>
+          </span>
+          <i class="fa-solid fa-chevron-down faq-icon" id="faq-chevron-${index}"></i>
+        </button>
+        <div class="faq-answer" id="faq-ans-${index}">
+          <p style="margin: 0; padding-top: 4px; border-top: 1px dashed #e2e8f0;">${item.a[langKey]}</p>
+        </div>
+      </div>
+    `;
+  });
+
+  container.innerHTML = html;
+
+  // Update button label and icon
+  const btnLabel = document.getElementById("faqBtnLabel");
+  const btnIcon = document.querySelector("#toggleFaqViewBtn i");
+  if (btnLabel && btnIcon) {
+    if (isFaqExpanded) {
+      btnLabel.textContent = (langKey === "hi") ? "कम प्रश्न दिखाएं" : "Show Less";
+      btnIcon.className = "fa-solid fa-chevron-up";
+    } else {
+      btnLabel.textContent = (langKey === "hi") ? `सभी प्रश्न देखें (${list.length})` : `View All ${list.length} Questions`;
+      btnIcon.className = "fa-solid fa-chevron-down";
+    }
   }
 }
 
+function filterAdolescentFaq(category) {
+  currentAdolescentFilter = category;
+
+  // Highlight active tab
+  ["tabFaqAll", "tabFaqGirls", "tabFaqBoys"].forEach(id => {
+    const btn = document.getElementById(id);
+    if (btn) {
+      btn.style.background = "#ffffff";
+      btn.style.color = "var(--dark-text)";
+      btn.style.borderColor = "#bae6fd";
+    }
+  });
+
+  const activeId = (category === "girls") ? "tabFaqGirls" : (category === "boys") ? "tabFaqBoys" : "tabFaqAll";
+  const activeBtn = document.getElementById(activeId);
+  if (activeBtn) {
+    activeBtn.style.background = "var(--brand-primary)";
+    activeBtn.style.color = "#ffffff";
+    activeBtn.style.borderColor = "var(--brand-primary)";
+  }
+
+  renderAdolescentFaqs();
+}
+
+function toggleFaqExpand() {
+  isFaqExpanded = !isFaqExpanded;
+  renderAdolescentFaqs();
+}
+
+function toggleFaqItem(index) {
+  const ans = document.getElementById(`faq-ans-${index}`);
+  const parent = document.getElementById(`faq-item-${index}`);
+  if (!ans || !parent) return;
+
+  const isOpen = (ans.style.display === "block");
+  ans.style.display = isOpen ? "none" : "block";
+  if (isOpen) {
+    parent.classList.remove("active");
+  } else {
+    parent.classList.add("active");
+  }
+}
 // 5. MODAL POPUP CONTROLLERS (WITH BODY SCROLL LOCK)
 function openBookingModal() {
   const modal = document.getElementById('bookingModal');
