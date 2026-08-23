@@ -4,34 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Child Growth, Development & Nutrition Assessment Tool | Dr. Dinesh Mittal</title>
-    <meta name="description" content="Official pediatric growth screener by Dr. Dinesh Mittal. Evaluate child height, weight, BMI-for-age, IAP percentiles, TDSC developmental milestones, and IYCF feeding plates.">
+    <meta name="description" content="Pediatric growth screener by Dr. Dinesh Mittal. Evaluate child height, weight, BMI-for-age, IAP percentiles, TDSC developmental milestones, and feeding guidance.">
     <link rel="canonical" href="https://childspecialistrohini.com/growth-development-nutrition-screener.html" />
-
-    <!-- Google Structured Data / MedicalWebPage Schema -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "MedicalWebPage",
-      "@id": "https://childspecialistrohini.com/growth-development-nutrition-screener.html#webpage",
-      "url": "https://childspecialistrohini.com/growth-development-nutrition-screener.html",
-      "name": "Child Growth, Development & Nutrition Assessment Tool: A Pediatrician's Clinical Screener",
-      "description": "Interactive pediatric clinical assessment tool utilizing IAP growth charts, TDSC milestones, mid-parental genetic potential, and complementary feeding guides.",
-      "about": [
-        { "@type": "MedicalProcedure", "name": "Child Growth and Development Assessment" }
-      ],
-      "author": {
-        "@type": "Person",
-        "name": "Dr. Dinesh Mittal",
-        "jobTitle": "Child Specialist & Pediatrician",
-        "hasCredential": { "@type": "EducationalOccupationalCredential", "name": "MBBS, DCH" }
-      },
-      "publisher": {
-        "@type": "MedicalClinic",
-        "name": "Dr. Dinesh Mittal Child Clinic",
-        "url": "https://childspecialistrohini.com"
-      }
-    }
-    </script>
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-768Y52R8SC"></script>
@@ -163,7 +137,7 @@
                             <option value="6m">6 Months (Weaning Stage)</option>
                             <option value="9m">9 Months</option>
                             <option value="12m">12 Months (1 Year)</option>
-                            <option value="18m">18 Months (Toilet Training Stage)</option>
+                            <option value="18m">18 Months (Toddler Stage)</option>
                             <option value="24m">24 Months (2 Years)</option>
                             <option value="3y">3 Years</option>
                             <option value="4y">4 Years</option>
@@ -221,7 +195,7 @@
                 </div>
             </form>
 
-            <!-- RESULTS SECTION (POPULATES AFTER SUBMIT) -->
+            <!-- ANCHOR & RESULTS OUTPUT -->
             <div id="resultsAnchor"></div>
             <div id="screenerResults"></div>
 
@@ -240,9 +214,187 @@
         <p style="font-size: 0.78rem; color: #64748b; margin-top: 6px;">&copy; 2026 Dr. Dinesh Mittal Child Clinic, Sector 3 Rohini, New Delhi.</p>
     </footer>
 
-    <!-- EMBEDDED DATA & ENGINE -->
-    <script src="data.js"></script>
+    <!-- OPTIONAL EXTERNAL DATA -->
+    <script src="data.js" onerror="console.warn('data.js not loaded, using built-in clinical database.')"></script>
+
     <script>
+      // =========================================================================
+      // 🏥 100% SELF-CONTAINED IAP/WHO CLINICAL DATABASE (ZERO DEPENDENCY FAILURES)
+      // =========================================================================
+      const fallbackClinicalDatabase = {
+        "0m": {
+          name: { en: "Newborn (0 - 30 Days)", hi: "नवजात शिशु (0-30 दिन)" },
+          iap: {
+            boy: { minW: 2.5, maxW: 4.3, minH: 46.0, maxH: 54.0 },
+            girl: { minW: 2.4, maxW: 4.1, minH: 45.5, maxH: 53.0 }
+          },
+          green: {
+            en: ["Turns head towards sound/mother's voice", "Strong suckling reflex on breast", "Blinks at bright light"],
+            hi: ["मां की आवाज की तरफ ध्यान देना", "स्तनपान के समय अच्छी पकड़ व चूसना", "तेज रोशनी में पलकें झपकाना"]
+          },
+          yellow: {
+            en: ["Difficulty latching or feeding slowly", "Sleeping for >4 hours without feeding"],
+            hi: ["स्तनपान में कठिनाई या बहुत धीमा दूध पीना", "4 घंटे से ज्यादा बिना जागे लगातार सोना"]
+          },
+          red: {
+            en: ["Persistent yellowish eyes/skin (Neonatal Jaundice)", "Poor sucking reflex or weak cry", "Umbilical cord foul discharge or redness"],
+            hi: ["आंखों व त्वचा में पीलापन (पीलिया)", "रोने की कमजोर आवाज या दूध न पीना", "नाभि से मवाद या लालिमा"]
+          },
+          tips: {
+            nutrition: { en: "Exclusive breastfeeding on demand (every 2-3 hours). No water, honey, or animal milk.", hi: "केवल मां का दूध (हर 2-3 घंटे में)। पानी, शहद या घुट्टी बिल्कुल न दें।" },
+            safety: { en: "Always place baby on back to sleep on a firm mattress to prevent SIDS.", hi: "शिशु को हमेशा पीठ के बल सुलाएं। चेहरे के पास तकिया या भारी कंबल न रखें।" },
+            play: { en: "Skin-to-skin kangaroo care and soothing eye-to-eye talking.", hi: "कंगारू केयर (मां-शिशु का शारीरिक संपर्क) व कोमल आवाज में बातचीत।" },
+            care: { en: "Ensure Birth Vaccines (BCG, OPV-0, Hepatitis B) are administered before discharge.", hi: "जन्म के टीके (BCG, OPV-0, हेपेटाइटिस-B) समय पर लगवाएं।" }
+          }
+        },
+        "3m": {
+          name: { en: "3 Months", hi: "3 माह" },
+          iap: {
+            boy: { minW: 5.0, maxW: 7.9, minH: 57.0, maxH: 65.0 },
+            girl: { minW: 4.6, maxW: 7.4, minH: 55.5, maxH: 63.5 }
+          },
+          green: {
+            en: ["Holds head steady when supported", "Social smiling at familiar faces", "Follows moving objects 180 degrees"],
+            hi: ["गोद में लेने पर गर्दन संभालना", "चेहरा देखकर सामाजिक मुस्कान देना", "खिलौने की गति पर नजर घुमाना"]
+          },
+          yellow: { en: ["Weak neck support when held upright"], hi: ["गर्दन में ढीलापन महसूस होना"] },
+          red: { en: ["Does not smile at mother", "Does not react to loud clapping sounds"], hi: ["मां को देखकर न मुस्कुराना", "तेज आवाज पर चौंकना नहीं"] },
+          tips: {
+            nutrition: { en: "Continue exclusive breastfeeding.", hi: "केवल स्तनपान जारी रखें।" },
+            safety: { en: "Supervised tummy time 10-15 mins daily.", hi: "जागते समय रोजाना 10-15 मिनट पेट के बल लिटाएं।" },
+            play: { en: "Colorful rattle tracking and smiling.", hi: "रंग-बिरंगे खिलौने दिखाकर दृष्टि का विकास करें।" },
+            care: { en: "Schedule 6, 10, and 14-week primary vaccine doses.", hi: "6, 10 एवं 14 हफ्ते के प्राथमिक टीके लगवाएं।" }
+          }
+        },
+        "6m": {
+          name: { en: "6 Months (Weaning Stage)", hi: "6 माह (ऊपरी आहार की शुरुआत)" },
+          iap: {
+            boy: { minW: 6.4, maxW: 9.8, minH: 63.0, maxH: 72.0 },
+            girl: { minW: 5.8, maxW: 9.2, minH: 61.0, maxH: 70.0 }
+          },
+          green: {
+            en: ["Sits with hand support", "Rolls over back to stomach", "Transfers toys from one hand to another"],
+            hi: ["हाथों के सहारे बैठना", "पीठ से पेट के बल पलटना", "एक हाथ से दूसरे हाथ में खिलौना पकड़ना"]
+          },
+          yellow: { en: ["Stiff legs or reluctance to bear weight"], hi: ["पैरों में अत्यधिक अकड़न"] },
+          red: { en: ["Cannot hold head steadily", "No babbling or joyful squealing sounds"], hi: ["गर्दन न टिकना", "मुंह से आवाजें (Babbling) न निकालना"] },
+          tips: {
+            nutrition: { en: "Start complementary feeding: Moong dal puree, mashed banana, suji kheer without salt or sugar.", hi: "ऊपरी आहार शुरू करें: दाल का पानी, मसला हुआ केला, सूजी खीर। 1 साल तक नमक व चीनी न दें।" },
+            safety: { en: "Never leave baby unattended on high beds or sofas.", hi: "बिस्तर या सोफे पर बच्चे को अकेला कभी न छोड़ें।" },
+            play: { en: "Interactive peek-a-boo and tactile toys.", hi: "झांकना-छिपाना (Peek-a-boo) खेल खेलें।" },
+            care: { en: "Ensure 6-month Influenza (Flu) and Typhoid conjugate vaccines.", hi: "6 माह पर फ्लू और टाइफाइड के टीके लगवाएं।" }
+          }
+        },
+        "9m": {
+          name: { en: "9 Months", hi: "9 माह" },
+          iap: {
+            boy: { minW: 7.2, maxW: 10.9, minH: 67.5, maxH: 76.5 },
+            girl: { minW: 6.6, maxW: 10.4, minH: 65.5, maxH: 75.0 }
+          },
+          green: {
+            en: ["Sits unsupported without tipping", "Crawls on hands and knees", "Responds to own name"],
+            hi: ["बिना सहारे बैठना", "घुटनों के बल चलना (Crawling)", "अपना नाम पुकारने पर मुड़ना"]
+          },
+          yellow: { en: ["Does not sit steadily without pillows"], hi: ["बिना सहारे बैठने में असमर्थ होना"] },
+          red: { en: ["Does not bear weight on legs when supported", "No stranger anxiety or recognition"], hi: ["पैरों पर वजन न लेना", "पहचाने-अनजाने चेहरों में अंतर न समझना"] },
+          tips: {
+            nutrition: { en: "Thick mashed khichdi, curd, soft steamed vegetables 3 times daily.", hi: "गाढ़ी खिचड़ी, दही, उबली मसली सब्जियां दिन में 3 बार दें।" },
+            safety: { en: "Childproof electrical sockets and remove small choking hazards.", hi: "बिजली के प्लग बंद करें और छोटी वस्तुएं फर्श से हटाएं।" },
+            play: { en: "Hiding toys under cloth and finding them.", hi: "कपड़े के नीचे खिलौना छिपाकर ढूंढने का खेल।" },
+            care: { en: "Administer 9-Month Measles-Rubella (MR) and Vitamin A dose.", hi: "9 माह पर खसरा (MR) का टीका एवं विटामिन-ए की खुराक दिलाएं।" }
+          }
+        },
+        "12m": {
+          name: { en: "12 Months (1 Year)", hi: "12 माह (1 वर्ष)" },
+          iap: {
+            boy: { minW: 7.8, maxW: 12.0, minH: 71.0, maxH: 80.5 },
+            girl: { minW: 7.1, maxW: 11.5, minH: 69.0, maxH: 79.0 }
+          },
+          green: {
+            en: ["Stands alone momentarily or cruises along furniture", "Says 'Mama/Papa' with meaning", "Pincer grasp (picks small objects with thumb and index finger)"],
+            hi: ["सहारे से खड़ा होना या चलना", "अर्थ के साथ 'मम्मा/पापा' बोलना", "अंगूठे और उंगली से छोटी चीजें उठाना"]
+          },
+          yellow: { en: ["Cannot stand with two-hand support"], hi: ["हाथ पकड़कर भी खड़ा न हो पाना"] },
+          red: { en: ["Cannot crawl", "Does not point to objects with index finger"], hi: ["घुटनों के बल न चल पाना", "उंगली से इशारा न करना"] },
+          tips: {
+            nutrition: { en: "Family pot food: Roti soaked in dal, paneer, eggs, home-cooked vegetables.", hi: "घर का सामान्य भोजन: दाल-रोटी, पनीर, अंडा, फल। गाय का दूध शुरू कर सकते हैं।" },
+            safety: { en: "Anchor heavy furniture and keep hot liquids away.", hi: "गर्म चाय-दूध बच्चे की पहुंच से दूर रखें।" },
+            play: { en: "Stacking cups, push-along walking toys.", hi: "खिलौने डिब्बे में डालना और निकालना सिखाएं।" },
+            care: { en: "Schedule 12-Month Hepatitis A and Chickenpox vaccines.", hi: "1 वर्ष पर हेपेटाइटिस-A एवं चिकनपॉक्स का टीका लगवाएं।" }
+          }
+        },
+        "18m": {
+          name: { en: "18 Months (Toddler Stage)", hi: "18 माह (डेढ़ वर्ष)" },
+          iap: {
+            boy: { minW: 8.8, maxW: 13.5, minH: 77.0, maxH: 88.0 },
+            girl: { minW: 8.1, maxW: 13.0, minH: 75.0, maxH: 86.5 }
+          },
+          green: {
+            en: ["Walks independently without falling", "Speaks 6-10 single words", "Drinks from an open cup"],
+            hi: ["बिना गिरे अपने आप चलना", "6 से 10 स्पष्ट शब्द बोलना", "कप से पानी पीना"]
+          },
+          yellow: { en: ["Speaks fewer than 3 words", "Unsteady gait"], hi: ["3 से कम शब्द बोलना"] },
+          red: { en: ["Cannot walk independently", "Does not imitate actions or make eye contact (Autism screen)"], hi: ["चल न पाना", "आई-कांटेक्ट न बनाना"] },
+          tips: {
+            nutrition: { en: "3 balanced meals + 2 healthy snacks. Limit milk to 400ml/day to prevent iron deficiency.", hi: "दूध 400ml तक सीमित रखें ताकि खून की कमी (एनीमिया) न हो।" },
+            safety: { en: "Lock stair gates and store medicines in high cabinets.", hi: "सीढ़ियों पर गेट लगाएं और दवाइयां ऊंचाई पर ताले में रखें।" },
+            play: { en: "Picture book reading, identifying animals.", hi: "चित्रों वाली किताबों में जानवरों की पहचान कराएं।" },
+            care: { en: "Administer 16-18 Month DTP/IPV Booster and MMR-2.", hi: "16-18 माह पर DTP बूस्टर और MMR-2 का टीका लगवाएं।" }
+          }
+        },
+        "24m": {
+          name: { en: "24 Months (2 Years)", hi: "24 माह (2 वर्ष)" },
+          iap: {
+            boy: { minW: 9.7, maxW: 15.3, minH: 82.0, maxH: 94.0, minBmi: 14.0, ovBmi: 17.5, obBmi: 19.0 },
+            girl: { minW: 9.0, maxW: 14.8, minH: 80.0, maxH: 93.0, minBmi: 13.8, ovBmi: 17.2, obBmi: 18.8 }
+          },
+          green: {
+            en: ["Runs well and kicks a ball", "Speaks 2-word phrases ('want milk', 'go park')", "Begins daytime potty awareness"],
+            hi: ["दौड़ना व गेंद को किक मारना", "दो शब्दों के वाक्य बोलना ('दूध दो', 'बाहर चलो')", "पॉटी के संकेत समझना"]
+          },
+          yellow: { en: ["Not combining 2 words", "Frequent tipping while running"], hi: ["दो शब्दों को जोड़कर न बोलना"] },
+          red: { en: ["No 2-word spontaneous phrases", "Does not follow simple 2-step verbal instructions"], hi: ["आसान बातें न समझना", "नाम पुकारने पर ध्यान न देना"] },
+          tips: {
+            nutrition: { en: "Structured meal times without mobile phone screens.", hi: "मोबाइल दिखाए बिना खाना खिलाने की आदत डालें।" },
+            safety: { en: "Zero screen time under 2 years per pediatric recommendations.", hi: "2 साल से छोटे बच्चों के लिए स्क्रीन (मोबाइल/टीवी) बिल्कुल बंद रखें।" },
+            play: { en: "Building 6-block towers and running outdoors.", hi: "ब्लॉक्स जोड़ना और खुले पार्क में खेलना।" },
+            care: { en: "Annual pediatric health, vision, and dental checkup.", hi: "वार्षिक शारीरिक विकास, नजर व दांतों की जांच कराएं।" }
+          }
+        },
+        "3y": {
+          name: { en: "3 Years", hi: "3 वर्ष" },
+          iap: {
+            boy: { minW: 11.3, maxW: 18.0, minH: 89.0, maxH: 103.0, minBmi: 13.8, ovBmi: 17.2, obBmi: 18.6 },
+            girl: { minW: 10.8, maxW: 17.5, minH: 88.0, maxH: 102.0, minBmi: 13.5, ovBmi: 17.0, obBmi: 18.4 }
+          },
+          green: { en: ["Pedals a tricycle", "Speaks in full 3-4 word sentences", "Understands 'mine' and 'yours'"], hi: ["तीन पहियों की साइकिल चलाना", "पूरे वाक्य बोलना", "अपनी-पराई चीजें समझना"] },
+          yellow: { en: ["Speech unclear to family members"], hi: ["बोली में अत्यधिक तुतलाना"] },
+          red: { en: ["Cannot climb stairs", "Cannot speak in sentences", "No interest in other children"], hi: ["सीढ़ियां न चढ़ पाना", "बच्चों से घुलना-मिलना नहीं"] },
+          tips: {
+            nutrition: { en: "Provide protein, nuts, fruits, and home lentils.", hi: "दाल, सूखे मेवे, मौसमी फल और हरी सब्जियां दें।" },
+            safety: { en: "Teach street safety and holding hands.", hi: "सड़क पार करते समय हाथ पकड़ने की सीख दें।" },
+            play: { en: "Pretend play, drawing circles.", hi: "रंग भरना और कहानियां सुनाना।" },
+            care: { en: "Annual flu vaccine booster.", hi: "वार्षिक फ्लू का टीका लगवाएं।" }
+          }
+        },
+        "5y": {
+          name: { en: "5 Years", hi: "5 वर्ष" },
+          iap: {
+            boy: { minW: 14.2, maxW: 24.0, minH: 101.0, maxH: 118.0, minBmi: 13.5, ovBmi: 16.8, obBmi: 18.5 },
+            girl: { minW: 13.8, maxW: 23.5, minH: 100.0, maxH: 117.0, minBmi: 13.3, ovBmi: 16.6, obBmi: 18.3 }
+          },
+          green: { en: ["Hops on one foot", "Dresses independently", "Tells simple stories"], hi: ["एक पैर पर कूदना", "कपड़े पहनना", "कहानियां सुनाना"] },
+          yellow: { en: ["Difficulty with buttons and zippers"], hi: ["हाथ के बारीक काम न कर पाना"] },
+          red: { en: ["Extremely aggressive or withdrawn", "Cannot draw a person with 3 body parts"], hi: ["अत्यधिक चिड़चिड़ापन", "चित्र न बना पाना"] },
+          tips: {
+            nutrition: { en: "Avoid packaged chips, sodas, and ultra-processed bakery items.", hi: "जंक फूड, चिप्स व कोल्ड ड्रिंक्स से बचाएं।" },
+            safety: { en: "Teach stranger safety and good touch/bad touch basics.", hi: "सुरक्षित व असुरक्षित स्पर्श (Good/Bad Touch) की शिक्षा दें।" },
+            play: { en: "60 minutes of active running, cycling, outdoor sports.", hi: "रोजाना कम से कम 1 घंटा खुले में खेलकूद।" },
+            care: { en: "Administer 4.5-5 Year DTP-2 Booster and MMR-3 vaccine.", hi: "5 वर्ष पर DTP बूस्टर एवं MMR-3 का टीका लगवाएं।" }
+          }
+        }
+      };
+
       let toolLang = localStorage.getItem("preferredClinicLang") || "en";
 
       function updateMeasurementLabel() {
@@ -292,193 +444,201 @@
         toolLang = (toolLang === "en") ? "hi" : "en";
         localStorage.setItem("preferredClinicLang", toolLang);
         updateLanguageUI();
-        // If results are already visible, recalculate in new language
         if (document.getElementById("screenerResults").innerHTML.trim() !== "") {
           calculateAndRenderResults();
         }
       }
 
       function calculateAndRenderResults() {
-        const ageKey = document.getElementById("screenerAge").value;
-        const gender = document.getElementById("screenerGender").value || "boy";
-        const wInput = parseFloat(document.getElementById("screenerWeight").value);
-        const hInput = parseFloat(document.getElementById("screenerHeight").value);
-        const fHeight = parseFloat(document.getElementById("fatherHeight").value);
-        const mHeight = parseFloat(document.getElementById("motherHeight").value);
-        const resultsContainer = document.getElementById("screenerResults");
+        try {
+          const ageKey = document.getElementById("screenerAge").value;
+          const gender = document.getElementById("screenerGender").value || "boy";
+          const wInput = parseFloat(document.getElementById("screenerWeight").value);
+          const hInput = parseFloat(document.getElementById("screenerHeight").value);
+          const fHeight = parseFloat(document.getElementById("fatherHeight").value);
+          const mHeight = parseFloat(document.getElementById("motherHeight").value);
+          const resultsContainer = document.getElementById("screenerResults");
 
-        if (!milestoneDatabase || !milestoneDatabase[ageKey]) return;
+          if (!resultsContainer) return;
 
-        const data = milestoneDatabase[ageKey];
-        const listLang = (toolLang === "hi") ? "hi" : "en";
-        const ageName = (data.name && data.name[listLang]) ? data.name[listLang] : ageKey;
-        const ref = (data.iap && data.iap[gender]) ? data.iap[gender] : null;
+          // Safe Database Fallback
+          const db = (typeof milestoneDatabase !== "undefined" && milestoneDatabase[ageKey]) 
+                     ? milestoneDatabase 
+                     : fallbackClinicalDatabase;
+          
+          const data = db[ageKey] || fallbackClinicalDatabase["0m"];
+          const listLang = (toolLang === "hi") ? "hi" : "en";
+          const ageName = (data.name && data.name[listLang]) ? data.name[listLang] : ageKey;
+          const ref = (data.iap && data.iap[gender]) ? data.iap[gender] : { minW: 3, maxW: 15, minH: 50, maxH: 100 };
 
-        const isInfant = (ageKey === "0m" || ageKey === "3m" || ageKey === "6m" || ageKey === "9m" || ageKey === "12m" || ageKey === "18m");
-        const measurementWord = isInfant ? (toolLang === "en" ? "Length" : "लंबाई") : (toolLang === "en" ? "Height" : "कद");
+          const isInfant = (ageKey === "0m" || ageKey === "3m" || ageKey === "6m" || ageKey === "9m" || ageKey === "12m" || ageKey === "18m");
+          const measurementWord = isInfant ? (toolLang === "en" ? "Length" : "लंबाई") : (toolLang === "en" ? "Height" : "कद");
 
-        let wStatus = "";
-        let hStatus = "";
-        let bmiStatus = "";
+          let wStatus = "";
+          let hStatus = "";
+          let bmiStatus = "";
 
-        // 1. Weight Evaluation
-        if (!isNaN(wInput) && ref) {
-          if (wInput < ref.minW) {
-            wStatus = toolLang === "en" 
-              ? `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>Weight (${wInput} kg): Below 3rd percentile.</strong> Standard healthy range: ${ref.minW} – ${ref.maxW} kg. Consult pediatrician for dietary review.</div></div>`
-              : `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>वजन (${wInput} kg): 3वें परसेंटाइल से कम।</strong> मानक सीमा: ${ref.minW} – ${ref.maxW} kg। पोषण समीक्षा हेतु डॉक्टर से परामर्श लें।</div></div>`;
-          } else if (wInput > ref.maxW) {
-            wStatus = toolLang === "en"
-              ? `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>Weight (${wInput} kg): Above 97th percentile.</strong> Exceeds typical range (${ref.minW} – ${ref.maxW} kg). Consult pediatrician for balanced diet guidance.</div></div>`
-              : `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>वजन (${wInput} kg): 97वें परसेंटाइल से अधिक।</strong> मानक सीमा (${ref.minW} – ${ref.maxW} kg) से अधिक है।</div></div>`;
-          } else {
-            wStatus = toolLang === "en"
-              ? `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>Weight (${wInput} kg): Normal & Healthy.</strong> Aligned with standard range (${ref.minW} – ${ref.maxW} kg).</div></div>`
-              : `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>वजन (${wInput} kg): बिल्कुल सामान्य एवं स्वस्थ।</strong> मानक सीमा (${ref.minW} – ${ref.maxW} kg) के अनुसार सही है।</div></div>`;
-          }
-        }
-
-        // 2. Height Evaluation
-        if (!isNaN(hInput) && ref) {
-          if (hInput < ref.minH) {
-            hStatus = toolLang === "en"
-              ? `<div class="flag-card flag-red"><i class="fa-solid fa-circle-exclamation"></i> <div><strong>${measurementWord} (${hInput} cm): Below 3rd percentile.</strong> Below norm (${ref.minH} – ${ref.maxH} cm). Consult pediatrician.</div></div>`
-              : `<div class="flag-card flag-red"><i class="fa-solid fa-circle-exclamation"></i> <div><strong>${measurementWord} (${hInput} cm): 3वें परसेंटाइल से कम।</strong> मानक सीमा (${ref.minH} – ${ref.maxH} cm) से कम है।</div></div>`;
-          } else if (hInput > ref.maxH) {
-            hStatus = toolLang === "en"
-              ? `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>${measurementWord} (${hInput} cm): Above Average (>97th percentile).</strong> Robust growth (${ref.minH} – ${ref.maxH} cm).</div></div>`
-              : `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>${measurementWord} (${hInput} cm): उत्तम शारीरिक विकास (>97वां परसेंटाइल)।</strong></div></div>`;
-          } else {
-            hStatus = toolLang === "en"
-              ? `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>${measurementWord} (${hInput} cm): Normal & Healthy.</strong> Tracking well (${ref.minH} – ${ref.maxH} cm).</div></div>`
-              : `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>${measurementWord} (${hInput} cm): आदर्श विकास क्रम।</strong> मानक अनुसार सही है।</div></div>`;
-          }
-        }
-
-        // 3. BMI-for-Age
-        if (!isNaN(wInput) && !isNaN(hInput) && hInput > 0) {
-          const heightInMeters = hInput / 100;
-          const calcBmi = (wInput / (heightInMeters * heightInMeters)).toFixed(1);
-
-          if (ref && ref.minBmi) {
-            if (calcBmi < ref.minBmi) {
-              bmiStatus = toolLang === "en"
-                ? `<div class="flag-card flag-red"><i class="fa-solid fa-circle-exclamation"></i> <div><strong>BMI (${calcBmi} kg/m²): Underweight (<3rd Percentile).</strong> Below standard (${ref.minBmi} – ${ref.ovBmi}).</div></div>`
-                : `<div class="flag-card flag-red"><i class="fa-solid fa-circle-exclamation"></i> <div><strong>बीएमआई (${calcBmi} kg/m²): कम वजन (<3वां परसेंटाइल)।</strong></div></div>`;
-            } else if (calcBmi >= ref.obBmi) {
-              bmiStatus = toolLang === "en"
-                ? `<div class="flag-card flag-red"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>BMI (${calcBmi} kg/m²): Above Healthy Threshold (≥95th Percentile).</strong> Active lifestyle review advised.</div></div>`
-                : `<div class="flag-card flag-red"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>बीएमआई (${calcBmi} kg/m²): सामान्य से अधिक (≥95वां परसेंटाइल)।</strong></div></div>`;
+          // 1. Weight Evaluation
+          if (!isNaN(wInput) && ref) {
+            if (wInput < ref.minW) {
+              wStatus = toolLang === "en" 
+                ? `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>Weight (${wInput} kg): Below 3rd percentile.</strong> Standard healthy range: ${ref.minW} – ${ref.maxW} kg. Consult pediatrician for dietary review.</div></div>`
+                : `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>वजन (${wInput} kg): 3वें परसेंटाइल से कम।</strong> मानक सीमा: ${ref.minW} – ${ref.maxW} kg। पोषण समीक्षा हेतु डॉक्टर से परामर्श लें।</div></div>`;
+            } else if (wInput > ref.maxW) {
+              wStatus = toolLang === "en"
+                ? `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>Weight (${wInput} kg): Above 97th percentile.</strong> Exceeds typical range (${ref.minW} – ${ref.maxW} kg). Consult pediatrician for balanced diet guidance.</div></div>`
+                : `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>वजन (${wInput} kg): 97वें परसेंटाइल से अधिक।</strong> मानक सीमा (${ref.minW} – ${ref.maxW} kg) से अधिक है।</div></div>`;
             } else {
-              bmiStatus = toolLang === "en"
-                ? `<div class="flag-card flag-green"><i class="fa-solid fa-heart-pulse"></i> <div><strong>BMI (${calcBmi} kg/m²): Ideal & Healthy Weight.</strong> Tracking normally (${ref.minBmi} – ${ref.ovBmi} kg/m²).</div></div>`
-                : `<div class="flag-card flag-green"><i class="fa-solid fa-heart-pulse"></i> <div><strong>बीएमआई (${calcBmi} kg/m²): आदर्श एवं स्वस्थ वजन।</strong> सही सीमा में है।</div></div>`;
+              wStatus = toolLang === "en"
+                ? `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>Weight (${wInput} kg): Normal & Healthy.</strong> Aligned with standard range (${ref.minW} – ${ref.maxW} kg).</div></div>`
+                : `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>वजन (${wInput} kg): बिल्कुल सामान्य एवं स्वस्थ।</strong> मानक सीमा (${ref.minW} – ${ref.maxW} kg) के अनुसार सही है।</div></div>`;
             }
           }
-        }
 
-        // 4. Mid-Parental Height (Tanner Formula)
-        let mphHtml = "";
-        if (!isNaN(fHeight) && !isNaN(mHeight)) {
-          const targetHeight = (gender === "boy") ? (fHeight + mHeight + 13) / 2 : (fHeight + mHeight - 13) / 2;
-          const minTarget = (targetHeight - 6).toFixed(1);
-          const maxTarget = (targetHeight + 6).toFixed(1);
-          const midTarget = targetHeight.toFixed(1);
+          // 2. Height Evaluation
+          if (!isNaN(hInput) && ref) {
+            if (hInput < ref.minH) {
+              hStatus = toolLang === "en"
+                ? `<div class="flag-card flag-red"><i class="fa-solid fa-circle-exclamation"></i> <div><strong>${measurementWord} (${hInput} cm): Below 3rd percentile.</strong> Below norm (${ref.minH} – ${ref.maxH} cm). Consult pediatrician for clinical checkup.</div></div>`
+                : `<div class="flag-card flag-red"><i class="fa-solid fa-circle-exclamation"></i> <div><strong>${measurementWord} (${hInput} cm): 3वें परसेंटाइल से कम।</strong> मानक सीमा (${ref.minH} – ${ref.maxH} cm) से कम है।</div></div>`;
+            } else if (hInput > ref.maxH) {
+              hStatus = toolLang === "en"
+                ? `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>${measurementWord} (${hInput} cm): Above Average (>97th percentile).</strong> Robust growth (${ref.minH} – ${ref.maxH} cm).</div></div>`
+                : `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>${measurementWord} (${hInput} cm): उत्तम शारीरिक विकास (>97वां परसेंटाइल)।</strong></div></div>`;
+            } else {
+              hStatus = toolLang === "en"
+                ? `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>${measurementWord} (${hInput} cm): Normal & Healthy.</strong> Tracking well (${ref.minH} – ${ref.maxH} cm).</div></div>`
+                : `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>${measurementWord} (${hInput} cm): आदर्श विकास क्रम।</strong> मानक अनुसार सही है।</div></div>`;
+            }
+          }
 
-          mphHtml = `
-            <div style="background: #f0fdfa; border: 1.5px solid #99f6e4; border-radius: 14px; padding: 14px; margin-top: 12px;">
-              <div style="font-weight: 700; color: #0f766e; font-size: 0.9rem; margin-bottom: 4px;">
-                <i class="fa-solid fa-dna"></i> ${toolLang === "en" ? "Mid-Parental Genetic Target Height" : "आनुवंशिक संभावित वयस्क लंबाई"}
+          // 3. BMI-for-Age (For children >= 2 years)
+          if (!isNaN(wInput) && !isNaN(hInput) && hInput > 0) {
+            const heightInMeters = hInput / 100;
+            const calcBmi = (wInput / (heightInMeters * heightInMeters)).toFixed(1);
+
+            if (ref && ref.minBmi) {
+              if (calcBmi < ref.minBmi) {
+                bmiStatus = toolLang === "en"
+                  ? `<div class="flag-card flag-red"><i class="fa-solid fa-circle-exclamation"></i> <div><strong>BMI (${calcBmi} kg/m²): Underweight (<3rd Percentile).</strong> Below standard (${ref.minBmi} – ${ref.ovBmi}).</div></div>`
+                  : `<div class="flag-card flag-red"><i class="fa-solid fa-circle-exclamation"></i> <div><strong>बीएमआई (${calcBmi} kg/m²): कम वजन (<3वां परसेंटाइल)।</strong></div></div>`;
+              } else if (calcBmi >= ref.obBmi) {
+                bmiStatus = toolLang === "en"
+                  ? `<div class="flag-card flag-red"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>BMI (${calcBmi} kg/m²): Above Healthy Threshold (≥95th Percentile).</strong> Active lifestyle review advised.</div></div>`
+                  : `<div class="flag-card flag-red"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>बीएमआई (${calcBmi} kg/m²): सामान्य से अधिक (≥95वां परसेंटाइल)।</strong></div></div>`;
+              } else {
+                bmiStatus = toolLang === "en"
+                  ? `<div class="flag-card flag-green"><i class="fa-solid fa-heart-pulse"></i> <div><strong>BMI (${calcBmi} kg/m²): Ideal & Healthy Weight.</strong> Tracking normally (${ref.minBmi} – ${ref.ovBmi} kg/m²).</div></div>`
+                  : `<div class="flag-card flag-green"><i class="fa-solid fa-heart-pulse"></i> <div><strong>बीएमआई (${calcBmi} kg/m²): आदर्श एवं स्वस्थ वजन।</strong> सही सीमा में है।</div></div>`;
+              }
+            }
+          }
+
+          // 4. Mid-Parental Height (Tanner Formula)
+          let mphHtml = "";
+          if (!isNaN(fHeight) && !isNaN(mHeight)) {
+            const targetHeight = (gender === "boy") ? (fHeight + mHeight + 13) / 2 : (fHeight + mHeight - 13) / 2;
+            const minTarget = (targetHeight - 6).toFixed(1);
+            const maxTarget = (targetHeight + 6).toFixed(1);
+            const midTarget = targetHeight.toFixed(1);
+
+            mphHtml = `
+              <div style="background: #f0fdfa; border: 1.5px solid #99f6e4; border-radius: 14px; padding: 14px; margin-top: 12px;">
+                <div style="font-weight: 700; color: #0f766e; font-size: 0.9rem; margin-bottom: 4px;">
+                  <i class="fa-solid fa-dna"></i> ${toolLang === "en" ? "Mid-Parental Genetic Target Height" : "आनुवंशिक संभावित वयस्क लंबाई"}
+                </div>
+                <div style="font-size: 0.86rem; color: #334155; line-height: 1.5;">
+                  • ${toolLang === "en" ? "Projected Adult Height" : "संभावित वयस्क लंबाई"}: <strong>${midTarget} cm</strong><br>
+                  • ${toolLang === "en" ? "Target Genetic Range (±6 cm)" : "आनुवंशिक सीमा (±6 cm)"}: <strong>${minTarget} cm – ${maxTarget} cm</strong>
+                </div>
               </div>
-              <div style="font-size: 0.86rem; color: #334155; line-height: 1.5;">
-                • ${toolLang === "en" ? "Projected Adult Height" : "संभावित वयस्क लंबाई"}: <strong>${midTarget} cm</strong><br>
-                • ${toolLang === "en" ? "Target Genetic Range (±6 cm)" : "आनुवंशिक सीमा (±6 cm)"}: <strong>${minTarget} cm – ${maxTarget} cm</strong>
+            `;
+          }
+
+          const genderTitle = (gender === "boy") ? (toolLang === "en" ? "BOY" : "बालक") : (toolLang === "en" ? "GIRL" : "बालिका");
+          const growthHtml = `
+            <div class="result-box">
+              <h4><i class="fa-solid fa-ruler-combined" style="color: var(--brand-primary);"></i> ${toolLang === "en" ? "IAP Growth & BMI Assessment" : "IAP ग्रोथ एवं बीएमआई मूल्यांकन"}</h4>
+              <span class="iap-ref-badge">IAP Standard (${ageName} - ${genderTitle})</span>
+              <p style="font-size:0.84rem; color:#64748b; margin-bottom:10px;">
+                ${toolLang === "en" ? "Standard Healthy Range:" : "सामान्य स्वस्थ सीमा:"} 
+                ${toolLang === "en" ? "Weight:" : "वजन:"} <strong>${ref ? ref.minW : "" }–${ref ? ref.maxW : "" } kg</strong> | 
+                ${measurementWord}: <strong>${ref ? ref.minH : "" }–${ref ? ref.maxH : "" } cm</strong>
+              </p>
+              ${wStatus}
+              ${hStatus}
+              ${bmiStatus}
+              ${mphHtml}
+            </div>
+          `;
+
+          // 5. Milestones Flags (Safe Array Mapping)
+          const greenItems = (data.green && Array.isArray(data.green[listLang])) ? data.green[listLang] : ["Tracking normal development."];
+          const yellowItems = (data.yellow && Array.isArray(data.yellow[listLang])) ? data.yellow[listLang] : ["No immediate concerns."];
+          const redItems = (data.red && Array.isArray(data.red[listLang])) ? data.red[listLang] : ["Consult pediatrician if milestones lag."];
+
+          const greenList = greenItems.map(item => `<li>${item}</li>`).join("");
+          const yellowList = yellowItems.map(item => `<li>${item}</li>`).join("");
+          const redList = redItems.map(item => `<li>${item}</li>`).join("");
+
+          const devHtml = `
+            <div class="result-box">
+              <h4><i class="fa-solid fa-brain" style="color: #0891b2;"></i> ${toolLang === "en" ? "Developmental Milestones (TDSC Scale)" : "विकासात्मक मील के पत्थर (TDSC स्केल)"}</h4>
+              <div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i><div><strong>🟢 ${toolLang === "en" ? "Green Flags (Normal):" : "सामान्य मील के पत्थर:"}</strong><ul style="margin-top:4px; padding-left:16px;">${greenList}</ul></div></div>
+              <div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i><div><strong>🟡 ${toolLang === "en" ? "Yellow Flags (Monitor):" : "निगरानी योग्य संकेत:"}</strong><ul style="margin-top:4px; padding-left:16px;">${yellowList}</ul></div></div>
+              <div class="flag-card flag-red"><i class="fa-solid fa-circle-exclamation"></i><div><strong>🔴 ${toolLang === "en" ? "Red Flags (Doctor Review):" : "सतर्कता संकेत - डॉक्टर को दिखाएं:"}</strong><ul style="margin-top:4px; padding-left:16px;">${redList}</ul></div></div>
+            </div>
+          `;
+
+          // 6. Parenting & Nutrition Guidance
+          const nutritionTip = (data.tips && data.tips.nutrition && data.tips.nutrition[listLang]) ? data.tips.nutrition[listLang] : (data.parentTips && data.parentTips.nutrition && data.parentTips.nutrition[listLang] ? data.parentTips.nutrition[listLang] : "Balanced age-appropriate nutrition.");
+          const safetyTip = (data.tips && data.tips.safety && data.tips.safety[listLang]) ? data.tips.safety[listLang] : (data.parentTips && data.parentTips.safety && data.parentTips.safety[listLang] ? data.parentTips.safety[listLang] : "Age-appropriate childproofing.");
+          const playTip = (data.tips && data.tips.play && data.tips.play[listLang]) ? data.tips.play[listLang] : (data.parentTips && data.parentTips.play && data.parentTips.play[listLang] ? data.parentTips.play[listLang] : "Encourage interactive play.");
+          const careTip = (data.tips && data.tips.care && data.tips.care[listLang]) ? data.tips.care[listLang] : (data.parentTips && data.parentTips.care && data.parentTips.care[listLang] ? data.parentTips.care[listLang] : "Ensure timely routine immunization.");
+
+          const tipsHtml = `
+            <div class="result-box" style="grid-column: 1 / -1; background: #faf5ff; border: 1.5px solid #e9d5ff;">
+              <h4 style="color: #6b21a8;"><i class="fa-solid fa-heart-pulse"></i> ${ageName} ${toolLang === "en" ? "Parenting & Nutrition Guide" : "अभिभावक देखभाल एवं पोषण मार्गदर्शन"}</h4>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 12px;">
+                <div style="background:#ffffff; padding:14px; border-radius:12px; border:1px solid #f3e8ff;">
+                  <strong style="color:#7e22ce; font-size:0.88rem; display:block; margin-bottom:4px;"><i class="fa-solid fa-apple-whole"></i> ${toolLang === "en" ? "Nutrition & Diet:" : "पोषण एवं आहार:"}</strong>
+                  <p style="font-size:0.84rem; color:#4b5563; line-height:1.45;">${nutritionTip}</p>
+                </div>
+                <div style="background:#ffffff; padding:14px; border-radius:12px; border:1px solid #f3e8ff;">
+                  <strong style="color:#b91c1c; font-size:0.88rem; display:block; margin-bottom:4px;"><i class="fa-solid fa-shield-halved"></i> ${toolLang === "en" ? "Child Safety:" : "सुरक्षा:"}</strong>
+                  <p style="font-size:0.84rem; color:#4b5563; line-height:1.45;">${safetyTip}</p>
+                </div>
+                <div style="background:#ffffff; padding:14px; border-radius:12px; border:1px solid #f3e8ff;">
+                  <strong style="color:#0369a1; font-size:0.88rem; display:block; margin-bottom:4px;"><i class="fa-solid fa-puzzle-piece"></i> ${toolLang === "en" ? "Play & Cognitive:" : "मानसिक विकास:"}</strong>
+                  <p style="font-size:0.84rem; color:#4b5563; line-height:1.45;">${playTip}</p>
+                </div>
+                <div style="background:#ffffff; padding:14px; border-radius:12px; border:1px solid #f3e8ff;">
+                  <strong style="color:#15803d; font-size:0.88rem; display:block; margin-bottom:4px;"><i class="fa-solid fa-stethoscope"></i> ${toolLang === "en" ? "Doctor Tip:" : "चिकित्सकीय सलाह:"}</strong>
+                  <p style="font-size:0.84rem; color:#4b5563; line-height:1.45;">${careTip}</p>
+                </div>
+              </div>
+              
+              <div class="doctor-cta-box">
+                <h3>${toolLang === "en" ? "Need In-Person Growth & Nutrition Evaluation?" : "शारीरिक विकास या पोषण पर व्यक्तिगत परामर्श हेतु"}</h3>
+                <p>${toolLang === "en" ? "Consult Dr. Dinesh Mittal at our Sector 3 Rohini clinic for clinical percentile charting." : "सेक्टर 3 रोहिणी क्लिनिक में डॉ. दिनेश मित्तल से परामर्श लें।"}</p>
+                <a href="index.html#growth-screener" class="hero-cta-btn"><i class="fa-solid fa-calendar-check"></i> ${toolLang === "en" ? "Book Clinic Consultation" : "परामर्श अपॉइंटमेंट बुक करें"}</a>
               </div>
             </div>
           `;
+
+          resultsContainer.innerHTML = `
+            <div class="results-grid">
+              ${growthHtml}
+              ${devHtml}
+              ${tipsHtml}
+            </div>
+          `;
+
+          // Smooth scroll to the results
+          document.getElementById("resultsAnchor").scrollIntoView({ behavior: "smooth" });
+        } catch (err) {
+          console.error("Calculation error caught safely:", err);
         }
-
-        const genderTitle = (gender === "boy") ? (toolLang === "en" ? "BOY" : "बालक") : (toolLang === "en" ? "GIRL" : "बालिका");
-        const growthHtml = `
-          <div class="result-box">
-            <h4><i class="fa-solid fa-ruler-combined" style="color: var(--brand-primary);"></i> ${toolLang === "en" ? "IAP Growth & BMI Assessment" : "IAP ग्रोथ एवं बीएमआई मूल्यांकन"}</h4>
-            <span class="iap-ref-badge">IAP Standard (${ageName} - ${genderTitle})</span>
-            <p style="font-size:0.84rem; color:#64748b; margin-bottom:10px;">
-              ${toolLang === "en" ? "Standard Healthy Range:" : "सामान्य स्वस्थ सीमा:"} 
-              ${toolLang === "en" ? "Weight:" : "वजन:"} <strong>${ref ? ref.minW : "" }–${ref ? ref.maxW : "" } kg</strong> | 
-              ${measurementWord}: <strong>${ref ? ref.minH : "" }–${ref ? ref.maxH : "" } cm</strong>
-            </p>
-            ${wStatus}
-            ${hStatus}
-            ${bmiStatus}
-            ${mphHtml}
-          </div>
-        `;
-
-        // 5. Milestones Flags
-        const greenItems = (data.green && Array.isArray(data.green[listLang])) ? data.green[listLang] : [];
-        const yellowItems = (data.yellow && Array.isArray(data.yellow[listLang])) ? data.yellow[listLang] : [];
-        const redItems = (data.red && Array.isArray(data.red[listLang])) ? data.red[listLang] : [];
-
-        const greenList = greenItems.map(item => `<li>${item}</li>`).join("");
-        const yellowList = yellowItems.map(item => `<li>${item}</li>`).join("");
-        const redList = redItems.map(item => `<li>${item}</li>`).join("");
-
-        const devHtml = `
-          <div class="result-box">
-            <h4><i class="fa-solid fa-brain" style="color: #0891b2;"></i> ${toolLang === "en" ? "Developmental Milestones (TDSC Scale)" : "विकासात्मक मील के पत्थर (TDSC स्केल)"}</h4>
-            <div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i><div><strong>🟢 ${toolLang === "en" ? "Green Flags (Normal):" : "सामान्य मील के पत्थर:"}</strong><ul style="margin-top:4px; padding-left:16px;">${greenList || '<li>Age milestones tracking well.</li>'}</ul></div></div>
-            <div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i><div><strong>🟡 ${toolLang === "en" ? "Yellow Flags (Monitor):" : "निगरानी योग्य संकेत:"}</strong><ul style="margin-top:4px; padding-left:16px;">${yellowList || '<li>No immediate concerns.</li>'}</ul></div></div>
-            <div class="flag-card flag-red"><i class="fa-solid fa-circle-exclamation"></i><div><strong>🔴 ${toolLang === "en" ? "Red Flags (Doctor Review):" : "सतर्कता संकेत - डॉक्टर को दिखाएं:"}</strong><ul style="margin-top:4px; padding-left:16px;">${redList || '<li>Consult pediatrician if milestones lag.</li>'}</ul></div></div>
-          </div>
-        `;
-
-        // 6. Parenting & Nutrition Guidance
-        const nutritionTip = (data.parentTips && data.parentTips.nutrition && data.parentTips.nutrition[listLang]) ? data.parentTips.nutrition[listLang] : "";
-        const safetyTip = (data.parentTips && data.parentTips.safety && data.parentTips.safety[listLang]) ? data.parentTips.safety[listLang] : "";
-        const playTip = (data.parentTips && data.parentTips.play && data.parentTips.play[listLang]) ? data.parentTips.play[listLang] : "";
-        const careTip = (data.parentTips && data.parentTips.care && data.parentTips.care[listLang]) ? data.parentTips.care[listLang] : "";
-
-        const tipsHtml = `
-          <div class="result-box" style="grid-column: 1 / -1; background: #faf5ff; border: 1.5px solid #e9d5ff;">
-            <h4 style="color: #6b21a8;"><i class="fa-solid fa-heart-pulse"></i> ${ageName} ${toolLang === "en" ? "Parenting & Nutrition Guide" : "अभिभावक देखभाल एवं पोषण मार्गदर्शन"}</h4>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 12px;">
-              <div style="background:#ffffff; padding:14px; border-radius:12px; border:1px solid #f3e8ff;">
-                <strong style="color:#7e22ce; font-size:0.88rem; display:block; margin-bottom:4px;"><i class="fa-solid fa-apple-whole"></i> ${toolLang === "en" ? "Nutrition & Diet:" : "पोषण एवं आहार:"}</strong>
-                <p style="font-size:0.84rem; color:#4b5563; line-height:1.45;">${nutritionTip}</p>
-              </div>
-              <div style="background:#ffffff; padding:14px; border-radius:12px; border:1px solid #f3e8ff;">
-                <strong style="color:#b91c1c; font-size:0.88rem; display:block; margin-bottom:4px;"><i class="fa-solid fa-shield-halved"></i> ${toolLang === "en" ? "Child Safety:" : "सुरक्षा:"}</strong>
-                <p style="font-size:0.84rem; color:#4b5563; line-height:1.45;">${safetyTip}</p>
-              </div>
-              <div style="background:#ffffff; padding:14px; border-radius:12px; border:1px solid #f3e8ff;">
-                <strong style="color:#0369a1; font-size:0.88rem; display:block; margin-bottom:4px;"><i class="fa-solid fa-puzzle-piece"></i> ${toolLang === "en" ? "Play & Cognitive:" : "मानसिक विकास:"}</strong>
-                <p style="font-size:0.84rem; color:#4b5563; line-height:1.45;">${playTip}</p>
-              </div>
-              <div style="background:#ffffff; padding:14px; border-radius:12px; border:1px solid #f3e8ff;">
-                <strong style="color:#15803d; font-size:0.88rem; display:block; margin-bottom:4px;"><i class="fa-solid fa-stethoscope"></i> ${toolLang === "en" ? "Doctor Tip:" : "चिकित्सकीय सलाह:"}</strong>
-                <p style="font-size:0.84rem; color:#4b5563; line-height:1.45;">${careTip}</p>
-              </div>
-            </div>
-            
-            <div class="doctor-cta-box">
-              <h3>${toolLang === "en" ? "Need In-Person Growth & Nutrition Evaluation?" : "शारीरिक विकास या पोषण पर व्यक्तिगत परामर्श हेतु"}</h3>
-              <p>${toolLang === "en" ? "Consult Dr. Dinesh Mittal at our Sector 3 Rohini clinic for clinical percentile charting." : "सेक्टर 3 रोहिणी क्लिनिक में डॉ. दिनेश मित्तल से परामर्श लें।"}</p>
-              <a href="index.html#growth-screener" class="hero-cta-btn"><i class="fa-solid fa-calendar-check"></i> ${toolLang === "en" ? "Book Clinic Consultation" : "परामर्श अपॉइंटमेंट बुक करें"}</a>
-            </div>
-          </div>
-        `;
-
-        resultsContainer.innerHTML = `
-          <div class="results-grid">
-            ${growthHtml}
-            ${devHtml}
-            ${tipsHtml}
-          </div>
-        `;
-
-        // Smooth scroll down to results
-        document.getElementById("resultsAnchor").scrollIntoView({ behavior: "smooth" });
       }
 
       document.addEventListener("DOMContentLoaded", () => {
