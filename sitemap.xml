@@ -63,4 +63,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <!-- Air Purifier and Delhi Pollution Guide -->
+  <url>
+    <loc>https://childspecialistrohini.com/air-purifier-delhi-pollution-children.html</loc>
+    <lastmod>2026-08-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
