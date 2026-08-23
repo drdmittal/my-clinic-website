@@ -939,3 +939,114 @@ const blogArticles = {
     `
   }
 };
+// ==========================================================
+// GLOBAL BILINGUAL DICTIONARY (Everyday Conversational Hindi)
+// ==========================================================
+const siteTranslations = {
+  en: {
+    nav_about: "About Doctor",
+    nav_services: "Services",
+    nav_growth: "Growth, Development & Nutrition",
+    nav_adolescent: "Adolescent Care",
+    nav_blog: "Parenting Blog",
+    nav_location: "Location",
+    btn_book: "Book Consultation",
+    btn_call: "Call Clinic",
+
+    hero_badge: "Child Specialist & Pediatrician",
+    hero_heading: "Compassionate Healthcare For Your Little Ones",
+    hero_sub: "Specialized newborn care, WHO/IAP vaccination schedules, and growth & development monitoring in Sector 3 Rohini, Delhi.",
+    hero_exp: "25+ Yrs Clinical Practice",
+
+    sec_clinical_care: "Clinical Care",
+    sec_services_title: "Pediatric Services",
+    svc_vax_title: "Vaccination",
+    svc_vax_desc: "WHO & IAP cold-chain vaccines.",
+    svc_newborn_title: "Newborn Care",
+    svc_newborn_desc: "Growth, feeding & jaundice checks.",
+    svc_fever_title: "Fevers & Infections",
+    svc_fever_desc: "Seasonal viral, flu & asthma care.",
+    svc_teen_title: "Adolescent Health",
+    svc_teen_desc: "Puberty & growth spurt counseling.",
+
+    screener_badge: "Pediatric Clinical Tool",
+    screener_title: "Growth, Development & Nutrition Assessment",
+    screener_subtitle: "Tap to assess IAP Growth Charts, Developmental Milestones (TDSC), IYCF Feeding Guides & Adolescent Puberty.",
+
+    blog_badge: "Health Education",
+    blog_heading: "Parenting & Health Insights",
+    blog_view_all: "View All Guides",
+    blog_featured_badge: "Latest Pediatric Guide",
+    blog_featured_title: "Air Purifiers for Delhi Pollution: A Pediatric Deep Dive & Buying Guide",
+    blog_featured_desc: "Do purifiers truly protect child lungs against winter smog? Learn certified HEPA H13 standards, CADR ratings for Delhi bedrooms, and critical household mistakes that cause purifiers to fail.",
+    blog_read_btn: "Read Full Guide",
+    blog_explore_btn: "Browse All 8 Articles in Health Library",
+
+    loc_title: "Visit Our Clinic",
+    loc_card_title: "Clinic Details",
+    loc_address_label: "Address:",
+    loc_hours_label: "Consultation Hours:",
+    loc_hours_text: "Mon - Sat: 10:00 AM - 1:00 PM | 6:00 PM - 8:30 PM<br>Sunday: 11:00 AM - 12:00 PM",
+    loc_maps_btn: "Open Directions in Google Maps",
+
+    teen_badge: "Ages 10 - 18 Years",
+    teen_heading: "Adolescent Health & Puberty Guidance",
+    teen_btn_all: "All (20)",
+    teen_btn_girls: "Girls",
+    teen_btn_boys: "Boys",
+    teen_book_btn: "Book Confidential Teen Consult"
+  },
+  hi: {
+    nav_about: "डॉक्टर परिचय",
+    nav_services: "चिकित्सा सेवाएं",
+    nav_growth: "विकास, माइलस्टोन व पोषण",
+    nav_adolescent: "किशोरावस्था परामर्श",
+    nav_blog: "पेरेंटिंग गाइड",
+    nav_location: "क्लिनिक पता",
+    btn_book: "परामर्श स्लॉट बुक करें",
+    btn_call: "कॉल करें",
+
+    hero_badge: "शिशु एवं बाल रोग विशेषज्ञ",
+    hero_heading: "आपके बच्चों के लिए समर्पित एवं अनुभवी बाल चिकित्सा",
+    hero_sub: "नवजात शिशु देखभाल, WHO/IAP टीकाकरण, एवं शारीरिक व मानसिक विकास मूल्यांकन — सेक्टर 3 रोहिणी, दिल्ली।",
+    hero_exp: "25+ वर्षों का नैदानिक अनुभव",
+
+    sec_clinical_care: "बाल स्वास्थ्य सेवाएं",
+    sec_services_title: "प्रमुख चिकित्सा सेवाएं",
+    svc_vax_title: "टीकाकरण (Vaccination)",
+    svc_vax_desc: "WHO एवं IAP प्रमाणित सुरक्षित टीके।",
+    svc_newborn_title: "नवजात देखभाल",
+    svc_newborn_desc: "वजन, पीलिया व स्तनपान जांच।",
+    svc_fever_title: "बुखार व संक्रमण",
+    svc_fever_desc: "मौसमी फ्लू, खांसी व दमा उपचार।",
+    svc_teen_title: "किशोरावस्था स्वास्थ्य",
+    svc_teen_desc: "प्यूबर्टी व लंबाई परामर्श।",
+
+    screener_badge: "बाल विकास जांच टूल",
+    screener_title: "शारीरिक विकास, मील के पत्थर एवं पोषण मूल्यांकन",
+    screener_subtitle: "IAP ग्रोथ चार्ट, त्रिवेंद्रम विकासात्मक माइलस्टोन (TDSC), और ऊपरी आहार (IYCF) तालिका देखने के लिए क्लिक करें।",
+
+    blog_badge: "स्वास्थ्य जागरूकता",
+    blog_heading: "पेरेंटिंग एवं बाल स्वास्थ्य मार्गदर्शन",
+    blog_view_all: "सभी गाइड देखें",
+    blog_featured_badge: "नवीनतम बाल स्वास्थ्य गाइड",
+    blog_featured_title: "दिल्ली के प्रदूषण में क्या एयर प्यूरीफायर खरीदना चाहिए? बाल रोग विशेषज्ञ गाइड",
+    blog_featured_desc: "क्या प्यूरीफायर सचमुच बच्चों के फेफड़ों को बचाते हैं? True HEPA H13 मानक, कमरे के अनुसार CADR रेटिंग, और वे गलतियां जिनसे प्यूरीफायर काम नहीं करता।",
+    blog_read_btn: "पूरी गाइड पढ़ें",
+    blog_explore_btn: "सभी 8 स्वास्थ्य लेख व गाइड देखें",
+
+    loc_title: "क्लिनिक समय व पता",
+    loc_card_title: "क्लिनिक विवरण",
+    loc_address_label: "पता:",
+    loc_hours_label: "परामर्श का समय:",
+    loc_hours_text: "सोमवार - शनिवार: सुबह 10:00 - दोपहर 1:00 | शाम 6:00 - 8:30<br>रविवार: सुबह 11:00 - दोपहर 12:00",
+    loc_maps_btn: "गूगल मैप्स पर रास्ता देखें",
+
+    teen_badge: "उम्र 10 से 18 वर्ष",
+    teen_heading: "किशोरावस्था स्वास्थ्य एवं प्यूबर्टी मार्गदर्शन",
+    teen_btn_all: "सभी (20)",
+    teen_btn_girls: "बालिकाएं (Girls)",
+    teen_btn_boys: "बालक (Boys)",
+    teen_book_btn: "गोपनीय टीनएज परामर्श बुक करें"
+  }
+};
