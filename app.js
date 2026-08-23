@@ -815,6 +815,19 @@ const siteTranslations = {
     loc_hours_label: "Consultation Hours:",
     loc_hours_text: "Mon - Sat: 10:00 AM - 1:00 PM | 6:00 PM - 8:30 PM<br>Sunday: 11:00 AM - 12:00 PM",
     loc_maps_btn: "Open Directions in Google Maps"
+    card_newborn_tag: "Newborn Care",
+    card_newborn_title: "Essential Newborn Care Tips (0-30 Days)",
+    card_newborn_desc: "Pediatric guide on feeding on demand, cord care, jaundice checks & sleep safety.",
+    
+    card_dengue_tag: "Seasonal Alert",
+    card_dengue_title: "Dengue in Children: Symptoms & Home Care",
+    card_dengue_desc: "Parent guide on high fever, platelet facts, and emergency red flags.",
+    
+    card_screen_tag: "Child Development",
+    card_screen_title: "How to Reduce Screen Time in Children",
+    card_screen_desc: "Practical strategies to manage mobile tantrums and establish healthy habits.",
+    
+    blog_read_btn_short: "Read Guide",
   },
   hi: {
     nav_about: "डॉक्टर परिचय",
@@ -881,19 +894,20 @@ const siteTranslations = {
     loc_hours_label: "परामर्श का समय:",
     loc_hours_text: "सोमवार - शनिवार: सुबह 10:00 - दोपहर 1:00 | शाम 6:00 - 8:30<br>रविवार: सुबह 11:00 - दोपहर 12:00",
     loc_maps_btn: "गूगल मैप्स पर रास्ता देखें"
-    card_newborn_tag: "Newborn Care",
-    card_newborn_title: "Essential Newborn Care Tips (0-30 Days)",
-    card_newborn_desc: "Pediatric guide on feeding on demand, cord care, jaundice checks & sleep safety.",
+  card_newborn_tag: "नवजात देखभाल",
+    card_newborn_title: "नवजात शिशु की देखभाल (0-30 दिन जरूरी नियम)",
+    card_newborn_desc: "स्तनपान, नाभि की सफाई, पीलिया की पहचान और सुलाने के सुरक्षित नियमों की डॉक्टरी सलाह।",
     
-    card_dengue_tag: "Seasonal Alert",
-    card_dengue_title: "Dengue in Children: Symptoms & Home Care",
-    card_dengue_desc: "Parent guide on high fever, platelet facts, and emergency red flags.",
+    card_dengue_tag: "मौसमी अलर्ट",
+    card_dengue_title: "बच्चों में डेंगू: लक्षण, प्लेटलेट्स व घरेलू देखभाल",
+    card_dengue_desc: "तेज बुखार, प्लेटलेट्स की सच्चाई और खतरे के लक्षणों पर अभिभावकों के लिए गाइड।",
     
-    card_screen_tag: "Child Development",
-    card_screen_title: "How to Reduce Screen Time in Children",
-    card_screen_desc: "Practical strategies to manage mobile tantrums and establish healthy habits.",
+    card_screen_tag: "बाल विकास",
+    card_screen_title: "बच्चों में मोबाइल और स्क्रीन की लत कैसे छुड़ाएं?",
+    card_screen_desc: "खाना खाते समय फोन की आदत और रोने-जिद्द करने से निपटने के आसान डॉक्टरी उपाय।",
     
-    blog_read_btn_short: "Read Guide",
+    blog_read_btn_short: "गाइड पढ़ें",
+  
   }
 };
 
