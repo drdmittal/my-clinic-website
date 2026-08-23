@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Adolescent Health & Puberty Guidance (Ages 10-18) | Dr. Dinesh Mittal</title>
-    <meta name="description" content="Pediatrician guide by Dr. Dinesh Mittal on adolescent growth spurts, puberty stages, emotional changes, and confidential wellness for teens in Delhi.">
+    <meta name="description" content="Comprehensive pediatric guidance by Dr. Dinesh Mittal on adolescent growth spurts, puberty stages, emotional changes, and confidential wellness for teens in Delhi.">
     <link rel="canonical" href="https://childspecialistrohini.com/adolescent-health-puberty-guide.html" />
 
     <!-- Google Structured Data / MedicalWebPage Schema -->
@@ -81,20 +81,26 @@
         .author-meta-bar { display: flex; align-items: center; gap: 12px; padding: 12px 0 16px; border-bottom: 1px solid #f1f5f9; margin-bottom: 22px; font-size: 0.84rem; color: var(--muted-text); }
         .author-img { width: 46px; height: 46px; border-radius: 50%; object-fit: cover; border: 2px solid #bae6fd; }
 
-        .filter-pill-container { display: flex; gap: 8px; flex-wrap: wrap; margin: 20px 0; }
-        .filter-btn {
-            padding: 8px 18px; border-radius: 20px; border: 1.5px solid #bae6fd; background: #ffffff;
-            color: #083344; font-weight: 700; font-size: 0.84rem; cursor: pointer; transition: all 0.2s;
+        /* Dropdown Control Styling */
+        .dropdown-control-box {
+            background: #f0fdfa; border: 1.5px solid #99f6e4; border-radius: 16px;
+            padding: 14px 18px; margin: 22px 0; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
         }
-        .filter-btn.active { background: var(--brand-primary); color: #ffffff; border-color: var(--brand-primary); }
+        .dropdown-label { font-size: 0.88rem; font-weight: 700; color: #0f766e; display: flex; align-items: center; gap: 6px; }
+        .teen-select {
+            padding: 8px 14px; border-radius: 12px; border: 1.5px solid #0891b2; background: #ffffff;
+            font-size: 0.9rem; font-weight: 700; color: #083344; outline: none; cursor: pointer; min-width: 180px;
+        }
 
         .faq-box {
             background: #ffffff; border: 1.5px solid #e2e8f0; border-radius: 18px;
-            padding: 20px 22px; margin-bottom: 16px; box-shadow: 0 4px 12px rgba(8, 145, 178, 0.03);
+            padding: 18px 20px; margin-bottom: 14px; box-shadow: 0 4px 12px rgba(8, 145, 178, 0.03);
+            transition: border-color 0.2s;
         }
-        .faq-box h3 { color: #083344; font-size: 1.08rem; margin-top: 0; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 10px; }
-        .faq-box h3 i { color: var(--brand-primary); margin-top: 4px; flex-shrink: 0; font-size: 1.05rem; }
-        .faq-box p { font-size: 0.93rem; color: #475569; margin-bottom: 0; line-height: 1.7; }
+        .faq-box:hover { border-color: #bae6fd; }
+        .faq-box h3 { color: #083344; font-size: 1.05rem; margin-top: 0; margin-bottom: 8px; display: flex; align-items: flex-start; gap: 10px; line-height: 1.4; }
+        .faq-box h3 i { color: var(--brand-primary); margin-top: 4px; flex-shrink: 0; font-size: 1rem; }
+        .faq-box p { font-size: 0.92rem; color: #475569; margin-bottom: 0; line-height: 1.65; }
 
         .doctor-cta-box { background: linear-gradient(135deg, #f0fdfa 0%, #e0f2fe 100%); border: 2px solid #bae6fd; border-radius: 20px; padding: 24px; text-align: center; margin-top: 32px; }
         .hero-cta-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(135deg, var(--brand-accent), var(--brand-accent-dark)); color: #ffffff; padding: 12px 26px; border-radius: 30px; font-weight: 700; font-size: 0.94rem; text-decoration: none; cursor: pointer; border: none; min-height: 46px; }
@@ -136,38 +142,107 @@
                     </div>
                 </div>
 
-                <p>Adolescence (ages 10 to 18) is a period of rapid biological, hormonal, and psychological transformation second only to infancy. During these years, teenagers experience dramatic physical growth spurts, sexual maturation (Tanner stages), emotional changes, and nutritional shifts.</p>
+                <p>Adolescence (ages 10 to 18) is a period of rapid biological, hormonal, and psychological transformation second only to infancy. During these years, teenagers experience physical growth spurts, sexual maturation, emotional changes, and unique nutritional requirements.</p>
 
-                <div class="filter-pill-container">
-                    <button class="filter-btn active" onclick="filterFaqGuide('all', this)">All Questions (20)</button>
-                    <button class="filter-btn" onclick="filterFaqGuide('girls', this)"><i class="fa-solid fa-venus" style="color:#db2777;"></i> Girls</button>
-                    <button class="filter-btn" onclick="filterFaqGuide('boys', this)"><i class="fa-solid fa-mars" style="color:#2563eb;"></i> Boys</button>
+                <!-- Dropdown Category Selector -->
+                <div class="dropdown-control-box">
+                    <div class="dropdown-label"><i class="fa-solid fa-filter"></i> Select Category for Questions:</div>
+                    <select id="teenCategorySelectEn" class="teen-select" onchange="filterFaqByDropdown('en')">
+                        <option value="girls" selected>👧 Girls (Puberty & Wellness)</option>
+                        <option value="boys">👦 Boys (Puberty & Growth)</option>
+                    </select>
                 </div>
 
+                <!-- Comprehensive Question Set (English) -->
                 <div id="en-faq-list">
-                    <div class="faq-box" data-cat="all">
-                        <h3><i class="fa-solid fa-circle-question"></i> When does the adolescent growth spurt happen?</h3>
-                        <p><strong>Clinical Answer:</strong> In girls, the peak height velocity (growth spurt) typically occurs early in puberty (around ages 11 to 12.5 years), usually 6 to 12 months before menarche. In boys, the growth spurt happens approximately 2 years later (between ages 13 and 15.5 years). Adequate protein, dietary calcium, vitamin D3, and 8 to 9 hours of sleep are vital to achieve genetic target height.</p>
+                    <!-- Q1 (Common) -->
+                    <div class="faq-box" data-cat="girls boys">
+                        <h3><i class="fa-solid fa-circle-question"></i> When does the peak adolescent growth spurt occur?</h3>
+                        <p><strong>Clinical Answer:</strong> In girls, the peak height velocity (growth spurt) typically occurs early in puberty (around ages 11 to 12.5 years), usually 6 to 12 months before menarche. In boys, it happens approximately 2 years later (between ages 13 and 15.5 years). Balanced protein intake, dietary calcium, vitamin D3, and 8 to 9 hours of sleep are vital for achieving genetic potential.</p>
                     </div>
 
+                    <!-- Q2 (Girls) -->
                     <div class="faq-box" data-cat="girls">
                         <h3><i class="fa-solid fa-venus" style="color:#db2777;"></i> What are normal menstrual cycle variations in the first 2 years?</h3>
-                        <p><strong>Clinical Answer:</strong> Menarche (first period) usually begins around age 12 to 13 years. In the first 18 to 24 months, the hypothalamic-pituitary-ovarian axis is maturing, meaning cycles can be irregular (ranging from 21 to 45 days). However, cycles shorter than 21 days, bleeding lasting longer than 7 days, or severe incapacitating cramps (dysmenorrhea) warrant pediatric clinical evaluation.</p>
+                        <p><strong>Clinical Answer:</strong> Menarche (first period) usually begins around age 12 to 13 years. In the first 18 to 24 months, cycles can naturally vary between 21 to 45 days as the hormonal axis matures. However, cycles shorter than 21 days, bleeding lasting longer than 7 days, or severe incapacitating cramps warrant pediatric evaluation.</p>
                     </div>
 
+                    <!-- Q3 (Girls) -->
+                    <div class="faq-box" data-cat="girls">
+                        <h3><i class="fa-solid fa-venus" style="color:#db2777;"></i> Why is HPV (Human Papillomavirus) vaccination recommended for teenage girls?</h3>
+                        <p><strong>Clinical Answer:</strong> The HPV vaccine provides strong protection against viral strains responsible for over 85% of cervical cancers. The Indian Academy of Pediatrics (IAP) recommends 2 doses for all girls between ages 9 and 14 years before potential exposure.</p>
+                    </div>
+
+                    <!-- Q4 (Girls) -->
+                    <div class="faq-box" data-cat="girls">
+                        <h3><i class="fa-solid fa-venus" style="color:#db2777;"></i> What are the early signs of puberty in girls?</h3>
+                        <p><strong>Clinical Answer:</strong> The first physical sign is breast budding (thelarche), usually beginning between ages 8 and 13 years, followed by pubic hair development, rapid linear growth, and finally menarche approximately 2 to 2.5 years later.</p>
+                    </div>
+
+                    <!-- Q5 (Girls) -->
+                    <div class="faq-box" data-cat="girls">
+                        <h3><i class="fa-solid fa-venus" style="color:#db2777;"></i> How can teen girls prevent anemia and iron deficiency?</h3>
+                        <p><strong>Clinical Answer:</strong> Menstrual blood loss increases iron requirements. Ensure iron-rich foods (green leafy vegetables, jaggery/gur, dates, lentils, eggs) paired with Vitamin C (citrus fruits, amla) for enhanced iron absorption.</p>
+                    </div>
+
+                    <!-- Q6 (Boys) -->
+                    <div class="faq-box" data-cat="boys">
+                        <h3><i class="fa-solid fa-mars" style="color:#2563eb;"></i> What are the first signs of puberty in boys?</h3>
+                        <p><strong>Clinical Answer:</strong> Puberty in boys typically begins between ages 9.5 and 14 years with testicular enlargement, followed by pubic hair growth, penile enlargement, and a noticeable growth spurt.</p>
+                    </div>
+
+                    <!-- Q7 (Boys) -->
                     <div class="faq-box" data-cat="boys">
                         <h3><i class="fa-solid fa-mars" style="color:#2563eb;"></i> Is voice cracking and temporary breast swelling normal in teenage boys?</h3>
-                        <p><strong>Clinical Answer:</strong> Yes. As testosterone levels rise, the larynx and vocal cords enlarge, causing temporary voice cracks. Additionally, up to 50% of boys experience mild, temporary tenderness or breast tissue swelling (physiological gynecomastia) in mid-puberty due to transient estrogen-testosterone imbalances. It typically resolves naturally within 6 to 18 months.</p>
+                        <p><strong>Clinical Answer:</strong> Yes. Rising testosterone causes the larynx to enlarge, leading to temporary voice cracks. Up to 50% of boys also experience mild, temporary breast tissue swelling (physiological gynecomastia) in mid-puberty, which resolves naturally within 6 to 18 months.</p>
                     </div>
 
-                    <div class="faq-box" data-cat="all">
+                    <!-- Q8 (Boys) -->
+                    <div class="faq-box" data-cat="boys">
+                        <h3><i class="fa-solid fa-mars" style="color:#2563eb;"></i> What are nocturnal emissions (wet dreams)?</h3>
+                        <p><strong>Clinical Answer:</strong> Nocturnal emissions are a completely normal physiological mechanism by which the maturing body releases seminal fluid during sleep. It is not harmful and requires reassuring parental support.</p>
+                    </div>
+
+                    <!-- Q9 (Boys) -->
+                    <div class="faq-box" data-cat="boys">
+                        <h3><i class="fa-solid fa-mars" style="color:#2563eb;"></i> When does facial and body hair appear in boys?</h3>
+                        <p><strong>Clinical Answer:</strong> Facial hair (upper lip mustache followed by chin/cheeks) and chest hair generally appear in the later stages of puberty (Tanner Stages 4 and 5), often between ages 14 and 17 years.</p>
+                    </div>
+
+                    <!-- Q10 (Common) -->
+                    <div class="faq-box" data-cat="girls boys">
                         <h3><i class="fa-solid fa-circle-question"></i> How should teenage acne and skin breakouts be managed?</h3>
-                        <p><strong>Clinical Answer:</strong> Rising androgen hormones stimulate sebaceous glands to produce excess sebum, which clogs pores. Wash the face twice daily with a gentle, non-comedogenic cleanser. Avoid popping pimples (which causes permanent scarring and secondary bacterial infection). Severe cystic acne can be safely managed with pediatrician-prescribed topical treatments.</p>
+                        <p><strong>Clinical Answer:</strong> Androgen hormones stimulate excess oil (sebum) production. Wash the face twice daily with a gentle cleanser. Never squeeze or pop pimples, as this causes scarring and secondary infection.</p>
                     </div>
 
-                    <div class="faq-box" data-cat="all">
-                        <h3><i class="fa-solid fa-circle-question"></i> Why is HPV (Human Papillomavirus) vaccination recommended for teens?</h3>
-                        <p><strong>Clinical Answer:</strong> The HPV vaccine prevents infection from high-risk virus strains responsible for over 85% of cervical cancers and other genital lesions. The Indian Academy of Pediatrics (IAP) strongly recommends giving 2 doses to all girls between ages 9 and 14 years before potential viral exposure.</p>
+                    <!-- Q11 (Common) -->
+                    <div class="faq-box" data-cat="girls boys">
+                        <h3><i class="fa-solid fa-circle-question"></i> How much sleep do teenagers actually need?</h3>
+                        <p><strong>Clinical Answer:</strong> Teens require <strong>8 to 10 hours of sleep</strong> per night. Due to a natural pubertal circadian shift (delayed melatonin release), teens naturally feel sleepy later at night. Screen cutoffs 1 hour before bed are essential for restorative sleep.</p>
+                    </div>
+
+                    <!-- Q12 (Common) -->
+                    <div class="faq-box" data-cat="girls boys">
+                        <h3><i class="fa-solid fa-circle-question"></i> What causes mood swings and emotional sensitivity in teens?</h3>
+                        <p><strong>Clinical Answer:</strong> Fluctuating estrogen and testosterone levels interacting with a still-maturing prefrontal cortex (the brain's emotional regulation center) cause natural mood swings. Open, non-judgmental communication at home provides emotional stability.</p>
+                    </div>
+
+                    <!-- Q13 (Common) -->
+                    <div class="faq-box" data-cat="girls boys">
+                        <h3><i class="fa-solid fa-circle-question"></i> What are "growing pains" in adolescents?</h3>
+                        <p><strong>Clinical Answer:</strong> Mild aching in the thighs or calves, often occurring in the evening after active days, is common. However, persistent joint swelling, morning stiffness, or limping warrants clinical pediatric examination.</p>
+                    </div>
+
+                    <!-- Q14 (Common) -->
+                    <div class="faq-box" data-cat="girls boys">
+                        <h3><i class="fa-solid fa-circle-question"></i> Why is Tdap booster vaccination required at age 10-12 years?</h3>
+                        <p><strong>Clinical Answer:</strong> Protection from infant DTP vaccines wanes by late childhood. The Tdap booster provides reinforced immunity against Tetanus, Diphtheria, and Pertussis (Whooping Cough).</p>
+                    </div>
+
+                    <!-- Q15 (Common) -->
+                    <div class="faq-box" data-cat="girls boys">
+                        <h3><i class="fa-solid fa-circle-question"></i> How does physical activity impact bone density in adolescence?</h3>
+                        <p><strong>Clinical Answer:</strong> More than 40% of adult peak bone mass is laid down during adolescent years. At least 60 minutes of daily weight-bearing physical activity (running, jumping, sports) builds strong lifelong bone density.</p>
                     </div>
                 </div>
 
@@ -190,38 +265,107 @@
                     </div>
                 </div>
 
-                <p>10 से 18 वर्ष की उम्र (किशोरावस्था) बच्चों के जीवन का सबसे महत्वपूर्ण पड़ाव होता है। इस दौरान बच्चों में अचानक तेजी से लंबाई बढ़ना (Growth Spurt), शारीरिक व हार्मोनल बदलाव (Puberty), और स्वभाव में संवेदनशीलता देखी जाती है।</p>
+                <p>10 से 18 वर्ष की उम्र (किशोरावस्था) बच्चों के जीवन का सबसे महत्वपूर्ण पड़ाव होता है। इस दौरान बच्चों में तेजी से लंबाई बढ़ना (Growth Spurt), शारीरिक व हार्मोनल बदलाव (Puberty), और स्वभाव में संवेदनशीलता देखी जाती है।</p>
 
-                <div class="filter-pill-container">
-                    <button class="filter-btn active" onclick="filterFaqGuide('all', this)">सभी सवाल (20)</button>
-                    <button class="filter-btn" onclick="filterFaqGuide('girls', this)"><i class="fa-solid fa-venus" style="color:#db2777;"></i> बालिकाएं (Girls)</button>
-                    <button class="filter-btn" onclick="filterFaqGuide('boys', this)"><i class="fa-solid fa-mars" style="color:#2563eb;"></i> बालक (Boys)</button>
+                <!-- Dropdown Category Selector (Hindi) -->
+                <div class="dropdown-control-box">
+                    <div class="dropdown-label"><i class="fa-solid fa-filter"></i> विषय के अनुसार प्रश्न चुनें:</div>
+                    <select id="teenCategorySelectHi" class="teen-select" onchange="filterFaqByDropdown('hi')">
+                        <option value="girls" selected>👧 बालिकाएं (Girls - प्यूबर्टी व स्वास्थ्य)</option>
+                        <option value="boys">👦 बालक (Boys - प्यूबर्टी व विकास)</option>
+                    </select>
                 </div>
 
+                <!-- Comprehensive Question Set (Hindi) -->
                 <div id="hi-faq-list">
-                    <div class="faq-box" data-cat="all">
+                    <!-- Q1 (Common) -->
+                    <div class="faq-box" data-cat="girls boys">
                         <h3><i class="fa-solid fa-circle-question"></i> बच्चों की लंबाई सबसे तेजी से किस उम्र में बढ़ती है?</h3>
-                        <p><strong>डॉक्टरी जवाब:</strong> लड़कियों में लंबाई सबसे तेजी से 11 से 12.5 साल की उम्र में बढ़ती है (माहवारी शुरू होने से 6-12 महीने पहले)। लड़कों में यह तेजी लगभग 2 साल बाद (13 से 15.5 साल की उम्र में) आती है। पूरी लंबाई हासिल करने के लिए सही मात्रा में प्रोटीन, दूध-दही (कैल्शियम), विटामिन डी और रात में 8-9 घंटे की गहरी नींद बहुत जरूरी है।</p>
+                        <p><strong>डॉक्टरी जवाब:</strong> लड़कियों में लंबाई सबसे तेजी से 11 से 12.5 साल की उम्र में बढ़ती है (पीरियड्स शुरू होने से 6-12 महीने पहले)। लड़कों में यह तेजी लगभग 2 साल बाद (13 से 15.5 साल की उम्र में) आती है। पूरी लंबाई हासिल करने के लिए सही मात्रा में प्रोटीन, दूध-दही (कैल्शियम), विटामिन डी और रात में 8-9 घंटे की गहरी नींद बहुत जरूरी है।</p>
                     </div>
 
+                    <!-- Q2 (Girls) -->
                     <div class="faq-box" data-cat="girls">
                         <h3><i class="fa-solid fa-venus" style="color:#db2777;"></i> शुरुआती सालों में पीरियड्स (माहवारी) का समय आगे-पीछे होना क्या सामान्य है?</h3>
-                        <p><strong>डॉक्टरी जवाब:</strong> लड़कियों में पीरियड्स आमतौर पर 12 से 13 साल की उम्र में शुरू होते हैं। शुरुआती 1.5 से 2 साल तक हार्मोन संतुलित हो रहे होते हैं, इसलिए 21 से 45 दिनों का अंतर होना सामान्य है। लेकिन अगर 7 दिन से ज्यादा ब्लीडिंग हो या बहुत तेज पेट दर्द (Cramps) हो, तो डॉक्टर से सलाह लेनी चाहिए।</p>
+                        <p><strong>डॉक्टरी जवाब:</strong> लड़कियों में पीरियड्स आमतौर पर 12 से 13 साल की उम्र में शुरू होते हैं। शुरुआती 1.5 से 2 साल तक हार्मोन संतुलित हो रहे होते हैं, इसलिए 21 से 45 दिनों का अंतर होना सामान्य है। लेकिन अगर 7 दिन से ज्यादा ब्लीडिंग हो या बहुत तेज पेट दर्द हो, तो डॉक्टर से सलाह लेनी चाहिए।</p>
                     </div>
 
+                    <!-- Q3 (Girls) -->
+                    <div class="faq-box" data-cat="girls">
+                        <h3><i class="fa-solid fa-venus" style="color:#db2777;"></i> किशोरियों के लिए HPV वैक्सीन क्यों जरूरी है?</h3>
+                        <p><strong>डॉक्टरी जवाब:</strong> HPV टीका महिलाओं में होने वाले सर्वाइकल कैंसर से 85% से अधिक सुरक्षा देता है। इंडियन एकेडमी ऑफ पीडियाट्रिक्स (IAP) के अनुसार 9 से 14 वर्ष की सभी बालिकाओं को इसके 2 टीके जरूर लगवाने चाहिए।</p>
+                    </div>
+
+                    <!-- Q4 (Girls) -->
+                    <div class="faq-box" data-cat="girls">
+                        <h3><i class="fa-solid fa-venus" style="color:#db2777;"></i> बालिकाओं में प्यूबर्टी के शुरुआती लक्षण क्या हैं?</h3>
+                        <p><strong>डॉक्टरी जवाब:</strong> पहला लक्षण 8 से 13 वर्ष की उम्र के बीच स्तनों का विकास शुरू होना है, जिसके बाद शरीर पर बाल आना, तेजी से लंबाई बढ़ना और लगभग 2-2.5 साल बाद माहवारी की शुरुआत होती है।</p>
+                    </div>
+
+                    <!-- Q5 (Girls) -->
+                    <div class="faq-box" data-cat="girls">
+                        <h3><i class="fa-solid fa-venus" style="color:#db2777;"></i> किशोरियों में खून की कमी (एनीमिया) से कैसे बचें?</h3>
+                        <p><strong>डॉक्टरी जवाब:</strong> माहवारी की वजह से आयरन की आवश्यकता बढ़ जाती है। हरी पत्तेदार सब्जियां, गुड़, खजूर, दालें और नींबू-पानी/आंवला (विटामिन C) दें ताकि शरीर में आयरन अच्छी तरह सोख सके।</p>
+                    </div>
+
+                    <!-- Q6 (Boys) -->
+                    <div class="faq-box" data-cat="boys">
+                        <h3><i class="fa-solid fa-mars" style="color:#2563eb;"></i> बालकों में प्यूबर्टी की शुरुआत कैसे होती है?</h3>
+                        <p><strong>डॉक्टरी जवाब:</strong> बालकों में प्यूबर्टी आमतौर पर 9.5 से 14 वर्ष की उम्र में अंडकोष के आकार में वृद्धि से शुरू होती है, जिसके बाद शरीर पर बाल आना और अचानक लंबाई बढ़ना शुरू होता है।</p>
+                    </div>
+
+                    <!-- Q7 (Boys) -->
                     <div class="faq-box" data-cat="boys">
                         <h3><i class="fa-solid fa-mars" style="color:#2563eb;"></i> लड़कों में आवाज भारी होना और छाती में हल्की गांठ महसूस होना क्या सामान्य है?</h3>
                         <p><strong>डॉक्टरी जवाब:</strong> हाँ, बिल्कुल। टेस्टोस्टेरोन हार्मोन बढ़ने से गले की नली चौड़ी होती है जिससे आवाज भारी होती है। इसके अलावा, लगभग 50% किशोर लड़कों में हार्मोन के उतार-चढ़ाव से छाती में हल्की गांठ या दर्द महसूस होता है, जो 6 से 18 महीने में अपने आप पूरी तरह ठीक हो जाता है।</p>
                     </div>
 
-                    <div class="faq-box" data-cat="all">
+                    <!-- Q8 (Boys) -->
+                    <div class="faq-box" data-cat="boys">
+                        <h3><i class="fa-solid fa-mars" style="color:#2563eb;"></i> स्वप्नदोष (Nocturnal Emission) क्या है?</h3>
+                        <p><strong>डॉक्टरी जवाब:</strong> यह प्यूबर्टी में शरीर का एक बिल्कुल सामान्य प्राकृतिक बदलाव है। इससे शरीर को कोई कमजोरी या नुकसान नहीं होता। अभिभावकों को बच्चों को डराने के बजाय सही जानकारी देनी चाहिए।</p>
+                    </div>
+
+                    <!-- Q9 (Boys) -->
+                    <div class="faq-box" data-cat="boys">
+                        <h3><i class="fa-solid fa-mars" style="color:#2563eb;"></i> लड़कों में दाढ़ी और मूंछें कब आती हैं?</h3>
+                        <p><strong>डॉक्टरी जवाब:</strong> दाढ़ी और मूंछों के बाल आमतौर पर प्यूबर्टी के आखिरी चरणों में (14 से 17 वर्ष की उम्र में) आते हैं।</p>
+                    </div>
+
+                    <!-- Q10 (Common) -->
+                    <div class="faq-box" data-cat="girls boys">
                         <h3><i class="fa-solid fa-circle-question"></i> चेहरे पर मुंहासे (Pimples/Acne) से कैसे बचें?</h3>
                         <p><strong>डॉक्टरी जवाब:</strong> प्यूबर्टी में ग्रंथियां ज्यादा तेल बनाती हैं जिससे चेहरे के रोमछिद्र बंद हो जाते हैं। दिन में दो बार सादे फेसवॉश से चेहरा धोएं। पिंपल्स को कभी भी हाथ से न फोड़ें (इससे चेहरे पर काले गड्ढे और दाग बन जाते हैं)।</p>
                     </div>
 
-                    <div class="faq-box" data-cat="all">
-                        <h3><i class="fa-solid fa-circle-question"></i> किशोरियों के लिए HPV वैक्सीन क्यों जरूरी है?</h3>
-                        <p><strong>डॉक्टरी जवाब:</strong> HPV टीका महिलाओं में होने वाले सर्वाइकल कैंसर से 85% से अधिक सुरक्षा देता है। इंडियन एकेडमी ऑफ पीडियाट्रिक्स (IAP) के अनुसार 9 से 14 वर्ष की सभी बालिकाओं को इसके 2 टीके जरूर लगवाने चाहिए।</p>
+                    <!-- Q11 (Common) -->
+                    <div class="faq-box" data-cat="girls boys">
+                        <h3><i class="fa-solid fa-circle-question"></i> किशोरों को कितनी नींद लेनी चाहिए?</h3>
+                        <p><strong>डॉक्टरी जवाब:</strong> 10 से 18 वर्ष के बच्चों को रोजाना <strong>8 से 10 घंटे की नींद</strong> की आवश्यकता होती है। सोने से 1 घंटा पहले मोबाइल स्क्रीन बंद करने से गहरी और अच्छी नींद आती है।</p>
+                    </div>
+
+                    <!-- Q12 (Common) -->
+                    <div class="faq-box" data-cat="girls boys">
+                        <h3><i class="fa-solid fa-circle-question"></i> टीनएज बच्चों के स्वभाव में चिड़चिड़ापन क्यों आता है?</h3>
+                        <p><strong>डॉक्टरी जवाब:</strong> हार्मोनल बदलाव और दिमाग के विकास की वजह से बच्चों के मूड में उतार-चढ़ाव आता है। घर में डांटने के बजाय उनसे बातचीत करने से उनका आत्मविश्वास बढ़ता है।</p>
+                    </div>
+
+                    <!-- Q13 (Common) -->
+                    <div class="faq-box" data-cat="girls boys">
+                        <h3><i class="fa-solid fa-circle-question"></i> पैरों में दर्द (Growing Pains) क्या होता है?</h3>
+                        <p><strong>डॉक्टरी जवाब:</strong> तेजी से लंबाई बढ़ने और खेलकूद के बाद शाम को पिंडलियों में हल्का दर्द होना सामान्य है। लेकिन जोड़ों में सूजन या सुबह उठने पर अकड़न हो तो डॉक्टर को दिखाएं।</p>
+                    </div>
+
+                    <!-- Q14 (Common) -->
+                    <div class="faq-box" data-cat="girls boys">
+                        <h3><i class="fa-solid fa-circle-question"></i> 10-12 वर्ष पर Tdap टीका क्यों लगवाना चाहिए?</h3>
+                        <p><strong>डॉक्टरी जवाब:</strong> बचपन के टीकों का असर 10 साल की उम्र तक कम हो जाता है। Tdap बूस्टर टीका टिटनेस, काली खांसी और डिप्थीरिया से नई सुरक्षा देता है।</p>
+                    </div>
+
+                    <!-- Q15 (Common) -->
+                    <div class="faq-box" data-cat="girls boys">
+                        <h3><i class="fa-solid fa-circle-question"></i> हड्डियों की मजबूती के लिए क्या जरूरी है?</h3>
+                        <p><strong>डॉक्टरी जवाब:</strong> जीवन भर की 40% हड्डियों की मजबूती इसी उम्र में बनती है। रोज 60 मिनट दौड़-भाग, खेलकूद और पर्याप्त कैल्शियम-विटामिन डी युक्त आहार बहुत जरूरी है।</p>
                     </div>
                 </div>
 
@@ -256,10 +400,12 @@
           if (enBox) enBox.style.display = "none";
           if (hiBox) hiBox.style.display = "block";
           if (btnText) btnText.textContent = "Read in English";
+          filterFaqByDropdown('hi');
         } else {
           if (enBox) enBox.style.display = "block";
           if (hiBox) hiBox.style.display = "none";
           if (btnText) btnText.textContent = "हिन्दी में पढ़ें";
+          filterFaqByDropdown('en');
         }
       }
 
@@ -269,16 +415,21 @@
         updateArticleView();
       }
 
-      function filterFaqGuide(category, btn) {
-        document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
+      function filterFaqByDropdown(langCode) {
+        const selectId = (langCode === 'hi') ? 'teenCategorySelectHi' : 'teenCategorySelectEn';
+        const listId = (langCode === 'hi') ? 'hi-faq-list' : 'en-faq-list';
+        const selectEl = document.getElementById(selectId);
+        if (!selectEl) return;
+        
+        const selectedCat = selectEl.value; // 'girls' or 'boys'
+        const items = document.querySelectorAll(`#${listId} .faq-box`);
 
-        const targetList = (currentLang === "hi") ? "#hi-faq-list .faq-box" : "#en-faq-list .faq-box";
-        document.querySelectorAll(targetList).forEach(box => {
-          if (category === "all" || box.getAttribute("data-cat") === category || box.getAttribute("data-cat") === "all") {
-            box.style.display = "block";
+        items.forEach(item => {
+          const itemCat = item.getAttribute('data-cat') || '';
+          if (itemCat.includes(selectedCat)) {
+            item.style.display = 'block';
           } else {
-            box.style.display = "none";
+            item.style.display = 'none';
           }
         });
       }
