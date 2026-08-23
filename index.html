@@ -214,7 +214,7 @@
         /* Hero Section */
         .hero {
             background: linear-gradient(145deg, #f0f9ff 0%, #ecfeff 50%, #f0fdf4 100%);
-            padding: 45px 5% 50px; position: relative; overflow: hidden;
+            padding: 40px 5% 45px; position: relative; overflow: hidden;
             border-bottom: 1px solid #e2e8f0;
         }
         .hero-container { max-width: 1120px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 35px; }
@@ -232,7 +232,7 @@
         .hero-cta-btn {
             display: inline-flex; align-items: center; justify-content: center; gap: 8px;
             background: linear-gradient(135deg, var(--brand-accent), var(--brand-accent-dark));
-            color: #ffffff; padding: 13px 26px; border-radius: 30px; font-weight: 700;
+            color: #ffffff; padding: 13px 28px; border-radius: 30px; font-weight: 700;
             font-size: 0.94rem; text-decoration: none; cursor: pointer; border: none; min-height: 48px;
             box-shadow: 0 6px 18px rgba(245, 158, 11, 0.32); transition: all 0.2s ease;
         }
@@ -240,9 +240,9 @@
 
         .hero-secondary-btn {
             display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-            background: #ffffff; color: var(--brand-primary-dark); padding: 13px 22px;
-            border-radius: 30px; font-weight: 700; font-size: 0.94rem; text-decoration: none;
-            cursor: pointer; border: 1.5px solid #bae6fd; min-height: 48px;
+            background: #ffffff; color: var(--brand-primary-dark); padding: 10px 20px;
+            border-radius: 30px; font-weight: 700; font-size: 0.88rem; text-decoration: none;
+            cursor: pointer; border: 1.5px solid #bae6fd; min-height: 40px;
             box-shadow: 0 4px 12px rgba(8, 145, 178, 0.08); transition: all 0.2s ease;
         }
         .hero-secondary-btn:hover { transform: translateY(-2px); background: #f0f9ff; }
@@ -255,7 +255,7 @@
             text-align: center; max-width: 300px; width: 100%; position: relative;
         }
         .hero-doctor-img-wrap {
-            width: 140px; height: 140px; margin: 0 auto 14px; border-radius: 50%;
+            width: 135px; height: 135px; margin: 0 auto 12px; border-radius: 50%;
             padding: 4px; background: linear-gradient(135deg, #38bdf8, #14b8a6);
             box-shadow: 0 8px 22px rgba(14, 116, 144, 0.2);
         }
@@ -264,9 +264,7 @@
         .doctor-hero-role { font-size: 0.88rem; font-weight: 700; color: var(--brand-secondary); margin-bottom: 8px; }
         .doctor-hero-clinic { font-size: 0.82rem; color: #64748b; margin-bottom: 12px; }
         
-        .trust-pills-row {
-            display: flex; justify-content: center; gap: 8px; flex-wrap: wrap;
-        }
+        .trust-pills-row { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
         .trust-micro-pill {
             background: #f8fafc; border: 1px solid #e2e8f0; color: #334155;
             font-size: 0.78rem; font-weight: 700; padding: 6px 14px; border-radius: 14px;
@@ -274,7 +272,7 @@
         }
 
         /* Layout & Sections */
-        .container { max-width: 1120px; margin: 40px auto; padding: 0 20px; }
+        .container { max-width: 1120px; margin: 35px auto; padding: 0 20px; }
         .section-title { font-family: 'Fredoka', cursive; text-align: center; font-size: 1.85rem; color: #083344; margin-bottom: 25px; }
 
         /* Compact Pediatric Services Grid */
@@ -304,9 +302,9 @@
             .service-text p { font-size: 0.72rem; }
         }
 
-        /* Symmetrical Stacked Cards */
+        /* Symmetrical 5 Stacked Cards */
         .screener-card {
-            background: #ffffff; border-radius: 24px; box-shadow: var(--card-shadow);
+            background: #ffffff; border-radius: 22px; box-shadow: var(--card-shadow);
             border: 1.5px solid #e0f2fe; overflow: hidden; margin-bottom: 12px;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
@@ -314,25 +312,25 @@
         
         .screener-toggle-header {
             width: 100%; background: linear-gradient(135deg, #f0fdfa 0%, #e0f2fe 100%);
-            border: none; padding: 18px 22px; text-align: left; cursor: pointer;
+            border: none; padding: 16px 20px; text-align: left; cursor: pointer;
             display: flex; justify-content: space-between; align-items: center; gap: 14px;
             transition: background 0.2s ease;
         }
         .screener-toggle-header:hover { background: #e0f2fe; }
-        .screener-toggle-icon { font-size: 1.5rem; color: var(--brand-primary); transition: transform 0.25s ease; }
-        .screener-content-body { padding: 22px 20px; }
+        .screener-toggle-icon { font-size: 1.4rem; color: var(--brand-primary); transition: transform 0.25s ease; }
+        .screener-content-body { padding: 20px; }
 
         .screener-badge {
             display: inline-flex; align-items: center; gap: 6px; background: #ffffff;
             color: var(--brand-primary-dark); padding: 4px 12px; border-radius: 16px;
-            font-size: 0.74rem; font-weight: 700; text-transform: uppercase; margin-bottom: 6px;
+            font-size: 0.74rem; font-weight: 700; text-transform: uppercase; margin-bottom: 4px;
             box-shadow: 0 2px 6px rgba(0,0,0,0.04); border: 1px solid #ccfbf1;
         }
-        .screener-title { font-family: 'Fredoka', cursive; font-size: 1.35rem; color: #083344; margin-bottom: 2px; }
-        .screener-subtitle { font-size: 0.85rem; color: var(--muted-text); }
+        .screener-title { font-family: 'Fredoka', cursive; font-size: 1.25rem; color: #083344; margin-bottom: 2px; }
+        .screener-subtitle { font-size: 0.82rem; color: var(--muted-text); }
 
         .card-circle-btn {
-            width: 40px; height: 40px; border-radius: 50%; background: #ffffff;
+            width: 38px; height: 38px; border-radius: 50%; background: #ffffff;
             box-shadow: 0 2px 8px rgba(8, 145, 178, 0.12); display: flex; align-items: center;
             justify-content: center; flex-shrink: 0; transition: transform 0.2s;
         }
@@ -400,11 +398,19 @@
             font-size: 0.88rem; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; padding: 0; text-decoration: none;
         }
 
-        /* Location Section */
-        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 22px; }
-        .contact-details { background: #ffffff; padding: 26px; border-radius: 24px; border: 1px solid #f1f5f9; box-shadow: var(--card-shadow); }
-        .contact-item { display: flex; gap: 12px; margin-bottom: 16px; align-items: flex-start; font-size: 0.9rem; }
+        /* Location Section with Compact Map */
+        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 20px; align-items: start; }
+        .contact-details { background: #ffffff; padding: 24px; border-radius: 24px; border: 1px solid #f1f5f9; box-shadow: var(--card-shadow); }
+        .contact-item { display: flex; gap: 12px; margin-bottom: 14px; align-items: flex-start; font-size: 0.9rem; }
         .contact-item i { font-size: 1.15rem; color: var(--brand-primary); margin-top: 3px; }
+
+        .compact-map-wrapper {
+            background: #ffffff; padding: 12px; border-radius: 24px; border: 1px solid #f1f5f9;
+            box-shadow: var(--card-shadow); display: flex; flex-direction: column; overflow: hidden;
+        }
+        .compact-map-frame {
+            width: 100%; height: 220px; border: 0; border-radius: 18px; display: block;
+        }
 
         /* Subtle Local SEO Styles */
         .lowkey-seo-section {
@@ -503,19 +509,19 @@
             .mobile-menu-toggle { display: block; }
             .lang-switch-btn-mobile { display: inline-flex; }
 
-            .hero { padding: 28px 16px 35px; text-align: center; }
-            .hero-container { flex-direction: column-reverse; gap: 22px; }
+            .hero { padding: 26px 16px 32px; text-align: center; }
+            .hero-container { flex-direction: column-reverse; gap: 20px; }
             .hero-text-side { text-align: center; }
-            .hero h1 { font-size: 1.7rem; }
-            .hero p { font-size: 0.92rem; margin-bottom: 18px; }
+            .hero h1 { font-size: 1.65rem; }
+            .hero p { font-size: 0.9rem; margin-bottom: 16px; }
 
             .hero-doctor-side { width: 100%; margin-bottom: 0; }
-            .doctor-hero-card { max-width: 300px; padding: 18px 14px; border-radius: 24px; }
+            .doctor-hero-card { max-width: 290px; padding: 18px 14px; border-radius: 24px; }
             .hero-doctor-img-wrap { width: 110px; height: 110px; }
-            .doctor-hero-name { font-size: 1.25rem; }
+            .doctor-hero-name { font-size: 1.22rem; }
 
-            .screener-toggle-header { padding: 16px 14px; }
-            .screener-title { font-size: 1.15rem; }
+            .screener-toggle-header { padding: 15px 14px; }
+            .screener-title { font-size: 1.12rem; }
             .screener-content-body { padding: 18px 12px; }
             .screener-inputs-grid { grid-template-columns: 1fr; }
             
@@ -572,20 +578,17 @@
         <a href="tel:+918130521456" style="color: var(--brand-accent);"><i class="fa-solid fa-phone"></i> Call: +91 81305 21456</a>
     </div>
 
-    <!-- Hero Section -->
+    <!-- Hero Section (Cleaned Up: Single Direct Booking Action) -->
     <section class="hero" id="about">
         <div class="hero-container">
             <div class="hero-text-side">
                 <div class="hero-badge"><i class="fa-solid fa-stethoscope"></i> <span data-i18n="hero_badge">Child Specialist & Pediatrician</span></div>
                 <h1 data-i18n="hero_heading">Compassionate Healthcare For Your Little Ones</h1>
                 <p data-i18n="hero_sub">Specialized newborn care, WHO/IAP vaccination schedules, and growth & development monitoring in Sector 3 Rohini, Delhi.</p>
-                <div style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: inherit;">
+                <div>
                     <button onclick="openBookingModal()" class="hero-cta-btn">
                         <i class="fa-solid fa-calendar-plus"></i> <span data-i18n="btn_book">Book Consultation</span>
                     </button>
-                    <a href="#growth-screener" onclick="expandGrowthTool()" class="hero-secondary-btn">
-                        <i class="fa-solid fa-chart-line" style="color: var(--brand-primary);"></i> <span data-i18n="nav_growth">Growth, Development & Nutrition</span>
-                    </a>
                 </div>
             </div>
 
@@ -593,7 +596,7 @@
             <div class="hero-doctor-side">
                 <div class="doctor-hero-card">
                     <div class="hero-doctor-img-wrap">
-                        <img src="doctor.jpg" alt="Dr. Dinesh Mittal - Pediatrician in Rohini" width="140" height="140" class="hero-doctor-img" loading="eager" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=400&q=80'">
+                        <img src="doctor.jpg" alt="Dr. Dinesh Mittal - Pediatrician in Rohini" width="135" height="135" class="hero-doctor-img" loading="eager" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=400&q=80'">
                     </div>
                     <h2 class="doctor-hero-name">Dr. Dinesh Mittal</h2>
                     <div class="doctor-hero-role" data-i18n="hero_badge">Child Specialist & Pediatrician</div>
@@ -664,7 +667,7 @@
 
     <!-- ================= 5 MATCHING STACKED CLINICAL CARDS ================= -->
 
-    <!-- 🌟 CARD 1: GROWTH, DEVELOPMENT & NUTRITION SCREENER TOOL -->
+    <!-- 🌟 CARD 1: GROWTH, DEVELOPMENT & NUTRITION ASSESSMENT (INTERACTIVE SCREENER) -->
     <div class="container" id="growth-screener" style="margin-top: 25px; margin-bottom: 12px;">
         <div class="screener-card" style="margin-bottom: 0;">
             <button type="button" class="screener-toggle-header" onclick="toggleGrowthTool()">
@@ -765,7 +768,7 @@
                 <div>
                     <span class="screener-badge" style="border-color: #bae6fd;"><i class="fa-solid fa-syringe" style="color: var(--brand-primary);"></i> <span data-i18n="vax_btn_badge">Pediatric Vaccination Guide</span></span>
                     <h2 class="screener-title" data-i18n="vax_btn_title">Childhood Immunization & Vaccine FAQs</h2>
-                    <p class="screener-subtitle" data-i18n="vax_btn_subtitle">Tap to read doctor answers on missed doses, multiple vaccines safety, and fever care.</p>
+                    <p class="screener-subtitle" data-i18n="vax_btn_subtitle">Doctor-curated guidance on missed doses, multiple vaccines safety, and post-shot fever care.</p>
                 </div>
                 <div class="card-circle-btn">
                     <i class="fa-solid fa-chevron-right" style="color: var(--brand-primary); font-size: 1.1rem;"></i>
@@ -808,7 +811,7 @@
         </div>
     </div>
 
-    <!-- 🌟 CARD 4: IAP IMMUNIZATION SCHEDULE (0-18 YEARS) -->
+    <!-- 🌟 CARD 4: IAP CHILDHOOD IMMUNIZATION SCHEDULE (0-18 YEARS) -->
     <div class="container" style="margin-top: 10px; margin-bottom: 12px;">
         <div class="screener-card" style="margin-bottom: 0;">
             <a href="iap-immunization-schedule.html" class="screener-toggle-header" style="text-decoration: none; display: flex; justify-content: space-between; align-items: center;">
@@ -823,7 +826,6 @@
             </a>
         </div>
     </div>
-    </div>
 
     <!-- 🌟 CARD 5: PARENTING & CHILD HEALTH BLOG LIBRARY -->
     <div class="container" style="margin-top: 10px; margin-bottom: 30px;">
@@ -832,7 +834,7 @@
                 <div>
                     <span class="screener-badge" style="border-color: #fef08a;"><i class="fa-solid fa-book-open-reader" style="color: var(--brand-accent-dark);"></i> <span data-i18n="blog_btn_badge">Health Education Library</span></span>
                     <h2 class="screener-title" data-i18n="blog_btn_title">Parenting & Pediatric Health Insights</h2>
-                    <p class="screener-subtitle" data-i18n="blog_btn_subtitle">Tap to explore all verified medical guides on fever care, infant nutrition, dengue, and air pollution.</p>
+                    <p class="screener-subtitle" data-i18n="blog_btn_subtitle">Explore clinical health guides on fever care, newborn monitoring, dengue, and winter pollution.</p>
                 </div>
                 <div class="card-circle-btn">
                     <i class="fa-solid fa-chevron-right" style="color: var(--brand-primary); font-size: 1.1rem;"></i>
@@ -917,12 +919,12 @@
         </div>
     </div>
 
-    <!-- Location & Contact -->
+    <!-- Location & Contact (With Compact Map) -->
     <div class="container" id="clinic-location">
         <h2 class="section-title" data-i18n="loc_title">Visit Our Clinic</h2>
         <div class="contact-grid">
             <div class="contact-details">
-                <h3 style="color: #083344; margin-bottom: 18px; font-size: 1.15rem; font-family: 'Fredoka', cursive;" data-i18n="loc_card_title">Clinic Details</h3>
+                <h3 style="color: #083344; margin-bottom: 16px; font-size: 1.15rem; font-family: 'Fredoka', cursive;" data-i18n="loc_card_title">Clinic Details</h3>
                 <div class="contact-item">
                     <i class="fa-solid fa-location-dot"></i>
                     <div><strong data-i18n="loc_address_label">Address:</strong><br>H-34/69, Sector 3, Rohini, Delhi - 110085</div>
@@ -935,20 +937,18 @@
                     <i class="fa-solid fa-phone"></i>
                     <div><strong>Phone / Mobile:</strong><br>+91 81305 21456</div>
                 </div>
-                <div style="margin-top: 15px;">
+                <div style="margin-top: 14px;">
                     <a href="https://maps.app.goo.gl/tW6fDW25fgrrA86P6" target="_blank" class="hero-cta-btn" style="width: 100%; text-decoration: none; font-size: 0.88rem; padding: 10px 16px; min-height: 44px;">
                         <i class="fa-solid fa-diamond-turn-right"></i> <span data-i18n="loc_maps_btn">Open Directions in Google Maps</span>
                     </a>
                 </div>
             </div>
 
-            <!-- Live Interactive Embedded Google Map -->
-            <div class="contact-details" style="padding: 0; overflow: hidden; border-radius: 24px; min-height: 300px; display: flex;">
+            <!-- Compact Embedded Google Map -->
+            <div class="compact-map-wrapper">
                 <iframe 
+                    class="compact-map-frame"
                     src="https://maps.google.com/maps?q=28.7080828,77.1078816&hl=en&z=16&output=embed" 
-                    width="100%" 
-                    height="100%" 
-                    style="border:0; min-height: 300px; width: 100%; border-radius: 24px;" 
                     allowfullscreen="" 
                     loading="lazy" 
                     referrerpolicy="no-referrer-when-downgrade">
@@ -1130,7 +1130,7 @@
     </script>
 
     <!-- EXTERNAL MODULAR SCRIPTS -->
-    <script defer src="data.js?v=25"></script>
-    <script defer src="app.js?v=25"></script>
+    <script defer src="data.js?v=27"></script>
+    <script defer src="app.js?v=27"></script>
 </body>
 </html>
