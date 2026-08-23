@@ -304,29 +304,39 @@
             .service-text p { font-size: 0.72rem; }
         }
 
-        /* Collapsible Screener */
+        /* Symmetrical Stacked Cards */
         .screener-card {
-            background: #ffffff; border-radius: 26px; box-shadow: var(--card-shadow);
-            border: 1.5px solid #e0f2fe; overflow: hidden; margin-bottom: 35px;
+            background: #ffffff; border-radius: 24px; box-shadow: var(--card-shadow);
+            border: 1.5px solid #e0f2fe; overflow: hidden; margin-bottom: 12px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
+        .screener-card:hover { box-shadow: var(--card-shadow-hover); }
+        
         .screener-toggle-header {
             width: 100%; background: linear-gradient(135deg, #f0fdfa 0%, #e0f2fe 100%);
-            border: none; padding: 20px 24px; text-align: left; cursor: pointer;
+            border: none; padding: 18px 22px; text-align: left; cursor: pointer;
             display: flex; justify-content: space-between; align-items: center; gap: 14px;
             transition: background 0.2s ease;
         }
         .screener-toggle-header:hover { background: #e0f2fe; }
-        .screener-toggle-icon { font-size: 1.6rem; color: var(--brand-primary); transition: transform 0.25s ease; }
-        .screener-content-body { padding: 24px 20px; }
+        .screener-toggle-icon { font-size: 1.5rem; color: var(--brand-primary); transition: transform 0.25s ease; }
+        .screener-content-body { padding: 22px 20px; }
 
         .screener-badge {
             display: inline-flex; align-items: center; gap: 6px; background: #ffffff;
             color: var(--brand-primary-dark); padding: 4px 12px; border-radius: 16px;
-            font-size: 0.75rem; font-weight: 700; text-transform: uppercase; margin-bottom: 6px;
+            font-size: 0.74rem; font-weight: 700; text-transform: uppercase; margin-bottom: 6px;
             box-shadow: 0 2px 6px rgba(0,0,0,0.04); border: 1px solid #ccfbf1;
         }
-        .screener-title { font-family: 'Fredoka', cursive; font-size: 1.45rem; color: #083344; margin-bottom: 2px; }
+        .screener-title { font-family: 'Fredoka', cursive; font-size: 1.35rem; color: #083344; margin-bottom: 2px; }
         .screener-subtitle { font-size: 0.85rem; color: var(--muted-text); }
+
+        .card-circle-btn {
+            width: 40px; height: 40px; border-radius: 50%; background: #ffffff;
+            box-shadow: 0 2px 8px rgba(8, 145, 178, 0.12); display: flex; align-items: center;
+            justify-content: center; flex-shrink: 0; transition: transform 0.2s;
+        }
+        .screener-card:hover .card-circle-btn { transform: translateX(3px); }
 
         .screener-inputs-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px;
@@ -505,7 +515,7 @@
             .doctor-hero-name { font-size: 1.25rem; }
 
             .screener-toggle-header { padding: 16px 14px; }
-            .screener-title { font-size: 1.2rem; }
+            .screener-title { font-size: 1.15rem; }
             .screener-content-body { padding: 18px 12px; }
             .screener-inputs-grid { grid-template-columns: 1fr; }
             
@@ -597,139 +607,6 @@
         </div>
     </section>
 
-                </div>
- 
-            </div>
-<!-- 1. TOP CARD: GROWTH, DEVELOPMENT & NUTRITION -->
-    <div class="container" id="growth-screener" style="margin-top: 25px; margin-bottom: 12px;">
-        <div class="screener-card" style="margin-bottom: 0;">
-            
-            <!-- Clickable Accordion Header -->
-            <button type="button" class="screener-toggle-header" onclick="toggleGrowthTool()">
-                <div>
-                    <span class="screener-badge"><i class="fa-solid fa-chart-line"></i> <span data-i18n="screener_badge">Pediatric Clinical Tool</span></span>
-                    <h2 class="screener-title" id="lblTitle" data-i18n="screener_title">Growth, Development & Nutrition Assessment</h2>
-                    <p class="screener-subtitle" id="lblSubtitle" data-i18n="screener_subtitle">Tap to assess IAP Growth Charts, Developmental Milestones (TDSC), IYCF Feeding Guides & Adolescent Puberty.</p>
-                </div>
-                <i id="growthToggleIcon" class="fa-solid fa-circle-chevron-down screener-toggle-icon"></i>
-            </button>
-
-            <!-- Collapsible Body -->
-            <div id="growthToolBody" class="screener-content-body" style="display: none;">
-                <div class="screener-inputs-grid">
-                    <div class="screener-field">
-                        <label><i class="fa-solid fa-language"></i> <span id="lblLang">Select Language</span></label>
-                        <select id="screenerLang" class="screener-select" onchange="runScreener()" style="border-color: #0891b2; font-weight:700; background:#f0fdfa;">
-                            <option value="english" selected>English (Standard)</option>
-                            <option value="hindi">हिन्दी (Hindi)</option>
-                        </select>
-                    </div>
-
-                    <div class="screener-field">
-                        <label><i class="fa-solid fa-cake-candles"></i> <span id="lblAge">Child's Age</span></label>
-                        <select id="screenerAge" class="screener-select" onchange="runScreener()">
-                            <option value="0m" selected>Newborn (0 - 30 Days)</option>
-                            <option value="3m">3 Months</option>
-                            <option value="6m">6 Months (Weaning Stage)</option>
-                            <option value="9m">9 Months</option>
-                            <option value="12m">12 Months (1 Year)</option>
-                            <option value="18m">18 Months (Toilet Training Stage)</option>
-                            <option value="24m">24 Months (2 Years)</option>
-                            <option value="3y">3 Years</option>
-                            <option value="4y">4 Years</option>
-                            <option value="5y">5 Years</option>
-                            <option value="6y">6 Years</option>
-                            <option value="7y">7 Years</option>
-                            <option value="8y">8 Years</option>
-                            <option value="9y">9 Years</option>
-                            <option value="10y">10 Years</option>
-                            <option value="11y">11 Years</option>
-                            <option value="12y">12 Years</option>
-                            <option value="13y">13 Years</option>
-                            <option value="14y">14 Years</option>
-                            <option value="15y">15 Years</option>
-                            <option value="16y">16 Years</option>
-                            <option value="17y">17 Years</option>
-                            <option value="18y">18 Years</option>
-                        </select>
-                    </div>
-
-                    <div class="screener-field">
-                        <label><i class="fa-solid fa-venus-mars"></i> <span id="lblGender">Child's Gender</span></label>
-                        <select id="screenerGender" class="screener-select" onchange="runScreener()">
-                            <option value="boy">Boy</option>
-                            <option value="girl">Girl</option>
-                        </select>
-                    </div>
-
-                    <div class="screener-field">
-                        <label><i class="fa-solid fa-weight-scale"></i> <span id="lblWeight">Current Weight (kg)</span></label>
-                        <input type="number" id="screenerWeight" class="screener-input" step="0.1" placeholder="e.g. 3.2" oninput="runScreener()">
-                    </div>
-
-                    <div class="screener-field">
-                        <label><i class="fa-solid fa-ruler-vertical"></i> <span id="lblHeight">Current Length (cm)</span></label>
-                        <input type="number" id="screenerHeight" class="screener-input" step="0.5" placeholder="e.g. 50" oninput="runScreener()">
-                    </div>
-
-                    <div class="screener-field">
-                        <label><i class="fa-solid fa-person"></i> <span id="lblFather">Father's Height</span> <small style="color:#64748b;">(Optional, cm)</small></label>
-                        <input type="number" id="fatherHeight" class="screener-input" step="1" placeholder="e.g. 175" oninput="runScreener()">
-                    </div>
-
-                    <div class="screener-field">
-                        <label><i class="fa-solid fa-person-dress"></i> <span id="lblMother">Mother's Height</span> <small style="color:#64748b;">(Optional, cm)</small></label>
-                        <input type="number" id="motherHeight" class="screener-input" step="1" placeholder="e.g. 160" oninput="runScreener()">
-                    </div>
-                </div>
-
-                <div id="screenerResults"></div>
-
-                <div style="margin-top: 16px; padding: 12px 16px; background: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0; text-align: center;">
-                    <p style="font-size: 0.76rem; color: #64748b; line-height: 1.5; margin: 0;">
-                        <i class="fa-solid fa-circle-info" style="color: var(--brand-primary); margin-right: 4px;"></i>
-                        <strong>Medical Disclaimer:</strong> This clinical screening tool utilizes standard Indian Academy of Pediatrics (IAP) percentiles for educational guidance. It does not replace a formal medical diagnosis. Please consult Dr. Dinesh Mittal for individual clinical evaluation.
-                    </p>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- 2. BOTTOM CARD: MATCHING VACCINE FAQs BUTTON (STACKED DIRECTLY UNDERNEATH) -->
-    <div class="container" style="margin-top: 10px; margin-bottom: 25px;">
-        <div class="screener-card" style="margin-bottom: 0;">
-            <a href="pediatric-vaccine-faqs-guide.html" class="screener-toggle-header" style="text-decoration: none; display: flex; justify-content: space-between; align-items: center;">
-                <div>
-                    <span class="screener-badge" style="border-color: #bae6fd;"><i class="fa-solid fa-syringe" style="color: var(--brand-primary);"></i> <span data-i18n="vax_btn_badge">Pediatric Vaccination Guide</span></span>
-                    <h2 class="screener-title" data-i18n="vax_btn_title">Childhood Immunization & Vaccine FAQs</h2>
-                    <p class="screener-subtitle" data-i18n="vax_btn_subtitle">Tap to read doctor answers on missed doses, multiple vaccines safety, and fever care.</p>
-                </div>
-                <div style="display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; border-radius: 50%; background: #ffffff; box-shadow: 0 2px 8px rgba(8, 145, 178, 0.12); flex-shrink: 0;">
-                    <i class="fa-solid fa-chevron-right" style="color: var(--brand-primary); font-size: 1.1rem;"></i>
-                </div>
-            </a>
-        </div>
-    </div>
-        </div>
-    </div>
-
-    <!-- 2. BOTTOM CARD: MATCHING VACCINE FAQs BUTTON (STACKED DIRECTLY UNDERNEATH) -->
-    <div class="container" style="margin-top: 10px; margin-bottom: 25px;">
-        <div class="screener-card" style="margin-bottom: 0;">
-            <a href="pediatric-vaccine-faqs-guide.html" class="screener-toggle-header" style="text-decoration: none; display: flex; justify-content: space-between; align-items: center;">
-                <div>
-                    <span class="screener-badge" style="border-color: #bae6fd;"><i class="fa-solid fa-syringe" style="color: var(--brand-primary);"></i> <span data-i18n="vax_btn_badge">Pediatric Vaccination Guide</span></span>
-                    <h2 class="screener-title" data-i18n="vax_btn_title">Childhood Immunization & Vaccine FAQs</h2>
-                    <p class="screener-subtitle" data-i18n="vax_btn_subtitle">Tap to read doctor answers on missed doses, multiple vaccines safety, and fever care.</p>
-                </div>
-                <div style="display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; border-radius: 50%; background: #ffffff; box-shadow: 0 2px 8px rgba(8, 145, 178, 0.12); flex-shrink: 0;">
-                    <i class="fa-solid fa-chevron-right" style="color: var(--brand-primary); font-size: 1.1rem;"></i>
-                </div>
-            </a>
-        </div>
-    </div>
-    </div>
     <!-- Services Section -->
     <div class="container" id="services" style="margin-top: 25px; margin-bottom: 25px;">
         <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 12px;">
@@ -785,11 +662,11 @@
         </div>
     </div>
 
-    <!-- COLLAPSIBLE GROWTH, DEVELOPMENT & NUTRITION SCREENER TOOL -->
-    <div class="container" id="growth-screener">
-        <div class="screener-card">
-            
-            <!-- Clickable Accordion Header -->
+    <!-- ================= 5 MATCHING STACKED CLINICAL CARDS ================= -->
+
+    <!-- 🌟 CARD 1: GROWTH, DEVELOPMENT & NUTRITION SCREENER TOOL -->
+    <div class="container" id="growth-screener" style="margin-top: 25px; margin-bottom: 12px;">
+        <div class="screener-card" style="margin-bottom: 0;">
             <button type="button" class="screener-toggle-header" onclick="toggleGrowthTool()">
                 <div>
                     <span class="screener-badge"><i class="fa-solid fa-chart-line"></i> <span data-i18n="screener_badge">Pediatric Clinical Tool</span></span>
@@ -877,64 +754,105 @@
                         <strong>Medical Disclaimer:</strong> This clinical screening tool utilizes standard Indian Academy of Pediatrics (IAP) percentiles for educational guidance. It does not replace a formal medical diagnosis. Please consult Dr. Dinesh Mittal for individual clinical evaluation.
                     </p>
                 </div>
+            </div>
+        </div>
+    </div>
 
+    <!-- 🌟 CARD 2: CHILDHOOD IMMUNIZATION & VACCINE FAQs -->
+    <div class="container" style="margin-top: 10px; margin-bottom: 12px;">
+        <div class="screener-card" style="margin-bottom: 0;">
+            <a href="pediatric-vaccine-faqs-guide.html" class="screener-toggle-header" style="text-decoration: none; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <span class="screener-badge" style="border-color: #bae6fd;"><i class="fa-solid fa-syringe" style="color: var(--brand-primary);"></i> <span data-i18n="vax_btn_badge">Pediatric Vaccination Guide</span></span>
+                    <h2 class="screener-title" data-i18n="vax_btn_title">Childhood Immunization & Vaccine FAQs</h2>
+                    <p class="screener-subtitle" data-i18n="vax_btn_subtitle">Tap to read doctor answers on missed doses, multiple vaccines safety, and fever care.</p>
+                </div>
+                <div class="card-circle-btn">
+                    <i class="fa-solid fa-chevron-right" style="color: var(--brand-primary); font-size: 1.1rem;"></i>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- 🌟 CARD 3: ADOLESCENT HEALTH & PUBERTY GUIDANCE (INTERACTIVE FAQ ACCORDION) -->
+    <div class="container" id="adolescent-care" style="margin-top: 10px; margin-bottom: 12px;">
+        <div class="screener-card" style="margin-bottom: 0;">
+            <div class="screener-toggle-header" style="cursor: default; flex-wrap: wrap;">
+                <div>
+                    <span class="screener-badge" style="background: #fdf4ff; color: #a21caf; border-color: #fae8ff;"><i class="fa-solid fa-person-shelter"></i> <span data-i18n="teen_badge">Ages 10 - 18 Years</span></span>
+                    <h2 class="screener-title" data-i18n="teen_heading">Adolescent Health & Puberty Guidance</h2>
+                    <p class="screener-subtitle" data-i18n="teen_sub">Confidential puberty guidance, growth spurt counseling & hormonal wellness.</p>
+                </div>
+                
+                <!-- Quick Category Filter Buttons -->
+                <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                    <button onclick="filterAdolescentFaq('all')" id="tabFaqAll" class="hero-secondary-btn" style="padding: 6px 14px; font-size: 0.78rem; min-height: 32px; background: var(--brand-primary); color: white; border-color: var(--brand-primary);" data-i18n="teen_btn_all">All (20)</button>
+                    <button onclick="filterAdolescentFaq('girls')" id="tabFaqGirls" class="hero-secondary-btn" style="padding: 6px 14px; font-size: 0.78rem; min-height: 32px;"><i class="fa-solid fa-venus" style="color:#db2777;"></i> <span data-i18n="teen_btn_girls">Girls</span></button>
+                    <button onclick="filterAdolescentFaq('boys')" id="tabFaqBoys" class="hero-secondary-btn" style="padding: 6px 14px; font-size: 0.78rem; min-height: 32px;"><i class="fa-solid fa-mars" style="color:#2563eb;"></i> <span data-i18n="teen_btn_boys">Boys</span></button>
+                </div>
             </div>
 
+            <!-- Compact FAQ Body -->
+            <div class="screener-content-body" style="background: #ffffff;">
+                <div class="faq-container" id="faqAccordionContainer" style="gap: 8px;"></div>
+                
+                <div style="text-align: center; margin-top: 14px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+                    <button id="toggleFaqViewBtn" onclick="toggleFaqExpand()" class="hero-secondary-btn" style="padding: 8px 18px; font-size: 0.82rem; min-height: 36px;">
+                        <i class="fa-solid fa-chevron-down"></i> <span id="faqBtnLabel">View All 20 Questions</span>
+                    </button>
+                    <button onclick="openBookingModal()" class="hero-cta-btn" style="padding: 8px 18px; font-size: 0.82rem; min-height: 36px;">
+                        <i class="fa-solid fa-calendar-check"></i> <span data-i18n="teen_book_btn">Book Confidential Teen Consult</span>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- COMPACT ADOLESCENT HEALTH & PUBERTY GUIDANCE -->
-    <div class="container" id="adolescent-care" style="margin-top: 25px; margin-bottom: 25px;">
-      <div style="background: #ffffff; border-radius: 24px; box-shadow: var(--card-shadow); border: 1.5px solid #e0f2fe; padding: 22px 20px;">
-        
-        <!-- Header with Mini Tabs -->
-        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
-          <div>
-            <span class="screener-badge" style="background: #fdf4ff; color: #a21caf; border-color: #fae8ff; margin-bottom: 4px;">
-              <i class="fa-solid fa-person-shelter"></i> <span data-i18n="teen_badge">Ages 10 - 18 Years</span>
-            </span>
-            <h2 style="font-family: 'Fredoka', cursive; font-size: 1.35rem; color: #083344; margin: 0;" data-i18n="teen_heading">
-              Adolescent Health & Puberty Guidance
-            </h2>
-          </div>
-
-          <!-- Quick Filter Buttons -->
-          <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-            <button onclick="filterAdolescentFaq('all')" id="tabFaqAll" class="hero-secondary-btn" style="padding: 6px 14px; font-size: 0.78rem; min-height: 32px; background: var(--brand-primary); color: white; border-color: var(--brand-primary);" data-i18n="teen_btn_all">All (20)</button>
-            <button onclick="filterAdolescentFaq('girls')" id="tabFaqGirls" class="hero-secondary-btn" style="padding: 6px 14px; font-size: 0.78rem; min-height: 32px;"><i class="fa-solid fa-venus" style="color:#db2777;"></i> <span data-i18n="teen_btn_girls">Girls</span></button>
-            <button onclick="filterAdolescentFaq('boys')" id="tabFaqBoys" class="hero-secondary-btn" style="padding: 6px 14px; font-size: 0.78rem; min-height: 32px;"><i class="fa-solid fa-mars" style="color:#2563eb;"></i> <span data-i18n="teen_btn_boys">Boys</span></button>
-          </div>
+    <!-- 🌟 CARD 4: OFFICIAL IAP IMMUNIZATION SCHEDULE (0-18 YEARS) -->
+    <div class="container" style="margin-top: 10px; margin-bottom: 12px;">
+        <div class="screener-card" style="margin-bottom: 0;">
+            <a href="iap-immunization-schedule.html" class="screener-toggle-header" style="text-decoration: none; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <span class="screener-badge" style="border-color: #ccfbf1;"><i class="fa-solid fa-calendar-days" style="color: var(--brand-secondary);"></i> <span data-i18n="iap_btn_badge">Official Medical Chart</span></span>
+                    <h2 class="screener-title" data-i18n="iap_btn_title">Official IAP Immunization Schedule (0 to 18 Years)</h2>
+                    <p class="screener-subtitle" data-i18n="iap_btn_subtitle">Tap to view the complete age-by-age vaccine chart approved by Indian Academy of Pediatrics.</p>
+                </div>
+                <div class="card-circle-btn">
+                    <i class="fa-solid fa-chevron-right" style="color: var(--brand-primary); font-size: 1.1rem;"></i>
+                </div>
+            </a>
         </div>
-
-        <!-- FAQ Container (Compact Scroll/Slice) -->
-        <div class="faq-container" id="faqAccordionContainer" style="gap: 8px;"></div>
-
-        <!-- Toggle View More / View Less Button -->
-        <div style="text-align: center; margin-top: 14px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
-          <button id="toggleFaqViewBtn" onclick="toggleFaqExpand()" class="hero-secondary-btn" style="padding: 8px 18px; font-size: 0.82rem; min-height: 36px;">
-            <i class="fa-solid fa-chevron-down"></i> <span id="faqBtnLabel">View All 20 Questions</span>
-          </button>
-          <button onclick="openBookingModal()" class="hero-cta-btn" style="padding: 8px 18px; font-size: 0.82rem; min-height: 36px;">
-            <i class="fa-solid fa-calendar-check"></i> <span data-i18n="teen_book_btn">Book Confidential Teen Consult</span>
-          </button>
-        </div>
-
-      </div>
     </div>
 
-    <!-- PROMINENT FEATURED BLOG SECTION ON HOMEPAGE -->
-    <div class="container" id="blog">
+    <!-- 🌟 CARD 5: PARENTING & CHILD HEALTH BLOG LIBRARY -->
+    <div class="container" style="margin-top: 10px; margin-bottom: 30px;">
+        <div class="screener-card" style="margin-bottom: 0;">
+            <a href="blog.html" class="screener-toggle-header" style="text-decoration: none; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <span class="screener-badge" style="border-color: #fef08a;"><i class="fa-solid fa-book-open-reader" style="color: var(--brand-accent-dark);"></i> <span data-i18n="blog_btn_badge">Health Education Library</span></span>
+                    <h2 class="screener-title" data-i18n="blog_btn_title">Parenting & Pediatric Health Insights</h2>
+                    <p class="screener-subtitle" data-i18n="blog_btn_subtitle">Tap to explore all verified medical guides on fever care, infant nutrition, dengue, and air pollution.</p>
+                </div>
+                <div class="card-circle-btn">
+                    <i class="fa-solid fa-chevron-right" style="color: var(--brand-primary); font-size: 1.1rem;"></i>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- ================= PROMINENT FEATURED BLOG SPOTLIGHT & IMPORTANT GUIDES ================= -->
+    <div class="container" id="blog" style="margin-top: 35px;">
         <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 18px;">
             <div>
                 <span style="font-size: 0.75rem; font-weight: 700; color: var(--brand-primary); text-transform: uppercase; letter-spacing: 0.5px;" data-i18n="blog_badge">Health Education</span>
-                <h2 style="font-family: 'Fredoka', cursive; font-size: 1.65rem; color: #083344; margin: 0;" data-i18n="blog_heading">Parenting & Health Insights</h2>
+                <h2 style="font-family: 'Fredoka', cursive; font-size: 1.65rem; color: #083344; margin: 0;" data-i18n="blog_heading">Featured Pediatric Guides</h2>
             </div>
             <a href="blog.html" style="font-size: 0.88rem; font-weight: 700; color: var(--brand-primary); text-decoration: none;">
                 <span data-i18n="blog_view_all">View All Guides</span> <i class="fa-solid fa-arrow-right"></i>
             </a>
         </div>
 
-        <!-- 🌟 1. PROMINENT SPOTLIGHT BANNER (LATEST PEDIATRIC GUIDE) -->
+        <!-- 🌟 1. HIGHLIGHTED LATEST BLOG SPOTLIGHT BANNER -->
         <div style="background: linear-gradient(135deg, #f0fdfa 0%, #e0f2fe 100%); border: 2px solid #38bdf8; border-radius: 24px; padding: 22px; margin-bottom: 20px; box-shadow: 0 10px 25px -5px rgba(8, 145, 178, 0.12); display: flex; flex-wrap: wrap; gap: 20px; align-items: center;">
             <div style="flex: 1; min-width: 260px;">
                 <span style="display: inline-flex; align-items: center; gap: 6px; background: #dc2626; color: #ffffff; padding: 4px 12px; border-radius: 20px; font-size: 0.74rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">
@@ -955,18 +873,20 @@
             </div>
         </div>
 
-        <!-- 📚 2. SECONDARY FEATURED CARDS -->
+        <!-- 📚 2. IMPORTANT FEATURED CARDS (NEWBORN CARE, DENGUE, SCREEN TIME) -->
         <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
             
-            <div class="blog-card" style="border: 2px solid var(--brand-secondary);">
+            <!-- Newborn Care Guide -->
+            <div class="blog-card" style="border: 2px solid var(--brand-primary);">
                 <div class="blog-content" style="padding: 16px;">
-                    <span class="blog-tag" style="background: var(--brand-secondary); color: white;">Essential Reference</span>
-                    <h3 class="blog-title" style="font-size: 1.05rem;">IAP Immunization Schedule (0-18 Years)</h3>
-                    <p class="blog-snippet" style="font-size: 0.82rem;">Official age-by-age vaccine chart recommended by the Indian Academy of Pediatrics.</p>
-                    <a href="iap-immunization-schedule.html" class="read-btn" style="font-size: 0.82rem;">View Schedule <i class="fa-solid fa-arrow-right"></i></a>
+                    <span class="blog-tag" style="background: #e0f2fe; color: #0369a1;">Newborn Care</span>
+                    <h3 class="blog-title" style="font-size: 1.05rem;">Essential Newborn Care Tips (0-30 Days)</h3>
+                    <p class="blog-snippet" style="font-size: 0.82rem;">Pediatric guide on feeding on demand, cord care, jaundice checks & sleep safety.</p>
+                    <a href="newborn-care-guide.html" class="read-btn" style="font-size: 0.82rem;">Read Guide <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
             </div>
 
+            <!-- Dengue Fever Guide -->
             <div class="blog-card">
                 <div class="blog-content" style="padding: 16px;">
                     <span class="blog-tag" style="background: #fee2e2; color: #991b1b;">Seasonal Alert</span>
@@ -976,6 +896,7 @@
                 </div>
             </div>
 
+            <!-- Screen Time Reduction -->
             <div class="blog-card">
                 <div class="blog-content" style="padding: 16px;">
                     <span class="blog-tag">Child Development</span>
@@ -990,7 +911,7 @@
         <!-- 🔗 3. LINK TO FULL ARCHIVE -->
         <div style="text-align: center; margin-top: 20px;">
             <a href="blog.html" class="hero-secondary-btn" style="padding: 10px 24px; font-size: 0.88rem;">
-                <i class="fa-solid fa-layer-group" style="color:var(--brand-primary);"></i> <span data-i18n="blog_explore_btn">Browse All 8 Articles in Health Library</span>
+                <i class="fa-solid fa-layer-group" style="color:var(--brand-primary);"></i> <span data-i18n="blog_explore_btn">Browse All Articles in Health Library</span>
             </a>
         </div>
     </div>
@@ -1208,7 +1129,7 @@
     </script>
 
     <!-- EXTERNAL MODULAR SCRIPTS -->
-    <script defer src="data.js?v=23"></script>
-    <script defer src="app.js?v=23"></script>
+    <script defer src="data.js?v=25"></script>
+    <script defer src="app.js?v=25"></script>
 </body>
 </html>
