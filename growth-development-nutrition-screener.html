@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Child Growth, Development & Nutrition Assessment Tool | Dr. Dinesh Mittal</title>
-    <meta name="description" content="Pediatric growth screener by Dr. Dinesh Mittal. Evaluate child height, weight, BMI-for-age, IAP percentiles, TDSC developmental milestones, and feeding guidance.">
+    <meta name="description" content="Pediatric growth screener by Dr. Dinesh Mittal. Evaluate child height, weight, BMI-for-age, IAP percentiles, TDSC developmental milestones, complementary feeding, and toilet training guidance.">
     <link rel="canonical" href="https://childspecialistrohini.com/growth-development-nutrition-screener.html" />
 
     <!-- Google tag (gtag.js) -->
@@ -134,10 +134,10 @@
                         <select id="screenerAge" class="screener-select" onchange="updateMeasurementLabel()">
                             <option value="0m" selected>Newborn (0 - 30 Days)</option>
                             <option value="3m">3 Months</option>
-                            <option value="6m">6 Months (Weaning Stage)</option>
+                            <option value="6m" id="opt6m">6 Months (Complementary Feeding Stage)</option>
                             <option value="9m">9 Months</option>
                             <option value="12m">12 Months (1 Year)</option>
-                            <option value="18m">18 Months (Toddler Stage)</option>
+                            <option value="18m" id="opt18m">18 Months (1.5 Years)</option>
                             <option value="24m">24 Months (2 Years)</option>
                             <option value="3y">3 Years</option>
                             <option value="4y">4 Years</option>
@@ -218,8 +218,11 @@
     <script src="data.js" onerror="console.warn('data.js not loaded, using built-in clinical database.')"></script>
 
     <script>
+      // Diet preference for Complementary Feeding
+      let currentDietPreference = "veg";
+
       // =========================================================================
-      // 🏥 100% SELF-CONTAINED IAP/WHO CLINICAL DATABASE (ZERO DEPENDENCY FAILURES)
+      // 🏥 100% SELF-CONTAINED IAP/WHO CLINICAL DATABASE
       // =========================================================================
       const fallbackClinicalDatabase = {
         "0m": {
@@ -267,7 +270,7 @@
           }
         },
         "6m": {
-          name: { en: "6 Months (Weaning Stage)", hi: "6 माह (ऊपरी आहार की शुरुआत)" },
+          name: { en: "6 Months (Complementary Feeding Stage)", hi: "6 माह (पूरक आहार - Complementary Feeding)" },
           iap: {
             boy: { minW: 6.4, maxW: 9.8, minH: 63.0, maxH: 72.0 },
             girl: { minW: 5.8, maxW: 9.2, minH: 61.0, maxH: 70.0 }
@@ -279,7 +282,7 @@
           yellow: { en: ["Stiff legs or reluctance to bear weight"], hi: ["पैरों में अत्यधिक अकड़न"] },
           red: { en: ["Cannot hold head steadily", "No babbling or joyful squealing sounds"], hi: ["गर्दन न टिकना", "मुंह से आवाजें (Babbling) न निकालना"] },
           tips: {
-            nutrition: { en: "Start complementary feeding: Moong dal puree, mashed banana, suji kheer without salt or sugar.", hi: "ऊपरी आहार शुरू करें: दाल का पानी, मसला हुआ केला, सूजी खीर। 1 साल तक नमक व चीनी न दें।" },
+            nutrition: { en: "Start Complementary Feeding along with breastmilk. Begin with single grain/vegetable purees.", hi: "स्तनपान के साथ पूरक आहार (Complementary Feeding) शुरू करें: दाल का पानी, मसला हुआ केला, सूजी खीर।" },
             safety: { en: "Never leave baby unattended on high beds or sofas.", hi: "बिस्तर या सोफे पर बच्चे को अकेला कभी न छोड़ें।" },
             play: { en: "Interactive peek-a-boo and tactile toys.", hi: "झांकना-छिपाना (Peek-a-boo) खेल खेलें।" },
             care: { en: "Ensure 6-month Influenza (Flu) and Typhoid conjugate vaccines.", hi: "6 माह पर फ्लू और टाइफाइड के टीके लगवाएं।" }
@@ -324,7 +327,7 @@
           }
         },
         "18m": {
-          name: { en: "18 Months (Toddler Stage)", hi: "18 माह (डेढ़ वर्ष)" },
+          name: { en: "18 Months (1.5 Years)", hi: "18 माह (डेढ़ वर्ष)" },
           iap: {
             boy: { minW: 8.8, maxW: 13.5, minH: 77.0, maxH: 88.0 },
             girl: { minW: 8.1, maxW: 13.0, minH: 75.0, maxH: 86.5 }
@@ -360,38 +363,6 @@
             play: { en: "Building 6-block towers and running outdoors.", hi: "ब्लॉक्स जोड़ना और खुले पार्क में खेलना।" },
             care: { en: "Annual pediatric health, vision, and dental checkup.", hi: "वार्षिक शारीरिक विकास, नजर व दांतों की जांच कराएं।" }
           }
-        },
-        "3y": {
-          name: { en: "3 Years", hi: "3 वर्ष" },
-          iap: {
-            boy: { minW: 11.3, maxW: 18.0, minH: 89.0, maxH: 103.0, minBmi: 13.8, ovBmi: 17.2, obBmi: 18.6 },
-            girl: { minW: 10.8, maxW: 17.5, minH: 88.0, maxH: 102.0, minBmi: 13.5, ovBmi: 17.0, obBmi: 18.4 }
-          },
-          green: { en: ["Pedals a tricycle", "Speaks in full 3-4 word sentences", "Understands 'mine' and 'yours'"], hi: ["तीन पहियों की साइकिल चलाना", "पूरे वाक्य बोलना", "अपनी-पराई चीजें समझना"] },
-          yellow: { en: ["Speech unclear to family members"], hi: ["बोली में अत्यधिक तुतलाना"] },
-          red: { en: ["Cannot climb stairs", "Cannot speak in sentences", "No interest in other children"], hi: ["सीढ़ियां न चढ़ पाना", "बच्चों से घुलना-मिलना नहीं"] },
-          tips: {
-            nutrition: { en: "Provide protein, nuts, fruits, and home lentils.", hi: "दाल, सूखे मेवे, मौसमी फल और हरी सब्जियां दें।" },
-            safety: { en: "Teach street safety and holding hands.", hi: "सड़क पार करते समय हाथ पकड़ने की सीख दें।" },
-            play: { en: "Pretend play, drawing circles.", hi: "रंग भरना और कहानियां सुनाना।" },
-            care: { en: "Annual flu vaccine booster.", hi: "वार्षिक फ्लू का टीका लगवाएं।" }
-          }
-        },
-        "5y": {
-          name: { en: "5 Years", hi: "5 वर्ष" },
-          iap: {
-            boy: { minW: 14.2, maxW: 24.0, minH: 101.0, maxH: 118.0, minBmi: 13.5, ovBmi: 16.8, obBmi: 18.5 },
-            girl: { minW: 13.8, maxW: 23.5, minH: 100.0, maxH: 117.0, minBmi: 13.3, ovBmi: 16.6, obBmi: 18.3 }
-          },
-          green: { en: ["Hops on one foot", "Dresses independently", "Tells simple stories"], hi: ["एक पैर पर कूदना", "कपड़े पहनना", "कहानियां सुनाना"] },
-          yellow: { en: ["Difficulty with buttons and zippers"], hi: ["हाथ के बारीक काम न कर पाना"] },
-          red: { en: ["Extremely aggressive or withdrawn", "Cannot draw a person with 3 body parts"], hi: ["अत्यधिक चिड़चिड़ापन", "चित्र न बना पाना"] },
-          tips: {
-            nutrition: { en: "Avoid packaged chips, sodas, and ultra-processed bakery items.", hi: "जंक फूड, चिप्स व कोल्ड ड्रिंक्स से बचाएं।" },
-            safety: { en: "Teach stranger safety and good touch/bad touch basics.", hi: "सुरक्षित व असुरक्षित स्पर्श (Good/Bad Touch) की शिक्षा दें।" },
-            play: { en: "60 minutes of active running, cycling, outdoor sports.", hi: "रोजाना कम से कम 1 घंटा खुले में खेलकूद।" },
-            care: { en: "Administer 4.5-5 Year DTP-2 Booster and MMR-3 vaccine.", hi: "5 वर्ष पर DTP बूस्टर एवं MMR-3 का टीका लगवाएं।" }
-          }
         }
       };
 
@@ -417,6 +388,8 @@
         const lblWeight = document.getElementById("lblWeight");
         const lblFather = document.getElementById("lblFather");
         const lblMother = document.getElementById("lblMother");
+        const opt6m = document.getElementById("opt6m");
+        const opt18m = document.getElementById("opt18m");
 
         if (toolLang === "hi") {
           if (btnText) btnText.textContent = "Read in English";
@@ -427,6 +400,8 @@
           if (lblWeight) lblWeight.textContent = "वर्तमान वजन (kg)";
           if (lblFather) lblFather.textContent = "पिता की लंबाई (cm)";
           if (lblMother) lblMother.textContent = "माता की लंबाई (cm)";
+          if (opt6m) opt6m.textContent = "6 माह (पूरक आहार - Complementary Feeding)";
+          if (opt18m) opt18m.textContent = "18 माह (डेढ़ वर्ष)";
         } else {
           if (btnText) btnText.textContent = "हिन्दी में पढ़ें";
           if (titleEl) titleEl.textContent = "Child Growth, Development & Nutrition Assessment";
@@ -436,6 +411,8 @@
           if (lblWeight) lblWeight.textContent = "Current Weight (kg)";
           if (lblFather) lblFather.textContent = "Father's Height (cm)";
           if (lblMother) lblMother.textContent = "Mother's Height (cm)";
+          if (opt6m) opt6m.textContent = "6 Months (Complementary Feeding Stage)";
+          if (opt18m) opt18m.textContent = "18 Months (1.5 Years)";
         }
         updateMeasurementLabel();
       }
@@ -449,6 +426,198 @@
         }
       }
 
+      // =========================================================================
+      // 🍲 6-MONTH COMPLEMENTARY FEEDING MODULE (WITH YOUTUBE RECIPES)
+      // =========================================================================
+      function renderComplementaryFeedingModule(lang) {
+        const isHi = (lang === "hi");
+        return `
+          <div style="background: #fffdf7; border: 2px solid #fdba74; border-radius: 18px; padding: 18px; margin-top: 18px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:14px;">
+              <div>
+                <span style="background:#ffedd5; color:#c2410c; font-size:0.75rem; font-weight:700; padding:4px 10px; border-radius:12px; display:inline-block; margin-bottom:4px;">
+                  <i class="fa-solid fa-seedling"></i> IAP IYCF Guidelines (6 to 12 Months)
+                </span>
+                <h5 style="color: #9a3412; font-family:'Fredoka',cursive; font-size: 1.25rem; margin:0;">
+                  ${isHi ? "6 माह से 1 वर्ष: संपूर्ण पूरक आहार (Complementary Feeding) एवं फूड-प्लेट मार्गदर्शन" : "6 to 12 Months: Stepwise Complementary Feeding & Food Plate Guide"}
+                </h5>
+              </div>
+              
+              <!-- DIET TOGGLE -->
+              <div style="display:flex; align-items:center; gap:6px; background:#ffedd5; padding:4px 8px; border-radius:20px; border:1px solid #fed7aa;">
+                <span style="font-size:0.78rem; font-weight:700; color:#9a3412;"><i class="fa-solid fa-filter"></i> ${isHi ? 'आहार:' : 'Diet:'}</span>
+                <button type="button" onclick="setFeedingDiet('veg')" style="border:none; padding:4px 10px; border-radius:14px; font-size:0.76rem; font-weight:700; cursor:pointer; background:${currentDietPreference === 'veg' ? '#16a34a' : 'transparent'}; color:${currentDietPreference === 'veg' ? '#fff' : '#431407'};">
+                  🟢 ${isHi ? 'शाकाहारी' : 'Vegetarian'}
+                </button>
+                <button type="button" onclick="setFeedingDiet('nonveg')" style="border:none; padding:4px 10px; border-radius:14px; font-size:0.76rem; font-weight:700; cursor:pointer; background:${currentDietPreference === 'nonveg' ? '#ea580c' : 'transparent'}; color:${currentDietPreference === 'nonveg' ? '#fff' : '#431407'};">
+                  🔴 ${isHi ? 'अंडा / नॉन-वेज' : 'Non-Veg / Egg'}
+                </button>
+              </div>
+            </div>
+
+            <!-- 4-FOOD GROUP PLATE -->
+            <div style="background:#ffffff; border:1.5px solid #fed7aa; border-radius:14px; padding:14px; margin-bottom:14px;">
+              <strong style="color:#c2410c; font-size:0.88rem; display:flex; align-items:center; gap:6px; margin-bottom:6px;">
+                <i class="fa-solid fa-chart-pie"></i> ${isHi ? 'संतुलित बाल आहार: 4-खाद्य समूह (Food Plate Concept)' : 'The Balanced 4-Group Pediatric Food Plate'}
+              </strong>
+              <p style="font-size:0.82rem; color:#431407; margin-bottom:8px;">
+                ${isHi ? 'प्रत्येक भोजन में इन 4 समूहों का संतुलन बच्चे के मानसिक व शारीरिक विकास के लिए आवश्यक है:' : 'Every main meal should combine elements from all 4 food groups for optimal brain & physical growth:'}
+              </p>
+              <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:8px;">
+                <div style="background:#fef2f2; padding:8px 10px; border-radius:8px; border:1px solid #fecaca; font-size:0.78rem; color:#991b1b;">
+                  <strong>1. Energy Grains:</strong> Rice, suji, sprouted ragi, wheat, oats.
+                </div>
+                <div style="background:#f0fdf4; padding:8px 10px; border-radius:8px; border:1px solid #bbf7d0; font-size:0.78rem; color:#166534;">
+                  <strong>2. Body Builders:</strong> Yellow moong dal, paneer, curd, egg yolk, fish, chicken liver.
+                </div>
+                <div style="background:#eff6ff; padding:8px 10px; border-radius:8px; border:1px solid #bfdbfe; font-size:0.78rem; color:#1e40af;">
+                  <strong>3. Protective Vitamins:</strong> Steamed pumpkin, carrot, bottle gourd (lauki), papaya, banana.
+                </div>
+                <div style="background:#fffbeb; padding:8px 10px; border-radius:8px; border:1px solid #fde68a; font-size:0.78rem; color:#854d0e;">
+                  <strong>4. Calorie Boosters:</strong> 1/2 tsp pure desi ghee or butter per meal.
+                </div>
+              </div>
+            </div>
+
+            <!-- STEP-BY-STEP RECIPES WITH YOUTUBE LINKS -->
+            <div style="background:#ffffff; padding:14px; border-radius:14px; border:1.5px solid #fed7aa; margin-bottom:12px;">
+              <strong style="color:#9a3412; font-size:0.88rem; display:flex; align-items:center; gap:6px; margin-bottom:10px;">
+                <i class="fa-solid fa-utensils"></i> ${isHi ? 'शुरुआती व्यंजन एवं रेसिपी गाइड' : 'Introductory Recipes & Video Guides'} (${currentDietPreference === 'veg' ? (isHi ? 'शाकाहारी' : 'Vegetarian') : (isHi ? 'अंडा / नॉन-वेज' : 'Non-Veg / Egg')}):
+              </strong>
+
+              ${currentDietPreference === 'veg' ? `
+                <div style="background:#fffaf5; padding:10px 12px; border-radius:10px; border:1px solid #fed7aa; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+                  <div>
+                    <strong style="font-size:0.84rem; color:#9a3412;">🥣 ${isHi ? 'मूंग दाल व चावल की पतली प्यूरी' : 'Moong Dal & Rice Smooth Puree'}</strong>
+                    <p style="font-size:0.78rem; color:#64748b; margin:0;">${isHi ? 'अच्छी तरह उबली हुई दाल-चावल को मैश करके 1/2 चम्मच देसी घी मिलाएं।' : 'Boil yellow moong dal & rice until soft, mash smoothly with 1/2 tsp pure ghee.'}</p>
+                  </div>
+                  <a href="https://www.youtube.com/results?search_query=6+month+baby+moong+dal+puree+recipe" target="_blank" rel="noopener noreferrer" style="background:#fee2e2; color:#b91c1c; font-size:0.72rem; font-weight:700; padding:4px 10px; border-radius:12px; text-decoration:none; display:inline-flex; align-items:center; gap:4px; border:1px solid #fca5a5;">
+                    <i class="fa-brands fa-youtube" style="color:#dc2626;"></i> ${isHi ? 'रेसिपी वीडियो देखें' : 'Watch Recipe'}
+                  </a>
+                </div>
+                <div style="background:#fffaf5; padding:10px 12px; border-radius:10px; border:1px solid #fed7aa; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+                  <div>
+                    <strong style="font-size:0.84rem; color:#9a3412;">🥣 ${isHi ? 'रागी व सूजी की पौष्टिक खीर (बिना चीनी)' : 'Sprouted Ragi & Suji Porridge (No Sugar)'}</strong>
+                    <p style="font-size:0.78rem; color:#64748b; margin:0;">${isHi ? 'पानी या मां के दूध में पकी रागी। प्राकृतिक मिठास के लिए मसला हुआ केला मिलाएं।' : 'Cooked in water or breastmilk. Naturally sweetened with mashed banana.'}</p>
+                  </div>
+                  <a href="https://www.youtube.com/results?search_query=6+month+baby+ragi+porridge+recipe" target="_blank" rel="noopener noreferrer" style="background:#fee2e2; color:#b91c1c; font-size:0.72rem; font-weight:700; padding:4px 10px; border-radius:12px; text-decoration:none; display:inline-flex; align-items:center; gap:4px; border:1px solid #fca5a5;">
+                    <i class="fa-brands fa-youtube" style="color:#dc2626;"></i> ${isHi ? 'रेसिपी वीडियो देखें' : 'Watch Recipe'}
+                  </a>
+                </div>
+              ` : `
+                <div style="background:#fffaf5; padding:10px 12px; border-radius:10px; border:1px solid #fed7aa; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+                  <div>
+                    <strong style="font-size:0.84rem; color:#9a3412;">🍳 ${isHi ? 'उबले अंडे की जर्दी की प्यूरी (Egg Yolk Puree)' : 'Hard-Boiled Egg Yolk Puree'}</strong>
+                    <p style="font-size:0.78rem; color:#64748b; margin:0;">${isHi ? 'अंडे की जर्दी को स्तनपान के दूध या गुनगुने पानी में मैश करके दें (उत्तम आयरन स्रोत)।' : 'Mash cooked yellow yolk with breastmilk or warm water (rich in iron & choline).'}</p>
+                  </div>
+                  <a href="https://www.youtube.com/results?search_query=6+month+baby+egg+yolk+puree" target="_blank" rel="noopener noreferrer" style="background:#fee2e2; color:#b91c1c; font-size:0.72rem; font-weight:700; padding:4px 10px; border-radius:12px; text-decoration:none; display:inline-flex; align-items:center; gap:4px; border:1px solid #fca5a5;">
+                    <i class="fa-brands fa-youtube" style="color:#dc2626;"></i> ${isHi ? 'रेसिपी वीडियो देखें' : 'Watch Recipe'}
+                  </a>
+                </div>
+                <div style="background:#fffaf5; padding:10px 12px; border-radius:10px; border:1px solid #fed7aa; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+                  <div>
+                    <strong style="font-size:0.84rem; color:#9a3412;">🍲 ${isHi ? 'चिकन व कद्दू का सूप (Clear Pureed Broth)' : 'Steamed Chicken & Pumpkin Broth'}</strong>
+                    <p style="font-size:0.78rem; color:#64748b; margin:0;">${isHi ? 'चिकन और कद्दू को उबालकर बारीक छानकर हल्का सूप तैयार करें।' : 'Pressure cook chicken breast with pumpkin, blend smoothly into mild broth.'}</p>
+                  </div>
+                  <a href="https://www.youtube.com/results?search_query=6+month+baby+chicken+soup+puree" target="_blank" rel="noopener noreferrer" style="background:#fee2e2; color:#b91c1c; font-size:0.72rem; font-weight:700; padding:4px 10px; border-radius:12px; text-decoration:none; display:inline-flex; align-items:center; gap:4px; border:1px solid #fca5a5;">
+                    <i class="fa-brands fa-youtube" style="color:#dc2626;"></i> ${isHi ? 'रेसिपी वीडियो देखें' : 'Watch Recipe'}
+                  </a>
+                </div>
+              `}
+            </div>
+
+            <!-- STRICT SAFETY RULES -->
+            <div style="background:#fef2f2; border:1.5px solid #fca5a5; border-radius:12px; padding:12px 14px;">
+              <strong style="color:#991b1b; font-size:0.85rem; display:flex; align-items:center; gap:6px;">
+                <i class="fa-solid fa-ban"></i> ${isHi ? '1 वर्ष से पहले पूर्णतः वर्जित चीजें (Strict Safety Rules):' : 'Strict IAP Safety Checklist (What NOT to give before 1 Year):'}
+              </strong>
+              <ul style="padding-left:18px; font-size:0.8rem; color:#7f1d1d; margin-top:6px; line-height:1.5;">
+                <li><strong>${isHi ? 'नमक व चीनी बिल्कुल न दें:' : 'NO Added Sugar or Salt:'}</strong> ${isHi ? 'शिशु के गुर्दों (Kidneys) पर दबाव से बचाता है।' : 'Protects developing infant kidneys and prevents taste habituation.'}</li>
+                <li><strong>${isHi ? '1 वर्ष तक शहद बिल्कुल न दें:' : 'NO Honey before 1 Year:'}</strong> ${isHi ? 'शिशु बोटुलिज़्म (Infant Botulism) नामक घातक संक्रमण का खतरा रहता है।' : 'Severe risk of Infant Botulism (a life-threatening spore infection).'}</li>
+                <li><strong>${isHi ? 'गाय या भैंस का दूध न पिलाएं:' : "NO Animal Cow's / Buffalo's Milk as primary drink:"}</strong> ${isHi ? 'आंतों में सूक्ष्म रक्तस्राव व खून की कमी (एनीमिया) करता है।' : 'Causes intestinal micro-bleeding and iron deficiency anemia.'}</li>
+                <li><strong>${isHi ? '3-दिन का नियम:' : 'The 3-Day Rule:'}</strong> ${isHi ? 'एलर्जी की पहचान हेतु एक बार में केवल एक नया भोजन 3 दिन तक दें।' : 'Introduce only ONE new single ingredient at a time for 3 consecutive days.'}</li>
+              </ul>
+            </div>
+          </div>
+        `;
+      }
+
+      function setFeedingDiet(diet) {
+        currentDietPreference = diet;
+        calculateAndRenderResults();
+      }
+
+      // =========================================================================
+      // 🚽 18-MONTH TOILET TRAINING PROTOCOL (WITH YOUTUBE GUIDE)
+      // =========================================================================
+      function renderToiletTrainingModule(lang) {
+        const isHi = (lang === "hi");
+        return `
+          <div style="background: #f0fdf4; border: 2px solid #86efac; border-radius: 18px; padding: 18px; margin-top: 18px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:12px;">
+              <div>
+                <span style="background:#dcfce7; color:#15803d; font-size:0.75rem; font-weight:700; padding:4px 10px; border-radius:12px; display:inline-block; margin-bottom:4px;">
+                  <i class="fa-solid fa-child-reaching"></i> 18 to 24 Months Developmental Milestone
+                </span>
+                <h5 style="color: #065f46; font-family:'Fredoka',cursive; font-size: 1.25rem; margin:0;">
+                  ${isHi ? "18 माह: वैज्ञानिक टॉयलेट ट्रेनिंग एवं पॉटी मार्गदर्शन" : "18 Months: The Pediatric Toilet Training Protocol"}
+                </h5>
+              </div>
+              <a href="https://www.youtube.com/results?search_query=toddler+potty+training+pediatrician+guide" target="_blank" rel="noopener noreferrer" style="background:#fee2e2; color:#b91c1c; font-size:0.75rem; font-weight:700; padding:5px 12px; border-radius:14px; text-decoration:none; display:inline-flex; align-items:center; gap:6px; border:1px solid #fca5a5;">
+                <i class="fa-brands fa-youtube" style="color:#dc2626; font-size:0.9rem;"></i> ${isHi ? 'टॉयलेट ट्रेनिंग वीडियो देखें' : 'Watch Toilet Training Guide'}
+              </a>
+            </div>
+
+            <p style="font-size:0.84rem; color:#047857; margin-bottom:12px; line-height:1.45;">
+              ${isHi ? "18 महीने की उम्र में अधिकांश बच्चे शारीरिक और मानसिक रूप से पॉटी ट्रेनिंग के लिए तैयार होने लगते हैं। जबरदस्ती करने के बजाय बच्चे के संकेतों को समझना सबसे जरूरी है।" : "Around 18 months, toddlers develop bowel/bladder nerve control. Forcing potty use causes stool withholding; gentle habit-building is key."}
+            </p>
+
+            <!-- READINESS SIGNS -->
+            <div style="background:#ffffff; border:1.5px solid #a7f3d0; border-radius:14px; padding:14px; margin-bottom:12px;">
+              <strong style="color:#065f46; font-size:0.88rem; display:flex; align-items:center; gap:6px; margin-bottom:8px;">
+                <i class="fa-solid fa-clipboard-check" style="color:#10b981;"></i> ${isHi ? "क्या आपका 18 माह का बच्चा तैयार है? (Readiness Checklist):" : "Toddler Readiness Checklist (Is Your 18-Month-Old Ready?):"}
+              </strong>
+              <ul style="list-style:none; padding:0; margin:0; font-size:0.82rem; color:#065f46; line-height:1.6;">
+                <li><i class="fa-solid fa-circle-check" style="color:#059669; margin-right:6px;"></i> ${isHi ? "डायपर कम से कम 2 घंटे तक सूखा रहता है।" : "Diaper stays dry for at least 2 consecutive hours."}</li>
+                <li><i class="fa-solid fa-circle-check" style="color:#059669; margin-right:6px;"></i> ${isHi ? "गीला या गंदा डायपर होने पर असहज होकर उतारने का इशारा करता है।" : "Dislikes wearing wet/dirty diapers and pulls at them."}</li>
+                <li><i class="fa-solid fa-circle-check" style="color:#059669; margin-right:6px;"></i> ${isHi ? "पॉटी आने पर कोने में छिपना या चेहरे पर भाव बदलना।" : "Shows hiding behavior or facial cues before bowel movements."}</li>
+                <li><i class="fa-solid fa-circle-check" style="color:#059669; margin-right:6px;"></i> ${isHi ? "सरल निर्देश ('यहाँ बैठो', 'पैंट पहनो') समझने लगा है।" : "Can follow simple 2-step verbal instructions."}</li>
+              </ul>
+            </div>
+
+            <!-- 4-STEP PROTOCOL -->
+            <div style="margin-bottom:12px;">
+              <strong style="color:#065f46; font-size:0.88rem; display:block; margin-bottom:8px;">
+                <i class="fa-solid fa-list-ol" style="color:#10b981;"></i> ${isHi ? "4-चरणीय वैज्ञानिक टॉयलेट रूटीन:" : "The 4-Step Pediatric Toilet Routine:"}
+              </strong>
+              <div style="background:#ffffff; border:1px solid #a7f3d0; border-radius:12px; padding:10px 14px; margin-bottom:6px; font-size:0.8rem; color:#064e3b;">
+                <strong>Step 1:</strong> ${isHi ? "बच्चे के आकार की आरामदायक पॉटी सीट कमरे में रखें ताकि वह उससे डरे नहीं।" : "Introduce a floor-level potty chair so feet touch the floor comfortably."}
+              </div>
+              <div style="background:#ffffff; border:1px solid #a7f3d0; border-radius:12px; padding:10px 14px; margin-bottom:6px; font-size:0.8rem; color:#064e3b;">
+                <strong>Step 2:</strong> ${isHi ? "सुबह उठने के बाद और खाना खाने के 15-20 मिनट बाद 5 मिनट पॉटी पर बैठने की आदत डालें।" : "Encourage sitting for 3-5 minutes post-meals (utilizing natural gastrocolic reflex)."}
+              </div>
+              <div style="background:#ffffff; border:1px solid #a7f3d0; border-radius:12px; padding:10px 14px; margin-bottom:6px; font-size:0.8rem; color:#064e3b;">
+                <strong>Step 3:</strong> ${isHi ? "सफलता पर बच्चे की खूब तारीफ करें या ताली बजाएं (Positive Reinforcement)।" : "Praise successful attempts enthusiastically without scolding accidents."}
+              </div>
+            </div>
+
+            <!-- DONT'S -->
+            <div style="background:#fef2f2; border:1.5px solid #fca5a5; border-radius:12px; padding:12px 14px;">
+              <strong style="color:#991b1b; font-size:0.84rem; display:flex; align-items:center; gap:6px;">
+                <i class="fa-solid fa-triangle-exclamation"></i> ${isHi ? "अभिभावक क्या न करें (कब्ज व डर से बचाव):" : "Strict Rules for Parents (Preventing Stool Withholding & Fear):"}
+              </strong>
+              <ul style="padding-left:18px; font-size:0.8rem; color:#7f1d1d; margin-top:6px; line-height:1.5;">
+                <li>${isHi ? "कपड़े गंदे होने पर कभी डांटें या सजा न दें (इससे बच्चा पॉटी रोकना शुरू कर देता है)।" : "Never scold, punish, or shame a child for toilet accidents."}</li>
+                <li>${isHi ? "पॉटी पर 5 मिनट से ज्यादा जबरदस्ती बैठाकर न रखें।" : "Do not force sitting for more than 5 minutes if child resists."}</li>
+              </ul>
+            </div>
+          </div>
+        `;
+      }
+
+      // =========================================================================
+      // 📊 MAIN CALCULATION FUNCTION
+      // =========================================================================
       function calculateAndRenderResults() {
         try {
           const ageKey = document.getElementById("screenerAge").value;
@@ -461,7 +630,6 @@
 
           if (!resultsContainer) return;
 
-          // Safe Database Fallback
           const db = (typeof milestoneDatabase !== "undefined" && milestoneDatabase[ageKey]) 
                      ? milestoneDatabase 
                      : fallbackClinicalDatabase;
@@ -572,7 +740,7 @@
             </div>
           `;
 
-          // 5. Milestones Flags (Safe Array Mapping)
+          // 5. Milestones Flags
           const greenItems = (data.green && Array.isArray(data.green[listLang])) ? data.green[listLang] : ["Tracking normal development."];
           const yellowItems = (data.yellow && Array.isArray(data.yellow[listLang])) ? data.yellow[listLang] : ["No immediate concerns."];
           const redItems = (data.red && Array.isArray(data.red[listLang])) ? data.red[listLang] : ["Consult pediatrician if milestones lag."];
@@ -596,6 +764,14 @@
           const playTip = (data.tips && data.tips.play && data.tips.play[listLang]) ? data.tips.play[listLang] : (data.parentTips && data.parentTips.play && data.parentTips.play[listLang] ? data.parentTips.play[listLang] : "Encourage interactive play.");
           const careTip = (data.tips && data.tips.care && data.tips.care[listLang]) ? data.tips.care[listLang] : (data.parentTips && data.parentTips.care && data.parentTips.care[listLang] ? data.parentTips.care[listLang] : "Ensure timely routine immunization.");
 
+          // 7. Special Modules: 6-Month Feeding or 18-Month Toilet Training
+          let specialInteractiveHtml = "";
+          if (ageKey === "6m" || ageKey === "9m") {
+            specialInteractiveHtml = renderComplementaryFeedingModule(listLang);
+          } else if (ageKey === "18m" || ageKey === "24m") {
+            specialInteractiveHtml = renderToiletTrainingModule(listLang);
+          }
+
           const tipsHtml = `
             <div class="result-box" style="grid-column: 1 / -1; background: #faf5ff; border: 1.5px solid #e9d5ff;">
               <h4 style="color: #6b21a8;"><i class="fa-solid fa-heart-pulse"></i> ${ageName} ${toolLang === "en" ? "Parenting & Nutrition Guide" : "अभिभावक देखभाल एवं पोषण मार्गदर्शन"}</h4>
@@ -617,11 +793,13 @@
                   <p style="font-size:0.84rem; color:#4b5563; line-height:1.45;">${careTip}</p>
                 </div>
               </div>
+
+              ${specialInteractiveHtml}
               
               <div class="doctor-cta-box">
                 <h3>${toolLang === "en" ? "Need In-Person Growth & Nutrition Evaluation?" : "शारीरिक विकास या पोषण पर व्यक्तिगत परामर्श हेतु"}</h3>
                 <p>${toolLang === "en" ? "Consult Dr. Dinesh Mittal at our Sector 3 Rohini clinic for clinical percentile charting." : "सेक्टर 3 रोहिणी क्लिनिक में डॉ. दिनेश मित्तल से परामर्श लें।"}</p>
-                <a href="index.html#growth-screener" class="hero-cta-btn"><i class="fa-solid fa-calendar-check"></i> ${toolLang === "en" ? "Book Clinic Consultation" : "परामर्श अपॉइंटमेंट बुक करें"}</a>
+                <a href="index.html" class="hero-cta-btn"><i class="fa-solid fa-calendar-check"></i> ${toolLang === "en" ? "Book Clinic Consultation" : "परामर्श अपॉइंटमेंट बुक करें"}</a>
               </div>
             </div>
           `;
@@ -634,7 +812,6 @@
             </div>
           `;
 
-          // Smooth scroll to the results
           document.getElementById("resultsAnchor").scrollIntoView({ behavior: "smooth" });
         } catch (err) {
           console.error("Calculation error caught safely:", err);
