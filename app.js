@@ -881,6 +881,19 @@ const siteTranslations = {
     loc_hours_label: "परामर्श का समय:",
     loc_hours_text: "सोमवार - शनिवार: सुबह 10:00 - दोपहर 1:00 | शाम 6:00 - 8:30<br>रविवार: सुबह 11:00 - दोपहर 12:00",
     loc_maps_btn: "गूगल मैप्स पर रास्ता देखें"
+    card_newborn_tag: "Newborn Care",
+    card_newborn_title: "Essential Newborn Care Tips (0-30 Days)",
+    card_newborn_desc: "Pediatric guide on feeding on demand, cord care, jaundice checks & sleep safety.",
+    
+    card_dengue_tag: "Seasonal Alert",
+    card_dengue_title: "Dengue in Children: Symptoms & Home Care",
+    card_dengue_desc: "Parent guide on high fever, platelet facts, and emergency red flags.",
+    
+    card_screen_tag: "Child Development",
+    card_screen_title: "How to Reduce Screen Time in Children",
+    card_screen_desc: "Practical strategies to manage mobile tantrums and establish healthy habits.",
+    
+    blog_read_btn_short: "Read Guide",
   }
 };
 
