@@ -1,8 +1,8 @@
 // ==========================================================
-// CLINIC APPLICATION ENGINE (app.js) - CRASH-PROOF VERSION
+// CLINIC APPLICATION ENGINE (app.js) - FAULTPROOF EDITION
 // ==========================================================
 
-// 🌐 1. FAIL-SAFE BILINGUAL DICTIONARY
+// 🌐 1. UNIFIED BILINGUAL DICTIONARY
 window.siteTranslations = {
   en: {
     nav_about: "About Doctor",
@@ -160,6 +160,7 @@ window.siteTranslations = {
 
 window.currentGlobalLang = localStorage.getItem("preferredClinicLang") || "en";
 
+// 🌐 SINGLE UNIFIED TRANSLATION FUNCTION
 window.setGlobalLanguage = function(lang) {
   try {
     window.currentGlobalLang = lang;
@@ -199,10 +200,8 @@ window.toggleGlobalLanguage = function() {
   window.setGlobalLanguage(nextLang);
 };
 
-let currentDietPreference = "veg";
-
 // ==========================================================
-// 2. DEFENSIVE & CRASH-PROOF SCREENER RUNNER
+// 2. DEFENSIVE & LIVE GROWTH SCREENER
 // ==========================================================
 function runScreener() {
   try {
@@ -338,7 +337,7 @@ function runScreener() {
       </div>
     `;
 
-    // 5. Milestones Flags (Safe Array Mapping)
+    // 5. Milestones Flags
     const greenItems = (data.green && Array.isArray(data.green[listLang])) ? data.green[listLang] : [];
     const yellowItems = (data.yellow && Array.isArray(data.yellow[listLang])) ? data.yellow[listLang] : [];
     const redItems = (data.red && Array.isArray(data.red[listLang])) ? data.red[listLang] : [];
@@ -351,12 +350,12 @@ function runScreener() {
       <div class="result-box">
         <h4><i class="fa-solid fa-brain" style="color: #0891b2;"></i> ${lang === "english" ? "Developmental Milestones (TDSC Scale)" : "विकासात्मक मील के पत्थर (TDSC स्केल)"}</h4>
         <div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i><div><strong>🟢 ${lang === "english" ? "Green Flags (Normal):" : "सामान्य मील के पत्थर:"}</strong><ul style="margin-top:4px; padding-left:16px;">${greenList || '<li>Normal age milestones tracking well.</li>'}</ul></div></div>
-        <div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i><div><strong>🟡 ${lang === "english" ? "Yellow Flags (Monitor):" : "निगरानी योग्य संकेत:"}</strong><ul style="margin-top:4px; padding-left:16px;">${yellowList || '<li>No immediate delays noted.</li>'}</ul></div></div>
+        <div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i><div><strong>🟡 ${lang === "english" ? "Yellow Flags (Monitor):" : "निगरानी योग्य संकेत:"}</strong><ul style="margin-top:4px; padding-left:16px;">${yellowList || '<li>No immediate concerns.</li>'}</ul></div></div>
         <div class="flag-card flag-red"><i class="fa-solid fa-circle-exclamation"></i><div><strong>🔴 ${lang === "english" ? "Red Flags (Doctor Review):" : "सतर्कता संकेत - डॉक्टर को दिखाएं:"}</strong><ul style="margin-top:4px; padding-left:16px;">${redList || '<li>Consult pediatrician if milestones lag.</li>'}</ul></div></div>
       </div>
     `;
 
-    // 6. Parenting Tips (Safe Object Access)
+    // 6. Parenting Tips
     const nutritionTip = (data.parentTips && data.parentTips.nutrition && data.parentTips.nutrition[listLang]) ? data.parentTips.nutrition[listLang] : "";
     const safetyTip = (data.parentTips && data.parentTips.safety && data.parentTips.safety[listLang]) ? data.parentTips.safety[listLang] : "";
     const playTip = (data.parentTips && data.parentTips.play && data.parentTips.play[listLang]) ? data.parentTips.play[listLang] : "";
@@ -404,7 +403,7 @@ function runScreener() {
 }
 
 // ==========================================================
-// 3. MODALS & EVENTS
+// 3. MODALS
 // ==========================================================
 function openBookingModal() {
   const modal = document.getElementById('bookingModal');
@@ -439,26 +438,9 @@ function closeModalOnOverlay(event, modalId) {
 }
 
 // ==========================================================
-// 4. HARDWARE-SAFE INITIALIZATION
+// 4. CLEAN INITIALIZATION (NO DUPLICATE EVENT LISTENERS)
 // ==========================================================
 document.addEventListener("DOMContentLoaded", function() {
-  const mobileBtn = document.getElementById("mobileLangToggleBtn");
-  const desktopBtn = document.getElementById("globalLangToggleBtn");
-
-  if (mobileBtn) {
-    mobileBtn.addEventListener("click", function(e) {
-      e.preventDefault();
-      window.toggleGlobalLanguage();
-    });
-  }
-
-  if (desktopBtn) {
-    desktopBtn.addEventListener("click", function(e) {
-      e.preventDefault();
-      window.toggleGlobalLanguage();
-    });
-  }
-
   window.setGlobalLanguage(window.currentGlobalLang);
   runScreener();
 });
