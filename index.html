@@ -596,31 +596,229 @@
             </div>
         </div>
     </section>
-<!-- 💉 SLEEK 1-LINE COMPACT VACCINE FAQ BANNER -->
-    <div class="container" style="margin-top: 12px; margin-bottom: 22px;">
-        <div style="background: linear-gradient(135deg, #f0fdfa 0%, #e0f2fe 100%); border: 1.5px solid #38bdf8; border-radius: 18px; padding: 12px 18px; box-shadow: 0 4px 14px rgba(8, 145, 178, 0.08); display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+
+                </div>
+  <!-- 1. TOP CARD: GROWTH, DEVELOPMENT & NUTRITION -->
+    <div class="container" id="growth-screener" style="margin-top: 25px; margin-bottom: 12px;">
+        <div class="screener-card" style="margin-bottom: 0;">
             
-            <!-- Left Side: Icon + 1-Line Text -->
-            <div style="display: flex; align-items: center; gap: 10px; min-width: 250px; flex: 1;">
-                <span style="background: var(--brand-secondary); color: white; width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.95rem;">
-                    <i class="fa-solid fa-syringe"></i>
-                </span>
+            <!-- Clickable Accordion Header -->
+            <button type="button" class="screener-toggle-header" onclick="toggleGrowthTool()">
                 <div>
-                    <h3 style="font-family: 'Fredoka', cursive; font-size: 1.05rem; color: #083344; margin: 0; line-height: 1.2;" data-i18n="vax_bar_title">
-                        Pediatric Vaccine FAQs & Cold-Chain Guide
-                    </h3>
-                    <p style="font-size: 0.78rem; color: #475569; margin: 0; line-height: 1.3;" data-i18n="vax_bar_sub">
-                        Missed doses, multiple shots safety & fever care answered by Dr. Dinesh Mittal.
+                    <span class="screener-badge"><i class="fa-solid fa-chart-line"></i> <span data-i18n="screener_badge">Pediatric Clinical Tool</span></span>
+                    <h2 class="screener-title" id="lblTitle" data-i18n="screener_title">Growth, Development & Nutrition Assessment</h2>
+                    <p class="screener-subtitle" id="lblSubtitle" data-i18n="screener_subtitle">Tap to assess IAP Growth Charts, Developmental Milestones (TDSC), IYCF Feeding Guides & Adolescent Puberty.</p>
+                </div>
+                <i id="growthToggleIcon" class="fa-solid fa-circle-chevron-down screener-toggle-icon"></i>
+            </button>
+
+            <!-- Collapsible Body -->
+            <div id="growthToolBody" class="screener-content-body" style="display: none;">
+                <div class="screener-inputs-grid">
+                    <div class="screener-field">
+                        <label><i class="fa-solid fa-language"></i> <span id="lblLang">Select Language</span></label>
+                        <select id="screenerLang" class="screener-select" onchange="runScreener()" style="border-color: #0891b2; font-weight:700; background:#f0fdfa;">
+                            <option value="english" selected>English (Standard)</option>
+                            <option value="hindi">हिन्दी (Hindi)</option>
+                        </select>
+                    </div>
+
+                    <div class="screener-field">
+                        <label><i class="fa-solid fa-cake-candles"></i> <span id="lblAge">Child's Age</span></label>
+                        <select id="screenerAge" class="screener-select" onchange="runScreener()">
+                            <option value="0m" selected>Newborn (0 - 30 Days)</option>
+                            <option value="3m">3 Months</option>
+                            <option value="6m">6 Months (Weaning Stage)</option>
+                            <option value="9m">9 Months</option>
+                            <option value="12m">12 Months (1 Year)</option>
+                            <option value="18m">18 Months (Toilet Training Stage)</option>
+                            <option value="24m">24 Months (2 Years)</option>
+                            <option value="3y">3 Years</option>
+                            <option value="4y">4 Years</option>
+                            <option value="5y">5 Years</option>
+                            <option value="6y">6 Years</option>
+                            <option value="7y">7 Years</option>
+                            <option value="8y">8 Years</option>
+                            <option value="9y">9 Years</option>
+                            <option value="10y">10 Years</option>
+                            <option value="11y">11 Years</option>
+                            <option value="12y">12 Years</option>
+                            <option value="13y">13 Years</option>
+                            <option value="14y">14 Years</option>
+                            <option value="15y">15 Years</option>
+                            <option value="16y">16 Years</option>
+                            <option value="17y">17 Years</option>
+                            <option value="18y">18 Years</option>
+                        </select>
+                    </div>
+
+                    <div class="screener-field">
+                        <label><i class="fa-solid fa-venus-mars"></i> <span id="lblGender">Child's Gender</span></label>
+                        <select id="screenerGender" class="screener-select" onchange="runScreener()">
+                            <option value="boy">Boy</option>
+                            <option value="girl">Girl</option>
+                        </select>
+                    </div>
+
+                    <div class="screener-field">
+                        <label><i class="fa-solid fa-weight-scale"></i> <span id="lblWeight">Current Weight (kg)</span></label>
+                        <input type="number" id="screenerWeight" class="screener-input" step="0.1" placeholder="e.g. 3.2" oninput="runScreener()">
+                    </div>
+
+                    <div class="screener-field">
+                        <label><i class="fa-solid fa-ruler-vertical"></i> <span id="lblHeight">Current Length (cm)</span></label>
+                        <input type="number" id="screenerHeight" class="screener-input" step="0.5" placeholder="e.g. 50" oninput="runScreener()">
+                    </div>
+
+                    <div class="screener-field">
+                        <label><i class="fa-solid fa-person"></i> <span id="lblFather">Father's Height</span> <small style="color:#64748b;">(Optional, cm)</small></label>
+                        <input type="number" id="fatherHeight" class="screener-input" step="1" placeholder="e.g. 175" oninput="runScreener()">
+                    </div>
+
+                    <div class="screener-field">
+                        <label><i class="fa-solid fa-person-dress"></i> <span id="lblMother">Mother's Height</span> <small style="color:#64748b;">(Optional, cm)</small></label>
+                        <input type="number" id="motherHeight" class="screener-input" step="1" placeholder="e.g. 160" oninput="runScreener()">
+                    </div>
+                </div>
+
+                <div id="screenerResults"></div>
+
+                <div style="margin-top: 16px; padding: 12px 16px; background: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0; text-align: center;">
+                    <p style="font-size: 0.76rem; color: #64748b; line-height: 1.5; margin: 0;">
+                        <i class="fa-solid fa-circle-info" style="color: var(--brand-primary); margin-right: 4px;"></i>
+                        <strong>Medical Disclaimer:</strong> This clinical screening tool utilizes standard Indian Academy of Pediatrics (IAP) percentiles for educational guidance. It does not replace a formal medical diagnosis. Please consult Dr. Dinesh Mittal for individual clinical evaluation.
+                    </p>
+                </div>
+            </div>
+<!-- 1. TOP CARD: GROWTH, DEVELOPMENT & NUTRITION -->
+    <div class="container" id="growth-screener" style="margin-top: 25px; margin-bottom: 12px;">
+        <div class="screener-card" style="margin-bottom: 0;">
+            
+            <!-- Clickable Accordion Header -->
+            <button type="button" class="screener-toggle-header" onclick="toggleGrowthTool()">
+                <div>
+                    <span class="screener-badge"><i class="fa-solid fa-chart-line"></i> <span data-i18n="screener_badge">Pediatric Clinical Tool</span></span>
+                    <h2 class="screener-title" id="lblTitle" data-i18n="screener_title">Growth, Development & Nutrition Assessment</h2>
+                    <p class="screener-subtitle" id="lblSubtitle" data-i18n="screener_subtitle">Tap to assess IAP Growth Charts, Developmental Milestones (TDSC), IYCF Feeding Guides & Adolescent Puberty.</p>
+                </div>
+                <i id="growthToggleIcon" class="fa-solid fa-circle-chevron-down screener-toggle-icon"></i>
+            </button>
+
+            <!-- Collapsible Body -->
+            <div id="growthToolBody" class="screener-content-body" style="display: none;">
+                <div class="screener-inputs-grid">
+                    <div class="screener-field">
+                        <label><i class="fa-solid fa-language"></i> <span id="lblLang">Select Language</span></label>
+                        <select id="screenerLang" class="screener-select" onchange="runScreener()" style="border-color: #0891b2; font-weight:700; background:#f0fdfa;">
+                            <option value="english" selected>English (Standard)</option>
+                            <option value="hindi">हिन्दी (Hindi)</option>
+                        </select>
+                    </div>
+
+                    <div class="screener-field">
+                        <label><i class="fa-solid fa-cake-candles"></i> <span id="lblAge">Child's Age</span></label>
+                        <select id="screenerAge" class="screener-select" onchange="runScreener()">
+                            <option value="0m" selected>Newborn (0 - 30 Days)</option>
+                            <option value="3m">3 Months</option>
+                            <option value="6m">6 Months (Weaning Stage)</option>
+                            <option value="9m">9 Months</option>
+                            <option value="12m">12 Months (1 Year)</option>
+                            <option value="18m">18 Months (Toilet Training Stage)</option>
+                            <option value="24m">24 Months (2 Years)</option>
+                            <option value="3y">3 Years</option>
+                            <option value="4y">4 Years</option>
+                            <option value="5y">5 Years</option>
+                            <option value="6y">6 Years</option>
+                            <option value="7y">7 Years</option>
+                            <option value="8y">8 Years</option>
+                            <option value="9y">9 Years</option>
+                            <option value="10y">10 Years</option>
+                            <option value="11y">11 Years</option>
+                            <option value="12y">12 Years</option>
+                            <option value="13y">13 Years</option>
+                            <option value="14y">14 Years</option>
+                            <option value="15y">15 Years</option>
+                            <option value="16y">16 Years</option>
+                            <option value="17y">17 Years</option>
+                            <option value="18y">18 Years</option>
+                        </select>
+                    </div>
+
+                    <div class="screener-field">
+                        <label><i class="fa-solid fa-venus-mars"></i> <span id="lblGender">Child's Gender</span></label>
+                        <select id="screenerGender" class="screener-select" onchange="runScreener()">
+                            <option value="boy">Boy</option>
+                            <option value="girl">Girl</option>
+                        </select>
+                    </div>
+
+                    <div class="screener-field">
+                        <label><i class="fa-solid fa-weight-scale"></i> <span id="lblWeight">Current Weight (kg)</span></label>
+                        <input type="number" id="screenerWeight" class="screener-input" step="0.1" placeholder="e.g. 3.2" oninput="runScreener()">
+                    </div>
+
+                    <div class="screener-field">
+                        <label><i class="fa-solid fa-ruler-vertical"></i> <span id="lblHeight">Current Length (cm)</span></label>
+                        <input type="number" id="screenerHeight" class="screener-input" step="0.5" placeholder="e.g. 50" oninput="runScreener()">
+                    </div>
+
+                    <div class="screener-field">
+                        <label><i class="fa-solid fa-person"></i> <span id="lblFather">Father's Height</span> <small style="color:#64748b;">(Optional, cm)</small></label>
+                        <input type="number" id="fatherHeight" class="screener-input" step="1" placeholder="e.g. 175" oninput="runScreener()">
+                    </div>
+
+                    <div class="screener-field">
+                        <label><i class="fa-solid fa-person-dress"></i> <span id="lblMother">Mother's Height</span> <small style="color:#64748b;">(Optional, cm)</small></label>
+                        <input type="number" id="motherHeight" class="screener-input" step="1" placeholder="e.g. 160" oninput="runScreener()">
+                    </div>
+                </div>
+
+                <div id="screenerResults"></div>
+
+                <div style="margin-top: 16px; padding: 12px 16px; background: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0; text-align: center;">
+                    <p style="font-size: 0.76rem; color: #64748b; line-height: 1.5; margin: 0;">
+                        <i class="fa-solid fa-circle-info" style="color: var(--brand-primary); margin-right: 4px;"></i>
+                        <strong>Medical Disclaimer:</strong> This clinical screening tool utilizes standard Indian Academy of Pediatrics (IAP) percentiles for educational guidance. It does not replace a formal medical diagnosis. Please consult Dr. Dinesh Mittal for individual clinical evaluation.
                     </p>
                 </div>
             </div>
 
-            <!-- Right Side: Compact Pill Button -->
-            <a href="pediatric-vaccine-faqs-guide.html" class="hero-cta-btn" style="padding: 8px 18px; font-size: 0.82rem; min-height: 36px; text-decoration: none; white-space: nowrap; flex-shrink: 0;">
-                <span data-i18n="vax_bar_btn">Read Vaccine FAQs</span> <i class="fa-solid fa-arrow-right" style="font-size: 0.72rem;"></i>
-            </a>
-
         </div>
+    </div>
+
+    <!-- 2. BOTTOM CARD: MATCHING VACCINE FAQs BUTTON (STACKED DIRECTLY UNDERNEATH) -->
+    <div class="container" style="margin-top: 10px; margin-bottom: 25px;">
+        <div class="screener-card" style="margin-bottom: 0;">
+            <a href="pediatric-vaccine-faqs-guide.html" class="screener-toggle-header" style="text-decoration: none; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <span class="screener-badge" style="border-color: #bae6fd;"><i class="fa-solid fa-syringe" style="color: var(--brand-primary);"></i> <span data-i18n="vax_btn_badge">Pediatric Vaccination Guide</span></span>
+                    <h2 class="screener-title" data-i18n="vax_btn_title">Childhood Immunization & Vaccine FAQs</h2>
+                    <p class="screener-subtitle" data-i18n="vax_btn_subtitle">Tap to read doctor answers on missed doses, multiple vaccines safety, and fever care.</p>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; border-radius: 50%; background: #ffffff; box-shadow: 0 2px 8px rgba(8, 145, 178, 0.12); flex-shrink: 0;">
+                    <i class="fa-solid fa-chevron-right" style="color: var(--brand-primary); font-size: 1.1rem;"></i>
+                </div>
+            </a>
+        </div>
+    </div>
+        </div>
+    </div>
+
+    <!-- 2. BOTTOM CARD: MATCHING VACCINE FAQs BUTTON (STACKED DIRECTLY UNDERNEATH) -->
+    <div class="container" style="margin-top: 10px; margin-bottom: 25px;">
+        <div class="screener-card" style="margin-bottom: 0;">
+            <a href="pediatric-vaccine-faqs-guide.html" class="screener-toggle-header" style="text-decoration: none; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <span class="screener-badge" style="border-color: #bae6fd;"><i class="fa-solid fa-syringe" style="color: var(--brand-primary);"></i> <span data-i18n="vax_btn_badge">Pediatric Vaccination Guide</span></span>
+                    <h2 class="screener-title" data-i18n="vax_btn_title">Childhood Immunization & Vaccine FAQs</h2>
+                    <p class="screener-subtitle" data-i18n="vax_btn_subtitle">Tap to read doctor answers on missed doses, multiple vaccines safety, and fever care.</p>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; border-radius: 50%; background: #ffffff; box-shadow: 0 2px 8px rgba(8, 145, 178, 0.12); flex-shrink: 0;">
+                    <i class="fa-solid fa-chevron-right" style="color: var(--brand-primary); font-size: 1.1rem;"></i>
+                </div>
+            </a>
+        </div>
+    </div>
     </div>
     <!-- Services Section -->
     <div class="container" id="services" style="margin-top: 25px; margin-bottom: 25px;">
