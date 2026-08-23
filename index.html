@@ -162,21 +162,40 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', 'Noto Sans Devanagari', sans-serif; }
         html { scroll-behavior: smooth; scroll-padding-top: 80px; }
         body { color: var(--dark-text); background-color: #f8fafc; line-height: 1.6; -webkit-tap-highlight-color: transparent; padding-bottom: 75px; }
-
-        /* Header Navigation */
-        header {
-            position: sticky; top: 0; background: rgba(255, 255, 255, 0.94); z-index: 1000;
-            backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-            box-shadow: 0 1px 15px rgba(0,0,0,0.04); padding: 12px 5%;
-            display: flex; justify-content: space-between; align-items: center;
-            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
-        }
-        .logo { font-family: 'Fredoka', cursive; font-size: 1.35rem; font-weight: 600; color: var(--brand-primary-dark); display: flex; align-items: center; gap: 8px; }
-        .logo i { color: var(--brand-accent); font-size: 1.35rem; }
         
-        nav.desktop-nav { display: flex; align-items: center; gap: 16px; }
-        nav.desktop-nav a { text-decoration: none; color: #334155; font-weight: 600; font-size: 0.88rem; transition: color 0.2s; cursor: pointer; }
-        nav.desktop-nav a:hover { color: var(--brand-primary); }
+    <!-- Header Navigation with Single-Trigger Language Toggle -->
+    <header>
+        <div class="logo"><i class="fa-solid fa-shapes"></i> Dr. Dinesh Mittal</div>
+        
+        <nav class="desktop-nav">
+            <a href="#about" data-i18n="nav_about">About Doctor</a>
+            <a href="#services" data-i18n="nav_services">Services</a>
+            <a href="#growth-screener" onclick="expandGrowthTool()" style="color: var(--brand-primary); font-weight: 700;">
+                <i class="fa-solid fa-chart-line"></i> <span data-i18n="nav_growth">Growth, Development & Nutrition</span>
+            </a>
+            <a href="#adolescent-care" data-i18n="nav_adolescent">Adolescent Care</a>
+            <a href="blog.html" data-i18n="nav_blog">Parenting Blog</a>
+            <a href="#clinic-location" data-i18n="nav_location">Location</a>
+
+            <!-- 🌐 Desktop Language Toggle -->
+            <button type="button" onclick="window.toggleGlobalLanguage()" id="globalLangToggleBtn" class="lang-switch-btn" aria-label="Switch Language">
+                <i class="fa-solid fa-language"></i> <span id="langBtnText">हिन्दी</span>
+            </button>
+
+            <a onclick="openBookingModal()" class="book-tab-btn"><i class="fa-solid fa-calendar-check"></i> <span data-i18n="btn_book">Book Consultation</span></a>
+        </nav>
+
+        <div style="display: flex; align-items: center; gap: 8px;">
+            <!-- 🌐 Mobile Header Language Toggle -->
+            <button type="button" onclick="window.toggleGlobalLanguage()" id="mobileLangToggleBtn" class="lang-switch-btn-mobile" aria-label="Switch Language">
+                <i class="fa-solid fa-globe"></i> <span id="mobileLangBtnText">हिन्दी</span>
+            </button>
+            
+            <button class="mobile-menu-toggle" onclick="toggleMobileDrawer()" aria-label="Toggle navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
         
         /* Language Toggle Button */
         .lang-switch-btn {
