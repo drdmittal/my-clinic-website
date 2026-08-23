@@ -5,10 +5,215 @@
 // & Fail-Safe Global Bilingual Engine (English <-> Hindi)
 // ==========================================================
 
+// 🌐 1. GLOBAL BILINGUAL DICTIONARY
+window.siteTranslations = {
+  en: {
+    nav_about: "About Doctor",
+    nav_services: "Services",
+    nav_growth: "Growth, Development & Nutrition",
+    nav_adolescent: "Adolescent Care",
+    nav_blog: "Parenting Blog",
+    nav_location: "Location",
+    btn_book: "Book Consultation",
+    btn_call: "Call Clinic",
+
+    hero_badge: "Child Specialist & Pediatrician",
+    hero_heading: "Compassionate Healthcare For Your Little Ones",
+    hero_sub: "Specialized newborn care, WHO/IAP vaccination schedules, and growth & development monitoring in Sector 3 Rohini, Delhi.",
+    hero_exp: "25+ Yrs Clinical Practice",
+
+    sec_clinical_care: "Clinical Care",
+    sec_services_title: "Pediatric Services",
+    svc_vax_title: "Vaccination",
+    svc_vax_desc: "WHO & IAP cold-chain vaccines.",
+    svc_newborn_title: "Newborn Care",
+    svc_newborn_desc: "Growth, feeding & jaundice checks.",
+    svc_fever_title: "Fevers & Infections",
+    svc_fever_desc: "Seasonal viral, flu & asthma care.",
+    svc_teen_title: "Adolescent Health",
+    svc_teen_desc: "Puberty & growth spurt counseling.",
+
+    screener_badge: "Pediatric Clinical Tool",
+    screener_title: "Growth, Development & Nutrition Assessment",
+    screener_subtitle: "Tap to assess IAP Growth Charts, Developmental Milestones (TDSC), IYCF Feeding Guides & Adolescent Puberty.",
+
+    vax_btn_badge: "Pediatric Vaccination Guide",
+    vax_btn_title: "Childhood Immunization & Vaccine FAQs",
+    vax_btn_subtitle: "Doctor-curated guidance on missed doses, multiple vaccines safety, and post-shot fever care.",
+
+    teen_badge: "Ages 10 - 18 Years",
+    teen_heading: "Adolescent Health & Puberty Guidance",
+    teen_sub: "Confidential puberty guidance, growth spurt counseling & hormonal wellness.",
+
+    iap_btn_badge: "Vaccine Schedule",
+    iap_btn_title: "IAP Childhood Immunization Schedule (0 to 18 Years)",
+    iap_btn_subtitle: "Age-by-age vaccine guide recommended by the Indian Academy of Pediatrics.",
+
+    blog_btn_badge: "Health Education Library",
+    blog_btn_title: "Parenting & Pediatric Health Insights",
+    blog_btn_subtitle: "Explore clinical health guides on fever care, newborn monitoring, dengue, and winter pollution.",
+
+    blog_badge: "Health Education",
+    blog_heading: "Featured Pediatric Guides",
+    blog_view_all: "View All Guides",
+    blog_featured_badge: "Latest Pediatric Guide",
+    blog_featured_title: "Air Purifiers for Delhi Pollution: A Pediatric Deep Dive & Buying Guide",
+    blog_featured_desc: "Do purifiers truly protect child lungs against winter smog? Learn certified HEPA H13 standards, CADR ratings for Delhi bedrooms, and critical household mistakes that cause purifiers to fail.",
+    blog_read_btn: "Read Full Guide",
+    blog_explore_btn: "Browse All Articles in Health Library",
+
+    card_newborn_tag: "Newborn Care",
+    card_newborn_title: "Essential Newborn Care Tips (0-30 Days)",
+    card_newborn_desc: "Pediatric guide on feeding on demand, cord care, jaundice checks & sleep safety.",
+    
+    card_dengue_tag: "Seasonal Alert",
+    card_dengue_title: "Dengue in Children: Symptoms & Home Care",
+    card_dengue_desc: "Parent guide on high fever, platelet facts, and emergency red flags.",
+    
+    card_screen_tag: "Child Development",
+    card_screen_title: "How to Reduce Screen Time in Children",
+    card_screen_desc: "Practical strategies to manage mobile tantrums and establish healthy habits.",
+    
+    blog_read_btn_short: "Read Guide",
+
+    loc_title: "Visit Our Clinic",
+    loc_card_title: "Clinic Details",
+    loc_address_label: "Address:",
+    loc_hours_label: "Consultation Hours:",
+    loc_hours_text: "Mon - Sat: 10:00 AM - 1:00 PM | 6:00 PM - 8:30 PM<br>Sunday: 11:00 AM - 12:00 PM",
+    loc_maps_btn: "Open Directions in Google Maps"
+  },
+  hi: {
+    nav_about: "डॉक्टर परिचय",
+    nav_services: "चिकित्सा सेवाएं",
+    nav_growth: "विकास, माइलस्टोन व पोषण",
+    nav_adolescent: "किशोरावस्था परामर्श",
+    nav_blog: "पेरेंटिंग गाइड",
+    nav_location: "क्लिनिक पता",
+    btn_book: "परामर्श स्लॉट बुक करें",
+    btn_call: "कॉल करें",
+
+    hero_badge: "शिशु एवं बाल रोग विशेषज्ञ",
+    hero_heading: "आपके बच्चों के लिए समर्पित एवं अनुभवी बाल चिकित्सा",
+    hero_sub: "नवजात शिशु देखभाल, WHO/IAP टीकाकरण, एवं शारीरिक व मानसिक विकास मूल्यांकन — सेक्टर 3 रोहिणी, दिल्ली।",
+    hero_exp: "25+ वर्षों का नैदानिक अनुभव",
+
+    sec_clinical_care: "बाल स्वास्थ्य सेवाएं",
+    sec_services_title: "प्रमुख चिकित्सा सेवाएं",
+    svc_vax_title: "टीकाकरण (Vaccination)",
+    svc_vax_desc: "WHO एवं IAP प्रमाणित सुरक्षित टीके।",
+    svc_newborn_title: "नवजात देखभाल",
+    svc_newborn_desc: "वजन, पीलिया व स्तनपान जांच।",
+    svc_fever_title: "बुखार व संक्रमण",
+    svc_fever_desc: "मौसमी फ्लू, खांसी व दमा उपचार।",
+    svc_teen_title: "किशोरावस्था स्वास्थ्य",
+    svc_teen_desc: "प्यूबर्टी व लंबाई परामर्श।",
+
+    screener_badge: "बाल विकास जांच टूल",
+    screener_title: "शारीरिक विकास, मील के पत्थर एवं पोषण मूल्यांकन",
+    screener_subtitle: "IAP ग्रोथ चार्ट, त्रिवेंद्रम विकासात्मक माइलस्टोन (TDSC), और ऊपरी आहार (IYCF) तालिका देखने के लिए क्लिक करें।",
+
+    vax_btn_badge: "बाल टीकाकरण गाइड",
+    vax_btn_title: "बच्चों के टीकाकरण से जुड़े जरूरी सवाल व जवाब",
+    vax_btn_subtitle: "छूटे हुए टीके, एक साथ 2-3 टीके व बुखार की सही देखभाल पर डॉक्टरी सलाह पढ़ने के लिए क्लिक करें।",
+
+    teen_badge: "उम्र 10 से 18 वर्ष",
+    teen_heading: "किशोरावस्था स्वास्थ्य एवं प्यूबर्टी मार्गदर्शन",
+    teen_sub: "प्यूबर्टी, शारीरिक बदलाव, लंबाई और हार्मोनल स्वास्थ्य पर गोपनीय डॉक्टरी परामर्श।",
+
+    iap_btn_badge: "टीकाकरण तालिका",
+    iap_btn_title: "IAP बाल टीकाकरण तालिका (जन्म से 18 वर्ष)",
+    iap_btn_subtitle: "इंडियन एकेडमी ऑफ पीडियाट्रिक्स द्वारा अनुशंसित उम्र अनुसार टीकाकरण गाइड।",
+
+    blog_btn_badge: "स्वास्थ्य मार्गदर्शिका",
+    blog_btn_title: "पेरेंटिंग एवं बाल स्वास्थ्य लेख",
+    blog_btn_subtitle: "बुखार, नवजात देखभाल, डेंगू और प्रदूषण से बचाव से जुड़े सभी चिकित्सकीय लेख पढ़ने के लिए क्लिक करें।",
+
+    blog_badge: "स्वास्थ्य जागरूकता",
+    blog_heading: "पेरेंटिंग एवं बाल स्वास्थ्य मार्गदर्शन",
+    blog_view_all: "सभी गाइड देखें",
+    blog_featured_badge: "नवीनतम बाल स्वास्थ्य गाइड",
+    blog_featured_title: "दिल्ली के प्रदूषण में क्या एयर प्यूरीफायर खरीदना चाहिए? बाल रोग विशेषज्ञ गाइड",
+    blog_featured_desc: "क्या प्यूरीफायर सचमुच बच्चों के फेफड़ों को बचाते हैं? True HEPA H13 मानक, कमरे के अनुसार CADR रेटिंग, और वे गलतियां जिनसे प्यूरीफायर काम नहीं करता।",
+    blog_read_btn: "पूरी गाइड पढ़ें",
+    blog_explore_btn: "सभी स्वास्थ्य लेख व गाइड देखें",
+
+    card_newborn_tag: "नवजात देखभाल",
+    card_newborn_title: "नवजात शिशु की देखभाल (0-30 दिन जरूरी नियम)",
+    card_newborn_desc: "स्तनपान, नाभि की सफाई, पीलिया की पहचान और सुलाने के सुरक्षित नियमों की डॉक्टरी सलाह।",
+    
+    card_dengue_tag: "मौसमी अलर्ट",
+    card_dengue_title: "बच्चों में डेंगू: लक्षण, प्लेटलेट्स व घरेलू देखभाल",
+    card_dengue_desc: "तेज बुखार, प्लेटलेट्स की सच्चाई और खतरे के लक्षणों पर अभिभावकों के लिए गाइड।",
+    
+    card_screen_tag: "बाल विकास",
+    card_screen_title: "बच्चों में मोबाइल और स्क्रीन की लत कैसे छुड़ाएं?",
+    card_screen_desc: "खाना खाते समय फोन की आदत और रोने-जिद्द करने से निपटने के आसान डॉक्टरी उपाय।",
+    
+    blog_read_btn_short: "गाइड पढ़ें",
+
+    loc_title: "क्लिनिक समय व पता",
+    loc_card_title: "क्लिनिक विवरण",
+    loc_address_label: "पता:",
+    loc_hours_label: "परामर्श का समय:",
+    loc_hours_text: "सोमवार - शनिवार: सुबह 10:00 - दोपहर 1:00 | शाम 6:00 - 8:30<br>रविवार: सुबह 11:00 - दोपहर 12:00",
+    loc_maps_btn: "गूगल मैप्स पर रास्ता देखें"
+  }
+};
+
+window.currentGlobalLang = localStorage.getItem("preferredClinicLang") || "en";
+
+window.setGlobalLanguage = function(lang) {
+  try {
+    window.currentGlobalLang = lang;
+    try { localStorage.setItem("preferredClinicLang", lang); } catch (e) {}
+
+    // 1. Text elements replacement
+    const elements = document.querySelectorAll("[data-i18n]");
+    const dict = window.siteTranslations[lang];
+    if (dict) {
+      elements.forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (dict[key]) {
+          el.innerHTML = dict[key];
+        }
+      });
+    }
+
+    // 2. Button Prompt Text Update
+    const desktopBtnText = document.getElementById("langBtnText");
+    const mobileBtnText = document.getElementById("mobileLangBtnText");
+    const nextPrompt = (lang === "en") ? "हिन्दी" : "English";
+
+    if (desktopBtnText) desktopBtnText.textContent = nextPrompt;
+    if (mobileBtnText) mobileBtnText.textContent = nextPrompt;
+
+    // 3. Sync Growth Screener Select Dropdown
+    const screenerLangSelect = document.getElementById("screenerLang");
+    if (screenerLangSelect) {
+      screenerLangSelect.value = (lang === "hi") ? "hindi" : "english";
+    }
+
+    // 4. Safely trigger growth screener recalculation
+    try {
+      if (typeof window.runScreener === "function") {
+        window.runScreener();
+      }
+    } catch (err) {}
+  } catch (globalErr) {
+    console.error("Language switch error:", globalErr);
+  }
+};
+
+window.toggleGlobalLanguage = function() {
+  const nextLang = (window.currentGlobalLang === "en") ? "hi" : "en";
+  window.setGlobalLanguage(nextLang);
+};
+
 let currentDietPreference = "veg"; // 'veg' or 'nonveg'
 
 // ==========================================================
-// 1. MAIN SCREENER RUNNER
+// 2. MAIN SCREENER RUNNER
 // ==========================================================
 function runScreener() {
   const langEl = document.getElementById("screenerLang");
@@ -34,7 +239,6 @@ function runScreener() {
   const fHeight = fatherEl ? parseFloat(fatherEl.value) : NaN;
   const mHeight = motherEl ? parseFloat(motherEl.value) : NaN;
 
-  // Dynamic UI Form Labels & Measurement Name (Length vs Height)
   const lblTitle = document.getElementById("lblTitle");
   const lblSubtitle = document.getElementById("lblSubtitle");
   const lblLang = document.getElementById("lblLang");
@@ -245,12 +449,6 @@ function runScreener() {
         </div>
       </div>
     `;
-  } else if ((!isNaN(fHeight) && isNaN(mHeight)) || (isNaN(fHeight) && !isNaN(mHeight))) {
-    mphHtml = `
-      <div style="background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 12px; padding: 10px 14px; margin-top: 10px; font-size: 0.8rem; color: #64748b;">
-        <i class="fa-solid fa-circle-info" style="color: var(--brand-primary); margin-right: 4px;"></i> ${lang === "english" ? "Enter both Father's and Mother's height above to calculate Mid-Parental Target Height." : "आनुवंशिक लक्ष्य लंबाई की गणना हेतु माता और पिता दोनों का कद दर्ज करें।"}
-      </div>
-    `;
   }
 
   const genderTitle = (gender === "boy") ? (lang === "english" ? "BOY" : "बालक") : (lang === "english" ? "GIRL" : "बालिका");
@@ -302,7 +500,6 @@ function runScreener() {
     </div>
   `;
 
-  // 6. Educational Modules (Weaning for 6-12m & Toilet Training for 18m-24m)
   let specialEducationHtml = "";
   if (ageKey === "6m" || ageKey === "9m" || ageKey === "12m") {
     specialEducationHtml = renderIapWeaningInteractive(lang);
@@ -351,7 +548,7 @@ function runScreener() {
 }
 
 // ==========================================================
-// 2. INTERACTIVE IAP WEANING GENERATOR
+// 3. WEANING & TOILET TRAINING HELPERS
 // ==========================================================
 function renderIapWeaningInteractive(lang) {
   if (typeof weaningEducationDatabase === "undefined") return "";
@@ -389,7 +586,6 @@ function renderIapWeaningInteractive(lang) {
             • <strong>${lang === 'english' ? 'Frequency:' : 'कितनी बार दें:'}</strong> ${stg.frequency[listLang]}<br>
             • <strong>${lang === 'english' ? 'Quantity per Meal:' : 'प्रति खुराक मात्रा:'}</strong> ${stg.quantity[listLang]}
           </div>
-          
           <div style="margin-top:10px;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:6px;">
               <span style="font-weight:700; color:#9a3412; font-size:0.84rem;">
@@ -417,8 +613,6 @@ function renderIapWeaningInteractive(lang) {
             ${lang === 'english' ? "Stepwise Complementary Feeding & Food Plate Guide" : "6 माह से 1 वर्ष: संपूर्ण ऊपरी आहार एवं फूड-प्लेट मार्गदर्शन"}
           </h5>
         </div>
-        
-        <!-- VEG / NON-VEG TOGGLE SWITCH -->
         <div style="display:flex; align-items:center; gap:6px; background:#ffedd5; padding:4px 8px; border-radius:20px; border:1px solid #fed7aa;">
           <span style="font-size:0.78rem; font-weight:700; color:#9a3412;"><i class="fa-solid fa-filter"></i> ${lang === 'english' ? 'Diet:' : 'आहार:'}</span>
           <button type="button" onclick="setWeaningDiet('veg')" style="border:none; padding:4px 10px; border-radius:14px; font-size:0.76rem; font-weight:700; cursor:pointer; background:${currentDietPreference === 'veg' ? '#16a34a' : 'transparent'}; color:${currentDietPreference === 'veg' ? '#fff' : '#431407'};">
@@ -429,47 +623,7 @@ function renderIapWeaningInteractive(lang) {
           </button>
         </div>
       </div>
-
-      <!-- THE 4-FOOD GROUP BALANCED PEDIATRIC PLATE -->
-      <div style="background:#ffffff; border:1.5px solid #fed7aa; border-radius:14px; padding:14px; margin-bottom:14px;">
-        <strong style="color:#c2410c; font-size:0.88rem; display:flex; align-items:center; gap:6px; margin-bottom:6px;">
-          <i class="fa-solid fa-chart-pie"></i> ${lang === 'english' ? 'The Balanced 4-Group Pediatric Food Plate' : 'संतुलित बाल आहार: 4-खाद्य समूह (Food Plate Concept)'}
-        </strong>
-        <p style="font-size:0.82rem; color:#431407; margin-bottom:8px;">
-          ${lang === 'english' ? 'Every main meal should combine elements from all 4 food groups for optimal brain & physical growth:' : 'प्रत्येक भोजन में इन 4 समूहों का संतुलन बच्चे के मानसिक व शारीरिक विकास के लिए आवश्यक है:'}
-        </p>
-        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:8px;">
-          <div style="background:#fef2f2; padding:8px 10px; border-radius:8px; border:1px solid #fecaca; font-size:0.78rem; color:#991b1b;">
-            <strong>1. Energy Grains:</strong> Rice, suji, sprouted ragi, wheat, oats.
-          </div>
-          <div style="background:#f0fdf4; padding:8px 10px; border-radius:8px; border:1px solid #bbf7d0; font-size:0.78rem; color:#166534;">
-            <strong>2. Body Builders:</strong> Yellow moong dal, paneer, curd, egg yolk, fish, chicken liver.
-          </div>
-          <div style="background:#eff6ff; padding:8px 10px; border-radius:8px; border:1px solid #bfdbfe; font-size:0.78rem; color:#1e40af;">
-            <strong>3. Protective Vitamins:</strong> Steamed pumpkin, carrot, bottle gourd (lauki), papaya, banana.
-          </div>
-          <div style="background:#fffbeb; padding:8px 10px; border-radius:8px; border:1px solid #fde68a; font-size:0.78rem; color:#854d0e;">
-            <strong>4. Calorie Boosters:</strong> 1/2 tsp pure desi ghee or butter per meal.
-          </div>
-        </div>
-      </div>
-
-      <!-- STAGES ACCORDION -->
       <div>${stageCardsHtml}</div>
-
-      <!-- STRICT IAP SAFETY RULES & PROHIBITED FOODS -->
-      <div style="background:#fef2f2; border:1.5px solid #fca5a5; border-radius:12px; padding:12px 14px; margin-top:12px;">
-        <strong style="color:#991b1b; font-size:0.85rem; display:flex; align-items:center; gap:6px;">
-          <i class="fa-solid fa-ban"></i> ${lang === 'english' ? 'Strict IAP Safety Checklist (What NOT to give before 1 Year):' : '1 वर्ष से पहले पूर्णतः वर्जित चीजें (Strict Safety Rules):'}
-        </strong>
-        <ul style="padding-left:18px; font-size:0.8rem; color:#7f1d1d; margin-top:6px; line-height:1.5;">
-          <li><strong>${lang === 'english' ? 'NO Added Sugar or Salt:' : 'नमक व चीनी बिल्कुल न दें:'}</strong> ${lang === 'english' ? "Protects developing infant kidneys and prevents early taste habituation." : "शिशु के गुर्दों (Kidneys) पर दबाव से बचाता है।"}</li>
-          <li><strong>${lang === 'english' ? 'NO Honey before 1 Year:' : '1 वर्ष तक शहद बिल्कुल न दें:'}</strong> ${lang === 'english' ? "Severe risk of Infant Botulism (a life-threatening bacterial spore infection)." : "शिशु बोटुलिज़्म (Infant Botulism) नामक घातक संक्रमण का खतरा रहता है।"}</li>
-          <li><strong>${lang === 'english' ? "NO Animal Cow's / Buffalo's Milk as primary drink:" : 'गाय या भैंस का दूध न पिलाएं:'}</strong> ${lang === 'english' ? "Causes intestinal micro-bleeding and iron deficiency anemia. Use only breastmilk/formula." : "आंतों में सूक्ष्म रक्तस्राव व खून की कमी (एनीमिया) करता है।"}</li>
-          <li><strong>${lang === 'english' ? 'The 3-Day Rule:' : '3-दिन का नियम:'}</strong> ${lang === 'english' ? "Introduce only ONE new single ingredient at a time for 3 consecutive days to rule out food allergies." : "एलर्जी की पहचान हेतु एक बार में केवल एक नया भोजन 3 दिन तक दें।"}</li>
-        </ul>
-      </div>
-
     </div>
   `;
 }
@@ -488,9 +642,6 @@ function toggleWeaningAccordion(bodyId, button) {
   if (icon) icon.style.transform = isOpen ? "rotate(0deg)" : "rotate(180deg)";
 }
 
-// ==========================================================
-// 3. 18-MONTH TOILET TRAINING PROTOCOL GENERATOR
-// ==========================================================
 function renderToiletTrainingGuide(lang) {
   if (typeof toiletTrainingDatabase === "undefined") return "";
 
@@ -513,108 +664,44 @@ function renderToiletTrainingGuide(lang) {
     </div>
   `).join("");
 
-  const dontsHtml = tt.donts[listLang].map(d => `
-    <li style="margin-bottom:4px;">${d}</li>
-  `).join("");
-
   return `
     <div style="background: #f0fdf4; border: 2px solid #86efac; border-radius: 18px; padding: 18px; margin-top: 18px;">
-      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:12px;">
-        <div>
-          <span style="background:#dcfce7; color:#15803d; font-size:0.75rem; font-weight:700; padding:4px 10px; border-radius:12px; display:inline-block; margin-bottom:4px;">
-            <i class="fa-solid fa-child-reaching"></i> 18 to 24 Months Developmental Milestone
-          </span>
-          <h5 style="color: #065f46; font-family:'Fredoka',cursive; font-size: 1.25rem; margin:0;">
-            ${tt.title[listLang]}
-          </h5>
-        </div>
-        <a href="${tt.ytLink}" target="_blank" rel="noopener noreferrer" style="background:#fee2e2; color:#b91c1c; font-size:0.75rem; font-weight:700; padding:5px 12px; border-radius:14px; text-decoration:none; display:inline-flex; align-items:center; gap:6px; border:1px solid #fca5a5;">
-          <i class="fa-brands fa-youtube" style="color:#dc2626; font-size:0.9rem;"></i> ${lang === 'english' ? 'Watch Toilet Training Guide' : 'टॉयलेट ट्रेनिंग वीडियो देखें'}
-        </a>
-      </div>
-
-      <p style="font-size:0.84rem; color:#047857; margin-bottom:12px; line-height:1.45;">
-        ${tt.intro[listLang]}
-      </p>
-
-      <!-- READINESS CHECKLIST -->
-      <div style="background:#ffffff; border:1.5px solid #a7f3d0; border-radius:14px; padding:14px; margin-bottom:12px;">
-        <strong style="color:#065f46; font-size:0.88rem; display:flex; align-items:center; gap:6px; margin-bottom:8px;">
-          <i class="fa-solid fa-clipboard-check" style="color:#10b981;"></i> ${lang === 'english' ? "Toddler Readiness Checklist (Is Your 18-Month-Old Ready?):" : "क्या आपका 18 माह का बच्चा तैयार है? (Readiness Checklist):"}
-        </strong>
-        <ul style="list-style:none; padding:0; margin:0;">${readinessHtml}</ul>
-      </div>
-
-      <!-- 4-STEP PEDIATRIC PROTOCOL -->
-      <div style="margin-bottom:12px;">
-        <strong style="color:#065f46; font-size:0.88rem; display:block; margin-bottom:8px;">
-          <i class="fa-solid fa-list-ol" style="color:#10b981;"></i> ${lang === 'english' ? "The 4-Step Pediatric Toilet Routine:" : "4-चरणीय वैज्ञानिक टॉयलेट रूटीन:"}
-        </strong>
-        ${stepsHtml}
-      </div>
-
-      <!-- WHAT NOT TO DO -->
-      <div style="background:#fef2f2; border:1.5px solid #fca5a5; border-radius:12px; padding:12px 14px;">
-        <strong style="color:#991b1b; font-size:0.84rem; display:flex; align-items:center; gap:6px;">
-          <i class="fa-solid fa-triangle-exclamation"></i> ${lang === 'english' ? "Strict Rules for Parents (Preventing Stool Withholding & Fear):" : "अभिभावक क्या न करें (कब्ज व डर से बचाव):"}
-        </strong>
-        <ul style="padding-left:18px; font-size:0.8rem; color:#7f1d1d; margin-top:6px; line-height:1.5;">${dontsHtml}</ul>
-      </div>
+      <h5 style="color: #065f46; font-family:'Fredoka',cursive; font-size: 1.25rem; margin-bottom:10px;">
+        ${tt.title[listLang]}
+      </h5>
+      <ul style="list-style:none; padding:0; margin:0 0 12px 0;">${readinessHtml}</ul>
+      <div>${stepsHtml}</div>
     </div>
   `;
 }
 
 // ==========================================================
-// 4. MODAL POPUP CONTROLLERS (WITH BODY SCROLL LOCK)
+// 4. MODALS
 // ==========================================================
 function openBookingModal() {
   const modal = document.getElementById('bookingModal');
-  if (modal) {
-    modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-  }
+  if (modal) { modal.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
 }
-
 function closeBookingModal() {
   const modal = document.getElementById('bookingModal');
-  if (modal) {
-    modal.style.display = 'none';
-    document.body.style.overflow = 'auto';
-  }
+  if (modal) { modal.style.display = 'none'; document.body.style.overflow = 'auto'; }
 }
-
 function openDisclaimerModal() {
   const modal = document.getElementById('disclaimerModal');
-  if (modal) {
-    modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-  }
+  if (modal) { modal.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
 }
-
 function closeDisclaimerModal() {
   const modal = document.getElementById('disclaimerModal');
-  if (modal) {
-    modal.style.display = 'none';
-    document.body.style.overflow = 'auto';
-  }
+  if (modal) { modal.style.display = 'none'; document.body.style.overflow = 'auto'; }
 }
-
 function openPrivacyModal() {
   const modal = document.getElementById('privacyModal');
-  if (modal) {
-    modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-  }
+  if (modal) { modal.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
 }
-
 function closePrivacyModal() {
   const modal = document.getElementById('privacyModal');
-  if (modal) {
-    modal.style.display = 'none';
-    document.body.style.overflow = 'auto';
-  }
+  if (modal) { modal.style.display = 'none'; document.body.style.overflow = 'auto'; }
 }
-
 function closeModalOnOverlay(event, modalId) {
   if (event.target && event.target.id === modalId) {
     if (modalId === 'bookingModal') closeBookingModal();
@@ -624,218 +711,28 @@ function closeModalOnOverlay(event, modalId) {
 }
 
 // ==========================================================
-// 5. 🌐 FAIL-SAFE GLOBAL BILINGUAL ENGINE (English <-> Hindi)
-// ==========================================================
-window.siteTranslations = window.siteTranslations || {
-  en: {
-    nav_about: "About Doctor",
-    nav_services: "Services",
-    nav_growth: "Growth, Development & Nutrition",
-    nav_adolescent: "Adolescent Care",
-    nav_blog: "Parenting Blog",
-    nav_location: "Location",
-    btn_book: "Book Consultation",
-    btn_call: "Call Clinic",
-
-    hero_badge: "Child Specialist & Pediatrician",
-    hero_heading: "Compassionate Healthcare For Your Little Ones",
-    hero_sub: "Specialized newborn care, WHO/IAP vaccination schedules, and growth & development monitoring in Sector 3 Rohini, Delhi.",
-    hero_exp: "25+ Yrs Clinical Practice",
-
-    sec_clinical_care: "Clinical Care",
-    sec_services_title: "Pediatric Services",
-    svc_vax_title: "Vaccination",
-    svc_vax_desc: "WHO & IAP cold-chain vaccines.",
-    svc_newborn_title: "Newborn Care",
-    svc_newborn_desc: "Growth, feeding & jaundice checks.",
-    svc_fever_title: "Fevers & Infections",
-    svc_fever_desc: "Seasonal viral, flu & asthma care.",
-    svc_teen_title: "Adolescent Health",
-    svc_teen_desc: "Puberty & growth spurt counseling.",
-
-    screener_badge: "Pediatric Clinical Tool",
-    screener_title: "Growth, Development & Nutrition Assessment",
-    screener_subtitle: "Tap to assess IAP Growth Charts, Developmental Milestones (TDSC), IYCF Feeding Guides & Adolescent Puberty.",
-
-    vax_btn_badge: "Pediatric Vaccination Guide",
-    vax_btn_title: "Childhood Immunization & Vaccine FAQs",
-    vax_btn_subtitle: "Doctor-curated guidance on missed doses, multiple vaccines safety, and post-shot fever care.",
-
-    teen_badge: "Ages 10 - 18 Years",
-    teen_heading: "Adolescent Health & Puberty Guidance",
-    teen_sub: "Confidential puberty guidance, growth spurt counseling & hormonal wellness.",
-
-    iap_btn_badge: "Vaccine Schedule",
-    iap_btn_title: "IAP Childhood Immunization Schedule (0 to 18 Years)",
-    iap_btn_subtitle: "Age-by-age vaccine guide recommended by the Indian Academy of Pediatrics.",
-
-    blog_btn_badge: "Health Education Library",
-    blog_btn_title: "Parenting & Pediatric Health Insights",
-    blog_btn_subtitle: "Explore clinical health guides on fever care, newborn monitoring, dengue, and winter pollution.",
-
-    blog_badge: "Health Education",
-    blog_heading: "Featured Pediatric Guides",
-    blog_view_all: "View All Guides",
-    blog_featured_badge: "Latest Pediatric Guide",
-    blog_featured_title: "Air Purifiers for Delhi Pollution: A Pediatric Deep Dive & Buying Guide",
-    blog_featured_desc: "Do purifiers truly protect child lungs against winter smog? Learn certified HEPA H13 standards, CADR ratings for Delhi bedrooms, and critical household mistakes that cause purifiers to fail.",
-    blog_read_btn: "Read Full Guide",
-    blog_explore_btn: "Browse All Articles in Health Library",
-
-    card_newborn_tag: "Newborn Care",
-    card_newborn_title: "Essential Newborn Care Tips (0-30 Days)",
-    card_newborn_desc: "Pediatric guide on feeding on demand, cord care, jaundice checks & sleep safety.",
-    
-    card_dengue_tag: "Seasonal Alert",
-    card_dengue_title: "Dengue in Children: Symptoms & Home Care",
-    card_dengue_desc: "Parent guide on high fever, platelet facts, and emergency red flags.",
-    
-    card_screen_tag: "Child Development",
-    card_screen_title: "How to Reduce Screen Time in Children",
-    card_screen_desc: "Practical strategies to manage mobile tantrums and establish healthy habits.",
-    
-    blog_read_btn_short: "Read Guide",
-
-    loc_title: "Visit Our Clinic",
-    loc_card_title: "Clinic Details",
-    loc_address_label: "Address:",
-    loc_hours_label: "Consultation Hours:",
-    loc_hours_text: "Mon - Sat: 10:00 AM - 1:00 PM | 6:00 PM - 8:30 PM<br>Sunday: 11:00 AM - 12:00 PM",
-    loc_maps_btn: "Open Directions in Google Maps"
-  },
-  hi: {
-    nav_about: "डॉक्टर परिचय",
-    nav_services: "चिकित्सा सेवाएं",
-    nav_growth: "विकास, माइलस्टोन व पोषण",
-    nav_adolescent: "किशोरावस्था परामर्श",
-    nav_blog: "पेरेंटिंग गाइड",
-    nav_location: "क्लिनिक पता",
-    btn_book: "परामर्श स्लॉट बुक करें",
-    btn_call: "कॉल करें",
-
-    hero_badge: "शिशु एवं बाल रोग विशेषज्ञ",
-    hero_heading: "आपके बच्चों के लिए समर्पित एवं अनुभवी बाल चिकित्सा",
-    hero_sub: "नवजात शिशु देखभाल, WHO/IAP टीकाकरण, एवं शारीरिक व मानसिक विकास मूल्यांकन — सेक्टर 3 रोहिणी, दिल्ली।",
-    hero_exp: "25+ वर्षों का नैदानिक अनुभव",
-
-    sec_clinical_care: "बाल स्वास्थ्य सेवाएं",
-    sec_services_title: "प्रमुख चिकित्सा सेवाएं",
-    svc_vax_title: "टीकाकरण (Vaccination)",
-    svc_vax_desc: "WHO एवं IAP प्रमाणित सुरक्षित टीके।",
-    svc_newborn_title: "नवजात देखभाल",
-    svc_newborn_desc: "वजन, पीलिया व स्तनपान जांच।",
-    svc_fever_title: "बुखार व संक्रमण",
-    svc_fever_desc: "मौसमी फ्लू, खांसी व दमा उपचार।",
-    svc_teen_title: "किशोरावस्था स्वास्थ्य",
-    svc_teen_desc: "प्यूबर्टी व लंबाई परामर्श।",
-
-    screener_badge: "बाल विकास जांच टूल",
-    screener_title: "शारीरिक विकास, मील के पत्थर एवं पोषण मूल्यांकन",
-    screener_subtitle: "IAP ग्रोथ चार्ट, त्रिवेंद्रम विकासात्मक माइलस्टोन (TDSC), और ऊपरी आहार (IYCF) तालिका देखने के लिए क्लिक करें।",
-
-    vax_btn_badge: "बाल टीकाकरण गाइड",
-    vax_btn_title: "बच्चों के टीकाकरण से जुड़े जरूरी सवाल व जवाब",
-    vax_btn_subtitle: "छूटे हुए टीके, एक साथ 2-3 टीके व बुखार की सही देखभाल पर डॉक्टरी सलाह पढ़ने के लिए क्लिक करें।",
-
-    teen_badge: "उम्र 10 से 18 वर्ष",
-    teen_heading: "किशोरावस्था स्वास्थ्य एवं प्यूबर्टी मार्गदर्शन",
-    teen_sub: "प्यूबर्टी, शारीरिक बदलाव, लंबाई और हार्मोनल स्वास्थ्य पर गोपनीय डॉक्टरी परामर्श।",
-
-    iap_btn_badge: "टीकाकरण तालिका",
-    iap_btn_title: "IAP बाल टीकाकरण तालिका (जन्म से 18 वर्ष)",
-    iap_btn_subtitle: "इंडियन एकेडमी ऑफ पीडियाट्रिक्स द्वारा अनुशंसित उम्र अनुसार टीकाकरण गाइड।",
-
-    blog_btn_badge: "स्वास्थ्य मार्गदर्शिका",
-    blog_btn_title: "पेरेंटिंग एवं बाल स्वास्थ्य लेख",
-    blog_btn_subtitle: "बुखार, नवजात देखभाल, डेंगू और प्रदूषण से बचाव से जुड़े सभी चिकित्सकीय लेख पढ़ने के लिए क्लिक करें।",
-
-    blog_badge: "स्वास्थ्य जागरूकता",
-    blog_heading: "पेरेंटिंग एवं बाल स्वास्थ्य मार्गदर्शन",
-    blog_view_all: "सभी गाइड देखें",
-    blog_featured_badge: "नवीनतम बाल स्वास्थ्य गाइड",
-    blog_featured_title: "दिल्ली के प्रदूषण में क्या एयर प्यूरीफायर खरीदना चाहिए? बाल रोग विशेषज्ञ गाइड",
-    blog_featured_desc: "क्या प्यूरीफायर सचमुच बच्चों के फेफड़ों को बचाते हैं? True HEPA H13 मानक, कमरे के अनुसार CADR रेटिंग, और वे गलतियां जिनसे प्यूरीफायर काम नहीं करता।",
-    blog_read_btn: "पूरी गाइड पढ़ें",
-    blog_explore_btn: "सभी स्वास्थ्य लेख व गाइड देखें",
-
-    card_newborn_tag: "नवजात देखभाल",
-    card_newborn_title: "नवजात शिशु की देखभाल (0-30 दिन जरूरी नियम)",
-    card_newborn_desc: "स्तनपान, नाभि की सफाई, पीलिया की पहचान और सुलाने के सुरक्षित नियमों की डॉक्टरी सलाह।",
-    
-    card_dengue_tag: "मौसमी अलर्ट",
-    card_dengue_title: "बच्चों में डेंगू: लक्षण, प्लेटलेट्स व घरेलू देखभाल",
-    card_dengue_desc: "तेज बुखार, प्लेटलेट्स की सच्चाई और खतरे के लक्षणों पर अभिभावकों के लिए गाइड।",
-    
-    card_screen_tag: "बाल विकास",
-    card_screen_title: "बच्चों में मोबाइल और स्क्रीन की लत कैसे छुड़ाएं?",
-    card_screen_desc: "खाना खाते समय फोन की आदत और रोने-जिद्द करने से निपटने के आसान डॉक्टरी उपाय।",
-    
-    blog_read_btn_short: "गाइड पढ़ें",
-
-    loc_title: "क्लिनिक समय व पता",
-    loc_card_title: "क्लिनिक विवरण",
-    loc_address_label: "पता:",
-    loc_hours_label: "परामर्श का समय:",
-    loc_hours_text: "सोमवार - शनिवार: सुबह 10:00 - दोपहर 1:00 | शाम 6:00 - 8:30<br>रविवार: सुबह 11:00 - दोपहर 12:00",
-    loc_maps_btn: "गूगल मैप्स पर रास्ता देखें"
-  }
-};
-
-window.currentGlobalLang = localStorage.getItem("preferredClinicLang") || "en";
-
-window.setGlobalLanguage = function(lang) {
-  try {
-    window.currentGlobalLang = lang;
-    try { localStorage.setItem("preferredClinicLang", lang); } catch (e) {}
-
-    // 1. Text elements replacement
-    const elements = document.querySelectorAll("[data-i18n]");
-    const dict = window.siteTranslations[lang];
-    if (dict) {
-      elements.forEach(el => {
-        const key = el.getAttribute("data-i18n");
-        if (dict[key]) {
-          el.innerHTML = dict[key];
-        }
-      });
-    }
-
-    // 2. Button Prompt Text Update
-    const desktopBtnText = document.getElementById("langBtnText");
-    const mobileBtnText = document.getElementById("mobileLangBtnText");
-    const nextPrompt = (lang === "en") ? "हिन्दी" : "English";
-
-    if (desktopBtnText) desktopBtnText.textContent = nextPrompt;
-    if (mobileBtnText) mobileBtnText.textContent = nextPrompt;
-
-    // 3. Sync Growth Screener Select Dropdown
-    const screenerLangSelect = document.getElementById("screenerLang");
-    if (screenerLangSelect) {
-      screenerLangSelect.value = (lang === "hi") ? "hindi" : "english";
-    }
-
-    // 4. Safely trigger growth screener recalculation
-    try {
-      if (typeof window.runScreener === "function") {
-        window.runScreener();
-      }
-    } catch (err) {}
-  } catch (globalErr) {
-    console.error("Language switch error:", globalErr);
-  }
-};
-
-window.toggleGlobalLanguage = function() {
-  const nextLang = (window.currentGlobalLang === "en") ? "hi" : "en";
-  window.setGlobalLanguage(nextLang);
-};
-
-// ==========================================================
-// 6. AUTO INITIALIZATION ON PAGE LOAD
+// 5. HARDWARE-SAFE TOUCH / CLICK BINDINGS
 // ==========================================================
 document.addEventListener("DOMContentLoaded", function() {
-  runScreener();
-  if (typeof window.setGlobalLanguage === "function") {
-    window.setGlobalLanguage(window.currentGlobalLang);
+  // Bind direct hardware touch & click events
+  const mobileBtn = document.getElementById("mobileLangToggleBtn");
+  const desktopBtn = document.getElementById("globalLangToggleBtn");
+
+  if (mobileBtn) {
+    mobileBtn.addEventListener("click", function(e) {
+      e.preventDefault();
+      window.toggleGlobalLanguage();
+    });
   }
+
+  if (desktopBtn) {
+    desktopBtn.addEventListener("click", function(e) {
+      e.preventDefault();
+      window.toggleGlobalLanguage();
+    });
+  }
+
+  // Initialize initial state
+  window.setGlobalLanguage(window.currentGlobalLang);
+  runScreener();
 });
