@@ -174,13 +174,28 @@
         .logo { font-family: 'Fredoka', cursive; font-size: 1.35rem; font-weight: 600; color: var(--brand-primary-dark); display: flex; align-items: center; gap: 8px; }
         .logo i { color: var(--brand-accent); font-size: 1.35rem; }
         
-        nav.desktop-nav { display: flex; align-items: center; gap: 20px; }
-        nav.desktop-nav a { text-decoration: none; color: #334155; font-weight: 600; font-size: 0.9rem; transition: color 0.2s; cursor: pointer; }
+        nav.desktop-nav { display: flex; align-items: center; gap: 16px; }
+        nav.desktop-nav a { text-decoration: none; color: #334155; font-weight: 600; font-size: 0.88rem; transition: color 0.2s; cursor: pointer; }
         nav.desktop-nav a:hover { color: var(--brand-primary); }
         
+        /* Language Toggle Button */
+        .lang-switch-btn {
+            background: #f0fdfa; border: 1.5px solid #99f6e4; color: #0f766e;
+            padding: 6px 14px; border-radius: 20px; font-size: 0.82rem; font-weight: 800;
+            cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
+            transition: all 0.2s ease;
+        }
+        .lang-switch-btn:hover { background: #ccfbf1; transform: scale(1.04); }
+
+        .lang-switch-btn-mobile {
+            display: none; background: #f0fdfa; border: 1.5px solid #99f6e4; color: #0f766e;
+            padding: 6px 12px; border-radius: 18px; font-size: 0.8rem; font-weight: 800;
+            cursor: pointer; align-items: center; gap: 5px;
+        }
+
         .book-tab-btn {
             background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
-            color: #ffffff !important; padding: 9px 20px; border-radius: 30px;
+            color: #ffffff !important; padding: 9px 18px; border-radius: 30px;
             font-size: 0.86rem; font-weight: 700; box-shadow: 0 4px 14px rgba(8, 145, 178, 0.25);
             transition: transform 0.2s, box-shadow 0.2s; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;
         }
@@ -476,6 +491,7 @@
             .logo { font-size: 1.15rem; }
             nav.desktop-nav { display: none; }
             .mobile-menu-toggle { display: block; }
+            .lang-switch-btn-mobile { display: inline-flex; }
 
             .hero { padding: 28px 16px 35px; text-align: center; }
             .hero-container { flex-direction: column-reverse; gap: 22px; }
@@ -501,35 +517,48 @@
 </head>
 <body>
 
-    <!-- Header Navigation -->
+    <!-- Header Navigation with Global Bilingual Switcher -->
     <header>
         <div class="logo"><i class="fa-solid fa-shapes"></i> Dr. Dinesh Mittal</div>
         
         <nav class="desktop-nav">
-            <a href="#about">About Doctor</a>
-            <a href="#services">Services</a>
+            <a href="#about" data-i18n="nav_about">About Doctor</a>
+            <a href="#services" data-i18n="nav_services">Services</a>
             <a href="#growth-screener" onclick="expandGrowthTool()" style="color: var(--brand-primary); font-weight: 700;">
-                <i class="fa-solid fa-chart-line"></i> Growth, Development & Nutrition
+                <i class="fa-solid fa-chart-line"></i> <span data-i18n="nav_growth">Growth, Development & Nutrition</span>
             </a>
-            <a href="#adolescent-care">Adolescent Care</a>
-            <a href="blog.html">Parenting Blog</a>
-            <a href="#clinic-location">Location</a>
-            <a onclick="openBookingModal()" class="book-tab-btn"><i class="fa-solid fa-calendar-check"></i> Book Consultation</a>
+            <a href="#adolescent-care" data-i18n="nav_adolescent">Adolescent Care</a>
+            <a href="blog.html" data-i18n="nav_blog">Parenting Blog</a>
+            <a href="#clinic-location" data-i18n="nav_location">Location</a>
+
+            <!-- 🌐 Desktop Language Toggle -->
+            <button type="button" onclick="toggleGlobalLanguage()" id="globalLangToggleBtn" class="lang-switch-btn" aria-label="Switch Language">
+                <i class="fa-solid fa-language"></i> <span id="langBtnText">हिन्दी</span>
+            </button>
+
+            <a onclick="openBookingModal()" class="book-tab-btn"><i class="fa-solid fa-calendar-check"></i> <span data-i18n="btn_book">Book Consultation</span></a>
         </nav>
 
-        <button class="mobile-menu-toggle" onclick="toggleMobileDrawer()" aria-label="Toggle navigation">
-            <i class="fa-solid fa-bars"></i>
-        </button>
+        <div style="display: flex; align-items: center; gap: 8px;">
+            <!-- 🌐 Mobile Header Language Toggle -->
+            <button type="button" onclick="toggleGlobalLanguage()" id="mobileLangToggleBtn" class="lang-switch-btn-mobile" aria-label="Switch Language">
+                <i class="fa-solid fa-globe"></i> <span id="mobileLangBtnText">हिन्दी</span>
+            </button>
+            
+            <button class="mobile-menu-toggle" onclick="toggleMobileDrawer()" aria-label="Toggle navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
     </header>
 
     <!-- Mobile Drawer Navigation -->
     <div id="mobileDrawer" class="mobile-nav-drawer">
-        <a href="#about" onclick="toggleMobileDrawer()"><i class="fa-solid fa-user-doctor"></i> About Dr. Dinesh Mittal</a>
-        <a href="#services" onclick="toggleMobileDrawer()"><i class="fa-solid fa-stethoscope"></i> Pediatric Services</a>
-        <a href="#growth-screener" onclick="toggleMobileDrawer(); expandGrowthTool();" style="color: var(--brand-primary);"><i class="fa-solid fa-chart-line"></i> Growth, Development & Nutrition</a>
-        <a href="#adolescent-care" onclick="toggleMobileDrawer()"><i class="fa-solid fa-person-shelter"></i> Adolescent & Teen FAQs</a>
-        <a href="blog.html" onclick="toggleMobileDrawer()"><i class="fa-solid fa-newspaper"></i> Parenting & Vaccine Blog</a>
-        <a href="#clinic-location" onclick="toggleMobileDrawer()"><i class="fa-solid fa-location-dot"></i> Clinic Location & Hours</a>
+        <a href="#about" onclick="toggleMobileDrawer()"><i class="fa-solid fa-user-doctor"></i> <span data-i18n="nav_about">About Dr. Dinesh Mittal</span></a>
+        <a href="#services" onclick="toggleMobileDrawer()"><i class="fa-solid fa-stethoscope"></i> <span data-i18n="nav_services">Pediatric Services</span></a>
+        <a href="#growth-screener" onclick="toggleMobileDrawer(); expandGrowthTool();" style="color: var(--brand-primary);"><i class="fa-solid fa-chart-line"></i> <span data-i18n="nav_growth">Growth, Development & Nutrition</span></a>
+        <a href="#adolescent-care" onclick="toggleMobileDrawer()"><i class="fa-solid fa-person-shelter"></i> <span data-i18n="nav_adolescent">Adolescent Care</span></a>
+        <a href="blog.html" onclick="toggleMobileDrawer()"><i class="fa-solid fa-newspaper"></i> <span data-i18n="nav_blog">Parenting & Vaccine Blog</span></a>
+        <a href="#clinic-location" onclick="toggleMobileDrawer()"><i class="fa-solid fa-location-dot"></i> <span data-i18n="nav_location">Clinic Location & Hours</span></a>
         <a href="tel:+918130521456" style="color: var(--brand-accent);"><i class="fa-solid fa-phone"></i> Call: +91 81305 21456</a>
     </div>
 
@@ -537,15 +566,15 @@
     <section class="hero" id="about">
         <div class="hero-container">
             <div class="hero-text-side">
-                <div class="hero-badge"><i class="fa-solid fa-stethoscope"></i> Child Specialist & Pediatrician</div>
-                <h1>Compassionate Healthcare For Your Little Ones</h1>
-                <p>Specialized newborn care, WHO/IAP vaccination schedules, and growth & development monitoring in Sector 3 Rohini, Delhi.</p>
+                <div class="hero-badge"><i class="fa-solid fa-stethoscope"></i> <span data-i18n="hero_badge">Child Specialist & Pediatrician</span></div>
+                <h1 data-i18n="hero_heading">Compassionate Healthcare For Your Little Ones</h1>
+                <p data-i18n="hero_sub">Specialized newborn care, WHO/IAP vaccination schedules, and growth & development monitoring in Sector 3 Rohini, Delhi.</p>
                 <div style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: inherit;">
                     <button onclick="openBookingModal()" class="hero-cta-btn">
-                        <i class="fa-solid fa-calendar-plus"></i> Book Consultation
+                        <i class="fa-solid fa-calendar-plus"></i> <span data-i18n="btn_book">Book Consultation</span>
                     </button>
                     <a href="#growth-screener" onclick="expandGrowthTool()" class="hero-secondary-btn">
-                        <i class="fa-solid fa-chart-line" style="color: var(--brand-primary);"></i> Growth, Development & Nutrition
+                        <i class="fa-solid fa-chart-line" style="color: var(--brand-primary);"></i> <span data-i18n="nav_growth">Growth, Development & Nutrition</span>
                     </a>
                 </div>
             </div>
@@ -557,11 +586,11 @@
                         <img src="doctor.jpg" alt="Dr. Dinesh Mittal - Pediatrician in Rohini" width="140" height="140" class="hero-doctor-img" loading="eager" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=400&q=80'">
                     </div>
                     <h2 class="doctor-hero-name">Dr. Dinesh Mittal</h2>
-                    <div class="doctor-hero-role">Child Specialist & Pediatrician</div>
+                    <div class="doctor-hero-role" data-i18n="hero_badge">Child Specialist & Pediatrician</div>
                     <div class="doctor-hero-clinic"><i class="fa-solid fa-location-dot" style="color:var(--brand-primary);"></i> Sector 3, Rohini, Delhi</div>
                     
                     <div class="trust-pills-row">
-                        <span class="trust-micro-pill"><i class="fa-solid fa-user-doctor" style="color:var(--brand-primary);"></i> 25+ Yrs Clinical Practice</span>
+                        <span class="trust-micro-pill"><i class="fa-solid fa-user-doctor" style="color:var(--brand-primary);"></i> <span data-i18n="hero_exp">25+ Yrs Clinical Practice</span></span>
                     </div>
                 </div>
             </div>
@@ -572,11 +601,11 @@
     <div class="container" id="services" style="margin-top: 25px; margin-bottom: 25px;">
         <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 12px;">
             <div>
-                <span style="font-size: 0.75rem; font-weight: 700; color: var(--brand-primary); text-transform: uppercase; letter-spacing: 0.5px;">Clinical Care</span>
-                <h2 style="font-family: 'Fredoka', cursive; font-size: 1.45rem; color: #083344; margin: 0;">Pediatric Services</h2>
+                <span style="font-size: 0.75rem; font-weight: 700; color: var(--brand-primary); text-transform: uppercase; letter-spacing: 0.5px;" data-i18n="sec_clinical_care">Clinical Care</span>
+                <h2 style="font-family: 'Fredoka', cursive; font-size: 1.45rem; color: #083344; margin: 0;" data-i18n="sec_services_title">Pediatric Services</h2>
             </div>
             <a onclick="openBookingModal()" style="font-size: 0.82rem; font-weight: 700; color: var(--brand-primary); text-decoration: none; cursor: pointer;">
-                Book Appointment <i class="fa-solid fa-chevron-right" style="font-size: 0.7rem;"></i>
+                <span data-i18n="btn_book">Book Appointment</span> <i class="fa-solid fa-chevron-right" style="font-size: 0.7rem;"></i>
             </a>
         </div>
 
@@ -586,8 +615,8 @@
                     <i class="fa-solid fa-syringe"></i>
                 </div>
                 <div class="service-text">
-                    <h3>Vaccination</h3>
-                    <p>WHO & IAP cold-chain vaccines.</p>
+                    <h3 data-i18n="svc_vax_title">Vaccination</h3>
+                    <p data-i18n="svc_vax_desc">WHO & IAP cold-chain vaccines.</p>
                 </div>
             </div>
 
@@ -596,8 +625,8 @@
                     <i class="fa-solid fa-baby"></i>
                 </div>
                 <div class="service-text">
-                    <h3>Newborn Care</h3>
-                    <p>Growth, feeding & jaundice checks.</p>
+                    <h3 data-i18n="svc_newborn_title">Newborn Care</h3>
+                    <p data-i18n="svc_newborn_desc">Growth, feeding & jaundice checks.</p>
                 </div>
             </div>
 
@@ -606,8 +635,8 @@
                     <i class="fa-solid fa-stethoscope"></i>
                 </div>
                 <div class="service-text">
-                    <h3>Fevers & Infections</h3>
-                    <p>Seasonal viral, flu & asthma care.</p>
+                    <h3 data-i18n="svc_fever_title">Fevers & Infections</h3>
+                    <p data-i18n="svc_fever_desc">Seasonal viral, flu & asthma care.</p>
                 </div>
             </div>
 
@@ -616,8 +645,8 @@
                     <i class="fa-solid fa-person-shelter"></i>
                 </div>
                 <div class="service-text">
-                    <h3>Adolescent Health</h3>
-                    <p>Puberty & growth spurt counseling.</p>
+                    <h3 data-i18n="svc_teen_title">Adolescent Health</h3>
+                    <p data-i18n="svc_teen_desc">Puberty & growth spurt counseling.</p>
                 </div>
             </div>
         </div>
@@ -630,9 +659,9 @@
             <!-- Clickable Accordion Header -->
             <button type="button" class="screener-toggle-header" onclick="toggleGrowthTool()">
                 <div>
-                    <span class="screener-badge"><i class="fa-solid fa-chart-line"></i> Pediatric Clinical Tool</span>
-                    <h2 class="screener-title" id="lblTitle">Growth, Development & Nutrition Assessment</h2>
-                    <p class="screener-subtitle" id="lblSubtitle">Tap to assess IAP Growth Charts, Developmental Milestones (TDSC), IYCF Feeding Guides & Adolescent Puberty.</p>
+                    <span class="screener-badge"><i class="fa-solid fa-chart-line"></i> <span data-i18n="screener_badge">Pediatric Clinical Tool</span></span>
+                    <h2 class="screener-title" id="lblTitle" data-i18n="screener_title">Growth, Development & Nutrition Assessment</h2>
+                    <p class="screener-subtitle" id="lblSubtitle" data-i18n="screener_subtitle">Tap to assess IAP Growth Charts, Developmental Milestones (TDSC), IYCF Feeding Guides & Adolescent Puberty.</p>
                 </div>
                 <i id="growthToggleIcon" class="fa-solid fa-circle-chevron-down screener-toggle-icon"></i>
             </button>
@@ -729,18 +758,18 @@
         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
           <div>
             <span class="screener-badge" style="background: #fdf4ff; color: #a21caf; border-color: #fae8ff; margin-bottom: 4px;">
-              <i class="fa-solid fa-person-shelter"></i> Ages 10 - 18 Years
+              <i class="fa-solid fa-person-shelter"></i> <span data-i18n="teen_badge">Ages 10 - 18 Years</span>
             </span>
-            <h2 style="font-family: 'Fredoka', cursive; font-size: 1.35rem; color: #083344; margin: 0;">
+            <h2 style="font-family: 'Fredoka', cursive; font-size: 1.35rem; color: #083344; margin: 0;" data-i18n="teen_heading">
               Adolescent Health & Puberty Guidance
             </h2>
           </div>
 
           <!-- Quick Filter Buttons -->
           <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-            <button onclick="filterAdolescentFaq('all')" id="tabFaqAll" class="hero-secondary-btn" style="padding: 6px 14px; font-size: 0.78rem; min-height: 32px; background: var(--brand-primary); color: white; border-color: var(--brand-primary);">All (20)</button>
-            <button onclick="filterAdolescentFaq('girls')" id="tabFaqGirls" class="hero-secondary-btn" style="padding: 6px 14px; font-size: 0.78rem; min-height: 32px;"><i class="fa-solid fa-venus" style="color:#db2777;"></i> Girls</button>
-            <button onclick="filterAdolescentFaq('boys')" id="tabFaqBoys" class="hero-secondary-btn" style="padding: 6px 14px; font-size: 0.78rem; min-height: 32px;"><i class="fa-solid fa-mars" style="color:#2563eb;"></i> Boys</button>
+            <button onclick="filterAdolescentFaq('all')" id="tabFaqAll" class="hero-secondary-btn" style="padding: 6px 14px; font-size: 0.78rem; min-height: 32px; background: var(--brand-primary); color: white; border-color: var(--brand-primary);" data-i18n="teen_btn_all">All (20)</button>
+            <button onclick="filterAdolescentFaq('girls')" id="tabFaqGirls" class="hero-secondary-btn" style="padding: 6px 14px; font-size: 0.78rem; min-height: 32px;"><i class="fa-solid fa-venus" style="color:#db2777;"></i> <span data-i18n="teen_btn_girls">Girls</span></button>
+            <button onclick="filterAdolescentFaq('boys')" id="tabFaqBoys" class="hero-secondary-btn" style="padding: 6px 14px; font-size: 0.78rem; min-height: 32px;"><i class="fa-solid fa-mars" style="color:#2563eb;"></i> <span data-i18n="teen_btn_boys">Boys</span></button>
           </div>
         </div>
 
@@ -753,7 +782,7 @@
             <i class="fa-solid fa-chevron-down"></i> <span id="faqBtnLabel">View All 20 Questions</span>
           </button>
           <button onclick="openBookingModal()" class="hero-cta-btn" style="padding: 8px 18px; font-size: 0.82rem; min-height: 36px;">
-            <i class="fa-solid fa-calendar-check"></i> Book Confidential Teen Consult
+            <i class="fa-solid fa-calendar-check"></i> <span data-i18n="teen_book_btn">Book Confidential Teen Consult</span>
           </button>
         </div>
 
@@ -764,11 +793,11 @@
     <div class="container" id="blog">
         <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 18px;">
             <div>
-                <span style="font-size: 0.75rem; font-weight: 700; color: var(--brand-primary); text-transform: uppercase; letter-spacing: 0.5px;">Health Education</span>
-                <h2 style="font-family: 'Fredoka', cursive; font-size: 1.65rem; color: #083344; margin: 0;">Parenting & Health Insights</h2>
+                <span style="font-size: 0.75rem; font-weight: 700; color: var(--brand-primary); text-transform: uppercase; letter-spacing: 0.5px;" data-i18n="blog_badge">Health Education</span>
+                <h2 style="font-family: 'Fredoka', cursive; font-size: 1.65rem; color: #083344; margin: 0;" data-i18n="blog_heading">Parenting & Health Insights</h2>
             </div>
             <a href="blog.html" style="font-size: 0.88rem; font-weight: 700; color: var(--brand-primary); text-decoration: none;">
-                View All Guides <i class="fa-solid fa-arrow-right"></i>
+                <span data-i18n="blog_view_all">View All Guides</span> <i class="fa-solid fa-arrow-right"></i>
             </a>
         </div>
 
@@ -776,16 +805,16 @@
         <div style="background: linear-gradient(135deg, #f0fdfa 0%, #e0f2fe 100%); border: 2px solid #38bdf8; border-radius: 24px; padding: 22px; margin-bottom: 20px; box-shadow: 0 10px 25px -5px rgba(8, 145, 178, 0.12); display: flex; flex-wrap: wrap; gap: 20px; align-items: center;">
             <div style="flex: 1; min-width: 260px;">
                 <span style="display: inline-flex; align-items: center; gap: 6px; background: #dc2626; color: #ffffff; padding: 4px 12px; border-radius: 20px; font-size: 0.74rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">
-                    <i class="fa-solid fa-bell"></i> Latest Pediatric Guide
+                    <i class="fa-solid fa-bell"></i> <span data-i18n="blog_featured_badge">Latest Pediatric Guide</span>
                 </span>
-                <h3 style="font-family: 'Fredoka', cursive; font-size: 1.35rem; color: #083344; margin-bottom: 8px; line-height: 1.3;">
+                <h3 style="font-family: 'Fredoka', cursive; font-size: 1.35rem; color: #083344; margin-bottom: 8px; line-height: 1.3;" data-i18n="blog_featured_title">
                     Air Purifiers for Delhi Pollution: A Pediatric Deep Dive & Buying Guide
                 </h3>
-                <p style="font-size: 0.88rem; color: #475569; margin-bottom: 16px; line-height: 1.5;">
+                <p style="font-size: 0.88rem; color: #475569; margin-bottom: 16px; line-height: 1.5;" data-i18n="blog_featured_desc">
                     Do purifiers truly protect child lungs against winter smog? Learn certified HEPA H13 standards, CADR ratings for Delhi bedrooms, and critical household mistakes that cause purifiers to fail.
                 </p>
                 <a href="air-purifier-delhi-pollution-children.html" class="hero-cta-btn" style="padding: 10px 22px; font-size: 0.88rem; min-height: 42px; text-decoration: none;">
-                    <i class="fa-solid fa-book-open-reader"></i> Read Full Guide <i class="fa-solid fa-arrow-right" style="font-size: 0.75rem;"></i>
+                    <i class="fa-solid fa-book-open-reader"></i> <span data-i18n="blog_read_btn">Read Full Guide</span> <i class="fa-solid fa-arrow-right" style="font-size: 0.75rem;"></i>
                 </a>
             </div>
             <div style="flex: 0.9; min-width: 260px; max-width: 360px; border-radius: 18px; overflow: hidden;">
@@ -828,24 +857,24 @@
         <!-- 🔗 3. LINK TO FULL ARCHIVE -->
         <div style="text-align: center; margin-top: 20px;">
             <a href="blog.html" class="hero-secondary-btn" style="padding: 10px 24px; font-size: 0.88rem;">
-                <i class="fa-solid fa-layer-group" style="color:var(--brand-primary);"></i> Browse All 8 Articles in Health Library
+                <i class="fa-solid fa-layer-group" style="color:var(--brand-primary);"></i> <span data-i18n="blog_explore_btn">Browse All 8 Articles in Health Library</span>
             </a>
         </div>
     </div>
 
     <!-- Location & Contact -->
     <div class="container" id="clinic-location">
-        <h2 class="section-title">Visit Our Clinic</h2>
+        <h2 class="section-title" data-i18n="loc_title">Visit Our Clinic</h2>
         <div class="contact-grid">
             <div class="contact-details">
-                <h3 style="color: #083344; margin-bottom: 18px; font-size: 1.15rem; font-family: 'Fredoka', cursive;">Clinic Details</h3>
+                <h3 style="color: #083344; margin-bottom: 18px; font-size: 1.15rem; font-family: 'Fredoka', cursive;" data-i18n="loc_card_title">Clinic Details</h3>
                 <div class="contact-item">
                     <i class="fa-solid fa-location-dot"></i>
-                    <div><strong>Address:</strong><br>H-34/69, Sector 3, Rohini, Delhi - 110085</div>
+                    <div><strong data-i18n="loc_address_label">Address:</strong><br>H-34/69, Sector 3, Rohini, Delhi - 110085</div>
                 </div>
                 <div class="contact-item">
                     <i class="fa-solid fa-clock"></i>
-                    <div><strong>Consultation Hours:</strong><br>Mon - Sat: 10:00 AM - 1:00 PM | 6:00 PM - 8:30 PM<br>Sunday: 11:00 AM - 12:00 PM</div>
+                    <div><strong data-i18n="loc_hours_label">Consultation Hours:</strong><br><span data-i18n="loc_hours_text">Mon - Sat: 10:00 AM - 1:00 PM | 6:00 PM - 8:30 PM<br>Sunday: 11:00 AM - 12:00 PM</span></div>
                 </div>
                 <div class="contact-item">
                     <i class="fa-solid fa-phone"></i>
@@ -853,7 +882,7 @@
                 </div>
                 <div style="margin-top: 15px;">
                     <a href="https://maps.app.goo.gl/tW6fDW25fgrrA86P6" target="_blank" class="hero-cta-btn" style="width: 100%; text-decoration: none; font-size: 0.88rem; padding: 10px 16px; min-height: 44px;">
-                        <i class="fa-solid fa-diamond-turn-right"></i> Open Directions in Google Maps
+                        <i class="fa-solid fa-diamond-turn-right"></i> <span data-i18n="loc_maps_btn">Open Directions in Google Maps</span>
                     </a>
                 </div>
             </div>
@@ -908,15 +937,15 @@
 
     <!-- Mobile Bottom Bar -->
     <div class="mobile-bottom-bar">
-        <a href="tel:+918130521456" class="mobile-bar-btn btn-call"><i class="fa-solid fa-phone"></i> Call Clinic</a>
-        <button onclick="openBookingModal()" class="mobile-bar-btn btn-book"><i class="fa-solid fa-calendar-check"></i> Book Online</button>
+        <a href="tel:+918130521456" class="mobile-bar-btn btn-call"><i class="fa-solid fa-phone"></i> <span data-i18n="btn_call">Call Clinic</span></a>
+        <button onclick="openBookingModal()" class="mobile-bar-btn btn-book"><i class="fa-solid fa-calendar-check"></i> <span data-i18n="btn_book">Book Online</span></button>
     </div>
 
     <!-- Booking Modal -->
     <div id="bookingModal" class="modal-overlay" onclick="closeModalOnOverlay(event, 'bookingModal')">
         <div class="modal-content">
             <div class="modal-header">
-                <h3><i class="fa-solid fa-calendar-check" style="color: var(--brand-primary);"></i> Book Consultation Slot</h3>
+                <h3><i class="fa-solid fa-calendar-check" style="color: var(--brand-primary);"></i> <span data-i18n="btn_book">Book Consultation Slot</span></h3>
                 <div class="modal-header-actions">
                     <a href="https://script.google.com/macros/s/AKfycbzZZJon_KvK0ibezOQT0ktfkxIB8-ee_-BnRKra6kvejGrbG1dFjMSD8f9zhR3ZXeWbXA/exec" target="_blank" class="modal-action-btn" title="Open full screen in dedicated browser tab">
                         <i class="fa-solid fa-arrow-up-right-from-square"></i> Open Full View
@@ -1046,7 +1075,7 @@
     </script>
 
     <!-- EXTERNAL MODULAR SCRIPTS -->
-    <script defer src="data.js?v=22"></script>
-    <script defer src="app.js?v=22"></script>
+    <script defer src="data.js?v=23"></script>
+    <script defer src="app.js?v=23"></script>
 </body>
 </html>
