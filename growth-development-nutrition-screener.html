@@ -177,13 +177,13 @@
                     </div>
 
                     <div class="screener-field">
-                        <label><i class="fa-solid fa-weight-scale"></i> <span id="lblWeight">Current Weight (kg)</span></label>
-                        <input type="number" inputmode="decimal" id="screenerWeight" class="screener-input" step="0.1" placeholder="e.g. 3.2" required>
+                        <label><i class="fa-solid fa-weight-scale"></i> <span id="lblWeight">Current Weight (kg)</span> <small style="color:#64748b;">(Optional)</small></label>
+                        <input type="number" inputmode="decimal" id="screenerWeight" class="screener-input" step="0.1" placeholder="e.g. 3.2">
                     </div>
 
                     <div class="screener-field">
-                        <label><i class="fa-solid fa-ruler-vertical"></i> <span id="lblHeight">Current Length (cm)</span></label>
-                        <input type="number" inputmode="decimal" id="screenerHeight" class="screener-input" step="0.5" placeholder="e.g. 50" required>
+                        <label><i class="fa-solid fa-ruler-vertical"></i> <span id="lblHeight">Current Length (cm)</span> <small style="color:#64748b;">(Optional)</small></label>
+                        <input type="number" inputmode="decimal" id="screenerHeight" class="screener-input" step="0.5" placeholder="e.g. 50">
                     </div>
 
                     <div class="screener-field">
@@ -253,7 +253,7 @@
           red: { en: ["Does not smile at mother", "Does not react to loud clapping sounds"], hi: ["मां को देखकर न मुस्कुराना", "तेज आवाज पर चौंकना नहीं"] },
           tips: {
             nutrition: { en: "Continue exclusive breastfeeding. Mother should consume calcium & iron-rich foods.", hi: "केवल स्तनपान जारी रखें। मां कैल्शियम व आयरन युक्त पौष्टिक आहार लें।" },
-            safety: { en: "Supervised tummy time 10-15 mins daily on a clean play mat.", hi: "जागते समय रोजाना 10-15 मिनट पेट के बल लिटाएं (Tummy Time)।" },
+            safety: { en: "Supervised tummy time 10-15 mins daily on a clean play mat.", hi: "जागते समय रोजाना 10-15 मिनट पेट के बल लिटाएं (Tummy Time)." },
             play: { en: "Colorful rattle tracking, making cooing sounds, hanging soft crib mobiles.", hi: "रंग-बिरंगा झुनझुना हिलाकर दृष्टि ट्रैक कराना और हंसमुख बातें करना।" },
             care: { en: "Schedule 6, 10, and 14-week primary vaccine doses (6-in-1, Rotavirus, PCV).", hi: "6, 10 एवं 14 हफ्ते के प्राथमिक टीके (6-in-1, रोटावायरस, PCV) लगवाएं।" }
           }
@@ -623,9 +623,6 @@
           if (selected) {
             answeredCount++;
             const val = selected.value;
-            // Scored as At-Risk if:
-            // For items 2, 5, 12 -> YES indicates risk
-            // For all other items -> NO indicates risk
             if (item.rev && val === "yes") score++;
             if (!item.rev && val === "no") score++;
           }
@@ -719,7 +716,7 @@
       }
 
       // =========================================================================
-      // 📊 MAIN CALCULATION FUNCTION (WITH MID-PARENTAL DISCREPANCY RE-ENABLED)
+      // 📊 MAIN CALCULATION FUNCTION (FLEXIBLE: HANDLES WEIGHT OR HEIGHT ALONE)
       // =========================================================================
       function calculateAndRenderResults() {
         try {
@@ -749,8 +746,8 @@
           let hStatus = "";
           let bmiStatus = "";
 
-          // 1. Weight Evaluation
-          if (!isNaN(wInput) && ref) {
+          // 1. Weight Evaluation (Optional check)
+          if (!isNaN(wInput) && wInput > 0 && ref) {
             if (wInput < ref.minW) {
               wStatus = toolLang === "en" 
                 ? `<div class="flag-card flag-yellow"><i class="fa-solid fa-triangle-exclamation"></i> <div><strong>Weight (${wInput} kg): Below 3rd percentile.</strong> Standard healthy range: ${ref.minW} – ${ref.maxW} kg. Consult pediatrician for dietary review.</div></div>`
@@ -764,6 +761,10 @@
                 ? `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>Weight (${wInput} kg): Normal & Healthy.</strong> Aligned with standard range (${ref.minW} – ${ref.maxW} kg).</div></div>`
                 : `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>वजन (${wInput} kg): बिल्कुल सामान्य एवं स्वस्थ।</strong> मानक सीमा (${ref.minW} – ${ref.maxW} kg) के अनुसार सही है।</div></div>`;
             }
+          } else {
+            wStatus = toolLang === "en"
+              ? `<div class="flag-card" style="background:#f8fafc; border:1px solid #e2e8f0; color:#64748b;"><i class="fa-solid fa-circle-info"></i> <div><strong>Weight not provided.</strong> Enter weight above to view weight-for-age percentile analysis.</div></div>`
+              : `<div class="flag-card" style="background:#f8fafc; border:1px solid #e2e8f0; color:#64748b;"><i class="fa-solid fa-circle-info"></i> <div><strong>वजन दर्ज नहीं किया गया है।</strong> वजन-संबंधी विश्लेषण देखने के लिए ऊपर वजन भरें।</div></div>`;
           }
 
           // 2. Auxological Height & Mid-Parental Channel Discrepancy Calculation
@@ -776,7 +777,7 @@
           if (ref) {
             const meanH = (ref.minH + ref.maxH) / 2;
             const sdH = (ref.maxH - ref.minH) / 3.76;
-            if (!isNaN(hInput)) {
+            if (!isNaN(hInput) && hInput > 0) {
               childHeightZ = (hInput - meanH) / sdH;
             }
           }
@@ -787,7 +788,7 @@
             const adultSD = (gender === "boy") ? 6.5 : 6.0;
             targetAdultZ = (targetHeight - adultMean) / adultSD;
 
-            if (!isNaN(hInput) && ref) {
+            if (!isNaN(hInput) && hInput > 0 && ref) {
               const zDiff = targetAdultZ - childHeightZ;
               if (zDiff >= 2.0) {
                 hasHeightDiscrepancy = true;
@@ -802,8 +803,8 @@
             }
           }
 
-          // Height Status with Channel Flagging
-          if (!isNaN(hInput) && ref) {
+          // Height Status with Channel Flagging (Optional check)
+          if (!isNaN(hInput) && hInput > 0 && ref) {
             if (hInput < ref.minH) {
               hStatus = toolLang === "en"
                 ? `<div class="flag-card flag-red"><i class="fa-solid fa-circle-exclamation"></i> <div><strong>${measurementWord} (${hInput} cm): Below 3rd percentile.</strong> Below population norm (${ref.minH} – ${ref.maxH} cm). Consult pediatrician for clinical checkup.</div></div>`
@@ -825,10 +826,14 @@
                 ? `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>${measurementWord} (${hInput} cm): Normal & Harmonized with Family Channel.</strong> Tracking well within expected population and genetic parameters (${ref.minH} – ${ref.maxH} cm).</div></div>`
                 : `<div class="flag-card flag-green"><i class="fa-solid fa-circle-check"></i> <div><strong>${measurementWord} (${hInput} cm): आदर्श विकास क्रम।</strong> मानक एवं आनुवंशिक सीमा अनुसार सही है।</div></div>`;
             }
+          } else {
+            hStatus = toolLang === "en"
+              ? `<div class="flag-card" style="background:#f8fafc; border:1px solid #e2e8f0; color:#64748b;"><i class="fa-solid fa-circle-info"></i> <div><strong>${measurementWord} not provided.</strong> Enter height/length above to view height-for-age percentile analysis.</div></div>`
+              : `<div class="flag-card" style="background:#f8fafc; border:1px solid #e2e8f0; color:#64748b;"><i class="fa-solid fa-circle-info"></i> <div><strong>${measurementWord} दर्ज नहीं की गई है।</strong> कद-संबंधी विश्लेषण देखने के लिए ऊपर लंबाई/कद भरें।</div></div>`;
           }
 
-          // 3. BMI-for-Age
-          if (!isNaN(wInput) && !isNaN(hInput) && hInput > 0) {
+          // 3. BMI-for-Age (Only calculated if BOTH are provided)
+          if (!isNaN(wInput) && wInput > 0 && !isNaN(hInput) && hInput > 0) {
             const heightInMeters = hInput / 100;
             const calcBmi = (wInput / (heightInMeters * heightInMeters)).toFixed(1);
 
