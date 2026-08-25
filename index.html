@@ -740,7 +740,24 @@
             <div style="margin-top: 10px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
                 <a onclick="openDisclaimerModal()" style="color: #38bdf8; text-decoration: underline; cursor: pointer;">Medical Disclaimer & Terms of Use</a>
                 <span style="color: #475569;">|</span>
-                <a onclick="openPrivacyModal()" style="color: #38bdf8; text-decoration: underline; cursor: pointer;">Privacy Policy</a>
+               <div id="privacyModal" class="modal-overlay" onclick="closeModalOnOverlay(event, 'privacyModal')">
+    <div class="modal-content" style="height: auto; max-height: 85vh;">
+        <div class="modal-header">
+            <h3><i class="fa-solid fa-lock" style="color: var(--brand-secondary);"></i> Privacy Policy & Data Security</h3>
+            <button class="close-modal-btn" onclick="closePrivacyModal()">&times;</button>
+        </div>
+        <div class="modal-body" style="padding: 22px; overflow-y: auto; font-size: 0.86rem; color: #475569; line-height: 1.6;">
+            <h4 style="color:#083344; margin-bottom:4px; font-family:'Fredoka',cursive;">1. Information Collection</h4>
+            <p style="margin-bottom:12px;">Any information provided through our online appointment booking system (name, phone number, child details) is collected strictly for the purpose of scheduling and coordinating in-clinic visits at Dr. Dinesh Mittal Child Clinic.</p>
+            
+            <h4 style="color:#083344; margin-bottom:4px; font-family:'Fredoka',cursive;">2. Data Confidentiality & Third Parties</h4>
+            <p style="margin-bottom:12px;">We adhere to strict medical confidentiality standards. Patient and visitor data is <strong>never</strong> sold, rented, or shared with third-party advertisers or commercial entities.</p>
+
+            <h4 style="color:#083344; margin-bottom:4px; font-family:'Fredoka',cursive;">3. Third-Party Embeds</h4>
+            <p>Our booking portal utilizes secure script frameworks (Google Apps Script). Data transmitted through these forms is protected under standard platform security protocols.</p>
+        </div>
+    </div>
+</div>
             </div>
         </div>
         <p style="font-size: 0.75rem; color: #64748b; margin-top: 8px;">&copy; 2026 Dr. Dinesh Mittal - Pediatric Care Clinic. Developed for patient education and informational transparency.</p>
