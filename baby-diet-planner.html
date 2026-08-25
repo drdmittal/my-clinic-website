@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Comprehensive Baby Diet & Nutrition Planner | Dr. Dinesh Mittal</title>
-    <meta name="description" content="Official pediatric dietary guidance by Dr. Dinesh Mittal. Month-by-month meal plans, quantities, authoritative feeding guidelines, do's/don'ts, and fussy eater protocols for ages 6m to 12y.">
+    <meta name="description" content="Official pediatric dietary guidance by Dr. Dinesh Mittal. Month-by-month meal plans, quantities, responsive feeding guidelines, do's/don'ts, and fussy eater protocols.">
     <link rel="canonical" href="https://childspecialistrohini.com/baby-diet-planner.html" />
 
     <!-- Google tag (gtag.js) -->
@@ -80,7 +80,7 @@
 
         .recipe-item-card {
             background:#fffaf5; padding:12px 14px; border-radius:12px; border:1px solid #fed7aa;
-            margin-bottom:10px; display:flex; justify-content:space-between; align-items:flex-start; gap:10px; flex-wrap:wrap;
+            margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;
         }
 
         .flag-card { padding: 12px 14px; border-radius: 14px; margin-bottom: 10px; font-size: 0.86rem; line-height: 1.45; display: flex; gap: 10px; align-items: flex-start; }
@@ -88,6 +88,12 @@
         .flag-green i { color: #16a34a; font-size: 1.1rem; margin-top: 2px; flex-shrink: 0; }
         .flag-red { background: #fef2f2; border: 1px solid #fca5a5; color: #991b1b; }
         .flag-red i { color: #dc2626; font-size: 1.1rem; margin-top: 2px; flex-shrink: 0; }
+
+        .fussy-banner {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            border: 1.5px solid #fde047; border-radius: 14px; padding: 14px 18px; margin: 16px 0;
+            display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
+        }
 
         .doctor-cta-box { background: linear-gradient(135deg, #f0fdfa 0%, #e0f2fe 100%); border: 2px solid #bae6fd; border-radius: 20px; padding: 24px; text-align: center; margin-top: 25px; }
         .hero-cta-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(135deg, var(--brand-accent), var(--brand-accent-dark)); color: #ffffff; padding: 12px 26px; border-radius: 30px; font-weight: 700; font-size: 0.94rem; text-decoration: none; cursor: pointer; border: none; min-height: 46px; }
@@ -164,16 +170,16 @@
             <div id="dietResults"></div>
 
             <!-- FUSSY EATER MASTER GUIDE SECTION -->
-            <div style="background: #faf5ff; border: 2px solid #e9d5ff; border-radius: 20px; padding: 24px; margin-top: 30px;">
+            <div id="fussyEaterSection" style="background: #faf5ff; border: 2px solid #e9d5ff; border-radius: 20px; padding: 24px; margin-top: 30px;">
                 <h3 style="color: #6b21a8; font-family:'Fredoka',cursive; font-size:1.35rem; margin-bottom:12px;">
-                    <i class="fa-solid fa-puzzle-piece"></i> <span id="fussyTitle">Master Guide: Managing the "Fussy Eater"</span>
+                    <i class="fa-solid fa-puzzle-piece"></i> <span id="fussyTitle">Master Guide: Managing the Selective or Fussy Eater</span>
                 </h3>
                 <p style="font-size:0.88rem; color:#4b5563; margin-bottom:14px; line-height:1.6;" id="fussyIntro">
                     Dealing with selective eating is a normal developmental phase, not parental failure. Here is Dr. Dinesh Mittal’s clinical protocol:
                 </p>
                 <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:12px;">
                     <div style="background:#ffffff; padding:14px; border-radius:12px; border:1px solid #f3e8ff;">
-                        <strong style="color:#7e22ce; font-size:0.88rem; display:block; margin-bottom:4px;" id="f1Title">1. Authoritative Boundaries</strong>
+                        <strong style="color:#7e22ce; font-size:0.88rem; display:block; margin-bottom:4px;" id="f1Title">1. Loving & Structured Boundaries</strong>
                         <p style="font-size:0.82rem; color:#4b5563; line-height:1.5;" id="f1Desc">Never become a short-order cook. Serve the family meal neutrally: "You don't have to eat, but this is what is on the table." Remove plate after 20 mins without anger.</p>
                     </div>
                     <div style="background:#ffffff; padding:14px; border-radius:12px; border:1px solid #f3e8ff;">
@@ -189,6 +195,16 @@
                         <p style="font-size:0.82rem; color:#4b5563; line-height:1.5;" id="f4Desc">Fussy eaters fill up on milk, packaged juices, or tea all day. Cap milk to age limits (e.g., max 400ml/day for toddlers) and offer water between meals.</p>
                     </div>
                 </div>
+            </div>
+
+            <!-- BIBLIOGRAPHY BIB-STYLE SOURCES -->
+            <div style="margin-top: 25px; padding: 14px 18px; background: #f8fafc; border-radius: 14px; border: 1px solid #e2e8f0;">
+                <p style="font-size: 0.72rem; color: #64748b; line-height: 1.5; margin: 0; font-family: monospace;" id="bibSourceText">
+                    <strong>References & Guidelines Bibliography:</strong><br>
+                    1. Indian Academy of Pediatrics (IAP) Guidelines on Infant and Young Child Feeding (IYCF).<br>
+                    2. World Health Organization (WHO) Guiding Principles for Complementary Feeding of the Breastfed Child.<br>
+                    3. Ellyn Satter Institute / AAP Principles of Responsive, Loving & Structured Feeding.
+                </p>
             </div>
 
             <div class="doctor-cta-box">
@@ -208,24 +224,16 @@
     <script>
       let toolLang = localStorage.getItem("preferredClinicLang") || "en";
 
-      // =========================================================================
-      // 📚 CLINICAL GUIDELINES SOURCES & DATABASES
-      // =========================================================================
-      const clinicalSourcesText = {
-        en: "Source Authority: Indian Academy of Pediatrics (IAP) IYCF Guidelines, World Health Organization (WHO) Complementary Feeding Framework, and Ellyn Satter Institute Authoritative Feeding Principles.",
-        hi: "संदर्भ स्रोत: इंडियन एकेडमी ऑफ पेडियाट्रिक्स (IAP) आईवाईसीएफ दिशा-निर्देश, विश्व स्वास्थ्य संगठन (WHO) पूरक आहार ढांचा, और एलिन सैटर संस्थान के आधिकारिक फीडिंग सिद्धांत।"
-      };
-
       const dietPlanDatabase = {
         "6m": {
           title: { en: "The 6-Month Milestone (Starting Solid Foods)", hi: "6 माह का मील का पत्थर (ठोस आहार की शुरुआत)" },
           schedule: { 
-            en: "Total feeds: 7-8 feeds/day. Day gap: 2-3 hours. Night gap: 5-7 hours. Start with 2 semi-solid meals daily (1-2 teaspoons moving to 2-3 tablespoons).", 
-            hi: "कुल फीड्स: दिन में 7-8 बार। दिन में अंतराल: 2-3 घंटे। रात का अंतराल: 5-7 घंटे। प्रतिदिन 2 सेमी-सॉलिड मील से शुरू करें (1-2 चम्मच से बढ़ाकर 2-3 चम्मच)।" 
+            en: "Total feeds: 7-8 feeds/day. Day gap: 2-3 hours. Night gap: 5-7 hours. Start with 2 semi-solid meals daily (1-2 teaspoons moving to 2-3 tablespoons). Focus on quality & nutrient density over strict quantities.", 
+            hi: "कुल फीड्स: दिन में 7-8 बार। दिन में अंतराल: 2-3 घंटे। रात का अंतराल: 5-7 घंटे। प्रतिदिन 2 सेमी-सॉलिड मील से शुरू करें (1-2 चम्मच से बढ़ाकर 2-3 चम्मच)। सख्त मात्रा के बजाय गुणवत्ता और पोषण घनत्व पर ध्यान दें।" 
           },
-          parenting: { 
-            en: "Authoritative Feeding: You decide what and when to offer food; let your baby decide how much to eat based on hunger and fullness cues.", 
-            hi: "अधिकारवादी फीडिंग (Authoritative Feeding): आप तय करें कि क्या और कब देना है; बच्चा तय करे कि भूख के संकेतों के अनुसार कितना खाना है।" 
+          responsive: { 
+            en: "Responsive, Loving & Structured Feeding: You decide what and when to offer food; let your baby decide how much to eat based on hunger and fullness cues. Never force-feed.", 
+            hi: "उत्तरदायी, स्नेही व संरचित फीडिंग: आप तय करें कि क्या और कब देना है; बच्चा तय करे कि भूख के संकेतों के अनुसार कितना खाना है। कभी जबरदस्ती न खिलाएं।" 
           },
           dos: {
             en: ["Follow the 3-day rule (one new food at a time).", "Mash food thoroughly to a smooth, thick semi-solid texture.", "Add 1/2 teaspoon of pure cow ghee to savory meals."],
@@ -276,9 +284,9 @@
             en: "Total feeds: 7-8 feeds/day. Increase to 3 semi-solid meals daily alongside 4-5 milk feeds. Portion size: 3-4 tablespoons (approx. 1/2 small katori) per meal.", 
             hi: "कुल फीड्स: दिन में 7-8 बार। दूध के साथ 3 सेमी-सॉलिड मील दें। मात्रा: 3-4 बड़े चम्मच (लगभग आधी छोटी कटोरी) प्रति मील।" 
           },
-          parenting: { 
-            en: "Authoritative Feeding: Set predictable meal routines while encouraging self-feeding with safe, soft finger foods on their tray.", 
-            hi: "अधिकारवादी फीडिंग: ट्रे पर सुरक्षित फिंगर फूड्स के साथ खुद खाने को प्रोत्साहित करें।" 
+          responsive: { 
+            en: "Responsive, Loving & Structured Feeding: Set predictable meal routines while encouraging self-feeding with safe, soft finger foods on their tray.", 
+            hi: "उत्तरदायी, स्नेही व संरचित फीडिंग: ट्रे पर सुरक्षित फिंगर फूड्स के साथ खुद खाने को प्रोत्साहित करें और समय निश्चित रखें।" 
           },
           dos: {
             en: ["Progress from watery purees to thicker mashes with soft tiny lumps.", "Encourage family mealtime visibility so they watch you eat."],
@@ -329,9 +337,9 @@
             en: "Total feeds: ~7 feeds/day (5 solid meals + 2 milk feeds). Day gap: 2-3 hours. Divide into Breakfast, Lunch, Dinner, and 2 Snack times. Portion size: 1/2 to 3/4 small katori (4-6 tablespoons).", 
             hi: "कुल फीड्स: लगभग 7 (5 ठोस मील + 2 दूध)। अंतराल: 2-3 घंटे। इसे नाश्ता, दोपहर का भोजन, रात का खाना और 2 स्नैक्स में बांटें। मात्रा: आधी से पौन कटोरी।" 
           },
-          parenting: { 
-            en: "Authoritative Feeding: Maintain firm boundaries around meal structure (no grazing all day), but offer unconditional love and patience. Let them make a mess.", 
-            hi: "अधिकारवादी फीडिंग: भोजन के समय सख्त नियम रखें (पूरे दिन कुछ न कुछ खिलाते न रहें), पर धैर्य रखें और उन्हें खुद खाने दें।" 
+          responsive: { 
+            en: "Responsive, Loving & Structured Feeding: Maintain firm boundaries around meal structure (no grazing all day), but offer unconditional love and patience. Let them make a mess.", 
+            hi: "उत्तरदायी, स्नेही व संरचित फीडिंग: भोजन के समय सख्त नियम रखें (पूरे दिन कुछ न कुछ खिलाते न रहें), पर धैर्य रखें और उन्हें खुद खाने दें।" 
           },
           dos: {
             en: ["Offer a wide variety of colors and textures from all four food groups.", "Introduce a clean cup of water during meals."],
@@ -351,7 +359,7 @@
             ],
             jain: [
               { name: { en: "Broken Wheat (Daliya) Kheer", hi: "दलिया की खीर" }, desc: { en: "Soft-boiled broken wheat sweetened naturally with fruit.", hi: "फल से मीठा किया हुआ मुलायम दलिया।" }, yt: "archanaskitchen+daliya+recipe+for+kids" },
-              { name: { en: "Fresh Homemade Curd", hi: "ताजा घर का बना दही" }, desc: { en: "Mild home-set curd to support healthy gut flora.", hi: "पाचन के लिए ताजे घर का दही।" }, yt: "hebbarskitchen+homemade+curd+dahi" },
+              { name: { en: "Fresh Homemade Curd", hi: "ताजा घर का बना दही" }, desc: { en: "Mild home-set curd to support healthy gut flora.", hi: "पाचन और पेट के लिए ताजे घर का दही।" }, yt: "hebbarskitchen+homemade+curd+dahi" },
               { name: { en: "Vegetable Suji Upma", hi: "सब्जी वाली सूजी उपमा" }, desc: { en: "Soft-cooked semolina with finely mashed soft peas.", hi: "मटर के साथ मुलायम पकी सूजी।" }, yt: "hebbarskitchen+suji+upma+recipe" },
               { name: { en: "Mashed Ripe Banana Custard", hi: "केले का कस्टर्ड" }, desc: { en: "Naturally sweet, creamy texture without sugar.", hi: "बिना चीनी का मलाईदार प्राकृतिक कस्टर्ड।" }, yt: "baby+banana+egg+custard+no+sugar" }
             ],
@@ -375,9 +383,9 @@
             en: "Family meal pattern: 3 main meals + 2 healthy snacks + milk. Portion size: 3/4 to 1 full small katori per meal. You can now introduce pasteurized cow's milk and minimal salt/sugar.", 
             hi: "पारिवारिक भोजन: 3 मुख्य भोजन + 2 स्नैक्स + दूध। मात्रा: पौन से एक पूरी छोटी कटोरी प्रति मील। अब गाय का दूध और न्यूनतम नमक/चीनी दे सकते हैं।" 
           },
-          parenting: { 
-            en: "Authoritative Feeding: Toddlers experience a natural growth slowdown and appetite drop. Do not panic or overfeed. Trust that you provide healthy food, and they decide how much to eat.", 
-            hi: "अधिकारवादी फीडिंग: इस उम्र में बच्चों की भूख थोड़ी कम हो सकती है, घबराएं नहीं। आप स्वस्थ भोजन दें, वे तय करेंगे कितना खाना है।" 
+          responsive: { 
+            en: "Responsive, Loving & Structured Feeding: Toddlers experience a natural growth slowdown and appetite drop. Do not panic or overfeed. Trust that you provide healthy food, and they decide how much to eat.", 
+            hi: "उत्तरदायी, स्नेही व संरचित फीडिंग: इस उम्र में बच्चों की भूख थोड़ी कम हो सकती है, घबराएं नहीं। आप स्वस्थ भोजन दें, वे तय करेंगे कितना खाना है।" 
           },
           dos: {
             en: ["Involve your toddler in family dining with a child-safe spoon."],
@@ -417,9 +425,9 @@
             en: "3 balanced meals + 2 nutritious snacks + max 400ml milk per day. Portion: 1 to 1.5 small bowls per meal.", 
             hi: "3 संतुलित भोजन + 2 पौष्टिक स्नैक्स + अधिकतम 400ml दूध प्रतिदिन। मात्रा: 1 से 1.5 छोटी कटोरी प्रति मील।" 
           },
-          parenting: { 
-            en: "Authoritative Feeding: Food battles peak here as toddlers test boundaries. Maintain calm, loving, but firm boundaries. Never make separate short-order meals; serve what the family eats with at least one safe food.", 
-            hi: "अधिकारवादी फीडिंग: इस उम्र में बच्चे जिद करते हैं। शांत और दृढ़ रहें। अलग से कोई दूसरा खाना न बनाएं; परिवार का खाना ही दें।" 
+          responsive: { 
+            en: "Responsive, Loving & Structured Feeding: Food battles peak here as toddlers test boundaries. Maintain calm, loving, but firm boundaries. Never make separate short-order meals; serve what the family eats with at least one safe food.", 
+            hi: "उत्तरदायी, स्नेही व संरचित फीडिंग: इस उम्र में बच्चे जिद करते हैं। शांत और दृढ़ रहें। अलग से कोई दूसरा खाना न बनाएं; परिवार का खाना ही दें।" 
           },
           dos: {
             en: ["Keep offering rejected foods up to 10-15 times neutrally (repeated exposure)."],
@@ -458,9 +466,9 @@
             en: "3 structured main meals + 2 healthy school/home snacks. Portions match an adult-sized small plate, driven by physical activity levels.", 
             hi: "3 मुख्य भोजन + 2 हेल्दी स्नैक्स। शारीरिक गतिविधियों के अनुसार छोटे वयस्क थाली के बराबर मात्रा।" 
           },
-          parenting: { 
-            en: "Authoritative Feeding: Involve your child in grocery shopping and simple kitchen tasks (washing veggies, mixing salads) to increase their willingness to taste and eat.", 
-            hi: "अधिकारवादी फीडिंग: बच्चे को ग्रॉसरी शॉपिंग और किचन के छोटे कामों में शामिल करें ताकि उनकी भोजन में रुचि बढ़े।" 
+          responsive: { 
+            en: "Responsive, Loving & Structured Feeding: Involve your child in grocery shopping and simple kitchen tasks (washing veggies, mixing salads) to increase their willingness to taste and eat.", 
+            hi: "उत्तरदायी, स्नेही व संरचित फीडिंग: बच्चे को ग्रॉसरी शॉपिंग और किचन के छोटे कामों में शामिल करें ताकि उनकी भोजन में रुचि बढ़े।" 
           },
           dos: {
             en: ["Provide a protein-rich breakfast before school.", "Ensure 60 minutes of daily outdoor sports."],
@@ -499,9 +507,9 @@
             en: "3 heavy, nutrient-dense meals + 2 substantial energy snacks. Portions match full adult requirements, prioritizing lean proteins, iron, calcium, and complex carbs.", 
             hi: "3 भारी और पौष्टिक भोजन + 2 स्नैक्स। वयस्क आवश्यकतानुसार मात्रा, जिसमें प्रोटीन, आयरन, कैल्शियम और कार्बोहाइड्रेट शामिल हों।" 
           },
-          parenting: { 
-            en: "Authoritative Feeding: Adolescents crave autonomy and face peer/social media influence. Maintain open, non-judgmental communication. Never diet or speak negatively about your own body.", 
-            hi: "अधिकारवादी फीडिंग: किशोरों में स्वतंत्रता की चाह होती है। खुला संवाद रखें। अपने शरीर या डाइट को लेकर नकारात्मक बातें उनके सामने न करें।" 
+          responsive: { 
+            en: "Responsive, Loving & Structured Feeding: Adolescents crave autonomy and face peer/social media influence. Maintain open, non-judgmental communication. Never diet or speak negatively about your own body.", 
+            hi: "उत्तरदायी, स्नेही व संरचित फीडिंग: किशोरों में स्वतंत्रता की चाह होती है। खुला संवाद रखें। अपने शरीर या डाइट को लेकर नकारात्मक बातें उनके सामने न करें।" 
           },
           dos: {
             en: ["Ensure high intake of iron (green leafy veg, dates, pomegranate) especially for girls approaching menarche."],
@@ -550,18 +558,36 @@
 
         const recipesHtml = recipes.map(r => `
           <div class="recipe-item-card">
-            <div>
+            <div style="flex: 1; min-width: 200px;">
               <strong style="font-size:0.88rem; color:#9a3412;"><i class="fa-solid fa-bowl-rice" style="color:#ea580c; margin-right:4px;"></i> ${r.name[isHi ? 'hi' : 'en']}</strong>
               <p style="font-size:0.82rem; color:#475569; margin:3px 0 0 0; line-height:1.4;">${r.desc[isHi ? 'hi' : 'en']}</p>
             </div>
-            <a href="https://www.youtube.com/results?search_query=${r.yt}" target="_blank" rel="noopener noreferrer" style="background:#fee2e2; color:#b91c1c; font-size:0.75rem; font-weight:700; padding:6px 12px; border-radius:12px; text-decoration:none; display:inline-flex; align-items:center; gap:5px; border:1px solid #fca5a5; flex-shrink:0;">
-              <i class="fa-brands fa-youtube" style="color:#dc2626;"></i> ${isHi ? 'रेसिपी वीडियो देखें' : 'Watch Recipe'}
+            <a href="https://www.youtube.com/results?search_query=${r.yt}" target="_blank" rel="noopener noreferrer" style="background:#fee2e2; color:#b91c1c; font-size:0.75rem; font-weight:700; padding:5px 10px; border-radius:10px; text-decoration:none; display:inline-flex; align-items:center; gap:4px; border:1px solid #fca5a5; flex-shrink:0;">
+              <i class="fa-brands fa-youtube" style="color:#dc2626;"></i> ${isHi ? 'वीडियो' : 'Watch'}
             </a>
           </div>
         `).join("");
 
         const dosList = plan.dos[isHi ? 'hi' : 'en'].map(d => `<li>${d}</li>`).join("");
         const dontsList = plan.donts[isHi ? 'hi' : 'en'].map(d => `<li>${d}</li>`).join("");
+
+        // Show fussy eater banner for ages 12m, 2y, 5y, 12y
+        const showFussyBanner = (ageKey === "12m" || ageKey === "2y" || ageKey === "5y" || ageKey === "12y");
+        const fussyBannerHtml = showFussyBanner ? `
+          <div class="fussy-banner">
+            <div>
+              <strong style="color: #b45309; font-size: 0.9rem; display: block;">
+                <i class="fa-solid fa-triangle-exclamation"></i> ${isHi ? 'क्या आपका बच्चा ठीक से नहीं खा रहा या नखरे करता है?' : 'Is your child not eating well or acting as a selective eater?'}
+              </strong>
+              <span style="font-size: 0.8rem; color: #78350f;">
+                ${isHi ? 'नीचे हमारे मास्टर गाइड में इसके समाधान देखें।' : 'Check our Master Guide on managing selective and fussy eaters below.'}
+              </span>
+            </div>
+            <a href="#fussyEaterSection" style="background: #d97706; color: #ffffff; padding: 6px 14px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+              ${isHi ? 'गाइड देखें' : 'View Guide'} <i class="fa-solid fa-arrow-down"></i>
+            </a>
+          </div>
+        ` : '';
 
         container.innerHTML = `
           <div class="results-box">
@@ -573,9 +599,11 @@
             </div>
 
             <div style="background:#f0fdfa; border:1px solid #5eead4; border-radius:14px; padding:14px; margin-bottom:14px; font-size:0.88rem; color:#134e4a;">
-              <strong><i class="fa-solid fa-heart-pulse" style="color:#0d9488;"></i> ${isHi ? 'अधिकारवादी फीडिंग (Authoritative Feeding):' : 'Authoritative Parenting Approach:'}</strong>
-              <p style="margin-top:4px;">${plan.parenting[isHi ? 'hi' : 'en']}</p>
+              <strong><i class="fa-solid fa-heart-pulse" style="color:#0d9488;"></i> ${isHi ? 'उत्तरदायी, स्नेही व संरचित फीडिंग (Responsive Feeding):' : 'Responsive, Loving & Structured Feeding:'}</strong>
+              <p style="margin-top:4px;">${plan.responsive[isHi ? 'hi' : 'en']}</p>
             </div>
+
+            ${fussyBannerHtml}
 
             <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:14px; margin-bottom:16px;">
               <div class="flag-card flag-green" style="margin-bottom:0;">
@@ -586,7 +614,7 @@
                 </div>
               </div>
               <div class="flag-card flag-red" style="margin-bottom:0;">
-                <i class="fa-solid fa-circle-triangle"></i>
+                <i class="fa-solid fa-circle-exclamation"></i>
                 <div>
                   <strong>${isHi ? 'क्या न करें (Don\'ts):' : 'Don\'ts:'}</strong>
                   <ul style="margin-top:4px; padding-left:16px; line-height:1.5;">${dontsList}</ul>
@@ -596,14 +624,10 @@
 
             <div style="background:#ffffff; border:1.5px solid #fed7aa; border-radius:14px; padding:16px; margin-top:16px;">
               <strong style="color:#9a3412; font-size:0.95rem; display:flex; align-items:center; gap:6px; margin-bottom:12px;">
-                <i class="fa-solid fa-utensils"></i> ${isHi ? 'डॉक्टर द्वारा सुझाई गई रेसिपीज व यूट्यूब वीडियो:' : 'Doctor-Recommended Recipes & Video Guides:'}
+                <i class="fa-solid fa-utensils"></i> ${isHi ? 'डॉक्टर द्वारा सुझाई गई रेसिपीज व वीडियो लिंक:' : 'Doctor-Recommended Recipes & Video Links:'}
               </strong>
               ${recipesHtml}
             </div>
-
-            <p style="font-size:0.75rem; color:#64748b; margin-top:16px; text-align:center; font-style:italic;">
-              ${clinicalSourcesText[isHi ? 'hi' : 'en']}
-            </p>
           </div>
         `;
 
@@ -633,6 +657,9 @@
         const f4Title = document.getElementById("f4Title");
         const f4Desc = document.getElementById("f4Desc");
 
+        // Bibliography text
+        const bibText = document.getElementById("bibSourceText");
+
         // CTA elements
         const ctaTitle = document.getElementById("ctaTitle");
         const ctaDesc = document.getElementById("ctaDesc");
@@ -646,9 +673,9 @@
           if (lblAge) lblAge.textContent = "आयु समूह चुनें (Age Group)";
           if (lblDiet) lblDiet.textContent = "आहार प्राथमिकता (Diet Preference)";
 
-          if (fussyTitle) fussyTitle.textContent = "मास्टर गाइड: नखरेबाज खाने वाले बच्चे (Fussy Eater) को कैसे संभालें";
+          if (fussyTitle) fussyTitle.textContent = "मास्टर गाइड: क्या आपका बच्चा ठीक से नहीं खा रहा या नखरे करता है? (Fussy/Selective Eater)";
           if (fussyIntro) fussyIntro.textContent = "चुनिंदा खाना सामान्य विकासात्मक चरण है, माता-पिता की असफलता नहीं। डॉ. दिनेश मित्तल का क्लिनिकल प्रोटोकॉल:";
-          if (f1Title) f1Title.textContent = "1. अधिकारवादी सीमाएं (Authoritative Boundaries)";
+          if (f1Title) f1Title.textContent = "1. स्नेही व संरचित सीमाएं (Loving & Structured Boundaries)";
           if (f1Desc) f1Desc.textContent = "अलग से दूसरा खाना न बनाएं। परिवार का भोजन परोसें: 'खाना हो तो खाएं, यही मेज पर है।' बिना गुस्से के 20 मिनट बाद थाली हटा लें।";
           if (f2Title) f2Title.textContent = "2. तटस्थ और बार-बार परोसना";
           if (f2Desc) f2Desc.textContent = "बच्चे के दिमाग को नया भोजन स्वीकार करने में 15 बार तक exposure लग सकता है। प्लेट में रखकर खुद आनंद से खाने से डर खत्म होता है।";
@@ -656,6 +683,8 @@
           if (f3Desc) f3Desc.textContent = "तनाव भूख मार देता है। 'मम्मी के लिए एक कौर और!' जैसी जिद न करें। बातचीत मजेदार रखें जो खाने से जुड़ी न हो।";
           if (f4Title) f4Title.textContent = "4. लिक्विड कैलोरी ट्रैप हटाएं";
           if (f4Desc) f4Desc.textContent = "नखरेबाज बच्चे दूध या जूस से पेट भर लेते हैं। दूध की मात्रा सीमित करें (जैसे टॉडलर के लिए अधिकतम 400ml/दिन) और बीच में पानी दें।";
+
+          if (bibText) bibText.innerHTML = "<strong>संदर्भ स्रोत और गाइडलाइंस (Bibliography):</strong><br>1. इंडियन एकेडमी ऑफ पेडियाट्रिक्स (IAP) आईवाईसीएफ दिशा-निर्देश。<br>2. विश्व स्वास्थ्य संगठन (WHO) पूरक आहार ढांचा。<br>3. एलिन सैटर संस्थान / AAP उत्तरदायी, स्नेही व संरचित फीडिंग सिद्धांत।";
 
           if (ctaTitle) ctaTitle.textContent = "व्यक्तिगत क्लिनिकल आहार परामर्श चाहते हैं?";
           if (ctaDesc) ctaDesc.textContent = "अपने बच्चे के पोषण और विकास के मूल्यांकन हेतु सेक्टर 3 रोहिणी क्लिनिक में डॉ. दिनेश मित्तल से मिलें।";
@@ -668,9 +697,9 @@
           if (lblAge) lblAge.textContent = "Select Age Group";
           if (lblDiet) lblDiet.textContent = "Dietary Preference";
 
-          if (fussyTitle) fussyTitle.textContent = "Master Guide: Managing the \"Fussy Eater\"";
+          if (fussyTitle) fussyTitle.textContent = "Master Guide: Is Your Child Not Eating Well or a Selective/Fussy Eater?";
           if (fussyIntro) fussyIntro.textContent = "Dealing with selective eating is a normal developmental phase, not parental failure. Here is Dr. Dinesh Mittal’s clinical protocol:";
-          if (f1Title) f1Title.textContent = "1. Authoritative Boundaries";
+          if (f1Title) f1Title.textContent = "1. Loving & Structured Boundaries";
           if (f1Desc) f1Desc.textContent = "Never become a short-order cook. Serve the family meal neutrally: \"You don't have to eat, but this is what is on the table.\" Remove plate after 20 mins without anger.";
           if (f2Title) f2Title.textContent = "2. Neutral Repeated Exposure";
           if (f2Desc) f2Desc.textContent = "It takes up to 15 exposures for a child's brain to accept a new food. Simply having it on their plate and seeing you eat it breaks down food phobia.";
@@ -678,6 +707,8 @@
           if (f3Desc) f3Desc.textContent = "Anxiety kills appetite. Never nag or beg (\"Just one more bite!\"). Keep dinner table conversations fun, light, and completely unrelated to eating.";
           if (f4Title) f4Title.textContent = "4. Eliminate Liquid Calorie Traps";
           if (f4Desc) f4Desc.textContent = "Fussy eaters fill up on milk, packaged juices, or tea all day. Cap milk to age limits (e.g., max 400ml/day for toddlers) and offer water between meals.";
+
+          if (bibText) bibText.innerHTML = "<strong>References & Guidelines Bibliography:</strong><br>1. Indian Academy of Pediatrics (IAP) Guidelines on Infant and Young Child Feeding (IYCF).<br>2. World Health Organization (WHO) Guiding Principles for Complementary Feeding of the Breastfed Child.<br>3. Ellyn Satter Institute / AAP Principles of Responsive, Loving & Structured Feeding.";
 
           if (ctaTitle) ctaTitle.textContent = "Need Personalized In-Person Dietary Counseling?";
           if (ctaDesc) ctaDesc.textContent = "Consult Dr. Dinesh Mittal at our Sector 3 Rohini clinic for tailored pediatric growth and nutrition evaluation.";
