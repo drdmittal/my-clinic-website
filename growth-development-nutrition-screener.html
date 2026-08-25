@@ -229,7 +229,7 @@
       let toolLang = localStorage.getItem("preferredClinicLang") || "en";
 
       // =========================================================================
-      // 🏥 100% SELF-CONTAINED IAP/WHO CLINICAL DATABASE (COVERS ALL AGES)
+      // 🏥 100% SELF-CONTAINED IAP/WHO CLINICAL DATABASE (COVERS ALL AGES UP TO 18Y)
       // =========================================================================
       const fallbackClinicalDatabase = {
         "0m": {
@@ -336,6 +336,19 @@
             care: { en: "Annual flu vaccine booster.", hi: "वार्षिक फ्लू का टीका लगवाएं।" }
           }
         },
+        "4y": {
+          name: { en: "4 Years", hi: "4 वर्ष" },
+          iap: { boy: { minW: 12.8, maxW: 21.0, minH: 95.0, maxH: 111.0, minBmi: 13.6, ovBmi: 17.0, obBmi: 18.5 }, girl: { minW: 12.3, maxW: 20.5, minH: 94.0, maxH: 110.0, minBmi: 13.4, ovBmi: 16.8, obBmi: 18.3 } },
+          green: { en: ["Throws ball overhand", "Counts to 10", "Recognizes basic colors"], hi: ["हाथ ऊपर करके गेंद फेंकना", "10 तक गिनती करना", "रंग पहचानना"] },
+          yellow: { en: ["Difficulty drawing simple shapes or circles"], hi: ["सरल आकृतियां न बना पाना"] },
+          red: { en: ["Cannot jump in place", "Ignores other children during play"], hi: ["एक जगह से कूद न पाना", "अन्य बच्चों की अनदेखी करना"] },
+          tips: {
+            nutrition: { en: "Balanced home-cooked meals with adequate green leafy vegetables and milk.", hi: "संतुलित घर का बना भोजन, हरी सब्जियां व दूध।" },
+            safety: { en: "Road safety and stranger awareness rules.", hi: "सड़क सुरक्षा और अनजान लोगों से सतर्क रहने के नियम।" },
+            play: { en: "Outdoor running games, puzzle solving, building blocks.", hi: "खुले मैदान में दौड़ने वाले खेल, पहेलियां सुलझाना।" },
+            care: { en: "Regular dental checkup.", hi: "नियमित दांतों की जांच।" }
+          }
+        },
         "5y": {
           name: { en: "5 Years", hi: "5 वर्ष" },
           iap: { boy: { minW: 14.2, maxW: 24.0, minH: 101.0, maxH: 118.0, minBmi: 13.5, ovBmi: 16.8, obBmi: 18.5 }, girl: { minW: 13.8, maxW: 23.5, minH: 100.0, maxH: 117.0, minBmi: 13.3, ovBmi: 16.6, obBmi: 18.3 } },
@@ -347,6 +360,175 @@
             safety: { en: "Teach good touch / bad touch and emergency contact numbers.", hi: "सुरक्षित व असुरक्षित स्पर्श (Good/Bad Touch) की शिक्षा दें।" },
             play: { en: "60 mins daily energetic sports: cycling, swimming, football, hopscotch.", hi: "रोजाना 60 मिनट खेलकूद: साइकिलिंग, फुटबॉल, पकड़म-पकड़ाई।" },
             care: { en: "Administer 4.5-5 Year DTP-2 Booster and MMR-3 vaccine.", hi: "5 वर्ष पर DTP बूस्टर एवं MMR-3 का टीका लगवाएं।" }
+          }
+        },
+        "6y": {
+          name: { en: "6 Years", hi: "6 वर्ष" },
+          iap: { boy: { minW: 15.5, maxW: 27.0, minH: 106.0, maxH: 124.0, minBmi: 13.4, ovBmi: 17.0, obBmi: 19.0 }, girl: { minW: 15.0, maxW: 26.5, minH: 105.0, maxH: 123.0, minBmi: 13.2, ovBmi: 16.8, obBmi: 18.8 } },
+          green: { en: ["Starts writing letters, ties shoelaces", "Good balance and coordination"], hi: ["अक्षर लिखना शुरू करना, जूते के फीते बांधना", "संतुलन और समन्वय"] },
+          yellow: { en: ["Difficulty focusing on structured tasks"], hi: ["संरचित कार्यों पर ध्यान केंद्रित करने में कठिनाई"] },
+          red: { en: ["Severe behavioral or social withdrawal"], hi: ["गंभीर व्यवहार संबंधी समस्याएं"] },
+          tips: {
+            nutrition: { en: "Nutritious breakfast before school, high protein and iron diet.", hi: "स्कूल जाने से पहले पौष्टिक नाश्ता, उच्च प्रोटीन व आयरन युक्त आहार।" },
+            safety: { en: "School bus and road transit safety rules.", hi: "स्कूल बस और सड़क यात्रा सुरक्षा नियम।" },
+            play: { en: "Team sports, skipping rope, cycling.", hi: "टीम गेम्स, रस्सी कूदना, साइकिल चलाना।" },
+            care: { en: "Vision and hearing screening test.", hi: "दृष्टि और श्रवण जांच।" }
+          }
+        },
+        "7y": {
+          name: { en: "7 Years", hi: "7 वर्ष" },
+          iap: { boy: { minW: 17.0, maxW: 30.5, minH: 111.0, maxH: 130.0, minBmi: 13.5, ovBmi: 17.5, obBmi: 19.5 }, girl: { minW: 16.5, maxW: 30.0, minH: 110.0, maxH: 129.0, minBmi: 13.3, ovBmi: 17.3, obBmi: 19.3 } },
+          green: { en: ["Reads simple books, understands time concepts", "Independent in personal hygiene"], hi: ["सरल किताबें पढ़ना, समय की अवधारणा समझना", "व्यक्तिगत स्वच्छता में स्वतंत्र"] },
+          yellow: { en: ["Persistent reading or writing difficulties"], hi: ["पढ़ने या लिखने में निरंतर कठिनाई"] },
+          red: { en: ["Extreme anxiety or school refusal"], hi: ["अत्यधिक चिंता या स्कूल जाने से इनकार"] },
+          tips: {
+            nutrition: { en: "Calcium-rich milk, curd, and green vegetables for bone density.", hi: "हड्डियों के घनत्व के लिए कैल्शियम युक्त दूध, दही और हरी सब्जियां।" },
+            safety: { en: "Basic cyber safety and screen time boundaries.", hi: "बुनियादी साइबर सुरक्षा और स्क्रीन टाइम सीमा।" },
+            play: { en: "Outdoor sports, board games, cycling.", hi: "आउटडोर खेल, बोर्ड गेम्स, साइकिल।" },
+            care: { en: "Annual routine pediatric checkup.", hi: "वार्षिक नियमित बाल रोग जांच।" }
+          }
+        },
+        "8y": {
+          name: { en: "8 Years", hi: "8 वर्ष" },
+          iap: { boy: { minW: 19.0, maxW: 34.5, minH: 116.0, maxH: 136.0, minBmi: 13.7, ovBmi: 18.0, obBmi: 20.2 }, girl: { minW: 18.5, maxW: 34.0, minH: 115.0, maxH: 135.0, minBmi: 13.5, ovBmi: 17.8, obBmi: 20.0 } },
+          green: { en: ["Active participation in school activities", "Forms strong peer friendships"], hi: ["स्कूल गतिविधियों में सक्रिय भागीदारी", "मजबूत दोस्ती बनाना"] },
+          yellow: { en: ["Fatigue after normal physical activity"], hi: ["सामान्य शारीरिक गतिविधि के बाद थकान"] },
+          red: { en: ["Unexplained weight loss or persistent lethargy"], hi: ["अस्पष्ट वजन घटना या लगातार सुस्ती"] },
+          tips: {
+            nutrition: { en: "Balanced meals supporting rapid growth spurts.", hi: "तेजी से बढ़ते विकास को समर्थन देने वाला संतुलित आहार।" },
+            safety: { en: "Water safety and swimming supervision.", hi: "पानी की सुरक्षा और तैराकी देखरेख।" },
+            play: { en: "Sports, swimming, creative arts.", hi: "खेलकूद, तैराकी, रचनात्मक कला।" },
+            care: { en: "Posture and spine check.", hi: "मुद्रा और रीढ़ की हड्डी की जांच।" }
+          }
+        },
+        "9y": {
+          name: { en: "9 Years", hi: "9 वर्ष" },
+          iap: { boy: { minW: 21.0, maxW: 39.0, minH: 121.0, maxH: 142.0, minBmi: 14.0, ovBmi: 18.6, obBmi: 21.0 }, girl: { minW: 20.5, maxW: 39.0, minH: 120.0, maxH: 142.0, minBmi: 13.8, ovBmi: 18.4, obBmi: 20.8 } },
+          green: { en: ["Shows logical reasoning and problem solving", "Takes responsibility for homework"], hi: ["तार्किक तर्क और समस्या समाधान दिखाना", "होमवर्क की जिम्मेदारी लेना"] },
+          yellow: { en: ["Decline in academic performance"], hi: ["शैक्षणिक प्रदर्शन में गिरावट"] },
+          red: { en: ["Signs of early puberty or hormonal changes"], hi: ["समय से पहले प्यूबर्टी या हार्मोनल बदलाव के लक्षण"] },
+          tips: {
+            nutrition: { en: "Protein-rich pulses, dairy, eggs, and lean meats.", hi: "प्रोटीन युक्त दालें, डेयरी, अंडे और लीन मीट।" },
+            safety: { en: "Personal privacy and stranger danger education.", hi: "व्यक्तिगत गोपनीयता और अजनबी से सुरक्षा की शिक्षा।" },
+            play: { en: "Competitive sports, skill-building activities.", hi: "प्रतियोगितात्मक खेल, कौशल विकास गतिविधियां।" },
+            care: { en: "Pre-pubertal clinical evaluation if indicated.", hi: "जरूरत पड़ने पर प्री-प्यूबर्टल नैदानिक मूल्यांकन।" }
+          }
+        },
+        "10y": {
+          name: { en: "10 Years", hi: "10 वर्ष" },
+          iap: { boy: { minW: 23.0, maxW: 43.5, minH: 126.0, maxH: 148.0, minBmi: 14.2, ovBmi: 19.2, obBmi: 21.8 }, girl: { minW: 23.0, maxW: 45.0, minH: 126.0, maxH: 150.0, minBmi: 14.0, ovBmi: 19.0, obBmi: 21.6 } },
+          green: { en: ["Independent thinking, strong social bonds", "Early adolescent growth phase"], hi: ["स्वतंत्र सोच, मजबूत सामाजिक संबंध", "प्रारंभिक किशोरावस्था विकास चरण"] },
+          yellow: { en: ["Mood swings or emotional sensitivity"], hi: ["मूड में उतार-चढ़ाव या भावनात्मक संवेदनशीलता"] },
+          red: { en: ["Severe anxiety, eating habits disturbance"], hi: ["गंभीर चिंता, खान-पान की आदत में गड़बड़ी"] },
+          tips: {
+            nutrition: { en: "High calorie and iron intake to fuel adolescent growth spurt.", hi: "किशोरावस्था के विकास के लिए उच्च कैलोरी और आयरन युक्त आहार।" },
+            safety: { en: "Guidance on digital media and peer influence.", hi: "डिजिटल मीडिया और सहकर्मी प्रभाव पर मार्गदर्शन।" },
+            play: { en: "Outdoor athletics, team sports, hobbies.", hi: "आउटडोर एथलेटिक्स, टीम स्पोर्ट्स, शौक।" },
+            care: { en: "Tdap booster vaccine evaluation.", hi: "Tdap बूस्टर टीके का मूल्यांकन।" }
+          }
+        },
+        "11y": {
+          name: { en: "11 Years", hi: "11 वर्ष" },
+          iap: { boy: { minW: 25.5, maxW: 48.0, minH: 131.0, maxH: 154.0, minBmi: 14.5, ovBmi: 19.8, obBmi: 22.5 }, girl: { minW: 26.0, maxW: 50.5, minH: 131.0, maxH: 156.0, minBmi: 14.3, ovBmi: 19.6, obBmi: 22.3 } },
+          green: { en: ["Active engagement in studies and sports", "Developing personal identity"], hi: ["पढ़ाई और खेलकूद में सक्रिय भागीदारी", "व्यक्तिगत पहचान का विकास"] },
+          yellow: { en: ["Body image concerns starting to appear"], hi: ["शारीरिक बनावट को लेकर चिंता होना"] },
+          red: { en: ["Marked growth deceleration or arrest"], hi: ["विकास में स्पष्ट रुकावट"] },
+          tips: {
+            nutrition: { en: "Balanced nutrient-dense meals with adequate calcium and iron.", hi: "पर्याप्त कैल्शियम और आयरन से भरपूर संतुलित भोजन।" },
+            safety: { en: "Open communication about adolescent physical changes.", hi: "किशोरावस्था के शारीरिक बदलावों पर खुली बातचीत।" },
+            play: { en: "Regular physical exercise, swimming, football.", hi: "नियमित शारीरिक व्यायाम, तैराकी, फुटबॉल।" },
+            care: { en: "Adolescent wellness counseling.", hi: "किशोरावस्था स्वास्थ्य परामर्श।" }
+          }
+        },
+        "12y": {
+          name: { en: "12 Years", hi: "12 वर्ष" },
+          iap: { boy: { minW: 28.0, maxW: 53.0, minH: 136.0, maxH: 160.0, minBmi: 14.8, ovBmi: 20.4, obBmi: 23.2 }, girl: { minW: 29.0, maxW: 56.0, minH: 137.0, maxH: 162.0, minBmi: 14.6, ovBmi: 20.2, obBmi: 23.0 } },
+          green: { en: ["Pubertal milestones progressing normally", "Strong cognitive and analytical skills"], hi: ["प्यूबर्टी मील के पत्थर सामान्य रूप से आगे बढ़ रहे हैं", "मजबूत संज्ञानात्मक कौशल"] },
+          yellow: { en: ["Fatigue due to school and activity overload"], hi: ["स्कूल और गतिविधि के अतिभार के कारण थकान"] },
+          red: { en: ["Absence of secondary sexual characteristics or extreme deviations"], hi: ["द्वितीयक यौन लक्षणों की अनुपस्थिति"] },
+          tips: {
+            nutrition: { en: "Increased protein and complex carbohydrate requirements.", hi: "बढ़ी हुई प्रोटीन और जटिल कार्बोहाइड्रेट की आवश्यकता।" },
+            safety: { en: "HPV vaccination counseling for girls.", hi: "बालिकाओं के लिए HPV टीकाकरण परामर्श।" },
+            play: { en: "Competitive sports, outdoor activities.", hi: "प्रतियोगितात्मक खेल, आउटडोर गतिविधियां।" },
+            care: { en: "Routine adolescent health screening.", hi: "नियमित किशोर स्वास्थ्य जांच।" }
+          }
+        },
+        "13y": {
+          name: { en: "13 Years (Adolescent)", hi: "13 वर्ष (किशोरावस्था)" },
+          iap: { boy: { minW: 31.0, maxW: 58.5, minH: 142.0, maxH: 166.0, minBmi: 15.2, ovBmi: 21.0, obBmi: 24.0 }, girl: { minW: 32.0, maxW: 60.0, minH: 142.0, maxH: 166.0, minBmi: 15.0, ovBmi: 20.8, obBmi: 23.8 } },
+          green: { en: ["Rapid pubertal growth spurt", "Independent problem solving and critical thinking"], hi: ["तेज प्यूबर्टल ग्रोथ स्पर्ट", "स्वतंत्र समस्या समाधान और आलोचनात्मक सोच"] },
+          yellow: { en: ["Nutritional deficiency signs (mild anemia or fatigue)"], hi: ["पोषण संबंधी कमी के लक्षण (हल्का एनीमिया या थकान)"] },
+          red: { en: ["Extreme delayed puberty or severe growth failure"], hi: ["अत्यधिक देरी से प्यूबर्टी या गंभीर विकास विफलता"] },
+          tips: {
+            nutrition: { en: "High protein, iron, and calcium rich diet to support peak adolescent bone mass accrual.", hi: "किशोरावस्था की हड्डियों के विकास के लिए उच्च प्रोटीन, आयरन और कैल्शियम युक्त आहार।" },
+            safety: { en: "Mental health and positive body image support.", hi: "मानसिक स्वास्थ्य और सकारात्मक शारीरिक छवि का समर्थन।" },
+            play: { en: "Structured sports, athletic training, outdoor games.", hi: "संरचित खेल, एथलेटिक प्रशिक्षण, आउटडोर खेल।" },
+            care: { en: "Adolescent health and nutritional screening with Dr. Dinesh Mittal.", hi: "डॉ. दिनेश मित्तल के साथ किशोर स्वास्थ्य और पोषण जांच।" }
+          }
+        },
+        "14y": {
+          name: { en: "14 Years", hi: "14 वर्ष" },
+          iap: { boy: { minW: 35.0, maxW: 64.0, minH: 148.0, maxH: 172.0, minBmi: 15.6, ovBmi: 21.6, obBmi: 24.8 }, girl: { minW: 35.0, maxW: 63.0, minH: 146.0, maxH: 168.0, minBmi: 15.4, ovBmi: 21.2, obBmi: 24.2 } },
+          green: { en: ["Secondary sexual characteristics well established", "Strong academic and extracurricular balance"], hi: ["द्वितीयक यौन लक्षण अच्छी तरह स्थापित", "मजबूत शैक्षणिक और पाठ्येतर संतुलन"] },
+          yellow: { en: ["Acne or skin breakouts requiring dermatological care"], hi: ["मुँहासे या त्वचा की समस्याएं"] },
+          red: { en: ["Severe depression, eating disorders, or substance exposure risks"], hi: ["गंभीर अवसाद, ईटिंग डिसऑर्डर या मादक पदार्थों के संपर्क का जोखिम"] },
+          tips: {
+            nutrition: { en: "Calorie dense nutritious foods, eggs, milk, nuts, and lentils.", hi: "कैलोरी से भरपूर पौष्टिक खाद्य पदार्थ, अंडे, दूध, मेवे और दालें।" },
+            safety: { en: "Internet safety, peer pressure management.", hi: "इंटरनेट सुरक्षा, सहकर्मी दबाव प्रबंधन।" },
+            play: { en: "Sports, gymnasium under supervision, athletics.", hi: "खेलकूद, देखरेख में जिम प्रशिक्षण, एथलेटिक्स।" },
+            care: { en: "Routine adolescent growth and BMI monitoring.", hi: "नियमित किशोर विकास और बीएमआई निगरानी।" }
+          }
+        },
+        "15y": {
+          name: { en: "15 Years", hi: "15 वर्ष" },
+          iap: { boy: { minW: 40.0, maxW: 69.5, minH: 154.0, maxH: 177.0, minBmi: 16.0, ovBmi: 22.2, obBmi: 25.5 }, girl: { minW: 38.0, maxW: 65.0, minH: 148.0, maxH: 170.0, minBmi: 15.8, ovBmi: 21.6, obBmi: 24.6 } },
+          green: { en: ["Approaching adult height velocity", "Clear career and personal goal orientation"], hi: ["वयस्क लंबाई गति के करीब", "स्पष्ट करियर और व्यक्तिगत लक्ष्य अभिविन्यास"] },
+          yellow: { en: ["Sleep cycle delays (staying up late)"], hi: ["नींद चक्र में देरी (देर तक जागना)"] },
+          red: { en: ["Primary amenorrhea in girls or severe growth arrest"], hi: ["बालिकाओं में प्राथमिक एमेनोरिया या गंभीर विकास अवरोध"] },
+          tips: {
+            nutrition: { en: "Consistent balanced diet with micronutrients (Iron, Vitamin D, B12).", hi: "माइक्रोन्यूट्रिएंट्स (आयरन, विटामिन डी, बी12) के साथ निरंतर संतुलित आहार।" },
+            safety: { en: "Road safety and responsible driving awareness.", hi: "सड़क सुरक्षा और जिम्मेदार ड्राइविंग जागरूकता।" },
+            play: { en: "Competitive sports and fitness routines.", hi: "प्रतियोगितात्मक खेल और फिटनेस रूटीन।" },
+            care: { en: "Adolescent immunization boosters.", hi: "किशोर टीकाकरण बूस्टर।" }
+          }
+        },
+        "16y": {
+          name: { en: "16 Years", hi: "16 वर्ष" },
+          iap: { boy: { minW: 45.0, maxW: 74.0, minH: 159.0, maxH: 181.0, minBmi: 16.5, ovBmi: 22.8, obBmi: 26.0 }, girl: { minW: 40.0, maxW: 67.0, minH: 150.0, maxH: 171.0, minBmi: 16.0, ovBmi: 22.0, obBmi: 25.0 } },
+          green: { en: ["Near adult skeletal maturity", "Mature decision making and emotional stability"], hi: ["वयस्क कंकाल की परिपक्वता के करीब", "परिपक्व निर्णय लेना और भावनात्मक स्थिरता"] },
+          yellow: { en: ["Exam stress and academic anxiety"], hi: ["परीक्षा का तनाव और शैक्षणिक चिंता"] },
+          red: { en: ["Persistent eating disorders or severe mood disturbances"], hi: ["निरंतर ईटिंग डिसऑर्डर या गंभीर मूड गड़बड़ी"] },
+          tips: {
+            nutrition: { en: "Clean protein sources, complex carbs, and hydration.", hi: "शुद्ध प्रोटीन स्रोत, जटिल कार्बोहाइड्रेट और जलयोजन।" },
+            safety: { en: "Mental health support and stress management.", hi: "मानसिक स्वास्थ्य सहायता और तनाव प्रबंधन।" },
+            play: { en: "Regular cardiovascular and strength workouts.", hi: "नियमित कार्डियोवैस्कुलर और स्ट्रेंथ वर्कआउट।" },
+            care: { en: "Pre-college health assessment.", hi: "कॉलेज पूर्व स्वास्थ्य मूल्यांकन।" }
+          }
+        },
+        "17y": {
+          name: { en: "17 Years", hi: "17 वर्ष" },
+          iap: { boy: { minW: 48.0, maxW: 77.0, minH: 162.0, maxH: 183.0, minBmi: 17.0, ovBmi: 23.4, obBmi: 26.5 }, girl: { minW: 42.0, maxW: 68.0, minH: 151.0, maxH: 172.0, minBmi: 16.2, ovBmi: 22.4, obBmi: 25.4 } },
+          green: { en: ["Adult height reached or finalizing", "Independent life skills"], hi: ["वयस्क लंबाई तक पहुंचना या अंतिम रूप देना", "स्वतंत्र जीवन कौशल"] },
+          yellow: { en: ["Career choices and future planning pressure"], hi: ["करियर विकल्प और भविष्य की योजना का दबाव"] },
+          red: { en: ["Severe chronic fatigue or unmanaged health issues"], hi: ["गंभीर पुरानी थकान या अनियंत्रित स्वास्थ्य समस्याएं"] },
+          tips: {
+            nutrition: { en: "Lifelong healthy eating habits and balanced nutrition.", hi: "जीवन भर की स्वस्थ खान-पान की आदतें और संतुलित पोषण।" },
+            safety: { en: "Safe independence and personal responsibility.", hi: "सुरक्षित स्वतंत्रता और व्यक्तिगत जिम्मेदारी।" },
+            play: { en: "Fitness, sports, and active lifestyle habits.", hi: "फिटनेस, खेल और सक्रिय जीवन शैली की आदतें।" },
+            care: { en: "Transition to adult healthcare guidance.", hi: "वयस्क स्वास्थ्य सेवा मार्गदर्शन में संक्रमण।" }
+          }
+        },
+        "18y": {
+          name: { en: "18 Years", hi: "18 वर्ष (युवा वयस्क)" },
+          iap: { boy: { minW: 50.0, maxW: 80.0, minH: 163.0, maxH: 184.0, minBmi: 17.5, ovBmi: 24.0, obBmi: 27.0 }, girl: { minW: 43.0, maxW: 69.0, minH: 152.0, maxH: 172.0, minBmi: 16.5, ovBmi: 22.8, obBmi: 25.8 } },
+          green: { en: ["Full adult somatic and cognitive maturity", "Ready for independent adult responsibilities"], hi: ["पूर्ण वयस्क शारीरिक और संज्ञानात्मक परिपक्वता", "स्वतंत्र वयस्क जिम्मेदारियों के लिए तैयार"] },
+          yellow: { en: ["Lifestyle adjustment stress"], hi: ["जीवनशैली समायोजन का तनाव"] },
+          red: { en: ["Any unaddressed developmental or clinical deficits"], hi: ["कोई भी अनसुलझी विकासात्मक या नैदानिक कमी"] },
+          tips: {
+            nutrition: { en: "Maintain balanced adult diet, regular exercise, and adequate sleep.", hi: "संतुलित वयस्क आहार, नियमित व्यायाम और पर्याप्त नींद बनाए रखें।" },
+            safety: { en: "General adult health and safety awareness.", hi: "सामान्य वयस्क स्वास्थ्य और सुरक्षा जागरूकता।" },
+            play: { en: "Active sports, gym, and lifelong fitness regimens.", hi: "सक्रिय खेल, जिम और आजीवन फिटनेस régimen." },
+            care: { en: "Final pediatric transition summary and adult health check.", hi: "अंतिम बाल चिकित्सा संक्रमण सारांश और वयस्क स्वास्थ्य जांच।" }
           }
         }
       };
