@@ -632,7 +632,12 @@
             </a>
           </div>
         ` : '';
-
+<div style="background: #fffbeb; border: 1.5px solid #fde047; border-radius: 12px; padding: 12px 14px; margin-bottom: 16px; font-size: 0.82rem; color: #854d0e; display: flex; gap: 10px; align-items: flex-start;">
+  <i class="fa-solid fa-triangle-exclamation" style="font-size: 1rem; margin-top: 2px; flex-shrink: 0;"></i>
+  <div>
+    <strong>Educational & Informational Notice:</strong> This tool provides general nutritional guidance based on standard educational frameworks (IYCF/WHO). It does <em>not</em> replace a formal clinical evaluation or medical prescription by a qualified pediatrician.
+  </div>
+</div>
         container.innerHTML = `
           <div class="results-box">
             <h3><i class="fa-solid fa-clipboard-list" style="color:var(--brand-primary);"></i> ${plan.title[isHi ? 'hi' : 'en']}</h3>
