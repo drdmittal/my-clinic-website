@@ -151,10 +151,10 @@
                     <div class="screener-field">
                         <label><i class="fa-solid fa-bowl-food"></i> <span id="lblDiet">Dietary Preference</span></label>
                         <select id="dietPref" class="screener-select" onchange="renderDietPlan()">
-                            <option value="veg" selected>🥬 Vegetarian (शाकाहारी)</option>
-                            <option value="jain">🌱 Jain Vegetarian (जैन - No Root Veg)</option>
-                            <option value="veg_egg">🥚 Vegetarian with Egg (अंडा युक्त)</option>
-                            <option value="nonveg">🍗 Non-Vegetarian / Fish (मांसाहारी)</option>
+                            <option value="veg" selected>Vegetarian</option>
+                            <option value="jain">Jain Vegetarian (No Root Veg)</option>
+                            <option value="veg_egg">Vegetarian with Egg</option>
+                            <option value="nonveg">Non-Vegetarian / Fish</option>
                         </select>
                     </div>
                 </div>
@@ -169,7 +169,7 @@
             <!-- RESULTS CONTAINER -->
             <div id="dietResults"></div>
 
-            <!-- FUSSY EATER MASTER GUIDE SECTION (Dynamic visibility) -->
+            <!-- FUSSY EATER MASTER GUIDE SECTION -->
             <div id="fussyEaterSection" style="display: none; background: #faf5ff; border: 2px solid #e9d5ff; border-radius: 20px; padding: 24px; margin-top: 30px;">
                 <h3 style="color: #6b21a8; font-family:'Fredoka',cursive; font-size:1.35rem; margin-bottom:12px;">
                     <i class="fa-solid fa-puzzle-piece"></i> <span id="fussyTitle">Master Guide: Is Your Child Not Eating Well or a Selective/Fussy Eater?</span>
@@ -197,7 +197,7 @@
                 </div>
             </div>
 
-            <!-- BIBLIOGRAPHY BIB-STYLE SOURCES -->
+            <!-- BIBLIOGRAPHY SOURCES -->
             <div style="margin-top: 25px; padding: 14px 18px; background: #f8fafc; border-radius: 14px; border: 1px solid #e2e8f0;">
                 <p style="font-size: 0.72rem; color: #64748b; line-height: 1.5; margin: 0; font-family: monospace;" id="bibSourceText">
                     <strong>Educational References & Framework Bibliography:</strong><br>
@@ -245,117 +245,33 @@
           },
           recipes: {
             veg: [
-              { 
-                name: { en: "Moong Dal & Rice Porridge", hi: "मूंग दाल व चावल की प्यूरी" }, 
-                desc: { en: "Soft-cooked rice and yellow moong dal boiled together with turmeric and mashed completely smooth with half a teaspoon of pure cow ghee.", hi: "हल्दी के साथ उबले हुए मुलायम चावल और मूंग दाल को आधे चम्मच शुद्ध घी के साथ पूरी तरह चिकना मैश करें।" }, 
-                yt: "shishuworld+moong+dal+rice+porridge+for+6+month+baby" 
-              },
-              { 
-                name: { en: "Sprouted Ragi Porridge (No Sugar)", hi: "अंकुरित रागी की खीर (बिना चीनी)" }, 
-                desc: { en: "Sprouted ragi flour cooked in water or milk alternative to a smooth pouring consistency, naturally sweetened with mashed ripe banana.", hi: "अंकुरित रागी के आटे को पानी में घोलकर पकाएं और पके केले से प्राकृतिक मिठास दें।" }, 
-                yt: "archanaskitchen+ragi+malt+baby+food" 
-              },
-              { 
-                name: { en: "Yellow Moong Dal Soup", hi: "पीली मूंग दाल का पानी/सूप" }, 
-                desc: { en: "Well-cooked yellow moong dal extracted as a thin, warm protein-rich soup seasoned with a pinch of turmeric and pure ghee.", hi: "अच्छी तरह उबली पीली मूंग दाल का पतला, गर्म प्रोटीन युक्त सूप जिसमें हल्दी और घी हो।" }, 
-                yt: "shishuworld+moong+dal+water+for+baby" 
-              },
-              { 
-                name: { en: "Steamed Pumpkin & Carrot Mash", hi: "उबले कद्दू व गाजर की प्यूरी" }, 
-                desc: { en: "Fresh pumpkin and carrot chunks steam-cooked until tender, then mashed smooth. Rich in Vitamin A for bright eyes and immunity.", hi: "कद्दू और गाजर के टुकड़ों को भाप में पकाकर चिकना मैश करें। आंखों और इम्युनिटी के लिए उत्तम।" }, 
-                yt: "hebbarskitchen+pumpkin+carrot+puree+baby" 
-              },
-              { 
-                name: { en: "Mashed Ripe Banana", hi: "मसला हुआ पका केला" }, 
-                desc: { en: "A classic instant energy booster. Take a ripe sweet banana and mash it completely smooth using a clean fork.", hi: "एक पके हुए मीठे केले को साफ कांटे की मदद से बिल्कुल चिकना मैश करें।" }, 
-                yt: "shishuworld+mashed+banana+for+baby" 
-              },
-              { 
-                name: { en: "Steamed Apple Compote", hi: "उबले सेब की प्यूरी" }, 
-                desc: { en: "Peeled apple slices steamed until soft and blended or mashed into a smooth, digestible fruit puree without any added sugar.", hi: "छिले हुए सेब के टुकड़ों को भाप में गलाकर बिना चीनी की सुपाच्य प्यूरी बनाएं।" }, 
-                yt: "archanaskitchen+steamed+apple+puree+for+baby" 
-              }
+              { name: { en: "Moong Dal & Rice Porridge", hi: "मूंग दाल व चावल की प्यूरी" }, desc: { en: "Soft-cooked rice and yellow moong dal boiled together with turmeric and mashed completely smooth with half a teaspoon of pure cow ghee.", hi: "हल्दी के साथ उबले हुए मुलायम चावल और मूंग दाल को आधे चम्मच शुद्ध घी के साथ पूरी तरह चिकना मैश करें।" }, yt: "shishuworld+moong+dal+rice+porridge+for+6+month+baby" },
+              { name: { en: "Sprouted Ragi Porridge (No Sugar)", hi: "अंकुरित रागी की खीर (बिना चीनी)" }, desc: { en: "Sprouted ragi flour cooked in water or milk alternative to a smooth pouring consistency, naturally sweetened with mashed ripe banana.", hi: "अंकुरित रागी के आटे को पानी में घोलकर पकाएं और पके केले से प्राकृतिक मिठास दें।" }, yt: "archanaskitchen+ragi+malt+baby+food" },
+              { name: { en: "Yellow Moong Dal Soup", hi: "पीली मूंग दाल का पानी/सूप" }, desc: { en: "Well-cooked yellow moong dal extracted as a thin, warm protein-rich soup seasoned with a pinch of turmeric and pure ghee.", hi: "अच्छी तरह उबली पीली मूंग दाल का पतला, गर्म प्रोटीन युक्त सूप जिसमें हल्दी और घी हो।" }, yt: "shishuworld+moong+dal+water+for+baby" },
+              { name: { en: "Steamed Pumpkin & Carrot Mash", hi: "उबले कद्दू व गाजर की प्यूरी" }, desc: { en: "Fresh pumpkin and carrot chunks steam-cooked until tender, then mashed smooth. Rich in Vitamin A for bright eyes and immunity.", hi: "कद्दू और गाजर के टुकड़ों को भाप में पकाकर चिकना मैश करें। आंखों और इम्युनिटी के लिए उत्तम।" }, yt: "hebbarskitchen+pumpkin+carrot+puree+baby" },
+              { name: { en: "Mashed Ripe Banana", hi: "मसला हुआ पका केला" }, desc: { en: "A classic instant energy booster. Take a ripe sweet banana and mash it completely smooth using a clean fork.", hi: "एक पके हुए मीठे केले को साफ कांटे की मदद से बिल्कुल चिकना मैश करें।" }, yt: "shishuworld+mashed+banana+for+baby" },
+              { name: { en: "Steamed Apple Compote", hi: "उबले सेब की प्यूरी" }, desc: { en: "Peeled apple slices steamed until soft and blended or mashed into a smooth, digestible fruit puree without any added sugar.", hi: "छिले हुए सेब के टुकड़ों को भाप में गलाकर बिना चीनी की सुपाच्य प्यूरी बनाएं।" }, yt: "archanaskitchen+steamed+apple+puree+for+baby" }
             ],
             jain: [
-              { 
-                name: { en: "Moong Dal & Rice Porridge", hi: "मूंग दाल व चावल की प्यूरी" }, 
-                desc: { en: "Soft-cooked rice and yellow moong dal mashed smooth with pure ghee.", hi: "शुद्ध घी के साथ मसली हुई मुलायम मूंग दाल व चावल।" }, 
-                yt: "shishuworld+moong+dal+rice+porridge+for+6+month+baby" 
-              },
-              { 
-                name: { en: "Sprouted Ragi Porridge (No Sugar)", hi: "अंकुरित रागी की खीर (बिना चीनी)" }, 
-                desc: { en: "Rich in natural calcium, sweetened with ripe banana.", hi: "प्राकृतिक कैल्शियम से भरपूर, पके केले से मीठी की गई।" }, 
-                yt: "archanaskitchen+ragi+malt+baby+food" 
-              },
-              { 
-                name: { en: "Yellow Moong Dal Soup", hi: "पीली मूंग दाल का पानी/सूप" }, 
-                desc: { en: "Protein-rich thin dal soup with turmeric and ghee.", hi: "हल्दी और घी से युक्त पौष्टिक मूंग दाल का सूप।" }, 
-                yt: "shishuworld+moong+dal+water+for+baby" 
-              },
-              { 
-                name: { en: "Mashed Ripe Banana", hi: "मसला हुआ पका केला" }, 
-                desc: { en: "Classic instant energy booster mashed with a clean fork.", hi: "साफ कांटे से मैश किया हुआ इंस्टेंट ऊर्जादायक केला।" }, 
-                yt: "shishuworld+mashed+banana+for+baby" 
-              },
-              { 
-                name: { en: "Steamed Apple Compote", hi: "उबले सेब की प्यूरी" }, 
-                desc: { en: "Soft-cooked apple slices mashed without sugar.", hi: "बिना चीनी के उबले और मैश किए हुए सेब के टुकड़े।" }, 
-                yt: "archanaskitchen+steamed+apple+puree+for+baby" 
-              },
-              { 
-                name: { en: "Mashed Ripe Papaya", hi: "मसला हुआ पपीता" }, 
-                desc: { en: "Naturally sweet and smooth ripe papaya mashed for gentle digestion.", hi: "पाचन के लिए प्राकृतिक रूप से मीठा मैश किया हुआ पपीता।" }, 
-                yt: "shishuworld+fruits+for+babies+papaya" 
-              }
+              { name: { en: "Moong Dal & Rice Porridge", hi: "मूंग दाल व चावल की प्यूरी" }, desc: { en: "Soft-cooked rice and yellow moong dal mashed smooth with pure ghee.", hi: "शुद्ध घी के साथ मसली हुई मुलायम मूंग दाल व चावल।" }, yt: "shishuworld+moong+dal+rice+porridge+for+6+month+baby" },
+              { name: { en: "Sprouted Ragi Porridge (No Sugar)", hi: "अंकुरित रागी की खीर (बिना चीनी)" }, desc: { en: "Rich in natural calcium, sweetened with ripe banana.", hi: "प्राकृतिक कैल्शियम से भरपूर, पके केले से मीठी की गई।" }, yt: "archanaskitchen+ragi+malt+baby+food" },
+              { name: { en: "Yellow Moong Dal Soup", hi: "पीली मूंग दाल का पानी/सूप" }, desc: { en: "Protein-rich thin dal soup with turmeric and ghee.", hi: "हल्दी और घी से युक्त पौष्टिक मूंग दाल का सूप।" }, yt: "shishuworld+moong+dal+water+for+baby" },
+              { name: { en: "Mashed Ripe Banana", hi: "मसला हुआ पका केला" }, desc: { en: "Classic instant energy booster mashed with a clean fork.", hi: "साफ कांटे से मैश किया हुआ इंस्टेंट ऊर्जादायक केला।" }, yt: "shishuworld+mashed+banana+for+baby" },
+              { name: { en: "Steamed Apple Compote", hi: "उबले सेब की प्यूरी" }, desc: { en: "Soft-cooked apple slices mashed without sugar.", hi: "बिना चीनी के उबले और मैश किए हुए सेब के टुकड़े।" }, yt: "archanaskitchen+steamed+apple+puree+for+baby" },
+              { name: { en: "Mashed Ripe Papaya", hi: "मसला हुआ पपीता" }, desc: { en: "Naturally sweet and smooth ripe papaya mashed for gentle digestion.", hi: "पाचन के लिए प्राकृतिक रूप से मीठा मैश किया हुआ पपीता।" }, yt: "shishuworld+fruits+for+babies+papaya" }
             ],
             veg_egg: [
-              { 
-                name: { en: "Moong Dal & Rice Porridge", hi: "मूंग दाल व चावल की प्यूरी" }, 
-                desc: { en: "Soft-cooked rice and yellow moong dal mashed smooth with pure ghee.", hi: "शुद्ध घी के साथ मसली हुई मुलायम मूंग दाल व चावल।" }, 
-                yt: "shishuworld+moong+dal+rice+porridge+for+6+month+baby" 
-              },
-              { 
-                name: { en: "Steamed Hard-Boiled Egg Yolk Mash", hi: "उबले अंडे की जर्दी की प्यूरी" }, 
-                desc: { en: "Hard-boiled egg yolk mashed smooth with a few drops of warm water or breastmilk and ghee. Excellent for brain growth.", hi: "उबले अंडे की पीली जर्दी को थोड़े से पानी और घी के साथ मैश करें।" }, 
-                yt: "shishuworld+egg+yolk+for+infants" 
-              },
-              { 
-                name: { en: "Steamed Pumpkin & Carrot Mash", hi: "उबले कद्दू व गाजर की प्यूरी" }, 
-                desc: { en: "Tender steamed pumpkin and carrot puree.", hi: "कद्दू और गाजर की प्यूरी।" }, 
-                yt: "hebbarskitchen+pumpkin+carrot+puree+baby" 
-              },
-              { 
-                name: { en: "Mashed Ripe Banana", hi: "मसला हुआ पका केला" }, 
-                desc: { en: "Mashed ripe banana.", hi: "केला।" }, 
-                yt: "shishuworld+mashed+banana+for+baby" 
-              },
-              { 
-                name: { en: "Steamed Apple Compote", hi: "उबले सेब की प्यूरी" }, 
-                desc: { en: "Apples compote.", hi: "सेब की प्यूरी।" }, 
-                yt: "archanaskitchen+steamed+apple+puree+for+baby" 
-              }
+              { name: { en: "Moong Dal & Rice Porridge", hi: "मूंग दाल व चावल की प्यूरी" }, desc: { en: "Soft-cooked rice and yellow moong dal mashed smooth with pure ghee.", hi: "शुद्ध घी के साथ मसली हुई मुलायम मूंग दाल व चावल।" }, yt: "shishuworld+moong+dal+rice+porridge+for+6+month+baby" },
+              { name: { en: "Steamed Hard-Boiled Egg Yolk Mash", hi: "उबले अंडे की जर्दी की प्यूरी" }, desc: { en: "Hard-boiled egg yolk mashed smooth with a few drops of warm water or breastmilk and ghee. Excellent for brain growth.", hi: "उबले अंडे की पीली जर्दी को थोड़े से पानी और घी के साथ मैश करें।" }, yt: "shishuworld+egg+yolk+for+infants" },
+              { name: { en: "Steamed Pumpkin & Carrot Mash", hi: "उबले कद्दू व गाजर की प्यूरी" }, desc: { en: "Tender steamed pumpkin and carrot puree.", hi: "कद्दू और गाजर की प्यूरी।" }, yt: "hebbarskitchen+pumpkin+carrot+puree+baby" },
+              { name: { en: "Mashed Ripe Banana", hi: "मसला हुआ पका केला" }, desc: { en: "Mashed ripe banana.", hi: "केला।" }, yt: "shishuworld+mashed+banana+for+baby" },
+              { name: { en: "Steamed Apple Compote", hi: "उबले सेब की प्यूरी" }, desc: { en: "Apples compote.", hi: "सेब की प्यूरी।" }, yt: "archanaskitchen+steamed+apple+puree+for+baby" }
             ],
             nonveg: [
-              { 
-                name: { en: "Moong Dal & Rice Porridge", hi: "मूंग दाल व चावल की प्यूरी" }, 
-                desc: { en: "Soft-cooked rice and yellow moong dal mashed smooth with pure ghee.", hi: "मूंग दाल व चावल।" }, 
-                yt: "shishuworld+moong+dal+rice+porridge+for+6+month+baby" 
-              },
-              { 
-                name: { en: "Chicken Liver & Bone Broth Puree", hi: "चिकन लिवर व बोन ब्रोथ प्यूरी" }, 
-                desc: { en: "Tender chicken liver boiled in clear bone broth, blended smooth. Natural source of Heme Iron for anemia prevention.", hi: "बोन ब्रोथ में उबला चिकन लिवर।" }, 
-                yt: "chicken+bone+broth+recipe+for+baby" 
-              },
-              { 
-                name: { en: "Steamed White Fish Puree", hi: "उबली मछली की प्यूरी" }, 
-                desc: { en: "Soft boneless river fish steamed and blended smooth. Rich in Omega-3 DHA for brain and eye development.", hi: "बोनलेस मछली की प्यूरी।" }, 
-                yt: "fish+puree+recipe+for+infants" 
-              },
-              { 
-                name: { en: "Steamed Pumpkin & Carrot Mash", hi: "उबले कद्दू व गाजर की प्यूरी" }, 
-                desc: { en: "Pumpkin and carrot mash.", hi: "कद्दू-गाजर प्यूरी।" }, 
-                yt: "hebbarskitchen+pumpkin+carrot+puree+baby" 
-              }
+              { name: { en: "Moong Dal & Rice Porridge", hi: "मूंग दाल व चावल की प्यूरी" }, desc: { en: "Soft-cooked rice and yellow moong dal mashed smooth with pure ghee.", hi: "मूंग दाल व चावल।" }, yt: "shishuworld+moong+dal+rice+porridge+for+6+month+baby" },
+              { name: { en: "Chicken Liver & Bone Broth Puree", hi: "चिकन लिवर व बोन ब्रोथ प्यूरी" }, desc: { en: "Tender chicken liver boiled in clear bone broth, blended smooth. Natural source of Heme Iron for anemia prevention.", hi: "बोन ब्रोथ में उबला चिकन लिवर।" }, yt: "chicken+bone+broth+recipe+for+baby" },
+              { name: { en: "Steamed White Fish Puree", hi: "उबली मछली की प्यूरी" }, desc: { en: "Soft boneless river fish steamed and blended smooth. Rich in Omega-3 DHA for brain and eye development.", hi: "बोनलेस मछली की प्यूरी।" }, yt: "fish+puree+recipe+for+infants" },
+              { name: { en: "Steamed Pumpkin & Carrot Mash", hi: "उबले कद्दू व गाजर की प्यूरी" }, desc: { en: "Pumpkin and carrot mash.", hi: "कद्दू-गाजर प्यूरी।" }, yt: "hebbarskitchen+pumpkin+carrot+puree+baby" }
             ]
           }
         },
@@ -379,21 +295,9 @@
           },
           recipes: {
             veg: [
-              { 
-                name: { en: "Suji & Green Pea Sheera", hi: "सूजी व मटर का शीरा" }, 
-                desc: { en: "Lightly roasted semolina cooked soft with mashed green peas and a touch of cow ghee.", hi: "मश किए हुए हरे मटर के साथ पकी हुई सूजी और घी।" }, 
-                yt: "shishuworld+suji+kheer+recipe+for+baby" 
-              },
-              { 
-                name: { en: "Oats & Apple Porridge", hi: "ओट्स व सेब की खीर" }, 
-                desc: { en: "Rolled oats cooked soft with steamed apple puree for healthy digestion.", hi: "उबले सेब की प्यूरी के साथ पकाया गया दलिया/ओट्स।" }, 
-                yt: "archanaskitchen+oats+apple+porridge+baby" 
-              },
-              { 
-                name: { en: "Soft Paneer & Lauki Mash", hi: "पनीर व लौकी की प्यूरी" }, 
-                desc: { en: "Fresh homemade soft paneer mashed together with boiled bottle gourd (lauki) for steady weight gain.", hi: "उबली लौकी और ताजे घर के पनीर का मैश किया हुआ मिश्रण।" }, 
-                yt: "hebbarskitchen+homemade+paneer+for+babies" 
-              },
+              { name: { en: "Suji & Green Pea Sheera", hi: "सूजी व मटर का शीरा" }, desc: { en: "Lightly roasted semolina cooked soft with mashed green peas and a touch of cow ghee.", hi: "मश किए हुए हरे मटर के साथ पकी हुई सूजी और घी।" }, yt: "shishuworld+suji+kheer+recipe+for+baby" },
+              { name: { en: "Oats & Apple Porridge", hi: "ओट्स व सेब की खीर" }, desc: { en: "Rolled oats cooked soft with steamed apple puree for healthy digestion.", hi: "उबले सेब की प्यूरी के साथ पकाया गया दलिया/ओट्स।" }, yt: "archanaskitchen+oats+apple+porridge+baby" },
+              { name: { en: "Soft Paneer & Lauki Mash", hi: "पनीर व लौकी की प्यूरी" }, desc: { en: "Fresh homemade soft paneer mashed together with boiled bottle gourd (lauki) for steady weight gain.", hi: "उबली लौकी और ताजे घर के पनीर का मैश किया हुआ मिश्रण।" }, yt: "hebbarskitchen+homemade+paneer+for+babies" },
               { name: { en: "Mashed Ripe Papaya", hi: "मसला हुआ पपीता" }, desc: { en: "Natural fruit enzymes for smooth tummy movements.", hi: "पाचन को दुरुस्त रखने वाला मीठा पपीता।" }, yt: "shishuworld+fruits+for+babies+papaya" },
               { name: { en: "Boiled Pear (Nashpati) Puree", hi: "नाशपाती की प्यूरी" }, desc: { en: "Gentle on the stomach and helpful for digestion.", hi: "पेट के लिए बेहद हल्की और सुपाच्य नाशपाती।" }, yt: "archanaskitchen+pear+puree+for+baby" },
               { name: { en: "Mashed Moong Dal Khichdi", hi: "मूंग दाल खिचड़ी" }, desc: { en: "Thick, soft-mashed rice and dal with ghee.", hi: "घी के साथ गाढ़ी और मुलायम पिसी हुई खिचड़ी।" }, yt: "hebbarskitchen+vegetable+khichdi+recipe" }
@@ -617,7 +521,7 @@
             ],
             jain: [
               { name: { en: "Stuffed Paneer & Green Peas Paratha", hi: "पनीर और मटर का परांठा" }, desc: { en: "Served with a fresh bowl of curd and pure butter.", hi: "ताजे दही और शुद्ध मक्खन के साथ परोसा गया परांठा।" }, yt: "hebbarskitchen+methi+paratha+recipe" },
-              { name: { en: "Dry Fruit & Date Ladoos (No Sugar)", hi: "ड्राई फ्रूट और खजूर के लड्डू" }, desc: { en: "Energy-dense homemade balls made of dates, almonds, and walnuts.", hi: "खजूर और बादाम से बने लड्डू।" }, yt: "hebbarskitchen+dry+fruit+ladoo+recipe" },
+              { name: { en: "Dry Fruit & Date Ladoos (No Sugar)", hi: "ड्राई फ्रूट और खजूर के लड्डू" }, desc: { en: "Energy-dense homemade balls made of dates, almonds, and walnuts.", hi: "खजूर और बादอม से बने लड्डू।" }, yt: "hebbarskitchen+dry+fruit+ladoo+recipe" },
               { name: { en: "Soybean & Paneer Pulao", hi: "सोयाबीन और पनीर पुलाव" }, desc: { en: "High protein meal.", hi: "हाई प्रोटीन पुलाव।" }, yt: "hebbarskitchen+soya+chunks+pulao" }
             ],
             veg_egg: [
@@ -647,7 +551,6 @@
         const plan = dietPlanDatabase[ageKey] || dietPlanDatabase["6m"];
         const recipes = (plan.recipes[dietKey] || plan.recipes.veg);
 
-        // Show/Hide fussy eater section (Starts from 12m onwards)
         if (ageKey === "12m" || ageKey === "2y" || ageKey === "5y" || ageKey === "12y") {
           fussySection.style.display = "block";
         } else {
@@ -737,9 +640,6 @@
         container.scrollIntoView({ behavior: "smooth" });
       }
 
-      // =========================================================================
-      // 🌐 LANGUAGE SWITCHER UI
-      // =========================================================================
       function updateLanguageUI() {
         const btnText = document.getElementById("toolLangText");
         const titleEl = document.getElementById("pageTitle");
