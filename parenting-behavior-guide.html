@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Parenting Behavior & Child Psychology Guide | Dr. Dinesh Mittal</title>
-    <meta name="description" content="Expert pediatric guidance on child behavior, temper tantrums, thumb-sucking, screen time addiction, outdoor play solutions, and adolescent mental health in Rohini, Delhi.">
+    <meta name="description" content="Comprehensive pediatric educational guidance on child behavior, temper tantrums, screen time addiction, outdoor play solutions, and adolescent mental health in Rohini, Delhi.">
     <link rel="canonical" href="https://childspecialistrohini.com/parenting-behavior-guide.html" />
 
     <!-- Google Structured Data / Local SEO Schema -->
@@ -12,16 +12,14 @@
     {
       "@context": "https://schema.org",
       "@type": "MedicalWebPage",
-      "name": "Parenting Behavior & Child Psychology Master Guide",
-      "description": "Pediatric advice on toddler tantrums, thumb sucking, screen time management, time management, and adolescent parenting.",
+      "name": "Parenting Behavior & Child Psychology Educational Guide",
+      "description": "Detailed pediatric framework on toddler tantrums, thumb sucking, screen time management, school refusal, and adolescent behavioral guidance.",
       "author": {
         "@type": "Physician",
         "name": "Dr. Dinesh Mittal",
-        "medicalSpecialty": "Pediatrics"
-      },
-      "publisher": {
-        "@type": "MedicalClinic",
-        "name": "Dr. Dinesh Mittal Child Clinic",
+        "jobTitle": "Child Specialist & Pediatrician",
+        "medicalSpecialty": "Pediatrics",
+        "hasCredential": "MBBS, DCH",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "H-34/69, Sector 3, Rohini",
@@ -30,6 +28,12 @@
           "postalCode": "110085",
           "addressCountry": "IN"
         }
+      },
+      "publisher": {
+        "@type": "MedicalClinic",
+        "name": "Dr. Dinesh Mittal Child Clinic",
+        "telephone": "+918130521456",
+        "url": "https://childspecialistrohini.com"
       }
     }
     </script>
@@ -55,7 +59,7 @@
             --card-shadow: 0 12px 32px -4px rgba(8, 145, 178, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', 'Noto Sans Devanagari', sans-serif; }
-        body { color: var(--dark-text); background-color: #f8fafc; line-height: 1.65; padding-bottom: 75px; -webkit-tap-highlight-color: transparent; }
+        body { color: var(--dark-text); background-color: #f8fafc; line-height: 1.7; padding-bottom: 75px; -webkit-tap-highlight-color: transparent; }
 
         header {
             position: sticky; top: 0; background: rgba(255, 255, 255, 0.94); z-index: 1000;
@@ -84,14 +88,17 @@
 
         .screener-inputs-grid {
             display: grid; grid-template-columns: 1fr; gap: 16px;
-            background: #f8fafc; padding: 20px; border-radius: 20px; border: 1.5px solid #e2e8f0; margin-bottom: 25px;
+            background: #f8fafc; padding: 22px; border-radius: 20px; border: 1.5px solid #cbd5e1; margin-bottom: 25px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
         }
-        .screener-field label { font-size: 0.88rem; font-weight: 700; color: #083344; display: block; margin-bottom: 6px; }
+        .screener-field label { font-size: 0.9rem; font-weight: 700; color: #0f172a; display: block; margin-bottom: 8px; }
         .screener-select {
-            width: 100%; min-height: 48px; padding: 10px 14px; border: 1.5px solid #cbd5e1;
-            border-radius: 12px; font-size: 16px; outline: none; background: #ffffff; font-weight: 600; color: #0f172a;
+            width: 100%; min-height: 52px; padding: 12px 16px; border: 2px solid #38bdf8;
+            border-radius: 14px; font-size: 1.02rem; outline: none; background: #ffffff; font-weight: 700; color: #083344;
+            box-shadow: 0 4px 12px rgba(8, 145, 178, 0.06); cursor: pointer; transition: all 0.2s;
         }
-        .screener-select:focus { border-color: var(--brand-primary); }
+        .screener-select:hover { border-color: var(--brand-primary); }
+        .screener-select:focus { border-color: var(--brand-primary-dark); box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.15); }
 
         .submit-btn-container { text-align: center; margin: 15px 0 25px; }
         .submit-btn {
@@ -102,20 +109,22 @@
         }
         .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(8, 145, 178, 0.38); }
 
-        .results-box { background: #ffffff; border-radius: 18px; padding: 24px; border: 1.5px solid #e2e8f0; margin-top: 15px; box-shadow: 0 4px 14px rgba(8, 145, 178, 0.04); }
-        .results-box h3 { font-family: 'Fredoka', cursive; font-size: 1.35rem; color: #083344; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+        .results-box { background: #ffffff; border-radius: 18px; padding: 26px; border: 1.5px solid #e2e8f0; margin-top: 15px; box-shadow: 0 4px 14px rgba(8, 145, 178, 0.04); }
+        .results-box h3 { font-family: 'Fredoka', cursive; font-size: 1.45rem; color: #083344; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; border-bottom: 2px solid #f1f5f9; padding-bottom: 12px; }
 
-        .scenario-card {
-            background: #fffdf7; border: 1.5px solid #fed7aa; border-radius: 16px; padding: 16px; margin-bottom: 16px;
+        .guidebook-chapter {
+            background: #fffdf9; border: 1.5px solid #fed7aa; border-radius: 18px; padding: 22px; margin-bottom: 24px;
+            box-shadow: 0 4px 12px rgba(249, 115, 22, 0.03);
         }
-        .scenario-card h4 { color: #9a3412; font-family: 'Fredoka', cursive; font-size: 1.05rem; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
-        .scenario-card p { font-size: 0.88rem; color: #475569; margin-bottom: 8px; line-height: 1.5; }
+        .guidebook-chapter h4 { color: #9a3412; font-family: 'Fredoka', cursive; font-size: 1.2rem; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+        .guidebook-chapter p { font-size: 0.92rem; color: #334155; margin-bottom: 10px; line-height: 1.6; }
 
-        .solution-box { background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 12px; padding: 12px 14px; margin-top: 10px; font-size: 0.86rem; color: #166534; }
-        .solution-box strong { color: #14532d; display: block; margin-bottom: 4px; }
+        .play-card { background: #f0fdfa; border: 1.5px solid #99f6e4; border-radius: 18px; padding: 20px; margin-top: 25px; }
+        .play-card h4 { color: #0f766e; font-family: 'Fredoka', cursive; font-size: 1.2rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
 
-        .play-card { background: #f0fdfa; border: 1.5px solid #99f6e4; border-radius: 16px; padding: 16px; margin-top: 20px; }
-        .play-card h4 { color: #0f766e; font-family: 'Fredoka', cursive; font-size: 1.1rem; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+        .medicolegal-notice {
+            background: #fffbeb; border: 1px solid #fde047; border-radius: 12px; padding: 12px 16px; margin-bottom: 20px; font-size: 0.82rem; color: #854d0e;
+        }
 
         .doctor-cta-box { background: linear-gradient(135deg, #f0fdfa 0%, #e0f2fe 100%); border: 2px solid #bae6fd; border-radius: 20px; padding: 24px; text-align: center; margin-top: 25px; }
         .hero-cta-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(135deg, var(--brand-accent), var(--brand-accent-dark)); color: #ffffff; padding: 12px 26px; border-radius: 30px; font-weight: 700; font-size: 0.94rem; text-decoration: none; cursor: pointer; border: none; min-height: 46px; }
@@ -144,7 +153,7 @@
                 <span id="breadcrumbTitle">Parenting Behavior & Child Psychology Guide</span>
             </div>
 
-            <h1 class="article-title" id="pageTitle">Parenting Behavior & Child Psychology Master Guide</h1>
+            <h1 class="article-title" id="pageTitle">Parenting Behavior & Child Psychology Guide</h1>
             
             <div class="author-meta-bar">
                 <img src="doctor.jpg" alt="Dr. Dinesh Mittal" class="author-img" onerror="this.src='https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=100&q=80'">
@@ -158,20 +167,20 @@
             <form id="guideForm" onsubmit="event.preventDefault(); renderGuide();">
                 <div class="screener-inputs-grid">
                     <div class="screener-field">
-                        <label><i class="fa-solid fa-cake-candles"></i> <span id="lblAge">Select Child Age Group / Topic</span></label>
+                        <label><i class="fa-solid fa-book-open"></i> <span id="lblAge">Select Child Age Group & Behavioral Topic</span></label>
                         <select id="guideAge" class="screener-select" onchange="renderGuide()">
-                            <option value="screen_solution" selected>🌟 Special Guide: Solving Screen Addiction & "No Kids to Play With"</option>
-                            <option value="toddler">1. Toddler Years (1 to 3 Years) - Tantrums, Thumb-Sucking & Bonding</option>
-                            <option value="preschool">2. Preschool Years (3 to 5 Years) - Bedtime, Screens & Money Basics</option>
-                            <option value="school">3. School-Age Years (6 to 10 Years) - School Refusal, Homework & Bullying</option>
-                            <option value="adolescent">4. Adolescent Years (11 to 18 Years) - Mood Swings, Phones, Sex Ed & Finances</option>
+                            <option value="screen_solution" selected>🌟 Special Guide: Solving Screen Addiction & The "No Kids to Play With" Dilemma</option>
+                            <option value="toddler">1. Toddler Years (1 to 3 Years) - Tantrums, Thumb-Sucking & Emotional Security</option>
+                            <option value="preschool">2. Preschool Years (3 to 5 Years) - Bedtime Resistance, Screen Time & Money Basics</option>
+                            <option value="school">3. School-Age Years (6 to 10 Years) - School Refusal, Homework Procrastination & Bullying</option>
+                            <option value="adolescent">4. Adolescent Years (11 to 18 Years) - Mood Swings, Digital Habits, Sex Education & Finances</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="submit-btn-container">
                     <button type="submit" class="submit-btn" id="submitBtn">
-                        <i class="fa-solid fa-book-open-reader"></i> <span>View Expert Guidance & Solutions</span>
+                        <i class="fa-solid fa-book-reader"></i> <span>Open Detailed Guidebook Chapter</span>
                     </button>
                 </div>
             </form>
@@ -199,132 +208,274 @@
       const guideDatabase = {
         "screen_solution": {
           title: { 
-            en: "Master Guide: Solving Screen Addiction & The 'No Kids to Play With' Dilemma", 
-            hi: "मास्टर गाइड: स्क्रीन की लत और 'खेलने के लिए कोई बच्चा नहीं है' की समस्या का समाधान" 
+            en: "Detailed Guidebook: Solving Screen Addiction & The 'No Kids to Play With' Dilemma", 
+            hi: "विस्तृत गाइडबुक: स्क्रीन की लत और 'खेलने के लिए कोई बच्चा नहीं है' की समस्या का समाधान" 
           },
           intro: { 
-            en: "Many parents in urban colonies complain: 'Doctor, my child is glued to the screen, but there are no other kids in the lane to play with!' Here is your practical roadmap to break this trap.", 
-            hi: "दिल्ली-एनसीआर के माता-पिता अक्सर शिकायत करते हैं: 'डॉक्टर, बच्चा स्क्रीन से चिपका रहता है, पर आसपास खेलने के लिए कोई बच्चा नहीं है!' यहाँ व्यावहारिक समाधान दिया गया है।" 
+            en: "In urban neighborhoods across Delhi NCR, parents frequently share a common frustration: 'Doctor, my child is glued to the screen all evening, but when I tell them to go outside, they say there are no other children in the colony to play with!' Here is a comprehensive step-by-step guidebook to break this cycle.", 
+            hi: "दिल्ली-एनसीआर की कॉलोनियों में माता-पिता अक्सर शिकायत करते हैं: 'डॉक्टर, बच्चा स्क्रीन से चिपका रहता है, पर बाहर भेजने पर कोई दूसरा बच्चा नहीं मिलता!' इस चक्र को तोड़ने के लिए विस्तृत चरण-दर-चरण मार्गदर्शिका यहाँ दी गई है।" 
           },
-          scenarios: [
+          chapters: [
             {
               problem: { 
-                en: "Real-Life Scenario: It's 6 PM. You want your child to step away from TV, but when you tell them to go play outside, they say: 'Play with whom? It's boring!' So you hand them the phone for peace.", 
-                hi: "वास्तविक स्थिति: शाम के 6 बजे हैं। आप बच्चे को टीवी से हटाना चाहते हैं, पर बाहर भेजने पर बच्चा कहता है: 'किसके साथ खेलूं? कोई नहीं है!' और आप शांति के लिए फोन थमा देते हैं।" 
+                en: "Real-Life Scenario & Challenge: It's 6 PM. You want your 6-year-old to step away from the television, but when you tell them to go play outside, they reply: 'Play with whom? There is no one in the lane, and it's too boring!' Feeling overwhelmed and wanting peace, you hand them the smartphone.", 
+                hi: "वास्तविक स्थिति: शाम के 6 बजे हैं। आप अपने बच्चे को टीवी से हटाना चाहते हैं, पर बाहर भेजने पर बच्चा कहता है: 'किसके साथ खेलूं? कोई नहीं है!' और आप शांति के लिए फोन थमा देते हैं।" 
               },
               solution: { 
-                en: "Dr. Dinesh Mittal’s 4-Step Solution:<br>1. <strong>Be the First Playmate:</strong> Children crave connection, not just space. Step onto the balcony or park with them for 15 mins of badminton or catch.<br>2. <strong>Leverage Sports Academies:</strong> Enroll them in evening local sports academies (football, swimming, skating) for guaranteed peer socialization.<br>3. <strong>Organize Playdates:</strong> Coordinate with 2-3 school parents nearby to host alternating bi-weekly playdates.<br>4. <strong>Active Indoor Play:</strong> On hot or smoggy days, build an indoor obstacle course or have a family dance party.", 
-                hi: "डॉ. दिनेश मित्तल का 4-चरण समाधान:<br>1. <strong>पहले आप खेलें:</strong> बच्चे को स्पेस के साथ साथ आपके साथ की जरूरत होती है। 15 मिनट उनके साथ बैडमिंटन या कैच खेलें।<br>2. <strong>स्पोर्ट्स अकादमी ज्वाइन कराएं:</strong> फुटबॉल, स्केटिंग या स्विमिंग जैसी स्थानीय खेल अकादमियों में दाखिला दिलाएं।<br>3. <strong>प्लेडेट्स आयोजित करें:</strong> आसपास के 2-3 माता-पिता से मिलकर बच्चों के मिलने का समय तय करें।" 
+                en: "Step-by-Step Pediatric Solution:<br><br>" +
+                   "<strong>Step 1: Be the First Playmate (Parental Co-Play)</strong><br>" +
+                   "Children do not just crave space; they crave connection with you. For the first 15–20 minutes, <em>you</em> must initiate play. Step onto the balcony, courtyard, or nearby park with them. Kick a football, play badminton, or jump rope together. Once their physical inertia breaks and their energy peaks, they will naturally want to keep moving.<br><br>" +
+                   "<strong>Step 2: Leverage Structured Sports & Play Academies</strong><br>" +
+                   "If your immediate lane lacks peer groups, look outward. Enroll your child in evening or weekend local sports coaching academies (football, skating, swimming, badminton, or martial arts). This guarantees structured peer socialization, physical fitness, and disciplined screen-free hours 2–3 times a week.<br><br>" +
+                   "<strong>Step 3: Organize Intentional Neighborhood Playdates</strong><br>" +
+                   "Connect with 2 or 3 school parents who live within a 1-kilometer radius. Take turns hosting a bi-weekly evening playdate where kids can engage in board games, Lego building, or outdoor tag together.<br><br>" +
+                   "<strong>Step 4: Active Indoor Play During Smog/Heat Waves</strong><br>" +
+                   "On days when outdoor access is restricted due to extreme Delhi summers or severe winter smog, channel their energy indoors constructively. Set up an obstacle course using cushions, create a 'floor is lava' game, or play upbeat music for a 10-minute family dance party.", 
+                hi: "चरण-दर-चरण बाल चिकित्सक समाधान:<br><br>" +
+                   "<strong>चरण 1: पहले आप खेलें (पेरेंट को-प्ले)</strong><br>" +
+                   "बच्चे को केवल जगह नहीं, आपके साथ की जरूरत होती है। पहले 15-20 मिनट आप उनके साथ खेल शुरू करें। बालकनी या पार्क में बैडमिंटन या कैच खेलें। जब उनकी ऊर्जा जागेगी, वे खुद खेलना चाहेंगे।<br><br>" +
+                   "<strong>चरण 2: स्पोर्ट्स अकादमी ज्वाइन कराएं</strong><br>" +
+                   "अगर आसपास बच्चे नहीं हैं, तो फुटबॉल, स्केटिंग या स्विमिंग जैसी स्थानीय खेल अकादमियों में दाखिला दिलाएं ताकि बच्चों का सामाजिक दायरा बढ़े।<br><br>" +
+                   "<strong>चरण 3: प्लेडेट्स आयोजित करें</strong><br>" +
+                   "आसपास के 2-3 स्कूली बच्चों के माता-पिता से संपर्क करें और बारी-बारी से घर या पार्क में बच्चों के मिलने का समय तय करें।" 
               }
             }
           ],
           plays: {
-            title: { en: "Suggestive Parent-Child Bonding Plays by Age", hi: "आयु के अनुसार माता-पिता और बच्चे के खेलने के तरीके" },
+            title: { en: "Suggestive Parent-Child Bonding Plays by Age Group", hi: "आयु समूह के अनुसार माता-पिता और बच्चे के खेलने के सुझाव" },
             items: [
-              { age: { en: "Toddlers (1-3 yrs)", hi: "टॉडलर्स (1-3 वर्ष)" }, desc: { en: "Water pouring with cups/colander on the balcony floor; Cardboard box tunnel crawling.", hi: "बालकनी में पानी और मग से खेलना; गत्ते के डिब्बे की सुरंग बनाकर रेंगना।" } },
-              { age: { en: "Preschoolers (3-5 yrs)", hi: "प्रीस्कूलर (3-5 वर्ष)" }, desc: { en: "Pretend grocery store roleplay with empty boxes; Outdoor scavenger hunt for leaves and pebbles.", hi: "खाली डिब्बों के साथ दुकान-दुकान खेलना; पार्क में पत्ते और कंकड़ ढूंढने का खेल।" } },
-              { age: { en: "School-Age (6-10 yrs)", hi: "स्कूली बच्चे (6-10 वर्ष)" }, desc: { en: "Strategy board games (Ludo, Uno); Building tall towers out of newspapers and tape together.", hi: "बोर्ड गेम्स (लूडो, यूनो); पुराने अखबार और टेप से ऊंची मीनार बनाना।" } },
-              { age: { en: "Adolescents (11-18 yrs)", hi: "किशोर (11-18 वर्ष)" }, desc: { en: "Family pizza-baking challenge, weekend bicycle rides, or strategic board games like Catan.", hi: "मिलकर पिज्जा बनाना, वीकेंड पर साइकिल चलाना या बोर्ड गेम खेलना।" } }
+              { age: { en: "Toddlers (1 to 3 Years)", hi: "टॉडलर्स (1 से 3 वर्ष)" }, desc: { en: "Water pouring and colander sensory play on the balcony floor; Cardboard delivery box tunnel crawling.", hi: "बालकनी में पानी और बर्तनों से संवेदी खेल; गत्ते के डिब्बे की सुरंग बनाकर रेंगना।" } },
+              { age: { en: "Preschoolers (3 to 5 Years)", hi: "प्रीस्कूलर (3 से 5 वर्ष)" }, desc: { en: "Pretend grocery store roleplay with empty boxes; Outdoor scavenger hunt for leaves and smooth pebbles in a park.", hi: "खाली डिब्बों के साथ दुकान-दुकान खेलना; पार्क में पत्ते और कंकड़ ढूंढने का खेल।" } },
+              { age: { en: "School-Age (6 to 10 Years)", hi: "स्कूली बच्चे (6 से 10 वर्ष)" }, desc: { en: "Strategy board games (Ludo, Chess); Building tall architectural towers out of old newspapers and adhesive tape.", hi: "रणनीति वाले बोर्ड गेम (लूडो, शतरंज); पुराने अखबार और टेप से ऊंची मीनार बनाना।" } },
+              { age: { en: "Adolescents (11 to 18 Years)", hi: "किशोर (11 से 18 वर्ष)" }, desc: { en: "Family pizza-baking challenge, weekend bicycle rides, or strategic board games like Catan.", hi: "मिलकर पिज्जा बनाना, वीकेंड पर साइकिल चलाना या बोर्ड गेम खेलना।" } }
             ]
           }
         },
         "toddler": {
-          title: { en: "Toddler Years (1 to 3 Years): Tantrums, Thumb-Sucking & Emotional Security", hi: "टॉडलर वर्ष (1 से 3 वर्ष): नखरे (Tantrums), अंगूठा चूसना व भावनात्मक सुरक्षा" },
-          intro: { en: "Toddlers experience rapid emotional growth but lack the vocabulary to express frustration, leading to meltdowns.", hi: "इस उम्र में बच्चे अपनी भावनाओं को शब्दों में नहीं कह पाते, जिससे वे गुस्सा करते हैं।" },
-          scenarios: [
+          title: { en: "Guidebook Chapter: Toddler Years (1 to 3 Years)", hi: "गाइडबुक अध्याय: टॉडलर वर्ष (1 से 3 वर्ष)" },
+          intro: { en: "The toddler stage is marked by astonishing neurological growth, linguistic exploration, and fierce emotional independence. Here is how to navigate common behavioral challenges step-by-step.", hi: "टॉडलर अवस्था में तेजी से मानसिक विकास और भावनाओं की तीव्रता होती है। यहाँ चरण-दर-चरण समाधान दिए गए हैं।" },
+          chapters: [
             {
-              problem: { en: "Problem 1: Thumb-Sucking Dependency. Your 2.5-year-old sucks their thumb whenever tired, and teeth are tilting.", hi: "समस्या 1: अंगूठा चूसना। आपका ढाई साल का बच्चा थकान में अंगूठा चूसता है।" },
-              solution: { en: "Never shame or use bitter medicine (causes anxiety). Praise them during the day when hands are busy playing: 'Look how nicely your hands are playing with blocks!'", hi: "कभी डांटें या कड़वी दवा न लगाएं। दिन में जब उनके हाथ खेल रहे हों तो उनकी तारीफ करें।" }
+              problem: { en: "Problem 1: Thumb-Sucking & Pacifier Dependency", hi: "समस्या 1: अंगूठा चूसने की आदत" },
+              solution: { 
+                en: "<strong>Real-Life Scenario:</strong> Your 2.5-year-old child sucks their thumb aggressively whenever they are sleepy or watching television, and their upper teeth are starting to tilt outward.<br><br>" +
+                   "<strong>Step-by-Step Solution:</strong><br>" +
+                   "1. <strong>Never Shame or Punish:</strong> Scolding, mocking, or applying bitter medicine on the thumb triggers anxiety, which actually <em>increases</em> the need for self-soothing thumb-sucking.<br>" +
+                   "2. <strong>Identify Triggers:</strong> Notice when they do it (boredom, fatigue, screen time).<br>" +
+                   "3. <strong>Positive Reinforcement:</strong> During the day when their hands are engaged in building blocks or clay, praise them warmly: <em>'Look how nicely your hands are playing with these toys!'</em><br>" +
+                   "4. <strong>Provide Substitutes:</strong> Offer a soft comfort blanket or stuffed plush toy to cuddle instead.",
+                hi: "<strong>वास्तविक स्थिति:</strong> आपका ढाई साल का बच्चा थकान या टीवी देखते समय अंगूठा चूसता है और उसके दांत बाहर की ओर झुकने लगे हैं।<br><br>" +
+                   "<strong>चरण-दर-चरण समाधान:</strong><br>" +
+                   "1. <strong>कभी डांटें या शर्मिंदा न करें:</strong> ऐसा करने से बच्चे में तनाव बढ़ता है और अंगूठा चूसने की आदत और पक्की हो जाती है।<br>" +
+                   "2. <strong>सकारात्मक प्रशंसा करें:</strong> दिन में जब वे ब्लॉक से खेल रहे हों, तो कहें: <em>'देखो तुम्हारे हाथ कितने अच्छे से खेल रहे हैं!'</em><br>" +
+                   "3. <strong>विकल्प दें:</strong> अंगूठे की जगह कोई मुलायम खिलौना या कम्बल पास रखें।" 
+              }
             },
             {
-              problem: { en: "Problem 2: Aggressive Tantrums (Hitting/Biting). When a toy is taken away, they bite or hit in frustration.", hi: "समस्या 2: आक्रामक नखरे (काटना या मारना)। खिलौना छीनने पर बच्चा काटने लगता है।" },
-              solution: { en: "Stay calm, block the hit gently, and say firmly: 'I cannot let you hit or bite. If you're angry, stomp your feet.'", hi: "शांत रहें, हाथ पकड़कर दृढ़ता से कहें: 'मैं तुम्हें मारने नहीं दूँगा। गुस्सा है तो पैर पटकें।'" }
+              problem: { en: "Problem 2: Aggressive Tantrums (Hitting & Biting)", hi: "समस्या 2: आक्रामक नखरे (मारना और काटना)" },
+              solution: { 
+                en: "<strong>Real-Life Scenario:</strong> When you take a forbidden object away from your 2-year-old, they instantly turn around and bite your arm or hit your face in pure frustration.<br><br>" +
+                   "<strong>Step-by-Step Solution:</strong><br>" +
+                   "1. <strong>Stay Calm & Block:</strong> Do not hit back or shout. Calmly block their hand or mouth with a neutral expression.<br>" +
+                   "2. <strong>Set Firm Boundaries with Simple Words:</strong> Look them in the eyes and say firmly: <em>'I cannot let you hit or bite. Biting hurts. If you are angry, stomp your feet.'</em><br>" +
+                   "3. <strong>Teach Emotional Regulation:</strong> Help them take a deep breath. Once calm, teach them verbal alternatives.",
+                hi: "<strong>वास्तविक स्थिति:</strong> कोई चीज वापस लेने पर 2 साल का बच्चा गुस्से में हाथ उठाने या काटने लगता है।<br><br>" +
+                   "<strong>चरण-दर-चरण समाधान:</strong><br>" +
+                   "1. <strong>शांत रहें और रोकें:</strong> वापस न मारें। दृढ़ता से रोकें और आँखों में देखकर कहें: <em>'मैं तुम्हें काटने नहीं दूँगा। इससे दर्द होता है।'</em><br>" +
+                   "2. <strong>भावनाओं को नियंत्रित करना सिखाएं:</strong> गहरी सांस लेना सिखाएं।" 
+              }
             },
             {
-              problem: { en: "Problem 3: Good Parenting Foundations. Whining and pulling your clothes constantly while you cook.", hi: "समस्या 3: अच्छी पेरेंटिंग की नींव। खाना बनाते वक्त लगातार रोना और खींचना।" },
-              solution: { en: "Practice 'Time-In' before expecting independence. Give them 2 mins of undivided loving attention first to fill their emotional cup.", hi: "स्वतंत्रता की उम्मीद करने से पहले 2 मिनट का पूरा प्यार और ध्यान दें ताकि उनका मन भरा रहे।" }
+              problem: { en: "Problem 3: Good Parenting Foundations (Building Emotional Security)", hi: "समस्या 3: अच्छी पेरेंटिंग (भावनात्मक सुरक्षा)" },
+              solution: { 
+                en: "<strong>Real-Life Scenario:</strong> You are busy cooking dinner in the kitchen, and your toddler is whining, clinging, and pulling your clothes for constant attention.<br><br>" +
+                   "<strong>Step-by-Step Solution:</strong><br>" +
+                   "1. <strong>Practice 'Time-In' First:</strong> Before expecting independence, fill their emotional cup. Stop for 2 minutes, squat down, give an undivided warm hug, and say: <em>'Mumma/Papa is right here. Let's finish cooking together in 5 minutes.'</em><br>" +
+                   "2. <strong>Involve Them Safely:</strong> Give them a plastic bowl and a safe wooden spoon on the kitchen floor to 'cook' alongside you.",
+                hi: "<strong>वास्तविक स्थिति:</strong> खाना बनाते वक्त बच्चा लगातार खींचता है और ध्यान आकर्षित करने के लिए रोता है।<br><br>" +
+                   "<strong>चरण-दर-चरण समाधान:</strong><br>" +
+                   "1. <strong>पहले प्यार दें ('Time-In'):</strong> खाना बनाने से पहले 2 मिनट का पूरा ध्यान दें और गले लगाएं।<br>" +
+                   "2. <strong>रसोई में शामिल करें:</strong> उन्हें प्लास्टिक का बर्तन और चम्मच देकर पास बैठाएं।" 
+              }
             }
           ],
           plays: {
-            title: { en: "Suggestive Bonding Play", hi: "बॉन्डिंग और खेल" },
+            title: { en: "Suggestive Bonding Play for Toddlers", hi: "टॉडलर्स के लिए बॉन्डिंग और खेल" },
             items: [
-              { age: { en: "Activity", hi: "गतिविधि" }, desc: { en: "Water pouring and colander sensory play; Cardboard carton tunnel crawling.", hi: "पानी और बर्तनों से खेलना; गत्ते के डिब्बे से सुरंग का खेल।" } }
+              { age: { en: "Sensory & Motor Play", hi: "संवेदी और मोटर खेल" }, desc: { en: "Water pouring with cups and colander on the balcony floor; Cardboard delivery box tunnel crawling.", hi: "बालकनी में पानी और बर्तनों से संवेदी खेल; गत्ते के डिब्बे की सुरंग बनाकर रेंगना।" } }
             ]
           }
         },
         "preschool": {
-          title: { en: "Preschool Years (3 to 5 Years): Bedtime, Screens & Money Basics", hi: "प्रीस्कूलर वर्ष (3 से 5 वर्ष): सोने का समय, स्क्रीन और पैसों की समझ" },
-          intro: { en: "Preschoolers test boundaries and develop early cognitive awareness and financial curiosity.", hi: "इस उम्र में बच्चे नियम तोड़ते हैं और चीजों को तेजी से सीखते हैं।" },
-          scenarios: [
+          title: { en: "Guidebook Chapter: Preschool Years (3 to 5 Years)", hi: "गाइडबुक अध्याय: प्रीस्कूलर वर्ष (3 से 5 वर्ष)" },
+          intro: { en: "Preschoolers test authority, master language, and begin developing complex social and financial awareness. Here is how to guide them effectively.", hi: "इस उम्र में बच्चे नियमों की सीमाएं परखते हैं और शुरुआती सामाजिक व आर्थिक समझ विकसित करते हैं।" },
+          chapters: [
             {
-              problem: { en: "Problem 1: Bedtime Resistance. Negotiating for 'one more story' and refusing to sleep for an hour at night.", hi: "समस्या 1: रात को सोने में नखरे। एक और कहानी की जिद करना और सोने से मना करना।" },
-              solution: { en: "Establish a calm 30-min wind-down routine. Offer limited choices: 'Do you want the animal book or dinosaur book tonight?' Once read, lights stay off.", hi: "30 मिनट की शांत दिनचर्या बनाएं। सीमित विकल्प दें: 'आज कौन सी किताब पढ़नी है?'" }
+              problem: { en: "Problem 1: Bedtime Resistance & Negotiation Tactics", hi: "समस्या 1: सोने में आनाकानी और लंबी जिद्द" },
+              solution: { 
+                en: "<strong>Real-Life Scenario:</strong> Every single night at 9 PM, your 4-year-old starts negotiating ('One more story! I need water! I need to pee!') and refuses to sleep for over an hour.<br><br>" +
+                   "<strong>Step-by-Step Solution:</strong><br>" +
+                   "1. <strong>Predictable Wind-Down Routine:</strong> Start dimming lights 30 minutes before sleep. Zero screens allowed.<br>" +
+                   "2. <strong>Empower with Limited Choices:</strong> Give them a sense of control: <em>'It's bedtime now. Do you want to read the animal book or the dinosaur book tonight?'</em><br>" +
+                   "3. <strong>Hold the Boundary:</strong> Once the story is finished, lights stay off. If they get out of bed, calmly walk them back without engaging in long conversations.",
+                hi: "<strong>वास्तविक स्थिति:</strong> रात को 9 बजे 4 साल का बच्चा एक और कहानी या पानी मांगने की लंबी जिद करता है और सोने से मना करता है।<br><br>" +
+                   "<strong>चरण-दर-चरण समाधान:</strong><br>" +
+                   "1. <strong>निश्चित दिनचर्या बनाएं:</strong> सोने से 30 मिनट पहले लाइट डिम करें, स्क्रीन बंद करें।<br>" +
+                   "2. <strong>सीमित विकल्प दें:</strong> <em>'कौन सी किताब पढ़नी है?'</em><br>" +
+                   "3. <strong>नियम पर कायम रहें:</strong> कहानी खत्म होने के बाद बत्ती बुझा दें।" 
+              }
             },
             {
-              problem: { en: "Problem 2: Screen Addiction During Meals. Refusing to eat unless a mobile phone playing rhymes is kept in front.", hi: "समस्या 2: खाने के समय स्क्रीन की लत। फोन पर राइम्स चले बिना खाना न खाना।" },
-              solution: { en: "Wean off gradually over 3 days by reducing brightness/volume, then placing the phone away. Sit and eat the exact same meal together.", hi: "3 दिनों में धीरे-धीरे ब्राइटनेस और वॉल्यूम कम करके फोन हटाएं। साथ बैठकर एक ही खाना खाएं।" }
+              problem: { en: "Problem 2: Screen Time Addiction & Mealtime Tantrums", hi: "समस्या 2: स्क्रीन की लत और खाने के समय नखरे" },
+              solution: { 
+                en: "<strong>Real-Life Scenario:</strong> Your 4-year-old refuses to eat a single bite of food unless a mobile phone playing rhymes is kept right in front of them.<br><br>" +
+                   "<strong>Step-by-Step Solution:</strong><br>" +
+                   "1. <strong>Gradual Weaning:</strong> Do not stop abruptly if it causes a chaotic meltdown. Reduce screen brightness and volume by 50% for 2 days, then remove the phone entirely.<br>" +
+                   "2. <strong>Family Modeling:</strong> Sit and eat the exact same meal together at the dining table. Never use screens while adults eat.<br>" +
+                   "3. <strong>Engage the Senses:</strong> Talk about the food's colors and textures: <em>'Look at this bright yellow dal! Can you make a loud crunch sound with this cucumber?'</em>",
+                hi: "<strong>वास्तविक स्थिति:</strong> मोबाइल पर वीडियो चले बिना बच्चा एक निवाला भी नहीं खाता।<br><br>" +
+                   "<strong>चरण-दर-चरण समाधान:</strong><br>" +
+                   "1. <strong>धीरे-धीरे आदत छुड़ाएं:</strong> 2 दिन ब्राइटनेस और आवाज आधी करें, फिर फोन हटा दें।<br>" +
+                   "2. <strong>साथ बैठकर खाएं:</strong> परिवार के साथ मेज पर बैठकर खाएं।" 
+              }
             },
             {
-              problem: { en: "Problem 3: Financial Management. Massive tantrum at the toy store counter over an expensive toy seen on ads.", hi: "समस्या 3: पैसों की समझ। खिलौने की दुकान पर महंगी चीज के लिए जिद करना।" },
-              solution: { en: "Introduce a transparent piggy bank. Explain: 'We can buy this, but we need to save pocket money in your piggy bank for 3 weeks first.'", hi: "पारदर्शी गुल्लक दें। समझाएं: 'हम इसे खरीदेंगे, पर 3 हफ्ते गुल्लक में पैसे बचाने होंगे।'" }
+              problem: { en: "Problem 3: Financial Management (Basic Value of Money)", hi: "समस्या 3: पैसों की बुनियादी समझ" },
+              solution: { 
+                en: "<strong>Real-Life Scenario:</strong> Your 5-year-old throws a massive tantrum at the toy store counter because you refused to buy an expensive toy they saw on YouTube ads.<br><br>" +
+                   "<strong>Step-by-Step Solution:</strong><br>" +
+                   "1. <strong>Validate Desire, Hold the Line:</strong> Acknowledge their wish without caving: <em>'That toy looks so fun! But we are not buying toys today.'</em><br>" +
+                   "2. <strong>Introduce Savings:</strong> Give them a transparent piggy bank. Whenever they want a non-birthday toy, explain calmly: <em>'We can buy this, but we need to save our coins in your piggy bank for 3 weeks first.'</em> This teaches patience and delayed gratification.",
+                hi: "<strong>वास्तविक स्थिति:</strong> खिलौने की दुकान पर विज्ञापन में देखा हुआ महंगा खिलौना मांगने के लिए बच्चा जिद्द करता है।<br><br>" +
+                   "<strong>चरण-दर-चरण समाधान:</strong><br>" +
+                   "1. <strong>इच्छा समझें पर झुकें नहीं:</strong> <em>'खिलौना सुंदर है, पर आज हम नहीं खरीदेंगे।'</em><br>" +
+                   "2. <strong>बचत करना सिखाएं:</strong> पारदर्शी गुल्लक देकर 3 हफ्ते पैसे बचाने की सीख दें।" 
+              }
             }
           ],
           plays: {
-            title: { en: "Suggestive Bonding Play", hi: "बॉन्डिंग और खेल" },
+            title: { en: "Suggestive Bonding Play for Preschoolers", hi: "प्रीस्कूलर के लिए बॉन्डिंग और खेल" },
             items: [
-              { age: { en: "Activity", hi: "गतिविधि" }, desc: { en: "Pretend grocery shop roleplay with empty boxes; Outdoor scavenger hunt for leaves.", hi: "खाली डिब्बों से दुकान-दुकान खेलना; पार्क में पत्ते ढूंढना।" } }
+              { age: { en: "Cognitive & Social Play", hi: "बौद्धिक और सामाजिक खेल" }, desc: { en: "Pretend grocery store roleplay with empty boxes and play money; Outdoor scavenger hunt in a local park.", hi: "खाली डिब्बों से दुकान-दुकान खेलना; पार्क में छिपी वस्तुएं ढूंढना।" } }
             ]
           }
         },
         "school": {
-          title: { en: "School-Age Years (6 to 10 Years): School Refusal, Homework & Bullying", hi: "स्कूली वर्ष (6 से 10 वर्ष): स्कूल जाने से डर, होमवर्क और बुलिंग" },
-          intro: { en: "School-age children face academic pressure, peer interactions, and emotional resilience building.", hi: "स्कूली बच्चों पर पढ़ाई और साथियों के बीच खुद को साबित करने का दबाव होता है।" },
-          scenarios: [
+          title: { en: "Guidebook Chapter: School-Age Years (6 to 10 Years)", hi: "गाइडबुक अध्याय: स्कूली वर्ष (6 से 10 वर्ष)" },
+          intro: { en: "School-age children navigate academic pressures, peer socialization, and emotional independence. Here is how parents can support their mental resilience.", hi: "इस उम्र में बच्चे पढ़ाई, स्कूल के दबाव और दोस्ती के बीच संतुलन सीखते हैं। माता-पिता ऐसे सहयोग करें।" },
+          chapters: [
             {
-              problem: { en: "Problem 1: Monday Morning Stomachaches. Complaining of stomachache every Monday to avoid school.", hi: "समस्या 1: सोमवार सुबह पेट दर्द। स्कूल जाने से बचने के लिए पेट दर्द का नाटक करना।" },
-              solution: { en: "Look past the physical symptom for emotional triggers (bullying or test anxiety). Ask gently: 'Is something tricky at school?'", hi: "शारीरिक दर्द के पीछे छिपे डर या बुलिंग को समझें। प्यार से पूछें: 'स्कूल में कोई परेशानी है क्या?'" }
+              problem: { en: "Problem 1: School Refusal & Somatic Complaints (Monday Morning Stomachaches)", hi: "समस्या 1: स्कूल जाने से डर और पेट दर्द के बहाने" },
+              solution: { 
+                en: "<strong>Real-Life Scenario:</strong> Every Monday morning, your 8-year-old complains of a severe stomachache and begs to stay home from school, but by afternoon they are playing happily.<br><br>" +
+                   "<strong>Step-by-Step Solution:</strong><br>" +
+                   "1. <strong>Look Past Physical Symptoms:</strong> Recognize that stress and anxiety manifest as real physical pain (somatic complaints) in children.<br>" +
+                   "2. <strong>Investigate Triggers Privately:</strong> Sit down over a snack and ask open-ended questions: <em>'Is there someone at school or a subject that feels tricky or scary right now?'</em><br>" +
+                   "3. <strong>Collaborative Problem Solving:</strong> Address the root cause (bullying, test fear) rather than forcing them blindly or calling them a liar.",
+                hi: "<strong>वास्तविक स्थिति:</strong> हर सोमवार सुबह 8 साल का बच्चा पेट दर्द का बहाना बनाकर स्कूल जाने से मना करता है।<br><br>" +
+                   "<strong>चरण-दर-चरण समाधान:</strong><br>" +
+                   "1. <strong>दर्द के पीछे का तनाव समझें:</strong> मानसिक तनाव बच्चों में पेट दर्द के रूप में उभरता है।<br>" +
+                   "2. <strong>प्यार से कारण पूछें:</strong> <em>'स्कूल में कोई बात परेशान कर रही है क्या?'</em>" 
+              }
             },
             {
-              problem: { en: "Problem 2: Homework Procrastination. Delaying school homework until 9 PM, leading to late-night tears.", hi: "समस्या 2: होमवर्क टालना। रात 9 बजे तक होमवर्क न करना और फिर रोना।" },
-              solution: { en: "Use the Pomodoro Technique: 20 mins of focused study followed by a 5-min movement break. Let them choose subject order.", hi: "पोमोडोरो तकनीक अपनाएं: 20 मिनट पढ़ाई, फिर 5 मिनट का ब्रेक। विषयों का क्रम चुनने दें।" }
+              problem: { en: "Problem 2: Time Management & Homework Procrastination", hi: "समस्या 2: समय प्रबंधन और होमवर्क टालना" },
+              solution: { 
+                en: "<strong>Real-Life Scenario:</strong> Your 9-year-old delays doing their school homework until 9 PM, leading to late nights, tears, and exhaustion for the whole family.<br><br>" +
+                   "<strong>Step-by-Step Solution:</strong><br>" +
+                   "1. <strong>Use the Pomodoro Technique for Kids:</strong> Break homework into manageable chunks: 20 minutes of focused study, followed by a 5-minute physical movement break.<br>" +
+                   "2. <strong>Autonomy in Order:</strong> Let them pick which subject to tackle first to give them a sense of control.<br>" +
+                   "3. <strong>Establish a Dedicated Study Zone:</strong> Ensure a quiet, screen-free desk space free from household distractions.",
+                hi: "<strong>वास्तविक स्थिति:</strong> 9 साल का बच्चा रात 9 बजे तक होमवर्क टालता है, जिससे अंत में घर में तनाव और रोना-धोना होता है।<br><br>" +
+                   "<strong>चरण-दर-चरण समाधान:</strong><br>" +
+                   "1. <strong>पोमोडोडो तकनीक अपनाएं:</strong> 20 मिनट पढ़ाई, फिर 5 मिनट का ब्रेक दें।<br>" +
+                   "2. <strong>पढ़ाई की जगह तय करें:</strong> घर में शांत कोना बनाएं जहाँ स्क्रीन न हो।" 
+              }
             },
             {
-              problem: { en: "Problem 3: Peer Pressure & Bullying. Coming home sad because a classmate mocked their shoes or lunchbox.", hi: "समस्या 3: साथियों का दबाव और बुलिंग। साथी द्वारा मजाक उड़ाने पर बच्चा उदास हो।" },
-              solution: { en: "Role-play at home: Practice standing tall, making eye contact, and saying firmly: 'Stop that, I don't like it,' and walking away.", hi: "घर पर अभ्यास करें: आंखें मिलाकर दृढ़ता से कहें 'बंद करो, मुझे पसंद नहीं,' और वहां से हट जाएं।" }
+              problem: { en: "Problem 3: Peer Pressure & Dealing with Name-Calling / Bullying", hi: "समस्या 3: साथियों का दबाव और बुलिंग से निपटना" },
+              solution: { 
+                en: "<strong>Real-Life Scenario:</strong> Your 8-year-old comes home quiet and sad because a classmate made fun of their shoes or lunchbox.<br><br>" +
+                   "<strong>Step-by-Step Solution:</strong><br>" +
+                   "1. <strong>Validate and Comfort:</strong> Listen without immediately rushing to fix it: <em>'That must have felt very hurtful. I am glad you told me.'</em><br>" +
+                   "2. <strong>Role-Play Assertiveness at Home:</strong> Practice standing tall, making strong eye contact, and saying in a firm voice: <em>'Stop that, I don't like it,'</em> and walking away.<br>" +
+                   "3. <strong>Encourage Reporting:</strong> Assure them that informing a teacher or parent is an act of courage, not 'snitching'.",
+                hi: "<strong>वास्तविक स्थिति:</strong> क्लासमेट द्वारा मजाक उड़ाए जाने पर 8 साल का बच्चा उदास होकर घर लौटता है।<br><br>" +
+                   "<strong>चरण-दर-चरण समाधान:</strong><br>" +
+                   "1. <strong>सहानुभूति रखें:</strong> <em>'यह सुनकर तुम्हें बुरा लगा होगा, तुमने मुझे बताया यह बहुत अच्छा किया।'</em><br>" +
+                   "2. <strong>आत्मविश्वास का अभ्यास करें:</strong> <em>'बंद करो, मुझे पसंद नहीं'</em> कहकर वहां से हट जाने का अभ्यास कराएं।" 
+              }
             }
           ],
           plays: {
-            title: { en: "Suggestive Bonding Play", hi: "बॉन्डिंग और खेल" },
+            title: { en: "Suggestive Bonding Play for School-Age Children", hi: "स्कूली बच्चों के लिए बॉन्डिंग और खेल" },
             items: [
-              { age: { en: "Activity", hi: "गतिविधि" }, desc: { en: "Strategy board games (Ludo, Chess); Newspaper and tape tower building challenge.", hi: "रणनीति वाले बोर्ड गेम (लूडो, शतरंज); अखबार और टेप से टावर बनाने की चुनौती।" } }
+              { age: { en: "Strategic & Cooperative Play", hi: "रणनीतिक और सहयोगात्मक खेल" }, desc: { en: "Strategy board games (Ludo, Chess); Building tall architectural towers out of old newspapers and adhesive tape.", hi: "बोर्ड गेम (लूडो, शतरंज); पुराने अखबार और टेप से टावर बनाने की चुनौती।" } }
             ]
           }
         },
         "adolescent": {
-          title: { en: "Adolescent Years (11 to 18 Years): Mood Swings, Phones, Sex Ed & Finances", hi: "किशोरावस्था (11 से 18 वर्ष): मूड स्विंग्स, फोन, सेक्स एजुकेशन और वित्त" },
-          intro: { en: "Adolescence brings puberty, brain wiring changes, and a strong craving for independence.", hi: "किशोरावस्था में हॉर्मोनल बदलाव, दिमागी विकास और स्वतंत्रता की तीव्र इच्छा होती है।" },
-          scenarios: [
+          title: { en: "Guidebook Chapter: Adolescent Years (11 to 18 Years)", hi: "गाइडबुक अध्याय: किशोरावस्था (11 से 18 वर्ष)" },
+          intro: { en: "Adolescence is a transformative period involving pubertal development, brain rewiring, and a healthy search for identity. Here is how parents can remain a trusted anchor.", hi: "किशोरावस्था में शारीरिक बदलाव, मस्तिष्क का विकास और अपनी पहचान की तलाश होती है। माता-पिता ऐसे मार्गदर्शन करें।" },
+          chapters: [
             {
-              problem: { en: "Problem 1: Door-Slamming & Mood Swings. Slamming bedroom doors and reacting with anger to simple questions.", hi: "समस्या 1: दरवाजा पटकना और अत्यधिक गुस्सा। छोटे सवाल पर भी भड़क जाना।" },
-              solution: { en: "Stay a calm anchor against hormonal flooding. Say: 'I see you're overwhelmed. I'm here whenever you want to talk.'", hi: "हॉर्मोनल बदलावों के बीच शांत सहारा बनें। कहें: 'मैं समझ रहा हूँ तुम परेशान हो, बात करनी हो तो मैं हूँ।'" }
+              problem: { en: "Problem 1: Severe Mood Swings & Communication Shutdown (Door-Slamming)", hi: "समस्या 1: गंभीर मूड स्विंग्स और बातचीत बंद करना" },
+              solution: { 
+                en: "<strong>Real-Life Scenario:</strong> Your 14-year-old slams their bedroom door shut, refuses to speak at the dinner table, and reacts with extreme anger to simple questions like 'How was your day?'<br><br>" +
+                   "<strong>Step-by-Step Solution:</strong><br>" +
+                   "1. <strong>Understand Brain Wiring:</strong> Puberty triggers intense emotional flooding and hormonal surges. Do not take attitude personally.<br>" +
+                   "2. <strong>Stay a Calm Anchor:</strong> Instead of shouting back, remain steady: <em>'I see you are overwhelmed right now. I am always here whenever you feel like talking.'</em><br>" +
+                   "3. <strong>Respect Privacy While Maintaining Safety:</strong> Give them space to cool down while keeping non-negotiable household respect rules clear.",
+                hi: "<strong>वास्तविक स्थिति:</strong> 14 साल का किशोर अपना दरवाजा पटक देता है और सामान्य सवाल पर भी भड़क जाता है।<br><br>" +
+                   "<strong>चरण-दर-चरण समाधान:</strong><br>" +
+                   "1. <strong>हॉर्मोनल बदलाव समझें:</strong> इस उम्र में भावनाएं तीव्र होती हैं, इसे व्यक्तिगत रूप से न लें।<br>" +
+                   "2. <strong>शांत सहारा बनें:</strong> <em>'मैं समझ रहा हूँ तुम परेशान हो, बात करनी हो तो मैं हूँ।'</em>" 
+              }
             },
             {
-              problem: { en: "Problem 2: Late-Night Phone Scrolling. Staying awake till 3 AM on Instagram, causing daytime fatigue.", hi: "समस्या 2: रातभर फोन चलाना। इंस्टाग्राम पर जागते रहने से दिन में थकान होना।" },
-              solution: { en: "Co-create a family rule: All phones dock in the charging station in parents' room at 10 PM so everyone gets proper rest.", hi: "नियम बनाएं: रात 10 बजे सभी फोन माता-पिता के कमरे में चार्जिंग पर रखे जाएंगे।" }
+              problem: { en: "Problem 2: Digital & Social Media Addiction", hi: "समस्या 2: सोशल मीडिया और फोन की लत" },
+              solution: { 
+                en: "<strong>Real-Life Scenario:</strong> Your 15-year-old stays awake until 3 AM under the blanket scrolling through Instagram, resulting in severe daytime fatigue and dropping school grades.<br><br>" +
+                   "<strong>Step-by-Step Solution:</strong><br>" +
+                   "1. <strong>Avoid Sudden Confiscation:</strong> Snatching phones triggers secrecy and rebellion. Hold a calm family meeting instead.<br>" +
+                   "2. <strong>Co-Create a Charging Station Rule:</strong> Establish that all phones and tablets dock in the charging station in the parents' room at 10 PM so everyone's brain gets proper rest. Parents must model this too!",
+                hi: "<strong>वास्तविक स्थिति:</strong> 15 साल का बच्चा रात 3 बजे तक इंस्टाग्राम चलाता है, जिससे पढ़ाई और सेहत पर असर पड़ता है।<br><br>" +
+                   "<strong>चरण-दर-चरण समाधान:</strong><br>" +
+                   "1. <strong>अचानक फोन न छीनें:</strong> इससे बच्चा छुपकर चलाना सीखेगा।<br>" +
+                   "2. <strong>नियम बनाएं:</strong> रात 10 बजे सभी फोन माता-पिता के कमरे में चार्जिंग पर रखे जाएं।" 
+              }
             },
             {
-              problem: { en: "Problem 3: Sex Education & Body Safety. Anxious about discussing puberty, relationships, and consent.", hi: "समस्या 3: सेक्स एजुकेशन और शरीर की सुरक्षा। प्यूबर्टी और रिश्तों पर बात करने में झिझक।" },
-              solution: { en: "Keep it factual and ongoing: 'As your body changes, you can ask me anything without judgment.' Prevents web misinformation.", hi: "तथ्यपरक बात करें: 'शरीर में बदलाव के साथ तुम बिना झिझक मुझसे कुछ भी पूछ सकते हो।'" }
+              problem: { en: "Problem 3: Age-Appropriate Sex Education & Body Safety", hi: "समस्या 3: सेक्स एजुकेशन और शरीर की सुरक्षा" },
+              solution: { 
+                en: "<strong>Real-Life Scenario:</strong> You suspect your teenager is browsing explicit content online or feel anxious about how to talk to them about bodily changes, relationships, and consent.<br><br>" +
+                   "<strong>Step-by-Step Solution:</strong><br>" +
+                   "1. <strong>Keep it Factual and Ongoing:</strong> Replace awkward one-time lectures with comfortable, ongoing dialogues.<br>" +
+                   "2. <strong>Open Door Policy:</strong> Say clearly: <em>'As your body changes during puberty, you might have questions about relationships, privacy, and respect. You can always ask me anything without judgment.'</em> This protects them from online misinformation.",
+                hi: "<strong>वास्तविक स्थिति:</strong> किशोरों में शारीरिक बदलाव और इंटरनेट सामग्री को लेकर माता-पिता में बात करने की झिझक होती है।<br><br>" +
+                   "<strong>चरण-दर-चरण समाधान:</strong><br>" +
+                   "1. <strong>तथ्यपरक बात करें:</strong> एक बार का भारी भाषण देने के बजाय सहज संवाद रखें।<br>" +
+                   "2. <strong>भरोसा दें:</strong> <em>'शरीर में बदलाव के साथ तुम बिना झिझक मुझसे कुछ भी पूछ सकते हो।'</em>" 
+              }
             },
             {
-              problem: { en: "Problem 4: Financial Management & Pocket Money. Demanding money constantly and spending impulsively.", hi: "समस्या 4: पैसों का प्रबंधन और पॉकेट मनी। बार-बार पैसे मांगना और बिना सोचे खर्च करना।" },
-              solution: { en: "Transition to a fixed monthly allowance budget for personal outings. If spent in week 1, they manage without until next month.", hi: "मासिक बजट दें। अगर हफ्ता 1 में सारा खर्च कर दिया, तो अगले महीने तक खुद मैनेज करना सिखाएं।" }
+              problem: { en: "Problem 4: Adolescent Financial Literacy & Pocket Money Management", hi: "समस्या 4: किशोरों के लिए वित्तीय प्रबंधन और पॉकेट मनी" },
+              solution: { 
+                en: "<strong>Real-Life Scenario:</strong> Your 16-year-old demands money constantly for outings with friends and spends it impulsively on branded clothes or food delivery apps without saving a rupee.<br><br>" +
+                   "<strong>Step-by-Step Solution:</strong><br>" +
+                   "1. <strong>Transition to a Monthly Allowance:</strong> Give a fixed sum at the start of the month.<br>" +
+                   "2. <strong>Teach Natural Consequences:</strong> Explain calmly: <em>'This covers your personal outings and treats for the month. If you spend it all in week one, you will need to manage without until next month.'</em> This builds real-world budgeting skills.",
+                hi: "<strong>वास्तविक स्थिति:</strong> 16 साल का किशोर पार्टी और कपड़ों के लिए बार-बार पैसे मांगता है और बिना सोचे खर्च करता है।<br><br>" +
+                   "<strong>चरण-दर-चरण समाधान:</strong><br>" +
+                   "1. <strong>मासिक बजट दें:</strong> महीने की शुरुआत में एक तय रकम दें।<br>" +
+                   "2. <strong>परिणाम से सिखाएं:</strong> <em>'यह इस महीने का खर्च है। अगर पहले हफ्ते में खत्म कर दिया, तो अगले महीने तक खुद मैनेज करना होगा।'</em>" 
+              }
             }
           ],
           plays: {
-            title: { en: "Suggestive Bonding Play", hi: "बॉन्डिंग और खेल" },
+            title: { en: "Suggestive Bonding Play for Adolescents", hi: "किशोरों के लिए बॉन्डिंग और खेल" },
             items: [
-              { age: { en: "Activity", hi: "गतिविधि" }, desc: { en: "Family cooking/baking challenge, weekend bicycle rides, or strategic board games like Catan.", hi: "मिलकर पिज्जा या केक बनाना, वीकेंड साइकिल राइड या बोर्ड गेम।" } }
+              { age: { en: "Collaborative & Intellectual Play", hi: "सहयोगात्मक और बौद्धिक खेल" }, desc: { en: "Family pizza-baking challenge, weekend bicycle rides, or strategic board games like Catan.", hi: "मिलकर पिज्जा बनाना, वीकेंड पर साइकिल चलाना या बोर्ड गेम खेलना।" } }
             ]
           }
         }
@@ -336,28 +487,30 @@
         const isHi = (toolLang === "hi");
         const data = guideDatabase[key];
 
-        const scenariosHtml = data.scenarios.map(s => `
-          <div class="scenario-card">
-            <h4><i class="fa-solid fa-triangle-exclamation" style="color:#ea580c;"></i> ${s.problem[isHi ? 'hi' : 'en']}</h4>
-            <div class="solution-box">
-              <strong><i class="fa-solid fa-circle-check" style="color:#16a34a;"></i> ${isHi ? 'डॉक्टर का सुझाव व समाधान:' : 'Pediatrician\'s Solution & Real-Life Example:'}</strong>
-              ${s.solution[isHi ? 'hi' : 'en']}
-            </div>
+        const chaptersHtml = data.chapters.map(ch => `
+          <div class="guidebook-chapter">
+            <h4><i class="fa-solid fa-book-bookmark" style="color:#ea580c;"></i> ${ch.problem[isHi ? 'hi' : 'en']}</h4>
+            <p>${ch.solution[isHi ? 'hi' : 'en']}</p>
           </div>
         `).join("");
 
         const itemsHtml = data.plays.items.map(i => `
-          <div style="margin-bottom: 8px; font-size: 0.88rem; color: #134e4a;">
+          <div style="margin-bottom: 8px; font-size: 0.9rem; color: #134e4a;">
             <strong>• ${i.age[isHi ? 'hi' : 'en']}:</strong> ${i.desc[isHi ? 'hi' : 'en']}
           </div>
         `).join("");
 
         container.innerHTML = `
           <div class="results-box">
-            <h3><i class="fa-solid fa-book-medical" style="color:var(--brand-primary);"></i> ${data.title[isHi ? 'hi' : 'en']}</h3>
-            <p style="font-size: 0.9rem; color: #475569; margin-bottom: 18px; line-height: 1.6;">${data.intro[isHi ? 'hi' : 'en']}</p>
+            <!-- MEDICAL DISCLAIMER NOTICE -->
+            <div style="background: #fffbeb; border: 1px solid #fde047; border-radius: 12px; padding: 12px 16px; margin-bottom: 20px; font-size: 0.82rem; color: #854d0e;">
+              <i class="fa-solid fa-circle-info"></i> <strong>Medical Disclaimer:</strong> This guide provides standard pediatric and behavioral coping strategies for educational purposes. It does not replace a formal clinical evaluation or psychiatric consultation.
+            </div>
+
+            <h3><i class="fa-solid fa-graduation-cap" style="color:var(--brand-primary);"></i> ${data.title[isHi ? 'hi' : 'en']}</h3>
+            <p style="font-size: 0.92rem; color: #475569; margin-bottom: 20px; line-height: 1.6;">${data.intro[isHi ? 'hi' : 'en']}</p>
             
-            ${scenariosHtml}
+            ${chaptersHtml}
 
             <div class="play-card">
               <h4><i class="fa-solid fa-baseball-bat-ball"></i> ${data.plays.title[isHi ? 'hi' : 'en']}</h4>
@@ -381,19 +534,19 @@
 
         if (toolLang === "hi") {
           if (btnText) btnText.textContent = "Read in English";
-          if (titleEl) titleEl.textContent = "पेरेंटिंग व्यवहार और बाल मनोविज्ञान मास्टर गाइड";
+          if (titleEl) titleEl.textContent = "पेरेंटिंग व्यवहार और बाल मनोविज्ञान मार्गदर्शिका";
           if (subTitleEl) subTitleEl.textContent = "बाल व्यवहार एवं मनोविज्ञान गाइड";
-          if (submitBtnText) submitBtnText.textContent = "विशेष मार्गदर्शन और समाधान देखें";
-          if (lblAge) lblAge.textContent = "बच्चे की आयु समूह / विषय चुनें";
+          if (submitBtnText) submitBtnText.textContent = "विस्तृत गाइडबुक अध्याय खोलें";
+          if (lblAge) lblAge.textContent = "बच्चे की आयु समूह व व्यवहारिक विषय चुनें";
           if (ctaTitle) ctaTitle.textContent = "व्यक्तिगत व्यवहार परामर्श चाहते हैं?";
           if (ctaDesc) ctaDesc.textContent = "बाल मनोविज्ञान और विकास मूल्यांकन हेतु सेक्टर 3 रोहिणी क्लिनिक में डॉ. दिनेश मित्तल से मिलें।";
           if (ctaBtn) ctaBtn.innerHTML = '<i class="fa-solid fa-calendar-check"></i> क्लिनिक अपॉइंटमेंट बुक करें';
         } else {
           if (btnText) btnText.textContent = "हिन्दी में पढ़ें";
-          if (titleEl) titleEl.textContent = "Parenting Behavior & Child Psychology Master Guide";
+          if (titleEl) titleEl.textContent = "Parenting Behavior & Child Psychology Guide";
           if (subTitleEl) subTitleEl.textContent = "Parenting Behavior & Child Psychology Guide";
-          if (submitBtnText) submitBtnText.textContent = "View Expert Guidance & Solutions";
-          if (lblAge) lblAge.textContent = "Select Child Age Group / Topic";
+          if (submitBtnText) submitBtnText.textContent = "Open Detailed Guidebook Chapter";
+          if (lblAge) lblAge.textContent = "Select Child Age Group & Behavioral Topic";
           if (ctaTitle) ctaTitle.textContent = "Need Personalized Behavioral Counseling?";
           if (ctaDesc) ctaDesc.textContent = "Consult Dr. Dinesh Mittal at our Sector 3 Rohini clinic for professional child psychology and developmental evaluations.";
           if (ctaBtn) ctaBtn.innerHTML = '<i class="fa-solid fa-calendar-check"></i> Book Clinic Consultation';
@@ -409,7 +562,7 @@
 
       document.addEventListener("DOMContentLoaded", () => {
         updateLanguageUI();
-        renderGuide(); // Render default screen solution view
+        renderGuide();
       });
     </script>
 </body>
