@@ -209,13 +209,6 @@
             <div id="resultsAnchor"></div>
             <div id="screenerResults"></div>
 
-            <div style="margin-top: 20px; padding: 12px 16px; background: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0; text-align: center;">
-                <p style="font-size: 0.76rem; color: #64748b; line-height: 1.5; margin: 0;">
-                    <i class="fa-solid fa-circle-info" style="color: var(--brand-primary); margin-right: 4px;"></i>
-                    <strong>Medical Disclaimer:</strong> This clinical screening tool utilizes standard Indian Academy of Pediatrics (IAP) percentiles for educational guidance. It does not replace a formal medical diagnosis. Please consult Dr. Dinesh Mittal for individual clinical evaluation.
-                </p>
-            </div>
-
         </div>
     </main>
 
@@ -741,7 +734,7 @@
       }
 
       // =========================================================================
-      // 🧩 FULL 20-QUESTION M-CHAT-R™ ACCORDION (TAP-TO-OPEN AT 18 & 24 MONTHS)
+      // 🧩 OFFICIAL 20-QUESTION M-CHAT-R™ ACCORDION (TAP-TO-OPEN AT 18 & 24 MONTHS)
       // =========================================================================
       function renderMchatAccordion(lang) {
         const isHi = (lang === "hi");
@@ -1097,7 +1090,7 @@
           const playTip = (data.tips && data.tips.play && data.tips.play[listLang]) ? data.tips.play[listLang] : "Interactive cognitive play.";
           const careTip = (data.tips && data.tips.care && data.tips.care[listLang]) ? data.tips.care[listLang] : "Ensure timely routine immunization.";
 
-          // 7. Interactive Modules (Feeding at 6-12m; Toilet Training & Full 20-Q M-CHAT at 18 & 24m)
+          // 7. Interactive Modules
           let specialInteractiveHtml = "";
           if (ageKey === "6m" || ageKey === "9m" || ageKey === "12m") {
             specialInteractiveHtml = renderComplementaryFeedingModule(listLang);
@@ -1105,8 +1098,18 @@
             specialInteractiveHtml = renderToiletTrainingModule(listLang) + renderMchatAccordion(listLang);
           }
 
+          const legalNoticeHtml = `
+            <div style="background: #fffbeb; border: 1.5px solid #fde047; border-radius: 12px; padding: 12px 14px; margin-bottom: 16px; font-size: 0.82rem; color: #854d0e; display: flex; gap: 10px; align-items: flex-start;">
+              <i class="fa-solid fa-triangle-exclamation" style="font-size: 1rem; margin-top: 2px; flex-shrink: 0;"></i>
+              <div>
+                <strong>Educational & Informational Notice:</strong> This clinical screening tool utilizes standard Indian Academy of Pediatrics (IAP) percentiles for educational guidance. It does <em>not</em> replace a formal medical diagnosis or prescription by a qualified pediatrician.
+              </div>
+            </div>
+          `;
+
           const tipsHtml = `
             <div class="result-box" style="grid-column: 1 / -1; background: #faf5ff; border: 1.5px solid #e9d5ff;">
+              ${legalNoticeHtml}
               <h4 style="color: #6b21a8;"><i class="fa-solid fa-heart-pulse"></i> ${ageName} ${toolLang === "en" ? "Parenting, Nutrition & Play Guide" : "अभिभावक देखभाल, पोषण व खेल मार्गदर्शन"}</h4>
               <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 12px;">
                 <div style="background:#ffffff; padding:14px; border-radius:12px; border:1px solid #f3e8ff;">
