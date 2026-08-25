@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>Comprehensive Baby Diet & Nutrition Planner | Dr. Dinesh Mittal</title>
-    <meta name="description" content="Official pediatric dietary guidance by Dr. Dinesh Mittal. Month-by-month meal plans, quantities, responsive feeding guidelines, do's/don'ts, and fussy eater protocols.">
+    <title>Comprehensive Baby & Child Diet Planner | Dr. Dinesh Mittal</title>
+    <meta name="description" content="Official pediatric dietary guidance by Dr. Dinesh Mittal. Month-by-month meal plans, quantities, consistency checks, responsive feeding guidelines, and fussy eater protocols.">
     <link rel="canonical" href="https://childspecialistrohini.com/baby-diet-planner.html" />
 
     <!-- Google tag (gtag.js) -->
@@ -119,7 +119,7 @@
             
             <div class="breadcrumbs">
                 <a href="index.html"><i class="fa-solid fa-house"></i> Home</a> &rsaquo; 
-                <span id="breadcrumbTitle">Baby Diet & Nutrition Planner</span>
+                <span id="breadcrumbTitle">Baby & Child Diet Planner</span>
             </div>
 
             <h1 class="article-title" id="pageTitle">Comprehensive Baby & Child Diet Planner</h1>
@@ -137,7 +137,7 @@
                 <div class="screener-inputs-grid">
                     <div class="screener-field">
                         <label><i class="fa-solid fa-cake-candles"></i> <span id="lblAge">Select Age Group</span></label>
-                        <select id="dietAge" class="screener-select">
+                        <select id="dietAge" class="screener-select" onchange="renderDietPlan()">
                             <option value="6m" selected>6 Months (Starting Solids)</option>
                             <option value="8m">8 Months (Expanding Textures)</option>
                             <option value="10m">10 Months (5-Meal Routine)</option>
@@ -150,7 +150,7 @@
 
                     <div class="screener-field">
                         <label><i class="fa-solid fa-bowl-food"></i> <span id="lblDiet">Dietary Preference</span></label>
-                        <select id="dietPref" class="screener-select">
+                        <select id="dietPref" class="screener-select" onchange="renderDietPlan()">
                             <option value="veg" selected>🥬 Vegetarian (शाकाहारी)</option>
                             <option value="jain">🌱 Jain Vegetarian (जैन - No Root Veg)</option>
                             <option value="veg_egg">🥚 Vegetarian with Egg (अंडा युक्त)</option>
@@ -169,13 +169,13 @@
             <!-- RESULTS CONTAINER -->
             <div id="dietResults"></div>
 
-            <!-- FUSSY EATER MASTER GUIDE SECTION -->
-            <div id="fussyEaterSection" style="background: #faf5ff; border: 2px solid #e9d5ff; border-radius: 20px; padding: 24px; margin-top: 30px;">
+            <!-- FUSSY EATER MASTER GUIDE SECTION (Dynamic visibility) -->
+            <div id="fussyEaterSection" style="display: none; background: #faf5ff; border: 2px solid #e9d5ff; border-radius: 20px; padding: 24px; margin-top: 30px;">
                 <h3 style="color: #6b21a8; font-family:'Fredoka',cursive; font-size:1.35rem; margin-bottom:12px;">
-                    <i class="fa-solid fa-puzzle-piece"></i> <span id="fussyTitle">Master Guide: Managing the Selective or Fussy Eater</span>
+                    <i class="fa-solid fa-puzzle-piece"></i> <span id="fussyTitle">Master Guide: Is Your Child Not Eating Well or a Selective/Fussy Eater?</span>
                 </h3>
                 <p style="font-size:0.88rem; color:#4b5563; margin-bottom:14px; line-height:1.6;" id="fussyIntro">
-                    Dealing with selective eating is a normal developmental phase, not parental failure. Here is Dr. Dinesh Mittal’s clinical protocol:
+                    Dealing with selective eating is a normal developmental phase starting around 1 year of age, not parental failure. Here is Dr. Dinesh Mittal’s clinical protocol:
                 </p>
                 <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:12px;">
                     <div style="background:#ffffff; padding:14px; border-radius:12px; border:1px solid #f3e8ff;">
@@ -228,69 +228,150 @@
         "6m": {
           title: { en: "The 6-Month Milestone (Starting Solid Foods)", hi: "6 माह का मील का पत्थर (ठोस आहार की शुरुआत)" },
           schedule: { 
-            en: "Total feeds: 7-8 feeds/day. Day gap: 2-3 hours. Night gap: 5-7 hours. Start with 2 semi-solid meals daily (1-2 teaspoons moving to 2-3 tablespoons). Focus on quality & nutrient density over strict quantities.", 
-            hi: "कुल फीड्स: दिन में 7-8 बार। दिन में अंतराल: 2-3 घंटे। रात का अंतराल: 5-7 घंटे। प्रतिदिन 2 सेमी-सॉलिड मील से शुरू करें (1-2 चम्मच से बढ़ाकर 2-3 चम्मच)। सख्त मात्रा के बजाय गुणवत्ता और पोषण घनत्व पर ध्यान दें।" 
+            en: "Welcome to solid foods! At 6 months, your baby's main nutrition remains breast milk or formula, but we introduce tastes to train swallowing. Total feeds: 7-8 feeds/day. Day gap: 2-3 hours. Night gap: 5-7 hours. Start with 2 semi-solid meals daily (1-2 teaspoons moving to 2-3 tablespoons). CONSISTENCY CHECK: Food must not be too watery or too thick and sticky; it should trickle easily off a spoon like a smooth cream. Focus on nutrient density over strict quantities.", 
+            hi: "ठोस आहार में आपका स्वागत है! 6 महीने की उम्र में मुख्य भोजन मां का दूध रहता है। कुल फीड्स: दिन में 7-8 बार। दिन में अंतराल: 2-3 घंटे। रात का अंतराल: 5-7 घंटे। प्रतिदिन 2 सेमी-सॉलिड मील दें (1-2 चम्मच से शुरू कर 2-3 चम्मच तक ले जाएं)। स्थिरता जांच (Consistency): भोजन न तो बहुत पतला हो और न ही बहुत गाढ़ा; यह चम्मच से आसानी से बहना (trickle) चाहिए।" 
           },
           responsive: { 
             en: "Responsive, Loving & Structured Feeding: You decide what and when to offer food; let your baby decide how much to eat based on hunger and fullness cues. Never force-feed.", 
             hi: "उत्तरदायी, स्नेही व संरचित फीडिंग: आप तय करें कि क्या और कब देना है; बच्चा तय करे कि भूख के संकेतों के अनुसार कितना खाना है। कभी जबरदस्ती न खिलाएं।" 
           },
           dos: {
-            en: ["Follow the 3-day rule (one new food at a time).", "Mash food thoroughly to a smooth, thick semi-solid texture.", "Add 1/2 teaspoon of pure cow ghee to savory meals."],
-            hi: ["3-दिन का नियम अपनाएं (एक बार में एक नया भोजन दें)।", "भोजन को पूरी तरह चिकना और गाढ़ा सेमी-सॉलिड मसलें।", "नमकीन भोजन में आधा चम्मच शुद्ध देसी घी मिलाएं।"]
+            en: ["Follow the 3-day rule (introduce one new food at a time for 3 days to check allergies).", "Mash food thoroughly to a smooth, thick semi-solid texture.", "Add 1/2 teaspoon of pure cow ghee to savory meals for healthy calories."],
+            hi: ["3-दिन का नियम अपनाएं (एलर्जी जांचने के लिए एक बार में एक नया भोजन दें)।", "भोजन को पूरी तरह चिकना और गाढ़ा सेमी-सॉलिड मसलें।", "स्वस्थ कैलोरी के लिए नमकीन भोजन में आधा चम्मच शुद्ध देसी घी मिलाएं।"]
           },
           donts: {
-            en: ["Never add salt or sugar (strains infant kidneys).", "Never give honey before 1 year (infant botulism risk).", "Never use mobile screens or toys as feeding bribes."],
-            hi: ["नमक या चीनी कभी न डालें (गुर्दों पर असर पड़ता है)।", "1 साल से पहले शहद बिल्कुल न दें (बोटुलिज़्म का खतरा)।", "मोबाइल स्क्रीन या खिलौनों को खिलाने का जरिया न बनाएं।"]
+            en: ["Never add salt or sugar (strains infant kidneys).", "Never give honey before 1 year (infant botulism risk).", "Never give undiluted cow/buffalo milk as a drink.", "Never use mobile screens or toys as feeding bribes."],
+            hi: ["नमक या चीनी कभी न डालें (गुर्दों पर असर पड़ता है)।", "1 साल से पहले शहद बिल्कुल न दें (बोटुलिज़्म का खतरा)।", "गाय/भैंस का सीधा दूध पीने को न दें।", "मोबाइल स्क्रीन या खिलौनों को खिलाने का जरिया न बनाएं।"]
           },
           recipes: {
             veg: [
-              { name: { en: "Moong Dal & Rice Porridge", hi: "मूंग दाल व चावल की प्यूरी" }, desc: { en: "Soft-cooked rice and yellow moong dal mashed smooth with pure ghee.", hi: "शुद्ध घी के साथ मसली हुई मुलायम मूंग दाल व चावल।" }, yt: "shishuworld+moong+dal+rice+porridge+for+6+month+baby" },
-              { name: { en: "Sprouted Ragi Porridge (No Sugar)", hi: "अंकुरित रागी की खीर (बिना चीनी)" }, desc: { en: "Rich in natural calcium, sweetened with ripe banana.", hi: "प्राकृतिक कैल्शियम से भरपूर, पके केले से मीठी की गई।" }, yt: "archanaskitchen+ragi+malt+baby+food" },
-              { name: { en: "Yellow Moong Dal Soup", hi: "पीली मूंग दाल का पानी/सूप" }, desc: { en: "Protein-rich thin dal soup with turmeric and ghee.", hi: "हल्दी और घी से युक्त पौष्टिक मूंग दाल का सूप।" }, yt: "shishuworld+moong+dal+water+for+baby" },
-              { name: { en: "Steamed Pumpkin & Carrot Mash", hi: "उबले कद्दू व गाजर की प्यूरी" }, desc: { en: "High in Vitamin A for bright eyes and strong immunity.", hi: "आंखों की रोशनी व इम्युनिटी के लिए विटामिन-ए युक्त।" }, yt: "hebbarskitchen+pumpkin+carrot+puree+baby" },
-              { name: { en: "Mashed Ripe Banana", hi: "मसला हुआ पका केला" }, desc: { en: "Classic instant energy booster mashed with a clean fork.", hi: "साफ कांटे से मैश किया हुआ इंस्टेंट ऊर्जादायक केला।" }, yt: "shishuworld+mashed+banana+for+baby" },
-              { name: { en: "Steamed Apple Compote", hi: "उबले सेब की प्यूरी" }, desc: { en: "Soft-cooked apple slices mashed without sugar.", hi: "बिना चीनी के उबले और मैश किए हुए सेब के टुकड़े।" }, yt: "archanaskitchen+steamed+apple+puree+for+baby" }
+              { 
+                name: { en: "Moong Dal & Rice Porridge", hi: "मूंग दाल व चावल की प्यूरी" }, 
+                desc: { en: "Soft-cooked rice and yellow moong dal boiled together with turmeric and mashed completely smooth with half a teaspoon of pure cow ghee.", hi: "हल्दी के साथ उबले हुए मुलायम चावल और मूंग दाल को आधे चम्मच शुद्ध घी के साथ पूरी तरह चिकना मैश करें।" }, 
+                yt: "shishuworld+moong+dal+rice+porridge+for+6+month+baby" 
+              },
+              { 
+                name: { en: "Sprouted Ragi Porridge (No Sugar)", hi: "अंकुरित रागी की खीर (बिना चीनी)" }, 
+                desc: { en: "Sprouted ragi flour cooked in water or milk alternative to a smooth pouring consistency, naturally sweetened with mashed ripe banana.", hi: "अंकुरित रागी के आटे को पानी में घोलकर पकाएं और पके केले से प्राकृतिक मिठास दें।" }, 
+                yt: "archanaskitchen+ragi+malt+baby+food" 
+              },
+              { 
+                name: { en: "Yellow Moong Dal Soup", hi: "पीली मूंग दाल का पानी/सूप" }, 
+                desc: { en: "Well-cooked yellow moong dal extracted as a thin, warm protein-rich soup seasoned with a pinch of turmeric and pure ghee.", hi: "अच्छी तरह उबली पीली मूंग दाल का पतला, गर्म प्रोटीन युक्त सूप जिसमें हल्दी और घी हो।" }, 
+                yt: "shishuworld+moong+dal+water+for+baby" 
+              },
+              { 
+                name: { en: "Steamed Pumpkin & Carrot Mash", hi: "उबले कद्दू व गाजर की प्यूरी" }, 
+                desc: { en: "Fresh pumpkin and carrot chunks steam-cooked until tender, then mashed smooth. Rich in Vitamin A for bright eyes and immunity.", hi: "कद्दू और गाजर के टुकड़ों को भाप में पकाकर चिकना मैश करें। आंखों और इम्युनिटी के लिए उत्तम।" }, 
+                yt: "hebbarskitchen+pumpkin+carrot+puree+baby" 
+              },
+              { 
+                name: { en: "Mashed Ripe Banana", hi: "मसला हुआ पका केला" }, 
+                desc: { en: "A classic instant energy booster. Take a ripe sweet banana and mash it completely smooth using a clean fork.", hi: "एक पके हुए मीठे केले को साफ कांटे की मदद से बिल्कुल चिकना मैश करें।" }, 
+                yt: "shishuworld+mashed+banana+for+baby" 
+              },
+              { 
+                name: { en: "Steamed Apple Compote", hi: "उबले सेब की प्यूरी" }, 
+                desc: { en: "Peeled apple slices steamed until soft and blended or mashed into a smooth, digestible fruit puree without any added sugar.", hi: "छिले हुए सेब के टुकड़ों को भाप में गलाकर बिना चीनी की सुपाच्य प्यूरी बनाएं।" }, 
+                yt: "archanaskitchen+steamed+apple+puree+for+baby" 
+              }
             ],
             jain: [
-              { name: { en: "Moong Dal & Rice Porridge", hi: "मूंग दाल व चावल की प्यूरी" }, desc: { en: "Soft-cooked rice and yellow moong dal mashed smooth with pure ghee.", hi: "शुद्ध घी के साथ मसली हुई मुलायम मूंग दाल व चावल।" }, yt: "shishuworld+moong+dal+rice+porridge+for+6+month+baby" },
-              { name: { en: "Sprouted Ragi Porridge (No Sugar)", hi: "अंकुरित रागी की खीर (बिना चीनी)" }, desc: { en: "Rich in natural calcium, sweetened with ripe banana.", hi: "प्राकृतिक कैल्शियम से भरपूर, पके केले से मीठी की गई।" }, yt: "archanaskitchen+ragi+malt+baby+food" },
-              { name: { en: "Yellow Moong Dal Soup", hi: "पीली मूंग दाल का पानी/सूप" }, desc: { en: "Protein-rich thin dal soup with turmeric and ghee.", hi: "हल्दी और घी से युक्त पौष्टिक मूंग दाल का सूप।" }, yt: "shishuworld+moong+dal+water+for+baby" },
-              { name: { en: "Mashed Ripe Banana", hi: "मसला हुआ पका केला" }, desc: { en: "Classic instant energy booster mashed with a clean fork.", hi: "साफ कांटे से मैश किया हुआ इंस्टेंट ऊर्जादायक केला।" }, yt: "shishuworld+mashed+banana+for+baby" },
-              { name: { en: "Steamed Apple Compote", hi: "उबले सेब की प्यूरी" }, desc: { en: "Soft-cooked apple slices mashed without sugar.", hi: "बिना चीनी के उबले और मैश किए हुए सेब के टुकड़े।" }, yt: "archanaskitchen+steamed+apple+puree+for+baby" },
-              { name: { en: "Mashed Ripe Papaya", hi: "मसला हुआ पपीता" }, desc: { en: "Naturally sweet and smooth for gentle digestion.", hi: "पाचन के लिए प्राकृतिक रूप से मीठा पपीता।" }, yt: "shishuworld+fruits+for+babies+papaya" }
+              { 
+                name: { en: "Moong Dal & Rice Porridge", hi: "मूंग दाल व चावल की प्यूरी" }, 
+                desc: { en: "Soft-cooked rice and yellow moong dal mashed smooth with pure ghee.", hi: "शुद्ध घी के साथ मसली हुई मुलायम मूंग दाल व चावल।" }, 
+                yt: "shishuworld+moong+dal+rice+porridge+for+6+month+baby" 
+              },
+              { 
+                name: { en: "Sprouted Ragi Porridge (No Sugar)", hi: "अंकुरित रागी की खीर (बिना चीनी)" }, 
+                desc: { en: "Rich in natural calcium, sweetened with ripe banana.", hi: "प्राकृतिक कैल्शियम से भरपूर, पके केले से मीठी की गई।" }, 
+                yt: "archanaskitchen+ragi+malt+baby+food" 
+              },
+              { 
+                name: { en: "Yellow Moong Dal Soup", hi: "पीली मूंग दाल का पानी/सूप" }, 
+                desc: { en: "Protein-rich thin dal soup with turmeric and ghee.", hi: "हल्दी और घी से युक्त पौष्टिक मूंग दाल का सूप।" }, 
+                yt: "shishuworld+moong+dal+water+for+baby" 
+              },
+              { 
+                name: { en: "Mashed Ripe Banana", hi: "मसला हुआ पका केला" }, 
+                desc: { en: "Classic instant energy booster mashed with a clean fork.", hi: "साफ कांटे से मैश किया हुआ इंस्टेंट ऊर्जादायक केला।" }, 
+                yt: "shishuworld+mashed+banana+for+baby" 
+              },
+              { 
+                name: { en: "Steamed Apple Compote", hi: "उबले सेब की प्यूरी" }, 
+                desc: { en: "Soft-cooked apple slices mashed without sugar.", hi: "बिना चीनी के उबले और मैश किए हुए सेब।" }, 
+                yt: "archanaskitchen+steamed+apple+puree+for+baby" 
+              },
+              { 
+                name: { en: "Mashed Ripe Papaya", hi: "मसला हुआ पपीता" }, 
+                desc: { en: "Naturally sweet and smooth ripe papaya mashed for gentle digestion.", hi: "पाचन के लिए प्राकृतिक रूप से मीठा मैश किया हुआ पपीता।" }, 
+                yt: "shishuworld+fruits+for+babies+papaya" 
+              }
             ],
             veg_egg: [
-              { name: { en: "Moong Dal & Rice Porridge", hi: "मूंग दाल व चावल की प्यूरी" }, desc: { en: "Soft-cooked rice and yellow moong dal mashed smooth with pure ghee.", hi: "शुद्ध घी के साथ मसली हुई मुलायम मूंग दाल व चावल।" }, yt: "shishuworld+moong+dal+rice+porridge+for+6+month+baby" },
-              { name: { en: "Sprouted Ragi Porridge (No Sugar)", hi: "अंकुरित रागी की खीर (बिना चीनी)" }, desc: { en: "Rich in natural calcium, sweetened with ripe banana.", hi: "प्राकृतिक कैल्शियम से भरपूर, पके केले से मीठी की गई।" }, yt: "archanaskitchen+ragi+malt+baby+food" },
-              { name: { en: "Steamed Hard-Boiled Egg Yolk Mash", hi: "उबले अंडे की जर्दी की प्यूरी" }, desc: { en: "Powerhouse of bioavailable Iron and Choline for brain growth.", hi: "दिमागी विकास के लिए आयरन और कोलीन से भरपूर।" }, yt: "shishuworld+egg+yolk+for+infants" },
-              { name: { en: "Steamed Pumpkin & Carrot Mash", hi: "उबले कद्दू व गाजर की प्यूरी" }, desc: { en: "High in Vitamin A for bright eyes and immunity.", hi: "आंखों की रोशनी के लिए विटामिन-ए युक्त।" }, yt: "hebbarskitchen+pumpkin+carrot+puree+baby" },
-              { name: { en: "Mashed Ripe Banana", hi: "मसला हुआ पका केला" }, desc: { en: "Classic instant energy booster mashed with a clean fork.", hi: "साफ कांटे से मैश किया हुआ केला।" }, yt: "shishuworld+mashed+banana+for+baby" },
-              { name: { en: "Steamed Apple Compote", hi: "उबले सेब की प्यूरी" }, desc: { en: "Soft-cooked apple slices mashed without sugar.", hi: "बिना चीनी के उबले सेब।" }, yt: "archanaskitchen+steamed+apple+puree+for+baby" }
+              { 
+                name: { en: "Moong Dal & Rice Porridge", hi: "मूंग दाल व चावल की प्यूरी" }, 
+                desc: { en: "Soft-cooked rice and yellow moong dal mashed smooth with pure ghee.", hi: "शुद्ध घी के साथ मसली हुई मुलायम मूंग दाल व चावल।" }, 
+                yt: "shishuworld+moong+dal+rice+porridge+for+6+month+baby" 
+              },
+              { 
+                name: { en: "Steamed Hard-Boiled Egg Yolk Mash", hi: "उबले अंडे की जर्दी की प्यूरी" }, 
+                desc: { en: "Hard-boiled egg yolk mashed smooth with a few drops of warm water or breastmilk and ghee. Excellent for brain growth.", hi: "उबले अंडे की पीली जर्दी को थोड़े से पानी और घी के साथ मैश करें।" }, 
+                yt: "shishuworld+egg+yolk+for+infants" 
+              },
+              { 
+                name: { en: "Steamed Pumpkin & Carrot Mash", hi: "उबले कद्दू व गाजर की प्यूरी" }, 
+                desc: { en: "Tender steamed pumpkin and carrot puree.", hi: "कद्दू और गाजर की प्यूरी।" }, 
+                yt: "hebbarskitchen+pumpkin+carrot+puree+baby" 
+              },
+              { 
+                name: { en: "Mashed Ripe Banana", hi: "मसला हुआ पका केला" }, 
+                desc: { en: "Mashed ripe banana.", hi: "केला।" }, 
+                yt: "shishuworld+mashed+banana+for+baby" 
+              },
+              { 
+                name: { en: "Steamed Apple Compote", hi: "उबले सेब की प्यूरी" }, 
+                desc: { en: "Apples compote.", hi: "सेब की प्यूरी।" }, 
+                yt: "archanaskitchen+steamed+apple+puree+for+baby" 
+              }
             ],
             nonveg: [
-              { name: { en: "Moong Dal & Rice Porridge", hi: "मूंग दाल व चावल की प्यूरी" }, desc: { en: "Soft-cooked rice and yellow moong dal mashed smooth with pure ghee.", hi: "शुद्ध घी के साथ मसली हुई मुलायम मूंग दाल व चावल।" }, yt: "shishuworld+moong+dal+rice+porridge+for+6+month+baby" },
-              { name: { en: "Chicken Liver & Bone Broth Puree", hi: "चिकन लिवर व बोन ब्रोथ प्यूरी" }, desc: { en: "Highest natural source of Heme Iron to protect against anemia.", hi: "एनीमिया से बचाव के लिए आयरन का बेहतरीन स्रोत।" }, yt: "chicken+bone+broth+recipe+for+baby" },
-              { name: { en: "Steamed White Fish Puree", hi: "उबली मछली की प्यूरी" }, desc: { en: "Rich in Omega-3 DHA fatty acids for brain development.", hi: "दिमागी विकास के लिए ओमेगा-3 DHA से भरपूर।" }, yt: "fish+puree+recipe+for+infants" },
-              { name: { en: "Steamed Pumpkin & Carrot Mash", hi: "उबले कद्दू व गाजर की प्यूरी" }, desc: { en: "High in Vitamin A for immunity.", hi: "इम्यूनिटी के लिए विटामिन-ए युक्त।" }, yt: "hebbarskitchen+pumpkin+carrot+puree+baby" },
-              { name: { en: "Mashed Ripe Banana", hi: "मसला हुआ पका केला" }, desc: { en: "Classic instant energy booster.", hi: "ऊर्जादायक केला।" }, yt: "shishuworld+mashed+banana+for+baby" },
-              { name: { en: "Steamed Apple Compote", hi: "उबले सेब की प्यूरी" }, desc: { en: "Soft-cooked apple slices.", hi: "उबले सेब।" }, yt: "archanaskitchen+steamed+apple+puree+for+baby" }
+              { 
+                name: { en: "Moong Dal & Rice Porridge", hi: "मूंग दाल व चावल की प्यूरी" }, 
+                desc: { en: "Soft-cooked rice and yellow moong dal mashed smooth with pure ghee.", hi: "मूंग दाल व चावल।" }, 
+                yt: "shishuworld+moong+dal+rice+porridge+for+6+month+baby" 
+              },
+              { 
+                name: { en: "Chicken Liver & Bone Broth Puree", hi: "चिकन लिवर व बोन ब्रोथ प्यूरी" }, 
+                desc: { en: "Tender chicken liver boiled in clear bone broth, blended smooth. The highest natural source of Heme Iron for anemia prevention.", hi: "बोन ब्रोथ में उबला चिकन लिवर, जो एनीमिया से बचाता है।" }, 
+                yt: "chicken+bone+broth+recipe+for+baby" 
+              },
+              { 
+                name: { en: "Steamed White Fish Puree", hi: "उबली मछली की प्यूरी" }, 
+                desc: { en: "Soft boneless river fish steamed and blended smooth. Rich in Omega-3 DHA for brain and eye development.", hi: "बोनलेस मछली की प्यूरी, जो ओमेगा-3 से भरपूर है।" }, 
+                yt: "fish+puree+recipe+for+infants" 
+              },
+              { 
+                name: { en: "Steamed Pumpkin & Carrot Mash", hi: "उबले कद्दू व गाजर की प्यूरी" }, 
+                desc: { en: "Pumpkin and carrot mash.", hi: "कद्दू-गाजर प्यूरी।" }, 
+                yt: "hebbarskitchen+pumpkin+carrot+puree+baby" 
+              }
             ]
           }
         },
         "8m": {
           title: { en: "The 8-Month Milestone (Expanding Textures & Tastes)", hi: "8 माह का मील का पत्थर (बनावट और स्वाद का विस्तार)" },
           schedule: { 
-            en: "Total feeds: 7-8 feeds/day. Increase to 3 semi-solid meals daily alongside 4-5 milk feeds. Portion size: 3-4 tablespoons (approx. 1/2 small katori) per meal.", 
-            hi: "कुल फीड्स: दिन में 7-8 बार। दूध के साथ 3 सेमी-सॉलिड मील दें। मात्रा: 3-4 बड़े चम्मच (लगभग आधी छोटी कटोरी) प्रति मील।" 
+            en: "At 8 months, your baby is active, sitting well, and ready for thicker textures. Total feeds: 7-8 feeds/day. Increase to 3 semi-solid meals daily alongside 4-5 milk feeds. Portion size: 3-4 tablespoons (approx. 1/2 small katori) per meal.", 
+            hi: "8 महीने की उम्र में बच्चा बैठने और अधिक सक्रिय होने लगता है। कुल फीड्स: दिन में 7-8 बार। दूध के साथ 3 सेमी-सॉलिड मील दें। मात्रा: 3-4 बड़े चम्मच (लगभग आधी छोटी कटोरी) प्रति मील।" 
           },
           responsive: { 
             en: "Responsive, Loving & Structured Feeding: Set predictable meal routines while encouraging self-feeding with safe, soft finger foods on their tray.", 
             hi: "उत्तरदायी, स्नेही व संरचित फीडिंग: ट्रे पर सुरक्षित फिंगर फूड्स के साथ खुद खाने को प्रोत्साहित करें और समय निश्चित रखें।" 
           },
           dos: {
-            en: ["Progress from watery purees to thicker mashes with soft tiny lumps.", "Encourage family mealtime visibility so they watch you eat."],
-            hi: ["पानी जैसी प्यूरी से गाढ़े मैश और छोटे मुलायम टुकड़ों की ओर बढ़ें।", "पारिवारिक भोजन के समय साथ बैठाएं ताकि वे आपको देखकर सीखें।"]
+            en: ["Progress from watery purees to thicker mashes with soft tiny lumps to train chewing.", "Encourage family mealtime visibility so they watch you eat."],
+            hi: ["चबाने की आदत डालने के लिए पतली प्यूरी से गाढ़े मैश और छोटे मुलायम टुकड़ों की ओर बढ़ें।", "पारिवारिक भोजन के समय साथ बैठाएं ताकि वे आपको देखकर सीखें।"]
           },
           donts: {
             en: ["Don't force-feed if they push the spoon away.", "Avoid choking hazards like whole grapes, nuts, popcorn, or raw carrots."],
@@ -298,9 +379,21 @@
           },
           recipes: {
             veg: [
-              { name: { en: "Suji & Green Pea Sheera", hi: "सूजी व मटर का शीरा" }, desc: { en: "Lightly roasted semolina cooked soft with mashed green peas.", hi: "मश किए हुए हरे मटर के साथ पकी हुई सूजी।" }, yt: "shishuworld+suji+kheer+recipe+for+baby" },
-              { name: { en: "Oats & Apple Porridge", hi: "ओट्स व सेब की खीर" }, desc: { en: "Rolled oats cooked soft with steamed apple puree.", hi: "उबले सेब के साथ पकाया गया दलिया/ओट्स।" }, yt: "archanaskitchen+oats+apple+porridge+baby" },
-              { name: { en: "Soft Paneer & Lauki Mash", hi: "पनीर व लौकी की प्यूरी" }, desc: { en: "Fresh homemade paneer mashed with boiled lauki.", hi: "उबली लौकी और ताजे पनीर का मिश्रण।" }, yt: "hebbarskitchen+homemade+paneer+for+babies" },
+              { 
+                name: { en: "Suji & Green Pea Sheera", hi: "सूजी व मटर का शीरा" }, 
+                desc: { en: "Lightly roasted semolina cooked soft with mashed green peas and a touch of cow ghee.", hi: "मश किए हुए हरे मटर के साथ पकी हुई सूजी और घी।" }, 
+                yt: "shishuworld+suji+kheer+recipe+for+baby" 
+              },
+              { 
+                name: { en: "Oats & Apple Porridge", hi: "ओट्स व सेब की खीर" }, 
+                desc: { en: "Rolled oats cooked soft with steamed apple puree for healthy digestion.", hi: "उबले सेब की प्यूरी के साथ पकाया गया दलिया/ओट्स।" }, 
+                yt: "archanaskitchen+oats+apple+porridge+baby" 
+              },
+              { 
+                name: { en: "Soft Paneer & Lauki Mash", hi: "पनीर व लौकी की प्यूरी" }, 
+                desc: { en: "Fresh homemade soft paneer mashed together with boiled bottle gourd (lauki) for steady weight gain.", hi: "उबली लौकी और ताजे घर के पनीर का मैश किया हुआ मिश्रण।" }, 
+                yt: "hebbarskitchen+homemade+paneer+for+babies" 
+              },
               { name: { en: "Mashed Ripe Papaya", hi: "मसला हुआ पपीता" }, desc: { en: "Natural fruit enzymes for smooth tummy movements.", hi: "पाचन को दुरुस्त रखने वाला मीठा पपीता।" }, yt: "shishuworld+fruits+for+babies+papaya" },
               { name: { en: "Boiled Pear (Nashpati) Puree", hi: "नाशपाती की प्यूरी" }, desc: { en: "Gentle on the stomach and helpful for digestion.", hi: "पेट के लिए बेहद हल्की और सुपाच्य नाशपाती।" }, yt: "archanaskitchen+pear+puree+for+baby" },
               { name: { en: "Mashed Moong Dal Khichdi", hi: "मूंग दाल खिचड़ी" }, desc: { en: "Thick, soft-mashed rice and dal with ghee.", hi: "घी के साथ गाढ़ी और मुलायम पिसी हुई खिचड़ी।" }, yt: "hebbarskitchen+vegetable+khichdi+recipe" }
@@ -309,33 +402,30 @@
               { name: { en: "Suji & Green Pea Sheera", hi: "सूजी व मटर का शीरा" }, desc: { en: "Lightly roasted semolina cooked soft with mashed green peas.", hi: "मश किए हुए हरे मटर के साथ पकी हुई सूजी।" }, yt: "shishuworld+suji+kheer+recipe+for+baby" },
               { name: { en: "Oats & Apple Porridge", hi: "ओट्स व सेब की खीर" }, desc: { en: "Rolled oats cooked soft with steamed apple puree.", hi: "उबले सेब के साथ पकाया गया दलिया/ओट्स।" }, yt: "archanaskitchen+oats+apple+porridge+baby" },
               { name: { en: "Soft Paneer & Banana Mash", hi: "पनीर व केले की प्यूरी" }, desc: { en: "Fresh paneer mashed smoothly with ripe banana.", hi: "पके केले के साथ मैश किया हुआ ताजा पनीर।" }, yt: "hebbarskitchen+homemade+paneer+for+babies" },
-              { name: { en: "Mashed Ripe Papaya", hi: "मसला हुआ पपीता" }, desc: { en: "Natural fruit enzymes for smooth tummy movements.", hi: "पाचन को दुरुस्त रखने वाला मीठा पपीता।" }, yt: "shishuworld+fruits+for+babies+papaya" },
-              { name: { en: "Boiled Pear Puree", hi: "नाशपाती की प्यूरी" }, desc: { en: "Gentle on the stomach and helpful for digestion.", hi: "पेट के लिए सुपाच्य नाशपाती।" }, yt: "archanaskitchen+pear+puree+for+baby" },
-              { name: { en: "Mashed Moong Dal Khichdi", hi: "मूंग दाल खिचड़ी" }, desc: { en: "Thick, soft-mashed rice and dal with ghee.", hi: "घी के साथ गाढ़ी और मुलायम पिसी हुई खिचड़ी।" }, yt: "hebbarskitchen+vegetable+khichdi+recipe" }
+              { name: { en: "Mashed Ripe Papaya", hi: "मसला हुआ पपीता" }, desc: { en: "Natural fruit enzymes.", hi: "पपीता।" }, yt: "shishuworld+fruits+for+babies+papaya" },
+              { name: { en: "Boiled Pear Puree", hi: "नाशपाती की प्यूरी" }, desc: { en: "Gentle on stomach.", hi: "नाशपाती।" }, yt: "archanaskitchen+pear+puree+for+baby" },
+              { name: { en: "Mashed Moong Dal Khichdi", hi: "मूंग दाल खिचड़ी" }, desc: { en: "Thick khichdi with ghee.", hi: "खिचड़ी।" }, yt: "hebbarskitchen+vegetable+khichdi+recipe" }
             ],
             veg_egg: [
               { name: { en: "Steamed Egg Yolk Mash", hi: "उबले अंडे की जर्दी की प्यूरी" }, desc: { en: "Hard-boiled egg yolk mashed smooth with ghee.", hi: "घी के साथ मसली हुई उबले अंडे की जर्दी।" }, yt: "shishuworld+egg+yolk+for+infants" },
-              { name: { en: "Suji & Green Pea Sheera", hi: "सूजी व मटर का शीरा" }, desc: { en: "Lightly roasted semolina cooked soft with green peas.", hi: "मटर के साथ पकी हुई सूजी।" }, yt: "shishuworld+suji+kheer+recipe+for+baby" },
-              { name: { en: "Soft Paneer & Lauki Mash", hi: "पनीर व लौकी की प्यूरी" }, desc: { en: "Fresh homemade paneer mashed with boiled lauki.", hi: "उबली लौकी और पनीर का मिश्रण।" }, yt: "hebbarskitchen+homemade+paneer+for+babies" },
-              { name: { en: "Oats & Apple Porridge", hi: "ओट्स व सेब की खीर" }, desc: { en: "Rolled oats cooked soft with steamed apple.", hi: "उबले सेब के साथ ओट्स।" }, yt: "archanaskitchen+oats+apple+porridge+baby" },
-              { name: { en: "Mashed Ripe Papaya", hi: "मसला हुआ पपीता" }, desc: { en: "Natural fruit enzymes.", hi: "पपीता।" }, yt: "shishuworld+fruits+for+babies+papaya" },
-              { name: { en: "Mashed Moong Dal Khichdi", hi: "मूंग दाल खिचड़ी" }, desc: { en: "Soft-mashed rice and dal.", hi: "खिचड़ी।" }, yt: "hebbarskitchen+vegetable+khichdi+recipe" }
+              { name: { en: "Suji & Green Pea Sheera", hi: "सूजी व मटर का शीरा" }, desc: { en: "Semolina and peas.", hi: "सूजी शीरा।" }, yt: "shishuworld+suji+kheer+recipe+for+baby" },
+              { name: { en: "Soft Paneer & Lauki Mash", hi: "पनीर व लौकी की प्यूरी" }, desc: { en: "Paneer and lauki.", hi: "पनीर लौकी।" }, yt: "hebbarskitchen+homemade+paneer+for+babies" },
+              { name: { en: "Oats & Apple Porridge", hi: "ओट्स व सेब की खीर" }, desc: { en: "Oats apple.", hi: "ओट्स।" }, yt: "archanaskitchen+oats+apple+porridge+baby" },
+              { name: { en: "Mashed Ripe Papaya", hi: "मसला हुआ पपीता" }, desc: { en: "Papaya.", hi: "पपीता।" }, yt: "shishuworld+fruits+for+babies+papaya" }
             ],
             nonveg: [
               { name: { en: "Tender Chicken & Lauki Puree", hi: "चिकन व लौकी की प्यूरी" }, desc: { en: "Soft-cooked lean chicken breast blended with boiled lauki.", hi: "उबली लौकी और मुलायम चिकन का मिश्रण।" }, yt: "chicken+puree+for+6+month+baby" },
               { name: { en: "Steamed White Fish Puree", hi: "उबली मछली की प्यूरी" }, desc: { en: "Soft boneless fish mashed smooth.", hi: "मुलायम उबली हुई बोनलेस मछली।" }, yt: "fish+puree+recipe+for+infants" },
-              { name: { en: "Suji & Green Pea Sheera", hi: "सूजी व मटर का शीरा" }, desc: { en: "Lightly roasted semolina cooked soft.", hi: "सूजी का शीरा।" }, yt: "shishuworld+suji+kheer+recipe+for+baby" },
-              { name: { en: "Oats & Apple Porridge", hi: "ओट्स व सेब की खीर" }, desc: { en: "Rolled oats with apple.", hi: "ओट्स खीर।" }, yt: "archanaskitchen+oats+apple+porridge+baby" },
-              { name: { en: "Mashed Ripe Papaya", hi: "मसला हुआ पपीता" }, desc: { en: "Natural fruit.", hi: "पपीता।" }, yt: "shishuworld+fruits+for+babies+papaya" },
-              { name: { en: "Mashed Moong Dal Khichdi", hi: "मूंग दाल खिचड़ी" }, desc: { en: "Rice and dal khichdi.", hi: "खिचड़ी।" }, yt: "hebbarskitchen+vegetable+khichdi+recipe" }
+              { name: { en: "Suji & Green Pea Sheera", hi: "सूजी व मटर का शीरा" }, desc: { en: "Semolina sheera.", hi: "सूजी शीरा।" }, yt: "shishuworld+suji+kheer+recipe+for+baby" },
+              { name: { en: "Oats & Apple Porridge", hi: "ओट्स व सेब की खीर" }, desc: { en: "Oats apple.", hi: "ओट्स।" }, yt: "archanaskitchen+oats+apple+porridge+baby" }
             ]
           }
         },
         "10m": {
           title: { en: "The 10-Month Milestone (The 5-Meal Routine)", hi: "10 माह का मील का पत्थर (5-मील की दिनचर्या)" },
           schedule: { 
-            en: "Total feeds: ~7 feeds/day (5 solid meals + 2 milk feeds). Day gap: 2-3 hours. Divide into Breakfast, Lunch, Dinner, and 2 Snack times. Portion size: 1/2 to 3/4 small katori (4-6 tablespoons).", 
-            hi: "कुल फीड्स: लगभग 7 (5 ठोस मील + 2 दूध)। अंतराल: 2-3 घंटे। इसे नाश्ता, दोपहर का भोजन, रात का खाना और 2 स्नैक्स में बांटें। मात्रा: आधी से पौन कटोरी।" 
+            en: "Your baby is exploring actively, crawling, and needs higher energy density. Total feeds: ~7 feeds/day (5 solid meals + 2 milk feeds). Day gap: 2-3 hours. Divide into Breakfast, Lunch, Dinner, and 2 Snack times. Portion size: 1/2 to 3/4 small katori (4-6 tablespoons).", 
+            hi: "बच्चा अब घुटनों के बल चलना और तेजी से सीखना शुरू करता है। कुल फीड्स: लगभग 7 (5 ठोस मील + 2 दूध)। अंतराल: 2-3 घंटे। इसे नाश्ता, दोपहर का भोजन, रात का खाना और 2 स्नैक्स में बांटें। मात्रा: आधी से पौन कटोरी।" 
           },
           responsive: { 
             en: "Responsive, Loving & Structured Feeding: Maintain firm boundaries around meal structure (no grazing all day), but offer unconditional love and patience. Let them make a mess.", 
@@ -380,8 +470,8 @@
         "12m": {
           title: { en: "The 12-Month Milestone (Transitioning to Family Pot Food)", hi: "12 माह का मील का पत्थर (परिवार के खाने की शुरुआत)" },
           schedule: { 
-            en: "Family meal pattern: 3 main meals + 2 healthy snacks + milk. Portion size: 3/4 to 1 full small katori per meal. You can now introduce pasteurized cow's milk and minimal salt/sugar.", 
-            hi: "पारिवारिक भोजन: 3 मुख्य भोजन + 2 स्नैक्स + दूध। मात्रा: पौन से एक पूरी छोटी कटोरी प्रति मील। अब गाय का दूध और न्यूनतम नमक/चीनी दे सकते हैं।" 
+            en: "Happy 1st Birthday! Your toddler transitions to regular family meals. Family meal pattern: 3 main meals + 2 healthy snacks + milk. Portion size: 3/4 to 1 full small katori per meal. You can now introduce pasteurized cow's milk and minimal salt/sugar.", 
+            hi: "पहला जन्मदिन मुबारक हो! बच्चा अब परिवार के साथ सामान्य खाना खाने लगेगा। पारिवारिक भोजन: 3 मुख्य भोजन + 2 स्नैक्स + दूध। मात्रा: पौन से एक पूरी छोटी कटोरी प्रति मील। अब गाय का दूध और न्यूनतम नमक/चीनी दे सकते हैं।" 
           },
           responsive: { 
             en: "Responsive, Loving & Structured Feeding: Toddlers experience a natural growth slowdown and appetite drop. Do not panic or overfeed. Trust that you provide healthy food, and they decide how much to eat.", 
@@ -398,7 +488,7 @@
           recipes: {
             veg: [
               { name: { en: "Soft Family Dal-Roti Mash", hi: "दाल-रोटी का मेश" }, desc: { en: "Soft roti pieces soaked and mashed thoroughly in warm home dal with ghee.", hi: "गरम दाल और घी में अच्छी तरह मैश की हुई मुलायम रोटी।" }, yt: "shishuworld+dal+roti+mash+for+toddlers" },
-              { name: { en: "Family Vegetable Khichdi", hi: "पारिवारिक वेजिटेबल खिचड़ी" }, desc: { en: "Home-cooked rice and dal khichdi with vegetables and ghee.", hi: "सब्जियों और घी से बनी घर की पौष्टिक खिचड़ी।" }, yt: "hebbarskitchen+vegetable+khichdi+recipe" },
+              { name: { en: "Family Vegetable Khichdi", hi: "पारिवारिक वेजिटेबल खिचड़ी" }, desc: { en: "Home-cooked rice and dal khichdi with vegetables and ghee.", hi: "सब्जी और घी से बनी घर की पौष्टिक खिचड़ी।" }, yt: "hebbarskitchen+vegetable+khichdi+recipe" },
               { name: { en: "Mashed Soft Idli in Sambhar", hi: "सांभर में डूबी मुलायम इडली" }, desc: { en: "Soft idli mashed in warm mild dal or sambhar.", hi: "हल्के सांभर या दाल में मैश की हुई मुलायम इडली।" }, yt: "hebbarskitchen+soft+idli+recipe" },
               { name: { en: "Scrambled Whole Egg", hi: "अंडे की भुर्जी" }, desc: { en: "Soft, fluffy scrambled egg cooked in pure ghee.", hi: "शुद्ध घी में बनी मुलायम और पौष्टिक एग भुर्जी।" }, yt: "archanaskitchen+scrambled+eggs+recipe" }
             ],
@@ -422,8 +512,8 @@
         "2y": {
           title: { en: "The 2-Year Milestone (The Toddler Years)", hi: "2 वर्ष का मील का पत्थर (टॉडलर वर्ष)" },
           schedule: { 
-            en: "3 balanced meals + 2 nutritious snacks + max 400ml milk per day. Portion: 1 to 1.5 small bowls per meal.", 
-            hi: "3 संतुलित भोजन + 2 पौष्टिक स्नैक्स + अधिकतम 400ml दूध प्रतिदिन। मात्रा: 1 से 1.5 छोटी कटोरी प्रति मील।" 
+            en: "At 2 years, your child is running, talking, and asserting independence. 3 balanced meals + 2 nutritious snacks + max 400ml milk per day. Portion: 1 to 1.5 small bowls per meal.", 
+            hi: "2 साल की उम्र में बच्चा दौड़ने और अपनी बात मनवाने लगता है। 3 संतुलित भोजन + 2 पौष्टिक स्नैक्स + अधिकतम 400ml दूध प्रतिदिन। मात्रा: 1 से 1.5 छोटी कटोरी प्रति मील।" 
           },
           responsive: { 
             en: "Responsive, Loving & Structured Feeding: Food battles peak here as toddlers test boundaries. Maintain calm, loving, but firm boundaries. Never make separate short-order meals; serve what the family eats with at least one safe food.", 
@@ -439,9 +529,9 @@
           },
           recipes: {
             veg: [
-              { name: { en: "Paneer Stuffed Mini Paratha", hi: "पनीर भरी मिनी परांठी" }, desc: { en: "Soft whole-wheat paratha cooked in cow ghee with grated paneer.", hi: "शुद्ध घी और कद्दूकस पनीर से बनी मुलायम परांठी।" }, yt: "hebbarskitchen+paneer+paratha+recipe" },
-              { name: { en: "Mixed Vegetable & Dal Pulao", hi: "मिक्स वेज दाल पुलाव" }, desc: { en: "Wholesome rice cooked with peas, carrots, and mild spices.", hi: "गाजर, मटर और हल्के मसालों से बना पुलाव।" }, yt: "archanaskitchen+vegetable+pulao+recipe" },
-              { name: { en: "Moong Dal Chilla (Pancakes)", hi: "मूंग दाल चीला" }, desc: { en: "Savory, protein-packed pancakes served with curd.", hi: "दही के साथ परोसा जाने वाला प्रोटीन युक्त चीला।" }, yt: "hebbarskitchen+moong+dal+chilla+recipe" }
+              { name: { en: "Paneer Stuffed Mini Paratha", hi: "पनीर भरी मिनी परांठी" }, desc: { en: "Soft whole-wheat paratha cooked in cow ghee with grated paneer filling.", hi: "शुद्ध घी और कद्दूकस पनीर से बनी मुलायम परांठी।" }, yt: "hebbarskitchen+paneer+paratha+recipe" },
+              { name: { en: "Mixed Vegetable & Dal Pulao", hi: "मिक्स वेज दाल पुलाव" }, desc: { en: "Wholesome rice cooked with peas, carrots, beans, and mild spices.", hi: "गाजर, मटर और हल्के मसालों से बना पुलाव।" }, yt: "archanaskitchen+vegetable+pulao+recipe" },
+              { name: { en: "Moong Dal Chilla (Pancakes)", hi: "मूंग दाल चीला" }, desc: { en: "Savory, protein-packed pancakes served with fresh green chutney or curd.", hi: "दही के साथ परोसा जाने वाला प्रोटीन युक्त चीला।" }, yt: "hebbarskitchen+moong+dal+chilla+recipe" }
             ],
             jain: [
               { name: { en: "Paneer Stuffed Mini Paratha (No Root Veg)", hi: "पनीर भरी मिनी परांठी" }, desc: { en: "Soft whole-wheat paratha cooked in cow ghee with grated paneer.", hi: "शुद्ध घी और कद्दूकस पनीर से बनी सात्विक परांठी।" }, yt: "hebbarskitchen+paneer+paratha+recipe" },
@@ -463,8 +553,8 @@
         "5y": {
           title: { en: "The 5-Year Milestone (Preschooler & School-Age)", hi: "5 वर्ष का मील का पत्थर (प्रीस्कूलर व स्कूली बच्चा)" },
           schedule: { 
-            en: "3 structured main meals + 2 healthy school/home snacks. Portions match an adult-sized small plate, driven by physical activity levels.", 
-            hi: "3 मुख्य भोजन + 2 हेल्दी स्नैक्स। शारीरिक गतिविधियों के अनुसार छोटे वयस्क थाली के बराबर मात्रा।" 
+            en: "At 5 years, your child's brain and body undergo active physical growth and school socialization. 3 structured main meals + 2 healthy school/home snacks. Portions match an adult-sized small plate, driven by physical activity levels.", 
+            hi: "5 साल की उम्र में बच्चे का स्कूल और शारीरिक विकास तेजी से होता है। 3 मुख्य भोजन + 2 हेल्दी स्नैक्स। शारीरिक गतिविधियों के अनुसार छोटे वयस्क थाली के बराबर मात्रा।" 
           },
           responsive: { 
             en: "Responsive, Loving & Structured Feeding: Involve your child in grocery shopping and simple kitchen tasks (washing veggies, mixing salads) to increase their willingness to taste and eat.", 
@@ -480,9 +570,9 @@
           },
           recipes: {
             veg: [
-              { name: { en: "Sprouts & Pomegranate Salad Chaat", hi: "स्प्राउट्स और अनार चाट" }, desc: { en: "Boiled moong sprouts tossed with lemon juice and cucumber.", hi: "नींबू और खीरे के साथ उबले हुए मूंग स्प्राउट्स।" }, yt: "archanaskitchen+sprouts+salad+recipe" },
+              { name: { en: "Sprouts & Pomegranate Salad Chaat", hi: "स्प्राउट्स और अनार चाट" }, desc: { en: "Boiled moong sprouts tossed with lemon juice, tomatoes, and cucumber.", hi: "नींबू और खीरे के साथ उबले हुए मूंग स्प्राउट्स।" }, yt: "archanaskitchen+sprouts+salad+recipe" },
               { name: { en: "Vegetable Idli with Coconut Chutney", hi: "वेजिटेबल इडली व चटनी" }, desc: { en: "Fermented, steam-cooked south Indian breakfast rich in probiotics.", hi: "प्रोबायोटिक्स से भरपूर दक्षिण भारतीय इडली।" }, yt: "hebbarskitchen+vegetable+idli+recipe" },
-              { name: { en: "Whole Wheat Vegetable Pasta", hi: "होल वीट वेज पास्ता" }, desc: { en: "Cooked in fresh homemade tomato puree with bell peppers.", hi: "ताजे टमाटर की प्यूरी और शिमला मिर्च से बना पास्ता।" }, yt: "hebbarskitchen+white+sauce+pasta+wheat" }
+              { name: { en: "Whole Wheat Vegetable Pasta", hi: "होल वीट वेज पास्ता" }, desc: { en: "Cooked in fresh homemade tomato puree loaded with bell peppers.", hi: "ताजे टमाटर की प्यूरी और शिमला मिर्च से बना पास्ता।" }, yt: "hebbarskitchen+white+sauce+pasta+wheat" }
             ],
             jain: [
               { name: { en: "Vegetable Idli with Coconut Chutney", hi: "वेजिटेबल इडली व चटनी" }, desc: { en: "Fermented, steam-cooked south Indian breakfast rich in probiotics.", hi: "प्रोबायोटिक्स से भरपूर दक्षिण भारतीय इडली।" }, yt: "hebbarskitchen+vegetable+idli+recipe" },
@@ -504,8 +594,8 @@
         "12y": {
           title: { en: "The 12-Year Milestone (Adolescent Growth Spurt)", hi: "12 वर्ष का मील का पत्थर (किशोर विकास स्पर्ट)" },
           schedule: { 
-            en: "3 heavy, nutrient-dense meals + 2 substantial energy snacks. Portions match full adult requirements, prioritizing lean proteins, iron, calcium, and complex carbs.", 
-            hi: "3 भारी और पौष्टिक भोजन + 2 स्नैक्स। वयस्क आवश्यकतानुसार मात्रा, जिसमें प्रोटीन, आयरन, कैल्शियम और कार्बोहाइड्रेट शामिल हों।" 
+            en: "Welcome to early adolescence! At 12 years, your child is on the brink of their major pubertal growth spurt, requiring peak bone mass accrual. 3 heavy, nutrient-dense meals + 2 substantial energy snacks. Portions match full adult requirements, prioritizing lean proteins, iron, calcium, and complex carbs.", 
+            hi: "किशोरावस्था में आपका स्वागत है! 12 साल की उम्र में बच्चे में प्यूबर्टल ग्रोथ स्पर्ट शुरू होता है। 3 भारी और पौष्टिक भोजन + 2 स्नैक्स। वयस्क आवश्यकतानुसार मात्रा, जिसमें प्रोटीन, आयरन और कैल्शियम शामिल हों।" 
           },
           responsive: { 
             en: "Responsive, Loving & Structured Feeding: Adolescents crave autonomy and face peer/social media influence. Maintain open, non-judgmental communication. Never diet or speak negatively about your own body.", 
@@ -551,10 +641,18 @@
         const ageKey = document.getElementById("dietAge").value;
         const dietKey = document.getElementById("dietPref").value;
         const container = document.getElementById("dietResults");
+        const fussySection = document.getElementById("fussyEaterSection");
         const isHi = (toolLang === "hi");
 
         const plan = dietPlanDatabase[ageKey] || dietPlanDatabase["6m"];
         const recipes = (plan.recipes[dietKey] || plan.recipes.veg);
+
+        // Show/Hide fussy eater section (Starts from 12m onwards)
+        if (ageKey === "12m" || ageKey === "2y" || ageKey === "5y" || ageKey === "12y") {
+          fussySection.style.display = "block";
+        } else {
+          fussySection.style.display = "none";
+        }
 
         const recipesHtml = recipes.map(r => `
           <div class="recipe-item-card">
@@ -562,18 +660,23 @@
               <strong style="font-size:0.88rem; color:#9a3412;"><i class="fa-solid fa-bowl-rice" style="color:#ea580c; margin-right:4px;"></i> ${r.name[isHi ? 'hi' : 'en']}</strong>
               <p style="font-size:0.82rem; color:#475569; margin:3px 0 0 0; line-height:1.4;">${r.desc[isHi ? 'hi' : 'en']}</p>
             </div>
-            <a href="https://www.youtube.com/results?search_query=${r.yt}" target="_blank" rel="noopener noreferrer" style="background:#fee2e2; color:#b91c1c; font-size:0.75rem; font-weight:700; padding:5px 10px; border-radius:10px; text-decoration:none; display:inline-flex; align-items:center; gap:4px; border:1px solid #fca5a5; flex-shrink:0;">
-              <i class="fa-brands fa-youtube" style="color:#dc2626;"></i> ${isHi ? 'वीडियो' : 'Watch'}
-            </a>
+            <details style="margin-top: 4px; width: 100%;">
+              <summary style="font-size: 0.78rem; font-weight: 700; color: #b91c1c; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;">
+                <i class="fa-brands fa-youtube" style="color:#dc2626;"></i> ${isHi ? 'यूट्यूब वीडियो संदर्भ देखें' : 'View YouTube Reference'}
+              </summary>
+              <div style="margin-top: 6px; padding: 8px; background: #fff5f5; border-radius: 8px; border: 1px solid #fca5a5;">
+                <a href="https://www.youtube.com/results?search_query=${r.yt}" target="_blank" rel="noopener noreferrer" style="color: #b91c1c; font-size: 0.78rem; text-decoration: underline; font-weight: 600; display: inline-flex; align-items: center; gap: 4px;">
+                  <i class="fa-solid fa-external-link-alt"></i> ${isHi ? 'क्लिक करके यूट्यूब पर रेसिपी खोजें' : 'Search & Watch Recipe on YouTube'}
+                </a>
+              </div>
+            </details>
           </div>
         `).join("");
 
         const dosList = plan.dos[isHi ? 'hi' : 'en'].map(d => `<li>${d}</li>`).join("");
         const dontsList = plan.donts[isHi ? 'hi' : 'en'].map(d => `<li>${d}</li>`).join("");
 
-        // Show fussy eater banner for ages 12m, 2y, 5y, 12y
-        const showFussyBanner = (ageKey === "12m" || ageKey === "2y" || ageKey === "5y" || ageKey === "12y");
-        const fussyBannerHtml = showFussyBanner ? `
+        const fussyBannerHtml = (ageKey === "12m" || ageKey === "2y" || ageKey === "5y" || ageKey === "12y") ? `
           <div class="fussy-banner">
             <div>
               <strong style="color: #b45309; font-size: 0.9rem; display: block;">
@@ -594,13 +697,13 @@
             <h3><i class="fa-solid fa-clipboard-list" style="color:var(--brand-primary);"></i> ${plan.title[isHi ? 'hi' : 'en']}</h3>
             
             <div style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:14px; padding:14px; margin-bottom:14px; font-size:0.88rem; color:#0f172a;">
-              <strong><i class="fa-solid fa-clock" style="color:var(--brand-primary);"></i> ${isHi ? 'फीडिंग शेड्यूल व मात्रा:' : 'Feeding Schedule & Quantities:'}</strong>
-              <p style="margin-top:4px; color:#475569;">${plan.schedule[isHi ? 'hi' : 'en']}</p>
+              <strong><i class="fa-solid fa-clock" style="color:var(--brand-primary);"></i> ${isHi ? 'फीडिंग शेड्यूल, मात्रा व स्थिरता (Consistency):' : 'Feeding Schedule, Quantities & Consistency:'}</strong>
+              <p style="margin-top:4px; color:#475569; line-height: 1.6;">${plan.schedule[isHi ? 'hi' : 'en']}</p>
             </div>
 
             <div style="background:#f0fdfa; border:1px solid #5eead4; border-radius:14px; padding:14px; margin-bottom:14px; font-size:0.88rem; color:#134e4a;">
               <strong><i class="fa-solid fa-heart-pulse" style="color:#0d9488;"></i> ${isHi ? 'उत्तरदायी, स्नेही व संरचित फीडिंग (Responsive Feeding):' : 'Responsive, Loving & Structured Feeding:'}</strong>
-              <p style="margin-top:4px;">${plan.responsive[isHi ? 'hi' : 'en']}</p>
+              <p style="margin-top:4px; line-height: 1.6;">${plan.responsive[isHi ? 'hi' : 'en']}</p>
             </div>
 
             ${fussyBannerHtml}
@@ -624,7 +727,7 @@
 
             <div style="background:#ffffff; border:1.5px solid #fed7aa; border-radius:14px; padding:16px; margin-top:16px;">
               <strong style="color:#9a3412; font-size:0.95rem; display:flex; align-items:center; gap:6px; margin-bottom:12px;">
-                <i class="fa-solid fa-utensils"></i> ${isHi ? 'डॉक्टर द्वारा सुझाई गई रेसिपीज व वीडियो लिंक:' : 'Doctor-Recommended Recipes & Video Links:'}
+                <i class="fa-solid fa-utensils"></i> ${isHi ? 'डॉक्टर द्वारा सुझाई गई रेसिपीज (텍스트 विवरण व वीडियो लिंक):' : 'Doctor-Recommended Recipes & Guides:'}
               </strong>
               ${recipesHtml}
             </div>
@@ -645,7 +748,6 @@
         const lblAge = document.getElementById("lblAge");
         const lblDiet = document.getElementById("lblDiet");
         
-        // Fussy eater text elements
         const fussyTitle = document.getElementById("fussyTitle");
         const fussyIntro = document.getElementById("fussyIntro");
         const f1Title = document.getElementById("f1Title");
@@ -657,24 +759,22 @@
         const f4Title = document.getElementById("f4Title");
         const f4Desc = document.getElementById("f4Desc");
 
-        // Bibliography text
         const bibText = document.getElementById("bibSourceText");
 
-        // CTA elements
         const ctaTitle = document.getElementById("ctaTitle");
         const ctaDesc = document.getElementById("ctaDesc");
         const ctaBtn = document.getElementById("ctaBtn");
 
         if (toolLang === "hi") {
           if (btnText) btnText.textContent = "Read in English";
-          if (titleEl) titleEl.textContent = "व्यापक शिशु और बाल आहार योजना (Baby Diet Planner)";
-          if (subTitleEl) subTitleEl.textContent = "शिशु आहार एवं पोषण योजना";
+          if (titleEl) titleEl.textContent = "व्यापक शिशु और बाल आहार योजना (Baby & Child Diet Planner)";
+          if (subTitleEl) subTitleEl.textContent = "शिशु एवं बाल आहार योजना";
           if (submitBtnText) submitBtnText.textContent = "विशेष आहार योजना तैयार करें";
           if (lblAge) lblAge.textContent = "आयु समूह चुनें (Age Group)";
           if (lblDiet) lblDiet.textContent = "आहार प्राथमिकता (Diet Preference)";
 
           if (fussyTitle) fussyTitle.textContent = "मास्टर गाइड: क्या आपका बच्चा ठीक से नहीं खा रहा या नखरे करता है? (Fussy/Selective Eater)";
-          if (fussyIntro) fussyIntro.textContent = "चुनिंदा खाना सामान्य विकासात्मक चरण है, माता-पिता की असफलता नहीं। डॉ. दिनेश मित्तल का क्लिनिकल प्रोटोकॉल:";
+          if (fussyIntro) fussyIntro.textContent = "1 वर्ष के बाद चुनिंदा खाना सामान्य विकासात्मक चरण है। डॉ. दिनेश मित्तल का क्लिनिकल प्रोटोकॉल:";
           if (f1Title) f1Title.textContent = "1. स्नेही व संरचित सीमाएं (Loving & Structured Boundaries)";
           if (f1Desc) f1Desc.textContent = "अलग से दूसरा खाना न बनाएं। परिवार का भोजन परोसें: 'खाना हो तो खाएं, यही मेज पर है।' बिना गुस्से के 20 मिनट बाद थाली हटा लें।";
           if (f2Title) f2Title.textContent = "2. तटस्थ और बार-बार परोसना";
@@ -684,7 +784,7 @@
           if (f4Title) f4Title.textContent = "4. लिक्विड कैलोरी ट्रैप हटाएं";
           if (f4Desc) f4Desc.textContent = "नखरेबाज बच्चे दूध या जूस से पेट भर लेते हैं। दूध की मात्रा सीमित करें (जैसे टॉडलर के लिए अधिकतम 400ml/दिन) और बीच में पानी दें।";
 
-          if (bibText) bibText.innerHTML = "<strong>संदर्भ स्रोत और गाइडलाइंस (Bibliography):</strong><br>1. इंडियन एकेडमी ऑफ पेडियाट्रिक्स (IAP) आईवाईसीएफ दिशा-निर्देश。<br>2. विश्व स्वास्थ्य संगठन (WHO) पूरक आहार ढांचा。<br>3. एलिन सैटर संस्थान / AAP उत्तरदायी, स्नेही व संरचित फीडिंग सिद्धांत।";
+          if (bibText) bibText.innerHTML = "<strong>संदर्भ स्रोत और गाइडलाइंस (Bibliography):</strong><br>1. इंडियन एकेडमी ऑफ पेडियाट्रिक्स (IAP) आईवाईसीएफ दिशा-निर्देश.<br>2. विश्व स्वास्थ्य संगठन (WHO) पूरक आहार ढांचा.<br>3. एलिन सैटर संस्थान / AAP उत्तरदायी, स्नेही व संरचित फीडिंग सिद्धांत.";
 
           if (ctaTitle) ctaTitle.textContent = "व्यक्तिगत क्लिनिकल आहार परामर्श चाहते हैं?";
           if (ctaDesc) ctaDesc.textContent = "अपने बच्चे के पोषण और विकास के मूल्यांकन हेतु सेक्टर 3 रोहिणी क्लिनिक में डॉ. दिनेश मित्तल से मिलें।";
@@ -692,13 +792,13 @@
         } else {
           if (btnText) btnText.textContent = "हिन्दी में पढ़ें";
           if (titleEl) titleEl.textContent = "Comprehensive Baby & Child Diet Planner";
-          if (subTitleEl) subTitleEl.textContent = "Baby Diet & Nutrition Planner";
+          if (subTitleEl) subTitleEl.textContent = "Baby & Child Diet Planner";
           if (submitBtnText) submitBtnText.textContent = "Generate Tailored Diet Plan";
           if (lblAge) lblAge.textContent = "Select Age Group";
           if (lblDiet) lblDiet.textContent = "Dietary Preference";
 
           if (fussyTitle) fussyTitle.textContent = "Master Guide: Is Your Child Not Eating Well or a Selective/Fussy Eater?";
-          if (fussyIntro) fussyIntro.textContent = "Dealing with selective eating is a normal developmental phase, not parental failure. Here is Dr. Dinesh Mittal’s clinical protocol:";
+          if (fussyIntro) fussyIntro.textContent = "Dealing with selective eating is a normal developmental phase starting around 1 year of age, not parental failure. Here is Dr. Dinesh Mittal’s clinical protocol:";
           if (f1Title) f1Title.textContent = "1. Loving & Structured Boundaries";
           if (f1Desc) f1Desc.textContent = "Never become a short-order cook. Serve the family meal neutrally: \"You don't have to eat, but this is what is on the table.\" Remove plate after 20 mins without anger.";
           if (f2Title) f2Title.textContent = "2. Neutral Repeated Exposure";
