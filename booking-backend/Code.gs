@@ -20,7 +20,10 @@ var TAB_BOOKINGS = 'Online Bookings';
 var NEW_BOOKING_PAGE = 'https://childspecialistrohini.com/book.html';
 
 function SS() {
-  var ss = SHEET_ID ? SpreadsheetApp.openById(SHEET_ID) : SpreadsheetApp.getActiveSpreadsheet();
+  // accepts a plain ID or a full sheet link (extra slashes or /edit are ignored)
+  var id = String(SHEET_ID || '').trim();
+  var m = id.match(/\/d\/([a-zA-Z0-9_-]+)/) || id.match(/([a-zA-Z0-9_-]{25,})/);
+  var ss = m ? SpreadsheetApp.openById(m[1]) : SpreadsheetApp.getActiveSpreadsheet();
   if (!ss) throw new Error('No sheet found. Open this script from the sheet (Extensions → Apps Script) or fill in SHEET_ID.');
   return ss;
 }
