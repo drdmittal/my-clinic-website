@@ -1,0 +1,535 @@
+<!doctype html><html lang="hi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style></head><body><title>Kabz Care Guide</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Mukta:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: one phone-width card at a time, progress strip on top, Back/Next thumb bar at the bottom. */
+:root{
+  --bg:#eef5f2; --surface:#ffffff; --ink:#12302b; --muted:#4d6560; --line:#d5e4df;
+  --accent:#0f7b6c; --accent-soft:#dcefe9; --mango:#f2a33a; --mango-soft:#fff1dc;
+  --good:#23804a; --good-soft:#e2f3e8; --bad:#c2362b; --bad-soft:#fbe7e5; --warn:#b4600c; --warn-soft:#fdf0e1;
+  --stool1:#6b4226; --stool2:#8a5a3b; --stool3:#a87b55; --stool4:#c49a6c;
+  --display:'Baloo 2','Mukta',system-ui,sans-serif; --body:'Mukta',system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0e1b19; --surface:#152724; --ink:#e4f1ed; --muted:#9db6b0; --line:#28403b;
+  --accent:#4cc3ad; --accent-soft:#1b3a35; --mango:#f5b257; --mango-soft:#3a2c17;
+  --good:#5fd08b; --good-soft:#163524; --bad:#ff8a7f; --bad-soft:#3d1d1a; --warn:#f2a65a; --warn-soft:#3a2a17;
+  --stool1:#a07050; --stool2:#b5845f; --stool3:#c9a07a; --stool4:#dcbb91; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0e1b19; --surface:#152724; --ink:#e4f1ed; --muted:#9db6b0; --line:#28403b;
+  --accent:#4cc3ad; --accent-soft:#1b3a35; --mango:#f5b257; --mango-soft:#3a2c17;
+  --good:#5fd08b; --good-soft:#163524; --bad:#ff8a7f; --bad-soft:#3d1d1a; --warn:#f2a65a; --warn-soft:#3a2a17;
+  --stool1:#a07050; --stool2:#b5845f; --stool3:#c9a07a; --stool4:#dcbb91; color-scheme:dark}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.45}
+.app{max-width:560px;margin:0 auto;min-height:100%;display:flex;flex-direction:column;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:12px 0}
+header{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.brand{display:flex;flex-direction:column;line-height:1.1}
+.brand b{font-family:var(--display);font-size:18px;color:var(--accent)}
+.brand span{font-size:12.5px;color:var(--muted)}
+.lang{display:flex;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:3px}
+.lang button{border:0;background:transparent;color:var(--muted);font:600 13px var(--body);padding:6px 10px;border-radius:999px;cursor:pointer;min-height:34px}
+.lang button[aria-pressed="true"]{background:var(--accent);color:var(--surface)}
+.progress{margin-top:12px;display:flex;align-items:center;gap:10px}
+.bar{flex:1;height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent);border-radius:99px;transition:width .35s ease}
+.count{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+main{flex:1;padding-block:14px 18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px 18px;display:flex;flex-direction:column;gap:14px}
+.eyebrow{font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mango)}
+h1,h2{font-family:var(--display);margin:0;line-height:1.15;text-wrap:balance}
+h1{font-size:30px}
+h2{font-size:24px}
+p{margin:0}
+.hi{display:block;color:var(--muted);font-size:.94em}
+.both .hi{margin-top:2px}
+.lead{font-size:18px}
+ul.pts{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
+ul.pts li{display:grid;grid-template-columns:22px 1fr;gap:8px;align-items:start}
+ul.pts li::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--accent);margin-top:8px;justify-self:center}
+.cycle{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.cycle div{background:var(--bad-soft);color:var(--bad);border-radius:12px;padding:10px;font-weight:700;font-size:15px;text-align:center;position:relative}
+.note{background:var(--mango-soft);border-radius:12px;padding:12px 14px;font-size:15.5px}
+.good-box{background:var(--good-soft);border-radius:12px;padding:12px 14px}
+.bad-box{background:var(--bad-soft);border-radius:12px;padding:12px 14px}
+.opt{display:flex;flex-direction:column;gap:8px}
+.choice{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:var(--surface);color:var(--ink);border:2px solid var(--line);border-radius:14px;padding:10px 12px;font:500 16px var(--body);cursor:pointer;min-height:52px}
+.choice:hover{border-color:var(--accent)}
+.choice[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.choice svg{flex:none}
+.choice .t{display:flex;flex-direction:column;line-height:1.2}
+.choice .t small{color:var(--muted);font-size:13.5px}
+.feedback{border-radius:14px;padding:14px;font-size:16px;display:flex;flex-direction:column;gap:4px}
+.feedback.good{background:var(--good-soft);color:var(--ink);border:2px solid var(--good)}
+.feedback.bad{background:var(--bad-soft);color:var(--ink);border:2px solid var(--bad)}
+.feedback.warn{background:var(--warn-soft);color:var(--ink);border:2px solid var(--warn)}
+.feedback b.tag{font-family:var(--display);font-size:19px}
+.feedback.good b.tag{color:var(--good)}.feedback.bad b.tag{color:var(--bad)}.feedback.warn b.tag{color:var(--warn)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.big-btn{border:0;border-radius:14px;padding:14px 10px;font:700 18px var(--display);cursor:pointer;min-height:56px}
+.yes{background:var(--good-soft);color:var(--good);border:2px solid var(--good)}
+.no{background:var(--bad-soft);color:var(--bad);border:2px solid var(--bad)}
+.food{font-family:var(--display);font-size:26px;text-align:center;padding:18px 10px;background:var(--accent-soft);border-radius:14px;line-height:1.2}
+.food .hi{font-family:var(--body);font-size:17px;margin-top:4px}
+.score{font-variant-numeric:tabular-nums;color:var(--muted);font-size:14px;text-align:center}
+.slider{display:flex;flex-direction:column;gap:6px}
+.slider label{font-weight:600}
+input[type=range]{width:100%;accent-color:var(--accent);height:32px}
+.ml{font-family:var(--display);font-size:34px;color:var(--accent);text-align:center;font-variant-numeric:tabular-nums}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:2px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:7px 13px;font:500 15px var(--body);cursor:pointer;min-height:42px}
+.chip[aria-pressed="true"]{border-color:var(--mango);background:var(--mango-soft)}
+.ages{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:var(--bg);padding:4px;border-radius:12px}
+.tabs button{border:0;border-radius:9px;padding:10px 6px;font:600 15px var(--body);background:transparent;color:var(--muted);cursor:pointer;min-height:44px}
+.tabs button[aria-selected="true"]{background:var(--surface);color:var(--accent);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+details{border:1px solid var(--line);border-radius:12px;padding:0 14px;background:var(--surface)}
+details summary{cursor:pointer;font-weight:700;padding:12px 0;list-style:none;display:flex;justify-content:space-between;gap:10px}
+details summary::after{content:"+";color:var(--accent);font-size:22px;line-height:1}
+details[open] summary::after{content:"–"}
+details > div{padding:0 0 12px}
+.flags li::before{background:var(--bad)!important}
+.flagcard{border:2px solid var(--bad);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.flagcard h3{margin:0;font-family:var(--display);color:var(--bad);font-size:20px}
+.check{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;background:var(--surface);color:var(--ink);border:2px solid var(--line);border-radius:14px;padding:12px;font:500 16px var(--body);cursor:pointer}
+.check .box{flex:none;width:26px;height:26px;border-radius:8px;border:2px solid var(--accent);display:grid;place-items:center;color:var(--surface);font-weight:800}
+.check[aria-pressed="true"]{border-color:var(--good);background:var(--good-soft)}
+.check[aria-pressed="true"] .box{background:var(--good);border-color:var(--good)}
+.welcome-langs{display:flex;flex-direction:column;gap:10px}
+.medal{font-family:var(--display);font-size:22px;text-align:center;color:var(--accent)}
+.summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.summary div{background:var(--accent-soft);border-radius:12px;padding:10px;text-align:center}
+.summary b{display:block;font-family:var(--display);font-size:24px;color:var(--accent);font-variant-numeric:tabular-nums}
+.summary span{font-size:13.5px;color:var(--muted)}
+.formbox{display:flex;flex-direction:column;gap:6px;border:2px solid var(--accent);border-radius:16px;padding:14px}
+.formbox label{font-weight:600;font-size:15px;margin-top:4px}
+.formbox input{font:500 17px var(--body);color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:10px;padding:11px 12px;min-height:48px;width:100%;box-sizing:border-box}
+.formbox input:focus{outline:3px solid var(--mango);outline-offset:1px;border-color:var(--accent)}
+.ferr{color:var(--bad);font-weight:600;font-size:15px}
+.sendbtn{display:flex;align-items:center;justify-content:center;margin-top:8px;min-height:54px;border-radius:14px;background:var(--accent);color:var(--surface);font:700 18px var(--display);text-decoration:none}
+.sendbtn[aria-disabled="true"]{opacity:.55}
+.sendbtn:focus-visible{outline:3px solid var(--mango);outline-offset:2px}
+nav{position:sticky;bottom:0;background:var(--bg);display:grid;grid-template-columns:1fr 2fr;gap:10px;padding-top:10px;padding-bottom:calc(12px + env(safe-area-inset-bottom,0px))}
+nav button{border:0;border-radius:14px;min-height:54px;font:700 18px var(--display);cursor:pointer}
+#back{background:var(--surface);color:var(--ink);border:1px solid var(--line)}
+#next{background:var(--accent);color:var(--surface)}
+#next:disabled{opacity:.45;cursor:not-allowed}
+button:focus-visible{outline:3px solid var(--mango);outline-offset:2px}
+.fade{animation:fade .3s ease}
+@keyframes fade{from{opacity:.4;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){.fade{animation:none}.bar i{transition:none}}
+</style>
+
+<div class="app">
+  <header>
+    <div class="brand"><b>Dr. Dinesh Mittal</b><span>MBBS, DCH · Child Specialist · Rohini</span></div>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="en" aria-pressed="false">English</button>
+      <button type="button" data-lang="hi" aria-pressed="false">हिंदी</button>
+      <button type="button" data-lang="both" aria-pressed="true">Both</button>
+    </div>
+  </header>
+  <div class="progress"><div class="bar"><i id="bar"></i></div><span class="count" id="count"></span></div>
+  <main><div class="card fade" id="card"></div></main>
+  <nav><button type="button" id="back">←</button><button type="button" id="next">Next →</button></nav>
+</div>
+
+<script>
+(function(){
+var S = {lang:'both', step:0, stool:null, milk:500, prods:{}, age:null, quizI:0, quizA:{}, tfA:{}, plan:{}, tab:'food'};
+try{ var saved = JSON.parse(localStorage.getItem('kabz-guide')||'null'); if(saved){ Object.assign(S, saved); } }catch(e){}
+function save(){ try{ localStorage.setItem('kabz-guide', JSON.stringify(S)); }catch(e){} }
+
+function t(en, hi){
+  if(S.lang==='en') return en;
+  if(S.lang==='hi') return hi;
+  return en + '<span class="hi">' + hi + '</span>';
+}
+function tx(o){ return t(o.en, o.hi); }
+function plain(en, hi){ return S.lang==='hi' ? hi : en; }
+
+var STOOL = [
+  {n:1, en:'Hard separate lumps, like goat droppings', hi:'बकरी की मेंगनी जैसी सख़्त गोलियाँ', v:'bad',
+   svg:'<circle cx="9" cy="14" r="5" fill="var(--stool1)"/><circle cx="22" cy="13" r="4.5" fill="var(--stool1)"/><circle cx="34" cy="15" r="5" fill="var(--stool1)"/><circle cx="47" cy="13" r="4.5" fill="var(--stool1)"/>'},
+  {n:2, en:'Lumpy, hard sausage', hi:'गांठदार, सख़्त', v:'bad',
+   svg:'<circle cx="10" cy="14" r="7" fill="var(--stool2)"/><circle cx="19" cy="14" r="7" fill="var(--stool2)"/><circle cx="28" cy="14" r="7" fill="var(--stool2)"/><circle cx="37" cy="14" r="7" fill="var(--stool2)"/><circle cx="46" cy="14" r="7" fill="var(--stool2)"/>'},
+  {n:3, en:'Sausage with cracks', hi:'दरारों वाली', v:'good',
+   svg:'<rect x="3" y="8" width="50" height="12" rx="6" fill="var(--stool2)"/><path d="M14 8 L16 13 M27 20 L29 15 M40 8 L41 13" stroke="var(--surface)" stroke-width="1.6"/>'},
+  {n:4, en:'Smooth and soft, like a banana', hi:'केले जैसी नरम, चिकनी', v:'best',
+   svg:'<rect x="3" y="9" width="50" height="10" rx="5" fill="var(--stool3)"/>'},
+  {n:5, en:'Soft pieces with clear edges', hi:'नरम टुकड़े', v:'good',
+   svg:'<ellipse cx="11" cy="14" rx="8" ry="6" fill="var(--stool3)"/><ellipse cx="29" cy="15" rx="7" ry="5.5" fill="var(--stool3)"/><ellipse cx="46" cy="13" rx="7" ry="6" fill="var(--stool3)"/>'},
+  {n:6, en:'Mushy, fluffy pieces', hi:'गूदेदार, ढीली', v:'loose',
+   svg:'<path d="M4 18 Q7 10 12 14 Q15 7 21 13 Q25 8 29 14 Q34 8 38 14 Q43 9 46 15 Q52 14 52 19 Q40 22 28 20 Q14 23 4 18 Z" fill="var(--stool4)"/>'},
+  {n:7, en:'Watery, no solid pieces', hi:'पानी जैसी', v:'loose',
+   svg:'<path d="M3 17 Q10 11 17 17 T31 17 T45 17 T55 16 L55 22 L3 22 Z" fill="var(--stool4)"/>'}
+];
+var VERDICT = {
+  bad:{cls:'bad', tag:['Still constipated','अभी भी कब्ज़ है'], msg:['Keep giving the medicine every day and follow the diet. If it stays like this for a week, tell the doctor — the dose may need to go up.','दवा रोज़ दें और खाने का ध्यान रखें। एक हफ़्ते तक ऐसी ही रहे तो डॉक्टर को बताएँ — खुराक बढ़ानी पड़ सकती है।']},
+  good:{cls:'good', tag:['Good','अच्छा है'], msg:['This is fine. Continue the same dose — do not stop the medicine.','यह ठीक है। यही खुराक जारी रखें — दवा बंद न करें।']},
+  best:{cls:'good', tag:['Ideal! This is our goal','बिल्कुल सही! यही लक्ष्य है'], msg:['Perfect stool. Keep the same dose and routine. The doctor will reduce the medicine slowly later.','बढ़िया पॉटी। यही खुराक और आदत जारी रखें। डॉक्टर बाद में धीरे-धीरे दवा कम करेंगे।']},
+  loose:{cls:'warn', tag:['Too loose','बहुत पतली'], msg:['Reduce the medicine dose a little (as the doctor told you). Do not stop it completely. Give plenty of fluids.','दवा की खुराक थोड़ी कम करें (जैसा डॉक्टर ने बताया)। पूरी बंद न करें। पानी ज़्यादा दें।']}
+};
+
+var FOODS = [
+  {en:'Papaya', hi:'पपीता', good:true, why:['Soft fibre — one of the best fruits for constipation.','नरम फाइबर — कब्ज़ के लिए सबसे अच्छे फलों में से एक।']},
+  {en:'Biscuits / rusk', hi:'बिस्किट / रस्क', good:false, why:['Made of maida, no fibre, and fills the tummy. Give roasted chana or makhana instead.','मैदे से बने, फाइबर नहीं, पेट भर देते हैं। इसकी जगह भुना चना या मखाना दें।']},
+  {en:'Guava (with peel)', hi:'अमरूद (छिलके सहित)', good:true, why:['Lots of fibre, especially in the peel.','बहुत फाइबर, ख़ासकर छिलके में।']},
+  {en:'Maggi / noodles / momos', hi:'मैगी / नूडल्स / मोमोज़', good:false, why:['Sticky maida with almost no fibre. Give vegetable dalia, upma or poha instead.','चिपचिपा मैदा, फाइबर लगभग नहीं। सब्ज़ी वाला दलिया, उपमा या पोहा दें।']},
+  {en:'Vegetable dalia', hi:'सब्ज़ी वाला दलिया', good:true, why:['Whole grain plus vegetables — very good.','साबुत अनाज और सब्ज़ी — बहुत अच्छा।']},
+  {en:'Chips / Kurkure', hi:'चिप्स / कुरकुरे', good:false, why:['Fried and salty; dries the stool. Give roasted makhana or bhutta instead.','तला और नमकीन; पॉटी सुखाता है। भुना मखाना या भुट्टा दें।']},
+  {en:'Cold drink / packet juice', hi:'कोल्ड ड्रिंक / पैकेट जूस', good:false, why:['Sugar, no fibre, and the child drinks less water. Give water, nimbu pani or nariyal pani.','चीनी, फाइबर नहीं, और बच्चा पानी कम पीता है। पानी, नींबू पानी या नारियल पानी दें।']},
+  {en:'Stuffed paratha (palak / gobhi / mooli)', hi:'भरवाँ पराठा (पालक / गोभी / मूली)', good:true, why:['A smart way to hide vegetables. Use chokar wala atta.','सब्ज़ी छिपाने का अच्छा तरीका। चोकर वाला आटा लें।']},
+  {en:'Pizza / burger / white bread', hi:'पिज़्ज़ा / बर्गर / ब्रेड', good:false, why:['Maida plus cheese makes stool hard. Make an atta roti roll with sabzi.','मैदा और चीज़ से पॉटी सख़्त होती है। सब्ज़ी वाला आटा रोल बनाएँ।']},
+  {en:'Soaked kishmish / anjeer', hi:'भिगोई किशमिश / अंजीर', good:true, why:['Natural fibre and sweetness. 4–5 in the morning.','प्राकृतिक फाइबर और मिठास। सुबह 4–5।']},
+  {en:'Chocolate / toffee', hi:'चॉकलेट / टॉफ़ी', good:false, why:['Sugar kills appetite for real food. Give khajoor or anjeer instead.','चीनी से असली खाने की भूख मर जाती है। खजूर या अंजीर दें।']},
+  {en:'Kaccha (unripe) banana', hi:'कच्चा केला', good:false, why:['Unripe banana binds the stool. A fully ripe banana is fine.','कच्चा केला कब्ज़ करता है। पूरा पका केला ठीक है।']},
+  {en:'Roasted chana / makhana', hi:'भुना चना / मखाना', good:true, why:['A crunchy snack with fibre — a great swap for chips.','फाइबर वाला कुरकुरा नाश्ता — चिप्स की जगह बढ़िया।']},
+  {en:'Ice cream / milkshake', hi:'आइसक्रीम / मिल्कशेक', good:false, why:['Adds to the daily milk load, with no fibre. Give fresh fruit instead.','दूध की मात्रा बढ़ाते हैं, फाइबर नहीं। ताज़े फल दें।']}
+];
+
+var TF = [
+  {q:['Stop the medicine as soon as stools become normal.','पॉटी ठीक होते ही दवा बंद कर दें।'], a:false, why:['No. The stretched bowel needs months to recover. Stopping early is the commonest reason constipation comes back. The doctor will reduce it slowly.','नहीं। फैली हुई आँत को ठीक होने में महीने लगते हैं। जल्दी बंद करने से कब्ज़ सबसे ज़्यादा लौटती है। डॉक्टर धीरे-धीरे कम करेंगे।']},
+  {q:['This medicine will make my child habitual.','इस दवा की बच्चे को आदत पड़ जाएगी।'], a:false, why:['No. These stool softeners are safe for long use and are not habit-forming.','नहीं। ये दवाएँ लंबे समय तक सुरक्षित हैं, इनकी आदत नहीं पड़ती।']},
+  {q:['If stools become watery, reduce the dose a little.','पॉटी पानी जैसी हो जाए तो खुराक थोड़ी कम करें।'], a:true, why:['Yes. Reduce a little — do not stop. If unsure, call the clinic.','हाँ। थोड़ी कम करें — बंद न करें। समझ न आए तो क्लिनिक में पूछें।']},
+  {q:['Holding back stool makes constipation worse.','पॉटी रोकने से कब्ज़ और बढ़ती है।'], a:true, why:['Yes. Stool stays inside, becomes harder and more painful. Send the child as soon as the urge comes.','हाँ। पॉटी अंदर रहकर और सख़्त, और दर्द वाली होती है। इच्छा होते ही भेजें।']},
+  {q:['A child who leaks stool in the underwear is doing it on purpose.','चड्डी में पॉटी लगाने वाला बच्चा जानबूझकर करता है।'], a:false, why:['No. Soft stool leaks around hard stool stuck inside. It improves with treatment. Never scold.','नहीं। अंदर जमी सख़्त पॉटी के चारों ओर से पतली पॉटी रिसती है। इलाज से ठीक होती है। डाँटें नहीं।']}
+];
+
+var PRODS = [['dahi','Dahi','दही'],['paneer','Paneer','पनीर'],['cheese','Cheese','चीज़'],['lassi','Lassi / shake','लस्सी / शेक'],['kheer','Kheer','खीर'],['icecream','Ice cream','आइसक्रीम'],['tea','Milk tea','दूध वाली चाय'],['flakes','Cornflakes with milk','दूध-कॉर्नफ्लेक्स']];
+
+var PLAN = [
+  ['Sit on the toilet 5–10 minutes after breakfast and dinner','नाश्ते और रात के खाने के बाद 5–10 मिनट टॉयलेट पर बिठाना'],
+  ['Put a small stool under the feet (knees above hips)','पैरों के नीचे छोटा स्टूल रखना (घुटने कूल्हों से ऊपर)'],
+  ['Praise every try, use a star chart','हर कोशिश पर शाबाशी, स्टार चार्ट'],
+  ['Never hold stool — also at school','पॉटी कभी न रोकना — स्कूल में भी'],
+  ['1 hour of active play daily','रोज़ 1 घंटा खेल-कूद']
+];
+
+// Google Form prefill config — fill from the form's "Get pre-filled link".
+var FORM = { base:'https://docs.google.com/forms/d/e/1FAIpQLSeM-EObOkYfkHZ1AjxjaYbOaOcsxOCNavLNUNood-v6FXlvpw/viewform', name:'1888707118', phone:'829750283', age:'1111376884', result:'322966893' };
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
+function resultLine(){
+  var quiz = Object.keys(S.quizA).filter(function(k){return S.quizA[k];}).length;
+  var tf = TF.filter(function(q,i){return S.tfA[i]===q.a;}).length;
+  var plan = PLAN.filter(function(p,i){return S.plan[i];}).length;
+  return 'Completed guide | Food quiz '+quiz+'/'+FOODS.length+' | Medicine quiz '+tf+'/'+TF.length+' | Toilet plan '+plan+'/'+PLAN.length+' | Milk '+S.milk+' ml'+(S.stool?' | Stool type '+S.stool:'')+' | Lang '+S.lang;
+}
+function formHref(){
+  var p = ['usp=pp_url'];
+  function add(id, v){ if(id) p.push('entry.'+id+'='+encodeURIComponent(v)); }
+  add(FORM.name, S.fname||''); add(FORM.phone, S.fphone||''); add(FORM.age, S.fage||''); add(FORM.result, resultLine());
+  return FORM.base + '?' + p.join('&');
+}
+function formValid(){ return (S.fname||'').trim().length>0 && /^[6-9]\d{9}$/.test(S.fphone||''); }
+function syncForm(){
+  var a = document.getElementById('f-send'); if(!a) return;
+  a.href = formHref();
+  a.setAttribute('aria-disabled', String(!formValid()));
+}
+
+function stoolSvg(s){ return '<svg width="56" height="28" viewBox="0 0 56 28" aria-hidden="true">'+s.svg+'</svg>'; }
+function pts(arr){ return '<ul class="pts">'+arr.map(function(x){return '<li><span>'+t(x[0],x[1])+'</span></li>';}).join('')+'</ul>'; }
+
+var STEPS = [
+  { // 0 welcome
+    render:function(){
+      return '<div class="eyebrow">'+t('Parent guide','माता-पिता के लिए')+'</div>'+
+      '<h1>'+t('Helping your child with constipation','बच्चे की कब्ज़ में मदद')+'</h1>'+
+      '<p class="lead">'+t('A 5-minute guide with small quizzes. Tap through at your own pace.','5 मिनट की गाइड, छोटे-छोटे सवालों के साथ। आराम से एक-एक करके देखें।')+'</p>'+
+      '<p style="font-weight:700">Choose language / भाषा चुनें</p>'+
+      '<div class="welcome-langs">'+
+        '<button type="button" class="choice" data-setlang="hi" aria-pressed="'+(S.lang==='hi')+'"><span class="t">हिंदी</span></button>'+
+        '<button type="button" class="choice" data-setlang="en" aria-pressed="'+(S.lang==='en')+'"><span class="t">English</span></button>'+
+        '<button type="button" class="choice" data-setlang="both" aria-pressed="'+(S.lang==='both')+'"><span class="t">Both / दोनों</span></button>'+
+      '</div>';
+    }
+  },
+  { // 1 what is it
+    render:function(){
+      return '<div class="eyebrow">'+t('Understand','समझें')+'</div>'+
+      '<h2>'+t('What is constipation?','कब्ज़ क्या है?')+'</h2>'+
+      '<p>'+t('Hard, painful or infrequent stools — less than 3 times a week. It is very common and almost never a serious disease.','सख़्त, दर्द वाली या कम पॉटी — हफ़्ते में 3 बार से कम। यह बहुत आम है और लगभग कभी गंभीर बीमारी नहीं होती।')+'</p>'+
+      '<p style="font-weight:700">'+t('Why does it keep going? The vicious cycle:','यह बार-बार क्यों होती है? दुष्चक्र:')+'</p>'+
+      '<div class="cycle"><div>1. '+t('Hard stool','सख़्त पॉटी')+'</div><div>2. '+t('Pain','दर्द')+'</div><div>4. '+t('Even harder stool','और सख़्त पॉटी')+'</div><div>3. '+t('Child holds stool','बच्चा पॉटी रोकता है')+'</div></div>'+
+      '<div class="note">'+t('Treatment breaks this cycle with <b>diet + toilet habit + daily medicine</b>. It usually takes <b>3–6 months or longer</b>.','इलाज इस चक्र को तोड़ता है: <b>सही खाना + टॉयलेट की आदत + रोज़ दवा</b>। आमतौर पर <b>3–6 महीने या ज़्यादा</b> लगते हैं।')+'</div>';
+    }
+  },
+  { // 2 stool picker
+    render:function(){
+      var v = S.stool ? VERDICT[STOOL[S.stool-1].v] : null;
+      return '<div class="eyebrow">'+t('Check','जाँचें')+'</div>'+
+      '<h2>'+t('What did your child\'s stool look like today?','आज बच्चे की पॉटी कैसी थी?')+'</h2>'+
+      '<div class="opt">'+STOOL.map(function(s){
+        return '<button type="button" class="choice" data-stool="'+s.n+'" aria-pressed="'+(S.stool===s.n)+'">'+stoolSvg(s)+'<span class="t"><b>'+plain('Type ','टाइप ')+s.n+'</b><small>'+plain(s.en,s.hi)+(S.lang==='both'?' · '+s.hi:'')+'</small></span></button>';
+      }).join('')+'</div>'+
+      (v ? '<div class="feedback '+v.cls+'" aria-live="polite"><b class="tag">'+t(v.tag[0],v.tag[1])+'</b><span>'+t(v.msg[0],v.msg[1])+'</span></div>' : '<p class="score">'+t('Tap one to see what it means','एक चुनें और देखें इसका मतलब')+'</p>');
+    }
+  },
+  { // 3 milk
+    render:function(){
+      var picked = PRODS.filter(function(p){return S.prods[p[0]];});
+      var fb;
+      if(S.milk > 400){
+        fb = '<div class="feedback bad"><b class="tag">'+t('Too much milk','दूध बहुत ज़्यादा है')+'</b><span>'+t('Bring it down slowly to about <b>400 ml a day in total</b>.','धीरे-धीरे घटाकर <b>दिन में कुल लगभग 400 ml</b> तक लाएँ।')+'</span></div>';
+      } else if(picked.length >= 2){
+        fb = '<div class="feedback warn"><b class="tag">'+t('Count the milk products too','दूध से बनी चीज़ें भी गिनें')+'</b><span>'+t('Milk is within limit, but dahi, paneer, shakes etc. are also milk. All together should stay around 400 ml a day — reduce plain milk on days you give these.','दूध सीमा में है, पर दही, पनीर, शेक आदि भी दूध ही हैं। सब मिलाकर दिन में लगभग 400 ml रहें — जिस दिन ये दें, सादा दूध कम करें।')+'</span></div>';
+      } else {
+        fb = '<div class="feedback good"><b class="tag">'+t('Good amount','सही मात्रा')+'</b><span>'+t('Keep milk and milk products together around 400 ml a day.','दूध और दूध से बनी चीज़ें मिलाकर लगभग 400 ml रखें।')+'</span></div>';
+      }
+      return '<div class="eyebrow">'+t('Milk','दूध')+'</div>'+
+      '<h2>'+t('Is your child taking too much milk?','क्या बच्चा ज़्यादा दूध ले रहा है?')+'</h2>'+
+      '<div class="slider"><label for="milk">'+t('Plain milk in a day (measure in ml, not glasses)','दिन भर में सादा दूध (गिलास नहीं, ml में नापें)')+'</label>'+
+      '<div class="ml" id="mlv">'+S.milk+' ml</div>'+
+      '<input type="range" id="milk" min="0" max="1200" step="50" value="'+S.milk+'"></div>'+
+      '<p style="font-weight:600">'+t('Which of these does the child also take daily?','इनमें से बच्चा रोज़ और क्या लेता है?')+'</p>'+
+      '<div class="chips">'+PRODS.map(function(p){return '<button type="button" class="chip" data-prod="'+p[0]+'" aria-pressed="'+(!!S.prods[p[0]])+'">'+plain(p[1],p[2])+'</button>';}).join('')+'</div>'+
+      '<div id="milkfb" aria-live="polite">'+fb+'</div>'+
+      '<details><summary>'+t('Why is extra milk harmful?','ज़्यादा दूध नुकसान क्यों करता है?')+'</summary><div>'+pts([
+        ['Milk has no fibre at all.','दूध में फाइबर बिल्कुल नहीं होता।'],
+        ['It fills the stomach, so the child eats less roti, dal, sabzi and fruit.','पेट भर जाता है, बच्चा रोटी, दाल, सब्ज़ी, फल कम खाता है।'],
+        ['In some children cow\'s milk protein itself makes stool hard.','कुछ बच्चों में गाय के दूध का प्रोटीन ही पॉटी सख़्त करता है।'],
+        ['Too much milk causes iron deficiency (anaemia) — pale, tired child who eats poorly.','ज़्यादा दूध से खून की कमी (एनीमिया) — बच्चा पीला, थका, कम खाने वाला।'],
+        ['Calcium also comes from ragi, til, rajma, chana and green leafy vegetables.','कैल्शियम रागी, तिल, राजमा, चना और हरी सब्ज़ियों से भी मिलता है।']
+      ])+'</div></details>';
+    },
+    update:function(){
+      // rerender feedback only (keep slider focus)
+      var tmp = document.createElement('div'); tmp.innerHTML = STEPS[3].render();
+      document.getElementById('milkfb').innerHTML = tmp.querySelector('#milkfb').innerHTML;
+      document.getElementById('mlv').textContent = S.milk + ' ml';
+    }
+  },
+  { // 4 food quiz
+    render:function(){
+      var i = S.quizI;
+      if(i >= FOODS.length){
+        var sc = Object.keys(S.quizA).filter(function(k){return S.quizA[k];}).length;
+        return '<div class="eyebrow">'+t('Food quiz','खाने का क्विज़')+'</div><h2>'+t('Quiz done!','क्विज़ पूरा!')+'</h2>'+
+        '<div class="medal">'+sc+' / '+FOODS.length+'</div>'+
+        '<div class="note">'+t('Rule of thumb: <b>whole, home-made, with peel = good</b>. <b>Maida, packet, fried, sugary = avoid</b>.','याद रखें: <b>घर का बना, साबुत, छिलके वाला = अच्छा</b>। <b>मैदा, पैकेट, तला, मीठा = न दें</b>।')+'</div>'+
+        '<button type="button" class="chip" data-quizreset="1">'+t('Play again','फिर से खेलें')+'</button>';
+      }
+      var f = FOODS[i], ans = S.quizA[i];
+      var out = '<div class="eyebrow">'+t('Food quiz','खाने का क्विज़')+' · '+(i+1)+' / '+FOODS.length+'</div>'+
+        '<h2>'+t('Good for constipation, or avoid?','कब्ज़ में अच्छा, या न दें?')+'</h2>'+
+        '<div class="food">'+tx(f)+'</div>';
+      if(ans === undefined){
+        out += '<div class="row2"><button type="button" class="big-btn yes" data-food="1">✓ '+plain('Good','अच्छा')+'</button><button type="button" class="big-btn no" data-food="0">✗ '+plain('Avoid','न दें')+'</button></div>';
+      } else {
+        var right = ans, isGood = f.good;
+        out += '<div class="feedback '+(right?'good':'bad')+'" aria-live="polite"><b class="tag">'+(right?t('Correct!','सही!'):t('Not quite','सही नहीं'))+' — '+(isGood?t('Good food','अच्छा खाना'):t('Avoid','न दें'))+'</b><span>'+t(f.why[0],f.why[1])+'</span></div>'+
+          '<button type="button" class="big-btn" style="background:var(--accent);color:var(--surface)" data-foodnext="1">'+plain('Next food →','अगला →')+'</button>';
+      }
+      return out;
+    }
+  },
+  { // 5 water + diet
+    render:function(){
+      var w = {a:['600–800 ml','1–3 years','1–3 साल'], b:['1000–1200 ml','4–8 years','4–8 साल'], c:['1200–1600 ml','9 years +','9 साल +']};
+      return '<div class="eyebrow">'+t('Diet','खान-पान')+'</div>'+
+      '<h2>'+t('Fibre and water every day','रोज़ फाइबर और पानी')+'</h2>'+
+      pts([
+        ['Fruits with peel 2–3 times a day — papaya, guava, pear, apple, orange, chikoo, ripe banana.','दिन में 2–3 बार छिलके वाले फल — पपीता, अमरूद, नाशपाती, सेब, संतरा, चीकू, पका केला।'],
+        ['1 katori sabzi with each meal — palak, methi, lauki, tori, gajar, beans, matar.','हर खाने में 1 कटोरी सब्ज़ी — पालक, मेथी, लौकी, तोरी, गाजर, बीन्स, मटर।'],
+        ['Chokar wala atta, dalia, oats, ragi, bajra, chilka dal, rajma, chana, sprouts.','चोकर वाला आटा, दलिया, ओट्स, रागी, बाजरा, छिलके वाली दाल, राजमा, चना, अंकुरित अनाज।'],
+        ['4–5 soaked kishmish / anjeer in the morning.','सुबह 4–5 भिगोई किशमिश / अंजीर।']
+      ])+
+      '<p style="font-weight:700">'+t('How much plain water? Tap your child\'s age:','कितना सादा पानी? बच्चे की उम्र चुनें:')+'</p>'+
+      '<div class="ages">'+['a','b','c'].map(function(k){return '<button type="button" class="choice" style="justify-content:center;text-align:center" data-age="'+k+'" aria-pressed="'+(S.age===k)+'"><span class="t">'+plain(w[k][1],w[k][2])+'</span></button>';}).join('')+'</div>'+
+      (S.age ? '<div class="feedback good" aria-live="polite"><b class="tag">'+w[S.age][0]+' '+plain('a day','रोज़')+'</b><span>'+t('Measure in ml — glass sizes differ. More in summer and after play.','ml में नापें — गिलास अलग-अलग होते हैं। गर्मी में और खेलने के बाद ज़्यादा।')+'</span></div>' : '');
+    }
+  },
+  { // 6 toilet plan
+    render:function(){
+      var done = PLAN.filter(function(p,i){return S.plan[i];}).length;
+      return '<div class="eyebrow">'+t('Toilet habit','टॉयलेट की आदत')+'</div>'+
+      '<h2>'+t('Make your home plan','घर का प्लान बनाएँ')+'</h2>'+
+      '<p>'+t('Tick each one you will start from today.','आज से जो-जो शुरू करेंगे, उस पर टिक करें।')+'</p>'+
+      '<div class="opt">'+PLAN.map(function(p,i){return '<button type="button" class="check" data-plan="'+i+'" aria-pressed="'+(!!S.plan[i])+'"><span class="box">'+(S.plan[i]?'✓':'')+'</span><span>'+t(p[0],p[1])+'</span></button>';}).join('')+'</div>'+
+      '<p class="score">'+done+' / '+PLAN.length+' '+plain('ready','तैयार')+'</p>'+
+      '<div class="note">'+t('Toddler in potty training? Pause the training until stools are soft.','पॉटी ट्रेनिंग चल रही है? पॉटी नरम होने तक ट्रेनिंग रोक दें।')+'</div>';
+    }
+  },
+  { // 7 medicine true/false
+    render:function(){
+      return '<div class="eyebrow">'+t('Medicine','दवा')+'</div>'+
+      '<h2>'+t('True or false?','सही या गलत?')+'</h2>'+
+      TF.map(function(q,i){
+        var a = S.tfA[i];
+        var h = '<div style="display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--line);padding-top:12px">'+
+          '<p style="font-weight:600">'+(i+1)+'. '+t(q.q[0],q.q[1])+'</p>';
+        if(a === undefined){
+          h += '<div class="row2"><button type="button" class="big-btn yes" style="font-size:16px;min-height:46px" data-tf="'+i+'" data-v="1">'+plain('True','सही')+'</button><button type="button" class="big-btn no" style="font-size:16px;min-height:46px" data-tf="'+i+'" data-v="0">'+plain('False','गलत')+'</button></div>';
+        } else {
+          var ok = (a === q.a);
+          h += '<div class="feedback '+(ok?'good':'bad')+'"><b class="tag">'+(ok?t('Correct','सही जवाब'):t('Not quite','सही नहीं'))+'</b><span>'+t(q.why[0],q.why[1])+'</span></div>';
+        }
+        return h + '</div>';
+      }).join('');
+    }
+  },
+  { // 8 stubborn
+    render:function(){
+      var food = [
+        ['Offer, don\'t force. A new food may need 10–15 tries before the child accepts it.','ज़बरदस्ती न करें, बार-बार दें — नया खाना 10–15 बार देने पर अपनाता है।'],
+        ['Hide the fibre: stuffed paratha, veg cutlet, soup, dalia khichdi, fruit raita.','फाइबर छिपाएँ: भरवाँ पराठा, सब्ज़ी कटलेट, सूप, दलिया खिचड़ी, फल वाला रायता।'],
+        ['Let the child pick fruit at the market and help in the kitchen.','बाज़ार में फल ख़ुद चुनने दें, रसोई में मदद करने दें।'],
+        ['Whole family eats the same food. No TV / mobile at meals; no snacks or milk 1 hour before meals.','पूरा परिवार वही खाना खाए। खाने के समय टीवी / मोबाइल नहीं; खाने से 1 घंटा पहले स्नैक या दूध नहीं।']
+      ];
+      var toilet = [
+        ['The child is afraid of pain. Explain that the medicine makes stool soft so it won\'t hurt.','बच्चा दर्द से डरता है। समझाएँ कि दवा से पॉटी नरम होगी, दर्द नहीं होगा।'],
+        ['Crossing legs, standing on toes, hiding in a corner = holding stool. Take the child to the toilet gently.','टाँगें क्रॉस करना, पंजों पर खड़े होना, कोने में छिपना = पॉटी रोकना। प्यार से टॉयलेट ले जाएँ।'],
+        ['Make toilet time relaxed — storybook, blowing a balloon, a song.','टॉयलेट का समय आरामदायक — कहानी, गुब्बारा फुलाना, गाना।'],
+        ['A star for every sitting; a small non-food gift after 5 stars. Never chocolate.','हर बार बैठने पर स्टार; 5 स्टार पर छोटा इनाम (खाने का नहीं)। चॉकलेट कभी नहीं।'],
+        ['Medicine: mix in a little water, nimbu pani or juice (as advised); give at the same time daily.','दवा थोड़े पानी, नींबू पानी या जूस में मिलाएँ (जैसा बताया); रोज़ एक ही समय दें।']
+      ];
+      return '<div class="eyebrow">'+t('Stubborn child','ज़िद्दी बच्चा')+'</div>'+
+      '<h2>'+t('What if my child refuses?','बच्चा ज़िद करे तो?')+'</h2>'+
+      '<div class="tabs" role="tablist"><button type="button" role="tab" data-tab="food" aria-selected="'+(S.tab==='food')+'">'+plain('Refuses food','खाने में ज़िद')+'</button><button type="button" role="tab" data-tab="toilet" aria-selected="'+(S.tab==='toilet')+'">'+plain('Refuses toilet / medicine','टॉयलेट / दवा में ज़िद')+'</button></div>'+
+      pts(S.tab==='food'?food:toilet);
+    }
+  },
+  { // 9 cheat days + how long
+    render:function(){
+      return '<div class="eyebrow">'+t('Treats','कभी-कभार की छूट')+'</div>'+
+      '<h2>'+t('Cheat days and junk food','चीट डे और जंक फूड')+'</h2>'+
+      pts([
+        ['Don\'t ban completely — children then eat junk secretly.','पूरी तरह मना करने से बच्चा चोरी-छिपे खाता है।'],
+        ['<b>1 small treat a week</b> (e.g. Sunday), after a proper meal.','<b>हफ़्ते में 1 बार थोड़ा सा</b> (जैसे रविवार), खाना खाने के बाद।'],
+        ['Party or wedding: fruit and water before going; extra water and sabzi the next day.','पार्टी या शादी: जाने से पहले फल व पानी; अगले दिन ज़्यादा पानी व सब्ज़ी।'],
+        ['Don\'t keep junk at home. Grandparents, relatives and school tiffin follow the same rule.','घर में जंक न रखें। दादा-दादी, रिश्तेदार और टिफ़िन — सब एक ही नियम मानें।']
+      ])+
+      '<div class="note" style="display:flex;flex-direction:column;gap:6px"><b style="font-family:var(--display);font-size:19px">'+t('Till when must we avoid junk food?','जंक फूड कब तक बंद रखें?')+'</b>'+
+      '<span>'+t('<b>Strictly until stools are soft every day AND the medicine is fully stopped</b> — usually 3–6 months, sometimes up to a year.','<b>जब तक पॉटी रोज़ नरम न हो और दवा पूरी बंद न हो जाए</b> — आमतौर पर 3–6 महीने, कभी-कभी 1 साल तक।')+'</span>'+
+      '<span>'+t('After that, junk stays an occasional treat for life. Going back to the old diet is a common reason constipation returns.','उसके बाद भी जंक सिर्फ़ कभी-कभार। पुराने खान-पान पर लौटने से अक्सर कब्ज़ लौट आती है।')+'</span></div>';
+    }
+  },
+  { // 10 FAQ
+    render:function(){
+      var faq = [
+        [['Isn\'t milk needed for strength and calcium?','क्या ताक़त और कैल्शियम के लिए दूध ज़रूरी नहीं?'],['Milk is good in the right amount — about 400 ml a day including dahi, paneer and shakes. More milk does not mean more strength; it reduces appetite and iron.','सही मात्रा में दूध अच्छा है — दही, पनीर, शेक मिलाकर दिन में लगभग 400 ml। ज़्यादा दूध से ज़्यादा ताक़त नहीं आती; भूख और आयरन घटते हैं।']],
+        [['There are streaks of blood on the stool. Is it serious?','पॉटी पर ख़ून की लकीर है। क्या ख़तरनाक है?'],['Usually a small tear (fissure) from hard stool; it heals as stool softens. A lot of blood — see the doctor.','आमतौर पर सख़्त पॉटी से छोटा कट (फ़िशर); पॉटी नरम होने पर ठीक हो जाता है। ज़्यादा ख़ून हो तो दिखाएँ।']],
+        [['Can we give ghee, castor oil, churan or isabgol?','क्या घी, अरंडी का तेल, चूर्ण या इसबगोल दे सकते हैं?'],['Don\'t give castor oil, churan, soap stick or enema at home. Ask the doctor before isabgol.','अरंडी का तेल, चूर्ण, साबुन की बत्ती या एनीमा घर पर न दें। इसबगोल से पहले डॉक्टर से पूछें।']],
+        [['Will constipation come back?','क्या कब्ज़ फिर से होगी?'],['It can, if medicine is stopped early or the old diet returns. If it comes back, come early — restarting is easy.','हो सकती है, अगर दवा जल्दी बंद करें या पुराना खान-पान लौटे। लौटे तो जल्दी आएँ — दोबारा शुरू करना आसान है।']],
+        [['Is banana good or bad?','केला अच्छा है या बुरा?'],['A fully ripe banana is fine. Kaccha (unripe) banana can make stools harder.','पूरा पका केला ठीक है। कच्चा केला पॉटी सख़्त कर सकता है।']]
+      ];
+      return '<div class="eyebrow">'+t('Questions','सवाल')+'</div>'+
+      '<h2>'+t('Questions parents often ask','माता-पिता के आम सवाल')+'</h2>'+
+      faq.map(function(f){return '<details><summary><span>'+t(f[0][0],f[0][1])+'</span></summary><div>'+t(f[1][0],f[1][1])+'</div></details>';}).join('');
+    }
+  },
+  { // 11 follow-up + red flags
+    render:function(){
+      return '<div class="eyebrow">'+t('Follow-up','फ़ॉलो-अप')+'</div>'+
+      '<h2>'+t('Follow-up is part of the treatment','फ़ॉलो-अप इलाज का हिस्सा है')+'</h2>'+
+      pts([
+        ['Come on the date written on your prescription, even if the child is fine — the dose has to be adjusted and later reduced slowly.','पर्चे पर लिखी तारीख़ पर आएँ, बच्चा ठीक हो तब भी — खुराक बदलनी और बाद में धीरे-धीरे कम करनी होती है।'],
+        ['Usual plan: after 2 weeks, then every 4–6 weeks while on medicine, and once after stopping.','आमतौर पर: 2 हफ़्ते बाद, फिर दवा चलने तक हर 4–6 हफ़्ते, और दवा बंद होने के बाद एक बार।'],
+        ['Bring the stool diary (type number daily) and the medicine bottle.','पॉटी डायरी (रोज़ का टाइप नंबर) और दवा की बोतल साथ लाएँ।'],
+        ['Tell the doctor about stool in underwear, bedwetting, pain or bleeding.','चड्डी में पॉटी, बिस्तर गीला करना, दर्द या ख़ून — ज़रूर बताएँ।']
+      ])+
+      '<div class="flagcard"><h3>'+t('Come immediately if','तुरंत दिखाएं अगर')+'</h3><ul class="pts flags">'+[
+        ['Severe or continuous belly pain, or swollen belly','पेट में तेज़ या लगातार दर्द, या पेट फूलना'],
+        ['Repeated vomiting, especially green','बार-बार उल्टी, ख़ासकर हरी'],
+        ['A lot of blood in the stool','पॉटी में ज़्यादा ख़ून'],
+        ['No stool for more than 5 days despite medicine','दवा के बावजूद 5 दिन से ज़्यादा पॉटी न होना'],
+        ['Fever, not eating, or weight loss','बुख़ार, खाना न खाना, या वज़न घटना'],
+        ['Weakness in legs or trouble passing urine','पैरों में कमज़ोरी या पेशाब में दिक्कत']
+      ].map(function(x){return '<li><span><b>'+t(x[0],x[1])+'</b></span></li>';}).join('')+'</ul></div>';
+    }
+  },
+  { // 12 finish
+    render:function(){
+      var quiz = Object.keys(S.quizA).filter(function(k){return S.quizA[k];}).length;
+      var tf = TF.filter(function(q,i){return S.tfA[i]===q.a;}).length;
+      var plan = PLAN.filter(function(p,i){return S.plan[i];}).length;
+      return '<div class="eyebrow">'+t('Done','पूरा हुआ')+'</div>'+
+      '<h2>'+t('Well done! You have finished the guide.','शाबाश! आपने गाइड पूरी कर ली।')+'</h2>'+
+      '<div class="summary">'+
+        '<div><b>'+quiz+'/'+FOODS.length+'</b><span>'+plain('Food quiz','खाने का क्विज़')+'</span></div>'+
+        '<div><b>'+tf+'/'+TF.length+'</b><span>'+plain('Medicine quiz','दवा क्विज़')+'</span></div>'+
+        '<div><b>'+plan+'/'+PLAN.length+'</b><span>'+plain('Toilet plan','टॉयलेट प्लान')+'</span></div>'+
+        '<div><b>'+(S.milk<=400?'✓':'!')+'</b><span>'+plain('Milk ≤ 400 ml','दूध ≤ 400 ml')+'</span></div>'+
+      '</div>'+
+      '<div class="note">'+t('Remember the 3 keys: <b>fibre + water, toilet routine, daily medicine</b>. Be patient — it takes months, and follow-up visits matter.','3 बातें याद रखें: <b>फाइबर + पानी, टॉयलेट की आदत, रोज़ दवा</b>। धैर्य रखें — महीने लगते हैं, और फ़ॉलो-अप ज़रूरी है।')+'</div>'+
+      '<div class="formbox">'+
+        '<b style="font-family:var(--display);font-size:20px">'+t('Tell Dr. Mittal you have finished','डॉक्टर मित्तल को बताएँ कि आपने गाइड पूरी कर ली')+'</b>'+
+        '<label for="f-name">'+t('Child\'s name','बच्चे का नाम')+'</label><input id="f-name" type="text" autocomplete="off" value="'+esc(S.fname||'')+'">'+
+        '<label for="f-phone">'+t('Parent\'s mobile number','माता-पिता का मोबाइल नंबर')+'</label><input id="f-phone" type="tel" inputmode="numeric" maxlength="10" placeholder="10 digits" value="'+esc(S.fphone||'')+'">'+
+        '<label for="f-age">'+t('Child\'s age','बच्चे की उम्र')+'</label><input id="f-age" type="text" placeholder="e.g. 4 years" value="'+esc(S.fage||'')+'">'+
+        '<p id="f-err" class="ferr" hidden>'+t('Please enter the child\'s name and a 10-digit mobile number.','कृपया बच्चे का नाम और 10 अंकों का मोबाइल नंबर लिखें।')+'</p>'+
+        (FORM.base ?
+          '<a id="f-send" class="sendbtn" href="#" target="_blank" rel="noopener">'+plain('Send to Dr. Mittal →','डॉक्टर को भेजें →')+'</a>'+
+          '<p class="score">'+t('A form opens with your details filled in. Just press the <b>Submit</b> button there.','आपकी जानकारी भरा हुआ फ़ॉर्म खुलेगा। वहाँ सिर्फ़ <b>Submit</b> बटन दबाएँ।')+'</p>'
+          : '<p class="score">'+t('Sending will be available soon.','भेजने की सुविधा जल्द आएगी।')+'</p>')+
+      '</div>'+
+      '<p class="score">'+t('You can open this link again anytime. Show this screen at your next visit.','यह लिंक कभी भी दोबारा खोल सकते हैं। अगली बार यह स्क्रीन डॉक्टर को दिखाएँ।')+'</p>'+
+      '<button type="button" class="chip" data-restart="1">'+t('Start again from the beginning','शुरू से दोबारा देखें')+'</button>';
+    }
+  }
+];
+
+var card = document.getElementById('card');
+var nextBtn = document.getElementById('next');
+var backBtn = document.getElementById('back');
+
+function render(anim){
+  if(S.step >= STEPS.length) S.step = STEPS.length-1;
+  card.className = 'card' + (S.lang==='both'?' both':'') + (anim?' fade':'');
+  card.innerHTML = STEPS[S.step].render();
+  document.getElementById('bar').style.width = ((S.step+1)/STEPS.length*100) + '%';
+  document.getElementById('count').textContent = (S.step+1) + ' / ' + STEPS.length;
+  backBtn.style.visibility = S.step===0 ? 'hidden' : 'visible';
+  backBtn.textContent = '← ' + plain('Back','पीछे');
+  nextBtn.textContent = S.step===STEPS.length-1 ? plain('Finish ✓','पूरा ✓') : (S.step===0 ? plain('Start →','शुरू करें →') : plain('Next →','आगे →'));
+  nextBtn.disabled = (S.step===STEPS.length-1);
+  document.querySelectorAll('.lang button').forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.lang===S.lang)); });
+  document.documentElement.lang = S.lang==='hi' ? 'hi' : 'en';
+  syncForm();
+  save();
+}
+function go(d){ S.step = Math.max(0, Math.min(STEPS.length-1, S.step+d)); render(true); window.scrollTo({top:0, behavior:'smooth'}); }
+
+nextBtn.addEventListener('click', function(){ go(1); });
+backBtn.addEventListener('click', function(){ go(-1); });
+document.querySelector('.lang').addEventListener('click', function(e){
+  var b = e.target.closest('button[data-lang]'); if(!b) return; S.lang = b.dataset.lang; render(false);
+});
+
+card.addEventListener('click', function(e){
+  var b = e.target.closest('button'); if(!b) return;
+  var d = b.dataset;
+  if(d.setlang){ S.lang = d.setlang; render(false); return; }
+  if(d.stool){ S.stool = +d.stool; render(false); return; }
+  if(d.prod){ S.prods[d.prod] = !S.prods[d.prod]; b.setAttribute('aria-pressed', String(!!S.prods[d.prod])); STEPS[3].update(); save(); return; }
+  if(d.food){ S.quizA[S.quizI] = ((d.food==='1') === FOODS[S.quizI].good); render(false); return; }
+  if(d.foodnext){ S.quizI++; render(true); return; }
+  if(d.quizreset){ S.quizI = 0; S.quizA = {}; render(true); return; }
+  if(d.age){ S.age = d.age; render(false); return; }
+  if(d.plan !== undefined){ S.plan[d.plan] = !S.plan[d.plan]; render(false); return; }
+  if(d.tf !== undefined){ S.tfA[d.tf] = (d.v==='1'); render(false); return; }
+  if(d.tab){ S.tab = d.tab; render(false); return; }
+  if(d.restart){ S.step = 0; S.stool=null; S.quizI=0; S.quizA={}; S.tfA={}; S.plan={}; S.age=null; render(true); }
+});
+card.addEventListener('input', function(e){
+  var id = e.target.id;
+  if(id==='milk'){ S.milk = +e.target.value; STEPS[3].update(); save(); return; }
+  if(id==='f-phone'){ e.target.value = e.target.value.replace(/\D/g,'').slice(0,10); }
+  if(id==='f-name'||id==='f-phone'||id==='f-age'){
+    S[id==='f-name'?'fname':id==='f-phone'?'fphone':'fage'] = e.target.value;
+    var err = document.getElementById('f-err'); if(err && formValid()) err.hidden = true;
+    syncForm(); save();
+  }
+});
+card.addEventListener('click', function(e){
+  var a = e.target.closest('#f-send'); if(!a) return;
+  if(!formValid()){ e.preventDefault(); document.getElementById('f-err').hidden = false; }
+}, true);
+
+render(false);
+})();
+</script>
+<footer style="max-width:560px;margin:8px auto 24px;padding:0 16px;text-align:center;font:13px/1.5 Mukta,system-ui,sans-serif;color:#556175"><b style="display:block;font:800 16px 'Baloo 2',Mukta,sans-serif;color:#1f5fbf">Dr. Dinesh Mittal Child Clinic</b>Dr. Dinesh Mittal, MBBS, DCH · Child Specialist<br>H-34/69, Sector 3, Rohini, Delhi – 110085<br>Phone: <span style="user-select:all;font-weight:700">+91 81305 21456</span><br>Mon–Sat 10:00 AM–1:00 PM &amp; 6:00–8:30 PM · Sun 11:00 AM–12:00 PM<br><a href="https://www.childspecialistrohini.com" style="color:#1f5fbf;font-weight:700">www.childspecialistrohini.com</a></footer></body></html>

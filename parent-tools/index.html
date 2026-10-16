@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Dr. Dinesh Mittal · Parent Care Tools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Mukta:wght@400;500;600;700&display=swap">
+<style>
+:root{--bg:#f3f6fa;--surface:#fff;--ink:#172234;--muted:#556175;--line:#dbe2ec;--brand:#1f5fbf;--brand-deep:#12407f;--brand-warm:#f2a33a;--display:'Baloo 2','Mukta',system-ui,sans-serif;--body:'Mukta',system-ui,sans-serif;color-scheme:light}
+@media (prefers-color-scheme: dark){:root{--bg:#0e131a;--surface:#18202b;--ink:#e7ecf3;--muted:#9ba7b9;--line:#2b3646;--brand:#1d4f9c;--brand-deep:#123566;color-scheme:dark}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.4;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.app{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:14px;padding-block:14px 28px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.doc{border-radius:22px;padding:18px 16px;background:linear-gradient(135deg,var(--brand),var(--brand-deep));color:#fff;display:grid;grid-template-columns:64px 1fr;gap:14px;align-items:center;position:relative;overflow:hidden}
+.doc::after{content:"";position:absolute;right:-40px;top:-40px;width:150px;height:150px;border-radius:50%;background:rgba(255,255,255,.07)}
+.doc svg{width:64px;height:64px}
+.doc b{display:block;font:800 24px var(--display);line-height:1.1}
+.doc span{display:block;font-size:14px;opacity:.92}
+h1{font:800 22px var(--display);margin:4px 0 0}
+p{margin:0}
+.muted{color:var(--muted);font-size:15px}
+a.tool{display:grid;grid-template-columns:56px 1fr 20px;gap:14px;align-items:center;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:14px;transition:transform .15s}
+a.tool:active{transform:scale(.98)}
+a.tool:focus-visible{outline:3px solid var(--brand-warm);outline-offset:2px}
+.ic{width:56px;height:56px;border-radius:16px;display:grid;place-items:center}
+.ic svg{width:30px;height:30px}
+a.tool b{display:block;font:800 19px var(--display);line-height:1.15}
+a.tool small{display:block;color:var(--muted);font-size:14.5px}
+.chev{color:var(--muted);font-size:22px}
+footer{text-align:center;color:var(--muted);font-size:13px}
+footer b{display:block;font:800 16px var(--display);color:var(--brand)}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="doc">
+    <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#fff"/><text x="32" y="39" text-anchor="middle" font-family="Baloo 2, Mukta, sans-serif" font-size="22" font-weight="800" fill="#1f5fbf">DM</text><path d="M20 48 q12 8 24 0" stroke="#f2a33a" stroke-width="2.5" fill="none" stroke-linecap="round"/><circle cx="44" cy="48" r="3" fill="#f2a33a"/></svg>
+    <div><b>Dr. Dinesh Mittal</b><span>MBBS, DCH</span><span>Child Specialist · शिशु रोग विशेषज्ञ</span><span>Rohini, Delhi</span></div>
+  </header>
+  <h1>बच्चों की देखभाल के लिए / Care tools for parents</h1>
+  <p class="muted">डॉक्टर ने जो टूल बताया है, उसे खोलें। Open the tool your doctor advised.</p>
+
+  <a class="tool" href="fever-care.html"><span class="ic" style="background:#fde8e7"><svg viewBox="0 0 24 24" fill="none" stroke="#c53030" stroke-width="2" stroke-linecap="round"><path d="M14 14.8V4a2 2 0 1 0-4 0v10.8a4 4 0 1 0 4 0z"/></svg></span><span><b>बुख़ार में क्या करें · Fever Care</b><small>कदम-दर-कदम: दवा, स्पंजिंग, कब अस्पताल</small></span><span class="chev">›</span></a>
+
+  <a class="tool" href="fever-chart.html"><span class="ic" style="background:#fff3dc"><svg viewBox="0 0 24 24" fill="none" stroke="#9a5b00" stroke-width="2" stroke-linecap="round"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg></span><span><b>बुख़ार का चार्ट · Fever Chart</b><small>हर बार का बुख़ार लिखें, डॉक्टर को दिखाएँ</small></span><span class="chev">›</span></a>
+
+  <a class="tool" href="constipation-guide.html"><span class="ic" style="background:#e2f4e8"><svg viewBox="0 0 24 24" fill="none" stroke="#16803f" stroke-width="2" stroke-linecap="round"><path d="M12 21s-7-4.5-7-11a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 6.5-7 11-7 11z"/></svg></span><span><b>कब्ज़ गाइड · Constipation Guide</b><small>खान-पान, आदत, दवा — माता-पिता के लिए</small></span><span class="chev">›</span></a>
+
+  <a class="tool" href="golu-game.html"><span class="ic" style="background:#e3edfb"><svg viewBox="0 0 24 24" fill="none" stroke="#1f5fbf" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 14.5q3.5 3 7 0"/><path d="M9 9.5h.01M15 9.5h.01"/></svg></span><span><b>गोलू पॉटी हीरो · Kids Game</b><small>बच्चों के लिए खेल: सही खाना, पॉटी की आदत</small></span><span class="chev">›</span></a>
+
+  <footer><b>Dr. Dinesh Mittal Child Clinic</b>Dr. Dinesh Mittal, MBBS, DCH · Child Specialist<br>H-34/69, Sector 3, Rohini, Delhi – 110085<br>Phone: <span style="user-select:all;font-weight:700">+91 81305 21456</span><br>Mon–Sat 10 AM–1 PM &amp; 6–8:30 PM · Sun 11 AM–12 PM<br><a href="https://www.childspecialistrohini.com" style="color:var(--brand);font-weight:700">www.childspecialistrohini.com</a><br>सारी जानकारी सिर्फ़ आपके फ़ोन में सेव रहती है।</footer>
+</div>
+</body>
+</html>

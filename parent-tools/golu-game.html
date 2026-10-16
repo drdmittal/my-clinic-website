@@ -1,0 +1,500 @@
+<!doctype html><html lang="hi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style></head><body><title>Golu Potty Hero</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&display=swap">
+<style>
+/* Layout: one playful phone screen at a time (home, food game, hero chart, potty timer, parents). Single bright daytime look by choice. */
+:root{
+  color-scheme: light;
+  --sky:#bfe6ff; --sky2:#e4f5ff; --sun:#ffc93c; --sun-deep:#f29f05; --grass:#3fb66b; --grass-deep:#22864a;
+  --berry:#e2483d; --ink:#21304a; --muted:#56637a; --card:#ffffff; --golu:#ffa94d; --golu-deep:#e8812a; --cheek:#ff7b8a;
+  --font:'Baloo 2', 'Mukta', system-ui, sans-serif;
+}
+html,body{height:100%}
+body{background:linear-gradient(180deg,var(--sky) 0%,var(--sky2) 70%);background-color:var(--sky);color:var(--ink);font-family:var(--font);font-size:18px;line-height:1.35}
+.app{max-width:520px;margin:0 auto;min-height:100%;display:flex;flex-direction:column;gap:12px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:12px 20px;position:relative}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.bank{display:flex;align-items:center;gap:6px;background:var(--card);border-radius:999px;padding:4px 14px 4px 8px;font-weight:800;font-size:20px;box-shadow:0 3px 0 rgba(33,48,74,.12)}
+.bank .st{font-size:24px}
+.lang{display:flex;background:var(--card);border-radius:999px;padding:3px;box-shadow:0 3px 0 rgba(33,48,74,.12)}
+.lang button{border:0;background:transparent;font:700 15px var(--font);color:var(--muted);padding:6px 12px;border-radius:999px;cursor:pointer;min-height:36px}
+.lang button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.back{border:0;background:var(--card);border-radius:999px;font:700 16px var(--font);color:var(--ink);padding:6px 14px;min-height:40px;cursor:pointer;box-shadow:0 3px 0 rgba(33,48,74,.12)}
+.screen{display:flex;flex-direction:column;gap:14px;align-items:stretch}
+.hero{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;padding-top:6px}
+h1{margin:0;font-size:34px;line-height:1.05;font-weight:800;text-wrap:balance}
+h2{margin:0;font-size:26px;line-height:1.1;font-weight:800;text-align:center;text-wrap:balance}
+.bubble{background:var(--card);border-radius:20px;padding:10px 16px;font-size:19px;font-weight:600;position:relative;box-shadow:0 3px 0 rgba(33,48,74,.1);max-width:420px}
+.bubble::after{content:"";position:absolute;left:50%;bottom:-10px;margin-left:-10px;border:10px solid transparent;border-top-color:var(--card);border-bottom:0}
+.golu{width:150px;height:150px;transition:transform .3s}
+.golu.small{width:96px;height:96px}
+.golu.bounce{animation:bounce .6s}
+.golu.shake{animation:shake .5s}
+@keyframes bounce{0%,100%{transform:translateY(0)}30%{transform:translateY(-22px) scale(1.06)}60%{transform:translateY(0) scale(.97)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-10px)}40%{transform:translateX(10px)}60%{transform:translateX(-7px)}80%{transform:translateX(7px)}}
+.menu{display:grid;grid-template-columns:1fr;gap:12px}
+.tile{display:flex;align-items:center;gap:14px;border:0;border-radius:22px;padding:14px 16px;text-align:left;font:800 22px var(--font);color:var(--ink);cursor:pointer;box-shadow:0 5px 0 rgba(33,48,74,.18);min-height:84px}
+.tile:active{transform:translateY(3px);box-shadow:0 2px 0 rgba(33,48,74,.18)}
+.tile .ic{font-size:40px;line-height:1;flex:none}
+.tile small{display:block;font:600 15px var(--font);color:var(--muted)}
+.t-food{background:var(--sun)} .t-chart{background:#9be3b4} .t-timer{background:#ffc7d0}
+.parents-link{border:0;background:transparent;font:700 15px var(--font);color:var(--muted);text-decoration:underline;cursor:pointer;align-self:center;min-height:40px}
+/* food game */
+.prog{display:flex;gap:5px;justify-content:center;flex-wrap:wrap}
+.prog i{width:22px;height:8px;border-radius:9px;background:rgba(33,48,74,.15)}
+.prog i.ok{background:var(--grass)} .prog i.no{background:var(--berry)} .prog i.now{background:var(--ink)}
+.food{background:var(--card);border-radius:28px;padding:18px 14px 16px;display:flex;flex-direction:column;align-items:center;gap:4px;position:relative;box-shadow:0 6px 0 rgba(33,48,74,.14);overflow:hidden}
+.food .pic{font-size:96px;line-height:1.1}
+.food .nm{font-size:28px;font-weight:800;text-align:center;line-height:1.1}
+.food.struck .pic,.food.struck .nm{opacity:.45}
+.food.struck .nm{text-decoration:line-through;text-decoration-color:var(--berry);text-decoration-thickness:4px}
+.stamp{position:absolute;top:14px;right:14px;width:64px;height:64px;border-radius:50%;display:grid;place-items:center;font-size:40px;font-weight:800;color:#fff;transform:scale(0) rotate(-20deg);transition:transform .25s cubic-bezier(.3,1.6,.5,1)}
+.stamp.show{transform:scale(1) rotate(-12deg)}
+.stamp.good{background:var(--grass)} .stamp.bad{background:var(--berry)}
+.big-x{position:absolute;inset:0;pointer-events:none}
+.ask{font-size:22px;font-weight:700;text-align:center}
+.yn{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.yn button{border:0;border-radius:24px;min-height:96px;font:800 24px var(--font);color:#fff;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.yn .ic{font-size:40px;line-height:1}
+.yes{background:var(--grass);box-shadow:0 6px 0 var(--grass-deep)} .no{background:var(--berry);box-shadow:0 6px 0 #a92a21}
+.yn button:active{transform:translateY(4px);box-shadow:none}
+.why{border-radius:18px;padding:12px 14px;font-size:19px;font-weight:600;text-align:center}
+.why.good{background:#d8f5e2;color:var(--grass-deep)} .why.bad{background:#ffe0dc;color:#a92a21}
+.go{border:0;border-radius:22px;min-height:64px;font:800 24px var(--font);background:var(--ink);color:#fff;cursor:pointer;box-shadow:0 5px 0 rgba(0,0,0,.25)}
+.go:active{transform:translateY(3px);box-shadow:none}
+.result{background:var(--card);border-radius:28px;padding:20px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;box-shadow:0 6px 0 rgba(33,48,74,.14)}
+.result .score{font-size:52px;font-weight:800;color:var(--sun-deep);line-height:1}
+/* chart */
+.today{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.task{border:3px solid transparent;background:var(--card);border-radius:22px;padding:12px 10px;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;font:700 17px var(--font);color:var(--ink);cursor:pointer;min-height:120px;justify-content:center;box-shadow:0 4px 0 rgba(33,48,74,.12);position:relative}
+.task .ic{font-size:38px;line-height:1}
+.task[aria-pressed="true"]{background:#fff6d6;border-color:var(--sun-deep)}
+.task .got{position:absolute;top:6px;right:8px;font-size:22px;opacity:0;transform:scale(.3);transition:all .25s cubic-bezier(.3,1.6,.5,1)}
+.task[aria-pressed="true"] .got{opacity:1;transform:scale(1)}
+.counter{text-align:center;font-weight:800;font-size:22px}
+.week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;background:var(--card);border-radius:20px;padding:10px 8px;box-shadow:0 4px 0 rgba(33,48,74,.1)}
+.day{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:13px;font-weight:700;color:var(--muted)}
+.day .b{width:36px;height:36px;border-radius:50%;background:rgba(33,48,74,.08);display:grid;place-items:center;font-size:20px}
+.day.today .b{outline:3px solid var(--ink)}
+.day.won .b{background:var(--sun)}
+.goal{background:var(--card);border-radius:20px;padding:12px 14px;display:flex;flex-direction:column;gap:6px;box-shadow:0 4px 0 rgba(33,48,74,.1)}
+.goal .bar{height:18px;background:rgba(33,48,74,.1);border-radius:99px;overflow:hidden}
+.goal .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--sun),var(--sun-deep));border-radius:99px;transition:width .4s}
+.goal .lbl{display:flex;justify-content:space-between;font-weight:700;font-variant-numeric:tabular-nums}
+/* timer */
+.balloon-wrap{height:250px;display:grid;place-items:center;position:relative}
+.balloon{width:110px;height:130px;border-radius:50% 50% 48% 48%;background:radial-gradient(circle at 35% 30%,#ff9fae,var(--berry));position:relative;transform:scale(.7);transition:transform 4s ease-in-out}
+.balloon::after{content:"";position:absolute;left:50%;bottom:-14px;margin-left:-7px;border:7px solid transparent;border-bottom-color:var(--berry)}
+.balloon.big{transform:scale(1.45)}
+.string{position:absolute;bottom:4px;left:50%;width:2px;height:70px;background:var(--muted);margin-left:-1px}
+.breath{text-align:center;font-size:26px;font-weight:800;min-height:36px}
+.clock{text-align:center;font-size:56px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1}
+.mins{display:flex;gap:8px;justify-content:center}
+.mins button{border:3px solid var(--card);background:var(--card);border-radius:16px;font:800 20px var(--font);padding:6px 16px;min-height:48px;cursor:pointer;color:var(--ink)}
+.mins button[aria-pressed="true"]{border-color:var(--ink)}
+.poops{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.poop{border:3px solid transparent;background:var(--card);border-radius:20px;padding:10px 6px;display:flex;flex-direction:column;align-items:center;gap:4px;font:700 16px var(--font);color:var(--ink);cursor:pointer;min-height:100px;justify-content:center;box-shadow:0 4px 0 rgba(33,48,74,.12);text-align:center}
+.poop:active{transform:translateY(3px);box-shadow:none}
+.diary{width:100%;border-collapse:collapse;font-size:15px}
+.diary th,.diary td{text-align:left;padding:6px 4px;border-bottom:1px solid #e3e9f2}
+.diary td.n{font-weight:800;font-variant-numeric:tabular-nums}
+/* parents */
+.pcard{background:var(--card);border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:10px;font-family:system-ui,sans-serif;font-size:16px;box-shadow:0 4px 0 rgba(33,48,74,.1)}
+.pcard h3{margin:0;font:800 20px var(--font)}
+.pcard label{font-weight:600}
+.pcard input,.pcard select{font:500 17px system-ui,sans-serif;border:2px solid #cfd8e6;border-radius:12px;padding:10px 12px;min-height:48px;width:100%;box-sizing:border-box;color:var(--ink);background:#fff}
+.pcard ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.save{border:0;border-radius:14px;min-height:50px;font:800 19px var(--font);background:var(--grass);color:#fff;cursor:pointer}
+.danger{border:2px solid var(--berry);background:#fff;color:var(--berry);border-radius:14px;min-height:46px;font:700 16px var(--font);cursor:pointer}
+.msg{font-weight:700;color:var(--grass-deep)}
+/* confetti */
+.confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:50}
+.confetti span{position:absolute;top:-20px;width:10px;height:14px;border-radius:2px;animation:fall 1.4s ease-in forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg);opacity:.8}}
+.fly{position:fixed;font-size:34px;z-index:60;pointer-events:none;animation:fly .8s ease-in forwards}
+@keyframes fly{to{transform:translate(var(--dx),var(--dy)) scale(.5);opacity:.3}}
+button:focus-visible{outline:4px solid var(--ink);outline-offset:3px}
+@media (prefers-reduced-motion: reduce){.golu.bounce,.golu.shake,.confetti span,.fly{animation:none}.balloon{transition:none}}
+</style>
+
+<div class="app" id="app">
+  <div class="top">
+    <button type="button" class="back" id="backBtn" hidden>← <span data-t="home"></span></button>
+    <div class="bank" id="bankBox" aria-label="Stars"><span class="st">⭐</span><span id="bank">0</span></div>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="hi" aria-pressed="false">हिं</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+
+  <!-- HOME -->
+  <section class="screen" id="s-home">
+    <div class="hero">
+      <div class="bubble" id="homeSay"></div>
+      <div id="goluHome"></div>
+      <h1 data-t="title"></h1>
+    </div>
+    <div class="menu">
+      <button type="button" class="tile t-food" data-go="food"><span class="ic">🍎</span><span><span data-t="foodGame"></span><small data-t="foodGameSub"></small></span></button>
+      <button type="button" class="tile t-chart" data-go="chart"><span class="ic">🏆</span><span><span data-t="chart"></span><small data-t="chartSub"></small></span></button>
+      <button type="button" class="tile t-timer" data-go="report"><span class="ic">🚽</span><span><span data-t="report"></span><small data-t="reportSub"></small></span></button>
+    </div>
+    <button type="button" class="parents-link" data-go="parents" data-t="forParents"></button>
+  </section>
+
+  <!-- FOOD GAME -->
+  <section class="screen" id="s-food" hidden></section>
+
+  <!-- CHART -->
+  <section class="screen" id="s-chart" hidden></section>
+
+  <!-- POOP REPORT -->
+  <section class="screen" id="s-report" hidden></section>
+
+  <!-- PARENTS -->
+  <section class="screen" id="s-parents" hidden></section>
+</div>
+
+<script>
+(function(){
+var T = {
+  home:{en:'Home',hi:'होम'},
+  title:{en:'Golu the Tummy',hi:'गोलू पेट'},
+  foodGame:{en:'Tummy Food Game',hi:'पेट का खाना गेम'},
+  foodGameSub:{en:'Is it good for Golu? Yes or No!',hi:'गोलू के लिए अच्छा? हाँ या ना!'},
+  chart:{en:'Potty Hero Chart',hi:'पॉटी हीरो चार्ट'},
+  chartSub:{en:'Do your jobs, win stars every day',hi:'रोज़ काम करो, स्टार जीतो'},
+  report:{en:'Poop Report',hi:'पॉटी रिपोर्ट'},
+  reportSub:{en:'Came back from the potty? Tell Golu!',hi:'पॉटी से आए? गोलू को बताओ!'},
+  forParents:{en:'For parents: reward & stool diary',hi:'माता-पिता के लिए: इनाम और पॉटी डायरी'},
+  homeSay:{en:"Hi! I'm Golu, your tummy. Help me stay happy!",hi:'नमस्ते! मैं गोलू हूँ, तुम्हारा पेट। मुझे खुश रखने में मदद करो!'},
+  homeSayStars:{en:'Wow, {n} stars! You are a superstar!',hi:'वाह, {n} स्टार! तुम सुपरस्टार हो!'},
+  ask:{en:'Is this good for Golu?',hi:'क्या यह गोलू के लिए अच्छा है?'},
+  yes:{en:'Yes',hi:'हाँ'}, no:{en:'No',hi:'ना'},
+  right:{en:'Correct! +1 star',hi:'सही! +1 स्टार'}, wrong:{en:'Oops! Not this one',hi:'ओह! यह नहीं'},
+  next:{en:'Next',hi:'अगला'},
+  done:{en:'Game over!',hi:'गेम खत्म!'},
+  youGot:{en:'You won',hi:'तुमने जीते'},
+  playAgain:{en:'Play again',hi:'फिर से खेलो'},
+  stars:{en:'stars',hi:'स्टार'},
+  todayJobs:{en:"Today's hero jobs",hi:'आज के हीरो काम'},
+  tapWhenDone:{en:'Tap a job when you finish it',hi:'काम पूरा होने पर टैप करो'},
+  thisWeek:{en:'This week',hi:'इस हफ़्ते'},
+  goalFor:{en:'Saving stars for',hi:'स्टार जमा कर रहे हैं'},
+  noGoal:{en:'Ask Mummy / Papa to set a reward!',hi:'मम्मी / पापा से इनाम तय करवाओ!'},
+  rewardWon:{en:'You did it! Ask for your reward!',hi:'तुमने कर दिखाया! अपना इनाम माँगो!'},
+  repAsk:{en:'What came out today?',hi:'आज क्या निकला?'},
+  repSay:{en:'Welcome back! Did you sit on the potty?',hi:'वापस आ गए! पॉटी पर बैठे?'},
+  repStar:{en:'+1 star for sitting!',hi:'बैठने का +1 स्टार!'},
+  repCap:{en:'You already got 3 report stars today. Great job!',hi:'आज के 3 रिपोर्ट स्टार मिल गए। शाबाश!'},
+  repAgain:{en:'Done',hi:'हो गया'},
+  repToday:{en:'Today',hi:'आज'}
+};
+var TASKS = [
+  {ic:'🚽', en:'Sat on potty after a meal', hi:'खाने के बाद पॉटी पर बैठे'},
+  {ic:'🍎', en:'Ate a fruit', hi:'फल खाया'},
+  {ic:'🥕', en:'Ate sabzi / salad', hi:'सब्ज़ी / सलाद खाया'},
+  {ic:'💧', en:'Drank lots of water', hi:'खूब पानी पिया'},
+  {ic:'🥄', en:'Took my medicine', hi:'दवा ली'},
+  {ic:'⚽', en:'Played outside', hi:'बाहर खेले'}
+];
+var GOODWHY = {en:'Yes! This makes poop soft and easy for Golu.',hi:'हाँ! इससे पॉटी नरम और आसान होती है।'};
+var FOODS = [
+  {p:'🍌',en:'Ripe banana',hi:'पका केला',g:1},
+  {p:'🍎',en:'Apple',hi:'सेब',g:1},
+  {p:'🍐',en:'Pear (nashpati)',hi:'नाशपाती',g:1},
+  {p:'🍊',en:'Orange',hi:'संतरा',g:1},
+  {p:'🍉',en:'Watermelon',hi:'तरबूज़',g:1},
+  {p:'🥕',en:'Carrot',hi:'गाजर',g:1},
+  {p:'🥦',en:'Green vegetables',hi:'हरी सब्ज़ी',g:1},
+  {p:'🌽',en:'Bhutta',hi:'भुट्टा',g:1},
+  {p:'🍇',en:'Kishmish / grapes',hi:'किशमिश / अंगूर',g:1},
+  {p:'🥗',en:'Salad',hi:'सलाद',g:1},
+  {p:'🍲',en:'Dal',hi:'दाल',g:1},
+  {p:'🫓',en:'Atta roti',hi:'आटे की रोटी',g:1},
+  {p:'💧',en:'Water',hi:'पानी',g:1,why:{en:'Yes! Water helps poop slide out easily.',hi:'हाँ! पानी से पॉटी आसानी से निकलती है।'}},
+  {p:'🍪',en:'Biscuit',hi:'बिस्किट',g:0,why:{en:'Biscuits are made of maida. Poop gets hard and stuck!',hi:'बिस्किट मैदे से बनते हैं। पॉटी सख़्त होकर अटक जाती है!'}},
+  {p:'🍜',en:'Maggi / noodles',hi:'मैगी / नूडल्स',g:0,why:{en:'Noodles are sticky maida. Golu gets a tummy ache!',hi:'नूडल्स चिपचिपा मैदा हैं। गोलू के पेट में दर्द!'}},
+  {p:'🍕',en:'Pizza',hi:'पिज़्ज़ा',g:0,why:{en:'Maida and cheese make poop hard.',hi:'मैदा और चीज़ से पॉटी सख़्त होती है।'}},
+  {p:'🍔',en:'Burger',hi:'बर्गर',g:0,why:{en:'White bun is maida. Golu does not like it!',hi:'सफ़ेद बन मैदा है। गोलू को पसंद नहीं!'}},
+  {p:'🍟',en:'Chips / fries',hi:'चिप्स / फ्राइज़',g:0,why:{en:'Fried and salty. They dry up the poop.',hi:'तले और नमकीन। पॉटी सुखा देते हैं।'}},
+  {p:'🍫',en:'Chocolate',hi:'चॉकलेट',g:0,why:{en:'Too much sugar, no fibre. Only a tiny treat sometimes!',hi:'बहुत चीनी, फाइबर नहीं। बस कभी-कभी थोड़ा सा!'}},
+  {p:'🍬',en:'Toffee / candy',hi:'टॉफ़ी / कैंडी',g:0,why:{en:'Sugar fills the tummy, no room for good food.',hi:'चीनी से पेट भर जाता है, अच्छे खाने की जगह नहीं।'}},
+  {p:'🥤',en:'Cold drink',hi:'कोल्ड ड्रिंक',g:0,why:{en:'Sugar water. Plain water is Golu’s best friend!',hi:'चीनी वाला पानी। सादा पानी गोलू का सबसे अच्छा दोस्त!'}},
+  {p:'🍦',en:'Ice cream',hi:'आइसक्रीम',g:0,why:{en:'Too much milk and sugar make poop hard.',hi:'ज़्यादा दूध और चीनी से पॉटी सख़्त होती है।'}},
+  {p:'🍰',en:'Cake / pastry',hi:'केक / पेस्ट्री',g:0,why:{en:'Maida plus sugar. Golu feels heavy!',hi:'मैदा और चीनी। गोलू भारी हो जाता है!'}},
+  {p:'🍩',en:'Donut',hi:'डोनट',g:0,why:{en:'Fried maida. Not for a happy tummy.',hi:'तला हुआ मैदा। खुश पेट के लिए नहीं।'}}
+];
+
+var S = {lang:'hi', bonus:0, days:{}, reward:{text:'', goal:30}, mins:5};
+try{ var sv = JSON.parse(localStorage.getItem('golu-hero')||'null'); if(sv) Object.assign(S, sv); }catch(e){}
+function save(){ try{ localStorage.setItem('golu-hero', JSON.stringify(S)); }catch(e){} }
+function L(o){ return o[S.lang] || o.en; }
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); }
+function dkey(d){ d = d || new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function chartStars(){ var n=0; for(var k in S.days){ for(var t in S.days[k]){ if(S.days[k][t]) n++; } } return n; }
+function totalStars(){ return chartStars() + S.bonus; }
+
+function goluSvg(mood, cls){
+  var mouth = mood==='sad' ? '<path d="M48 92 Q60 80 72 92" stroke="#21304a" stroke-width="5" fill="none" stroke-linecap="round"/>'
+    : mood==='wow' ? '<ellipse cx="60" cy="88" rx="9" ry="11" fill="#21304a"/><ellipse cx="60" cy="92" rx="5" ry="5" fill="#ff7b8a"/>'
+    : '<path d="M42 80 Q60 102 78 80 Z" fill="#21304a"/><path d="M50 88 Q60 96 70 88 Q60 92 50 88Z" fill="#ff7b8a"/>';
+  var eyes = mood==='sad' ? '<path d="M38 60 Q44 56 50 60" stroke="#21304a" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M70 60 Q76 56 82 60" stroke="#21304a" stroke-width="5" fill="none" stroke-linecap="round"/>'
+    : '<ellipse cx="44" cy="60" rx="7" ry="9" fill="#21304a"/><ellipse cx="76" cy="60" rx="7" ry="9" fill="#21304a"/><circle cx="46" cy="57" r="2.5" fill="#fff"/><circle cx="78" cy="57" r="2.5" fill="#fff"/>';
+  return '<svg class="golu '+(cls||'')+'" viewBox="0 0 120 120" role="img" aria-label="Golu">'+
+    '<ellipse cx="60" cy="112" rx="34" ry="5" fill="rgba(33,48,74,.15)"/>'+
+    '<path d="M24 50 Q14 66 26 70" stroke="#e8812a" stroke-width="8" fill="none" stroke-linecap="round"/>'+
+    '<path d="M96 50 Q106 66 94 70" stroke="#e8812a" stroke-width="8" fill="none" stroke-linecap="round"/>'+
+    '<ellipse cx="60" cy="64" rx="40" ry="44" fill="#ffa94d"/>'+
+    '<ellipse cx="60" cy="72" rx="26" ry="24" fill="#ffc285"/>'+
+    '<path d="M60 70 q-4 3 0 6 q4 3 0 6" stroke="#e8812a" stroke-width="2.5" fill="none" stroke-linecap="round"/>'+
+    eyes+'<ellipse cx="32" cy="76" rx="7" ry="4.5" fill="#ff7b8a" opacity=".7"/><ellipse cx="88" cy="76" rx="7" ry="4.5" fill="#ff7b8a" opacity=".7"/>'+mouth+
+    '<path d="M44 108 v6 M76 108 v6" stroke="#e8812a" stroke-width="7" stroke-linecap="round"/></svg>';
+}
+function react(el, mood){ var g = el.querySelector('.golu'); if(!g) return; var cls = mood==='sad'?'shake':'bounce'; g.outerHTML = goluSvg(mood, (g.classList.contains('small')?'small ':'')+cls); }
+
+function confetti(){
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var box = document.createElement('div'); box.className='confetti';
+  var cols = ['#ffc93c','#3fb66b','#e2483d','#4aa8ff','#ff7b8a','#ffa94d'];
+  for(var i=0;i<36;i++){ var s=document.createElement('span'); s.style.left=(Math.random()*100)+'%'; s.style.background=cols[i%cols.length]; s.style.animationDelay=(Math.random()*.3)+'s'; s.style.animationDuration=(1+Math.random()*.8)+'s'; box.appendChild(s); }
+  document.body.appendChild(box); setTimeout(function(){ box.remove(); }, 2300);
+}
+function flyStar(fromEl){
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var a = fromEl.getBoundingClientRect(), b = document.getElementById('bankBox').getBoundingClientRect();
+  var s = document.createElement('div'); s.className='fly'; s.textContent='⭐';
+  s.style.left = (a.left + a.width/2 - 17)+'px'; s.style.top = (a.top + a.height/2 - 17)+'px';
+  s.style.setProperty('--dx', (b.left - a.left - a.width/2 + 20)+'px'); s.style.setProperty('--dy', (b.top - a.top - a.height/2)+'px');
+  document.body.appendChild(s); setTimeout(function(){ s.remove(); updateBank(); }, 800);
+}
+function updateBank(){ document.getElementById('bank').textContent = totalStars(); }
+
+/* ---------- navigation ---------- */
+var current = 'home';
+function show(name){
+  stopTimer();
+  current = name;
+  ['home','food','chart','report','parents'].forEach(function(n){ document.getElementById('s-'+n).hidden = (n!==name); });
+  document.getElementById('backBtn').hidden = (name==='home');
+  if(name==='home') renderHome();
+  if(name==='food') startGame();
+  if(name==='chart') renderChart();
+  if(name==='report') renderReport();
+  if(name==='parents') renderParents();
+  window.scrollTo(0,0);
+}
+function applyLang(){
+  document.documentElement.lang = S.lang==='hi'?'hi':'en';
+  document.querySelectorAll('[data-t]').forEach(function(el){ el.textContent = L(T[el.dataset.t]); });
+  document.querySelectorAll('.lang button').forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.lang===S.lang)); });
+}
+function renderHome(){
+  var n = totalStars();
+  document.getElementById('homeSay').textContent = n>0 ? L(T.homeSayStars).replace('{n}', n) : L(T.homeSay);
+  document.getElementById('goluHome').innerHTML = goluSvg('happy','bounce');
+}
+
+/* ---------- food game ---------- */
+var G = null;
+function shuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+function startGame(){
+  var good = shuffle(FOODS.filter(function(f){return f.g;})).slice(0,5);
+  var bad = shuffle(FOODS.filter(function(f){return !f.g;})).slice(0,5);
+  G = {list: shuffle(good.concat(bad)), i:0, res:[], answered:false, won:0};
+  renderFood();
+}
+function progHtml(){
+  return '<div class="prog">'+G.list.map(function(f,k){ var c = k<G.res.length ? (G.res[k]?'ok':'no') : (k===G.i?'now':''); return '<i class="'+c+'"></i>'; }).join('')+'</div>';
+}
+function renderFood(){
+  var el = document.getElementById('s-food');
+  if(G.i >= G.list.length){
+    var mood = G.won >= 8 ? 'wow' : G.won >= 5 ? 'happy' : 'sad';
+    el.innerHTML = progHtml()+'<div class="result">'+goluSvg(mood,'bounce')+'<h2>'+L(T.done)+'</h2><div>'+L(T.youGot)+'</div><div class="score">⭐ '+G.won+' / '+G.list.length+'</div></div>'+
+      '<button type="button" class="go" id="again">'+L(T.playAgain)+'</button>';
+    if(G.won >= 7) confetti();
+    return;
+  }
+  var f = G.list[G.i];
+  var h = progHtml()+
+    '<div style="display:flex;justify-content:center">'+goluSvg('happy','small')+'</div>'+
+    '<div class="food" id="foodCard"><span class="pic" aria-hidden="true">'+f.p+'</span><span class="nm">'+esc(L(f))+'</span><span class="stamp" id="stamp"></span></div>';
+  if(!G.answered){
+    h += '<div class="ask">'+L(T.ask)+'</div><div class="yn"><button type="button" class="yes" data-ans="1"><span class="ic">👍</span>'+L(T.yes)+'</button><button type="button" class="no" data-ans="0"><span class="ic">👎</span>'+L(T.no)+'</button></div>';
+  }
+  el.innerHTML = h;
+}
+function answer(v, btn){
+  if(G.answered) return;
+  var f = G.list[G.i], ok = (v === !!f.g);
+  G.answered = true; G.res.push(ok);
+  var el = document.getElementById('s-food');
+  el.querySelector('.ask').remove(); el.querySelector('.yn').remove();
+  var card = document.getElementById('foodCard'), stamp = document.getElementById('stamp');
+  var why = f.g ? (f.why || GOODWHY) : f.why;
+  if(ok){
+    G.won++; S.bonus++; save();
+    stamp.className='stamp good show'; stamp.textContent='✓';
+    react(el,'wow'); flyStar(card);
+  } else {
+    stamp.className='stamp bad show'; stamp.textContent='✗';
+    card.classList.add('struck'); react(el,'sad');
+  }
+  // Junk food always gets struck out, so the lesson sticks even when the child answered right.
+  if(!f.g) card.classList.add('struck');
+  var w = document.createElement('div'); w.className = 'why '+(f.g?'good':'bad');
+  w.innerHTML = '<div style="font-size:22px;font-weight:800">'+(ok?L(T.right):L(T.wrong))+'</div>'+esc(L(why));
+  var nx = document.createElement('button'); nx.type='button'; nx.className='go'; nx.id='nextFood'; nx.textContent = L(T.next)+' →';
+  el.appendChild(w); el.appendChild(nx);
+  // refresh progress dots
+  el.querySelector('.prog').outerHTML = progHtml();
+  nx.focus();
+}
+
+/* ---------- hero chart ---------- */
+function renderChart(){
+  var k = dkey(), today = S.days[k] || {};
+  var done = TASKS.filter(function(t,i){return today[i];}).length;
+  var now = new Date(), dow = (now.getDay()+6)%7; // Monday = 0
+  var names = S.lang==='hi' ? ['सो','मं','बु','गु','शु','श','र'] : ['Mo','Tu','We','Th','Fr','Sa','Su'];
+  var week = '';
+  for(var i=0;i<7;i++){
+    var d = new Date(now); d.setDate(now.getDate() - dow + i);
+    var dd = S.days[dkey(d)] || {}, cnt = 0; for(var t in dd){ if(dd[t]) cnt++; }
+    var won = cnt >= 4, isT = (i===dow);
+    week += '<div class="day'+(won?' won':'')+(isT?' today':'')+'"><span class="b">'+(won?'⭐':(cnt? cnt : ''))+'</span>'+names[i]+'</div>';
+  }
+  var tot = totalStars(), goal = Math.max(5, +S.reward.goal||30);
+  var pct = Math.min(100, tot/goal*100);
+  var goalHtml = S.reward.text ?
+    '<div class="goal"><div style="font-weight:800">🎁 '+L(T.goalFor)+': '+esc(S.reward.text)+'</div><div class="bar"><i style="width:'+pct+'%"></i></div><div class="lbl"><span>⭐ '+tot+'</span><span>'+goal+'</span></div>'+(tot>=goal?'<div style="font-weight:800;color:var(--grass-deep)">'+L(T.rewardWon)+'</div>':'')+'</div>'
+    : '<div class="goal" style="text-align:center;font-weight:700">🎁 '+L(T.noGoal)+'</div>';
+  document.getElementById('s-chart').innerHTML =
+    '<h2>'+L(T.todayJobs)+'</h2><div style="text-align:center;color:var(--muted);font-weight:600">'+L(T.tapWhenDone)+'</div>'+
+    '<div class="today">'+TASKS.map(function(t,i){ return '<button type="button" class="task" data-task="'+i+'" aria-pressed="'+(!!today[i])+'"><span class="got">⭐</span><span class="ic" aria-hidden="true">'+t.ic+'</span>'+esc(L(t))+'</button>'; }).join('')+'</div>'+
+    '<div class="counter">'+done+' / '+TASKS.length+(done===TASKS.length?' 🏆':'')+'</div>'+
+    '<div style="font-weight:800;text-align:center">'+L(T.thisWeek)+'</div><div class="week">'+week+'</div>'+goalHtml;
+}
+function toggleTask(i, btn){
+  var k = dkey(); S.days[k] = S.days[k] || {};
+  var on = !S.days[k][i]; S.days[k][i] = on; save();
+  if(on){ flyStar(btn); var c = TASKS.filter(function(t,j){return S.days[k][j];}).length; if(c===TASKS.length) confetti(); }
+  setTimeout(renderChart, on?250:0); updateBank();
+}
+
+/* ---------- poop report ---------- */
+var POOP = [
+  {n:1, en:'Rabbit pellets', hi:'खरगोश जैसी गोलियाँ', mood:'sad', say:{en:'Too hard! Golu needs more water and fruit today.',hi:'बहुत सख़्त! आज गोलू को ज़्यादा पानी और फल चाहिए।'},
+   svg:'<circle cx="14" cy="22" r="7" fill="#6b4226"/><circle cx="32" cy="20" r="6.5" fill="#6b4226"/><circle cx="50" cy="23" r="7" fill="#6b4226"/><circle cx="66" cy="20" r="6" fill="#6b4226"/>'},
+  {n:2, en:'Lumpy snake', hi:'गांठ वाला साँप', mood:'sad', say:{en:'A bit hard. Eat a fruit and drink water!',hi:'थोड़ा सख़्त। फल खाओ और पानी पियो!'},
+   svg:'<circle cx="14" cy="21" r="9" fill="#7a4b2c"/><circle cx="26" cy="21" r="9" fill="#7a4b2c"/><circle cx="38" cy="21" r="9" fill="#7a4b2c"/><circle cx="50" cy="21" r="9" fill="#7a4b2c"/><circle cx="62" cy="21" r="9" fill="#7a4b2c"/>'},
+  {n:3, en:'Snake with cracks', hi:'दरार वाला साँप', mood:'happy', say:{en:'Good job! Golu is happy.',hi:'शाबाश! गोलू खुश है।'},
+   svg:'<rect x="4" y="12" width="70" height="18" rx="9" fill="#86552f"/><path d="M20 12 L23 19 M38 30 L40 23 M56 12 L58 19" stroke="#fff" stroke-width="2"/>'},
+  {n:4, en:'Smooth snake', hi:'चिकना साँप', mood:'wow', say:{en:'PERFECT poop! You are a Potty Hero!',hi:'एकदम सही पॉटी! तुम पॉटी हीरो हो!'},
+   svg:'<rect x="4" y="13" width="70" height="16" rx="8" fill="#a5703f"/><circle cx="62" cy="19" r="2.4" fill="#fff"/><circle cx="68" cy="19" r="2.4" fill="#fff"/><circle cx="62" cy="19" r="1.1" fill="#21304a"/><circle cx="68" cy="19" r="1.1" fill="#21304a"/>'},
+  {n:5, en:'Soft blobs', hi:'नरम टुकड़े', mood:'happy', say:{en:'Nice and soft. Well done!',hi:'अच्छी नरम। बहुत बढ़िया!'},
+   svg:'<ellipse cx="16" cy="21" rx="11" ry="8" fill="#b07c4d"/><ellipse cx="40" cy="22" rx="10" ry="7.5" fill="#b07c4d"/><ellipse cx="63" cy="20" rx="10" ry="8" fill="#b07c4d"/>'},
+  {n:6, en:'Mushy', hi:'गूदेदार', mood:'happy', say:{en:'Very soft. Tell Mummy or Papa about it.',hi:'बहुत नरम। मम्मी या पापा को बताओ।'},
+   svg:'<path d="M5 26 Q9 15 16 20 Q20 10 28 18 Q33 11 39 19 Q46 11 51 19 Q58 12 62 20 Q72 18 73 26 Q56 31 39 29 Q20 33 5 26 Z" fill="#c49a6c"/>'},
+  {n:7, en:'Watery', hi:'पानी जैसी', mood:'sad', say:{en:'Too watery! Tell Mummy or Papa now.',hi:'बहुत पतली! अभी मम्मी या पापा को बताओ।'},
+   svg:'<path d="M4 25 Q14 17 24 25 T44 25 T64 25 T76 24 L76 32 L4 32 Z" fill="#d4ad7f"/>'},
+  {n:0, en:'Nothing came', hi:'कुछ नहीं निकला', mood:'happy', say:{en:"That's OK! Sitting on the potty is a win.",hi:'कोई बात नहीं! पॉटी पर बैठना भी जीत है।'},
+   svg:'<circle cx="40" cy="22" r="13" fill="none" stroke="#56637a" stroke-width="3" stroke-dasharray="4 4"/>'}
+];
+function todayReports(){ var k=dkey(); return (S.log||[]).filter(function(r){return r.d===k;}); }
+function renderReport(picked){
+  var el = document.getElementById('s-report');
+  var tr = todayReports();
+  var h = '<div class="hero"><div class="bubble">'+(picked ? esc(L(picked.say)) : L(T.repSay))+'</div>'+goluSvg(picked?picked.mood:'happy', 'small'+(picked?(picked.mood==='sad'?' shake':' bounce'):''))+'</div>';
+  if(!picked){
+    h += '<h2>'+L(T.repAsk)+'</h2><div class="poops">'+POOP.map(function(p){
+      return '<button type="button" class="poop" data-poop="'+p.n+'"><svg width="78" height="40" viewBox="0 0 78 40" aria-hidden="true">'+p.svg+'</svg><span>'+esc(L(p))+'</span></button>';
+    }).join('')+'</div>';
+  } else {
+    h += '<div class="why '+(picked.mood==='sad'?'bad':'good')+'" style="font-size:22px;font-weight:800">'+(picked.capped?L(T.repCap):'⭐ '+L(T.repStar))+'</div>'+
+      '<button type="button" class="go" id="repDone">'+L(T.repAgain)+' ✓</button>';
+  }
+  if(tr.length){
+    h += '<div class="goal"><div style="font-weight:800">'+L(T.repToday)+'</div><div style="display:flex;gap:8px;flex-wrap:wrap">'+tr.map(function(r){
+      var p = POOP.filter(function(x){return x.n===r.type;})[0];
+      return '<span style="background:var(--sky2);border-radius:12px;padding:4px 10px;font-weight:700">'+r.t+' · '+esc(L(p))+'</span>';
+    }).join('')+'</div></div>';
+  }
+  el.innerHTML = h;
+}
+function logPoop(n, btn){
+  var now = new Date();
+  S.log = S.log || [];
+  var tr = todayReports();
+  var capped = tr.length >= 3;
+  S.log.push({d:dkey(now), t:String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0'), type:n});
+  if(S.log.length > 120) S.log = S.log.slice(-120);
+  if(!capped) S.bonus++;
+  save();
+  var p = POOP.filter(function(x){return x.n===n;})[0];
+  var shown = Object.assign({}, p, {capped:capped});
+  if(!capped) flyStar(btn);
+  if(n===4 || n===3 || n===5) confetti();
+  renderReport(shown);
+}
+function stopTimer(){}
+
+/* ---------- parents ---------- */
+function diaryHtml(hi){
+  var log = (S.log||[]).slice(-14).reverse();
+  var names = {1:'Type 1 (hard)',2:'Type 2 (hard)',3:'Type 3',4:'Type 4 (ideal)',5:'Type 5',6:'Type 6 (loose)',7:'Type 7 (watery)',0:hi?'कुछ नहीं':'Nothing'};
+  var since = new Date(); since.setDate(since.getDate()-6); var sk = dkey(since);
+  var wk = (S.log||[]).filter(function(r){return r.d>=sk && r.type>0;});
+  var hard = wk.filter(function(r){return r.type<=2;}).length, loose = wk.filter(function(r){return r.type>=6;}).length;
+  var note = '';
+  if(wk.length && hard/wk.length >= .5) note = hi?'पिछले 7 दिनों में ज़्यादातर पॉटी सख़्त (टाइप 1–2) — डॉक्टर को बताएँ।':'Most stools in the last 7 days were hard (type 1–2). Tell the doctor.';
+  else if(loose >= 3) note = hi?'पिछले 7 दिनों में कई बार पतली पॉटी — दवा थोड़ी कम करने के बारे में डॉक्टर से पूछें।':'Several loose stools in the last 7 days. Ask the doctor about reducing the dose.';
+  return '<div class="pcard"><h3>'+(hi?'पॉटी डायरी (फ़ॉलो-अप पर डॉक्टर को दिखाएँ)':'Stool diary (show the doctor at follow-up)')+'</h3>'+
+    (log.length ? '<div style="overflow-x:auto"><table class="diary"><thead><tr><th>'+(hi?'तारीख़':'Date')+'</th><th>'+(hi?'समय':'Time')+'</th><th>'+(hi?'पॉटी':'Stool')+'</th></tr></thead><tbody>'+
+      log.map(function(r){ var d=r.d.split('-'); return '<tr><td>'+d[2]+'/'+d[1]+'</td><td>'+r.t+'</td><td class="n">'+names[r.type]+'</td></tr>'; }).join('')+'</tbody></table></div>'
+      : '<p style="margin:0;color:#56637a">'+(hi?'अभी कोई रिपोर्ट नहीं। बच्चा पॉटी से आकर "पॉटी रिपोर्ट" भरे।':'No reports yet. The child fills "Poop Report" after coming out of the toilet.')+'</p>')+
+    (note?'<p style="margin:0;font-weight:700;color:#a92a21">'+note+'</p>':'')+'</div>';
+}
+function renderParents(msg){
+  var hi = S.lang==='hi';
+  document.getElementById('s-parents').innerHTML =
+    '<div class="pcard"><h3>'+(hi?'इनाम तय करें':'Set a reward')+'</h3>'+
+    '<label for="rw">'+(hi?'इनाम (खाने की चीज़ नहीं) — जैसे पार्क जाना, नई किताब, स्टिकर':'Reward (not food) — e.g. park trip, new book, stickers')+'</label>'+
+    '<input id="rw" type="text" maxlength="60" value="'+esc(S.reward.text||'')+'">'+
+    '<label for="gl">'+(hi?'कितने स्टार पर इनाम?':'Stars needed for the reward')+'</label>'+
+    '<select id="gl">'+[20,30,50,75,100].map(function(n){return '<option value="'+n+'"'+(+S.reward.goal===n?' selected':'')+'>'+n+' ⭐</option>';}).join('')+'</select>'+
+    '<button type="button" class="save" id="saveRw">'+(hi?'सेव करें':'Save')+'</button>'+(msg?'<div class="msg">'+msg+'</div>':'')+'</div>'+
+    diaryHtml(hi)+
+    '<div class="pcard"><h3>'+(hi?'माता-पिता के लिए टिप्स':'Tips for parents')+'</h3><ul>'+
+      (hi ? '<li>पॉटी पर बैठने पर शाबाशी और स्टार दें, पॉटी हो या न हो।</li><li>दिन में एक बार, नाश्ते या रात के खाने के 15–30 मिनट बाद, 5–10 मिनट बिठाएँ; पैरों के नीचे स्टूल रखें। दिन में एक बार पॉटी होना बिल्कुल ठीक है — दो बार ज़बरदस्ती न करें।</li><li>इनाम कभी चॉकलेट या जंक फूड न रखें।</li><li>दवा डॉक्टर की सलाह के बिना बंद न करें।</li><li>फ़ोन टॉयलेट में न ले जाएँ — बच्चा बाहर आकर रिपोर्ट भरे।</li><li>स्टार और डायरी इसी फ़ोन में सेव रहते हैं।</li>'
+          : '<li>Praise and give a star for sitting, whether or not poop comes.</li><li>Once a day, 15–30 minutes after breakfast or dinner, sit for 5–10 minutes with a stool under the feet. One stool a day is perfectly fine — do not force a second sitting.</li><li>Never make the reward chocolate or junk food.</li><li>Do not stop the medicine without asking the doctor.</li><li>Keep the phone out of the toilet — the child fills the report after coming out.</li><li>Stars and the diary are saved on this phone only.</li>')+
+    '</ul></div>'+
+    '<div class="pcard"><h3>'+(hi?'सब कुछ फिर से शुरू करें':'Start over')+'</h3>'+
+    '<div id="resetZone"><button type="button" class="danger" id="resetAsk">'+(hi?'सारे स्टार मिटाएँ':'Clear all stars')+'</button></div></div>'+
+    '<div style="text-align:center;color:var(--muted);font-size:14px;font-family:system-ui,sans-serif">Dr. Dinesh Mittal, MBBS, DCH</div>';
+}
+
+/* ---------- events ---------- */
+document.getElementById('app').addEventListener('click', function(e){
+  var b = e.target.closest('button'); if(!b) return;
+  if(b.dataset.lang){ S.lang = b.dataset.lang; save(); applyLang(); show(current==='food'?'home':current); return; }
+  if(b.id==='backBtn'){ show('home'); return; }
+  if(b.dataset.go){ show(b.dataset.go); return; }
+  if(b.dataset.ans !== undefined){ answer(b.dataset.ans==='1', b); return; }
+  if(b.id==='nextFood'){ G.i++; G.answered=false; renderFood(); return; }
+  if(b.id==='again'){ startGame(); return; }
+  if(b.dataset.task !== undefined){ toggleTask(+b.dataset.task, b); return; }
+  if(b.dataset.poop !== undefined){ logPoop(+b.dataset.poop, b); return; }
+  if(b.id==='repDone'){ show('home'); return; }
+  if(b.id==='saveRw'){ S.reward = {text: document.getElementById('rw').value.trim(), goal: +document.getElementById('gl').value}; save(); renderParents(S.lang==='hi'?'सेव हो गया ✓':'Saved ✓'); return; }
+  if(b.id==='resetAsk'){ var hi=S.lang==='hi'; document.getElementById('resetZone').innerHTML = '<p style="margin:0 0 8px">'+(hi?'पक्का? सारे स्टार मिट जाएँगे।':'Sure? All stars will be cleared.')+'</p><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><button type="button" class="danger" id="resetYes">'+(hi?'हाँ, मिटाएँ':'Yes, clear')+'</button><button type="button" class="save" id="resetNo">'+(hi?'नहीं':'No')+'</button></div>'; return; }
+  if(b.id==='resetYes'){ S.bonus=0; S.days={}; S.log=[]; save(); updateBank(); renderParents(S.lang==='hi'?'साफ़ हो गया':'Cleared'); return; }
+  if(b.id==='resetNo'){ renderParents(); return; }
+});
+
+applyLang(); updateBank(); show('home');
+})();
+</script>
+<footer style="max-width:560px;margin:8px auto 24px;padding:0 16px;text-align:center;font:13px/1.5 Mukta,system-ui,sans-serif;color:#556175"><b style="display:block;font:800 16px 'Baloo 2',Mukta,sans-serif;color:#1f5fbf">Dr. Dinesh Mittal Child Clinic</b>Dr. Dinesh Mittal, MBBS, DCH · Child Specialist<br>H-34/69, Sector 3, Rohini, Delhi – 110085<br>Phone: <span style="user-select:all;font-weight:700">+91 81305 21456</span><br>Mon–Sat 10:00 AM–1:00 PM &amp; 6:00–8:30 PM · Sun 11:00 AM–12:00 PM<br><a href="https://www.childspecialistrohini.com" style="color:#1f5fbf;font-weight:700">www.childspecialistrohini.com</a></footer></body></html>

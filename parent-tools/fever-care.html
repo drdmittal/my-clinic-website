@@ -1,0 +1,643 @@
+<!doctype html><html lang="hi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style></head><body><title>Fever Care Diary</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Mukta:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: phone app. Now tab = status hero (animated thermometer + entry), step map, ONE current-step card with an animated picture, dose timers, diary. Other tabs: Graph, Care (full flowchart + red flags), Setup. */
+:root{
+  --bg:#f3f6fa; --surface:#ffffff; --ink:#172234; --muted:#556175; --line:#dbe2ec;
+  --accent:#1f5fbf; --accent-soft:#e3edfb;
+  --temp:#eb6834; --pcm:#2a78d6; --mef:#1baf7a;
+  --good:#16803f; --good-soft:#e2f4e8; --warn:#9a5b00; --warn-soft:#fff3dc; --bad:#c53030; --bad-soft:#fde8e7;
+  --water:#7cc4ff; --skin:#f2c19b; --cloth:#ffffff;
+  --display:'Baloo 2','Mukta',system-ui,sans-serif; --body:'Mukta',system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0e131a; --surface:#18202b; --ink:#e7ecf3; --muted:#9ba7b9; --line:#2b3646;
+  --accent:#7aaeff; --accent-soft:#1b2a40;
+  --temp:#d95926; --pcm:#3987e5; --mef:#199e70;
+  --good:#58d08d; --good-soft:#15301f; --warn:#f0b04a; --warn-soft:#33270f; --bad:#ff8077; --bad-soft:#3a1c1b;
+  --water:#4f9bd9; --skin:#d9a782; --cloth:#dfe7f2; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0e131a; --surface:#18202b; --ink:#e7ecf3; --muted:#9ba7b9; --line:#2b3646;
+  --accent:#7aaeff; --accent-soft:#1b2a40;
+  --temp:#d95926; --pcm:#3987e5; --mef:#199e70;
+  --good:#58d08d; --good-soft:#15301f; --warn:#f0b04a; --warn-soft:#33270f; --bad:#ff8077; --bad-soft:#3a1c1b;
+  --water:#4f9bd9; --skin:#d9a782; --cloth:#dfe7f2; color-scheme:dark}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.4}
+.app{max-width:560px;margin:0 auto;min-height:100%;display:flex;flex-direction:column}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;justify-content:space-between;align-items:center;gap:8px;padding-block:10px 8px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.brand{display:flex;flex-direction:column;line-height:1.1;min-width:0}
+.brand b{font-family:var(--display);font-size:20px;color:var(--accent);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand span{font-size:12.5px;color:var(--muted)}
+.seg{display:flex;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:3px;flex:none}
+.seg button{border:0;background:transparent;color:var(--muted);font:600 14px var(--body);padding:5px 11px;border-radius:999px;cursor:pointer;min-height:34px}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--surface)}
+main{flex:1;padding-block:4px 100px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:10px}
+h2{font-family:var(--display);font-size:23px;line-height:1.15;margin:0;text-wrap:balance}
+h3{font-family:var(--display);font-size:19px;margin:0}
+p{margin:0}
+.muted{color:var(--muted);font-size:15px}
+.btn{border:0;border-radius:14px;min-height:54px;padding:0 18px;font:700 18px var(--display);cursor:pointer;background:var(--accent);color:var(--surface)}
+.btn.ghost{background:var(--surface);color:var(--ink);border:1.5px solid var(--line)}
+.btn.pcm{background:var(--pcm);color:#fff} .btn.mef{background:var(--mef);color:#fff} .btn.danger{background:var(--bad);color:#fff}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn:active{transform:translateY(2px)}
+.hero{display:grid;grid-template-columns:64px 1fr;gap:14px;align-items:center}
+.thermo{width:64px;height:170px}
+.thermo .merc{transition:all 1.2s cubic-bezier(.3,1.2,.4,1)}
+.reading{font:800 46px var(--display);line-height:1;font-variant-numeric:tabular-nums}
+.band{display:inline-flex;align-items:center;gap:6px;font-weight:700;border-radius:999px;padding:2px 12px;font-size:15px;width:max-content}
+.band.good{background:var(--good-soft);color:var(--good)} .band.warn{background:var(--warn-soft);color:var(--warn)} .band.bad{background:var(--bad-soft);color:var(--bad)}
+.entry{display:flex;gap:8px;margin-top:8px}
+.entry input{flex:1;min-width:0;font:700 26px var(--display);text-align:center;color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:14px;padding:4px 8px;min-height:54px;font-variant-numeric:tabular-nums}
+.entry input:focus{outline:3px solid var(--accent);outline-offset:1px}
+.entry .unit{display:grid;place-items:center;font:700 20px var(--display);color:var(--muted)}
+.map{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.map::-webkit-scrollbar{display:none}
+.chip{flex:none;display:flex;align-items:center;gap:6px;border-radius:999px;padding:5px 11px 5px 6px;font-size:13.5px;font-weight:700;background:var(--surface);border:1.5px solid var(--line);color:var(--muted)}
+.chip i{font-style:normal;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:var(--bg);font-size:12px}
+.chip.done{color:var(--good);border-color:var(--good-soft)} .chip.done i{background:var(--good);color:#fff}
+.chip.now{color:var(--accent);border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)} .chip.now i{background:var(--accent);color:var(--surface)}
+.chip.red.now{color:var(--bad);border-color:var(--bad);box-shadow:0 0 0 3px var(--bad-soft)} .chip.red.now i{background:var(--bad);color:#fff}
+.chip.green.now{color:var(--good);border-color:var(--good);box-shadow:0 0 0 3px var(--good-soft)} .chip.green.now i{background:var(--good);color:#fff}
+.step{border-radius:22px;padding:18px 16px;display:flex;flex-direction:column;gap:12px;background:var(--surface);border:2px solid var(--accent);animation:rise .45s ease both}
+.step.good{border-color:var(--good)} .step.bad{border-color:var(--bad);background:var(--bad-soft)} .step.warn{border-color:var(--warn)}
+.step .eyebrow{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.step.good .eyebrow{color:var(--good)} .step.bad .eyebrow{color:var(--bad)} .step.warn .eyebrow{color:var(--warn)}
+.pic{display:grid;place-items:center;min-height:120px}
+.pic svg{max-width:100%;height:auto}
+@keyframes rise{from{opacity:.3;transform:translateY(10px)}to{opacity:1;transform:none}}
+.todo{display:flex;flex-direction:column;gap:8px}
+.tdo{display:grid;grid-template-columns:40px 1fr 30px;gap:10px;align-items:center;text-align:left;border:2px solid var(--line);background:var(--surface);color:var(--ink);border-radius:16px;padding:8px 10px;font:500 15.5px var(--body);cursor:pointer;width:100%}
+.tdo b{display:block;font:800 17px var(--display)}
+.tdo .ok{width:28px;height:28px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;color:#fff;font-weight:800;transition:all .25s}
+.tdo[aria-pressed="true"]{border-color:var(--good);background:var(--good-soft)}
+.tdo[aria-pressed="true"] .ok{background:var(--good);border-color:var(--good);transform:scale(1.1)}
+.out{border-radius:12px;padding:10px 12px;font-size:15.5px}
+.out.good{background:var(--good-soft);border:1.5px solid var(--good)} .out.warn{background:var(--warn-soft);border:1.5px solid var(--warn)} .out.bad{background:var(--bad-soft);border:1.5px solid var(--bad)}
+.dose{font-family:var(--display);font-size:26px;line-height:1.1}
+.faces{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.face{border:2px solid var(--line);background:var(--surface);color:var(--ink);border-radius:18px;padding:10px 6px;display:flex;flex-direction:column;align-items:center;gap:4px;font:700 16px var(--display);cursor:pointer}
+.face small{font:500 13px var(--body);color:var(--muted);text-align:center}
+.face[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.checks{display:flex;flex-direction:column;gap:8px}
+.q{display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--bg);border-radius:12px;padding:8px 10px}
+.q span{font-weight:600;font-size:15px}
+.yn{display:flex;gap:6px;flex:none}
+.yn button{border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:10px;min-width:54px;min-height:42px;font:700 15px var(--body);cursor:pointer}
+.yn button[aria-pressed="true"][data-v="1"]{background:var(--bad);border-color:var(--bad);color:#fff}
+.yn button[aria-pressed="true"][data-v="0"]{background:var(--good);border-color:var(--good);color:#fff}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ringwrap{display:grid;place-items:center;position:relative}
+.ringwrap svg{width:170px;height:170px;transform:rotate(-90deg)}
+.ringwrap .lbl{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.ringwrap .lbl b{font:800 30px var(--display);font-variant-numeric:tabular-nums;line-height:1}
+.ringwrap .lbl span{font-size:13px;color:var(--muted)}
+.ring-fg{transition:stroke-dashoffset 1s linear}
+.due .ringwrap svg{animation:pulse 1.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:rotate(-90deg) scale(1)}50%{transform:rotate(-90deg) scale(1.06)}}
+.sponge{display:flex;flex-direction:column;gap:10px;background:var(--accent-soft);border-radius:18px;padding:14px}
+.sponge .phase{font:800 24px var(--display);text-align:center;min-height:32px}
+.sponge .clock{font:800 34px var(--display);text-align:center;font-variant-numeric:tabular-nums}
+ol.pts,ul.pts{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.myth{display:grid;grid-template-columns:64px 1fr;gap:10px;align-items:center;background:var(--bad-soft);border-radius:14px;padding:10px}
+.fact{background:var(--good-soft);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:4px}
+@keyframes wipe{0%,100%{transform:translateX(-26px)}50%{transform:translateX(26px)}}
+@keyframes steam{0%{transform:translateY(0);opacity:0}30%{opacity:.9}100%{transform:translateY(-34px);opacity:0}}
+@keyframes drip{0%{transform:translateY(-6px);opacity:0}30%{opacity:1}100%{transform:translateY(22px);opacity:0}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes beat{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+@keyframes flap{0%,100%{transform:scaleX(1)}50%{transform:scaleX(1.12)}}
+.a-wipe{animation:wipe 1.8s ease-in-out infinite}
+.a-steam{animation:steam 2.2s ease-out infinite}
+.a-drip{animation:drip 1.6s ease-in infinite}
+.a-spin{animation:spin 14s linear infinite;transform-origin:60px 60px}
+.a-bob{animation:bob 2.4s ease-in-out infinite}
+.a-beat{animation:beat 1.1s ease-in-out infinite;transform-origin:center;transform-box:fill-box}
+.a-flap{animation:flap 1.6s ease-in-out infinite;transform-origin:center;transform-box:fill-box}
+.confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:50}
+.confetti span{position:absolute;top:-20px;width:9px;height:13px;border-radius:2px;animation:fall 1.5s ease-in forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg);opacity:.8}}
+.timers{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.timers div{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px;font-size:13.5px;color:var(--muted);display:flex;flex-direction:column;gap:2px}
+.timers b{font:800 19px var(--display);color:var(--ink);font-variant-numeric:tabular-nums}
+.dots{display:flex;gap:4px}
+.dots i{width:14px;height:6px;border-radius:9px;background:var(--line)}
+.dots i.on{background:var(--pcm)} .dots.m i.on{background:var(--mef)}
+.row3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.row3 .btn{font-size:15px;min-height:50px;padding:0 6px;line-height:1.1}
+.li{display:grid;grid-template-columns:56px 1fr auto;gap:10px;align-items:center;padding:8px 0;border-top:1px solid var(--line);font-size:15.5px}
+.li:first-child{border-top:0}
+.li time{color:var(--muted);font-variant-numeric:tabular-nums}
+.tag{display:inline-flex;align-items:center;gap:5px;font-weight:700;border-radius:999px;padding:2px 10px;font-size:14px}
+.tag.t{background:var(--accent-soft)} .tag.p{color:#fff;background:var(--pcm)} .tag.m{color:#fff;background:var(--mef)} .tag.s{background:var(--bg);border:1px solid var(--line)}
+.x{border:0;background:transparent;color:var(--muted);font-size:22px;cursor:pointer;min-width:40px;min-height:40px}
+.flow{display:flex;flex-direction:column;align-items:stretch}
+.node{background:var(--surface);border:2px solid var(--line);border-radius:14px;padding:10px 12px;display:flex;flex-direction:column;gap:4px;font-size:15px}
+.node b{font:800 17px var(--display)}
+.node.dec{border-style:dashed;border-color:var(--warn)}
+.node.er{border-color:var(--bad);background:var(--bad-soft)} .node.er b{color:var(--bad)}
+.node.ok{border-color:var(--good);background:var(--good-soft)} .node.ok b{color:var(--good)}
+.arrow{align-self:center;width:2px;height:22px;background:var(--muted);position:relative;margin:2px 0 6px}
+.arrow::after{content:"";position:absolute;left:-6px;bottom:-6px;border:7px solid transparent;border-top-color:var(--muted);border-bottom:0}
+.arrow span{position:absolute;left:12px;top:0;white-space:nowrap;font-size:13px;font-weight:700;color:var(--muted)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.chartbox svg{display:block;width:100%;height:auto;overflow:visible}
+.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:14px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:14px;height:14px;border-radius:50%;display:inline-grid;place-items:center;color:#fff;font-size:9px;font-weight:800}
+.tip{min-height:24px;font-weight:600;font-size:15px}
+.tbl{width:100%;border-collapse:collapse;font-size:15px;font-variant-numeric:tabular-nums}
+.tbl th,.tbl td{padding:7px 6px;text-align:left;border-bottom:1px solid var(--line)}
+.tbl th{font-size:13px;color:var(--muted);font-weight:600}
+.trend{border-radius:14px;padding:12px 14px;font-weight:700}
+.trend.good{background:var(--good-soft);color:var(--good)} .trend.warn{background:var(--warn-soft);color:var(--warn)} .trend.bad{background:var(--bad-soft);color:var(--bad)}
+.form{display:flex;flex-direction:column;gap:6px}
+.form label{font-weight:600;font-size:15px;margin-top:6px}
+.form input,.form select{font:500 17px var(--body);color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;min-height:48px;width:100%;box-sizing:border-box}
+.form input:focus,.form select:focus{outline:3px solid var(--accent);outline-offset:1px}
+.tick{display:flex;gap:10px;align-items:flex-start;font-weight:600;margin-top:8px}
+.tick input{width:24px;height:24px;flex:none;accent-color:var(--accent);margin-top:2px}
+.saved{color:var(--good);font-weight:700}
+.phone{font:800 22px var(--display);user-select:all;letter-spacing:.02em}
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--surface);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px);padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
+.tabs div{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
+.tabs button{border:0;background:transparent;color:var(--muted);font:700 14px var(--body);min-height:62px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.tabs button svg{width:22px;height:22px}
+.tabs button[aria-selected="true"]{color:var(--accent)}
+button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="app">
+  <div class="bar">
+    <div class="brand"><b id="brandTitle">Fever Care</b><span>Dr. Dinesh Mittal · MBBS, DCH</span></div>
+    <div class="seg" role="group" aria-label="Language"><button type="button" data-lang="hi">हिंदी</button><button type="button" data-lang="en">EN</button></div>
+  </div>
+  <main id="main"></main>
+  <nav class="tabs"><div role="tablist">
+    <button type="button" role="tab" data-tab="now"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 14.8V4a2 2 0 1 0-4 0v10.8a4 4 0 1 0 4 0z"/></svg><span data-l="now"></span></button>
+    <button type="button" role="tab" data-tab="graph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg><span data-l="graph"></span></button>
+    <button type="button" role="tab" data-tab="care"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-4.5-7-11a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 6.5-7 11-7 11z"/></svg><span data-l="care"></span></button>
+    <button type="button" role="tab" data-tab="setup"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></svg><span data-l="setup"></span></button>
+  </div></nav>
+</div>
+
+<script>
+(function(){
+/* clinical rules (doctor protocol) */
+var FEVER = 100.4, HIGH = 103, VERY_HIGH = 104;
+var PCM_GAP = 5*60, PCM_MAX = 5;
+var RECHECK = 60;
+var MEF_GAP = 8*60, MEF_MAX = 3;
+var SPONGE_MIN = 15;
+var MIN = 60000;
+
+var DEF_CHILD = {name:'', age:'6m+', pcmMl:'', pcmStr:'250 mg/5 ml', mefMl:'', mefOk:false, phone:'+91 81305 21456'};
+var S = {lang:'hi', unit:'F', tab:'now', child:Object.assign({}, DEF_CHILD), log:[], checks:{}, todo:{}};
+try{ var sv = JSON.parse(localStorage.getItem('fever-care')||'null'); if(sv){ Object.assign(S, sv); S.child = Object.assign({}, DEF_CHILD, sv.child||{}); S.todo = sv.todo||{}; S.checks = sv.checks||{}; } }catch(e){}
+function save(){ try{ localStorage.setItem('fever-care', JSON.stringify(S)); }catch(e){} }
+
+function t(en, hi){ return S.lang==='hi' ? hi : en; }
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); }
+function toF(v){ return S.unit==='F' ? v : v*9/5+32; }
+function show(f){ return S.unit==='F' ? f.toFixed(1)+'°F' : ((f-32)*5/9).toFixed(1)+'°C'; }
+function hm(ts){ var d=new Date(ts); return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0'); }
+function at(ts){ return S.lang==='hi' ? hm(ts)+' बजे' : hm(ts); }
+function dkey(ts){ var d=new Date(ts); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function dlabel(k){ var p=k.split('-'); return p[2]+'/'+p[1]; }
+function minsSince(ts){ return (Date.now()-ts)/MIN; }
+function dur(ms){ var m=Math.max(0,Math.ceil(ms/MIN)); var h=Math.floor(m/60); m=m%60; return h ? (h+t('h ','घं ')+m+t('m','मि')) : (m+t(' min',' मिनट')); }
+function mmss(ms){ var s=Math.max(0,Math.ceil(ms/1000)); return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0'); }
+function last(kind){ for(var i=S.log.length-1;i>=0;i--){ if(S.log[i].k===kind) return S.log[i]; } return null; }
+function count24(kind){ var c=0, lim=Date.now()-24*3600e3; S.log.forEach(function(e){ if(e.k===kind && e.ts>=lim) c++; }); return c; }
+function nextAllowed(kind){ var l=last(kind); if(!l) return null; var n=l.ts+(kind==='p'?PCM_GAP:MEF_GAP)*MIN; return n>Date.now()?n:null; }
+function mefAllowed(){ var c=S.child; return c.mefOk && c.mefMl && c.age!=='lt6m' && c.age!=='lt3m'; }
+function band(f){ if(f>=VERY_HIGH) return ['bad',t('Very high fever','बहुत तेज़ बुख़ार')]; if(f>=HIGH) return ['bad',t('High fever','तेज़ बुख़ार')]; if(f>=FEVER) return ['warn',t('Fever','बुख़ार')]; return ['good',t('No fever','बुख़ार नहीं')]; }
+
+/* where are we in the flow? */
+function flowState(){
+  var lt = last('t'), lp = last('p'), lm = last('m');
+  if(lp && (!lt || lp.ts > lt.ts) && minsSince(lp.ts) < 3*60) return {node:'wait', from:lp.ts, after:'p'};
+  if(!lt || minsSince(lt.ts) > 8*60) return {node:'check'};
+  if(S.child.age==='lt3m' && lt.v >= FEVER) return {node:'baby'};
+  if(lm && lm.ts > lt.ts) return {node:'wait', from:lm.ts, after:'m'};
+  if(lt.v < FEVER){
+    var had = S.log.some(function(e){ return e.k==='t' && e.v>=FEVER && e.ts<lt.ts && e.ts>lt.ts-8*60*MIN; });
+    return {node: had ? 'down' : 'none'};
+  }
+  if(lp && lt.ts - lp.ts < PCM_GAP*MIN){
+    if(lt.ts - lp.ts < 50*MIN) return {node:'wait', from:lp.ts, after:'p'};
+    if(lm && lm.ts > lp.ts){ return (lt.ts - lm.ts >= 50*MIN) ? {node:'er'} : {node:'wait', from:lm.ts, after:'m'}; }
+    return {node: S.comfort===1 ? 'mef' : (S.comfort===0 ? 'calm' : 'comfort')};
+  }
+  if(count24('p') >= PCM_MAX) return {node:'pcmmax'};
+  return {node:'act'};
+}
+var MAP = [
+  {n:'1', en:'Check', hi:'नापें'}, {n:'2', en:'3 things', hi:'3 काम'}, {n:'3', en:'Wait 1 h', hi:'1 घंटा'},
+  {n:'4', en:'Comfortable?', hi:'आराम में?'}, {n:'5', en:'Mefenamic', hi:'मेफ़ेनामिक'}, {n:'6', en:'Wait 1 h', hi:'1 घंटा'}, {n:'✓', en:'Better', hi:'ठीक'}
+];
+function mapPos(fs){
+  var n = fs.node;
+  if(n==='act'||n==='pcmmax') return 1;
+  if(n==='wait') return fs.after==='m' ? 5 : 2;
+  if(n==='comfort'||n==='calm') return 3; if(n==='mef') return 4; if(n==='er'||n==='down') return 6; return 0;
+}
+function mapHtml(fs){
+  var p = mapPos(fs), end = fs.node==='er' ? {n:'!', en:'Hospital', hi:'अस्पताल', cls:'red'} : {n:'✓', en:'Better', hi:'ठीक', cls:'green'};
+  return '<div class="map" aria-label="'+t('Steps','कदम')+'">'+MAP.map(function(s,i){
+    var lab = i===6 ? end : s, cls = (i<p?'done':(i===p?'now':'')) + (i===6?' '+end.cls:'');
+    return '<span class="chip '+cls+'"><i>'+(i<p?'✓':lab.n)+'</i>'+t(lab.en,lab.hi)+'</span>';
+  }).join('')+'</div>';
+}
+
+/* illustrations */
+function thermoSvg(f){
+  var lo=96, hi=106, v = f==null ? 97 : Math.max(lo, Math.min(hi, f));
+  var top=14, bottom=124, h=(v-lo)/(hi-lo)*(bottom-top), fy = bottom-(FEVER-lo)/(hi-lo)*(bottom-top);
+  var col = f==null ? 'var(--line)' : (f>=HIGH ? 'var(--bad)' : f>=FEVER ? 'var(--temp)' : 'var(--good)');
+  return '<svg class="thermo" viewBox="0 0 60 170" aria-hidden="true">'+
+    '<rect x="20" y="6" width="20" height="128" rx="10" fill="var(--bg)" stroke="var(--line)" stroke-width="2"/>'+
+    '<circle cx="30" cy="146" r="18" fill="'+col+'" stroke="var(--line)" stroke-width="2"/>'+
+    '<rect class="merc" x="25" y="'+(bottom-h)+'" width="10" height="'+(h+22)+'" rx="5" fill="'+col+'"/>'+
+    '<line x1="42" x2="52" y1="'+fy+'" y2="'+fy+'" stroke="var(--bad)" stroke-width="2"/>'+
+    (f!=null && f>=HIGH ? '<g class="a-steam"><path d="M8 40 q-4 -6 0 -12 q4 -6 0 -12" stroke="var(--temp)" stroke-width="2.5" fill="none" stroke-linecap="round"/></g>' : '')+'</svg>';
+}
+function picAct(){
+  return '<svg width="300" height="120" viewBox="0 0 300 120" aria-hidden="true">'+
+    '<g transform="translate(18,18)"><g class="a-flap"><path d="M14 10 L30 2 Q40 10 50 2 L66 10 L76 30 L62 36 L62 82 L18 82 L18 36 L4 30 Z" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="3" stroke-linejoin="round"/></g><path d="M-4 50 h-10 M84 50 h10" stroke="var(--accent)" stroke-width="3" stroke-linecap="round"/></g>'+
+    '<g transform="translate(122,6)"><rect x="12" y="0" width="28" height="12" rx="3" fill="var(--pcm)"/><rect x="4" y="12" width="44" height="74" rx="10" fill="var(--surface)" stroke="var(--pcm)" stroke-width="3"/><rect x="10" y="40" width="32" height="22" rx="4" fill="var(--pcm)"/><text x="26" y="56" text-anchor="middle" font-size="12" font-weight="800" fill="#fff">PCM</text><g class="a-drip"><path d="M26 94 q-6 8 0 12 q6 -4 0 -12z" fill="var(--pcm)"/></g></g>'+
+    '<g transform="translate(206,18)"><rect x="0" y="54" width="86" height="28" rx="14" fill="var(--skin)"/><g class="a-wipe"><rect x="22" y="38" width="42" height="26" rx="6" fill="var(--cloth)" stroke="var(--water)" stroke-width="3"/></g><g class="a-steam"><circle cx="20" cy="40" r="3" fill="var(--water)"/><circle cx="62" cy="34" r="2.5" fill="var(--water)"/></g></g></svg>';
+}
+function faceSvg(kind){
+  var calm = kind==='calm';
+  return '<svg width="70" height="70" viewBox="0 0 70 70" aria-hidden="true"><circle cx="35" cy="35" r="30" fill="'+(calm?'var(--good-soft)':'var(--bad-soft)')+'" stroke="'+(calm?'var(--good)':'var(--bad)')+'" stroke-width="3"/>'+
+    (calm ? '<circle cx="25" cy="30" r="3.5" fill="var(--ink)"/><circle cx="45" cy="30" r="3.5" fill="var(--ink)"/><path d="M23 44 q12 10 24 0" stroke="var(--ink)" stroke-width="3" fill="none" stroke-linecap="round"/>'
+          : '<path d="M20 28 l9 4 M50 28 l-9 4" stroke="var(--ink)" stroke-width="3" stroke-linecap="round"/><path d="M24 50 q11 -9 22 0" stroke="var(--ink)" stroke-width="3" fill="none" stroke-linecap="round"/><g class="a-drip"><path d="M50 36 q-4 6 0 9 q4 -3 0 -9z" fill="var(--water)"/></g>')+'</svg>';
+}
+function picHospital(){
+  return '<svg width="150" height="120" viewBox="0 0 150 120" aria-hidden="true"><rect x="20" y="30" width="110" height="80" rx="8" fill="var(--surface)" stroke="var(--bad)" stroke-width="3"/>'+
+    '<g class="a-beat"><rect x="62" y="44" width="26" height="26" rx="4" fill="var(--bad)"/><path d="M75 49 v16 M67 57 h16" stroke="#fff" stroke-width="4" stroke-linecap="round"/></g>'+
+    '<rect x="62" y="82" width="26" height="28" fill="var(--bad-soft)" stroke="var(--bad)" stroke-width="2"/><rect x="34" y="82" width="18" height="14" fill="var(--bad-soft)"/><rect x="98" y="82" width="18" height="14" fill="var(--bad-soft)"/>'+
+    '<path d="M40 30 L75 8 L110 30" fill="none" stroke="var(--bad)" stroke-width="3" stroke-linejoin="round"/></svg>';
+}
+function picSun(){
+  var rays=''; for(var i=0;i<12;i++){ var a=i*30*Math.PI/180; rays += '<line x1="'+(60+Math.cos(a)*36).toFixed(1)+'" y1="'+(60+Math.sin(a)*36).toFixed(1)+'" x2="'+(60+Math.cos(a)*50).toFixed(1)+'" y2="'+(60+Math.sin(a)*50).toFixed(1)+'" stroke="var(--warn)" stroke-width="5" stroke-linecap="round"/>'; }
+  return '<svg width="140" height="120" viewBox="0 0 120 120" aria-hidden="true"><g class="a-spin">'+rays+'</g><g class="a-bob"><circle cx="60" cy="60" r="28" fill="var(--warn-soft)" stroke="var(--warn)" stroke-width="3"/><circle cx="50" cy="56" r="3.5" fill="var(--ink)"/><circle cx="70" cy="56" r="3.5" fill="var(--ink)"/><path d="M48 68 q12 10 24 0" stroke="var(--ink)" stroke-width="3" fill="none" stroke-linecap="round"/></g></svg>';
+}
+function picCheck(){
+  return '<svg width="160" height="120" viewBox="0 0 160 120" aria-hidden="true"><g class="a-bob"><rect x="70" y="10" width="16" height="80" rx="8" fill="var(--bg)" stroke="var(--accent)" stroke-width="3"/><circle cx="78" cy="96" r="14" fill="var(--temp)" stroke="var(--accent)" stroke-width="3"/><rect x="74" y="44" width="8" height="52" rx="4" fill="var(--temp)"/></g><text x="104" y="40" font-size="13" font-weight="700" fill="var(--muted)">'+(S.unit==='F'?'°F':'°C')+'</text></svg>';
+}
+function picSpongeBody(){
+  return '<svg width="220" height="120" viewBox="0 0 220 120" aria-hidden="true">'+
+    '<circle cx="110" cy="26" r="18" fill="var(--skin)"/><rect x="88" y="46" width="44" height="50" rx="16" fill="var(--skin)"/>'+
+    '<rect x="58" y="50" width="30" height="12" rx="6" fill="var(--skin)"/><rect x="132" y="50" width="30" height="12" rx="6" fill="var(--skin)"/>'+
+    '<rect x="94" y="92" width="12" height="26" rx="6" fill="var(--skin)"/><rect x="114" y="92" width="12" height="26" rx="6" fill="var(--skin)"/>'+
+    '<g class="a-wipe"><rect x="92" y="56" width="36" height="20" rx="5" fill="var(--cloth)" stroke="var(--water)" stroke-width="3"/></g>'+
+    '<g class="a-steam"><path d="M70 44 q-3 -5 0 -10" stroke="var(--water)" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M150 40 q-3 -5 0 -10" stroke="var(--water)" stroke-width="2.5" fill="none" stroke-linecap="round"/></g>'+
+    '<g class="a-steam" style="animation-delay:1.1s"><path d="M110 46 q-3 -5 0 -10" stroke="var(--water)" stroke-width="2.5" fill="none" stroke-linecap="round"/></g></svg>';
+}
+function ringHtml(from, minutes, label){
+  var total = minutes*MIN, el = Date.now()-from, frac = Math.min(1, el/total), C = 2*Math.PI*70, due = el >= total - 2*MIN;
+  return '<div class="'+(due?'due':'')+'" id="ringBox"><div class="ringwrap"><svg viewBox="0 0 160 160" aria-hidden="true"><circle cx="80" cy="80" r="70" fill="none" stroke="var(--line)" stroke-width="12"/><circle class="ring-fg" cx="80" cy="80" r="70" fill="none" stroke="'+(due?'var(--good)':'var(--accent)')+'" stroke-width="12" stroke-linecap="round" stroke-dasharray="'+C.toFixed(1)+'" stroke-dashoffset="'+(C*(1-frac)).toFixed(1)+'"/></svg>'+
+    '<div class="lbl">'+(due ? '<b style="color:var(--good)">'+t('Now','अभी')+'</b><span>'+t('check temperature','बुख़ार नापें')+'</span>' : '<b>'+dur(total-el)+'</b><span>'+label+'</span>')+'</div></div></div>';
+}
+
+/* sponging guide */
+function spongeHtml(){
+  var sp = S.spongeStart && minsSince(S.spongeStart) < SPONGE_MIN ? S.spongeStart : null;
+  var h = '<div class="sponge" id="spongeBox"><h3>'+t('Sponging the right way','सही तरीके से स्पंजिंग')+'</h3><div class="pic">'+picSpongeBody()+'</div>';
+  if(sp){
+    var el = Date.now()-sp, cyc = Math.floor(el/1000) % 90;
+    h += '<div class="phase" id="spPhase">'+(cyc < 40 ? t('Wipe the whole body','पूरे शरीर को पोंछें') : t('Let the skin dry in the air','त्वचा को हवा में सूखने दें'))+'</div>'+
+      '<div class="clock" id="spClock">'+mmss(SPONGE_MIN*MIN-el)+'</div><button type="button" class="btn ghost" id="spStop">'+t('Stop sponging','स्पंजिंग रोकें')+'</button>';
+  } else {
+    h += '<ol class="pts"><li>'+t('Take <b>lukewarm</b> water, like bath water. Never cold, ice or alcohol.','<b>गुनगुना</b> पानी लें, नहाने जैसा। ठंडा, बर्फ़ या स्प्रिट कभी नहीं।')+'</li>'+
+      '<li>'+t('Wet a cloth and <b>wipe the whole body</b> — forehead, neck, chest, back, armpits, arms, legs.','कपड़ा भिगोकर <b>पूरे शरीर को पोंछें</b> — माथा, गर्दन, छाती, पीठ, बगल, हाथ, पैर।')+'</li>'+
+      '<li>'+t('<b>Let the skin dry in the air.</b> Drying is what takes the heat out.','<b>त्वचा को हवा में सूखने दें।</b> सूखने से ही गर्मी निकलती है।')+'</li>'+
+      '<li>'+t('<b>Wet again</b> and repeat for 15–20 minutes. Stop if the child shivers.','<b>फिर गीला करें</b>, 15–20 मिनट दोहराएँ। बच्चा काँपे तो रोकें।')+'</li></ol>'+
+      '<div class="myth"><svg width="64" height="54" viewBox="0 0 64 54" aria-hidden="true"><circle cx="32" cy="30" r="20" fill="var(--skin)"/><rect x="14" y="10" width="36" height="12" rx="4" fill="var(--cloth)" stroke="var(--water)" stroke-width="2"/><path d="M8 4 L56 50 M56 4 L8 50" stroke="var(--bad)" stroke-width="4" stroke-linecap="round"/></svg>'+
+      '<p><b>'+t('A wet cloth kept on the forehead does NOT bring fever down.','माथे पर गीली पट्टी रखने से बुख़ार नहीं उतरता।')+'</b> '+t('Wipe the whole body and let it dry.','पूरे शरीर को पोंछें और सूखने दें।')+'</p></div>'+
+      '<button type="button" class="btn" id="spStart">'+t('Start 15-minute sponging guide','15 मिनट स्पंजिंग गाइड शुरू करें')+'</button>';
+  }
+  return h + '</div>';
+}
+
+/* step cards */
+var CHECKQ = [
+  ['Vomiting again and again?','बार-बार उल्टी हो रही है?'],
+  ['Drinking very little / passing very little urine?','बहुत कम पी रहा है / पेशाब बहुत कम?'],
+  ['Any rash, red spots, bleeding from gums or nose, or black stool?','कोई दाने, लाल धब्बे, मसूड़ों या नाक से ख़ून, या काली पॉटी?'],
+  ['Severe stomach pain?','पेट में तेज़ दर्द?'],
+  ['Has the doctor said it may be dengue, or is there dengue in your area?','क्या डॉक्टर ने डेंगू का शक जताया है, या आपके इलाके में डेंगू फैला है?']
+];
+function checksState(){ var any=false, all=true; CHECKQ.forEach(function(q,i){ var v=S.checks[i]; if(v===1) any=true; if(v===undefined) all=false; }); return {any:any, all:all}; }
+function phoneHtml(){ return S.child.phone ? '<p>'+t('Clinic phone','क्लिनिक फ़ोन')+': <span class="phone">'+esc(S.child.phone)+'</span></p>' : ''; }
+function fevFact(){
+  return '<div class="fact"><b>'+t('Good to know','जानना ज़रूरी')+'</b><span>'+t('Mild fever in a child who is active and playful is not harmful. Fever is the body’s way of fighting infection and may even help it. Medicine is to make the child comfortable, not to bring the thermometer to normal. Fever medicine does not prevent fits.','चुस्त और खेलते बच्चे में हल्का बुख़ार नुकसान नहीं करता। बुख़ार शरीर का इन्फ़ेक्शन से लड़ने का तरीका है और इसमें मदद भी कर सकता है। दवा बच्चे को आराम देने के लिए है, थर्मामीटर को नॉर्मल करने के लिए नहीं। बुख़ार की दवा दौरे (झटके) नहीं रोकती।')+'</span></div>';
+}
+function stepCard(fs){
+  var c = S.child, n = fs.node;
+  var pcm = '<b>'+t('Paracetamol','पैरासिटामोल')+' '+(c.pcmMl? esc(c.pcmMl)+' ml':t('(dose as prescribed)','(डॉक्टर की खुराक)'))+'</b>';
+  if(n==='check') return '<div class="step"><span class="eyebrow">'+t('Step 1','कदम 1')+'</span><h2>'+t('Check the temperature','बुख़ार नापें')+'</h2><div class="pic">'+picCheck()+'</div>'+
+    '<p>'+t('Use a digital thermometer in the armpit and write the reading in the box above. Check whenever the child feels hot or looks unwell.','डिजिटल थर्मामीटर बगल में लगाएँ और ऊपर बॉक्स में लिखें। जब भी बच्चा गर्म लगे या ठीक न लगे, नापें।')+'</p></div>';
+  if(n==='none') return '<div class="step good"><span class="eyebrow">'+t('All clear','सब ठीक')+'</span><h2>'+t('No fever — no medicine needed','बुख़ार नहीं — दवा की ज़रूरत नहीं')+'</h2><div class="pic">'+picSun()+'</div><p>'+t('Give fluids and normal food. Let the child rest and play.','पानी/तरल और सामान्य खाना दें। आराम और खेलने दें।')+'</p></div>';
+  if(n==='baby') return '<div class="step bad"><span class="eyebrow">'+t('Urgent','ज़रूरी')+'</span><h2>'+t('Baby under 3 months with fever','3 महीने से छोटे बच्चे को बुख़ार')+'</h2><div class="pic">'+picHospital()+'</div><p><b>'+t('Take the baby to the doctor or hospital now. Do not wait.','बच्चे को अभी डॉक्टर या अस्पताल ले जाएँ। इंतज़ार न करें।')+'</b></p>'+phoneHtml()+'</div>';
+  if(n==='act'){
+    var items = [
+      ['cl', t('Loosen clothes','कपड़े ढीले करें'), t('Remove extra layers. No blanket. Light cotton only.','ज़्यादा कपड़े उतारें। कंबल नहीं। सिर्फ़ हल्का सूती।')],
+      ['pc', t('Give paracetamol','पैरासिटामोल दें'), pcm+' — '+esc(c.pcmStr)],
+      ['sp', t('Start sponging','स्पंजिंग शुरू करें'), t('Lukewarm water, whole body, let it dry, repeat. See below.','गुनगुना पानी, पूरा शरीर, सूखने दें, दोहराएँ। नीचे देखें।')]
+    ];
+    return '<div class="step warn"><span class="eyebrow">'+t('Step 2 · Fever','कदम 2 · बुख़ार')+'</span><h2>'+t('Do these 3 things together','ये 3 काम साथ में करें')+'</h2><div class="pic">'+picAct()+'</div>'+
+      '<div class="todo">'+items.map(function(it,i){ var on = !!S.todo[it[0]]; return '<button type="button" class="tdo" data-todo="'+it[0]+'" aria-pressed="'+on+'"><span style="font:800 26px var(--display);color:var(--accent);text-align:center">'+(i+1)+'</span><span><b>'+it[1]+'</b>'+it[2]+'</span><span class="ok">'+(on?'✓':'')+'</span></button>'; }).join('')+'</div>'+
+      '<p class="muted">'+t('Tap “Give paracetamol” once you have given it — the 1-hour timer starts.','पैरासिटामोल देने के बाद “पैरासिटामोल दें” पर टैप करें — 1 घंटे का टाइमर शुरू होगा।')+'</p></div>'+spongeHtml();
+  }
+  if(n==='pcmmax') return '<div class="step bad"><span class="eyebrow">'+t('Limit reached','सीमा पूरी')+'</span><h2>'+t('Paracetamol already given 5 times in 24 hours','24 घंटे में 5 बार पैरासिटामोल दी जा चुकी')+'</h2><div class="pic">'+picHospital()+'</div><p><b>'+t('Do not give more. Keep sponging and contact the doctor.','और न दें। स्पंजिंग करते रहें और डॉक्टर से संपर्क करें।')+'</b></p>'+phoneHtml()+'</div>'+spongeHtml();
+  if(n==='wait'){
+    var isM = fs.after==='m';
+    return '<div class="step"><span class="eyebrow">'+(isM?t('Step 6','कदम 6'):t('Step 3','कदम 3'))+'</span><h2>'+t('Wait 1 hour, then check again','1 घंटा रुकें, फिर नापें')+'</h2>'+
+      ringHtml(fs.from, RECHECK, t('to recheck','फिर नापने में'))+
+      '<p>'+(isM ? t('Mefenamic acid given at ','मेफ़ेनामिक एसिड दी गई: ') : t('Paracetamol given at ','पैरासिटामोल दी गई: '))+at(fs.from)+'. '+t('Medicine takes about 1 hour to work. Meanwhile keep sponging and give sips of water.','दवा को असर करने में लगभग 1 घंटा लगता है। तब तक स्पंजिंग करें और घूँट-घूँट पानी दें।')+'</p>'+
+      (isM ? '<div class="out warn">'+t('If fever is still there after this hour, go to hospital emergency.','अगर इस घंटे के बाद भी बुख़ार रहे, तो अस्पताल इमरजेंसी जाएँ।')+'</div>' : '')+'</div>'+spongeHtml();
+  }
+  if(n==='comfort' || n==='calm' || n==='mef'){
+    var h = '<div class="step"><span class="eyebrow">'+t('Step 4','कदम 4')+'</span><h2>'+t('Fever still there. How is the child?','अभी भी बुख़ार है। बच्चा कैसा है?')+'</h2>'+
+      '<div class="faces"><button type="button" class="face" data-comfort="0" aria-pressed="'+(S.comfort===0)+'">'+faceSvg('calm')+t('Comfortable','आराम में है')+'<small>'+t('playing, calm, resting','खेल रहा, शांत, आराम कर रहा')+'</small></button>'+
+      '<button type="button" class="face" data-comfort="1" aria-pressed="'+(S.comfort===1)+'">'+faceSvg('sad')+t('Uncomfortable','बेचैन है')+'<small>'+t('crying, restless, cannot settle','रो रहा, बेचैन, चैन नहीं')+'</small></button></div>';
+    if(n==='calm'){
+      var np = nextAllowed('p');
+      h += '<div class="out good"><b>'+t('No need for mefenamic acid.','मेफ़ेनामिक एसिड की ज़रूरत नहीं।')+'</b> '+t('Keep sponging and fluids. Check again in 1 hour.','स्पंजिंग और तरल जारी रखें। 1 घंटे बाद फिर नापें।')+(np?' '+t('Next paracetamol allowed at ','अगली पैरासिटामोल ')+at(np)+t('.',' से।'):'')+'</div>'+fevFact();
+    }
+    h += '</div>';
+    if(n==='mef'){
+      h += '<div class="step"><span class="eyebrow">'+t('Step 5','कदम 5')+'</span><h2>'+t('Mefenamic acid — only if really needed','मेफ़ेनामिक एसिड — सिर्फ़ ज़रूरत पड़ने पर')+'</h2>';
+      if(!mefAllowed()) h += '<div class="out bad"><b>'+t('Mefenamic acid is not prescribed for this child. Keep sponging and contact the doctor.','इस बच्चे के लिए मेफ़ेनामिक एसिड लिखी नहीं है। स्पंजिंग करते रहें और डॉक्टर से संपर्क करें।')+'</b>'+phoneHtml()+'</div>';
+      else if(count24('m') >= MEF_MAX) h += '<div class="out bad"><b>'+t('Already given 3 times in 24 hours. Go to the hospital.','24 घंटे में 3 बार दी जा चुकी। अस्पताल जाएँ।')+'</b></div>';
+      else if(nextAllowed('m')) h += '<div class="out warn"><b>'+t('Last dose was less than 8 hours ago. Do not repeat. Keep sponging; if the child stays very uncomfortable, go to the hospital.','पिछली खुराक को 8 घंटे नहीं हुए। दोबारा न दें। स्पंजिंग करते रहें; बच्चा बहुत बेचैन रहे तो अस्पताल जाएँ।')+'</b></div>';
+      else {
+        var st = checksState();
+        h += '<p style="font-weight:700">'+t('Answer these first:','पहले इनके जवाब दें:')+'</p><div class="checks">'+
+          CHECKQ.map(function(q,i){ var v=S.checks[i]; return '<div class="q"><span>'+t(q[0],q[1])+'</span><div class="yn"><button type="button" data-chk="'+i+'" data-v="1" aria-pressed="'+(v===1)+'">'+t('Yes','हाँ')+'</button><button type="button" data-chk="'+i+'" data-v="0" aria-pressed="'+(v===0)+'">'+t('No','नहीं')+'</button></div></div>'; }).join('')+'</div>';
+        if(st.any) h += '<div class="out bad"><b>'+t('Do NOT give mefenamic acid. Contact the doctor or go to the hospital now.','मेफ़ेनामिक एसिड न दें। अभी डॉक्टर से संपर्क करें या अस्पताल जाएँ।')+'</b>'+phoneHtml()+'</div>';
+        else if(st.all) h += '<div class="dose" style="color:var(--mef)">'+t('Mefenamic acid','मेफ़ेनामिक एसिड')+' · '+esc(c.mefMl)+' ml</div><p class="muted">'+t('Give after food or milk. Keep sponging.','खाने या दूध के बाद दें। स्पंजिंग जारी रखें।')+'</p><button type="button" class="btn mef" data-add="m">'+t('I gave mefenamic acid','मैंने मेफ़ेनामिक एसिड दी')+'</button>';
+      }
+      h += '</div>';
+    }
+    return h + spongeHtml();
+  }
+  if(n==='er') return '<div class="step bad"><span class="eyebrow">'+t('Emergency','इमरजेंसी')+'</span><h2>'+t('Go to hospital emergency now','तुरंत अस्पताल इमरजेंसी जाएँ')+'</h2><div class="pic">'+picHospital()+'</div><p><b>'+t('Fever has not come down even after paracetamol and mefenamic acid.','पैरासिटामोल और मेफ़ेनामिक एसिड के बाद भी बुख़ार नहीं उतरा।')+'</b> '+t('Keep sponging on the way. Carry this phone to show the doctor the graph.','रास्ते में स्पंजिंग करते रहें। डॉक्टर को ग्राफ़ दिखाने के लिए यह फ़ोन साथ ले जाएँ।')+'</p>'+phoneHtml()+'</div>';
+  if(n==='down'){
+    var h2 = '<div class="step good"><span class="eyebrow">'+t('Fever is down','बुख़ार उतर गया')+'</span><h2>'+t('Well done! Is the child active and playful?','शाबाश! क्या बच्चा चुस्त और खेल रहा है?')+'</h2><div class="pic">'+picSun()+'</div>'+
+      '<div class="two"><button type="button" class="btn ghost" data-active="1"'+(S.active===1?' style="border-color:var(--good);background:var(--good-soft)"':'')+'>'+t('Yes, playing','हाँ, खेल रहा')+'</button><button type="button" class="btn ghost" data-active="0"'+(S.active===0?' style="border-color:var(--bad);background:var(--bad-soft)"':'')+'>'+t('No, still dull','नहीं, सुस्त है')+'</button></div>';
+    if(S.active===1) h2 += '<div class="out good"><b>'+t('Good sign.','अच्छा संकेत।')+'</b> '+t('Give fluids and light food the child likes.','तरल और बच्चे की पसंद का हल्का खाना दें।')+'</div>';
+    if(S.active===0) h2 += '<div class="out bad"><b>'+t('A child who stays dull or sleepy even without fever should see the doctor today.','बुख़ार न होने पर भी बच्चा सुस्त या नींद में रहे तो आज ही डॉक्टर को दिखाएँ।')+'</b>'+phoneHtml()+'</div>';
+    h2 += '<div class="out warn"><b>'+t('Fever often comes back after 4–6 hours.','बुख़ार अक्सर 4–6 घंटे बाद फिर आता है।')+'</b> '+t('Then start again from step 1.','तब फिर से कदम 1 से शुरू करें।')+'</div>'+fevFact()+'</div>';
+    return h2;
+  }
+  return '';
+}
+
+/* NOW tab */
+function renderNow(){
+  var c = S.child, lt = last('t'), fs = flowState(), h = '';
+  if(!c.pcmMl) h += '<div class="out warn" style="display:flex;flex-direction:column;gap:8px"><b>'+t('First, enter the doses from your prescription in Setup.','पहले सेटअप में पर्चे से खुराक भरें।')+'</b><button type="button" class="btn" data-tabgo="setup">'+t('Open Setup','सेटअप खोलें')+'</button></div>';
+  var b = lt ? band(lt.v) : null;
+  h += '<div class="card"><div class="hero">'+thermoSvg(lt?lt.v:null)+'<div style="display:flex;flex-direction:column;gap:6px;min-width:0">'+
+    (lt ? '<span class="reading">'+show(lt.v)+'</span><span class="band '+b[0]+'">'+b[1]+'</span><span class="muted">'+t('checked at ','नापा: ')+at(lt.ts)+'</span>' : '<span class="reading" style="color:var(--muted)">--.-</span><span class="muted">'+t('No reading yet','अभी कोई रीडिंग नहीं')+'</span>')+
+    '<form id="tform" class="entry"><label for="tval" style="position:absolute;left:-9999px">Temperature</label><input id="tval" type="number" inputmode="decimal" step="0.1" placeholder="'+(S.unit==='F'?'101.2':'38.4')+'"><span class="unit">°'+S.unit+'</span><button type="submit" class="btn" style="padding:0 14px">'+t('Save','सेव')+'</button></form>'+
+    '</div></div></div>';
+  h += mapHtml(fs) + stepCard(fs);
+  var np = nextAllowed('p'), nm = nextAllowed('m'), pc = count24('p'), mc = count24('m');
+  function dots(n,max,m){ var s='<span class="dots'+(m?' m':'')+'">'; for(var i=0;i<max;i++) s+='<i class="'+(i<n?'on':'')+'"></i>'; return s+'</span>'; }
+  h += '<div class="timers"><div>'+t('Next paracetamol','अगली पैरासिटामोल')+'<b>'+(np?at(np):t('Allowed if fever','बुख़ार हो तो दे सकते हैं'))+'</b>'+dots(pc,PCM_MAX)+'<span>'+pc+'/'+PCM_MAX+' '+t('in 24 h · 5 h gap','24 घंटे में · 5 घंटे का अंतर')+'</span></div>'+
+    '<div>'+t('Next mefenamic','अगली मेफ़ेनामिक')+'<b>'+(!mefAllowed()?t('Not prescribed','लिखी नहीं'):(nm?at(nm):t('Only if needed','सिर्फ़ ज़रूरत पर')))+'</b>'+dots(mc,MEF_MAX,1)+'<span>'+mc+'/'+MEF_MAX+' '+t('in 24 h · 8 h gap','24 घंटे में · 8 घंटे का अंतर')+'</span></div></div>';
+  h += '<div class="card"><h3>'+t('Diary','डायरी')+'</h3><div class="row3">'+
+    '<button type="button" class="btn pcm" data-add="p">'+t('Gave paracetamol','पैरासिटामोल दी')+'</button>'+
+    '<button type="button" class="btn mef" data-add="m"'+(mefAllowed()?'':' disabled')+'>'+t('Gave mefenamic','मेफ़ेनामिक दी')+'</button>'+
+    '<button type="button" class="btn ghost" data-add="s">'+t('Did sponging','स्पंजिंग की')+'</button></div>'+todayLog()+'</div>';
+  document.getElementById('main').innerHTML = h;
+  if(S._scroll){ S._scroll=false; var st=document.querySelector('.step'); if(st) st.scrollIntoView({block:'start', behavior:'smooth'}); }
+}
+function todayLog(){
+  var k = dkey(Date.now()), items = S.log.map(function(e,i){return {e:e,i:i};}).filter(function(x){return dkey(x.e.ts)===k;}).reverse();
+  if(!items.length) return '<p class="muted">'+t('Nothing recorded today yet.','आज अभी कुछ नहीं लिखा।')+'</p>';
+  return '<div>'+items.map(function(x){
+    var e=x.e, tag = e.k==='t' ? '<span class="tag t">'+show(e.v)+'</span>' : e.k==='p' ? '<span class="tag p">P · '+t('Paracetamol','पैरासिटामोल')+'</span>' : e.k==='m' ? '<span class="tag m">M · '+t('Mefenamic','मेफ़ेनामिक')+'</span>' : '<span class="tag s">'+t('Sponging','स्पंजिंग')+'</span>';
+    return '<div class="li"><time>'+hm(e.ts)+'</time><span>'+tag+'</span><button type="button" class="x" data-del="'+x.i+'" aria-label="'+t('Delete entry','हटाएँ')+'">×</button></div>';
+  }).join('')+'</div>';
+}
+
+/* GRAPH tab */
+function renderGraph(){
+  var temps = S.log.filter(function(e){return e.k==='t';});
+  var h = '<div class="card"><h2>'+t('Fever graph','बुख़ार का ग्राफ़')+'</h2>';
+  if(temps.length < 2){
+    h += '<p class="muted">'+t('Record at least 2 temperatures to see the graph. Record each time you check, and 1 hour after each medicine.','ग्राफ़ देखने के लिए कम से कम 2 बार बुख़ार लिखें। हर बार नापें तब लिखें, और हर दवा के 1 घंटे बाद।')+'</p></div>';
+    document.getElementById('main').innerHTML = h + summaryHtml(); return;
+  }
+  var end = Math.max(Date.now(), temps[temps.length-1].ts), start = Math.max(temps[0].ts, end - 7*24*3600e3);
+  var vis = S.log.filter(function(e){return e.ts>=start;}), tv = vis.filter(function(e){return e.k==='t';});
+  var W=340, H=230, L=34, R=10, T=12, B=52, lane=H-B+14;
+  var lo = Math.min(97, Math.floor(Math.min.apply(null, tv.map(function(e){return e.v;}))));
+  var hi = Math.max(104, Math.ceil(Math.max.apply(null, tv.map(function(e){return e.v;}))));
+  function x(ts){ return L + (ts-start)/(end-start||1)*(W-L-R); }
+  function y(v){ return T + (hi-v)/(hi-lo)*(H-B-T); }
+  var g = '';
+  for(var v=lo; v<=hi; v++){ g += '<line x1="'+L+'" x2="'+(W-R)+'" y1="'+y(v)+'" y2="'+y(v)+'" stroke="var(--line)" stroke-width="1"/>'+((hi-lo>6 && v%2)?'':'<text x="'+(L-5)+'" y="'+(y(v)+4)+'" text-anchor="end" font-size="10" fill="var(--muted)">'+(S.unit==='F'?v:((v-32)*5/9).toFixed(0))+'</text>'); }
+  g += '<line x1="'+L+'" x2="'+(W-R)+'" y1="'+y(FEVER)+'" y2="'+y(FEVER)+'" stroke="var(--bad)" stroke-width="1.5" stroke-dasharray="5 4"/><text x="'+(W-R)+'" y="'+(y(FEVER)-4)+'" text-anchor="end" font-size="10" font-weight="700" fill="var(--bad)">'+t('Fever','बुख़ार')+' '+show(FEVER)+'</text>';
+  var d0 = new Date(start); d0.setHours(0,0,0,0);
+  for(var d=d0.getTime(); d<=end; d+=24*3600e3){ if(d<start) continue; g += '<line x1="'+x(d)+'" x2="'+x(d)+'" y1="'+T+'" y2="'+(H-B)+'" stroke="var(--line)" stroke-dasharray="2 3"/><text x="'+(x(d)+3)+'" y="'+(H-B+40)+'" font-size="10" fill="var(--muted)">'+dlabel(dkey(d))+'</text>'; }
+  g += '<polyline points="'+tv.map(function(e){return x(e.ts).toFixed(1)+','+y(e.v).toFixed(1);}).join(' ')+'" fill="none" stroke="var(--temp)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>';
+  tv.forEach(function(e){ var idx=S.log.indexOf(e); g += '<circle cx="'+x(e.ts)+'" cy="'+y(e.v)+'" r="4.5" fill="var(--temp)" stroke="var(--surface)" stroke-width="2"/><circle cx="'+x(e.ts)+'" cy="'+y(e.v)+'" r="14" fill="transparent" data-pt="'+idx+'" style="cursor:pointer" tabindex="0" role="button" aria-label="'+hm(e.ts)+' '+show(e.v)+'"/>'; });
+  g += '<text x="'+(L-5)+'" y="'+(lane+4)+'" text-anchor="end" font-size="9" fill="var(--muted)">Rx</text>';
+  vis.forEach(function(e){ if(e.k!=='p' && e.k!=='m') return; var cx=x(e.ts), cy=lane+(e.k==='m'?12:0), col=e.k==='p'?'var(--pcm)':'var(--mef)';
+    g += '<circle cx="'+cx+'" cy="'+cy+'" r="6" fill="'+col+'" stroke="var(--surface)" stroke-width="2"/><text x="'+cx+'" y="'+(cy+3)+'" text-anchor="middle" font-size="8" font-weight="800" fill="#fff">'+(e.k==='p'?'P':'M')+'</text>'; });
+  h += '<div class="chartbox"><svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+t('Temperature over time','समय के साथ बुख़ार')+'">'+g+'</svg></div>'+
+    '<div class="tip" id="tip">'+t('Tap a dot to see time and temperature','समय और बुख़ार देखने के लिए बिंदु पर टैप करें')+'</div>'+
+    '<div class="legend"><span><span class="sw" style="background:var(--temp)"></span>'+t('Temperature','बुख़ार')+'</span><span><span class="sw" style="background:var(--pcm)">P</span>'+t('Paracetamol','पैरासिटामोल')+'</span><span><span class="sw" style="background:var(--mef)">M</span>'+t('Mefenamic acid','मेफ़ेनामिक एसिड')+'</span></div></div>';
+  document.getElementById('main').innerHTML = h + summaryHtml();
+}
+function daySummary(){
+  var days = {}, order = [], prevFever = false, prevTs = 0;
+  S.log.forEach(function(e){
+    var k = dkey(e.ts); if(!days[k]){ days[k] = {max:null, spikes:0, p:0, m:0, n:0}; order.push(k); }
+    var d = days[k];
+    if(e.k==='t'){ d.n++; if(d.max===null || e.v>d.max) d.max=e.v; var f = e.v>=FEVER; if(f && (!prevFever || e.ts-prevTs > 6*3600e3)) d.spikes++; prevFever = f; prevTs = e.ts; }
+    if(e.k==='p') d.p++; if(e.k==='m') d.m++;
+  });
+  return order.map(function(k){ return Object.assign({k:k}, days[k]); });
+}
+function summaryHtml(){
+  var ds = daySummary().filter(function(d){return d.n>0;});
+  if(!ds.length) return '';
+  var feverDays = ds.filter(function(d){return d.max>=FEVER;}), trend = '';
+  if(ds.length >= 2){
+    var a = ds[ds.length-1], b = ds[ds.length-2];
+    var down = (a.max < b.max - 0.4) || (a.max<=b.max && a.spikes < b.spikes);
+    var up = (a.max > b.max + 0.4) || (a.max>=b.max && a.spikes > b.spikes);
+    if(a.max < FEVER) trend = '<div class="trend good">'+t('No fever on the last day recorded. Keep watching for 24 hours.','पिछले दिन बुख़ार नहीं रहा। 24 घंटे और नज़र रखें।')+'</div>';
+    else if(down) trend = '<div class="trend good">'+t('Fever is coming down: lower peak or fewer spikes than the day before.','बुख़ार घट रहा है: पिछले दिन से कम ऊँचा या कम बार।')+'</div>';
+    else if(up) trend = '<div class="trend bad">'+t('Fever is going up: higher peak or more spikes than the day before. Show the doctor.','बुख़ार बढ़ रहा है: पिछले दिन से ज़्यादा ऊँचा या ज़्यादा बार। डॉक्टर को दिखाएँ।')+'</div>';
+    else trend = '<div class="trend warn">'+t('Fever is about the same as the day before.','बुख़ार पिछले दिन जैसा ही है।')+'</div>';
+  }
+  var longFever = feverDays.length >= 3 ? '<div class="trend bad">'+t('Fever on '+feverDays.length+' days. Fever lasting 3 days or more needs a doctor visit (blood tests may be needed).','बुख़ार '+feverDays.length+' दिन से। 3 दिन या ज़्यादा बुख़ार पर डॉक्टर को दिखाएँ (ख़ून की जाँच की ज़रूरत हो सकती है)।')+'</div>' : '';
+  return '<div class="card"><h2>'+t('Day by day','दिन-ब-दिन')+'</h2>'+trend+longFever+
+    '<div style="overflow-x:auto"><table class="tbl"><thead><tr><th>'+t('Day','दिन')+'</th><th>'+t('Highest','सबसे ज़्यादा')+'</th><th>'+t('Fever spikes','बुख़ार कितनी बार')+'</th><th>P</th><th>M</th></tr></thead><tbody>'+
+    ds.map(function(d,i){ return '<tr><td>'+t('Day ','दिन ')+(i+1)+' <span class="muted">'+dlabel(d.k)+'</span></td><td style="font-weight:700;color:'+(d.max>=FEVER?'var(--bad)':'var(--good)')+'">'+show(d.max)+'</td><td>'+d.spikes+'</td><td>'+d.p+'</td><td>'+d.m+'</td></tr>'; }).join('')+
+    '</tbody></table></div><p class="muted">'+t('Show this screen to the doctor at the visit.','डॉक्टर के पास जाएँ तो यह स्क्रीन दिखाएँ।')+'</p></div>';
+}
+
+/* CARE tab */
+function renderCare(){
+  function node(cls, title, body){ return '<div class="node '+cls+'"><b>'+title+'</b>'+(body?'<span>'+body+'</span>':'')+'</div>'; }
+  function ar(l){ return '<div class="arrow" aria-hidden="true">'+(l?'<span>'+l+'</span>':'')+'</div>'; }
+  var flow = '<div class="card"><h2>'+t('The fever plan at a glance','एक नज़र में बुख़ार का प्लान')+'</h2><div class="flow">'+
+    node('', '1. '+t('Check temperature','बुख़ार नापें'), t('Digital thermometer, armpit.','डिजिटल थर्मामीटर, बगल में।'))+ar()+
+    node('dec', t('100.4°F (38°C) or more?','100.4°F (38°C) या ज़्यादा?'), t('No → no medicine, fluids and rest.','नहीं → दवा नहीं, तरल और आराम।'))+ar(t('Yes','हाँ'))+
+    node('', '2. '+t('Do 3 things together','3 काम साथ में'), t('Loosen clothes · Paracetamol · Sponging (lukewarm, whole body, let dry, repeat)','कपड़े ढीले · पैरासिटामोल · स्पंजिंग (गुनगुना, पूरा शरीर, सूखने दें, दोहराएँ)'))+ar()+
+    node('', '3. '+t('Wait 1 hour, check again','1 घंटा रुकें, फिर नापें'), '')+ar()+
+    '<div class="split">'+node('ok', t('Fever down','बुख़ार उतरा'), t('Child should be active and playful. Fever may return in 4–6 h → start again.','बच्चा चुस्त और खेलने वाला हो। 4–6 घंटे में बुख़ार लौट सकता है → फिर शुरू करें।'))+node('dec', t('Still fever','अभी भी बुख़ार'), t('Is the child uncomfortable?','क्या बच्चा बेचैन है?'))+'</div>'+ar(t('Uncomfortable','बेचैन'))+
+    '<div class="split">'+node('ok', t('Comfortable','आराम में'), t('No mefenamic. Keep sponging.','मेफ़ेनामिक नहीं। स्पंजिंग जारी।'))+node('', '4. '+t('Mefenamic acid','मेफ़ेनामिक एसिड'), t('Only if prescribed and safety questions are all “No”.','सिर्फ़ अगर लिखी हो और सुरक्षा सवाल सब “नहीं” हों।'))+'</div>'+ar()+
+    node('', '5. '+t('Wait 1 hour, check again','1 घंटा रुकें, फिर नापें'), '')+ar(t('Still fever','अभी भी बुख़ार'))+
+    node('er', t('Hospital emergency','अस्पताल इमरजेंसी'), '')+
+    '</div><p class="muted">'+t('Paracetamol: 4–5 times a day, at least 5 hours apart (never more than 5 in 24 h). Mefenamic acid: only if really needed, max 3 in 24 h.','पैरासिटामोल: दिन में 4–5 बार, कम से कम 5 घंटे के अंतर पर (24 घंटे में 5 से ज़्यादा कभी नहीं)। मेफ़ेनामिक एसिड: सिर्फ़ सच में ज़रूरत पर, 24 घंटे में ज़्यादा से ज़्यादा 3।')+'</p></div>';
+  var h = flow + fevFact() +
+  '<div class="card" style="border:2px solid var(--bad)"><h2 style="color:var(--bad)">'+t('Go to the doctor / hospital immediately if','तुरंत डॉक्टर / अस्पताल जाएँ अगर')+'</h2><ul class="pts">'+
+    [['Fits (convulsion), or the child is very drowsy or hard to wake','दौरा (झटके) आए, या बच्चा बहुत सुस्त हो / जगाना मुश्किल हो'],
+     ['Fast or difficult breathing, chest pulling in','तेज़ या मुश्किल से साँस, छाती अंदर धँसना'],
+     ['Purple or red spots that do not fade on pressing, bleeding from gums or nose, black stool','दबाने पर न मिटने वाले बैंगनी/लाल धब्बे, मसूड़ों या नाक से ख़ून, काली पॉटी'],
+     ['Repeated vomiting, cannot drink, no urine for 6–8 hours','बार-बार उल्टी, कुछ पी न पाए, 6–8 घंटे से पेशाब नहीं'],
+     ['Severe stomach pain, or cold, clammy hands and feet','पेट में तेज़ दर्द, या हाथ-पैर ठंडे और चिपचिपे'],
+     ['Stiff neck, severe headache, or the child cries when touched','गर्दन अकड़ना, तेज़ सिरदर्द, या छूने पर बच्चा रोए'],
+     ['Baby under 3 months with any fever','3 महीने से छोटे बच्चे को कोई भी बुख़ार'],
+     ['Fever not coming down even after paracetamol and mefenamic acid','पैरासिटामोल और मेफ़ेनामिक एसिड के बाद भी बुख़ार न उतरे'],
+     ['Child stays dull or sleepy even when the fever is down','बुख़ार उतरने पर भी बच्चा सुस्त या नींद में रहे'],
+     ['Fever for 3 days or more','3 दिन या ज़्यादा बुख़ार']].map(function(x){return '<li><b>'+t(x[0],x[1])+'</b></li>';}).join('')+'</ul>'+phoneHtml()+'</div>'+
+  '<div class="card"><h3>'+t('If a fit (convulsion) happens','अगर दौरा (झटके) आए')+'</h3><ul class="pts">'+
+    '<li>'+t('Stay calm. Lay the child on one side on a flat surface.','घबराएँ नहीं। बच्चे को समतल जगह पर एक करवट लिटाएँ।')+'</li>'+
+    '<li>'+t('Do not put anything in the mouth. Do not hold the child down. Do not give water or medicine by mouth.','मुँह में कुछ न डालें। बच्चे को ज़ोर से न पकड़ें। मुँह से पानी या दवा न दें।')+'</li>'+
+    '<li>'+t('Note the time. Go to hospital after it stops, or at once if it lasts more than 5 minutes.','समय नोट करें। रुकने के बाद अस्पताल जाएँ; 5 मिनट से ज़्यादा चले तो तुरंत।')+'</li></ul></div>'+
+  '<div class="card"><h3>'+t('Do','करें')+'</h3><ul class="pts">'+
+    '<li>'+t('Plenty of fluids: water, ORS, nariyal pani, dal water, soup; breastfeed more often.','ख़ूब तरल: पानी, ORS, नारियल पानी, दाल का पानी, सूप; माँ का दूध बार-बार।')+'</li>'+
+    '<li>'+t('Light food the child likes: khichdi, dalia, idli, fruit. Small amounts often.','पसंद का हल्का खाना: खिचड़ी, दलिया, इडली, फल। थोड़ा-थोड़ा बार-बार।')+'</li>'+
+    '<li>'+t('Light cotton clothes; a fan is fine.','हल्के सूती कपड़े; पंखा चला सकते हैं।')+'</li>'+
+    '<li>'+t('Measure medicine with the cup or syringe that came with it, not a kitchen spoon.','दवा उसी के साथ आए कप या सिरिंज से नापें, रसोई के चम्मच से नहीं।')+'</li></ul></div>'+
+  '<div class="card"><h3>'+t('Do not','न करें')+'</h3><ul class="pts">'+
+    '<li>'+t('Do not give mefenamic acid if the child is comfortable, even with fever.','बुख़ार हो पर बच्चा आराम में हो तो मेफ़ेनामिक एसिड न दें।')+'</li>'+
+    '<li>'+t('Do not give aspirin, nimesulide or any medicine not prescribed. Do not start antibiotics on your own.','एस्पिरिन, निमेसुलाइड या बिना लिखी कोई दवा न दें। अपने आप एंटीबायोटिक शुरू न करें।')+'</li>'+
+    '<li>'+t('No cold water, ice or alcohol sponging. A wet cloth on the forehead alone does not lower fever. No blankets.','ठंडा पानी, बर्फ़ या स्प्रिट से स्पंजिंग नहीं। सिर्फ़ माथे पर गीली पट्टी से बुख़ार नहीं उतरता। कंबल नहीं।')+'</li>'+
+    '<li>'+t('Do not wake a sleeping, comfortable child only to give fever medicine.','आराम से सोते बच्चे को सिर्फ़ बुख़ार की दवा देने के लिए न जगाएँ।')+'</li></ul></div>';
+  document.getElementById('main').innerHTML = h;
+}
+
+/* SETUP tab */
+function renderSetup(msg){
+  var c = S.child;
+  document.getElementById('main').innerHTML = '<div class="card form"><h2>'+t('Setup from prescription','पर्चे से सेटअप')+'</h2>'+
+    '<label for="cname">'+t('Child’s name','बच्चे का नाम')+'</label><input id="cname" type="text" value="'+esc(c.name)+'">'+
+    '<label for="cage">'+t('Age','उम्र')+'</label><select id="cage">'+
+      [['lt3m','Under 3 months','3 महीने से कम'],['lt6m','3–6 months','3–6 महीने'],['6m+','6 months or older','6 महीने या ज़्यादा']].map(function(o){return '<option value="'+o[0]+'"'+(c.age===o[0]?' selected':'')+'>'+t(o[1],o[2])+'</option>';}).join('')+'</select>'+
+    '<label for="pstr">'+t('Paracetamol syrup strength (on the bottle)','पैरासिटामोल सिरप की ताक़त (बोतल पर लिखी)')+'</label><select id="pstr">'+
+      ['120 mg/5 ml','250 mg/5 ml','100 mg/ml (drops)','Other / अन्य'].map(function(o){return '<option'+(c.pcmStr===o?' selected':'')+'>'+o+'</option>';}).join('')+'</select>'+
+    '<label for="pml">'+t('Paracetamol dose in ml (as written by the doctor)','पैरासिटामोल की खुराक ml में (जैसा डॉक्टर ने लिखा)')+'</label><input id="pml" type="number" inputmode="decimal" step="0.1" value="'+esc(c.pcmMl)+'">'+
+    '<label class="tick"><input id="mok" type="checkbox"'+(c.mefOk?' checked':'')+'><span>'+t('Doctor has prescribed mefenamic acid for an uncomfortable child with fever','डॉक्टर ने बुख़ार में बेचैन बच्चे के लिए मेफ़ेनामिक एसिड लिखी है')+'</span></label>'+
+    '<label for="mml">'+t('Mefenamic acid dose in ml (as written by the doctor)','मेफ़ेनामिक एसिड की खुराक ml में (जैसा डॉक्टर ने लिखा)')+'</label><input id="mml" type="number" inputmode="decimal" step="0.1" value="'+esc(c.mefMl)+'">'+
+    '<label for="ph">'+t('Clinic phone number','क्लिनिक का फ़ोन नंबर')+'</label><input id="ph" type="tel" value="'+esc(c.phone)+'">'+
+    '<label for="unit">'+t('Thermometer unit','थर्मामीटर की इकाई')+'</label><select id="unit"><option value="F"'+(S.unit==='F'?' selected':'')+'>°F</option><option value="C"'+(S.unit==='C'?' selected':'')+'>°C</option></select>'+
+    '<button type="button" class="btn" id="saveSetup" style="margin-top:10px">'+t('Save','सेव करें')+'</button>'+(msg?'<p class="saved">'+msg+'</p>':'')+
+    '<p class="muted">'+t('This guide never calculates doses. Use only the dose your doctor wrote.','यह गाइड खुराक ख़ुद नहीं बनाती। सिर्फ़ डॉक्टर की लिखी खुराक दें।')+'</p></div>'+
+    '<div class="card"><h3>'+t('New illness','नई बीमारी')+'</h3><p class="muted">'+t('Clears the diary and graph, keeps your doses.','डायरी और ग्राफ़ साफ़ करें, खुराक रहेगी।')+'</p><div id="clr"><button type="button" class="btn ghost" id="clearAsk">'+t('Clear diary','डायरी साफ़ करें')+'</button></div></div>'+
+    '<p class="muted" style="text-align:center">'+t('Everything is saved only on this phone.','सब कुछ सिर्फ़ इसी फ़ोन में सेव रहता है।')+'</p>';
+}
+
+/* shell */
+var TABS = {now:['Now','अभी'], graph:['Graph','ग्राफ़'], care:['Care','देखभाल'], setup:['Setup','सेटअप']};
+function render(){
+  document.documentElement.lang = S.lang==='hi'?'hi':'en';
+  document.getElementById('brandTitle').textContent = t('Fever Care','बुख़ार देखभाल') + (S.child.name ? ' · '+S.child.name : '');
+  document.querySelectorAll('[data-l]').forEach(function(el){ var k=el.dataset.l; el.textContent = t(TABS[k][0], TABS[k][1]); });
+  document.querySelectorAll('.seg button').forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.lang===S.lang)); });
+  document.querySelectorAll('.tabs button').forEach(function(b){ b.setAttribute('aria-selected', String(b.dataset.tab===S.tab)); });
+  ({now:renderNow, graph:renderGraph, care:renderCare, setup:renderSetup})[S.tab]();
+  save();
+}
+function addLog(k, v){ S.log.push({k:k, ts:Date.now(), v:v}); if(S.log.length>600) S.log = S.log.slice(-600); }
+function confetti(){
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var box=document.createElement('div'); box.className='confetti'; var cols=['#eb6834','#2a78d6','#1baf7a','#f0b04a','#e87ba4'];
+  for(var i=0;i<34;i++){ var s=document.createElement('span'); s.style.left=(Math.random()*100)+'%'; s.style.background=cols[i%cols.length]; s.style.animationDelay=(Math.random()*.3)+'s'; box.appendChild(s); }
+  document.body.appendChild(box); setTimeout(function(){ box.remove(); }, 2200);
+}
+
+document.addEventListener('click', function(e){
+  var b = e.target.closest('button, [data-pt]'); if(!b) return;
+  var d = b.dataset;
+  if(d.lang){ S.lang = d.lang; render(); return; }
+  if(d.tab){ S.tab = d.tab; render(); window.scrollTo(0,0); return; }
+  if(d.tabgo){ S.tab = d.tabgo; render(); return; }
+  if(d.todo){
+    if(d.todo==='pc'){ if(!S.todo.pc){ S.todo.pc = true; addLog('p'); S._scroll = true; } render(); return; }
+    S.todo[d.todo] = !S.todo[d.todo];
+    if(d.todo==='sp' && S.todo.sp && !(S.spongeStart && minsSince(S.spongeStart) < SPONGE_MIN)){ S.spongeStart = Date.now(); addLog('s'); }
+    render(); return;
+  }
+  if(d.add){
+    addLog(d.add);
+    if(d.add==='p'){ S.todo.pc = true; S.comfort = undefined; S._scroll = true; }
+    if(d.add==='m'){ S.checks = {}; S._scroll = true; }
+    render(); return;
+  }
+  if(d.del !== undefined){ S.log.splice(+d.del, 1); render(); return; }
+  if(d.chk !== undefined){ S.checks[d.chk] = +d.v; render(); return; }
+  if(d.comfort !== undefined){ S.comfort = +d.comfort; render(); return; }
+  if(d.active !== undefined){ S.active = +d.active; if(S.active===1) confetti(); render(); return; }
+  if(d.pt !== undefined){ var en = S.log[+d.pt], tip=document.getElementById('tip'); if(tip && en) tip.textContent = dlabel(dkey(en.ts))+'  '+hm(en.ts)+'  ·  '+show(en.v); return; }
+  if(b.id==='spStart'){ S.spongeStart = Date.now(); S.todo.sp = true; addLog('s'); render(); var sb=document.getElementById('spongeBox'); if(sb) sb.scrollIntoView({block:'center',behavior:'smooth'}); return; }
+  if(b.id==='spStop'){ S.spongeStart = null; render(); return; }
+  if(b.id==='saveSetup'){
+    S.child = {name:document.getElementById('cname').value.trim(), age:document.getElementById('cage').value, pcmStr:document.getElementById('pstr').value, pcmMl:document.getElementById('pml').value, mefOk:document.getElementById('mok').checked, mefMl:document.getElementById('mml').value, phone:document.getElementById('ph').value.trim()};
+    S.unit = document.getElementById('unit').value; render(); renderSetup(t('Saved ✓','सेव हो गया ✓')); return;
+  }
+  if(b.id==='clearAsk'){ document.getElementById('clr').innerHTML = '<p style="margin-bottom:8px">'+t('Sure? The diary and graph will be cleared.','पक्का? डायरी और ग्राफ़ साफ़ हो जाएँगे।')+'</p><div class="two"><button type="button" class="btn danger" id="clearYes">'+t('Yes, clear','हाँ, साफ़ करें')+'</button><button type="button" class="btn ghost" id="clearNo">'+t('No','नहीं')+'</button></div>'; return; }
+  if(b.id==='clearYes'){ S.log=[]; S.checks={}; S.todo={}; S.comfort=undefined; S.active=undefined; S.spongeStart=null; render(); renderSetup(t('Diary cleared','डायरी साफ़ हो गई')); return; }
+  if(b.id==='clearNo'){ renderSetup(); return; }
+});
+document.addEventListener('keydown', function(e){ if((e.key==='Enter'||e.key===' ') && e.target.dataset && e.target.dataset.pt!==undefined){ e.preventDefault(); e.target.dispatchEvent(new MouseEvent('click',{bubbles:true})); } });
+document.addEventListener('submit', function(e){
+  if(e.target.id!=='tform') return; e.preventDefault();
+  var inp = document.getElementById('tval'), raw = parseFloat(inp.value);
+  if(isNaN(raw)) return;
+  var f = toF(raw);
+  if(f < 93 || f > 109){ inp.value=''; inp.placeholder=t('Check reading','रीडिंग जाँचें'); return; }
+  var prev = last('t');
+  addLog('t', Math.round(f*10)/10);
+  S.checks = {}; S.comfort = undefined; S.active = undefined; S._scroll = true;
+  if(f >= FEVER && (!prev || prev.v < FEVER || minsSince(prev.ts) > 5*60)) S.todo = {};
+  render();
+  if(prev && prev.v >= FEVER && f < FEVER) confetti();
+});
+
+setInterval(function(){
+  if(S.tab!=='now') return;
+  var sp = document.getElementById('spClock');
+  if(sp && S.spongeStart){
+    var el = Date.now()-S.spongeStart;
+    if(el >= SPONGE_MIN*MIN){ S.spongeStart = null; save(); renderNow(); return; }
+    sp.textContent = mmss(SPONGE_MIN*MIN-el);
+    var cyc = Math.floor(el/1000) % 90, ph = document.getElementById('spPhase');
+    if(ph) ph.textContent = cyc < 40 ? t('Wipe the whole body','पूरे शरीर को पोंछें') : t('Let the skin dry in the air','त्वचा को हवा में सूखने दें');
+  }
+}, 1000);
+setInterval(function(){ if(S.tab==='now' && document.getElementById('ringBox') && !(document.activeElement && document.activeElement.id==='tval')) renderNow(); }, 30000);
+
+render();
+})();
+</script>
+<footer style="max-width:560px;margin:8px auto 24px;padding:0 16px;text-align:center;font:13px/1.5 Mukta,system-ui,sans-serif;color:#556175"><b style="display:block;font:800 16px 'Baloo 2',Mukta,sans-serif;color:#1f5fbf">Dr. Dinesh Mittal Child Clinic</b>Dr. Dinesh Mittal, MBBS, DCH · Child Specialist<br>H-34/69, Sector 3, Rohini, Delhi – 110085<br>Phone: <span style="user-select:all;font-weight:700">+91 81305 21456</span><br>Mon–Sat 10:00 AM–1:00 PM &amp; 6:00–8:30 PM · Sun 11:00 AM–12:00 PM<br><a href="https://www.childspecialistrohini.com" style="color:#1f5fbf;font-weight:700">www.childspecialistrohini.com</a></footer></body></html>
