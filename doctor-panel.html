@@ -49,6 +49,14 @@ header .sp{flex:1}
 .btn:disabled{opacity:.5;cursor:not-allowed}
 label{display:flex;flex-direction:column;gap:4px;font-weight:600;font-size:14.5px}
 input,select,textarea{font:500 17px var(--body);color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;min-height:46px;width:100%}
+#walk .wk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px;margin-top:10px}
+.wk{border:2px solid #2fa84f;background:#e4f6e8;color:#14361d;border-radius:12px;min-height:54px;font:800 15px var(--body);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.15}
+.wk small{font:600 11.5px var(--body)}
+.wk.few{border-color:#f08a1c;background:#fff0dd;color:#5a3300}
+.wk.full{border-color:#e07070;background:#fdeaea;color:#8a2020}
+.wk.now{outline:3px solid #2a2580;outline-offset:2px}
+.wk:disabled{border-style:dashed;background:transparent;color:#999;cursor:not-allowed}
+.btn.walkbtn{background:#2fa84f}
 textarea{min-height:120px;resize:vertical;line-height:1.45}
 .notice-prev{background:#fff4dc;border:2px solid #f5ad1b;border-radius:14px;padding:12px 14px;color:#3a2600;font-weight:600}
 .notice-prev p{margin:0}.notice-prev p+p{margin-top:6px}
@@ -126,9 +134,9 @@ textarea{min-height:120px;resize:vertical;line-height:1.45}
   }
 
   /* ---------- appointments */
-  function appts(){
+  function appts(after){
     var v = document.getElementById('view');
-    v.innerHTML = '<div class="card"><div class="datebar"><button class="btn ghost sm" data-nav="-1" aria-label="Previous day">◀</button><h2 id="dl">…</h2><button class="btn ghost sm" data-nav="1" aria-label="Next day">▶</button></div><div class="row"><input type="date" id="pick" value="'+S.date+'" style="max-width:200px"><button class="btn ghost sm" data-nav="0">Today</button></div><div class="stats" id="stats"></div></div><div class="card" id="list"><p class="loading">Loading…</p></div>';
+    v.innerHTML = '<div class="card"><div class="datebar"><button class="btn ghost sm" data-nav="-1" aria-label="Previous day">◀</button><h2 id="dl">…</h2><button class="btn ghost sm" data-nav="1" aria-label="Next day">▶</button></div><div class="row"><input type="date" id="pick" value="'+S.date+'" style="max-width:200px"><button class="btn ghost sm" data-nav="0">Today</button></div><div class="stats" id="stats"></div><div class="row" style="margin-top:10px"><button class="btn walkbtn" id="walkBtn">+ Walk-in patient</button></div></div><div class="card" id="walk" hidden></div><div class="card" id="list"><p class="loading">Loading…</p></div>';
     post({action:'admin_day', date:S.date}).then(function(r){
       if(!r.ok) return fail(r);
       S.day = r;
@@ -136,10 +144,11 @@ textarea{min-height:120px;resize:vertical;line-height:1.45}
       var act = r.bookings.filter(function(b){ return /^Booked/.test(b.status); }), cx = r.bookings.length - act.length;
       document.getElementById('stats').innerHTML = '<span class="pill">'+act.length+' booked</span>'+(cx?'<span class="pill r">'+cx+' cancelled</span>':'')+'<span class="pill g">'+act.filter(function(b){return b.wa==='YES';}).length+' on WhatsApp</span>';
       var L = document.getElementById('list');
+      if(after) setTimeout(after, 0);
       if(!r.bookings.length){ L.innerHTML = '<p class="muted">No online bookings for this day.</p>'; return; }
       L.innerHTML = r.bookings.map(function(b){
         var on = /^Booked/.test(b.status);
-        return '<div class="appt'+(on?'':' cx')+'" data-row="'+b.row+'"><time>'+esc(b.timeLabel)+'</time><div><b>'+esc(b.child)+'</b>'+(b.age?' <span class="sub">· '+esc(b.age)+'</span>':'')+'<div class="sub">'+(b.parent?esc(b.parent)+' · ':'')+'<a href="tel:+91'+esc(b.phone)+'">'+esc(b.phone)+'</a>'+(b.reason?' · '+esc(b.reason):'')+'</div><div class="sub">'+esc(b.id)+(on?'':' · '+esc(b.status))+'</div></div>'+(on && !b.legacy?'<button class="btn ghost sm" data-cx="'+b.row+'" data-id="'+esc(b.id)+'">Cancel</button>':'<span></span>')+'</div>';
+        return '<div class="appt'+(on?'':' cx')+'" data-row="'+b.row+'"><time>'+esc(b.timeLabel)+'</time><div><b>'+esc(b.child)+'</b>'+(b.age?' <span class="sub">· '+esc(b.age)+'</span>':'')+'<div class="sub">'+(b.parent?esc(b.parent)+' · ':'')+(b.phone?'<a href="tel:+91'+esc(b.phone)+'">'+esc(b.phone)+'</a>':'Added by clinic')+(b.reason?' · '+esc(b.reason):'')+'</div><div class="sub">'+esc(b.id)+(on?'':' · '+esc(b.status))+'</div></div>'+(on && !b.legacy?'<button class="btn ghost sm" data-cx="'+b.row+'" data-id="'+esc(b.id)+'">'+(b.phone?'Cancel':'Remove')+'</button>':'<span></span>')+'</div>';
       }).join('');
     }).catch(net);
   }
@@ -181,6 +190,29 @@ textarea{min-height:120px;resize:vertical;line-height:1.45}
     }).catch(function(){ btn.disabled=false; net(); });
   }
   blockView.list = function(){ var L=document.getElementById('blist'); if(L) L.innerHTML = S.blocks.length ? S.blocks.map(function(b){ return '<div class="blk"><div><b>'+esc(b.from)+' → '+esc(b.to)+'</b><div class="muted">'+esc(b.msg)+'</div></div><button class="btn ghost sm" data-unb="'+b.row+'">Remove</button></div>'; }).join('') : '<p class="muted">Nothing blocked. All timings are open for booking.</p>'; };
+
+  /* ---------- walk-in: fill a place in a slot so it cannot be booked online */
+  function walkView(msg){
+    var W = document.getElementById('walk'); if(!W) return;
+    W.hidden = false;
+    W.innerHTML = '<h3>Walk-in: tap the time</h3><p class="muted">Each tap fills one place in that slot. No name or phone needed. Green = free, orange = filling, red = full.</p><div class="wk-grid"><p class="loading">Loading…</p></div><p class="msg'+(msg?' ok':'')+'" id="wmsg">'+(msg||'')+'</p><div class="row"><button class="btn ghost sm" id="walkClose">Done</button></div>';
+    post({action:'admin_walkin_slots', date:S.date}).then(function(r){
+      if(!r.ok) return fail(r, document.getElementById('wmsg'));
+      var G = W.querySelector('.wk-grid');
+      if(!r.slots.length){ G.innerHTML = '<p class="muted">No OPD slots left on this day.</p>'; return; }
+      G.innerHTML = r.slots.map(function(x){
+        var cls = x.left<=0 ? ' full' : (x.cap && x.left/x.cap<=0.5 ? ' few' : '');
+        return '<button type="button" class="wk'+cls+(x.now?' now':'')+'" data-wk="'+x.time+'"'+(x.blocked?' disabled':'')+'>'+esc(x.label)+'<small>'+(x.blocked?'Blocked':(x.now?'Now · ':'')+x.taken+' of '+x.cap)+'</small></button>';
+      }).join('');
+    }).catch(net);
+  }
+  function addWalkin(time, btn){
+    var out = document.getElementById('wmsg'); btn.disabled = true;
+    post({action:'admin_walkin', date:S.date, time:time}).then(function(r){
+      if(!r.ok){ btn.disabled=false; return fail(r,out); }
+      appts(function(){ walkView('Walk-in added at '+r.timeLabel+' ✓'); });
+    }).catch(function(){ btn.disabled=false; net(); });
+  }
 
   /* ---------- message for parents on the booking page */
   var EXAMPLES = ['Dr. Mittal will be on leave from __ to __. Clinic reopens on __.', 'Flu vaccine (2026–27) is now available at the clinic.', 'Please bring your child’s vaccination card at every visit.', 'Sunday OPD is closed this week.'];
@@ -268,6 +300,9 @@ textarea{min-height:120px;resize:vertical;line-height:1.45}
     if(b.dataset.ps){ var o=document.getElementById('ps'); o.textContent = Math.max(1, Math.min(10, +o.textContent + +b.dataset.ps)); return; }
     if(b.id==='copyMon'){ var mv=document.getElementById('ses_MON').value; ['TUE','WED','THU','FRI','SAT'].forEach(function(k){ document.getElementById('ses_'+k).value = mv; }); return; }
     if(b.id==='saveSet') return saveSettings();
+    if(b.id==='walkBtn') return walkView();
+    if(b.id==='walkClose'){ document.getElementById('walk').hidden = true; return; }
+    if(b.dataset.wk) return addWalkin(b.dataset.wk, b);
     if(b.id==='saveNotice') return saveNotice(false);
     if(b.id==='clearNotice') return saveNotice(true);
     if(b.dataset.ex!==undefined){ var ta=document.getElementById('nt'); ta.value = (ta.value.trim() ? ta.value.trim()+'\n' : '') + EXAMPLES[+b.dataset.ex]; prev(); ta.focus(); return; }
@@ -282,6 +317,8 @@ textarea{min-height:120px;resize:vertical;line-height:1.45}
     if(b.action==='admin_cancel'){ DM['cx'+(b.row-2)] = true; return res({ok:true}); }
     if(b.action==='admin_block'){ DM.blocks.push({row:DM.blocks.length+2, from:b.from.replace('T',' ').slice(0,16), to:b.to.replace('T',' ').slice(0,16), msg:b.message||'Dr. Mittal is not available at this time.'}); return res({ok:true, affected:[], cancelled:0, notified:0}); }
     if(b.action==='admin_unblock'){ DM.blocks = DM.blocks.filter(function(x){ return x.row!==b.row; }); return res({ok:true}); }
+    if(b.action==='admin_walkin_slots'){ var sl=[]; for(var m=18*60;m<20.5*60;m+=15){ var h=Math.floor(m/60),mm=m%60; var tk=(DM.wk&&DM.wk[m]!=null)?DM.wk[m]:(m%45===0?1:0); sl.push({time:String(h).padStart(2,'0')+':'+String(mm).padStart(2,'0'), label:(((h+11)%12)+1)+':'+String(mm).padStart(2,'0')+' PM', cap:2, taken:tk, left:2-tk, blocked:false, now:m===18*60}); } return res({ok:true, slots:sl}); }
+    if(b.action==='admin_walkin'){ var pt=b.time.split(':'); DM.wk=DM.wk||{}; var k=+pt[0]*60+ +pt[1]; DM.wk[k]=(DM.wk[k]!=null?DM.wk[k]:(k%45===0?1:0))+1; DM.appts.push([b.time,'Walk-in','','','','','NO']); return res({ok:true, timeLabel:b.time}); }
     if(b.action==='admin_save_settings'){ Object.assign(DM.settings, b.settings); return res({ok:true}); }
     if(b.action==='admin_notice'){ DM.notice=b.notice; DM.until=b.until; return res({ok:true, notice:b.notice, noticeUntil:b.until}); }
     res({ok:false});

@@ -33,6 +33,8 @@ To update the code later, repeat step 3 and step 8. The link never changes.
 
 - **Doctor panel:** childspecialistrohini.com/doctor-panel.html → enter PIN.
   - *Appointments:* see any day's bookings, call parents, cancel.
+  - *Walk-in:* on the Appointments tab tap **+ Walk-in patient**, then tap the time. Each tap fills one place in that slot (no name or phone). Remove it from the list if added by mistake.
+  - *Message:* text shown in a yellow box at the top of the booking page, with an optional date after which it hides.
   - *Block time:* quick buttons (rest of today, morning, evening, tomorrow) or any period with a message for parents. Optionally cancel bookings already made in that period.
   - *Slot settings:* slot length, patients per slot, days ahead, OPD timings per day. `18:00-20:30@3` allows 3 per slot in that session only.
 - Everything is also visible and editable directly in the Google Sheet (tabs Booking Settings, Blocked Times, Online Bookings).

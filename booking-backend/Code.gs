@@ -417,6 +417,40 @@ function admin(b) {
     return { ok: true, settings: editable, blocks: bl, notice: String(s.NOTICE || ''), noticeUntil: noticeDate(s.NOTICE_UNTIL), noticeLive: !!activeNotice(s), whatsapp: String(s.WA_ENABLED).toUpperCase() === 'YES' };
   }
 
+  /* Walk-in: staff fill a place in a slot so it cannot be booked online. No name or phone needed. */
+  if (b.action === 'admin_walkin_slots') {
+    var wd = /^\d{4}-\d{2}-\d{2}$/.test(String(b.date)) ? String(b.date) : ymd(new Date());
+    var gd = getSlots(wd, 1).days[0];
+    if (!gd || gd.date !== wd) return { ok: true, date: wd, slots: [] };
+    var nowMin = toMin(Utilities.formatDate(new Date(), TZ, 'HH:mm'));
+    var isToday = wd === ymd(new Date());
+    var cnt = {};
+    bookingRows().forEach(function (r) { if (isActive(r) && r[COL.date] === wd) cnt[r[COL.time]] = (cnt[r[COL.time]] || 0) + 1; });
+    legacyRows().forEach(function (r) { if (r.date === wd) cnt[r.time] = (cnt[r.time] || 0) + 1; });
+    var list2 = [];
+    gd.sessions.forEach(function (ses) { ses.slots.forEach(function (x) {
+      var m = toMin(x.time), taken = cnt[x.time] || 0;
+      // a slot whose time is over (more than one slot ago) is not offered
+      if (isToday && m + s.SLOT_MINUTES <= nowMin) return;
+      list2.push({ time: x.time, label: x.label, cap: x.cap, taken: taken, left: Math.max(0, x.cap - taken),
+        blocked: x.state === 'blocked', now: isToday && nowMin >= m && nowMin < m + s.SLOT_MINUTES });
+    }); });
+    return { ok: true, date: wd, slots: list2 };
+  }
+
+  if (b.action === 'admin_walkin') {
+    var wdate = /^\d{4}-\d{2}-\d{2}$/.test(String(b.date)) ? String(b.date) : ymd(new Date());
+    var wtime = String(b.time || '');
+    if (!/^\d{2}:\d{2}$/.test(wtime)) return { ok: false, error: 'bad_slot' };
+    var lk = LockService.getScriptLock(); lk.waitLock(15000);
+    try {
+      var wid = 'WALKIN-' + Utilities.formatDate(new Date(), TZ, 'yyMMdd-HHmm') + '-' + Math.floor(100 + Math.random() * 900);
+      ss.getSheetByName(TAB_BOOKINGS).appendRow([wid, Utilities.formatDate(new Date(), TZ, 'yyyy-MM-dd HH:mm'), "'" + wdate, "'" + wtime, 'Walk-in', '', '', '', '', 'NO', 'Booked', '', 'Added by clinic']);
+      SpreadsheetApp.flush();
+    } finally { lk.releaseLock(); }
+    return { ok: true, id: wid, timeLabel: label(toMin(wtime)) };
+  }
+
   if (b.action === 'admin_notice') {
     var text = String(b.notice || '').replace(/\r/g, '').split('\n').map(function (l) { return cleanText(l, 200); }).filter(String).slice(0, 5).join('\n');
     var until = /^\d{4}-\d{2}-\d{2}$/.test(String(b.until || '')) ? String(b.until) : '';
