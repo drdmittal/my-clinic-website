@@ -121,7 +121,7 @@ input:focus{outline:3px solid var(--brand);outline-offset:1px;border-color:var(-
 <main class="wrap" id="app">
   <div class="head">
     <h1><span class="en">Book an appointment</span><span class="hi">अपॉइंटमेंट बुक करें</span></h1>
-    <p><span class="en">Choose a day and time. It takes less than a minute.</span><span class="hi">दिन और समय चुनें। एक मिनट से भी कम लगेगा।</span></p>
+    <p><span class="en">Pick a time, add the child’s name and mobile. That’s it.</span><span class="hi">समय चुनें, बच्चे का नाम और मोबाइल लिखें। बस।</span></p>
   </div>
 
   <section class="step" id="s1" aria-labelledby="h1t">
@@ -135,30 +135,15 @@ input:focus{outline:3px solid var(--brand);outline-offset:1px;border-color:var(-
   </section>
 
   <section class="step" id="s3" aria-labelledby="h3t">
-    <div class="sh"><span class="n">3</span><h2 id="h3t"><span class="en">Your details</span><span class="hi">आपकी जानकारी</span></h2></div>
+    <div class="sh"><span class="n">3</span><h2 id="h3t"><span class="en">Name &amp; mobile</span><span class="hi">नाम और मोबाइल</span></h2></div>
     <form id="form" novalidate>
       <div class="two">
-        <label for="child"><span><span class="en">Child’s name</span><span class="hi">बच्चे का नाम</span> *</span><input id="child" type="text" autocomplete="off" maxlength="60" required></label>
-        <label for="age"><span><span class="en">Child’s age</span><span class="hi">बच्चे की उम्र</span> <small>(<span class="en">e.g. 2 yrs, 8 months</span><span class="hi">जैसे 2 साल, 8 महीने</span>)</small></span><input id="age" type="text" autocomplete="off" maxlength="20"></label>
+        <label for="child"><span><span class="en">Child’s name</span><span class="hi">बच्चे का नाम</span></span><input id="child" type="text" autocomplete="off" maxlength="60" required></label>
+        <label for="phone"><span><span class="en">Mobile number</span><span class="hi">मोबाइल नंबर</span></span><input id="phone" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="10" placeholder="10 digits" required></label>
       </div>
-      <div class="two">
-        <label for="parent"><span><span class="en">Parent’s name</span><span class="hi">माता/पिता का नाम</span></span><input id="parent" type="text" autocomplete="name" maxlength="60"></label>
-        <label for="phone"><span><span class="en">Mobile number</span><span class="hi">मोबाइल नंबर</span> *</span><input id="phone" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="10" placeholder="10 digits" required></label>
-      </div>
-      <div><p style="font-weight:600;font-size:15px;margin-bottom:6px"><span class="en">Reason for visit</span><span class="hi">आने का कारण</span></p>
-        <div class="chips" id="reasons">
-          <button type="button" class="chip" data-r="Fever / cough / cold"><span class="en">Fever / cough / cold</span><span class="hi">बुख़ार / खाँसी / ज़ुकाम</span></button>
-          <button type="button" class="chip" data-r="Vaccination"><span class="en">Vaccination</span><span class="hi">टीकाकरण</span></button>
-          <button type="button" class="chip" data-r="Stomach problem"><span class="en">Stomach problem</span><span class="hi">पेट की समस्या</span></button>
-          <button type="button" class="chip" data-r="Growth / routine check"><span class="en">Growth / routine check</span><span class="hi">विकास / सामान्य जाँच</span></button>
-          <button type="button" class="chip" data-r="Follow-up"><span class="en">Follow-up</span><span class="hi">फ़ॉलो-अप</span></button>
-          <button type="button" class="chip" data-r="Newborn"><span class="en">Newborn</span><span class="hi">नवजात</span></button>
-          <button type="button" class="chip" data-r="Other"><span class="en">Other</span><span class="hi">अन्य</span></button>
-        </div>
-      </div>
-      <label class="tick" for="wa"><input id="wa" type="checkbox"><span><b><span class="en">Send me confirmation and a reminder on WhatsApp</span><span class="hi">WhatsApp पर पुष्टि और रिमाइंडर भेजें</span></b><br><small><span class="en">Only for this appointment. No promotional messages.</span><span class="hi">सिर्फ़ इस अपॉइंटमेंट के लिए। कोई प्रचार संदेश नहीं।</span></small></span></label>
+      <label class="tick" for="wa"><input id="wa" type="checkbox"><span><span><span class="en">Send me a WhatsApp reminder</span><span class="hi">WhatsApp पर रिमाइंडर भेजें</span></span></span></label>
       <label class="hp" aria-hidden="true">Website <input id="website" type="text" tabindex="-1" autocomplete="off"></label>
-      <p class="note info" style="font-size:14.5px"><span class="en">For an emergency (fits, breathing difficulty, child very drowsy), do not wait for a slot — go to the nearest hospital emergency.</span><span class="hi">इमरजेंसी (दौरा, साँस में दिक्कत, बच्चा बहुत सुस्त) में स्लॉट का इंतज़ार न करें — तुरंत नज़दीकी अस्पताल इमरजेंसी जाएँ।</span></p>
+      <p class="note info" style="font-size:14px"><span class="en">Emergency? Do not wait for a slot — go to the nearest hospital.</span><span class="hi">इमरजेंसी में स्लॉट का इंतज़ार न करें — तुरंत अस्पताल जाएँ।</span></p>
       <p class="err" id="err" role="alert"></p>
     </form>
   </section>
@@ -196,9 +181,8 @@ input:focus{outline:3px solid var(--brand);outline-offset:1px;border-color:var(-
 
   // ---- remembered details
   var mem = {}; try{ mem = JSON.parse(localStorage.getItem('clinicBookingDetails')||'{}'); }catch(e){}
-  ['parent','phone'].forEach(function(k){ if(mem[k]) document.getElementById(k).value = mem[k]; });
+  if(mem.phone) document.getElementById('phone').value = mem.phone;
   if(mem.child) document.getElementById('child').value = mem.child;
-  if(mem.age) document.getElementById('age').value = mem.age;
   if(mem.wa) document.getElementById('wa').checked = true;
 
   // ---- API
@@ -304,8 +288,8 @@ input:focus{outline:3px solid var(--brand);outline-offset:1px;border-color:var(-
     if(!child){ err.textContent = t('Please enter the child’s name.','कृपया बच्चे का नाम लिखें।'); document.getElementById('child').focus(); return; }
     if(!/^[6-9]\d{9}$/.test(phone)){ err.textContent = t('Please enter a valid 10-digit mobile number.','कृपया सही 10 अंकों का मोबाइल नंबर लिखें।'); document.getElementById('phone').focus(); return; }
     err.textContent = '';
-    var body = { action:'book', date:state.day, time:state.slot, childName:child, childAge:document.getElementById('age').value.trim(), parentName:document.getElementById('parent').value.trim(), phone:phone, reason:state.reason, whatsapp:document.getElementById('wa').checked, website:document.getElementById('website').value };
-    try{ localStorage.setItem('clinicBookingDetails', JSON.stringify({child:body.childName, age:body.childAge, parent:body.parentName, phone:phone, wa:body.whatsapp})); }catch(e){}
+    var body = { action:'book', date:state.day, time:state.slot, childName:child, childAge:'', parentName:'', phone:phone, reason:'', whatsapp:document.getElementById('wa').checked, website:document.getElementById('website').value };
+    try{ localStorage.setItem('clinicBookingDetails', JSON.stringify({child:body.childName, phone:phone, wa:body.whatsapp})); }catch(e){}
     state.busy = true;
     var go = document.getElementById('go'); go.disabled = true; go.innerHTML = '<span class="spin" aria-hidden="true"></span>'+t('Booking…','बुक हो रहा है…');
     apiPost(body).then(function(res){

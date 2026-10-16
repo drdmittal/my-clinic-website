@@ -55,4 +55,4 @@ To update the code later, repeat step 3 and step 8. The link never changes.
 4. In Apps Script run **testWhatsApp** once (sends a test to the clinic phone), then run **installReminderTrigger** once (sends reminders daily around 7 pm for the next day's appointments).
 5. Deploy a new version (section A, step 8).
 
-Messages are sent only to parents who tick "Send me confirmation and a reminder on WhatsApp".
+Messages are sent only to parents who tick "Send me a WhatsApp reminder" on the booking page.
