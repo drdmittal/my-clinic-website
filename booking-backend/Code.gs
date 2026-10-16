@@ -10,6 +10,21 @@
  * Web App URL. Parents only ever see free/full slot counts, never other names.
  */
 
+// If this script is NOT opened from inside the sheet (Extensions → Apps Script),
+// paste the sheet's ID here (the long code in the sheet's web address between /d/ and /edit).
+var SHEET_ID = '';
+
+var TAB_SETTINGS = 'Booking Settings';
+var TAB_BLOCKED = 'Blocked Times';
+var TAB_BOOKINGS = 'Online Bookings';
+var NEW_BOOKING_PAGE = 'https://childspecialistrohini.com/book.html';
+
+function SS() {
+  var ss = SHEET_ID ? SpreadsheetApp.openById(SHEET_ID) : SpreadsheetApp.getActiveSpreadsheet();
+  if (!ss) throw new Error('No sheet found. Open this script from the sheet (Extensions → Apps Script) or fill in SHEET_ID.');
+  return ss;
+}
+
 var TZ = 'Asia/Kolkata';
 var OFFSET = '+05:30';
 var DAYS = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
@@ -48,9 +63,9 @@ var COL = { id: 0, created: 1, date: 2, time: 3, child: 4, age: 5, parent: 6, ph
 
 /** Run once from the editor: creates the three tabs with defaults. */
 function setup() {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var ss = SS();
   ss.setSpreadsheetTimeZone(TZ);
-  var st = ss.getSheetByName('Settings') || ss.insertSheet('Settings');
+  var st = ss.getSheetByName(TAB_SETTINGS) || ss.insertSheet(TAB_SETTINGS);
   if (st.getLastRow() < 2) {
     st.clear();
     st.getRange(1, 1, 1, 3).setValues([['Setting', 'Value', 'What it means']]).setFontWeight('bold');
@@ -63,14 +78,14 @@ function setup() {
     var have = st.getRange(2, 1, st.getLastRow() - 1, 1).getValues().map(function (r) { return String(r[0]).trim(); });
     DEFAULT_SETTINGS.forEach(function (row) { if (have.indexOf(row[0]) < 0) st.appendRow(row); });
   }
-  var bl = ss.getSheetByName('Blocked') || ss.insertSheet('Blocked');
+  var bl = ss.getSheetByName(TAB_BLOCKED) || ss.insertSheet(TAB_BLOCKED);
   if (bl.getLastRow() < 1) {
     bl.getRange(1, 1, 1, 4).setValues([['From', 'To', 'Message to parents', 'Added']]).setFontWeight('bold');
     bl.getRange('A:B').setNumberFormat('dd mmm yyyy, hh:mm am/pm');
     bl.setColumnWidth(1, 200); bl.setColumnWidth(2, 200); bl.setColumnWidth(3, 380);
     bl.setFrozenRows(1);
   }
-  var bk = ss.getSheetByName('Bookings') || ss.insertSheet('Bookings');
+  var bk = ss.getSheetByName(TAB_BOOKINGS) || ss.insertSheet(TAB_BOOKINGS);
   if (bk.getLastRow() < 1) {
     bk.getRange(1, 1, 1, BOOKING_HEADERS.length).setValues([BOOKING_HEADERS]).setFontWeight('bold');
     bk.getRange('C:D').setNumberFormat('@');
@@ -96,6 +111,7 @@ function doGet(e) {
   try {
     if (p.action === 'slots') return out(getSlots(p.from, Number(p.days || 0)));
     if (p.action === 'ping') return out({ ok: true });
+    if (!p.action) return redirectPage();
     return out({ ok: false, error: 'unknown_action' });
   } catch (err) {
     return out({ ok: false, error: String(err && err.message || err) });
@@ -114,6 +130,19 @@ function doPost(e) {
   }
 }
 
+/** Old booking links open this page, which sends parents to the new booking page. */
+function redirectPage() {
+  var url = NEW_BOOKING_PAGE;
+  var html = '<!doctype html><html><head><base target="_top"><meta name="viewport" content="width=device-width,initial-scale=1">' +
+    '<style>body{margin:0;font-family:system-ui,sans-serif;background:#f6f8fc;color:#152238;display:grid;place-items:center;min-height:100vh;text-align:center;padding:24px}' +
+    'a{display:inline-block;margin-top:18px;background:#1f5fbf;color:#fff;text-decoration:none;font-weight:700;font-size:20px;padding:16px 28px;border-radius:999px}</style></head>' +
+    '<body><div><h1 style="margin:0 0 6px">Dr. Dinesh Mittal Child Clinic</h1>' +
+    '<p>Online booking has moved to our website.<br>ऑनलाइन बुकिंग अब हमारी वेबसाइट पर है।</p>' +
+    '<a href="' + url + '">Book appointment / अपॉइंटमेंट बुक करें</a></div>' +
+    '<script>try{window.top.location.href=' + JSON.stringify(url) + ';}catch(e){}</script></body></html>';
+  return HtmlService.createHtmlOutput(html).setTitle('Book appointment | Dr. Dinesh Mittal').addMetaTag('viewport', 'width=device-width, initial-scale=1');
+}
+
 function out(obj) {
   return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
 }
@@ -121,7 +150,7 @@ function out(obj) {
 /* ------------------------------------------------------------------ data */
 
 function settings() {
-  var st = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Settings');
+  var st = SS().getSheetByName(TAB_SETTINGS);
   var rows = st.getRange(2, 1, Math.max(1, st.getLastRow() - 1), 2).getValues();
   var s = {};
   DEFAULT_SETTINGS.forEach(function (r) { s[r[0]] = r[1]; });
@@ -159,7 +188,7 @@ function addDays(dateStr, n) { var d = new Date(dateStr + 'T12:00:00' + OFFSET);
 function prettyDate(dateStr) { return Utilities.formatDate(new Date(dateStr + 'T12:00:00' + OFFSET), TZ, 'EEE, d MMM yyyy'); }
 
 function blocks() {
-  var bl = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Blocked');
+  var bl = SS().getSheetByName(TAB_BLOCKED);
   if (!bl || bl.getLastRow() < 2) return [];
   return bl.getRange(2, 1, bl.getLastRow() - 1, 3).getValues().map(function (r, i) {
     return { row: i + 2, from: toDate(r[0]), to: toDate(r[1]), msg: String(r[2] || '') };
@@ -174,7 +203,7 @@ function toDate(v) {
 }
 
 function bookingRows() {
-  var bk = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Bookings');
+  var bk = SS().getSheetByName(TAB_BOOKINGS);
   if (!bk || bk.getLastRow() < 2) return [];
   return bk.getRange(2, 1, bk.getLastRow() - 1, BOOKING_HEADERS.length).getDisplayValues().map(function (r, i) {
     r.row = i + 2; return r;
@@ -252,7 +281,7 @@ function book(b) {
 
     var id = 'DM' + Utilities.formatDate(new Date(), TZ, 'yyMMdd') + '-' + Math.floor(1000 + Math.random() * 9000);
     var wa = b.whatsapp ? 'YES' : 'NO';
-    var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Bookings');
+    var sheet = SS().getSheetByName(TAB_BOOKINGS);
     sheet.appendRow([id, Utilities.formatDate(new Date(), TZ, 'yyyy-MM-dd HH:mm'), "'" + date, "'" + time, child, age, parent, "'" + phone, reason, wa, 'Booked', '', '']);
     SpreadsheetApp.flush();
   } finally {
@@ -271,7 +300,7 @@ function toMin(t) { var p = t.split(':'); return +p[0] * 60 + +p[1]; }
 function admin(b) {
   var s = settings();
   if (!b.pin || String(b.pin) !== String(s.ADMIN_PIN)) { Utilities.sleep(1200); return { ok: false, error: 'wrong_pin' }; }
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var ss = SS();
 
   if (b.action === 'admin_load') {
     var editable = {};
@@ -284,7 +313,7 @@ function admin(b) {
   }
 
   if (b.action === 'admin_save_settings') {
-    var st = ss.getSheetByName('Settings');
+    var st = ss.getSheetByName(TAB_SETTINGS);
     var rows = st.getRange(2, 1, st.getLastRow() - 1, 1).getValues();
     var allowed = ['SLOT_MINUTES', 'PER_SLOT', 'DAYS_AHEAD', 'MIN_NOTICE_MINUTES', 'SESSIONS_MON', 'SESSIONS_TUE', 'SESSIONS_WED', 'SESSIONS_THU', 'SESSIONS_FRI', 'SESSIONS_SAT', 'SESSIONS_SUN'];
     var vals = b.settings || {};
@@ -305,13 +334,13 @@ function admin(b) {
     var from = new Date(String(b.from) + OFFSET), to = new Date(String(b.to) + OFFSET);
     if (isNaN(from) || isNaN(to) || to <= from) return { ok: false, error: 'bad_range' };
     var msg = cleanText(b.message, 200) || 'Dr. Mittal is not available at this time.';
-    ss.getSheetByName('Blocked').appendRow([from, to, msg, Utilities.formatDate(new Date(), TZ, 'yyyy-MM-dd HH:mm')]);
+    ss.getSheetByName(TAB_BLOCKED).appendRow([from, to, msg, Utilities.formatDate(new Date(), TZ, 'yyyy-MM-dd HH:mm')]);
     var affected = bookingRows().filter(function (r) {
       if (!isActive(r)) return false; var t = atIST(r[COL.date], toMin(r[COL.time])); return t >= from && t < to;
     });
     var cancelled = 0, notified = 0;
     if (b.cancelAffected) {
-      var sheet = ss.getSheetByName('Bookings');
+      var sheet = ss.getSheetByName(TAB_BOOKINGS);
       affected.forEach(function (r) {
         sheet.getRange(r.row, COL.status + 1).setValue('Cancelled (doctor unavailable)');
         cancelled++;
@@ -323,7 +352,7 @@ function admin(b) {
 
   if (b.action === 'admin_unblock') {
     var row = Number(b.row);
-    var bls = ss.getSheetByName('Blocked');
+    var bls = ss.getSheetByName(TAB_BLOCKED);
     if (row >= 2 && row <= bls.getLastRow()) bls.deleteRow(row);
     return { ok: true };
   }
@@ -337,7 +366,7 @@ function admin(b) {
   }
 
   if (b.action === 'admin_cancel') {
-    var sh = ss.getSheetByName('Bookings');
+    var sh = ss.getSheetByName(TAB_BOOKINGS);
     var r = Number(b.row);
     if (r < 2 || r > sh.getLastRow()) return { ok: false, error: 'bad_row' };
     var vals2 = sh.getRange(r, 1, 1, BOOKING_HEADERS.length).getDisplayValues()[0];
@@ -383,7 +412,7 @@ function sendReminders() {
   var s = settings();
   if (String(s.WA_ENABLED).toUpperCase() !== 'YES') return;
   var tomorrow = addDays(ymd(new Date()), 1);
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Bookings');
+  var sheet = SS().getSheetByName(TAB_BOOKINGS);
   bookingRows().forEach(function (r) {
     if (!isActive(r) || r[COL.date] !== tomorrow || r[COL.wa] !== 'YES' || r[COL.reminded]) return;
     if (sendTemplate(s, s.WA_TEMPLATE_REMINDER, r[COL.phone], [r[COL.child], prettyDate(r[COL.date]), label(toMin(r[COL.time]))])) {
