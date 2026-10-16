@@ -39,8 +39,14 @@ To update the code later, repeat step 3 and step 8. The link never changes.
 
 ## C. WhatsApp confirmations and reminders (after Meta setup)
 
-1. Create a Meta Business account and add **WhatsApp** in developers.facebook.com (WhatsApp Cloud API). Use a number that is **not** active on the WhatsApp app.
-2. Create these **Utility** message templates (WhatsApp Manager → Message templates). Each has three variables: {{1}} child name, {{2}} date, {{3}} time.
+**What parents see:** the WhatsApp tick appears only on a number's first booking. After the parent ticks it once, the number is saved in the **WhatsApp Consent** tab, and every later booking from that number gets the confirmation and reminder automatically, with no tick. To stop messages to a number, change its **YES** to **NO** in that tab.
+The tick stays hidden on the website until WhatsApp is switched on (WA_ENABLED = YES).
+
+1. **business.facebook.com** → create a business portfolio (name: Dr. Dinesh Mittal Child Clinic).
+2. **developers.facebook.com** → My Apps → Create app → choose the WhatsApp use case → connect it to the business portfolio.
+3. In the app: **WhatsApp → API Setup → Add phone number**. Use a number that is **not** on the WhatsApp app (a new SIM, or delete WhatsApp from that number first). Verify it by OTP and set the display name "Dr. Dinesh Mittal Child Clinic".
+4. **WhatsApp Manager → Payment settings**: add a card (each message costs well under ₹1).
+5. **WhatsApp Manager → Message templates**: create these three, Category **Utility**, Language **English**. Each has three variables: {{1}} child name, {{2}} date, {{3}} time.
 
    **appointment_confirmed**
    > Appointment confirmed. {{1}} has an appointment with Dr. Dinesh Mittal on {{2}} at {{3}}. Clinic: H-34/69, Sector 3, Rohini, Delhi. Please arrive 10 minutes early and bring the vaccination card. To change or cancel, call +91 81305 21456.
@@ -51,8 +57,8 @@ To update the code later, repeat step 3 and step 8. The link never changes.
    **appointment_cancelled**
    > Sorry, Dr. Dinesh Mittal is not available for {{1}}'s appointment on {{2}} at {{3}}. Please book another time at childspecialistrohini.com/book.html or call +91 81305 21456.
 
-3. In the sheet's **Booking Settings** tab fill in **WA_TOKEN** (permanent token), **WA_PHONE_NUMBER_ID**, and set **WA_ENABLED** to **YES**.
-4. In Apps Script run **testWhatsApp** once (sends a test to the clinic phone), then run **installReminderTrigger** once (sends reminders daily around 7 pm for the next day's appointments).
-5. Deploy a new version (section A, step 8).
-
-Messages are sent only to parents who tick "Send me a WhatsApp reminder" on the booking page.
+6. **Permanent token:** business.facebook.com → Settings → Users → **System users** → Add (Admin) → Assign assets: the app and the WhatsApp account (full control) → **Generate token** → expiry **Never** → permissions `whatsapp_business_messaging` and `whatsapp_business_management` → copy the token.
+7. From **WhatsApp → API Setup**, copy the **Phone number ID** (a number, not the phone number itself).
+8. In the sheet's **Booking Settings** tab, fill **WA_TOKEN** and **WA_PHONE_NUMBER_ID**, and set **WA_ENABLED** to **YES**.
+9. In Apps Script: paste the latest `Code.gs` (section A, step 3) → run **setup** once (creates the WhatsApp Consent tab) → run **testWhatsApp** (sends a test to the clinic phone) → run **installReminderTrigger** (reminders go out daily around 7 pm for the next day).
+10. Deploy a new version (section A, step 8).

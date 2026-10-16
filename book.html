@@ -82,6 +82,7 @@ input:focus{outline:3px solid var(--brand);outline-offset:1px;border-color:var(-
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chip{border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;min-height:42px;padding:0 14px;font:600 15px var(--body);cursor:pointer}
 .chip[aria-pressed="true"]{border-color:var(--brand);background:var(--brand-soft);color:var(--brand)}
+[hidden]{display:none!important}
 .tick{flex-direction:row;align-items:flex-start;gap:10px;font-weight:500;background:var(--leaf-soft);border-radius:14px;padding:12px}
 .tick input{width:24px;height:24px;flex:none;accent-color:var(--leaf);margin-top:2px}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
@@ -141,7 +142,8 @@ input:focus{outline:3px solid var(--brand);outline-offset:1px;border-color:var(-
         <label for="child"><span><span class="en">Child’s name</span><span class="hi">बच्चे का नाम</span></span><input id="child" type="text" autocomplete="off" maxlength="60" required></label>
         <label for="phone"><span><span class="en">Mobile number</span><span class="hi">मोबाइल नंबर</span></span><input id="phone" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="10" placeholder="10 digits" required></label>
       </div>
-      <label class="tick" for="wa"><input id="wa" type="checkbox"><span><span><span class="en">Send me a WhatsApp reminder</span><span class="hi">WhatsApp पर रिमाइंडर भेजें</span></span></span></label>
+      <label class="tick" for="wa" id="waBox" hidden><input id="wa" type="checkbox"><span><span class="en">Send me booking confirmation and reminder on WhatsApp</span><span class="hi">बुकिंग की पुष्टि और रिमाइंडर WhatsApp पर भेजें</span></span></label>
+      <p class="note good" id="waKnown" hidden style="font-size:14px"><span class="en">✓ Confirmation and reminder will come on WhatsApp.</span><span class="hi">✓ पुष्टि और रिमाइंडर WhatsApp पर आएगा।</span></p>
       <label class="hp" aria-hidden="true">Website <input id="website" type="text" tabindex="-1" autocomplete="off"></label>
       <p class="note info" style="font-size:14px"><span class="en">Emergency? Do not wait for a slot — go to the nearest hospital.</span><span class="hi">इमरजेंसी में स्लॉट का इंतज़ार न करें — तुरंत अस्पताल जाएँ।</span></p>
       <p class="err" id="err" role="alert"></p>
@@ -183,7 +185,16 @@ input:focus{outline:3px solid var(--brand);outline-offset:1px;border-color:var(-
   var mem = {}; try{ mem = JSON.parse(localStorage.getItem('clinicBookingDetails')||'{}'); }catch(e){}
   if(mem.phone) document.getElementById('phone').value = mem.phone;
   if(mem.child) document.getElementById('child').value = mem.child;
-  if(mem.wa) document.getElementById('wa').checked = true;
+  // WhatsApp permission is asked only the first time a number is used on this phone.
+  // (The clinic also remembers numbers that agreed before, so other devices are covered too.)
+  var waOn = false;
+  function updateWa(){
+    var ph = document.getElementById('phone').value.trim();
+    var known = !!(mem.wa && mem.phone && mem.phone === ph);
+    document.getElementById('waBox').hidden = !waOn || known;
+    document.getElementById('waKnown').hidden = !waOn || !known;
+  }
+  document.getElementById('phone').addEventListener('input', updateWa);
 
   // ---- API
   function apiGet(params){
@@ -201,6 +212,7 @@ input:focus{outline:3px solid var(--brand);outline-offset:1px;border-color:var(-
     apiGet({action:'slots'}).then(function(res){
       if(!res || !res.ok) throw new Error(res && res.error || 'load');
       state.days = res.days;
+      waOn = !!res.whatsapp; updateWa();
       if(!keep || !state.days.some(function(d){ return d.date===state.day; })){
         var first = state.days.filter(function(d){ return openCount(d) > 0; })[0] || state.days[0];
         state.day = first ? first.date : null; state.slot = null;
@@ -288,7 +300,7 @@ input:focus{outline:3px solid var(--brand);outline-offset:1px;border-color:var(-
     if(!child){ err.textContent = t('Please enter the child’s name.','कृपया बच्चे का नाम लिखें।'); document.getElementById('child').focus(); return; }
     if(!/^[6-9]\d{9}$/.test(phone)){ err.textContent = t('Please enter a valid 10-digit mobile number.','कृपया सही 10 अंकों का मोबाइल नंबर लिखें।'); document.getElementById('phone').focus(); return; }
     err.textContent = '';
-    var body = { action:'book', date:state.day, time:state.slot, childName:child, childAge:'', parentName:'', phone:phone, reason:'', whatsapp:document.getElementById('wa').checked, website:document.getElementById('website').value };
+    var body = { action:'book', date:state.day, time:state.slot, childName:child, childAge:'', parentName:'', phone:phone, reason:'', whatsapp:document.getElementById('wa').checked || !document.getElementById('waKnown').hidden, website:document.getElementById('website').value };
     try{ localStorage.setItem('clinicBookingDetails', JSON.stringify({child:body.childName, phone:phone, wa:body.whatsapp})); }catch(e){}
     state.busy = true;
     var go = document.getElementById('go'); go.disabled = true; go.innerHTML = '<span class="spin" aria-hidden="true"></span>'+t('Booking…','बुक हो रहा है…');
@@ -318,7 +330,8 @@ input:focus{outline:3px solid var(--brand);outline-offset:1px;border-color:var(-
   function showDone(res, body){
     document.getElementById('bar').hidden = true;
     var p = dayParts(res.date);
-    var waLine = body.whatsapp ? (res.whatsappSent ? '<p class="note good">'+t('A confirmation has been sent to your WhatsApp.','पुष्टि आपके WhatsApp पर भेज दी गई है।')+'</p>' : '<p class="note info">'+t('You will get a WhatsApp reminder the evening before.','आपको एक दिन पहले शाम को WhatsApp पर रिमाइंडर मिलेगा।')+'</p>') : '';
+    if(res.whatsapp){ try{ localStorage.setItem('clinicBookingDetails', JSON.stringify({child:body.childName, phone:body.phone, wa:true})); mem = {child:body.childName, phone:body.phone, wa:true}; }catch(e){} }
+    var waLine = res.whatsapp ? (res.whatsappSent ? '<p class="note good">'+t('A confirmation has been sent to your WhatsApp.','पुष्टि आपके WhatsApp पर भेज दी गई है।')+'</p>' : '<p class="note info">'+t('You will get a WhatsApp reminder the evening before.','आपको एक दिन पहले शाम को WhatsApp पर रिमाइंडर मिलेगा।')+'</p>') : '';
     document.getElementById('app').innerHTML =
       '<div class="done-card" role="status">'+
       '<svg class="check" viewBox="0 0 76 76" aria-hidden="true"><circle cx="38" cy="38" r="36"/><path d="M23 39l10 10 20-22" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>'+
@@ -361,13 +374,13 @@ input:focus{outline:3px solid var(--brand);outline-offset:1px;border-color:var(-
         });
         days.push(day);
       }
-      res({ok:true, slotMinutes:15, days:days});
+      res({ok:true, slotMinutes:15, whatsapp:true, days:days});
     }, 400); });
   }
   function demoPost(b){
     return new Promise(function(res){ setTimeout(function(){
       var s = findSlot(b.date, b.time);
-      res({ok:true, id:'DM'+b.date.slice(2).replace(/-/g,'')+'-4821', date:b.date, time:b.time, timeLabel:s?s.label:b.time, childName:b.childName, whatsappSent:false});
+      res({ok:true, id:'DM'+b.date.slice(2).replace(/-/g,'')+'-4821', date:b.date, time:b.time, timeLabel:s?s.label:b.time, childName:b.childName, whatsapp:!!b.whatsapp, whatsappSent:!!b.whatsapp});
     }, 700); });
   }
 

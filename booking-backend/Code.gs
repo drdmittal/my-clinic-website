@@ -17,6 +17,7 @@ var SHEET_ID = '';
 var TAB_SETTINGS = 'Booking Settings';
 var TAB_BLOCKED = 'Blocked Times';
 var TAB_BOOKINGS = 'Online Bookings';
+var TAB_CONSENT = 'WhatsApp Consent'; // one row per mobile number; change YES to NO to stop messages
 var NEW_BOOKING_PAGE = 'https://childspecialistrohini.com/book.html';
 
 function SS() {
@@ -102,6 +103,7 @@ function setup() {
     bk.getRange('H:H').setNumberFormat('@');
     bk.setFrozenRows(1);
   }
+  consentSheet();
   return 'Setup done';
 }
 
@@ -289,7 +291,7 @@ function getSlots(from, days) {
     day.closed = !sessions.length;
     outDays.push(day);
   }
-  return { ok: true, slotMinutes: s.SLOT_MINUTES, days: outDays, clinic: { name: s.CLINIC_NAME, phone: s.CLINIC_PHONE, address: s.CLINIC_ADDRESS } };
+  return { ok: true, slotMinutes: s.SLOT_MINUTES, whatsapp: String(s.WA_ENABLED).toUpperCase() === 'YES', days: outDays, clinic: { name: s.CLINIC_NAME, phone: s.CLINIC_PHONE, address: s.CLINIC_ADDRESS } };
 }
 
 /* ------------------------------------------------------------------ book */
@@ -321,7 +323,7 @@ function book(b) {
     if (samePhone >= s.MAX_BOOKINGS_PER_PHONE_PER_DAY) return { ok: false, error: 'too_many' };
 
     var id = 'DM' + Utilities.formatDate(new Date(), TZ, 'yyMMdd') + '-' + Math.floor(1000 + Math.random() * 9000);
-    var wa = b.whatsapp ? 'YES' : 'NO';
+    var wa = waConsent(phone, !!b.whatsapp) ? 'YES' : 'NO';
     var sheet = SS().getSheetByName(TAB_BOOKINGS);
     sheet.appendRow([id, Utilities.formatDate(new Date(), TZ, 'yyyy-MM-dd HH:mm'), "'" + date, "'" + time, child, age, parent, "'" + phone, reason, wa, 'Booked', '', '']);
     SpreadsheetApp.flush();
@@ -331,7 +333,45 @@ function book(b) {
 
   var waSent = false;
   if (wa === 'YES') waSent = sendTemplate(s, s.WA_TEMPLATE_CONFIRM, phone, [child, prettyDate(date), label(toMin(time))]);
-  return { ok: true, id: id, date: date, dateLabel: prettyDate(date), time: time, timeLabel: label(toMin(time)), childName: child, whatsappSent: waSent };
+  return { ok: true, id: id, date: date, dateLabel: prettyDate(date), time: time, timeLabel: label(toMin(time)), childName: child, whatsapp: wa === 'YES', whatsappSent: waSent };
+}
+
+/* WhatsApp permission is asked only once per mobile number.
+   The first time the parent ticks the box, the number is saved in the "WhatsApp Consent" tab.
+   Later bookings from the same number get WhatsApp messages without asking again.
+   To stop messages for a number, change its YES to NO in that tab. */
+function consentSheet() {
+  var ss = SS();
+  var sh = ss.getSheetByName(TAB_CONSENT);
+  if (!sh) {
+    sh = ss.insertSheet(TAB_CONSENT);
+    sh.getRange(1, 1, 1, 4).setValues([['Phone', 'WhatsApp OK', 'First agreed on', 'Last booking']]).setFontWeight('bold');
+    sh.setFrozenRows(1);
+    sh.getRange('A:A').setNumberFormat('@');
+    // carry over parents who already agreed on earlier online bookings
+    var seen = {};
+    bookingRows().forEach(function (r) { if (r[COL.wa] === 'YES' && r[COL.phone] && !seen[r[COL.phone]]) seen[r[COL.phone]] = r[COL.created] || ''; });
+    var rows = Object.keys(seen).map(function (ph) { return ["'" + ph, 'YES', String(seen[ph]), '']; });
+    if (rows.length) sh.getRange(2, 1, rows.length, 4).setValues(rows);
+  }
+  return sh;
+}
+
+function waConsent(phone, tickedNow) {
+  var sh = consentSheet();
+  var now = Utilities.formatDate(new Date(), TZ, 'yyyy-MM-dd HH:mm');
+  var vals = sh.getDataRange().getValues();
+  for (var i = 1; i < vals.length; i++) {
+    if (String(vals[i][0]).replace(/\D/g, '') === phone) {
+      var ok = String(vals[i][1]).trim().toUpperCase();
+      if (ok !== 'YES' && tickedNow) { sh.getRange(i + 1, 2).setValue('YES'); ok = 'YES'; }
+      sh.getRange(i + 1, 4).setValue(now);
+      return ok === 'YES';
+    }
+  }
+  if (!tickedNow) return false;
+  sh.appendRow(["'" + phone, 'YES', now, now]);
+  return true;
 }
 
 function toMin(t) { var p = t.split(':'); return +p[0] * 60 + +p[1]; }
