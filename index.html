@@ -6,9 +6,9 @@
 <title>Dr. Dinesh Mittal | Child Specialist & Pediatrician in Rohini, Delhi</title>
 <meta name="description" content="Dr. Dinesh Mittal, MBBS, DCH (DMC/R/00668). Child Specialist & Pediatrician in Sector 3 Rohini, New Delhi. Clinical newborn care, IAP vaccination schedules, growth & development screening.">
 <link rel="canonical" href="https://childspecialistrohini.com/" />
-<meta name="theme-color" content="#1f5fbf">
+<meta name="theme-color" content="#2a2580">
 <meta property="og:title" content="Dr. Dinesh Mittal | Child Specialist in Rohini, Delhi">
-<meta property="og:description" content="Newborn care, IAP vaccination, fever care and growth checks in Sector 3, Rohini. Free parent care tools in Hindi and English.">
+<meta property="og:description" content="Newborn care, IAP vaccination, illness and growth checks in Sector 3, Rohini. Free parent care tools in Hindi and English.">
 <meta property="og:image" content="https://childspecialistrohini.com/doctor.jpg">
 <meta property="og:url" content="https://childspecialistrohini.com/">
 <!-- Google Structured Data / Local SEO Schema -->
@@ -139,292 +139,281 @@
     <meta name="geo.position" content="28.708083;77.107882" />
     <meta name="ICBM" content="28.708083, 77.107882" />
 
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%231f5fbf'/%3E%3Ctext x='32' y='40' text-anchor='middle' font-family='Arial' font-size='24' font-weight='800' fill='white'%3EDM%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%232a2580'/%3E%3Ctext x='32' y='40' text-anchor='middle' font-family='Arial' font-size='24' font-weight='800' fill='white'%3EDM%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Mukta:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anek+Devanagari:wdth,wght@75..125,400..800&display=swap">
 <style>
-/* Layout: sticky slim nav; hero = message + doctor card with live open/closed status; then services, parent tools, guides, visit (hours + map), connect; mobile bottom action bar. */
+/* Concept: a child's wall growth chart. The hero is a colour-banded height ruler (newborn → 18 yrs) showing what the clinic does at each age.
+   Crayon-box palette: indigo (trust), kite pink, turmeric, peacock teal, sky, grape, leaf. One family: Anek Devanagari (Latin + Devanagari), wide for headings. */
 :root{
-  --paper:#f6f8fc; --surface:#ffffff; --ink:#152238; --muted:#566279; --line:#dfe5ef;
-  --brand:#1f5fbf; --brand-deep:#12407f; --brand-soft:#e6eefb;
-  --marigold:#f2a33a; --marigold-soft:#fff2dc; --marigold-text:#a35d00; --leaf:#16803f; --leaf-soft:#e2f4e8; --rose:#c53030; --rose-soft:#fde8e7;
-  --display:'Baloo 2','Mukta',system-ui,sans-serif; --body:'Mukta',system-ui,sans-serif;
+  --paper:#f4f6ff; --surface:#ffffff; --ink:#1c1950; --muted:#565a85; --line:#dde1f4;
+  --indigo:#2a2580; --indigo-2:#3d36b8; --indigo-soft:#e9e8fb;
+  --pink:#e2457a; --pink-soft:#fde7ef; --sun:#f5ad1b; --sun-soft:#fff3d6; --sun-ink:#7a4b00;
+  --teal:#0f9b8e; --teal-soft:#dff5f2; --sky:#2f8fe0; --sky-soft:#e2f0fd; --grape:#8b4fd6; --grape-soft:#f0e7fc;
+  --leaf:#2f8f3a; --leaf-soft:#e3f4e2; --orange:#f08a1c; --orange-soft:#ffecd9;
+  --font:'Anek Devanagari',system-ui,sans-serif;
   color-scheme:light;
 }
 @media (prefers-color-scheme: dark){:root{
-  --paper:#0e131b; --surface:#161f2b; --ink:#e8edf4; --muted:#9ea9bb; --line:#283446;
-  --brand:#7aaeff; --brand-deep:#123566; --brand-soft:#1a2a42;
-  --marigold:#f5b257; --marigold-soft:#352914; --marigold-text:#f5b257; --leaf:#58d08d; --leaf-soft:#15301f; --rose:#ff8077; --rose-soft:#3a1c1b; color-scheme:dark}}
+  --paper:#12112b; --surface:#1c1a3d; --ink:#eceafd; --muted:#aeacd2; --line:#2f2c5c;
+  --indigo-soft:#262356; --pink-soft:#3a1a2a; --sun-soft:#3a2d10; --sun-ink:#ffd27a; --teal-soft:#0f312e; --sky-soft:#13304c; --grape-soft:#2c1f48; --leaf-soft:#173219; --orange-soft:#3a2510;
+  color-scheme:dark}}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:76px}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5;padding-bottom:calc(72px + env(safe-area-inset-bottom,0px))}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{margin:0;background:var(--paper);color:var(--ink);font:450 18px/1.55 var(--font);padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}
 @media (min-width:860px){body{padding-bottom:0}}
 img{max-width:100%;display:block}
-a{color:var(--brand)}
-.wrap{max-width:1120px;margin:0 auto;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
+a{color:var(--indigo-2)}
+@media (prefers-color-scheme: dark){a{color:#a9a4ff}}
+.wrap{max-width:1140px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
 html[data-lang="hi"] .en, html:not([data-lang="hi"]) .hi{display:none!important}
-h1,h2,h3{font-family:var(--display);line-height:1.12;margin:0;text-wrap:balance}
+h1,h2,h3{font-family:var(--font);font-weight:800;font-stretch:115%;line-height:1.05;margin:0;text-wrap:balance;letter-spacing:-.01em}
+html[data-lang="hi"] h1,html[data-lang="hi"] h2,html[data-lang="hi"] h3{line-height:1.25;font-stretch:105%}
 p{margin:0}
-.eyebrow{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--marigold-text)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;min-height:50px;padding:0 22px;font:700 17px var(--display);cursor:pointer;text-decoration:none;transition:transform .15s, box-shadow .15s}
-.btn:active{transform:translateY(1px)}
-.btn-primary{background:var(--brand);color:#fff;box-shadow:0 6px 16px rgba(31,95,191,.25)}
-.btn-ghost{background:var(--surface);color:var(--ink);border:1.5px solid var(--line)}
-.btn svg{width:20px;height:20px}
-:focus-visible{outline:3px solid var(--marigold);outline-offset:3px}
+:focus-visible{outline:3px solid var(--sun);outline-offset:3px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;border:0;border-radius:16px;min-height:54px;padding:0 24px;font:700 18px var(--font);font-stretch:108%;cursor:pointer;text-decoration:none;box-shadow:inset 0 -4px 0 rgba(0,0,0,.18);transition:transform .12s}
+.btn:active{transform:translateY(2px);box-shadow:inset 0 -2px 0 rgba(0,0,0,.18)}
+.btn svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.btn-pink{background:var(--pink);color:#fff}
+.btn-indigo{background:var(--indigo);color:#fff}
+.btn-line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.btn-line:active{box-shadow:inset 0 0 0 2px currentColor}
 
-/* nav */
-.nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.nav .wrap{display:flex;align-items:center;gap:14px;min-height:64px}
-.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);min-width:0}
-.logo svg{width:42px;height:42px;flex:none}
-.logo b{font:800 19px var(--display);display:block;line-height:1.05;white-space:nowrap}
-.logo span{font-size:12.5px;color:var(--muted);white-space:nowrap}
-.links{display:none;gap:4px;margin-left:auto}
-.links a{text-decoration:none;color:var(--ink);font-weight:600;font-size:15.5px;padding:8px 12px;border-radius:999px}
-.links a:hover{background:var(--brand-soft)}
-.navr{display:flex;align-items:center;gap:8px;margin-left:auto}
-@media (min-width:860px){.links{display:flex}.navr{margin-left:8px}}
-.lang{border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;min-height:40px;padding:0 14px;font:700 14px var(--body);cursor:pointer}
-.nav .btn{min-height:42px;padding:0 16px;font-size:15.5px;display:none}
-@media (min-width:600px){.nav .btn{display:inline-flex}}
+/* top bar */
+.top{position:sticky;top:0;z-index:40;background:var(--indigo);color:#fff}
+.top .wrap{display:flex;align-items:center;gap:12px;min-height:64px}
+.logo{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;min-width:0;margin-right:auto}
+.logo i{width:42px;height:42px;border-radius:50%;background:#fff;color:var(--indigo);display:grid;place-items:center;font:800 17px var(--font);font-stretch:112%;font-style:normal;flex:none}
+.logo b{display:block;font:800 19px/1.05 var(--font);font-stretch:112%;white-space:nowrap}
+.logo small{display:block;font-size:13px;opacity:.8;white-space:nowrap}
+@media (min-width:1100px){.logo i{display:none}}
+.lang{border:0;background:rgba(255,255,255,.14);color:#fff;border-radius:12px;min-height:42px;padding:0 14px;font:700 15px var(--font);cursor:pointer}
+.top .btn{min-height:44px;padding:0 16px;font-size:16px;display:none}
+@media (min-width:560px){.top .btn{display:inline-flex}}
 
 /* hero */
-.hero{padding:40px 0 30px}
-.hero .wrap{display:grid;gap:28px;align-items:center}
-@media (min-width:860px){.hero .wrap{grid-template-columns:1.15fr .85fr;gap:48px}.hero{padding:64px 0 48px}}
-.hero h1{font-size:clamp(34px,6vw,58px);font-weight:800}
-.hero h1 em{font-style:normal;color:var(--brand);position:relative;white-space:nowrap}
-.hero h1 em::after{content:"";position:absolute;left:0;right:0;bottom:.06em;height:.22em;background:var(--marigold);opacity:.45;border-radius:4px;z-index:-1}
-.hero .lede{font-size:clamp(17px,2.2vw,20px);color:var(--muted);margin-top:14px;max-width:34em}
-.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
-.trust{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:22px;font-size:14.5px;color:var(--muted)}
-.trust span{display:inline-flex;align-items:center;gap:6px}
-.trust svg{width:18px;height:18px;color:var(--leaf)}
-.doc{background:var(--surface);border:1px solid var(--line);border-radius:28px;padding:22px;box-shadow:0 18px 40px rgba(21,34,56,.08);position:relative;overflow:hidden}
-.doc::before{content:"";position:absolute;inset:0 0 auto 0;height:8px;background:linear-gradient(135deg,var(--brand),var(--brand-deep))}
-.doc-top{position:relative;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;margin-top:6px}
-.photo{width:104px;height:104px;border-radius:24px;object-fit:cover;border:0;background:var(--brand-soft);box-shadow:0 6px 16px rgba(0,0,0,.12)}
+.hero{background:var(--indigo);color:#fff;border-radius:0 0 40px 40px;padding:34px 0 46px;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;right:-120px;top:-140px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(226,69,122,.35),transparent 65%);pointer-events:none}
+.hero .wrap{display:grid;gap:34px;position:relative}
+@media (min-width:900px){.hero .wrap{grid-template-columns:1.1fr .9fr;align-items:center;gap:56px}.hero{padding:64px 0 72px}}
+.hero h1{font-size:clamp(40px,7vw,74px)}
+.lede{font-size:clamp(18px,2.1vw,21px);opacity:.88;margin-top:18px;max-width:31em}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.status{display:inline-flex;align-items:center;gap:9px;margin-top:22px;font-weight:600;font-size:16px;background:rgba(255,255,255,.1);border-radius:999px;padding:6px 14px 6px 10px}
+.status i{width:12px;height:12px;border-radius:50%;background:#5ee07a;box-shadow:0 0 0 4px rgba(94,224,122,.25)}
+.status.closed i{background:#ff8a8a;box-shadow:0 0 0 4px rgba(255,138,138,.25)}
+
+/* growth ruler */
+.ruler{background:var(--surface);color:var(--ink);border-radius:28px;padding:18px;box-shadow:0 24px 50px rgba(10,6,50,.35)}
+.doc{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;padding-bottom:14px;border-bottom:2px dashed var(--line)}
+.photo{width:84px;height:84px;border-radius:50%;object-fit:cover;background:var(--indigo-soft);border:4px solid var(--sun)}
 .doc h2{font-size:24px}
-.doc .q{color:var(--muted);font-size:15px}
-.status{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:15px;border-radius:999px;padding:4px 12px;margin-top:16px}
-.status i{width:9px;height:9px;border-radius:50%;background:currentColor;box-shadow:0 0 0 0 currentColor;animation:ping 1.8s infinite}
-@keyframes ping{0%{box-shadow:0 0 0 0 color-mix(in srgb,currentColor 50%,transparent)}100%{box-shadow:0 0 0 10px transparent}}
-.status.open{background:var(--leaf-soft);color:var(--leaf)} .status.closed{background:var(--rose-soft);color:var(--rose)}
-.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:16px}
-.facts div{background:var(--paper);border-radius:14px;padding:10px 8px;text-align:center}
-.facts b{display:block;font:800 20px var(--display);color:var(--brand)}
-.facts span{font-size:12.5px;color:var(--muted);line-height:1.25;display:block}
-.doc .reg{margin-top:12px;font-size:13px;color:var(--muted)}
+.doc p{color:var(--muted);font-size:15px;line-height:1.35;margin-top:3px}
+.ages{list-style:none;margin:14px 0 0;padding:0;display:grid;grid-template-columns:58px 1fr;row-gap:0}
+.ages li{display:contents}
+.band{background:var(--c);position:relative;min-height:58px;display:flex;align-items:center;justify-content:center;color:#fff;font:800 15px/1 var(--font);font-stretch:110%;text-align:center}
+.band::after{content:"";position:absolute;right:0;top:0;bottom:0;width:12px;background:repeating-linear-gradient(180deg,rgba(255,255,255,.75) 0 2px,transparent 2px 11.6px)}
+.ages li:first-child .band{border-radius:14px 14px 0 0}
+.ages li:last-child .band{border-radius:0 0 14px 14px}
+.what{display:flex;flex-direction:column;justify-content:center;padding:6px 0 6px 14px;border-bottom:1px solid var(--line);line-height:1.25}
+.ages li:last-child .what{border-bottom:0}
+.what b{font-weight:700;font-size:17px}
+.what small{color:var(--muted);font-size:14.5px}
+.reg{margin-top:12px;font-size:13px;color:var(--muted)}
 
 /* sections */
-section{padding:44px 0}
-.sh{display:flex;flex-direction:column;gap:6px;margin-bottom:22px;max-width:40em}
-.sh h2{font-size:clamp(28px,4vw,40px)}
-.sh p{color:var(--muted)}
-.grid4{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr))}
-.grid2{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(380px,100%),1fr))}
-.grid3{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr))}
-.svc{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:20px;display:flex;flex-direction:column;gap:8px}
-.svc .ic{width:52px;height:52px;border-radius:16px;display:grid;place-items:center}
-.svc .ic svg{width:28px;height:28px}
-.svc h3{font-size:21px}
-.svc p{color:var(--muted);font-size:15.5px}
+section{padding:56px 0}
+.sh{margin-bottom:24px;max-width:40em}
+.sh h2{font-size:clamp(30px,4.4vw,46px)}
+.sh p{color:var(--muted);margin-top:8px}
 
-.tools{background:linear-gradient(180deg,var(--brand-soft),transparent)}
-.tool{display:grid;grid-template-columns:56px 1fr 22px;gap:14px;align-items:center;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:16px;transition:transform .15s, box-shadow .15s}
-.tool:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(21,34,56,.08)}
-.tool .ic{width:56px;height:56px;border-radius:16px;display:grid;place-items:center}
-.tool .ic svg{width:30px;height:30px}
-.tool b{display:block;font:800 19px var(--display);line-height:1.15}
-.tool small{display:block;color:var(--muted);font-size:14.5px;line-height:1.35;margin-top:2px}
-.tool .chev{color:var(--muted);font-size:24px}
-.new{display:inline-block;font:700 11px var(--body);letter-spacing:.06em;text-transform:uppercase;background:var(--marigold);color:#2a1a00;border-radius:999px;padding:1px 8px;margin-left:6px;vertical-align:middle}
-.sub{font:800 18px var(--display);margin:28px 0 12px;color:var(--muted)}
+.svcs{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(250px,100%),1fr))}
+.svc{background:var(--soft);border-radius:24px;padding:22px;display:flex;flex-direction:column;gap:10px}
+.svc .ic{width:56px;height:56px;border-radius:18px;background:var(--c);display:grid;place-items:center;box-shadow:inset 0 -4px 0 rgba(0,0,0,.15)}
+.svc svg,.tool svg{fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.svc svg{width:30px;height:30px}
+.svc h3{font-size:23px}
+.svc p{color:var(--muted);font-size:16.5px;line-height:1.45}
 
-.guides{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr))}
-.guide{display:flex;flex-direction:column;gap:6px;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px 18px}
-.guide:hover{border-color:var(--brand)}
-.guide .tag{font-size:12.5px;font-weight:700;color:var(--brand)}
-.guide b{font:800 18px var(--display);line-height:1.2}
-.more{margin-top:16px}
+.tools{display:grid;gap:14px;grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (min-width:860px){.tools{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.tool{background:var(--c);color:#fff;border-radius:26px;padding:18px;text-decoration:none;display:flex;flex-direction:column;gap:10px;min-height:178px;position:relative;overflow:hidden;box-shadow:inset 0 -5px 0 rgba(0,0,0,.16);transition:transform .15s}
+.tool:hover{transform:translateY(-3px)}
+.tool::after{content:"";position:absolute;right:-30px;bottom:-30px;width:110px;height:110px;border-radius:50%;background:rgba(255,255,255,.14)}
+.tool .ic{width:50px;height:50px;border-radius:16px;background:rgba(255,255,255,.22);display:grid;place-items:center}
+.tool svg{width:28px;height:28px}
+.tool b{font:800 21px/1.1 var(--font);font-stretch:110%;margin-top:auto}
+.tool small{font-size:15px;line-height:1.3;opacity:.92}
+.tool.dark{color:#3a2600}.tool.dark svg{stroke:#3a2600}
+@media (max-width:420px){.tool{padding:15px;min-height:168px}.tool b{font-size:19px}}
 
-.visit .wrap{display:grid;gap:18px}
-@media (min-width:860px){.visit .wrap{grid-template-columns:1fr 1.1fr;align-items:stretch}}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:20px;display:flex;flex-direction:column;gap:14px}
-.row{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start}
-.row svg{width:24px;height:24px;color:var(--brand);margin-top:2px}
-.row b{display:block}
-.hours{width:100%;border-collapse:collapse;font-size:15.5px;font-variant-numeric:tabular-nums}
+.guides{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(330px,100%),1fr))}
+.guide{display:flex;align-items:center;gap:14px;background:var(--surface);border-radius:18px;padding:14px 16px;text-decoration:none;color:var(--ink);border:2px solid transparent}
+.guide:hover{border-color:var(--c)}
+.guide .dot{width:44px;height:44px;border-radius:14px;background:var(--soft);color:var(--c);display:grid;place-items:center;flex:none;font:800 13px var(--font)}
+.guide b{font-weight:650;font-size:17.5px;line-height:1.25}
+.guide small{display:block;color:var(--c);font-weight:700;font-size:13.5px}
+.more{margin-top:18px}
+
+.visit .wrap{display:grid;gap:16px}
+@media (min-width:900px){.visit .wrap{grid-template-columns:1fr 1.1fr}}
+.card{background:var(--surface);border-radius:28px;padding:24px;display:flex;flex-direction:column;gap:16px}
+.card h2{font-size:clamp(28px,3.8vw,38px)}
+.row{display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:start}
+.row .ic{width:44px;height:44px;border-radius:14px;background:var(--soft);color:var(--c);display:grid;place-items:center}
+.row svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.row b{display:block;font-weight:700}
+.hours{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:16.5px}
 .hours td{padding:7px 4px;border-bottom:1px solid var(--line)}
-.hours tr.today td{font-weight:700;color:var(--brand)}
-.hours tr.today td:first-child::after{content:" •";color:var(--marigold)}
-.phone{font:800 22px var(--display);letter-spacing:.02em}
-.map{border-radius:22px;overflow:hidden;border:1px solid var(--line);min-height:300px;background:var(--brand-soft)}
-.map iframe{width:100%;height:100%;min-height:300px;border:0;display:block}
-.areas{font-size:14.5px;color:var(--muted)}
+.hours td:last-child{text-align:right;white-space:nowrap}
+.hours tr.today td{font-weight:750;color:var(--pink)}
+.phone{font:800 24px var(--font);font-stretch:110%;text-decoration:none}
+.areas{font-size:15px;color:var(--muted)}
+.map{border-radius:28px;overflow:hidden;min-height:320px;background:var(--sky-soft)}
+.map iframe{width:100%;height:100%;min-height:320px;border:0;display:block}
 
-.social{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(150px,100%),1fr));gap:10px}
-.soc{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px;font-weight:700}
+.social{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(160px,100%),1fr));gap:10px}
+.soc{display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff;background:var(--c);border-radius:18px;padding:14px 16px;font-weight:700;font-size:17px;box-shadow:inset 0 -4px 0 rgba(0,0,0,.16)}
 .soc svg{width:26px;height:26px;flex:none}
 
-footer{border-top:1px solid var(--line);padding:28px 0 36px;color:var(--muted);font-size:14px}
+footer{background:var(--indigo);color:#d9d7ff;padding:30px 0 40px;font-size:15px;margin-top:20px;border-radius:40px 40px 0 0}
 footer .wrap{display:flex;flex-direction:column;gap:8px}
-footer b{color:var(--ink)}
-.linkbtn{border:0;background:none;color:var(--brand);font:600 14px var(--body);padding:0;cursor:pointer;text-decoration:underline}
+footer b{color:#fff}
+.linkbtn{border:0;background:none;color:#fff;font:600 15px var(--font);padding:0;cursor:pointer;text-decoration:underline}
 
-.bar{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--surface);border-top:1px solid var(--line);display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px max(14px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(14px,env(safe-area-inset-left,0px))}
-.bar .btn{min-height:48px}
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--surface);box-shadow:0 -6px 20px rgba(20,16,70,.12);display:grid;grid-template-columns:1fr 1.4fr;gap:10px;padding:10px max(14px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(40px,env(safe-area-inset-left,0px))}
+.bar .btn{min-height:50px;font-size:17px}
+.bar .btn-line{color:var(--indigo)}
+@media (prefers-color-scheme: dark){.bar .btn-line{color:#fff}}
 @media (min-width:860px){.bar{display:none}}
+@media (min-width:1100px){.hero{border-radius:0 0 48px 0}footer{border-radius:0 48px 0 0}}
 
-dialog{border:0;border-radius:22px;padding:0;width:min(640px,94vw);max-height:90vh;background:var(--surface);color:var(--ink);box-shadow:0 30px 80px rgba(0,0,0,.35)}
-dialog::backdrop{background:rgba(10,18,32,.55)}
+dialog{border:0;border-radius:24px;padding:0;width:min(640px,94vw);max-height:90vh;background:var(--surface);color:var(--ink);box-shadow:0 30px 80px rgba(0,0,0,.35)}
+dialog::backdrop{background:rgba(15,12,50,.55)}
 .dh{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line)}
-.dh h3{font-size:20px}
-.dx{border:0;background:var(--paper);color:var(--ink);width:40px;height:40px;border-radius:50%;font-size:22px;cursor:pointer}
-.db{padding:16px;overflow:auto;max-height:calc(90vh - 70px);display:flex;flex-direction:column;gap:10px;font-size:15.5px}
-.db h4{margin:6px 0 0;font:800 16px var(--display)}
-.bookframe{width:100%;height:70vh;border:0;display:block}
+.dh h3{font-size:21px}
+.dx{border:0;background:var(--paper);color:var(--ink);width:42px;height:42px;border-radius:50%;font-size:22px;cursor:pointer}
+.db{padding:16px;overflow:auto;max-height:calc(90vh - 70px);display:flex;flex-direction:column;gap:10px;font-size:16px}
+.db h4{margin:6px 0 0;font:800 17px var(--font)}
 
-.rise{animation:rise .7s ease both}
-@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+/* one entrance moment: the ruler bands grow up from the floor */
+.band{animation:grow .6s cubic-bezier(.2,.8,.2,1) both}
+.ages li:nth-child(5) .band{animation-delay:.05s}.ages li:nth-child(4) .band{animation-delay:.15s}.ages li:nth-child(3) .band{animation-delay:.25s}.ages li:nth-child(2) .band{animation-delay:.35s}.ages li:nth-child(1) .band{animation-delay:.45s}
+@keyframes grow{from{transform:scaleY(0);transform-origin:bottom;opacity:0}to{transform:none;opacity:1}}
 @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
+<script src="/site-nav.js" defer></script>
 </head>
 <body>
 
-<header class="nav">
+<header class="top">
   <div class="wrap">
-    <a class="logo" href="#top" aria-label="Dr. Dinesh Mittal — home">
-      <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#1f5fbf"/><text x="32" y="39" text-anchor="middle" font-family="Baloo 2, Mukta, sans-serif" font-size="22" font-weight="800" fill="#fff">DM</text><path d="M20 48 q12 8 24 0" stroke="#f2a33a" stroke-width="2.5" fill="none" stroke-linecap="round"/><circle cx="44" cy="48" r="3" fill="#f2a33a"/></svg>
-      <span><b>Dr. Dinesh Mittal</b><span class="en">Child Specialist · Rohini</span><span class="hi">शिशु रोग विशेषज्ञ · रोहिणी</span></span>
-    </a>
-    <nav class="links" aria-label="Main">
-      <a href="#services"><span class="en">Services</span><span class="hi">सेवाएँ</span></a>
-      <a href="#tools"><span class="en">Parent tools</span><span class="hi">पेरेंट टूल्स</span></a>
-      <a href="#guides"><span class="en">Guides</span><span class="hi">गाइड</span></a>
-      <a href="blog.html"><span class="en">Blog</span><span class="hi">ब्लॉग</span></a>
-      <a href="#visit"><span class="en">Visit</span><span class="hi">पता</span></a>
-    </nav>
-    <div class="navr">
-      <button type="button" class="lang" id="langBtn" aria-label="Switch language"><span class="en">हिन्दी</span><span class="hi">English</span></button>
-      <button type="button" class="btn btn-primary" data-book><span class="en">Book visit</span><span class="hi">अपॉइंटमेंट</span></button>
-    </div>
+    <a class="logo" href="#top" aria-label="Dr. Dinesh Mittal — home"><i>DM</i><span><b>Dr. Dinesh Mittal</b><small class="en">Child Specialist, Rohini</small><small class="hi">शिशु रोग विशेषज्ञ, रोहिणी</small></span></a>
+    <button type="button" class="lang" id="langBtn" aria-label="Switch language"><span class="en">हिन्दी</span><span class="hi">English</span></button>
+    <button type="button" class="btn btn-pink" data-book><span class="en">Book visit</span><span class="hi">अपॉइंटमेंट</span></button>
   </div>
 </header>
 
 <main id="top">
-  <section class="hero">
+  <section class="hero" aria-labelledby="h1">
     <div class="wrap">
-      <div class="rise">
-        <p class="eyebrow"><span class="en">Child Specialist &amp; Pediatrician · Sector 3, Rohini</span><span class="hi">शिशु रोग विशेषज्ञ · सेक्टर 3, रोहिणी</span></p>
-        <h1 style="margin-top:10px"><span class="en">Caring for your child, from the <em>first cry</em> to the teenage years</span><span class="hi">पहली किलकारी से किशोर उम्र तक, <em>आपके बच्चे</em> की देखभाल</span></h1>
-        <p class="lede"><span class="en">Newborn care, IAP vaccination, fever and infection care, and growth &amp; development checks — with clear advice parents can follow at home.</span><span class="hi">नवजात की देखभाल, IAP टीकाकरण, बुख़ार और इन्फ़ेक्शन का इलाज, और विकास की जाँच — घर पर अपनाने लायक साफ़ सलाह के साथ।</span></p>
+      <div>
+        <h1 id="h1"><span class="en">From the first cry to the teenage years</span><span class="hi">पहली किलकारी से किशोर उम्र तक</span></h1>
+        <p class="lede"><span class="en">Child specialist in Sector 3, Rohini. Newborn care, IAP vaccination, illness and growth checks, with clear advice you can follow at home.</span><span class="hi">सेक्टर 3, रोहिणी में शिशु रोग विशेषज्ञ। नवजात की देखभाल, IAP टीकाकरण, बीमारी का इलाज और विकास की जाँच — घर पर अपनाने लायक साफ़ सलाह के साथ।</span></p>
         <div class="cta">
-          <button type="button" class="btn btn-primary" data-book><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M8 2v4M16 2v4M3 10h18"/></svg><span class="en">Book consultation</span><span class="hi">अपॉइंटमेंट बुक करें</span></button>
-          <a class="btn btn-ghost" href="tel:+918130521456"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>+91 81305 21456</a>
+          <button type="button" class="btn btn-pink" data-book><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M8 2v4M16 2v4M3 10h18"/></svg><span class="en">Book appointment</span><span class="hi">अपॉइंटमेंट बुक करें</span></button>
+          <a class="btn btn-line" href="tel:+918130521456"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>81305 21456</a>
         </div>
-        <div class="trust">
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span class="en">25+ years in clinical practice</span><span class="hi">25+ वर्षों का अनुभव</span></span>
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span class="en">IAP-recommended vaccines</span><span class="hi">IAP द्वारा सुझाए टीके</span></span>
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span class="en">Advice in Hindi &amp; English</span><span class="hi">हिंदी और अंग्रेज़ी में सलाह</span></span>
-        </div>
+        <div id="status" class="status" aria-live="polite"><i></i><span id="statusText"></span></div>
       </div>
 
-      <aside class="doc rise" style="animation-delay:.12s" aria-label="About the doctor">
-        <div class="doc-top">
-          <img class="photo" src="doctor.jpg" alt="Dr. Dinesh Mittal" width="112" height="112" loading="eager">
-          <div>
-            <h2>Dr. Dinesh Mittal</h2>
-            <p class="q">MBBS, DCH · <span class="en">Child Specialist</span><span class="hi">शिशु रोग विशेषज्ञ</span></p>
-          </div>
+      <aside class="ruler" aria-label="About the doctor">
+        <div class="doc">
+          <img class="photo" src="doctor.jpg" alt="Dr. Dinesh Mittal" width="84" height="84" loading="eager">
+          <div><h2>Dr. Dinesh Mittal</h2><p>MBBS, DCH<br><span class="en">25+ years caring for children</span><span class="hi">25+ वर्षों से बच्चों का इलाज</span></p></div>
         </div>
-        <div id="status" class="status open" aria-live="polite"><i></i><span id="statusText"></span></div>
-        <div class="facts">
-          <div><b>25+</b><span class="en">years of practice</span><span class="hi">वर्षों का अनुभव</span></div>
-          <div><b>0–18</b><span class="en">years age group</span><span class="hi">वर्ष तक के बच्चे</span></div>
-          <div><b>IAP</b><span class="en">vaccine schedule</span><span class="hi">टीकाकरण चार्ट</span></div>
-        </div>
+        <ol class="ages" reversed>
+          <li><span class="band" style="--c:var(--grape)"><span class="en">18<br>yrs</span><span class="hi">18<br>वर्ष</span></span><span class="what"><b><span class="en">Teen health</span><span class="hi">किशोर स्वास्थ्य</span></b><small><span class="en">Puberty, growth spurts, HPV vaccine</span><span class="hi">यौवन, तेज़ी से बढ़ना, HPV टीका</span></small></span></li>
+          <li><span class="band" style="--c:var(--sky)"><span class="en">12<br>yrs</span><span class="hi">12<br>वर्ष</span></span><span class="what"><b><span class="en">School years</span><span class="hi">स्कूल की उम्र</span></b><small><span class="en">Growth, diet, screen time, behaviour</span><span class="hi">विकास, खान-पान, स्क्रीन टाइम, व्यवहार</span></small></span></li>
+          <li><span class="band" style="--c:var(--teal)"><span class="en">5<br>yrs</span><span class="hi">5<br>वर्ष</span></span><span class="what"><b><span class="en">Toddler &amp; preschool</span><span class="hi">छोटे बच्चे</span></b><small><span class="en">Fever, cough, boosters, milestones</span><span class="hi">बुख़ार, खाँसी, बूस्टर टीके, विकास के पड़ाव</span></small></span></li>
+          <li><span class="band" style="--c:var(--sun);color:#3a2600"><span class="en">1<br>yr</span><span class="hi">1<br>वर्ष</span></span><span class="what"><b><span class="en">Infancy</span><span class="hi">पहला साल</span></b><small><span class="en">IAP vaccines, weaning, weight gain</span><span class="hi">IAP टीके, ऊपरी आहार, वज़न बढ़ना</span></small></span></li>
+          <li><span class="band" style="--c:var(--pink)"><span class="en">0</span><span class="hi">0</span></span><span class="what"><b><span class="en">Newborn</span><span class="hi">नवजात</span></b><small><span class="en">First check, feeding, jaundice</span><span class="hi">पहली जाँच, दूध पिलाना, पीलिया</span></small></span></li>
+        </ol>
         <p class="reg">Delhi Medical Council Reg. No. DMC/R/00668</p>
       </aside>
     </div>
   </section>
 
-  <section id="services">
+  <section id="tools">
     <div class="wrap">
-      <div class="sh"><p class="eyebrow"><span class="en">Clinical care</span><span class="hi">इलाज और देखभाल</span></p><h2><span class="en">How we care for your child</span><span class="hi">हम आपके बच्चे की देखभाल कैसे करते हैं</span></h2></div>
-      <div class="grid4">
-        <div class="svc"><span class="ic" style="background:var(--brand-soft);color:var(--brand)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m18 2 4 4M17 7l3-3M19 9 8.7 19.3a2.4 2.4 0 0 1-3.4 0l-.6-.6a2.4 2.4 0 0 1 0-3.4L15 5M9 11l4 4M5 19l-3 3M14 4l6 6"/></svg></span><h3><span class="en">Vaccination</span><span class="hi">टीकाकरण</span></h3><p><span class="en">IAP and WHO schedules from birth to 18 years, with cold-chain vaccines and catch-up plans for missed doses.</span><span class="hi">जन्म से 18 वर्ष तक IAP और WHO शेड्यूल, कोल्ड-चेन टीके, छूटे टीकों का प्लान।</span></p></div>
-        <div class="svc"><span class="ic" style="background:var(--marigold-soft);color:var(--marigold)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="5"/><path d="M9 7.5h.01M15 7.5h.01M10 10q2 1.5 4 0M7 21v-2a5 5 0 0 1 10 0v2"/></svg></span><h3><span class="en">Newborn care</span><span class="hi">नवजात देखभाल</span></h3><p><span class="en">Newborn checks, feeding and weight gain, jaundice screening and guidance for first-time parents.</span><span class="hi">नवजात की जाँच, दूध पिलाना और वज़न, पीलिया की जाँच, नए माता-पिता को मार्गदर्शन।</span></p></div>
-        <div class="svc"><span class="ic" style="background:var(--rose-soft);color:var(--rose)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M14 14.8V4a2 2 0 1 0-4 0v10.8a4 4 0 1 0 4 0z"/></svg></span><h3><span class="en">Fever &amp; infections</span><span class="hi">बुख़ार और इन्फ़ेक्शन</span></h3><p><span class="en">Seasonal viral fever, dengue, flu, cough, asthma and stomach problems — diagnosed and treated with care.</span><span class="hi">मौसमी वायरल बुख़ार, डेंगू, फ़्लू, खाँसी, अस्थमा और पेट की समस्याओं का इलाज।</span></p></div>
-        <div class="svc"><span class="ic" style="background:var(--leaf-soft);color:var(--leaf)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 16l4-6 3 3 5-8"/></svg></span><h3><span class="en">Growth &amp; adolescent health</span><span class="hi">विकास और किशोर स्वास्थ्य</span></h3><p><span class="en">IAP growth charts, milestones, nutrition, puberty and growth-spurt counselling for teenagers.</span><span class="hi">IAP ग्रोथ चार्ट, विकास के पड़ाव, पोषण, किशोरों के लिए यौवन और ग्रोथ स्पर्ट पर सलाह।</span></p></div>
+      <div class="sh"><h2><span class="en">Free tools for parents</span><span class="hi">माता-पिता के लिए मुफ़्त टूल्स</span></h2><p><span class="en">Use them at home on your phone, in Hindi or English. What you enter stays on your phone.</span><span class="hi">घर पर फ़ोन में इस्तेमाल करें, हिंदी या अंग्रेज़ी में। आपकी जानकारी आपके फ़ोन में ही रहती है।</span></p></div>
+      <div class="tools">
+        <a class="tool" href="parent-tools/fever-chart.html" style="--c:var(--orange)"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg></span><b><span class="en">Fever chart</span><span class="hi">बुख़ार चार्ट</span></b><small><span class="en">Note each fever and show the doctor</span><span class="hi">हर बार का बुख़ार लिखें, डॉक्टर को दिखाएँ</span></small></a>
+        <a class="tool" href="parent-tools/constipation-guide.html" style="--c:var(--leaf)"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.5-7-11a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 6.5-7 11-7 11z"/></svg></span><b><span class="en">Constipation guide</span><span class="hi">कब्ज़ गाइड</span></b><small><span class="en">Diet, toilet habit, milk and medicine</span><span class="hi">खान-पान, टॉयलेट की आदत, दूध और दवा</span></small></a>
+        <a class="tool" href="parent-tools/golu-game.html" style="--c:var(--pink)"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 14.5q3.5 3 7 0M9 9.5h.01M15 9.5h.01"/></svg></span><b><span class="en">Golu Potty Hero</span><span class="hi">गोलू पॉटी हीरो</span></b><small><span class="en">A game for kids about good food</span><span class="hi">बच्चों का खेल: अच्छा खाना</span></small></a>
+        <a class="tool" href="growth-development-nutrition-screener.html" style="--c:var(--teal)"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20V10M18 20V4M6 20v-4"/></svg></span><b><span class="en">Growth check</span><span class="hi">विकास की जाँच</span></b><small><span class="en">IAP growth charts and milestones</span><span class="hi">IAP ग्रोथ चार्ट और विकास के पड़ाव</span></small></a>
+        <a class="tool dark" href="baby-diet-planner.html" style="--c:var(--sun)"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11h18a9 9 0 0 1-18 0zM12 3v4M8 5v2M16 5v2"/></svg></span><b><span class="en">Diet planner</span><span class="hi">डाइट प्लानर</span></b><small><span class="en">6 months to 12 years, with portions</span><span class="hi">6 महीने से 12 वर्ष, मात्रा के साथ</span></small></a>
+        <a class="tool" href="parenting-behavior-guide.html" style="--c:var(--grape)"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg></span><b><span class="en">Behaviour guide</span><span class="hi">व्यवहार गाइड</span></b><small><span class="en">Tantrums, thumb-sucking, screens</span><span class="hi">ज़िद, अंगूठा चूसना, स्क्रीन</span></small></a>
       </div>
     </div>
   </section>
 
-  <section id="tools" class="tools">
+  <section id="services" style="padding-top:12px">
     <div class="wrap">
-      <div class="sh"><p class="eyebrow"><span class="en">Free for parents</span><span class="hi">माता-पिता के लिए मुफ़्त</span></p><h2><span class="en">Parent care tools</span><span class="hi">पेरेंट केयर टूल्स</span></h2><p><span class="en">Simple step-by-step tools to use at home, in Hindi and English. Everything stays on your phone.</span><span class="hi">घर पर इस्तेमाल के लिए आसान, कदम-दर-कदम टूल्स — हिंदी और अंग्रेज़ी में। सारी जानकारी आपके फ़ोन में ही रहती है।</span></p></div>
-      <div class="grid2">
-        <a class="tool" href="parent-tools/fever-care.html"><span class="ic" style="background:var(--rose-soft);color:var(--rose)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M14 14.8V4a2 2 0 1 0-4 0v10.8a4 4 0 1 0 4 0z"/></svg></span><span><b><span class="en">Fever: what to do</span><span class="hi">बुख़ार में क्या करें</span><span class="new">New</span></b><small><span class="en">Medicine, sponging and when to go to hospital</span><span class="hi">दवा, स्पंजिंग और कब अस्पताल जाएँ</span></small></span><span class="chev">›</span></a>
-        <a class="tool" href="parent-tools/fever-chart.html"><span class="ic" style="background:var(--marigold-soft);color:var(--marigold)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg></span><span><b><span class="en">Fever chart</span><span class="hi">बुख़ार चार्ट</span><span class="new">New</span></b><small><span class="en">Log every fever and show the doctor</span><span class="hi">हर बार का बुख़ार लिखें, डॉक्टर को दिखाएँ</span></small></span><span class="chev">›</span></a>
-        <a class="tool" href="parent-tools/constipation-guide.html"><span class="ic" style="background:var(--leaf-soft);color:var(--leaf)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 21s-7-4.5-7-11a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 6.5-7 11-7 11z"/></svg></span><span><b><span class="en">Constipation guide</span><span class="hi">कब्ज़ गाइड</span><span class="new">New</span></b><small><span class="en">Diet, toilet habit, milk and medicine</span><span class="hi">खान-पान, टॉयलेट की आदत, दूध और दवा</span></small></span><span class="chev">›</span></a>
-        <a class="tool" href="parent-tools/golu-game.html"><span class="ic" style="background:var(--brand-soft);color:var(--brand)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 14.5q3.5 3 7 0M9 9.5h.01M15 9.5h.01"/></svg></span><span><b><span class="en">Golu Potty Hero</span><span class="hi">गोलू पॉटी हीरो</span><span class="new">New</span></b><small><span class="en">A game for kids: good food and potty habit</span><span class="hi">बच्चों का खेल: अच्छा खाना और पॉटी की आदत</span></small></span><span class="chev">›</span></a>
-      </div>
-      <h3 class="sub"><span class="en">Growth, nutrition &amp; behaviour</span><span class="hi">विकास, पोषण और व्यवहार</span></h3>
-      <div class="grid3">
-        <a class="tool" href="growth-development-nutrition-screener.html"><span class="ic" style="background:var(--leaf-soft);color:var(--leaf)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 20V10M18 20V4M6 20v-4"/></svg></span><span><b><span class="en">Growth &amp; development check</span><span class="hi">विकास की जाँच</span></b><small><span class="en">IAP growth charts, milestones (TDSC), feeding</span><span class="hi">IAP ग्रोथ चार्ट, विकास के पड़ाव, आहार</span></small></span><span class="chev">›</span></a>
-        <a class="tool" href="baby-diet-planner.html"><span class="ic" style="background:var(--marigold-soft);color:var(--marigold)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 11h18a9 9 0 0 1-18 0zM12 3v4M8 5v2M16 5v2"/></svg></span><span><b><span class="en">Baby &amp; child diet planner</span><span class="hi">बच्चों का डाइट प्लानर</span></b><small><span class="en">6 months to 12 years, recipes and portions</span><span class="hi">6 महीने से 12 वर्ष, रेसिपी और मात्रा</span></small></span><span class="chev">›</span></a>
-        <a class="tool" href="parenting-behavior-guide.html"><span class="ic" style="background:var(--brand-soft);color:var(--brand)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg></span><span><b><span class="en">Parenting &amp; behaviour guide</span><span class="hi">पेरेंटिंग और व्यवहार गाइड</span></b><small><span class="en">Tantrums, thumb-sucking, screen time</span><span class="hi">ज़िद, अंगूठा चूसना, स्क्रीन टाइम</span></small></span><span class="chev">›</span></a>
+      <div class="sh"><h2><span class="en">How we care for your child</span><span class="hi">हम आपके बच्चे की देखभाल कैसे करते हैं</span></h2></div>
+      <div class="svcs">
+        <div class="svc" style="--c:var(--teal);--soft:var(--teal-soft)"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m18 2 4 4M17 7l3-3M19 9 8.7 19.3a2.4 2.4 0 0 1-3.4 0l-.6-.6a2.4 2.4 0 0 1 0-3.4L15 5M9 11l4 4M5 19l-3 3M14 4l6 6"/></svg></span><h3><span class="en">Vaccination</span><span class="hi">टीकाकरण</span></h3><p><span class="en">IAP schedule from birth to 18 years, cold-chain vaccines, and catch-up plans for missed doses.</span><span class="hi">जन्म से 18 वर्ष तक IAP शेड्यूल, कोल्ड-चेन टीके, छूटे टीकों का प्लान।</span></p></div>
+        <div class="svc" style="--c:var(--pink);--soft:var(--pink-soft)"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="5"/><path d="M9 7.5h.01M15 7.5h.01M10 10q2 1.5 4 0M7 21v-2a5 5 0 0 1 10 0v2"/></svg></span><h3><span class="en">Newborn care</span><span class="hi">नवजात देखभाल</span></h3><p><span class="en">Newborn checks, feeding and weight gain, jaundice screening, and help for first-time parents.</span><span class="hi">नवजात की जाँच, दूध पिलाना और वज़न, पीलिया की जाँच, नए माता-पिता को मार्गदर्शन।</span></p></div>
+        <div class="svc" style="--c:var(--orange);--soft:var(--orange-soft)"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 14.8V4a2 2 0 1 0-4 0v10.8a4 4 0 1 0 4 0z"/></svg></span><h3><span class="en">Fever &amp; infections</span><span class="hi">बुख़ार और इन्फ़ेक्शन</span></h3><p><span class="en">Viral fever, dengue, flu, cough, asthma and stomach problems.</span><span class="hi">वायरल बुख़ार, डेंगू, फ़्लू, खाँसी, अस्थमा और पेट की समस्याएँ।</span></p></div>
+        <div class="svc" style="--c:var(--grape);--soft:var(--grape-soft)"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 16l4-6 3 3 5-8"/></svg></span><h3><span class="en">Growth &amp; teen health</span><span class="hi">विकास और किशोर स्वास्थ्य</span></h3><p><span class="en">Growth charts, milestones, nutrition, and puberty counselling for teenagers.</span><span class="hi">ग्रोथ चार्ट, विकास के पड़ाव, पोषण, और किशोरों के लिए यौवन पर सलाह।</span></p></div>
       </div>
     </div>
   </section>
 
-  <section id="guides">
+  <section id="guides" style="padding-top:12px">
     <div class="wrap">
-      <div class="sh"><p class="eyebrow"><span class="en">Read &amp; learn</span><span class="hi">पढ़ें और जानें</span></p><h2><span class="en">Vaccines &amp; health guides</span><span class="hi">टीके और स्वास्थ्य गाइड</span></h2></div>
+      <div class="sh"><h2><span class="en">Health guides</span><span class="hi">स्वास्थ्य गाइड</span></h2><p><span class="en">Short reads written for parents.</span><span class="hi">माता-पिता के लिए आसान लेख।</span></p></div>
       <div class="guides">
-        <a class="guide" href="iap-immunization-schedule.html"><span class="tag"><span class="en">Vaccines</span><span class="hi">टीके</span></span><b><span class="en">IAP immunization schedule, 0–18 years</span><span class="hi">IAP टीकाकरण चार्ट, 0–18 वर्ष</span></b></a>
-        <a class="guide" href="pediatric-vaccine-faqs-guide.html"><span class="tag"><span class="en">Vaccines</span><span class="hi">टीके</span></span><b><span class="en">Vaccine FAQs: missed doses, fever after shots</span><span class="hi">टीकों के सवाल: छूटी खुराक, टीके के बाद बुख़ार</span></b></a>
-        <a class="guide" href="painless-vs-painful-vaccines.html"><span class="tag"><span class="en">Vaccines</span><span class="hi">टीके</span></span><b><span class="en">Painless vs painful vaccines</span><span class="hi">दर्द-रहित बनाम सामान्य टीके</span></b></a>
-        <a class="guide" href="child-fever-management-guide.html"><span class="tag"><span class="en">Fever</span><span class="hi">बुख़ार</span></span><b><span class="en">Managing high fever in toddlers at home</span><span class="hi">घर पर तेज़ बुख़ार कैसे संभालें</span></b></a>
-        <a class="guide" href="dengue-in-children-delhi.html"><span class="tag"><span class="en">Fever</span><span class="hi">बुख़ार</span></span><b><span class="en">Dengue in children in Delhi</span><span class="hi">दिल्ली में बच्चों में डेंगू</span></b></a>
-        <a class="guide" href="newborn-care-guide.html"><span class="tag"><span class="en">Newborn</span><span class="hi">नवजात</span></span><b><span class="en">Newborn care tips for first-time parents</span><span class="hi">नए माता-पिता के लिए नवजात देखभाल</span></b></a>
-        <a class="guide" href="adolescent-health-puberty-guide.html"><span class="tag"><span class="en">Teenagers</span><span class="hi">किशोर</span></span><b><span class="en">Adolescent health &amp; puberty guide</span><span class="hi">किशोर स्वास्थ्य और यौवन गाइड</span></b></a>
-        <a class="guide" href="reduce-screen-time-in-children.html"><span class="tag"><span class="en">Lifestyle</span><span class="hi">जीवनशैली</span></span><b><span class="en">How to reduce screen time</span><span class="hi">स्क्रीन टाइम कैसे कम करें</span></b></a>
-        <a class="guide" href="air-purifier-delhi-pollution-children.html"><span class="tag"><span class="en">Lifestyle</span><span class="hi">जीवनशैली</span></span><b><span class="en">Air purifiers for Delhi pollution</span><span class="hi">दिल्ली प्रदूषण और एयर प्यूरीफ़ायर</span></b></a>
+        <a class="guide" href="iap-immunization-schedule.html" style="--c:var(--teal);--soft:var(--teal-soft)"><span class="dot"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m18 2 4 4M17 7l3-3M19 9 8.7 19.3a2.4 2.4 0 0 1-3.4 0l-.6-.6a2.4 2.4 0 0 1 0-3.4L15 5"/></svg></span><span><small><span class="en">Vaccines</span><span class="hi">टीके</span></small><b><span class="en">IAP immunization schedule, 0–18 years</span><span class="hi">IAP टीकाकरण चार्ट, 0–18 वर्ष</span></b></span></a>
+        <a class="guide" href="pediatric-vaccine-faqs-guide.html" style="--c:var(--teal);--soft:var(--teal-soft)"><span class="dot"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m18 2 4 4M17 7l3-3M19 9 8.7 19.3a2.4 2.4 0 0 1-3.4 0l-.6-.6a2.4 2.4 0 0 1 0-3.4L15 5"/></svg></span><span><small><span class="en">Vaccines</span><span class="hi">टीके</span></small><b><span class="en">Vaccine FAQs: missed doses, fever after shots</span><span class="hi">टीकों के सवाल: छूटी खुराक, टीके के बाद बुख़ार</span></b></span></a>
+        <a class="guide" href="painless-vs-painful-vaccines.html" style="--c:var(--teal);--soft:var(--teal-soft)"><span class="dot"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m18 2 4 4M17 7l3-3M19 9 8.7 19.3a2.4 2.4 0 0 1-3.4 0l-.6-.6a2.4 2.4 0 0 1 0-3.4L15 5"/></svg></span><span><small><span class="en">Vaccines</span><span class="hi">टीके</span></small><b><span class="en">Painless vs painful vaccines</span><span class="hi">दर्द-रहित बनाम सामान्य टीके</span></b></span></a>
+        <a class="guide" href="dengue-in-children-delhi.html" style="--c:var(--orange);--soft:var(--orange-soft)"><span class="dot"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M14 14.8V4a2 2 0 1 0-4 0v10.8a4 4 0 1 0 4 0z"/></svg></span><span><small><span class="en">Fever</span><span class="hi">बुख़ार</span></small><b><span class="en">Dengue in children in Delhi</span><span class="hi">दिल्ली में बच्चों में डेंगू</span></b></span></a>
+        <a class="guide" href="newborn-care-guide.html" style="--c:var(--pink);--soft:var(--pink-soft)"><span class="dot"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="5"/><path d="M7 21v-2a5 5 0 0 1 10 0v2"/></svg></span><span><small><span class="en">Newborn</span><span class="hi">नवजात</span></small><b><span class="en">Newborn care tips for first-time parents</span><span class="hi">नए माता-पिता के लिए नवजात देखभाल</span></b></span></a>
+        <a class="guide" href="adolescent-health-puberty-guide.html" style="--c:var(--grape);--soft:var(--grape-soft)"><span class="dot"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 16l4-6 3 3 5-8"/></svg></span><span><small><span class="en">Teenagers</span><span class="hi">किशोर</span></small><b><span class="en">Adolescent health &amp; puberty guide</span><span class="hi">किशोर स्वास्थ्य और यौवन गाइड</span></b></span></a>
+        <a class="guide" href="reduce-screen-time-in-children.html" style="--c:var(--sky);--soft:var(--sky-soft)"><span class="dot"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="3"/><path d="M11 18h2"/></svg></span><span><small><span class="en">Lifestyle</span><span class="hi">जीवनशैली</span></small><b><span class="en">How to reduce screen time</span><span class="hi">स्क्रीन टाइम कैसे कम करें</span></b></span></a>
+        <a class="guide" href="air-purifier-delhi-pollution-children.html" style="--c:var(--sky);--soft:var(--sky-soft)"><span class="dot"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 8h11a3 3 0 1 0-3-3M3 12h15a3 3 0 1 1-3 3M3 16h8"/></svg></span><span><small><span class="en">Lifestyle</span><span class="hi">जीवनशैली</span></small><b><span class="en">Air purifiers for Delhi pollution</span><span class="hi">दिल्ली प्रदूषण और एयर प्यूरीफ़ायर</span></b></span></a>
       </div>
-      <div class="more"><a class="btn btn-ghost" href="blog.html"><span class="en">All articles</span><span class="hi">सभी लेख</span> →</a></div>
+      <div class="more"><a class="btn btn-indigo" href="blog.html"><span class="en">See all articles</span><span class="hi">सभी लेख देखें</span></a></div>
     </div>
   </section>
 
-  <section id="visit" class="visit">
+  <section id="visit" class="visit" style="padding-top:12px">
     <div class="wrap">
       <div class="card">
-        <div><p class="eyebrow"><span class="en">Visit the clinic</span><span class="hi">क्लिनिक आएँ</span></p><h2 style="font-size:clamp(26px,3.6vw,36px);margin-top:4px">Dr. Dinesh Mittal Child Clinic</h2></div>
-        <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg><div><b>H-34/69, Sector 3, Rohini, Delhi – 110085</b><a href="https://maps.app.goo.gl/tW6fDW25fgrrA86P6" target="_blank" rel="noopener"><span class="en">Get directions</span><span class="hi">रास्ता देखें</span> →</a></div></div>
-        <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div style="min-width:0"><table class="hours" id="hours">
-          <tr data-d="1-6"><td><span class="en">Mon – Sat (morning)</span><span class="hi">सोम – शनि (सुबह)</span></td><td>10:00 AM – 1:00 PM</td></tr>
-          <tr data-d="1-6"><td><span class="en">Mon – Sat (evening)</span><span class="hi">सोम – शनि (शाम)</span></td><td>6:00 PM – 8:30 PM</td></tr>
+        <h2>Dr. Dinesh Mittal Child Clinic</h2>
+        <div class="row" style="--c:var(--pink);--soft:var(--pink-soft)"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></span><div><b>H-34/69, Sector 3, Rohini, Delhi – 110085</b><a href="https://maps.app.goo.gl/tW6fDW25fgrrA86P6" target="_blank" rel="noopener"><span class="en">Get directions</span><span class="hi">रास्ता देखें</span></a></div></div>
+        <div class="row" style="--c:var(--teal);--soft:var(--teal-soft)"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div style="min-width:0"><table class="hours" id="hours">
+          <tr data-d="1-6"><td><span class="en">Mon – Sat morning</span><span class="hi">सोम – शनि सुबह</span></td><td>10:00 AM – 1:00 PM</td></tr>
+          <tr data-d="1-6"><td><span class="en">Mon – Sat evening</span><span class="hi">सोम – शनि शाम</span></td><td>6:00 PM – 8:30 PM</td></tr>
           <tr data-d="0"><td><span class="en">Sunday</span><span class="hi">रविवार</span></td><td>11:00 AM – 12:00 PM</td></tr>
         </table></div></div>
-        <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg><div><a class="phone" href="tel:+918130521456">+91 81305 21456</a></div></div>
-        <p class="areas"><span class="en">Families visit us from Rohini (Sectors 3–24), Pitampura, Prashant Vihar, Vijay Vihar, Budh Vihar, Nangloi and North Delhi.</span><span class="hi">रोहिणी (सेक्टर 3–24), पीतमपुरा, प्रशांत विहार, विजय विहार, बुध विहार, नांगलोई और उत्तर दिल्ली से परिवार आते हैं।</span></p>
-        <button type="button" class="btn btn-primary" data-book><span class="en">Book consultation</span><span class="hi">अपॉइंटमेंट बुक करें</span></button>
+        <div class="row" style="--c:var(--leaf);--soft:var(--leaf-soft)"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span><div><a class="phone" href="tel:+918130521456">+91 81305 21456</a></div></div>
+        <p class="areas"><span class="en">Families come from Rohini (Sectors 3–24), Pitampura, Prashant Vihar, Vijay Vihar, Budh Vihar, Nangloi and North Delhi.</span><span class="hi">रोहिणी (सेक्टर 3–24), पीतमपुरा, प्रशांत विहार, विजय विहार, बुध विहार, नांगलोई और उत्तर दिल्ली से परिवार आते हैं।</span></p>
+        <button type="button" class="btn btn-pink" data-book><span class="en">Book appointment</span><span class="hi">अपॉइंटमेंट बुक करें</span></button>
       </div>
       <div class="map"><iframe title="Clinic location map" src="https://maps.google.com/maps?q=28.7080828,77.1078816&amp;hl=en&amp;z=16&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
     </div>
   </section>
 
-  <section id="connect">
+  <section id="connect" style="padding-top:12px">
     <div class="wrap">
       <div class="sh"><h2><span class="en">Health tips &amp; videos</span><span class="hi">हेल्थ टिप्स और वीडियो</span></h2><p><span class="en">Follow Dr. Dinesh Mittal for regular advice for parents.</span><span class="hi">माता-पिता के लिए नियमित सलाह के लिए फ़ॉलो करें।</span></p></div>
       <div class="social">
-        <a class="soc" href="https://www.instagram.com/dr_dinesh_mittal_child_clinic" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="#c13584" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#c13584"/></svg>Instagram</a>
-        <a class="soc" href="https://youtube.com/@drdmittal" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="4" fill="#e62117"/><path d="M10 9v6l5-3z" fill="#fff"/></svg>YouTube</a>
-        <a class="soc" href="https://www.facebook.com/share/1Thf9ecpvw/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#1877f2"/><path d="M13.5 8H15V5.5h-2c-2 0-3 1.3-3 3.2V10H8v2.6h2V19h2.8v-6.4h2l.4-2.6h-2.4V9c0-.6.3-1 .7-1z" fill="#fff"/></svg>Facebook</a>
-        <a class="soc" href="https://wa.me/918130521456" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#25d366"/><path d="M8 17l.7-2.3A5 5 0 1 1 11 16.6a5 5 0 0 1-1.6-.4z" fill="none" stroke="#fff" stroke-width="1.6"/></svg>WhatsApp</a>
+        <a class="soc" style="--c:#c13584" href="https://www.instagram.com/dr_dinesh_mittal_child_clinic" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#fff"/></svg>Instagram</a>
+        <a class="soc" style="--c:#e62117" href="https://youtube.com/@drdmittal" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="4" fill="#fff"/><path d="M10 9v6l5-3z" fill="#e62117"/></svg>YouTube</a>
+        <a class="soc" style="--c:#1877f2" href="https://www.facebook.com/share/1Thf9ecpvw/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#fff"/><path d="M13.5 8H15V5.5h-2c-2 0-3 1.3-3 3.2V10H8v2.6h2V19h2.8v-6.4h2l.4-2.6h-2.4V9c0-.6.3-1 .7-1z" fill="#1877f2"/></svg>Facebook</a>
+        <a class="soc" style="--c:#1fae5b" href="https://wa.me/918130521456" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 18.8z"/></svg>WhatsApp</a>
       </div>
     </div>
   </section>
@@ -440,15 +429,9 @@ dialog::backdrop{background:rgba(10,18,32,.55)}
 </footer>
 
 <div class="bar">
-  <a class="btn btn-ghost" href="tel:+918130521456"><span class="en">Call clinic</span><span class="hi">कॉल करें</span></a>
-  <button type="button" class="btn btn-primary" data-book><span class="en">Book online</span><span class="hi">ऑनलाइन बुक करें</span></button>
+  <a class="btn btn-line" href="tel:+918130521456"><span class="en">Call</span><span class="hi">कॉल करें</span></a>
+  <button type="button" class="btn btn-pink" data-book><span class="en">Book now</span><span class="hi">बुक करें</span></button>
 </div>
-
-<dialog id="book" aria-labelledby="bookT">
-  <div class="dh"><h3 id="bookT"><span class="en">Book a consultation slot</span><span class="hi">अपॉइंटमेंट का समय बुक करें</span></h3><button type="button" class="dx" data-close aria-label="Close">×</button></div>
-  <iframe class="bookframe" id="bookFrame" title="Booking form" data-src="https://script.google.com/macros/s/AKfycbzZZJon_KvK0ibezOQT0ktfkxIB8-ee_-BnRKra6kvejGrbG1dFjMSD8f9zhR3ZXeWbXA/exec"></iframe>
-  <div class="dh" style="border-top:1px solid var(--line);border-bottom:0"><a href="https://script.google.com/macros/s/AKfycbzZZJon_KvK0ibezOQT0ktfkxIB8-ee_-BnRKra6kvejGrbG1dFjMSD8f9zhR3ZXeWbXA/exec" target="_blank" rel="noopener"><span class="en">Open booking in full screen</span><span class="hi">बुकिंग पूरी स्क्रीन पर खोलें</span> ↗</a></div>
-</dialog>
 
 <dialog id="disclaimer" aria-labelledby="discT">
   <div class="dh"><h3 id="discT"><span class="en">Medical disclaimer</span><span class="hi">चिकित्सा अस्वीकरण</span></h3><button type="button" class="dx" data-close aria-label="Close">×</button></div>
@@ -474,6 +457,7 @@ dialog::backdrop{background:rgba(10,18,32,.55)}
   </div>
 </dialog>
 
+
 <script>
 (function(){
   var root = document.documentElement;
@@ -482,33 +466,31 @@ dialog::backdrop{background:rgba(10,18,32,.55)}
   document.getElementById('langBtn').addEventListener('click', function(){ setLang(root.getAttribute('data-lang')==='hi' ? 'en' : 'hi'); });
 
   // live open / closed status in clinic time (IST)
-  var SLOTS = {0:[[11*60,12*60]], 1:[[600,780],[1080,1230]], 2:[[600,780],[1080,1230]], 3:[[600,780],[1080,1230]], 4:[[600,780],[1080,1230]], 5:[[600,780],[1080,1230]], 6:[[600,780],[1080,1230]]};
+  var SLOTS = {0:[[660,720]], 1:[[600,780],[1080,1230]], 2:[[600,780],[1080,1230]], 3:[[600,780],[1080,1230]], 4:[[600,780],[1080,1230]], 5:[[600,780],[1080,1230]], 6:[[600,780],[1080,1230]]};
   function ist(){ var p = new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Kolkata',weekday:'short',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date()); var o={}; p.forEach(function(x){o[x.type]=x.value;}); var wd={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6}[o.weekday]; return {d:wd, m:(+o.hour%24)*60 + (+o.minute)}; }
   function fmt(m){ var h=Math.floor(m/60), mm=m%60, ap=h>=12?'PM':'AM', h12=((h+11)%12)+1; return h12+(mm?':'+String(mm).padStart(2,'0'):'')+' '+ap; }
   function status(){
     var n = ist(), hi = root.getAttribute('data-lang')==='hi', el = document.getElementById('status'), tx = document.getElementById('statusText');
     var open = (SLOTS[n.d]||[]).filter(function(s){ return n.m>=s[0] && n.m<s[1]; })[0];
-    if(open){ el.className='status open'; tx.textContent = hi ? 'अभी खुला है · '+fmt(open[1])+' तक' : 'Open now · until '+fmt(open[1]); }
+    if(open){ el.className='status'; tx.textContent = hi ? 'क्लिनिक अभी खुला है, '+fmt(open[1])+' तक' : 'Clinic open now, until '+fmt(open[1]); }
     else {
-      var next=null, day=n.d, add=0;
+      var next=null;
       for(var k=0;k<8 && !next;k++){ var dd=(n.d+k)%7; (SLOTS[dd]||[]).forEach(function(s){ if(!next && (k>0 || s[0]>n.m)){ next={s:s[0], k:k, d:dd}; } }); }
       var names = hi ? ['रविवार','सोमवार','मंगलवार','बुधवार','गुरुवार','शुक्रवार','शनिवार'] : ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
       var when = next.k===0 ? (hi?'आज ':'today ') : next.k===1 ? (hi?'कल ':'tomorrow ') : names[next.d]+' ';
-      el.className='status closed'; tx.textContent = hi ? 'अभी बंद है · खुलेगा '+when+fmt(next.s) : 'Closed now · opens '+when+fmt(next.s);
+      el.className='status closed'; tx.textContent = hi ? 'क्लिनिक अभी बंद है, खुलेगा '+when+fmt(next.s) : 'Clinic closed now, opens '+when+'at '+fmt(next.s);
     }
     document.querySelectorAll('#hours tr').forEach(function(tr){ var d=tr.getAttribute('data-d'); var on = d==='0' ? n.d===0 : n.d>=1; tr.classList.toggle('today', on); });
   }
   setLang(saved);
   setInterval(status, 60000);
 
-  // dialogs
-  function openD(id){ var d=document.getElementById(id); if(id==='book'){ var f=document.getElementById('bookFrame'); if(!f.src) f.src=f.getAttribute('data-src'); } if(d.showModal) d.showModal(); else d.setAttribute('open',''); }
   document.addEventListener('click', function(e){
-    var b = e.target.closest('[data-book],[data-open],[data-close]');
     if(e.target.tagName==='DIALOG'){ e.target.close(); return; }
+    var b = e.target.closest('[data-book],[data-open],[data-close]');
     if(!b) return;
     if(b.hasAttribute('data-book')){ if(typeof gtag==='function') gtag('event','book_click'); location.href='book.html'; }
-    else if(b.hasAttribute('data-open')) openD(b.getAttribute('data-open'));
+    else if(b.hasAttribute('data-open')){ var d=document.getElementById(b.getAttribute('data-open')); if(d.showModal) d.showModal(); else d.setAttribute('open',''); }
     else if(b.hasAttribute('data-close')) b.closest('dialog').close();
   });
   document.getElementById('yr').textContent = new Date().getFullYear();

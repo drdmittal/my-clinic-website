@@ -9,33 +9,35 @@
 <meta name="theme-color" content="#1f5fbf">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-768Y52R8SC"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-768Y52R8SC');</script>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%231f5fbf'/%3E%3Ctext x='32' y='40' text-anchor='middle' font-family='Arial' font-size='24' font-weight='800' fill='white'%3EDM%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%232a2580'/%3E%3Ctext x='32' y='40' text-anchor='middle' font-family='Arial' font-size='24' font-weight='800' fill='white'%3EDM%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Mukta:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anek+Devanagari:wdth,wght@75..125,400..800&display=swap">
 <style>
 /* Layout: one narrow column — header, 3 numbered steps (day → time → details), sticky confirm bar; success screen replaces the steps. */
 :root{
-  --paper:#f6f8fc; --surface:#ffffff; --ink:#152238; --muted:#566279; --line:#dfe5ef;
-  --brand:#1f5fbf; --brand-deep:#12407f; --brand-soft:#e6eefb;
+  --paper:#f4f6ff; --surface:#ffffff; --ink:#1c1950; --muted:#565a85; --line:#dde1f4;
+  --brand:#3d36b8; --brand-deep:#2a2580; --brand-soft:#e9e8fb; --pink:#e2457a;
   --marigold:#f2a33a; --marigold-soft:#fff2dc; --marigold-text:#a35d00;
   --leaf:#16803f; --leaf-soft:#e2f4e8; --rose:#c53030; --rose-soft:#fde8e7;
-  --display:'Baloo 2','Mukta',system-ui,sans-serif; --body:'Mukta',system-ui,sans-serif; color-scheme:light;
+  --display:'Anek Devanagari',system-ui,sans-serif; --body:'Anek Devanagari',system-ui,sans-serif; color-scheme:light;
 }
 @media (prefers-color-scheme: dark){:root{
-  --paper:#0e131b; --surface:#161f2b; --ink:#e8edf4; --muted:#9ea9bb; --line:#283446;
-  --brand:#7aaeff; --brand-deep:#123566; --brand-soft:#1a2a42;
+  --paper:#12112b; --surface:#1c1a3d; --ink:#eceafd; --muted:#aeacd2; --line:#2f2c5c;
+  --brand:#a9a4ff; --brand-deep:#2a2580; --brand-soft:#262356; --pink:#e2457a;
   --marigold:#f5b257; --marigold-soft:#352914; --marigold-text:#f5b257;
   --leaf:#58d08d; --leaf-soft:#15301f; --rose:#ff8077; --rose-soft:#3a1c1b; color-scheme:dark}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.45;padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
 html[data-lang="hi"] .en, html:not([data-lang="hi"]) .hi{display:none!important}
 .wrap{max-width:640px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-h1,h2,h3{font-family:var(--display);line-height:1.12;margin:0;text-wrap:balance}
+h1,h2,h3{font-family:var(--display);font-weight:800;font-stretch:112%;line-height:1.12;margin:0;text-wrap:balance}
 p{margin:0}
 a{color:var(--brand)}
 :focus-visible{outline:3px solid var(--marigold);outline-offset:3px}
-.nav{background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}
+.nav{background:#2a2580;color:#fff;position:sticky;top:0;z-index:10}
+.nav .logo,.nav .logo b{color:#fff}.nav .logo span{color:rgba(255,255,255,.8)}
+.nav .lang{background:rgba(255,255,255,.14);border-color:transparent;color:#fff}
 .nav .wrap{display:flex;align-items:center;gap:10px;min-height:60px}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);min-width:0;flex:1}
 .logo svg{width:38px;height:38px;flex:none}
@@ -87,12 +89,12 @@ input:focus{outline:3px solid var(--brand);outline-offset:1px;border-color:var(-
 .tick input{width:24px;height:24px;flex:none;accent-color:var(--leaf);margin-top:2px}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .err{color:var(--rose);font-weight:700;font-size:15px;min-height:20px}
-.bar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--surface);border-top:1px solid var(--line);padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.bar{position:fixed;left:var(--dmr-w,0px);right:0;bottom:0;z-index:20;background:var(--surface);border-top:1px solid var(--line);padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
 .bar .wrap{display:flex;align-items:center;gap:12px;padding:0}
 .sum{flex:1;min-width:0;font-size:14.5px;line-height:1.25;color:var(--muted)}
 .sum b{display:block;color:var(--ink);font:800 16px var(--display);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;min-height:52px;padding:0 22px;font:700 18px var(--display);cursor:pointer;text-decoration:none}
-.btn-primary{background:var(--brand);color:#fff}
+.btn-primary{background:var(--pink);color:#fff;box-shadow:inset 0 -4px 0 rgba(0,0,0,.18)}
 .btn-ghost{background:var(--surface);color:var(--ink);border:1.5px solid var(--line)}
 .btn:disabled{opacity:.45;cursor:not-allowed}
 .spin{width:18px;height:18px;border-radius:50%;border:3px solid rgba(255,255,255,.4);border-top-color:#fff;animation:rot .8s linear infinite}
@@ -112,10 +114,11 @@ input:focus{outline:3px solid var(--brand);outline-offset:1px;border-color:var(-
 .foot{margin-top:24px;color:var(--muted);font-size:14px;text-align:center}
 @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}.check path{stroke-dashoffset:0}}
 </style>
+<script src="/site-nav.js" defer></script>
 </head>
 <body>
 <header class="nav"><div class="wrap">
-  <a class="logo" href="index.html"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#1f5fbf"/><text x="32" y="39" text-anchor="middle" font-family="Baloo 2, Mukta, sans-serif" font-size="22" font-weight="800" fill="#fff">DM</text><path d="M20 48 q12 8 24 0" stroke="#f2a33a" stroke-width="2.5" fill="none" stroke-linecap="round"/><circle cx="44" cy="48" r="3" fill="#f2a33a"/></svg><span><b>Dr. Dinesh Mittal</b><span class="en">Child Specialist · Rohini</span><span class="hi">शिशु रोग विशेषज्ञ · रोहिणी</span></span></a>
+  <a class="logo" href="index.html"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#fff"/><text x="32" y="39" text-anchor="middle" font-family="Anek Devanagari, sans-serif" font-size="21" font-weight="800" fill="#2a2580">DM</text></svg><span><b>Dr. Dinesh Mittal</b><span class="en">Child Specialist, Rohini</span><span class="hi">शिशु रोग विशेषज्ञ, रोहिणी</span></span></a>
   <button type="button" class="lang" id="langBtn"><span class="en">हिन्दी</span><span class="hi">English</span></button>
 </div></header>
 
@@ -150,7 +153,7 @@ input:focus{outline:3px solid var(--brand);outline-offset:1px;border-color:var(-
     </form>
   </section>
 
-  <p class="foot">Dr. Dinesh Mittal Child Clinic · H-34/69, Sector 3, Rohini, Delhi 110085 · <a href="tel:+918130521456">+91 81305 21456</a></p>
+  <p class="foot">Dr. Dinesh Mittal Child Clinic, H-34/69, Sector 3, Rohini, Delhi 110085<br><a href="tel:+918130521456">+91 81305 21456</a></p>
 </main>
 
 <div class="bar" id="bar"><div class="wrap">
@@ -242,7 +245,7 @@ input:focus{outline:3px solid var(--brand);outline-offset:1px;border-color:var(-
     box.innerHTML = state.days.map(function(d){
       var n = openCount(d), p = dayParts(d.date);
       var sub = d.closed ? t('Closed','बंद') : d.blockedMsg && !n ? t('Not available','उपलब्ध नहीं') : n ? n+' '+t('slots','स्लॉट') : t('Full','भरा');
-      return '<button type="button" class="day" data-day="'+d.date+'" aria-pressed="'+(d.date===state.day)+'"'+(n?'':' disabled')+'><b>'+p.name+'</b><span class="dt">'+p.num+'</span><small>'+p.mon+' · '+sub+'</small></button>';
+      return '<button type="button" class="day" data-day="'+d.date+'" aria-pressed="'+(d.date===state.day)+'"'+(n?'':' disabled')+'><b>'+p.name+'</b><span class="dt">'+p.num+'</span><small>'+p.mon+'</small><small>'+sub+'</small></button>';
     }).join('');
     var sel = box.querySelector('[aria-pressed="true"]'); if(sel && sel.scrollIntoView) sel.scrollIntoView({block:'nearest', inline:'nearest'});
   }
@@ -255,7 +258,7 @@ input:focus{outline:3px solid var(--brand);outline-offset:1px;border-color:var(-
     var icons = {morning:'☀', afternoon:'☀', evening:'☾'};
     d.sessions.forEach(function(s){
       var title = s.name==='morning' ? t('Morning','सुबह') : s.name==='afternoon' ? t('Afternoon','दोपहर') : t('Evening','शाम');
-      h += '<div class="sess"><h3><span aria-hidden="true">'+icons[s.name]+'</span>'+title+' · '+s.from+' – '+s.to+'</h3><div class="slots">';
+      h += '<div class="sess"><h3><span aria-hidden="true">'+icons[s.name]+'</span>'+title+', '+s.from+' – '+s.to+'</h3><div class="slots">';
       s.slots.forEach(function(x){
         var open = x.state==='open' && x.left>0;
         var sub = open ? (x.left===1 ? t('1 left','1 बचा') : x.left+' '+t('left','बचे')) : x.state==='blocked' ? t('Unavailable','उपलब्ध नहीं') : x.state==='past' ? t('Closed','बंद') : t('Full','भरा');
@@ -270,7 +273,7 @@ input:focus{outline:3px solid var(--brand);outline-offset:1px;border-color:var(-
     var sum = document.getElementById('sum'), go = document.getElementById('go');
     if(state.day && state.slot){
       var s = findSlot(state.day, state.slot), p = dayParts(state.day);
-      sum.innerHTML = '<b>'+p.name+', '+p.num+' '+p.mon+' · '+(s?s.label:state.slot)+'</b>'+t('Fill in the details, then confirm','जानकारी भरें, फिर पक्का करें');
+      sum.innerHTML = '<b>'+p.name+', '+p.num+' '+p.mon+', '+(s?s.label:state.slot)+'</b>'+t('Fill in the details, then confirm','जानकारी भरें, फिर पक्का करें');
       go.disabled = false;
     } else {
       sum.innerHTML = '<b>'+t('No time selected','समय नहीं चुना')+'</b>'+t('Pick a day and a time slot','दिन और समय चुनें');
