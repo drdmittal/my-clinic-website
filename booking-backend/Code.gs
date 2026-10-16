@@ -57,6 +57,8 @@ var DEFAULT_SETTINGS = [
   ['LEGACY_PHONE_COL', 'D', 'Column with the phone number in the old tab'],
   ['LEGACY_STATUS_COL', 'H', 'Column with the status in the old tab'],
   ['LEGACY_ACTIVE_STATUS', 'Confirmed', 'Status text that means the old booking is still active'],
+  ['NOTICE', '', 'Message shown at the top of the booking page (each line shows separately). Edit it from the doctor panel.'],
+  ['NOTICE_UNTIL', '', 'Hide the message after this date (YYYY-MM-DD). Empty = keep showing'],
   ['WA_ENABLED', 'NO', 'YES after WhatsApp Cloud API is set up'],
   ['WA_TOKEN', '', 'Permanent access token from Meta (keep private)'],
   ['WA_PHONE_NUMBER_ID', '', 'Phone number ID from Meta WhatsApp settings'],
@@ -175,6 +177,28 @@ function settings() {
   return s;
 }
 
+/* Message for parents on the booking page */
+function noticeDate(v) {
+  if (v instanceof Date) return Utilities.formatDate(v, TZ, 'yyyy-MM-dd');
+  var t = String(v || '').trim();
+  return /^\d{4}-\d{2}-\d{2}$/.test(t) ? t : '';
+}
+function activeNotice(s) {
+  var text = String(s.NOTICE || '').trim();
+  if (!text) return '';
+  var until = noticeDate(s.NOTICE_UNTIL);
+  if (until && Utilities.formatDate(new Date(), TZ, 'yyyy-MM-dd') > until) return '';
+  return text;
+}
+function setSetting(key, value) {
+  var st = SS().getSheetByName(TAB_SETTINGS);
+  var keys = st.getRange(2, 1, Math.max(1, st.getLastRow() - 1), 1).getValues();
+  for (var i = 0; i < keys.length; i++) {
+    if (String(keys[i][0]).trim() === key) { st.getRange(i + 2, 2).setNumberFormat('@').setValue(value); return; }
+  }
+  st.appendRow([key, value, '']);
+}
+
 function clampNum(v, lo, hi, def) {
   var n = Number(v);
   if (!isFinite(n)) return def;
@@ -291,7 +315,7 @@ function getSlots(from, days) {
     day.closed = !sessions.length;
     outDays.push(day);
   }
-  return { ok: true, slotMinutes: s.SLOT_MINUTES, whatsapp: String(s.WA_ENABLED).toUpperCase() === 'YES', days: outDays, clinic: { name: s.CLINIC_NAME, phone: s.CLINIC_PHONE, address: s.CLINIC_ADDRESS } };
+  return { ok: true, slotMinutes: s.SLOT_MINUTES, notice: activeNotice(s), whatsapp: String(s.WA_ENABLED).toUpperCase() === 'YES', days: outDays, clinic: { name: s.CLINIC_NAME, phone: s.CLINIC_PHONE, address: s.CLINIC_ADDRESS } };
 }
 
 /* ------------------------------------------------------------------ book */
@@ -390,7 +414,15 @@ function admin(b) {
     var bl = blocks().filter(function (x) { return x.to > now; }).map(function (x) {
       return { row: x.row, from: Utilities.formatDate(x.from, TZ, "EEE d MMM, h:mm a"), to: Utilities.formatDate(x.to, TZ, "EEE d MMM, h:mm a"), msg: x.msg };
     });
-    return { ok: true, settings: editable, blocks: bl, whatsapp: String(s.WA_ENABLED).toUpperCase() === 'YES' };
+    return { ok: true, settings: editable, blocks: bl, notice: String(s.NOTICE || ''), noticeUntil: noticeDate(s.NOTICE_UNTIL), noticeLive: !!activeNotice(s), whatsapp: String(s.WA_ENABLED).toUpperCase() === 'YES' };
+  }
+
+  if (b.action === 'admin_notice') {
+    var text = String(b.notice || '').replace(/\r/g, '').split('\n').map(function (l) { return cleanText(l, 200); }).filter(String).slice(0, 5).join('\n');
+    var until = /^\d{4}-\d{2}-\d{2}$/.test(String(b.until || '')) ? String(b.until) : '';
+    setSetting('NOTICE', text);
+    setSetting('NOTICE_UNTIL', until);
+    return { ok: true, notice: text, noticeUntil: until };
   }
 
   if (b.action === 'admin_save_settings') {
