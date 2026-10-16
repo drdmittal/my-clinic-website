@@ -62,14 +62,19 @@ a{color:var(--brand)}
 .sess{display:flex;flex-direction:column;gap:8px}
 .sess h3{font-size:16px;color:var(--muted);font-family:var(--body);font-weight:700;display:flex;align-items:center;gap:6px}
 .slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(102px,1fr));gap:8px}
-.slot{border:2px solid var(--line);background:var(--surface);color:var(--ink);border-radius:14px;padding:8px 6px;min-height:56px;cursor:pointer;font-family:var(--body);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0}
+.slot{border:2px solid var(--g);background:var(--gs);color:var(--ink);border-radius:14px;padding:8px 6px;min-height:52px;cursor:pointer;font-family:var(--body);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;--g:#2fa84f;--gs:#e4f6e8}
 .slot b{font:800 16px var(--display);font-variant-numeric:tabular-nums}
-.slot small{font-size:12px;color:var(--leaf);font-weight:700}
-.slot.few small{color:var(--marigold-text)}
-.slot[aria-pressed="true"]{border-color:var(--brand);background:var(--brand);color:#fff}
-.slot[aria-pressed="true"] small{color:#fff}
-.slot:disabled{background:var(--paper);color:var(--muted);cursor:not-allowed;border-style:dashed}
-.slot:disabled small{color:var(--muted)}
+.slot small{font-size:12px;font-weight:700;color:var(--muted)}
+.slot.few{--g:#f08a1c;--gs:#fff0dd}
+.slot[aria-pressed="true"]{border-color:var(--brand);background:var(--brand);color:#fff;box-shadow:0 0 0 3px var(--brand-soft)}
+.slot:disabled{background:var(--paper);color:var(--muted);cursor:not-allowed;border:2px dashed var(--line)}
+.slot.full:disabled{border:2px solid #f1b3b3;background:#fdeaea;color:#a33}
+.slot.full:disabled small{color:#a33}
+@media (prefers-color-scheme: dark){.slot{--gs:#173a20}.slot.few{--gs:#3d2a10}.slot.full:disabled{background:#3a1c1c;border-color:#7a3434;color:#ffb0b0}.slot.full:disabled small{color:#ffb0b0}}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;color:var(--muted);margin:-2px 0 8px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:14px;height:14px;border-radius:4px;display:inline-block;border:2px solid}
+.day small i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;vertical-align:1px}
 .note{border-radius:14px;padding:10px 12px;font-size:15.5px}
 .note.warn{background:var(--marigold-soft)} .note.bad{background:var(--rose-soft)} .note.good{background:var(--leaf-soft)} .note.info{background:var(--brand-soft)}
 .skel{height:56px;border-radius:14px;background:linear-gradient(90deg,var(--paper),var(--line),var(--paper));background-size:200% 100%;animation:sh 1.2s linear infinite}
@@ -244,7 +249,9 @@ input:focus{outline:3px solid var(--brand);outline-offset:1px;border-color:var(-
     var box = document.getElementById('days');
     box.innerHTML = state.days.map(function(d){
       var n = openCount(d), p = dayParts(d.date);
-      var sub = d.closed ? t('Closed','बंद') : d.blockedMsg && !n ? t('Not available','उपलब्ध नहीं') : n ? n+' '+t('slots','स्लॉट') : t('Full','भरा');
+      var tot = 0; d.sessions.forEach(function(s){ s.slots.forEach(function(x){ if(x.state!=='past' && x.state!=='blocked') tot++; }); });
+      var sub = d.closed ? t('Closed','बंद') : d.blockedMsg && !n ? t('Not available','उपलब्ध नहीं') : !n ? t('Full','भरा')
+        : (n <= Math.max(2, tot*0.25) ? '<i style="background:#f08a1c"></i>'+t('Filling up','भर रहा है') : '<i style="background:#2fa84f"></i>'+t('Available','उपलब्ध'));
       return '<button type="button" class="day" data-day="'+d.date+'" aria-pressed="'+(d.date===state.day)+'"'+(n?'':' disabled')+'><b>'+p.name+'</b><span class="dt">'+p.num+'</span><small>'+p.mon+'</small><small>'+sub+'</small></button>';
     }).join('');
     var sel = box.querySelector('[aria-pressed="true"]'); if(sel && sel.scrollIntoView) sel.scrollIntoView({block:'nearest', inline:'nearest'});
@@ -253,16 +260,21 @@ input:focus{outline:3px solid var(--brand);outline-offset:1px;border-color:var(-
     var box = document.getElementById('slotsBox');
     var d = state.days.filter(function(x){ return x.date===state.day; })[0];
     if(!d){ box.innerHTML = '<p class="note warn">'+t('No days are open for booking right now. Please call the clinic.','अभी बुकिंग के लिए कोई दिन उपलब्ध नहीं है। कृपया क्लिनिक को कॉल करें।')+'</p>'; return; }
-    var h = '';
+    var h = '<div class="legend"><span><i style="background:#e4f6e8;border-color:#2fa84f"></i>'+t('Available','उपलब्ध')+'</span><span><i style="background:#fff0dd;border-color:#f08a1c"></i>'+t('Filling up','भर रहा है')+'</span><span><i style="background:#fdeaea;border-color:#f1b3b3"></i>'+t('Full','भरा')+'</span></div>';
     if(d.blockedMsg) h += '<p class="note warn">'+escapeHtml(d.blockedMsg)+'</p>';
     var icons = {morning:'☀', afternoon:'☀', evening:'☾'};
     d.sessions.forEach(function(s){
+      if(s.slots.every(function(x){ return x.state==='past'; })) return; // session already over today
       var title = s.name==='morning' ? t('Morning','सुबह') : s.name==='afternoon' ? t('Afternoon','दोपहर') : t('Evening','शाम');
       h += '<div class="sess"><h3><span aria-hidden="true">'+icons[s.name]+'</span>'+title+', '+s.from+' – '+s.to+'</h3><div class="slots">';
       s.slots.forEach(function(x){
+        if(x.state==='past') return; // hide times already gone
         var open = x.state==='open' && x.left>0;
-        var sub = open ? (x.left===1 ? t('1 left','1 बचा') : x.left+' '+t('left','बचे')) : x.state==='blocked' ? t('Unavailable','उपलब्ध नहीं') : x.state==='past' ? t('Closed','बंद') : t('Full','भरा');
-        h += '<button type="button" class="slot'+(open && x.left===1 ? ' few':'')+'" data-slot="'+x.time+'" aria-pressed="'+(x.time===state.slot)+'"'+(open?'':' disabled')+'><b>'+x.label+'</b><small>'+sub+'</small></button>';
+        // colour only, no numbers: green = free, orange = filling up, red = full
+        var few = open && (x.cap ? x.left/x.cap <= 0.5 : x.left===1);
+        var sub = open ? '' : x.state==='blocked' ? t('Unavailable','उपलब्ध नहीं') : x.state==='past' ? t('Closed','बंद') : t('Full','भरा');
+        var aria = open ? (few ? t('filling up','भर रहा है') : t('available','उपलब्ध')) : sub;
+        h += '<button type="button" class="slot'+(few?' few':'')+(x.state==='full'?' full':'')+'" data-slot="'+x.time+'" aria-label="'+x.label+', '+aria+'" aria-pressed="'+(x.time===state.slot)+'"'+(open?'':' disabled')+'><b>'+x.label+'</b>'+(sub?'<small>'+sub+'</small>':'')+'</button>';
       });
       h += '</div></div>';
     });
