@@ -44,18 +44,18 @@ The tick stays hidden on the website until WhatsApp is switched on (WA_ENABLED =
 
 1. **business.facebook.com** → create a business portfolio (name: Dr. Dinesh Mittal Child Clinic).
 2. **developers.facebook.com** → My Apps → Create app → choose the WhatsApp use case → connect it to the business portfolio.
-3. In the app: **WhatsApp → API Setup → Add phone number**. Use a number that is **not** on the WhatsApp app (a new SIM, or delete WhatsApp from that number first). Verify it by OTP and set the display name "Dr. Dinesh Mittal Child Clinic".
+3. In the app: **WhatsApp → API Setup → Add phone number**. Use the **new SIM bought only for these messages**. Do not install WhatsApp on it. The clinic number 81305 21456 stays on WhatsApp Business for staff. Keep the new SIM recharged so it stays active. Verify it by OTP and set the display name "Dr. Dinesh Mittal Child Clinic".
 4. **WhatsApp Manager → Payment settings**: add a card (each message costs well under ₹1).
 5. **WhatsApp Manager → Message templates**: create these three, Category **Utility**, Language **English**. Each has three variables: {{1}} child name, {{2}} date, {{3}} time.
 
    **appointment_confirmed**
-   > Appointment confirmed. {{1}} has an appointment with Dr. Dinesh Mittal on {{2}} at {{3}}. Clinic: H-34/69, Sector 3, Rohini, Delhi. Please arrive 10 minutes early and bring the vaccination card. To change or cancel, call +91 81305 21456.
+   > Appointment confirmed. {{1}} has an appointment with Dr. Dinesh Mittal on {{2}} at {{3}}. Clinic: H-34/69, Sector 3, Rohini, Delhi. Please arrive 10 minutes early and bring the vaccination card. This is an automatic message. To change or cancel, or for any query, WhatsApp or call +91 81305 21456.
 
    **appointment_reminder**
-   > Reminder: {{1}} has an appointment with Dr. Dinesh Mittal tomorrow, {{2}} at {{3}}. Clinic: H-34/69, Sector 3, Rohini, Delhi. To change or cancel, call +91 81305 21456.
+   > Reminder: {{1}} has an appointment with Dr. Dinesh Mittal tomorrow, {{2}} at {{3}}. Clinic: H-34/69, Sector 3, Rohini, Delhi. This is an automatic message. To change or cancel, or for any query, WhatsApp or call +91 81305 21456.
 
    **appointment_cancelled**
-   > Sorry, Dr. Dinesh Mittal is not available for {{1}}'s appointment on {{2}} at {{3}}. Please book another time at childspecialistrohini.com/book.html or call +91 81305 21456.
+   > Sorry, Dr. Dinesh Mittal is not available for {{1}}'s appointment on {{2}} at {{3}}. Please book another time at childspecialistrohini.com/book.html. This is an automatic message. For any query, WhatsApp or call +91 81305 21456.
 
 6. **Permanent token:** business.facebook.com → Settings → Users → **System users** → Add (Admin) → Assign assets: the app and the WhatsApp account (full control) → **Generate token** → expiry **Never** → permissions `whatsapp_business_messaging` and `whatsapp_business_management` → copy the token.
 7. From **WhatsApp → API Setup**, copy the **Phone number ID** (a number, not the phone number itself).
