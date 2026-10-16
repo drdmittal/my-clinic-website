@@ -37,6 +37,7 @@ To update the code later, repeat step 3 and step 8. The link never changes.
   - *Message:* text shown in a yellow box at the top of the booking page, with an optional date after which it hides.
   - *Block time:* quick buttons (rest of today, morning, evening, tomorrow) or any period with a message for parents. Optionally cancel bookings already made in that period.
   - *Slot settings:* slot length, patients per slot, days ahead, OPD timings per day. `18:00-20:30@3` allows 3 per slot in that session only.
+- **Staff access:** in *Slot settings → Staff PIN*, set a separate PIN for staff. With it they see only *Appointments* (list, walk-ins, cancel) and *Block time*. Remove it any time to lock staff out.
 - Everything is also visible and editable directly in the Google Sheet (tabs Booking Settings, Blocked Times, Online Bookings).
 
 ## C. WhatsApp confirmations and reminders (after Meta setup)

@@ -119,13 +119,14 @@ textarea{min-height:120px;resize:vertical;line-height:1.45}
     document.getElementById('pin').focus();
   }
   function shell(){
-    root.innerHTML = '<header><div class="wrap"><div><b>Doctor Panel</b><br><span>Online booking control</span></div><div class="sp"></div><a class="hbtn" href="book.html" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center">Booking page ↗</a><button class="hbtn" id="logout">Lock</button></div></header>'+
+    root.innerHTML = '<header><div class="wrap"><div><b>'+(S.role==='staff'?'Clinic Staff':'Doctor Panel')+'</b><br><span>'+(S.role==='staff'?'Appointments & walk-ins':'Online booking control')+'</span></div><div class="sp"></div><a class="hbtn" href="book.html" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center">Booking page ↗</a><button class="hbtn" id="logout">Lock</button></div></header>'+
       '<div class="wrap"><div class="tabs" role="tablist">'+
-      ['appts','Appointments','notice','Message','block','Block time','settings','Slot settings'].reduce(function(a,v,i,arr){ if(i%2) return a; return a+'<button class="tab" role="tab" data-tab="'+v+'" aria-selected="'+(S.tab===v)+'">'+arr[i+1]+'</button>'; },'')+
+      (S.role==='staff' ? ['appts','Appointments','block','Block time'] : ['appts','Appointments','notice','Message','block','Block time','settings','Slot settings']).reduce(function(a,v,i,arr){ if(i%2) return a; return a+'<button class="tab" role="tab" data-tab="'+v+'" aria-selected="'+(S.tab===v)+'">'+arr[i+1]+'</button>'; },'')+
       '</div><div id="view"></div></div>';
     view();
   }
   function view(){
+    if(S.role==='staff' && (S.tab==='notice' || S.tab==='settings')) S.tab='appts';
     document.querySelectorAll('.tab').forEach(function(t){ t.setAttribute('aria-selected', String(t.dataset.tab===S.tab)); });
     if(S.tab==='appts') return appts();
     if(S.tab==='block') return blockView();
@@ -258,6 +259,9 @@ textarea{min-height:120px;resize:vertical;line-height:1.45}
         '<div class="card"><h3>OPD timings</h3><p class="muted">Format: <b>10:00-13:00, 18:00-20:30</b> (24-hour). Leave a day empty if closed. To allow a different number per slot in one session, add @ and the number, e.g. <b>18:00-20:30@3</b>.</p>'+
         DAYN.map(function(d){ return '<div class="dayrow"><b>'+d[1]+'</b><input id="ses_'+d[0]+'" type="text" value="'+esc(s['SESSIONS_'+d[0]]||'')+'" placeholder="Closed"></div>'; }).join('')+
         '<div class="row"><button type="button" class="btn ghost sm" id="copyMon">Copy Monday to Tue–Sat</button></div></div>'+
+        '<div class="card"><h3>Staff PIN</h3><p class="muted">Staff open this same app with their own PIN. They can see appointments, add walk-ins, cancel bookings and block time. They cannot change the message for parents, these settings or any PIN.</p>'+
+        '<p class="msg'+(S.staffPinSet?' ok':'')+'" id="spState">'+(S.staffPinSet?'Staff PIN is set ✓':'No staff PIN yet. Staff cannot log in.')+'</p>'+
+        '<div class="row"><input id="spin" type="text" inputmode="numeric" maxlength="8" placeholder="New staff PIN (4–8 digits)" style="max-width:240px"><button type="button" class="btn sm" id="saveSpin">Save staff PIN</button>'+(S.staffPinSet?'<button type="button" class="btn ghost sm" id="clearSpin">Remove staff access</button>':'')+'</div><p class="msg" id="spmsg"></p></div>'+
         '<div class="card"><button class="btn" id="saveSet">Save settings</button><p class="msg" id="smsg"></p><p class="muted">Changes apply to the booking page immediately. Existing bookings are not changed.</p></div>';
     });
   }
@@ -270,15 +274,15 @@ textarea{min-height:120px;resize:vertical;line-height:1.45}
     post({action:'admin_save_settings', settings:vals}).then(function(r){ btn.disabled=false; if(!r.ok) return fail(r,out); out.className='msg ok'; out.textContent='Saved ✓'; S.settings = Object.assign(S.settings, vals); }).catch(function(){ btn.disabled=false; net(); });
   }
 
-  function loadMeta(cb){ post({action:'admin_load'}).then(function(r){ if(!r.ok) return fail(r); S.notice=r.notice||''; S.noticeUntil=r.noticeUntil||''; S.noticeLive=!!r.noticeLive; S.settings=r.settings; S.blocks=r.blocks; S.wa=r.whatsapp; cb&&cb(); }).catch(net); }
-  function fail(r, el){ if(r.error==='wrong_pin'){ S.pin=''; try{sessionStorage.removeItem('drPanelPin');}catch(e){} return gate('Wrong PIN. Try again.'); } var m = 'Could not complete: '+(r.error||'error'); if(el){ el.className='msg err'; el.textContent=m; } else alertBox(m); }
+  function loadMeta(cb){ post({action:'admin_load'}).then(function(r){ if(!r.ok) return fail(r); S.notice=r.notice||''; S.noticeUntil=r.noticeUntil||''; S.noticeLive=!!r.noticeLive; S.role=r.role||'doctor'; S.staffPinSet=!!r.staffPinSet; S.settings=r.settings; S.blocks=r.blocks; S.wa=r.whatsapp; cb&&cb(); }).catch(net); }
+  function fail(r, el){ if(r.error==='wrong_pin'){ S.pin=''; try{sessionStorage.removeItem('drPanelPin');}catch(e){} return gate('Wrong PIN. Try again.'); } var m = r.error==='doctor_only' ? 'Only the doctor can change this.' : r.error==='unknown_action' ? 'Could not complete: the Google script needs updating (see setup steps).' : r.error==='staff_pin_same' ? 'Staff PIN must be different from your own PIN.' : 'Could not complete: '+(r.error||'error'); if(el){ el.className='msg err'; el.textContent=m; } else alertBox(m); }
   function net(){ alertBox('No connection to the booking system. Check the internet and try again.'); }
   function alertBox(m){ var v=document.getElementById('view'); if(v) v.insertAdjacentHTML('afterbegin','<div class="card" style="background:var(--rose-soft)">'+esc(m)+'</div>'); }
 
   document.addEventListener('submit', function(e){
     if(e.target.id!=='pinForm') return; e.preventDefault();
     S.pin = document.getElementById('pin').value.trim(); if(!S.pin) return;
-    post({action:'admin_load'}).then(function(r){ if(!r.ok) return fail(r); S.settings=r.settings; S.blocks=r.blocks; S.wa=r.whatsapp; try{ sessionStorage.setItem('drPanelPin', S.pin); }catch(x){} shell(); }).catch(function(){ gate('Could not reach the booking system.'); });
+    post({action:'admin_load'}).then(function(r){ if(!r.ok) return fail(r); S.role=r.role||'doctor'; S.staffPinSet=!!r.staffPinSet; S.settings=r.settings; S.blocks=r.blocks; S.wa=r.whatsapp; try{ sessionStorage.setItem('drPanelPin', S.pin); }catch(x){} shell(); }).catch(function(){ gate('Could not reach the booking system.'); });
   });
   document.addEventListener('input', function(e){ if(e.target.id==='nt') prev(); });
   document.addEventListener('change', function(e){ if(e.target.id==='pick' && e.target.value){ S.date=e.target.value; appts(); } });
@@ -300,6 +304,14 @@ textarea{min-height:120px;resize:vertical;line-height:1.45}
     if(b.dataset.ps){ var o=document.getElementById('ps'); o.textContent = Math.max(1, Math.min(10, +o.textContent + +b.dataset.ps)); return; }
     if(b.id==='copyMon'){ var mv=document.getElementById('ses_MON').value; ['TUE','WED','THU','FRI','SAT'].forEach(function(k){ document.getElementById('ses_'+k).value = mv; }); return; }
     if(b.id==='saveSet') return saveSettings();
+    if(b.id==='saveSpin' || b.id==='clearSpin'){
+      var clear = b.id==='clearSpin', v = clear ? '' : document.getElementById('spin').value.trim(), o = document.getElementById('spmsg');
+      if(!clear && !/^\d{4,8}$/.test(v)){ o.className='msg err'; o.textContent='Use 4 to 8 digits.'; return; }
+      if(!clear && v===S.pin){ o.className='msg err'; o.textContent='Staff PIN must be different from your own PIN.'; return; }
+      b.disabled = true;
+      post({action:'admin_staff_pin', staffPin:v}).then(function(r){ b.disabled=false; if(!r.ok) return fail(r,o); S.staffPinSet=!!r.staffPinSet; settingsView(); setTimeout(function(){ var m=document.getElementById('spmsg'); if(m){ m.className='msg ok'; m.textContent = clear ? 'Staff access removed. The old staff PIN no longer works.' : 'Saved ✓ Give this PIN to your staff: '+v; } }, 600); }).catch(function(){ b.disabled=false; net(); });
+      return;
+    }
     if(b.id==='walkBtn') return walkView();
     if(b.id==='walkClose'){ document.getElementById('walk').hidden = true; return; }
     if(b.dataset.wk) return addWalkin(b.dataset.wk, b);
@@ -312,19 +324,20 @@ textarea{min-height:120px;resize:vertical;line-height:1.45}
   var DM = { settings:{SLOT_MINUTES:15,PER_SLOT:2,DAYS_AHEAD:7,MIN_NOTICE_MINUTES:30,SESSIONS_MON:'10:00-13:00, 18:00-20:30',SESSIONS_TUE:'10:00-13:00, 18:00-20:30',SESSIONS_WED:'10:00-13:00, 18:00-20:30',SESSIONS_THU:'10:00-13:00, 18:00-20:30',SESSIONS_FRI:'10:00-13:00, 18:00-20:30',SESSIONS_SAT:'10:00-13:00, 18:00-20:30',SESSIONS_SUN:'11:00-12:00'}, blocks:[{row:2, from:'Mon 20 Oct, 10:00 AM', to:'Mon 27 Oct, 8:30 PM', msg:'Dr. Mittal is on leave. Clinic reopens on 28 Oct.'}],
     appts:[['10:00','Aarav Sharma','3 yrs','Neha Sharma','9810012345','Fever / cough / cold','YES'],['10:00','Myra Gupta','8 months','Rohit Gupta','9899012345','Vaccination','YES'],['10:15','Kabir Jain','6 yrs','Pooja Jain','9711012345','Stomach problem','NO'],['10:45','Anaya Singh','1.5 yrs','','9958012345','Follow-up','YES'],['18:00','Vivaan Arora','10 yrs','Sunil Arora','9873012345','Growth / routine check','NO'],['18:15','Ishaan Bansal','4 yrs','Ritu Bansal','9650012345','Fever / cough / cold','YES']] };
   function demo(b){ return new Promise(function(res){ setTimeout(function(){
-    if(b.action==='admin_load') return res({ok:true, settings:DM.settings, blocks:DM.blocks, whatsapp:true, notice:DM.notice||'', noticeUntil:DM.until||'', noticeLive:!!DM.notice});
+    if(b.action==='admin_load') return res({ok:true, role: b.pin==='2' ? 'staff' : 'doctor', staffPinSet: !!DM.spin, settings:DM.settings, blocks:DM.blocks, whatsapp:true, notice:DM.notice||'', noticeUntil:DM.until||'', noticeLive:!!DM.notice});
     if(b.action==='admin_day'){ var p=b.date.split('-'); var d=new Date(+p[0],+p[1]-1,+p[2]); return res({ok:true, date:b.date, dateLabel:d.toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short',year:'numeric'}), bookings: DM.appts.map(function(a,i){ var h=+a[0].slice(0,2), m=a[0].slice(3); return {row:i+2, id:'DM'+b.date.slice(2).replace(/-/g,'')+'-'+(4100+i*37), time:a[0], timeLabel:(((h+11)%12)+1)+':'+m+' '+(h>=12?'PM':'AM'), child:a[1], age:a[2], parent:a[3], phone:a[4], reason:a[5], wa:a[6], status: DM['cx'+i] ? 'Cancelled' : 'Booked'}; })}); }
     if(b.action==='admin_cancel'){ DM['cx'+(b.row-2)] = true; return res({ok:true}); }
     if(b.action==='admin_block'){ DM.blocks.push({row:DM.blocks.length+2, from:b.from.replace('T',' ').slice(0,16), to:b.to.replace('T',' ').slice(0,16), msg:b.message||'Dr. Mittal is not available at this time.'}); return res({ok:true, affected:[], cancelled:0, notified:0}); }
     if(b.action==='admin_unblock'){ DM.blocks = DM.blocks.filter(function(x){ return x.row!==b.row; }); return res({ok:true}); }
     if(b.action==='admin_walkin_slots'){ var sl=[]; for(var m=18*60;m<20.5*60;m+=15){ var h=Math.floor(m/60),mm=m%60; var tk=(DM.wk&&DM.wk[m]!=null)?DM.wk[m]:(m%45===0?1:0); sl.push({time:String(h).padStart(2,'0')+':'+String(mm).padStart(2,'0'), label:(((h+11)%12)+1)+':'+String(mm).padStart(2,'0')+' PM', cap:2, taken:tk, left:2-tk, blocked:false, now:m===18*60}); } return res({ok:true, slots:sl}); }
     if(b.action==='admin_walkin'){ var pt=b.time.split(':'); DM.wk=DM.wk||{}; var k=+pt[0]*60+ +pt[1]; DM.wk[k]=(DM.wk[k]!=null?DM.wk[k]:(k%45===0?1:0))+1; DM.appts.push([b.time,'Walk-in','','','','','NO']); return res({ok:true, timeLabel:b.time}); }
+    if(b.action==='admin_staff_pin'){ DM.spin=b.staffPin; return res({ok:true, staffPinSet:!!b.staffPin}); }
     if(b.action==='admin_save_settings'){ Object.assign(DM.settings, b.settings); return res({ok:true}); }
     if(b.action==='admin_notice'){ DM.notice=b.notice; DM.until=b.until; return res({ok:true, notice:b.notice, noticeUntil:b.until}); }
     res({ok:false});
   }, 300); }); }
 
-  if(S.pin) { post({action:'admin_load'}).then(function(r){ if(!r.ok) return gate(); S.settings=r.settings; S.blocks=r.blocks; S.wa=r.whatsapp; shell(); }).catch(function(){ gate(); }); }
+  if(S.pin) { post({action:'admin_load'}).then(function(r){ if(!r.ok) return gate(); S.role=r.role||'doctor'; S.staffPinSet=!!r.staffPinSet; S.settings=r.settings; S.blocks=r.blocks; S.wa=r.whatsapp; shell(); }).catch(function(){ gate(); }); }
   else gate();
 })();
 </script>

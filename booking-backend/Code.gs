@@ -47,6 +47,7 @@ var DEFAULT_SETTINGS = [
   ['SESSIONS_SUN', '11:00-12:00', 'Leave empty for a closed day'],
   ['MAX_BOOKINGS_PER_PHONE_PER_DAY', 3, 'Stops one number filling many slots'],
   ['ADMIN_PIN', '4321', 'PIN for the doctor panel — CHANGE THIS'],
+  ['STAFF_PIN', '', 'PIN for clinic staff (appointments, walk-ins, cancel, block time). Empty = no staff access'],
   ['CLINIC_NAME', 'Dr. Dinesh Mittal Child Clinic', ''],
   ['CLINIC_PHONE', '+91 81305 21456', ''],
   ['CLINIC_ADDRESS', 'H-34/69, Sector 3, Rohini, Delhi 110085', ''],
@@ -404,7 +405,13 @@ function toMin(t) { var p = t.split(':'); return +p[0] * 60 + +p[1]; }
 
 function admin(b) {
   var s = settings();
-  if (!b.pin || String(b.pin) !== String(s.ADMIN_PIN)) { Utilities.sleep(1200); return { ok: false, error: 'wrong_pin' }; }
+  var pin = String(b.pin || '').trim();
+  var role = pin && pin === String(s.ADMIN_PIN).trim() ? 'doctor'
+    : (pin && String(s.STAFF_PIN || '').trim() && pin === String(s.STAFF_PIN).trim() ? 'staff' : '');
+  if (!role) { Utilities.sleep(1200); return { ok: false, error: 'wrong_pin' }; }
+  // staff can see and manage appointments, walk-ins and blocked time; only the doctor changes the message, settings and PINs
+  var STAFF_OK = ['admin_load', 'admin_day', 'admin_cancel', 'admin_walkin_slots', 'admin_walkin', 'admin_block', 'admin_unblock'];
+  if (role === 'staff' && STAFF_OK.indexOf(b.action) < 0) return { ok: false, error: 'doctor_only' };
   var ss = SS();
 
   if (b.action === 'admin_load') {
@@ -414,7 +421,7 @@ function admin(b) {
     var bl = blocks().filter(function (x) { return x.to > now; }).map(function (x) {
       return { row: x.row, from: Utilities.formatDate(x.from, TZ, "EEE d MMM, h:mm a"), to: Utilities.formatDate(x.to, TZ, "EEE d MMM, h:mm a"), msg: x.msg };
     });
-    return { ok: true, settings: editable, blocks: bl, notice: String(s.NOTICE || ''), noticeUntil: noticeDate(s.NOTICE_UNTIL), noticeLive: !!activeNotice(s), whatsapp: String(s.WA_ENABLED).toUpperCase() === 'YES' };
+    return { ok: true, role: role, staffPinSet: !!String(s.STAFF_PIN || '').trim(), settings: editable, blocks: bl, notice: String(s.NOTICE || ''), noticeUntil: noticeDate(s.NOTICE_UNTIL), noticeLive: !!activeNotice(s), whatsapp: String(s.WA_ENABLED).toUpperCase() === 'YES' };
   }
 
   /* Walk-in: staff fill a place in a slot so it cannot be booked online. No name or phone needed. */
@@ -457,6 +464,14 @@ function admin(b) {
     setSetting('NOTICE', text);
     setSetting('NOTICE_UNTIL', until);
     return { ok: true, notice: text, noticeUntil: until };
+  }
+
+  if (b.action === 'admin_staff_pin') {
+    var sp = String(b.staffPin || '').trim();
+    if (sp && !/^\d{4,8}$/.test(sp)) return { ok: false, error: 'staff_pin_digits' };
+    if (sp && sp === String(s.ADMIN_PIN).trim()) return { ok: false, error: 'staff_pin_same' };
+    setSetting('STAFF_PIN', sp);
+    return { ok: true, staffPinSet: !!sp };
   }
 
   if (b.action === 'admin_save_settings') {
