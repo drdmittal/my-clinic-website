@@ -46,6 +46,13 @@ var DEFAULT_SETTINGS = [
   ['CLINIC_NAME', 'Dr. Dinesh Mittal Child Clinic', ''],
   ['CLINIC_PHONE', '+91 81305 21456', ''],
   ['CLINIC_ADDRESS', 'H-34/69, Sector 3, Rohini, Delhi 110085', ''],
+  ['LEGACY_TAB', 'APPOINTMENTS', 'Old booking tab whose upcoming bookings still occupy slots (leave empty to ignore)'],
+  ['LEGACY_DATE_COL', 'E', 'Column with the date in the old tab'],
+  ['LEGACY_TIME_COL', 'F', 'Column with the time (e.g. 18:45) in the old tab'],
+  ['LEGACY_NAME_COL', 'B', 'Column with the child name in the old tab'],
+  ['LEGACY_PHONE_COL', 'D', 'Column with the phone number in the old tab'],
+  ['LEGACY_STATUS_COL', 'H', 'Column with the status in the old tab'],
+  ['LEGACY_ACTIVE_STATUS', 'Confirmed', 'Status text that means the old booking is still active'],
   ['WA_ENABLED', 'NO', 'YES after WhatsApp Cloud API is set up'],
   ['WA_TOKEN', '', 'Permanent access token from Meta (keep private)'],
   ['WA_PHONE_NUMBER_ID', '', 'Phone number ID from Meta WhatsApp settings'],
@@ -210,6 +217,36 @@ function bookingRows() {
   });
 }
 
+/** Upcoming bookings made with the old form (so the same slot is not booked twice). */
+function legacyRows() {
+  var s = settings();
+  var tab = String(s.LEGACY_TAB || '').trim();
+  if (!tab) return [];
+  var sh = SS().getSheetByName(tab);
+  if (!sh || sh.getLastRow() < 2) return [];
+  function colIdx(letter) { var L = String(letter || '').trim().toUpperCase(); var n = 0; for (var i = 0; i < L.length; i++) n = n * 26 + (L.charCodeAt(i) - 64); return n - 1; }
+  var cD = colIdx(s.LEGACY_DATE_COL), cT = colIdx(s.LEGACY_TIME_COL), cN = colIdx(s.LEGACY_NAME_COL), cP = colIdx(s.LEGACY_PHONE_COL), cS = colIdx(s.LEGACY_STATUS_COL);
+  var active = String(s.LEGACY_ACTIVE_STATUS || 'Confirmed').trim().toLowerCase();
+  var today = ymd(new Date());
+  var width = Math.max(cD, cT, cN, cP, cS) + 1;
+  var raw = sh.getRange(2, 1, sh.getLastRow() - 1, width).getValues();
+  var disp = sh.getRange(2, 1, sh.getLastRow() - 1, width).getDisplayValues();
+  var out = [];
+  for (var i = 0; i < raw.length; i++) {
+    var dv = raw[i][cD], date = '';
+    if (dv instanceof Date) date = ymd(dv);
+    else { var m = String(disp[i][cD]).match(/(\d{4})-(\d{1,2})-(\d{1,2})/); if (m) date = m[1] + '-' + pad(+m[2]) + '-' + pad(+m[3]); }
+    if (!date || date < today) continue;
+    if (cS >= 0 && String(disp[i][cS]).trim().toLowerCase() !== active) continue;
+    var tv = raw[i][cT], time = '';
+    if (tv instanceof Date) time = Utilities.formatDate(tv, TZ, 'HH:mm');
+    else { var t = String(disp[i][cT]).match(/(\d{1,2}):(\d{2})\s*(AM|PM)?/i); if (t) { var h = +t[1]; if (t[3]) { h = h % 12 + (/pm/i.test(t[3]) ? 12 : 0); } time = pad(h) + ':' + t[2]; } }
+    if (!time) continue;
+    out.push({ date: date, time: time, child: String(disp[i][cN] || ''), phone: String(disp[i][cP] || '').replace(/\D/g, '').slice(-10), row: i + 2 });
+  }
+  return out;
+}
+
 function isActive(r) { return String(r[COL.status]).indexOf('Booked') === 0; }
 
 /* ------------------------------------------------------------------ slots */
@@ -222,6 +259,7 @@ function getSlots(from, days) {
   var lastDay = addDays(today, s.DAYS_AHEAD - 1);
   var counts = {};
   bookingRows().forEach(function (r) { if (isActive(r)) { var k = r[COL.date] + ' ' + r[COL.time]; counts[k] = (counts[k] || 0) + 1; } });
+  legacyRows().forEach(function (r) { var k = r.date + ' ' + r.time; counts[k] = (counts[k] || 0) + 1; });
   var bl = blocks();
   var now = new Date();
   var outDays = [];
@@ -361,7 +399,11 @@ function admin(b) {
     var d = /^\d{4}-\d{2}-\d{2}$/.test(String(b.date)) ? String(b.date) : ymd(new Date());
     var list = bookingRows().filter(function (r) { return r[COL.date] === d; }).map(function (r) {
       return { row: r.row, id: r[COL.id], time: r[COL.time], timeLabel: label(toMin(r[COL.time])), child: r[COL.child], age: r[COL.age], parent: r[COL.parent], phone: r[COL.phone], reason: r[COL.reason], status: r[COL.status], wa: r[COL.wa] };
-    }).sort(function (a, c) { return a.time < c.time ? -1 : a.time > c.time ? 1 : 0; });
+    });
+    legacyRows().filter(function (r) { return r.date === d; }).forEach(function (r) {
+      list.push({ row: 0, id: 'Old form', time: r.time, timeLabel: label(toMin(r.time)), child: r.child, age: '', parent: '', phone: r.phone, reason: '', status: 'Booked (old form)', wa: 'NO', legacy: true });
+    });
+    list.sort(function (a, c) { return a.time < c.time ? -1 : a.time > c.time ? 1 : 0; });
     return { ok: true, date: d, dateLabel: prettyDate(d), bookings: list };
   }
 
