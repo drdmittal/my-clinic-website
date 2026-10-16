@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Doctor Panel | Dr. Dinesh Mittal Clinic</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%2312407f'/%3E%3Ctext x='32' y='40' text-anchor='middle' font-family='Arial' font-size='24' font-weight='800' fill='white'%3EDM%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Mukta:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: PIN gate, then a tabbed control panel (Appointments / Block time / Slot settings) in one column with a sticky header. */
+:root{
+  --paper:#f4f6fa; --surface:#ffffff; --ink:#152238; --muted:#566279; --line:#dfe5ef;
+  --brand:#1f5fbf; --brand-deep:#12407f; --brand-soft:#e6eefb;
+  --marigold-soft:#fff2dc; --marigold-text:#a35d00; --leaf:#16803f; --leaf-soft:#e2f4e8; --rose:#c53030; --rose-soft:#fde8e7;
+  --display:'Baloo 2','Mukta',system-ui,sans-serif; --body:'Mukta',system-ui,sans-serif; color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root{
+  --paper:#0e131b; --surface:#161f2b; --ink:#e8edf4; --muted:#9ea9bb; --line:#283446;
+  --brand:#7aaeff; --brand-deep:#0f2a52; --brand-soft:#1a2a42;
+  --marigold-soft:#352914; --marigold-text:#f5b257; --leaf:#58d08d; --leaf-soft:#15301f; --rose:#ff8077; --rose-soft:#3a1c1b; color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16.5px;line-height:1.45}
+.wrap{max-width:820px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);line-height:1.15;margin:0}
+p{margin:0}
+a{color:var(--brand)}
+:focus-visible{outline:3px solid #f2a33a;outline-offset:2px}
+header{position:sticky;top:0;z-index:5;background:var(--brand-deep);color:#fff}
+header .wrap{display:flex;align-items:center;gap:12px;min-height:58px}
+header b{font:800 19px var(--display)}
+header span{font-size:13px;opacity:.85}
+header .sp{flex:1}
+.hbtn{border:1px solid rgba(255,255,255,.35);background:transparent;color:#fff;border-radius:999px;min-height:36px;padding:0 12px;font:600 14px var(--body);cursor:pointer}
+.tabs{display:flex;gap:6px;padding:12px 0;position:sticky;top:58px;background:var(--paper);z-index:4;overflow-x:auto}
+.tab{border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;min-height:42px;padding:0 16px;font:700 15px var(--body);cursor:pointer;white-space:nowrap}
+.tab[aria-selected="true"]{background:var(--brand);border-color:var(--brand);color:#fff}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:12px;margin-bottom:12px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:0;border-radius:12px;min-height:46px;padding:0 16px;font:700 16px var(--display);cursor:pointer;background:var(--brand);color:#fff;text-decoration:none}
+.btn.ghost{background:var(--surface);color:var(--ink);border:1.5px solid var(--line)}
+.btn.red{background:var(--rose);color:#fff}
+.btn.sm{min-height:38px;font-size:14.5px;padding:0 12px}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+label{display:flex;flex-direction:column;gap:4px;font-weight:600;font-size:14.5px}
+input,select{font:500 17px var(--body);color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;min-height:46px;width:100%}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:10px}
+.muted{color:var(--muted);font-size:14.5px}
+.msg{font-weight:700;min-height:22px}
+.msg.ok{color:var(--leaf)} .msg.err{color:var(--rose)}
+.datebar{display:flex;align-items:center;gap:8px}
+.datebar h2{flex:1;text-align:center;font-size:20px}
+.stats{display:flex;gap:8px;flex-wrap:wrap}
+.pill{border-radius:999px;padding:3px 12px;font-weight:700;font-size:14px;background:var(--brand-soft);color:var(--brand)}
+.pill.g{background:var(--leaf-soft);color:var(--leaf)} .pill.r{background:var(--rose-soft);color:var(--rose)}
+.appt{display:grid;grid-template-columns:76px 1fr auto;gap:10px;align-items:start;padding:10px 0;border-top:1px solid var(--line)}
+.appt:first-child{border-top:0}
+.appt time{font:800 17px var(--display);font-variant-numeric:tabular-nums;color:var(--brand)}
+.appt b{font-size:17px}
+.appt .sub{font-size:14px;color:var(--muted)}
+.appt.cx{opacity:.55}
+.appt.cx b{text-decoration:line-through}
+.confirm{background:var(--rose-soft);border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:8px;grid-column:1/-1}
+.blk{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.blk:first-child{border-top:0}
+.quick{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(170px,100%),1fr));gap:8px}
+.quick .btn{background:var(--marigold-soft);color:var(--marigold-text);font-size:15px}
+.tick{flex-direction:row;align-items:flex-start;gap:10px;font-weight:500}
+.tick input{width:22px;height:22px;min-height:0;flex:none;margin-top:2px}
+.stepper{display:grid;grid-template-columns:46px 1fr 46px;gap:6px;align-items:center}
+.stepper button{min-height:46px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font:800 22px var(--display);cursor:pointer}
+.stepper output{text-align:center;font:800 24px var(--display)}
+.dayrow{display:grid;grid-template-columns:56px 1fr;gap:10px;align-items:center}
+.dayrow b{font:800 16px var(--display)}
+.gate{max-width:380px;margin:12vh auto 0;text-align:center}
+.gate input{text-align:center;font-size:28px;letter-spacing:.3em;font-weight:800}
+.affected{background:var(--marigold-soft);border-radius:12px;padding:10px;font-size:15px}
+.loading{padding:20px;text-align:center;color:var(--muted)}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="booking-config.js"></script>
+<script>
+(function(){
+  var API = (window.BOOKING_API||'').trim();
+  var DEMO = /[?&]demo=1/.test(location.search) || window.BOOKING_DEMO;
+  var S = { pin:'', tab:'appts', date:today(), data:null, day:null, blocks:[], wa:false };
+  try{ S.pin = sessionStorage.getItem('drPanelPin') || ''; }catch(e){}
+  var root = document.getElementById('root');
+
+  function today(){ var d=new Date(); return d.getFullYear()+'-'+p2(d.getMonth()+1)+'-'+p2(d.getDate()); }
+  function p2(n){ return String(n).padStart(2,'0'); }
+  function addDays(ds,n){ var p=ds.split('-'), d=new Date(+p[0],+p[1]-1,+p[2]+n); return d.getFullYear()+'-'+p2(d.getMonth()+1)+'-'+p2(d.getDate()); }
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  function post(body){ body.pin = S.pin; if(DEMO) return demo(body); return fetch(API,{method:'POST',body:JSON.stringify(body)}).then(function(r){return r.json();}); }
+
+  if(!API && !DEMO){ root.innerHTML = '<div class="wrap gate card"><h1>Doctor Panel</h1><p>The new booking system is not connected yet. Once the Google script is deployed, its URL goes into booking-config.js.</p></div>'; return; }
+
+  function gate(err){
+    root.innerHTML = '<div class="wrap gate"><div class="card"><h1>Doctor Panel</h1><p class="muted">Dr. Dinesh Mittal Child Clinic</p><form id="pinForm" style="display:flex;flex-direction:column;gap:10px"><label for="pin">Enter PIN<input id="pin" type="password" inputmode="numeric" autocomplete="current-password" maxlength="12"></label><button class="btn" type="submit">Open panel</button><p class="msg err">'+(err||'')+'</p></form>'+(DEMO?'<p class="muted">Preview: any PIN works.</p>':'')+'</div></div>';
+    document.getElementById('pin').focus();
+  }
+  function shell(){
+    root.innerHTML = '<header><div class="wrap"><div><b>Doctor Panel</b><br><span>Online booking control</span></div><div class="sp"></div><a class="hbtn" href="book.html" target="_blank" rel="noopener" style="text-decoration:none;display:inline-flex;align-items:center">Booking page ↗</a><button class="hbtn" id="logout">Lock</button></div></header>'+
+      '<div class="wrap"><div class="tabs" role="tablist">'+
+      ['appts','Appointments','block','Block time','settings','Slot settings'].reduce(function(a,v,i,arr){ if(i%2) return a; return a+'<button class="tab" role="tab" data-tab="'+v+'" aria-selected="'+(S.tab===v)+'">'+arr[i+1]+'</button>'; },'')+
+      '</div><div id="view"></div></div>';
+    view();
+  }
+  function view(){
+    document.querySelectorAll('.tab').forEach(function(t){ t.setAttribute('aria-selected', String(t.dataset.tab===S.tab)); });
+    if(S.tab==='appts') return appts();
+    if(S.tab==='block') return blockView();
+    return settingsView();
+  }
+
+  /* ---------- appointments */
+  function appts(){
+    var v = document.getElementById('view');
+    v.innerHTML = '<div class="card"><div class="datebar"><button class="btn ghost sm" data-nav="-1" aria-label="Previous day">◀</button><h2 id="dl">…</h2><button class="btn ghost sm" data-nav="1" aria-label="Next day">▶</button></div><div class="row"><input type="date" id="pick" value="'+S.date+'" style="max-width:200px"><button class="btn ghost sm" data-nav="0">Today</button></div><div class="stats" id="stats"></div></div><div class="card" id="list"><p class="loading">Loading…</p></div>';
+    post({action:'admin_day', date:S.date}).then(function(r){
+      if(!r.ok) return fail(r);
+      S.day = r;
+      document.getElementById('dl').textContent = r.dateLabel;
+      var act = r.bookings.filter(function(b){ return /^Booked/.test(b.status); }), cx = r.bookings.length - act.length;
+      document.getElementById('stats').innerHTML = '<span class="pill">'+act.length+' booked</span>'+(cx?'<span class="pill r">'+cx+' cancelled</span>':'')+'<span class="pill g">'+act.filter(function(b){return b.wa==='YES';}).length+' on WhatsApp</span>';
+      var L = document.getElementById('list');
+      if(!r.bookings.length){ L.innerHTML = '<p class="muted">No online bookings for this day.</p>'; return; }
+      L.innerHTML = r.bookings.map(function(b){
+        var on = /^Booked/.test(b.status);
+        return '<div class="appt'+(on?'':' cx')+'" data-row="'+b.row+'"><time>'+esc(b.timeLabel)+'</time><div><b>'+esc(b.child)+'</b>'+(b.age?' <span class="sub">· '+esc(b.age)+'</span>':'')+'<div class="sub">'+(b.parent?esc(b.parent)+' · ':'')+'<a href="tel:+91'+esc(b.phone)+'">'+esc(b.phone)+'</a>'+(b.reason?' · '+esc(b.reason):'')+'</div><div class="sub">'+esc(b.id)+(on?'':' · '+esc(b.status))+'</div></div>'+(on?'<button class="btn ghost sm" data-cx="'+b.row+'" data-id="'+esc(b.id)+'">Cancel</button>':'<span></span>')+'</div>';
+      }).join('');
+    }).catch(net);
+  }
+
+  /* ---------- block */
+  function blockView(){
+    var v = document.getElementById('view'), t = today(), tm = addDays(t,1);
+    v.innerHTML = '<div class="card"><h3>Quick block</h3><div class="quick">'+
+      '<button class="btn" data-q="rest">Rest of today</button><button class="btn" data-q="tm-m">Today morning</button><button class="btn" data-q="tm-e">Today evening</button><button class="btn" data-q="tomorrow">Whole tomorrow</button>'+
+      '</div></div>'+
+      '<div class="card"><h3>Block a period (leave, conference, busy hours)</h3><div class="grid2">'+
+      '<label for="bf">From<input id="bf" type="datetime-local" value="'+t+'T10:00"></label><label for="bt">To<input id="bt" type="datetime-local" value="'+t+'T13:00"></label></div>'+
+      '<label for="bm">Message shown to parents<input id="bm" type="text" maxlength="200" placeholder="Dr. Mittal is on leave. Clinic reopens on …"></label>'+
+      '<label class="tick" for="bc"><input id="bc" type="checkbox"><span>Also cancel bookings already made in this period'+(S.wa?' and inform parents on WhatsApp':' (call parents to inform them)')+'</span></label>'+
+      '<button class="btn" id="doBlock">Block this time</button><p class="msg" id="bmsg"></p><div id="aff"></div></div>'+
+      '<div class="card"><h3>Current & upcoming blocks</h3><div id="blist"><p class="loading">Loading…</p></div></div>';
+    loadMeta(function(){
+      var L = document.getElementById('blist');
+      L.innerHTML = S.blocks.length ? S.blocks.map(function(b){ return '<div class="blk"><div><b>'+esc(b.from)+' → '+esc(b.to)+'</b><div class="muted">'+esc(b.msg)+'</div></div><button class="btn ghost sm" data-unb="'+b.row+'">Remove</button></div>'; }).join('') : '<p class="muted">Nothing blocked. All timings are open for booking.</p>';
+    });
+  }
+  function quick(q){
+    var t = today(), tm = addDays(t,1), n = new Date(), hh = p2(n.getHours())+':'+p2(n.getMinutes());
+    var m = { rest:[t+'T'+hh, t+'T23:59','Dr. Mittal is not available for the rest of today.'], 'tm-m':[t+'T00:00', t+'T14:00','Morning OPD is closed today.'], 'tm-e':[t+'T14:00', t+'T23:59','Evening OPD is closed today.'], tomorrow:[tm+'T00:00', tm+'T23:59','Dr. Mittal is not available tomorrow.'] }[q];
+    document.getElementById('bf').value = m[0]; document.getElementById('bt').value = m[1]; document.getElementById('bm').value = m[2];
+    document.getElementById('bmsg').className='msg'; document.getElementById('bmsg').textContent = 'Check the times and message, then tap “Block this time”.';
+  }
+  function doBlock(){
+    var f = document.getElementById('bf').value, to = document.getElementById('bt').value, msg = document.getElementById('bm').value, out = document.getElementById('bmsg');
+    if(!f || !to || to <= f){ out.className='msg err'; out.textContent = '“To” must be after “From”.'; return; }
+    var btn = document.getElementById('doBlock'); btn.disabled = true;
+    post({action:'admin_block', from:f+':00', to:to+':00', message:msg, cancelAffected:document.getElementById('bc').checked}).then(function(r){
+      btn.disabled = false;
+      if(!r.ok) return fail(r, out);
+      out.className='msg ok'; out.textContent = 'Blocked. Parents will see your message on the booking page.';
+      var a = r.affected || [];
+      document.getElementById('aff').innerHTML = a.length ? '<div class="affected"><b>'+a.length+' booking(s) fall in this period'+(r.cancelled?' — cancelled'+(r.notified?', '+r.notified+' informed on WhatsApp':''):'')+':</b><br>'+a.map(function(x){ return esc(x.date)+' '+esc(x.time)+' · '+esc(x.child)+' · <a href="tel:+91'+esc(x.phone)+'">'+esc(x.phone)+'</a>'; }).join('<br>')+(r.cancelled&&!r.notified?'<br>Please call these parents.':'')+'</div>' : '';
+      loadMeta(function(){ blockView.list(); });
+    }).catch(function(){ btn.disabled=false; net(); });
+  }
+  blockView.list = function(){ var L=document.getElementById('blist'); if(L) L.innerHTML = S.blocks.length ? S.blocks.map(function(b){ return '<div class="blk"><div><b>'+esc(b.from)+' → '+esc(b.to)+'</b><div class="muted">'+esc(b.msg)+'</div></div><button class="btn ghost sm" data-unb="'+b.row+'">Remove</button></div>'; }).join('') : '<p class="muted">Nothing blocked. All timings are open for booking.</p>'; };
+
+  /* ---------- settings */
+  var DAYN = [['MON','Mon'],['TUE','Tue'],['WED','Wed'],['THU','Thu'],['FRI','Fri'],['SAT','Sat'],['SUN','Sun']];
+  function settingsView(){
+    var v = document.getElementById('view');
+    v.innerHTML = '<div class="card"><p class="loading">Loading…</p></div>';
+    loadMeta(function(){
+      var s = S.settings;
+      v.innerHTML = '<div class="card"><h3>Slots</h3><div class="grid2">'+
+        '<label for="sl">Slot length<select id="sl">'+[10,15,20,30].map(function(n){ return '<option value="'+n+'"'+(+s.SLOT_MINUTES===n?' selected':'')+'>'+n+' minutes</option>'; }).join('')+'</select></label>'+
+        '<div><span style="font-weight:600;font-size:14.5px">Patients per slot</span><div class="stepper"><button type="button" data-ps="-1" aria-label="Fewer">−</button><output id="ps">'+(+s.PER_SLOT)+'</output><button type="button" data-ps="1" aria-label="More">+</button></div></div>'+
+        '<label for="da">Parents can book up to<select id="da">'+[3,5,7,10,14,21,30].map(function(n){ return '<option value="'+n+'"'+(+s.DAYS_AHEAD===n?' selected':'')+'>'+n+' days ahead</option>'; }).join('')+'</select></label>'+
+        '<label for="mn">Close a slot before it starts<select id="mn">'+[0,15,30,60,120].map(function(n){ return '<option value="'+n+'"'+(+s.MIN_NOTICE_MINUTES===n?' selected':'')+'>'+(n?n+' minutes before':'Keep open till it starts')+'</option>'; }).join('')+'</select></label>'+
+        '</div></div>'+
+        '<div class="card"><h3>OPD timings</h3><p class="muted">Format: <b>10:00-13:00, 18:00-20:30</b> (24-hour). Leave a day empty if closed. To allow a different number per slot in one session, add @ and the number, e.g. <b>18:00-20:30@3</b>.</p>'+
+        DAYN.map(function(d){ return '<div class="dayrow"><b>'+d[1]+'</b><input id="ses_'+d[0]+'" type="text" value="'+esc(s['SESSIONS_'+d[0]]||'')+'" placeholder="Closed"></div>'; }).join('')+
+        '<div class="row"><button type="button" class="btn ghost sm" id="copyMon">Copy Monday to Tue–Sat</button></div></div>'+
+        '<div class="card"><button class="btn" id="saveSet">Save settings</button><p class="msg" id="smsg"></p><p class="muted">Changes apply to the booking page immediately. Existing bookings are not changed.</p></div>';
+    });
+  }
+  function saveSettings(){
+    var out = document.getElementById('smsg'), vals = { SLOT_MINUTES:document.getElementById('sl').value, PER_SLOT:document.getElementById('ps').textContent, DAYS_AHEAD:document.getElementById('da').value, MIN_NOTICE_MINUTES:document.getElementById('mn').value };
+    var bad = '';
+    DAYN.forEach(function(d){ var x = document.getElementById('ses_'+d[0]).value.trim(); vals['SESSIONS_'+d[0]] = x; if(x && !/^(\s*\d{1,2}:\d{2}\s*-\s*\d{1,2}:\d{2}(\s*@\s*\d+)?\s*)(,\s*\d{1,2}:\d{2}\s*-\s*\d{1,2}:\d{2}(\s*@\s*\d+)?\s*)*$/.test(x)) bad = d[1]; });
+    if(bad){ out.className='msg err'; out.textContent = 'Please check the timings for '+bad+'. Example: 10:00-13:00, 18:00-20:30'; return; }
+    var btn = document.getElementById('saveSet'); btn.disabled = true;
+    post({action:'admin_save_settings', settings:vals}).then(function(r){ btn.disabled=false; if(!r.ok) return fail(r,out); out.className='msg ok'; out.textContent='Saved ✓'; S.settings = Object.assign(S.settings, vals); }).catch(function(){ btn.disabled=false; net(); });
+  }
+
+  function loadMeta(cb){ post({action:'admin_load'}).then(function(r){ if(!r.ok) return fail(r); S.settings=r.settings; S.blocks=r.blocks; S.wa=r.whatsapp; cb&&cb(); }).catch(net); }
+  function fail(r, el){ if(r.error==='wrong_pin'){ S.pin=''; try{sessionStorage.removeItem('drPanelPin');}catch(e){} return gate('Wrong PIN. Try again.'); } var m = 'Could not complete: '+(r.error||'error'); if(el){ el.className='msg err'; el.textContent=m; } else alertBox(m); }
+  function net(){ alertBox('No connection to the booking system. Check the internet and try again.'); }
+  function alertBox(m){ var v=document.getElementById('view'); if(v) v.insertAdjacentHTML('afterbegin','<div class="card" style="background:var(--rose-soft)">'+esc(m)+'</div>'); }
+
+  document.addEventListener('submit', function(e){
+    if(e.target.id!=='pinForm') return; e.preventDefault();
+    S.pin = document.getElementById('pin').value.trim(); if(!S.pin) return;
+    post({action:'admin_load'}).then(function(r){ if(!r.ok) return fail(r); S.settings=r.settings; S.blocks=r.blocks; S.wa=r.whatsapp; try{ sessionStorage.setItem('drPanelPin', S.pin); }catch(x){} shell(); }).catch(function(){ gate('Could not reach the booking system.'); });
+  });
+  document.addEventListener('change', function(e){ if(e.target.id==='pick' && e.target.value){ S.date=e.target.value; appts(); } });
+  document.addEventListener('click', function(e){
+    var b = e.target.closest('button'); if(!b) return;
+    if(b.id==='logout'){ S.pin=''; try{sessionStorage.removeItem('drPanelPin');}catch(x){} return gate(); }
+    if(b.dataset.tab){ S.tab=b.dataset.tab; return view(); }
+    if(b.dataset.nav!==undefined){ S.date = b.dataset.nav==='0' ? today() : addDays(S.date, +b.dataset.nav); return appts(); }
+    if(b.dataset.cx){
+      var row = b.closest('.appt'); if(row.querySelector('.confirm')) return;
+      row.insertAdjacentHTML('beforeend','<div class="confirm"><b>Cancel this booking?</b>'+(S.wa?'<label class="tick"><input type="checkbox" class="notify" checked> Inform the parent on WhatsApp</label>':'<span class="muted">Please call the parent to inform them.</span>')+'<div class="row"><button class="btn red sm" data-yes="'+b.dataset.cx+'" data-id="'+b.dataset.id+'">Yes, cancel</button><button class="btn ghost sm" data-no="1">Keep</button></div></div>');
+      return;
+    }
+    if(b.dataset.no){ b.closest('.confirm').remove(); return; }
+    if(b.dataset.yes){ var n = b.closest('.confirm').querySelector('.notify'); b.disabled=true; post({action:'admin_cancel', row:+b.dataset.yes, id:b.dataset.id, notify: n?n.checked:false}).then(function(r){ if(!r.ok) return fail(r); appts(); }).catch(net); return; }
+    if(b.dataset.q){ return quick(b.dataset.q); }
+    if(b.id==='doBlock') return doBlock();
+    if(b.dataset.unb){ b.disabled=true; post({action:'admin_unblock', row:+b.dataset.unb}).then(function(r){ if(!r.ok) return fail(r); loadMeta(function(){ blockView.list(); }); }).catch(net); return; }
+    if(b.dataset.ps){ var o=document.getElementById('ps'); o.textContent = Math.max(1, Math.min(10, +o.textContent + +b.dataset.ps)); return; }
+    if(b.id==='copyMon'){ var mv=document.getElementById('ses_MON').value; ['TUE','WED','THU','FRI','SAT'].forEach(function(k){ document.getElementById('ses_'+k).value = mv; }); return; }
+    if(b.id==='saveSet') return saveSettings();
+  });
+
+  /* ---------- demo backend for previews */
+  var DM = { settings:{SLOT_MINUTES:15,PER_SLOT:2,DAYS_AHEAD:7,MIN_NOTICE_MINUTES:30,SESSIONS_MON:'10:00-13:00, 18:00-20:30',SESSIONS_TUE:'10:00-13:00, 18:00-20:30',SESSIONS_WED:'10:00-13:00, 18:00-20:30',SESSIONS_THU:'10:00-13:00, 18:00-20:30',SESSIONS_FRI:'10:00-13:00, 18:00-20:30',SESSIONS_SAT:'10:00-13:00, 18:00-20:30',SESSIONS_SUN:'11:00-12:00'}, blocks:[{row:2, from:'Mon 20 Oct, 10:00 AM', to:'Mon 27 Oct, 8:30 PM', msg:'Dr. Mittal is on leave. Clinic reopens on 28 Oct.'}],
+    appts:[['10:00','Aarav Sharma','3 yrs','Neha Sharma','9810012345','Fever / cough / cold','YES'],['10:00','Myra Gupta','8 months','Rohit Gupta','9899012345','Vaccination','YES'],['10:15','Kabir Jain','6 yrs','Pooja Jain','9711012345','Stomach problem','NO'],['10:45','Anaya Singh','1.5 yrs','','9958012345','Follow-up','YES'],['18:00','Vivaan Arora','10 yrs','Sunil Arora','9873012345','Growth / routine check','NO'],['18:15','Ishaan Bansal','4 yrs','Ritu Bansal','9650012345','Fever / cough / cold','YES']] };
+  function demo(b){ return new Promise(function(res){ setTimeout(function(){
+    if(b.action==='admin_load') return res({ok:true, settings:DM.settings, blocks:DM.blocks, whatsapp:true});
+    if(b.action==='admin_day'){ var p=b.date.split('-'); var d=new Date(+p[0],+p[1]-1,+p[2]); return res({ok:true, date:b.date, dateLabel:d.toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short',year:'numeric'}), bookings: DM.appts.map(function(a,i){ var h=+a[0].slice(0,2), m=a[0].slice(3); return {row:i+2, id:'DM'+b.date.slice(2).replace(/-/g,'')+'-'+(4100+i*37), time:a[0], timeLabel:(((h+11)%12)+1)+':'+m+' '+(h>=12?'PM':'AM'), child:a[1], age:a[2], parent:a[3], phone:a[4], reason:a[5], wa:a[6], status: DM['cx'+i] ? 'Cancelled' : 'Booked'}; })}); }
+    if(b.action==='admin_cancel'){ DM['cx'+(b.row-2)] = true; return res({ok:true}); }
+    if(b.action==='admin_block'){ DM.blocks.push({row:DM.blocks.length+2, from:b.from.replace('T',' ').slice(0,16), to:b.to.replace('T',' ').slice(0,16), msg:b.message||'Dr. Mittal is not available at this time.'}); return res({ok:true, affected:[], cancelled:0, notified:0}); }
+    if(b.action==='admin_unblock'){ DM.blocks = DM.blocks.filter(function(x){ return x.row!==b.row; }); return res({ok:true}); }
+    if(b.action==='admin_save_settings'){ Object.assign(DM.settings, b.settings); return res({ok:true}); }
+    res({ok:false});
+  }, 300); }); }
+
+  if(S.pin) { post({action:'admin_load'}).then(function(r){ if(!r.ok) return gate(); S.settings=r.settings; S.blocks=r.blocks; S.wa=r.whatsapp; shell(); }).catch(function(){ gate(); }); }
+  else gate();
+})();
+</script>
+</body>
+</html>

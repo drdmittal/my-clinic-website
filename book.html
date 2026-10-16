@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Book Appointment | Dr. Dinesh Mittal, Child Specialist, Rohini</title>
+<meta name="description" content="Book a consultation with Dr. Dinesh Mittal, Child Specialist in Sector 3, Rohini, Delhi. Choose a time slot online in under a minute.">
+<link rel="canonical" href="https://childspecialistrohini.com/book.html">
+<meta name="theme-color" content="#1f5fbf">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-768Y52R8SC"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-768Y52R8SC');</script>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%231f5fbf'/%3E%3Ctext x='32' y='40' text-anchor='middle' font-family='Arial' font-size='24' font-weight='800' fill='white'%3EDM%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Mukta:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: one narrow column — header, 3 numbered steps (day → time → details), sticky confirm bar; success screen replaces the steps. */
+:root{
+  --paper:#f6f8fc; --surface:#ffffff; --ink:#152238; --muted:#566279; --line:#dfe5ef;
+  --brand:#1f5fbf; --brand-deep:#12407f; --brand-soft:#e6eefb;
+  --marigold:#f2a33a; --marigold-soft:#fff2dc; --marigold-text:#a35d00;
+  --leaf:#16803f; --leaf-soft:#e2f4e8; --rose:#c53030; --rose-soft:#fde8e7;
+  --display:'Baloo 2','Mukta',system-ui,sans-serif; --body:'Mukta',system-ui,sans-serif; color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root{
+  --paper:#0e131b; --surface:#161f2b; --ink:#e8edf4; --muted:#9ea9bb; --line:#283446;
+  --brand:#7aaeff; --brand-deep:#123566; --brand-soft:#1a2a42;
+  --marigold:#f5b257; --marigold-soft:#352914; --marigold-text:#f5b257;
+  --leaf:#58d08d; --leaf-soft:#15301f; --rose:#ff8077; --rose-soft:#3a1c1b; color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.45;padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+html[data-lang="hi"] .en, html:not([data-lang="hi"]) .hi{display:none!important}
+.wrap{max-width:640px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);line-height:1.12;margin:0;text-wrap:balance}
+p{margin:0}
+a{color:var(--brand)}
+:focus-visible{outline:3px solid var(--marigold);outline-offset:3px}
+.nav{background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}
+.nav .wrap{display:flex;align-items:center;gap:10px;min-height:60px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);min-width:0;flex:1}
+.logo svg{width:38px;height:38px;flex:none}
+.logo b{font:800 18px var(--display);display:block;line-height:1.05}
+.logo span{font-size:12.5px;color:var(--muted)}
+.lang{border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;min-height:38px;padding:0 13px;font:700 14px var(--body);cursor:pointer}
+.head{padding:22px 0 8px;display:flex;flex-direction:column;gap:6px}
+.head h1{font-size:clamp(28px,6vw,38px)}
+.head p{color:var(--muted)}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:16px;margin-top:14px;display:flex;flex-direction:column;gap:12px}
+.sh{display:flex;align-items:center;gap:10px}
+.sh .n{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--brand-soft);color:var(--brand);font:800 16px var(--display);flex:none}
+.sh h2{font-size:21px}
+.step.done .sh .n{background:var(--leaf);color:#fff}
+.days{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 6px;scroll-snap-type:x mandatory;scrollbar-width:thin}
+.day{flex:none;scroll-snap-align:start;min-width:78px;border:2px solid var(--line);background:var(--surface);color:var(--ink);border-radius:16px;padding:8px 10px;text-align:center;cursor:pointer;font-family:var(--body);display:flex;flex-direction:column;gap:1px}
+.day b{font:800 15px var(--display)}
+.day .dt{font-size:22px;font-weight:700;font-family:var(--display);line-height:1.1}
+.day small{font-size:12px;color:var(--muted)}
+.day[aria-pressed="true"]{border-color:var(--brand);background:var(--brand-soft)}
+.day:disabled{opacity:.45;cursor:not-allowed}
+.sess{display:flex;flex-direction:column;gap:8px}
+.sess h3{font-size:16px;color:var(--muted);font-family:var(--body);font-weight:700;display:flex;align-items:center;gap:6px}
+.slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(102px,1fr));gap:8px}
+.slot{border:2px solid var(--line);background:var(--surface);color:var(--ink);border-radius:14px;padding:8px 6px;min-height:56px;cursor:pointer;font-family:var(--body);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0}
+.slot b{font:800 16px var(--display);font-variant-numeric:tabular-nums}
+.slot small{font-size:12px;color:var(--leaf);font-weight:700}
+.slot.few small{color:var(--marigold-text)}
+.slot[aria-pressed="true"]{border-color:var(--brand);background:var(--brand);color:#fff}
+.slot[aria-pressed="true"] small{color:#fff}
+.slot:disabled{background:var(--paper);color:var(--muted);cursor:not-allowed;border-style:dashed}
+.slot:disabled small{color:var(--muted)}
+.note{border-radius:14px;padding:10px 12px;font-size:15.5px}
+.note.warn{background:var(--marigold-soft)} .note.bad{background:var(--rose-soft)} .note.good{background:var(--leaf-soft)} .note.info{background:var(--brand-soft)}
+.skel{height:56px;border-radius:14px;background:linear-gradient(90deg,var(--paper),var(--line),var(--paper));background-size:200% 100%;animation:sh 1.2s linear infinite}
+@keyframes sh{to{background-position:-200% 0}}
+form{display:flex;flex-direction:column;gap:12px}
+label{display:flex;flex-direction:column;gap:4px;font-weight:600;font-size:15px}
+label small{font-weight:500;color:var(--muted)}
+input[type=text],input[type=tel]{font:500 18px var(--body);color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;min-height:50px;width:100%}
+input:focus{outline:3px solid var(--brand);outline-offset:1px;border-color:var(--brand)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:420px){.two{grid-template-columns:1fr}}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;min-height:42px;padding:0 14px;font:600 15px var(--body);cursor:pointer}
+.chip[aria-pressed="true"]{border-color:var(--brand);background:var(--brand-soft);color:var(--brand)}
+.tick{flex-direction:row;align-items:flex-start;gap:10px;font-weight:500;background:var(--leaf-soft);border-radius:14px;padding:12px}
+.tick input{width:24px;height:24px;flex:none;accent-color:var(--leaf);margin-top:2px}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.err{color:var(--rose);font-weight:700;font-size:15px;min-height:20px}
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--surface);border-top:1px solid var(--line);padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.bar .wrap{display:flex;align-items:center;gap:12px;padding:0}
+.sum{flex:1;min-width:0;font-size:14.5px;line-height:1.25;color:var(--muted)}
+.sum b{display:block;color:var(--ink);font:800 16px var(--display);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;min-height:52px;padding:0 22px;font:700 18px var(--display);cursor:pointer;text-decoration:none}
+.btn-primary{background:var(--brand);color:#fff}
+.btn-ghost{background:var(--surface);color:var(--ink);border:1.5px solid var(--line)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.spin{width:18px;height:18px;border-radius:50%;border:3px solid rgba(255,255,255,.4);border-top-color:#fff;animation:rot .8s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+.done-card{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:22px 18px;margin-top:18px;display:flex;flex-direction:column;gap:14px;text-align:center;align-items:center;animation:pop .5s cubic-bezier(.3,1.4,.5,1) both}
+@keyframes pop{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
+.check{width:76px;height:76px}
+.check circle{fill:var(--leaf-soft)}
+.check path{stroke:var(--leaf);stroke-dasharray:60;stroke-dashoffset:60;animation:draw .6s .25s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.ticket{width:100%;border:2px dashed var(--line);border-radius:18px;padding:14px;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;text-align:left;font-size:16px}
+.ticket dt{color:var(--muted)}
+.ticket dd{margin:0;font-weight:700}
+.ticket .big{font:800 22px var(--display);color:var(--brand)}
+.acts{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%}
+.acts .btn{font-size:16px;min-height:48px;padding:0 10px}
+.foot{margin-top:24px;color:var(--muted);font-size:14px;text-align:center}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}.check path{stroke-dashoffset:0}}
+</style>
+</head>
+<body>
+<header class="nav"><div class="wrap">
+  <a class="logo" href="index.html"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#1f5fbf"/><text x="32" y="39" text-anchor="middle" font-family="Baloo 2, Mukta, sans-serif" font-size="22" font-weight="800" fill="#fff">DM</text><path d="M20 48 q12 8 24 0" stroke="#f2a33a" stroke-width="2.5" fill="none" stroke-linecap="round"/><circle cx="44" cy="48" r="3" fill="#f2a33a"/></svg><span><b>Dr. Dinesh Mittal</b><span class="en">Child Specialist · Rohini</span><span class="hi">शिशु रोग विशेषज्ञ · रोहिणी</span></span></a>
+  <button type="button" class="lang" id="langBtn"><span class="en">हिन्दी</span><span class="hi">English</span></button>
+</div></header>
+
+<main class="wrap" id="app">
+  <div class="head">
+    <h1><span class="en">Book an appointment</span><span class="hi">अपॉइंटमेंट बुक करें</span></h1>
+    <p><span class="en">Choose a day and time. It takes less than a minute.</span><span class="hi">दिन और समय चुनें। एक मिनट से भी कम लगेगा।</span></p>
+  </div>
+
+  <section class="step" id="s1" aria-labelledby="h1t">
+    <div class="sh"><span class="n">1</span><h2 id="h1t"><span class="en">Choose a day</span><span class="hi">दिन चुनें</span></h2></div>
+    <div class="days" id="days" role="group" aria-label="Days"><div class="skel" style="width:100%"></div></div>
+  </section>
+
+  <section class="step" id="s2" aria-labelledby="h2t">
+    <div class="sh"><span class="n">2</span><h2 id="h2t"><span class="en">Choose a time</span><span class="hi">समय चुनें</span></h2></div>
+    <div id="slotsBox"><div class="slots"><div class="skel"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div></div></div>
+  </section>
+
+  <section class="step" id="s3" aria-labelledby="h3t">
+    <div class="sh"><span class="n">3</span><h2 id="h3t"><span class="en">Your details</span><span class="hi">आपकी जानकारी</span></h2></div>
+    <form id="form" novalidate>
+      <div class="two">
+        <label for="child"><span><span class="en">Child’s name</span><span class="hi">बच्चे का नाम</span> *</span><input id="child" type="text" autocomplete="off" maxlength="60" required></label>
+        <label for="age"><span><span class="en">Child’s age</span><span class="hi">बच्चे की उम्र</span> <small>(<span class="en">e.g. 2 yrs, 8 months</span><span class="hi">जैसे 2 साल, 8 महीने</span>)</small></span><input id="age" type="text" autocomplete="off" maxlength="20"></label>
+      </div>
+      <div class="two">
+        <label for="parent"><span><span class="en">Parent’s name</span><span class="hi">माता/पिता का नाम</span></span><input id="parent" type="text" autocomplete="name" maxlength="60"></label>
+        <label for="phone"><span><span class="en">Mobile number</span><span class="hi">मोबाइल नंबर</span> *</span><input id="phone" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="10" placeholder="10 digits" required></label>
+      </div>
+      <div><p style="font-weight:600;font-size:15px;margin-bottom:6px"><span class="en">Reason for visit</span><span class="hi">आने का कारण</span></p>
+        <div class="chips" id="reasons">
+          <button type="button" class="chip" data-r="Fever / cough / cold"><span class="en">Fever / cough / cold</span><span class="hi">बुख़ार / खाँसी / ज़ुकाम</span></button>
+          <button type="button" class="chip" data-r="Vaccination"><span class="en">Vaccination</span><span class="hi">टीकाकरण</span></button>
+          <button type="button" class="chip" data-r="Stomach problem"><span class="en">Stomach problem</span><span class="hi">पेट की समस्या</span></button>
+          <button type="button" class="chip" data-r="Growth / routine check"><span class="en">Growth / routine check</span><span class="hi">विकास / सामान्य जाँच</span></button>
+          <button type="button" class="chip" data-r="Follow-up"><span class="en">Follow-up</span><span class="hi">फ़ॉलो-अप</span></button>
+          <button type="button" class="chip" data-r="Newborn"><span class="en">Newborn</span><span class="hi">नवजात</span></button>
+          <button type="button" class="chip" data-r="Other"><span class="en">Other</span><span class="hi">अन्य</span></button>
+        </div>
+      </div>
+      <label class="tick" for="wa"><input id="wa" type="checkbox"><span><b><span class="en">Send me confirmation and a reminder on WhatsApp</span><span class="hi">WhatsApp पर पुष्टि और रिमाइंडर भेजें</span></b><br><small><span class="en">Only for this appointment. No promotional messages.</span><span class="hi">सिर्फ़ इस अपॉइंटमेंट के लिए। कोई प्रचार संदेश नहीं।</span></small></span></label>
+      <label class="hp" aria-hidden="true">Website <input id="website" type="text" tabindex="-1" autocomplete="off"></label>
+      <p class="note info" style="font-size:14.5px"><span class="en">For an emergency (fits, breathing difficulty, child very drowsy), do not wait for a slot — go to the nearest hospital emergency.</span><span class="hi">इमरजेंसी (दौरा, साँस में दिक्कत, बच्चा बहुत सुस्त) में स्लॉट का इंतज़ार न करें — तुरंत नज़दीकी अस्पताल इमरजेंसी जाएँ।</span></p>
+      <p class="err" id="err" role="alert"></p>
+    </form>
+  </section>
+
+  <p class="foot">Dr. Dinesh Mittal Child Clinic · H-34/69, Sector 3, Rohini, Delhi 110085 · <a href="tel:+918130521456">+91 81305 21456</a></p>
+</main>
+
+<div class="bar" id="bar"><div class="wrap">
+  <div class="sum" id="sum"><b><span class="en">No time selected</span><span class="hi">समय नहीं चुना</span></b><span class="en">Pick a day and a time slot</span><span class="hi">दिन और समय चुनें</span></div>
+  <button type="button" class="btn btn-primary" id="go" disabled><span class="en">Confirm</span><span class="hi">पक्का करें</span></button>
+</div></div>
+
+<script src="booking-config.js"></script>
+<script>
+(function(){
+  var root = document.documentElement;
+  var lang = 'en'; try{ lang = localStorage.getItem('preferredClinicLang') || 'en'; }catch(e){}
+  function setLang(l){ lang = l; root.setAttribute('data-lang', l); root.lang = l==='hi'?'hi':'en'; try{ localStorage.setItem('preferredClinicLang', l); }catch(e){} if(state.days) { renderDays(); renderSlots(); renderBar(); } }
+  function t(en, hi){ return lang==='hi' ? hi : en; }
+  document.getElementById('langBtn').addEventListener('click', function(){ setLang(lang==='hi'?'en':'hi'); });
+
+  var API = (window.BOOKING_API || '').trim();
+  var DEMO = /[?&]demo=1/.test(location.search) || window.BOOKING_DEMO;
+  var state = { days:null, day:null, slot:null, reason:'', busy:false };
+
+  // ---- fallback when the new system is not connected yet
+  if(!API && !DEMO){
+    document.getElementById('app').innerHTML = '<div class="head"><h1><span class="en">Book an appointment</span><span class="hi">अपॉइंटमेंट बुक करें</span></h1></div>'+
+      '<div class="step"><p><span class="en">Please use our booking form below, or call the clinic.</span><span class="hi">नीचे दिए फ़ॉर्म से बुक करें, या क्लिनिक को कॉल करें।</span></p>'+
+      '<a class="btn btn-primary" href="'+window.BOOKING_FALLBACK+'" target="_blank" rel="noopener"><span class="en">Open booking form</span><span class="hi">बुकिंग फ़ॉर्म खोलें</span></a>'+
+      '<a class="btn btn-ghost" href="tel:+918130521456">+91 81305 21456</a></div>';
+    document.getElementById('bar').hidden = true;
+    setLang(lang); return;
+  }
+
+  // ---- remembered details
+  var mem = {}; try{ mem = JSON.parse(localStorage.getItem('clinicBookingDetails')||'{}'); }catch(e){}
+  ['parent','phone'].forEach(function(k){ if(mem[k]) document.getElementById(k).value = mem[k]; });
+  if(mem.child) document.getElementById('child').value = mem.child;
+  if(mem.age) document.getElementById('age').value = mem.age;
+  if(mem.wa) document.getElementById('wa').checked = true;
+
+  // ---- API
+  function apiGet(params){
+    if(DEMO) return demoGet(params);
+    var q = Object.keys(params).map(function(k){ return k+'='+encodeURIComponent(params[k]); }).join('&');
+    return fetch(API+'?'+q, {method:'GET'}).then(function(r){ return r.json(); });
+  }
+  function apiPost(body){
+    if(DEMO) return demoPost(body);
+    return fetch(API, {method:'POST', body:JSON.stringify(body)}).then(function(r){ return r.json(); });
+  }
+
+  // ---- load
+  function load(keep){
+    apiGet({action:'slots'}).then(function(res){
+      if(!res || !res.ok) throw new Error(res && res.error || 'load');
+      state.days = res.days;
+      if(!keep || !state.days.some(function(d){ return d.date===state.day; })){
+        var first = state.days.filter(function(d){ return openCount(d) > 0; })[0] || state.days[0];
+        state.day = first ? first.date : null; state.slot = null;
+      } else if(state.slot){
+        var s = findSlot(state.day, state.slot); if(!s || s.state!=='open' || s.left<1) state.slot = null;
+      }
+      renderDays(); renderSlots(); renderBar();
+    }).catch(function(){
+      document.getElementById('days').innerHTML = '';
+      document.getElementById('slotsBox').innerHTML = '<p class="note bad">'+t('Could not load available times. Check your internet and try again, or call the clinic: +91 81305 21456.','उपलब्ध समय लोड नहीं हो सके। इंटरनेट जाँचें और फिर कोशिश करें, या क्लिनिक को कॉल करें: +91 81305 21456।')+'</p><button type="button" class="btn btn-ghost" id="retry" style="margin-top:10px">'+t('Try again','फिर कोशिश करें')+'</button>';
+    });
+  }
+  function openCount(d){ var n=0; d.sessions.forEach(function(s){ s.slots.forEach(function(x){ if(x.state==='open' && x.left>0) n++; }); }); return n; }
+  function findSlot(date, time){ var d = state.days.filter(function(x){return x.date===date;})[0]; if(!d) return null; var f=null; d.sessions.forEach(function(s){ s.slots.forEach(function(x){ if(x.time===time) f=x; }); }); return f; }
+  function dayParts(dateStr){
+    var p = dateStr.split('-'), d = new Date(+p[0], +p[1]-1, +p[2]);
+    var today = new Date(); today.setHours(0,0,0,0);
+    var diff = Math.round((d - today)/86400000);
+    var wd = d.toLocaleDateString(lang==='hi'?'hi-IN':'en-IN',{weekday:'short'});
+    var mon = d.toLocaleDateString(lang==='hi'?'hi-IN':'en-IN',{month:'short'});
+    var name = diff===0 ? t('Today','आज') : diff===1 ? t('Tomorrow','कल') : wd;
+    return {name:name, num:d.getDate(), mon:mon, long:d.toLocaleDateString(lang==='hi'?'hi-IN':'en-IN',{weekday:'long', day:'numeric', month:'long'})};
+  }
+
+  function renderDays(){
+    var box = document.getElementById('days');
+    box.innerHTML = state.days.map(function(d){
+      var n = openCount(d), p = dayParts(d.date);
+      var sub = d.closed ? t('Closed','बंद') : d.blockedMsg && !n ? t('Not available','उपलब्ध नहीं') : n ? n+' '+t('slots','स्लॉट') : t('Full','भरा');
+      return '<button type="button" class="day" data-day="'+d.date+'" aria-pressed="'+(d.date===state.day)+'"'+(n?'':' disabled')+'><b>'+p.name+'</b><span class="dt">'+p.num+'</span><small>'+p.mon+' · '+sub+'</small></button>';
+    }).join('');
+    var sel = box.querySelector('[aria-pressed="true"]'); if(sel && sel.scrollIntoView) sel.scrollIntoView({block:'nearest', inline:'nearest'});
+  }
+  function renderSlots(){
+    var box = document.getElementById('slotsBox');
+    var d = state.days.filter(function(x){ return x.date===state.day; })[0];
+    if(!d){ box.innerHTML = '<p class="note warn">'+t('No days are open for booking right now. Please call the clinic.','अभी बुकिंग के लिए कोई दिन उपलब्ध नहीं है। कृपया क्लिनिक को कॉल करें।')+'</p>'; return; }
+    var h = '';
+    if(d.blockedMsg) h += '<p class="note warn">'+escapeHtml(d.blockedMsg)+'</p>';
+    var icons = {morning:'☀', afternoon:'☀', evening:'☾'};
+    d.sessions.forEach(function(s){
+      var title = s.name==='morning' ? t('Morning','सुबह') : s.name==='afternoon' ? t('Afternoon','दोपहर') : t('Evening','शाम');
+      h += '<div class="sess"><h3><span aria-hidden="true">'+icons[s.name]+'</span>'+title+' · '+s.from+' – '+s.to+'</h3><div class="slots">';
+      s.slots.forEach(function(x){
+        var open = x.state==='open' && x.left>0;
+        var sub = open ? (x.left===1 ? t('1 left','1 बचा') : x.left+' '+t('left','बचे')) : x.state==='blocked' ? t('Unavailable','उपलब्ध नहीं') : x.state==='past' ? t('Closed','बंद') : t('Full','भरा');
+        h += '<button type="button" class="slot'+(open && x.left===1 ? ' few':'')+'" data-slot="'+x.time+'" aria-pressed="'+(x.time===state.slot)+'"'+(open?'':' disabled')+'><b>'+x.label+'</b><small>'+sub+'</small></button>';
+      });
+      h += '</div></div>';
+    });
+    if(!openCount(d) && !d.blockedMsg) h += '<p class="note warn">'+t('All slots on this day are booked. Please choose another day.','इस दिन के सारे स्लॉट भर गए हैं। दूसरा दिन चुनें।')+'</p>';
+    box.innerHTML = h || '<p class="note warn">'+t('The clinic is closed on this day.','इस दिन क्लिनिक बंद है।')+'</p>';
+  }
+  function renderBar(){
+    var sum = document.getElementById('sum'), go = document.getElementById('go');
+    if(state.day && state.slot){
+      var s = findSlot(state.day, state.slot), p = dayParts(state.day);
+      sum.innerHTML = '<b>'+p.name+', '+p.num+' '+p.mon+' · '+(s?s.label:state.slot)+'</b>'+t('Fill in the details, then confirm','जानकारी भरें, फिर पक्का करें');
+      go.disabled = false;
+    } else {
+      sum.innerHTML = '<b>'+t('No time selected','समय नहीं चुना')+'</b>'+t('Pick a day and a time slot','दिन और समय चुनें');
+      go.disabled = true;
+    }
+    document.getElementById('s1').classList.toggle('done', !!state.day);
+    document.getElementById('s2').classList.toggle('done', !!state.slot);
+  }
+  function escapeHtml(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+  document.addEventListener('click', function(e){
+    var b = e.target.closest('button'); if(!b) return;
+    if(b.dataset.day){ state.day = b.dataset.day; state.slot = null; renderDays(); renderSlots(); renderBar(); return; }
+    if(b.dataset.slot){ state.slot = b.dataset.slot; renderSlots(); renderBar(); if(window.innerWidth < 700) document.getElementById('s3').scrollIntoView({behavior:'smooth', block:'start'}); return; }
+    if(b.dataset.r){ state.reason = state.reason===b.dataset.r ? '' : b.dataset.r; document.querySelectorAll('[data-r]').forEach(function(c){ c.setAttribute('aria-pressed', String(c.dataset.r===state.reason)); }); return; }
+    if(b.id==='retry'){ load(); return; }
+    if(b.id==='go'){ submit(); return; }
+  });
+  document.getElementById('phone').addEventListener('input', function(e){ e.target.value = e.target.value.replace(/\D/g,'').slice(0,10); });
+  document.getElementById('form').addEventListener('submit', function(e){ e.preventDefault(); submit(); });
+
+  function submit(){
+    if(state.busy) return;
+    var err = document.getElementById('err');
+    var child = document.getElementById('child').value.trim(), phone = document.getElementById('phone').value.trim();
+    if(!state.slot){ err.textContent = t('Please choose a time slot.','कृपया समय चुनें।'); return; }
+    if(!child){ err.textContent = t('Please enter the child’s name.','कृपया बच्चे का नाम लिखें।'); document.getElementById('child').focus(); return; }
+    if(!/^[6-9]\d{9}$/.test(phone)){ err.textContent = t('Please enter a valid 10-digit mobile number.','कृपया सही 10 अंकों का मोबाइल नंबर लिखें।'); document.getElementById('phone').focus(); return; }
+    err.textContent = '';
+    var body = { action:'book', date:state.day, time:state.slot, childName:child, childAge:document.getElementById('age').value.trim(), parentName:document.getElementById('parent').value.trim(), phone:phone, reason:state.reason, whatsapp:document.getElementById('wa').checked, website:document.getElementById('website').value };
+    try{ localStorage.setItem('clinicBookingDetails', JSON.stringify({child:body.childName, age:body.childAge, parent:body.parentName, phone:phone, wa:body.whatsapp})); }catch(e){}
+    state.busy = true;
+    var go = document.getElementById('go'); go.disabled = true; go.innerHTML = '<span class="spin" aria-hidden="true"></span>'+t('Booking…','बुक हो रहा है…');
+    apiPost(body).then(function(res){
+      state.busy = false; go.innerHTML = '<span class="en">Confirm</span><span class="hi">पक्का करें</span>';
+      if(res && res.ok){ if(typeof gtag==='function') gtag('event','booking_done'); showDone(res, body); return; }
+      var code = res && res.error;
+      var msg = code==='slot_full' ? t('Sorry, this slot just filled up. Please choose another time.','माफ़ कीजिए, यह स्लॉट अभी भर गया। दूसरा समय चुनें।')
+        : code==='blocked' ? (res.message || t('The doctor is not available at this time.','इस समय डॉक्टर उपलब्ध नहीं हैं।'))
+        : code==='too_many' ? t('This number already has the maximum bookings for this day. Please call the clinic.','इस नंबर से इस दिन की अधिकतम बुकिंग हो चुकी है। कृपया क्लिनिक को कॉल करें।')
+        : code==='bad_phone' ? t('Please enter a valid 10-digit mobile number.','कृपया सही 10 अंकों का मोबाइल नंबर लिखें।')
+        : t('Booking could not be completed. Please try again or call +91 81305 21456.','बुकिंग पूरी नहीं हो सकी। फिर कोशिश करें या +91 81305 21456 पर कॉल करें।');
+      err.textContent = msg; renderBar();
+      if(code==='slot_full' || code==='blocked'){ state.slot = null; load(true); }
+    }).catch(function(){
+      state.busy = false; go.innerHTML = '<span class="en">Confirm</span><span class="hi">पक्का करें</span>'; renderBar();
+      err.textContent = t('No internet connection. Please try again.','इंटरनेट कनेक्शन नहीं है। फिर कोशिश करें।');
+    });
+  }
+
+  function gcal(res){
+    var p = res.date.replace(/-/g,''), tm = res.time.replace(':','');
+    var endMin = (+res.time.slice(0,2))*60 + (+res.time.slice(3)) + 15;
+    var end = p+'T'+String(Math.floor(endMin/60)).padStart(2,'0')+String(endMin%60).padStart(2,'0')+'00';
+    return 'https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent('Dr. Dinesh Mittal – '+res.childName)+'&dates='+p+'T'+tm+'00/'+end+'&ctz=Asia/Kolkata&details='+encodeURIComponent('Booking ID: '+res.id+'\nPhone: +91 81305 21456')+'&location='+encodeURIComponent('H-34/69, Sector 3, Rohini, Delhi 110085');
+  }
+  function showDone(res, body){
+    document.getElementById('bar').hidden = true;
+    var p = dayParts(res.date);
+    var waLine = body.whatsapp ? (res.whatsappSent ? '<p class="note good">'+t('A confirmation has been sent to your WhatsApp.','पुष्टि आपके WhatsApp पर भेज दी गई है।')+'</p>' : '<p class="note info">'+t('You will get a WhatsApp reminder the evening before.','आपको एक दिन पहले शाम को WhatsApp पर रिमाइंडर मिलेगा।')+'</p>') : '';
+    document.getElementById('app').innerHTML =
+      '<div class="done-card" role="status">'+
+      '<svg class="check" viewBox="0 0 76 76" aria-hidden="true"><circle cx="38" cy="38" r="36"/><path d="M23 39l10 10 20-22" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>'+
+      '<h1 style="font-size:30px">'+t('Appointment booked','अपॉइंटमेंट बुक हो गया')+'</h1>'+
+      '<dl class="ticket"><dt>'+t('Child','बच्चा')+'</dt><dd>'+escapeHtml(res.childName)+'</dd>'+
+      '<dt>'+t('Day','दिन')+'</dt><dd>'+p.long+'</dd>'+
+      '<dt>'+t('Time','समय')+'</dt><dd class="big">'+res.timeLabel+'</dd>'+
+      '<dt>'+t('Booking ID','बुकिंग ID')+'</dt><dd style="font-variant-numeric:tabular-nums">'+escapeHtml(res.id)+'</dd>'+
+      '<dt>'+t('Clinic','क्लिनिक')+'</dt><dd>H-34/69, Sector 3, Rohini, Delhi 110085</dd></dl>'+
+      waLine+
+      '<p class="note warn" style="text-align:left">'+t('Please arrive 10 minutes early. Bring previous prescriptions and the vaccination card. To cancel or change, call +91 81305 21456.','कृपया 10 मिनट पहले आएँ। पुराने पर्चे और टीकाकरण कार्ड साथ लाएँ। रद्द या बदलने के लिए +91 81305 21456 पर कॉल करें।')+'</p>'+
+      '<div class="acts"><a class="btn btn-ghost" href="'+gcal(res)+'" target="_blank" rel="noopener">'+t('Add to calendar','कैलेंडर में जोड़ें')+'</a><a class="btn btn-ghost" href="https://maps.app.goo.gl/tW6fDW25fgrrA86P6" target="_blank" rel="noopener">'+t('Directions','रास्ता')+'</a></div>'+
+      '<a class="btn btn-primary" href="index.html" style="width:100%">'+t('Back to home','होम पर जाएँ')+'</a>'+
+      '</div>';
+    window.scrollTo(0,0);
+  }
+
+  // ---- demo backend (for previews only)
+  function demoGet(){
+    return new Promise(function(res){ setTimeout(function(){
+      var days = [], now = new Date();
+      for(var i=0;i<7;i++){
+        var d = new Date(now); d.setDate(now.getDate()+i);
+        var ds = d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+        var sun = d.getDay()===0;
+        var sess = sun ? [[660,720]] : [[600,780],[1080,1230]];
+        var day = {date:ds, label:ds, sessions:[], blockedMsg:'', closed:false};
+        if(i===4){ day.blockedMsg = 'Dr. Mittal is on leave on this day. Clinic reopens tomorrow.'; }
+        sess.forEach(function(se){
+          var slots=[];
+          for(var m=se[0]; m+15<=se[1]; m+=15){
+            var h=Math.floor(m/60), mm=m%60, ap=h>=12?'PM':'AM', h12=((h+11)%12)+1;
+            var seed = (i*97 + m) % 7;
+            var left = seed<2 ? 0 : seed<4 ? 1 : 2;
+            var past = i===0 && (m <= now.getHours()*60+now.getMinutes()+30);
+            var st = i===4 ? 'blocked' : past ? 'past' : left ? 'open' : 'full';
+            slots.push({time:String(h).padStart(2,'0')+':'+String(mm).padStart(2,'0'), label:h12+':'+String(mm).padStart(2,'0')+' '+ap, left: st==='open'?left:0, cap:2, state:st});
+          }
+          day.sessions.push({name: se[0]<720?'morning':'evening', from: se[0]===600?'10:00 AM':se[0]===660?'11:00 AM':'6:00 PM', to: se[1]===780?'1:00 PM':se[1]===720?'12:00 PM':'8:30 PM', slots:slots});
+        });
+        days.push(day);
+      }
+      res({ok:true, slotMinutes:15, days:days});
+    }, 400); });
+  }
+  function demoPost(b){
+    return new Promise(function(res){ setTimeout(function(){
+      var s = findSlot(b.date, b.time);
+      res({ok:true, id:'DM'+b.date.slice(2).replace(/-/g,'')+'-4821', date:b.date, time:b.time, timeLabel:s?s.label:b.time, childName:b.childName, whatsappSent:false});
+    }, 700); });
+  }
+
+  setLang(lang);
+  load();
+})();
+</script>
+</body>
+</html>

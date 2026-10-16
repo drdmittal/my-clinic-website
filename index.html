@@ -507,7 +507,7 @@ dialog::backdrop{background:rgba(10,18,32,.55)}
     var b = e.target.closest('[data-book],[data-open],[data-close]');
     if(e.target.tagName==='DIALOG'){ e.target.close(); return; }
     if(!b) return;
-    if(b.hasAttribute('data-book')){ openD('book'); if(typeof gtag==='function') gtag('event','book_click'); }
+    if(b.hasAttribute('data-book')){ if(typeof gtag==='function') gtag('event','book_click'); location.href='book.html'; }
     else if(b.hasAttribute('data-open')) openD(b.getAttribute('data-open'));
     else if(b.hasAttribute('data-close')) b.closest('dialog').close();
   });
