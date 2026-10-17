@@ -381,9 +381,8 @@ function panelNormal(){
     return '<div class="nc"><b>'+t(n.h)+'</b><p>'+t(n.p)+'</p>'+(n.s?'<p class="strong">'+t(n.s)+'</p>':'')+(n.w?'<p class="worry"><strong>'+t(UI.worryIf)+'</strong>'+t(n.w)+'</p>':'')+'</div>';
   }).join('')+'</div>';
   return sec('alert',['When to worry','चिंता कब करें'],
-      '<p class="lead">'+t(['A newborn can become sick quickly. Do not wait and watch if you see any of these.','नवजात बहुत जल्दी बीमार हो सकता है। इनमें से कुछ भी दिखे तो इंतज़ार न करें।'])+'</p>'+
-      '<div class="box er"><h3>'+t(['Go to the hospital at once','तुरंत अस्पताल ले जाएँ'])+'</h3>'+ul(ER,'warn')+'</div>'+
-      '<div class="box doc"><h3>'+t(['See the doctor the same day','उसी दिन डॉक्टर को दिखाएँ'])+'</h3>'+ul(DOC,'dot')+'</div>'+
+      '<p class="lead">'+t(['A newborn can become seriously ill within hours. If you see any of these, do not wait and watch, and do not wait for a clinic appointment: take your baby to a doctor or hospital immediately, day or night.','नवजात कुछ ही घंटों में गंभीर रूप से बीमार हो सकता है। इनमें से कुछ भी दिखे तो इंतज़ार न करें, और क्लिनिक के अपॉइंटमेंट का भी इंतज़ार न करें: दिन हो या रात, बच्चे को तुरंत डॉक्टर या अस्पताल ले जाएँ।'])+'</p>'+
+      '<div class="box er"><h3>'+t(['Seek urgent medical attention if your baby has any of these','इनमें से कोई भी लक्षण हो तो तुरंत डॉक्टरी सहायता लें'])+'</h3>'+ul(ER.concat(DOC),'warn')+'</div>'+
       '<p class="note">'+t(['You know your baby best. If you feel something is not right, call the clinic.','अपने बच्चे को आप सबसे अच्छी तरह जानते हैं। कुछ ठीक न लगे तो क्लिनिक को कॉल करें।'])+'</p>','red')+
     sec('check',['Usually normal: no need to worry','आमतौर पर सामान्य: चिंता की बात नहीं'],
       '<p class="lead">'+t(['These are common in healthy newborns. Each card also says when it is not normal.','ये बातें स्वस्थ नवजात में आम हैं। हर कार्ड में यह भी लिखा है कि कब यह सामान्य नहीं है।'])+'</p>'+cards,'leaf');
