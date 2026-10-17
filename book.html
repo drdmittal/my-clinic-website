@@ -228,9 +228,35 @@ input:focus{outline:3px solid var(--brand);outline-offset:1px;border-color:var(-
   }
 
   // ---- load
+  // Show the last slot list straight away (saved on this phone), then refresh it from the clinic.
+  // A slot that filled in the meantime is still refused on Confirm, and the list updates in a few seconds.
+  var SLOT_CACHE = 'clinicSlotsCache';
+  function localYmd(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+  function cachedSlots(){
+    if(DEMO) return null;
+    try{
+      var c = JSON.parse(localStorage.getItem(SLOT_CACHE)||'null');
+      if(!c || !c.res || Date.now() - c.at > 15*60000) return null;
+      var now = new Date(), today = localYmd(now), soon = now.getHours()*60 + now.getMinutes() + 30;
+      var res = c.res;
+      res.days = res.days.filter(function(d){ return d.date >= today; });
+      res.days.forEach(function(d){ if(d.date !== today) return; d.sessions.forEach(function(se){ se.slots.forEach(function(x){
+        var m = (+x.time.slice(0,2))*60 + (+x.time.slice(3)); if(m < soon && x.state==='open'){ x.state='past'; x.left=0; } }); }); });
+      return res.days.length ? res : null;
+    }catch(e){ return null; }
+  }
   function load(keep){
+    if(!keep && !state.days){ var c = cachedSlots(); if(c){ try{ apply(c, false); keep = true; }catch(e){} } }
     apiGet({action:'slots'}).then(function(res){
       if(!res || !res.ok) throw new Error(res && res.error || 'load');
+      if(!DEMO){ try{ localStorage.setItem(SLOT_CACHE, JSON.stringify({at:Date.now(), res:res})); }catch(e){} }
+      apply(res, keep);
+    }).catch(function(){
+      document.getElementById('days').innerHTML = '';
+      document.getElementById('slotsBox').innerHTML = '<p class="note bad">'+t('Could not load available times. Check your internet and try again, or call the clinic: +91 81305 21456.','उपलब्ध समय लोड नहीं हो सके। इंटरनेट जाँचें और फिर कोशिश करें, या क्लिनिक को कॉल करें: +91 81305 21456।')+'</p><button type="button" class="btn btn-ghost" id="retry" style="margin-top:10px">'+t('Try again','फिर कोशिश करें')+'</button>';
+    });
+  }
+  function apply(res, keep){
       state.days = res.days;
       waOn = !!res.whatsapp; updateWa();
       var nb = document.getElementById('notice'), lines = String(res.notice||'').split('\n').map(function(l){ return l.trim(); }).filter(String);
@@ -242,10 +268,6 @@ input:focus{outline:3px solid var(--brand);outline-offset:1px;border-color:var(-
         var s = findSlot(state.day, state.slot); if(!s || s.state!=='open' || s.left<1) state.slot = null;
       }
       renderDays(); renderSlots(); renderBar();
-    }).catch(function(){
-      document.getElementById('days').innerHTML = '';
-      document.getElementById('slotsBox').innerHTML = '<p class="note bad">'+t('Could not load available times. Check your internet and try again, or call the clinic: +91 81305 21456.','उपलब्ध समय लोड नहीं हो सके। इंटरनेट जाँचें और फिर कोशिश करें, या क्लिनिक को कॉल करें: +91 81305 21456।')+'</p><button type="button" class="btn btn-ghost" id="retry" style="margin-top:10px">'+t('Try again','फिर कोशिश करें')+'</button>';
-    });
   }
   function openCount(d){ var n=0; d.sessions.forEach(function(s){ s.slots.forEach(function(x){ if(x.state==='open' && x.left>0) n++; }); }); return n; }
   function findSlot(date, time){ var d = state.days.filter(function(x){return x.date===date;})[0]; if(!d) return null; var f=null; d.sessions.forEach(function(s){ s.slots.forEach(function(x){ if(x.time===time) f=x; }); }); return f; }

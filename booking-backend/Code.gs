@@ -133,7 +133,7 @@ function installReminderTrigger() {
 function doGet(e) {
   var p = (e && e.parameter) || {};
   try {
-    if (p.action === 'slots') return out(getSlots(p.from, Number(p.days || 0)));
+    if (p.action === 'slots') return out(publicSlots(p.from, Number(p.days || 0)));
     if (p.action === 'ping') return out({ ok: true });
     if (!p.action) return redirectPage();
     return out({ ok: false, error: 'unknown_action' });
@@ -173,7 +173,9 @@ function out(obj) {
 
 /* ------------------------------------------------------------------ data */
 
+var _settingsMemo = null; // read the Settings tab once per request
 function settings() {
+  if (_settingsMemo) return _settingsMemo;
   var st = SS().getSheetByName(TAB_SETTINGS);
   var rows = st.getRange(2, 1, Math.max(1, st.getLastRow() - 1), 2).getValues();
   var s = {};
@@ -184,6 +186,7 @@ function settings() {
   s.DAYS_AHEAD = clampNum(s.DAYS_AHEAD, 1, 4, 3); // never more than today + 3 days
   s.MIN_NOTICE_MINUTES = clampNum(s.MIN_NOTICE_MINUTES, 0, 1440, 30);
   s.MAX_BOOKINGS_PER_PHONE_PER_DAY = clampNum(s.MAX_BOOKINGS_PER_PHONE_PER_DAY, 1, 20, 3);
+  _settingsMemo = s;
   return s;
 }
 
@@ -201,6 +204,7 @@ function activeNotice(s) {
   return text;
 }
 function setSetting(key, value) {
+  _settingsMemo = null; slotsChanged();
   var st = SS().getSheetByName(TAB_SETTINGS);
   var keys = st.getRange(2, 1, Math.max(1, st.getLastRow() - 1), 1).getValues();
   for (var i = 0; i < keys.length; i++) {
@@ -258,6 +262,13 @@ function bookingRows() {
 
 /** Upcoming bookings made with the old form (so the same slot is not booked twice). */
 function legacyRows() {
+  var c = CacheService.getScriptCache(), hit = c.get('legacy_rows');
+  if (hit) { try { return JSON.parse(hit); } catch (e) {} }
+  var rows = readLegacyRows();
+  try { var txt = JSON.stringify(rows); if (txt.length < 95000) c.put('legacy_rows', txt, 600); } catch (e) {}
+  return rows;
+}
+function readLegacyRows() {
   var s = settings();
   var tab = String(s.LEGACY_TAB || '').trim();
   if (!tab) return [];
@@ -289,6 +300,28 @@ function legacyRows() {
 function isActive(r) { return String(r[COL.status]).indexOf('Booked') === 0; }
 
 /* ------------------------------------------------------------------ slots */
+
+/* The booking page's slot list is kept ready for 30 seconds so most visitors
+   get it without re-reading the sheet. Any booking, cancellation, walk-in,
+   block or settings change clears it at once. Booking itself always checks
+   the sheet afresh, so a slot can never be double-booked. */
+function slotsVersion() {
+  var c = CacheService.getScriptCache(), v = c.get('slots_ver');
+  if (!v) { v = String(Date.now()); c.put('slots_ver', v, 21600); }
+  return v;
+}
+function slotsChanged() {
+  try { CacheService.getScriptCache().put('slots_ver', String(Date.now()), 21600); } catch (e) {}
+}
+function publicSlots(from, days) {
+  var c = CacheService.getScriptCache();
+  var key = 'slots_' + slotsVersion() + '_' + (from || '') + '_' + (days || 0);
+  var hit = c.get(key);
+  if (hit) { try { return JSON.parse(hit); } catch (e) {} }
+  var res = getSlots(from, days);
+  try { var txt = JSON.stringify(res); if (txt.length < 95000) c.put(key, txt, 30); } catch (e) {}
+  return res;
+}
 
 function getSlots(from, days) {
   var s = settings();
@@ -362,6 +395,7 @@ function book(b) {
     var sheet = SS().getSheetByName(TAB_BOOKINGS);
     sheet.appendRow([id, Utilities.formatDate(new Date(), TZ, 'yyyy-MM-dd HH:mm'), "'" + date, "'" + time, child, age, parent, "'" + phone, reason, wa, 'Booked', '', '', visit, '']);
     SpreadsheetApp.flush();
+    slotsChanged();
   } finally {
     lock.releaseLock();
   }
@@ -464,6 +498,7 @@ function admin(b) {
       var wid = 'WALKIN-' + Utilities.formatDate(new Date(), TZ, 'yyMMdd-HHmm') + '-' + Math.floor(100 + Math.random() * 900);
       ss.getSheetByName(TAB_BOOKINGS).appendRow([wid, Utilities.formatDate(new Date(), TZ, 'yyyy-MM-dd HH:mm'), "'" + wdate, "'" + wtime, 'Walk-in', '', '', '', '', 'NO', 'Booked', '', 'Added by clinic', '', '']);
       SpreadsheetApp.flush();
+      slotsChanged();
     } finally { lk.releaseLock(); }
     return { ok: true, id: wid, timeLabel: label(toMin(wtime)) };
   }
@@ -499,6 +534,7 @@ function admin(b) {
       for (var i = 0; i < rows.length; i++) { if (String(rows[i][0]).trim() === k) { st.getRange(i + 2, 2).setValue(v); return; } }
       st.appendRow([k, v, '']);
     });
+    slotsChanged();
     return { ok: true };
   }
 
@@ -507,6 +543,7 @@ function admin(b) {
     if (isNaN(from) || isNaN(to) || to <= from) return { ok: false, error: 'bad_range' };
     var msg = cleanText(b.message, 200) || 'Dr. Mittal is not available at this time.';
     ss.getSheetByName(TAB_BLOCKED).appendRow([from, to, msg, Utilities.formatDate(new Date(), TZ, 'yyyy-MM-dd HH:mm')]);
+    slotsChanged();
     var affected = bookingRows().filter(function (r) {
       if (!isActive(r)) return false; var t = atIST(r[COL.date], toMin(r[COL.time])); return t >= from && t < to;
     });
@@ -526,6 +563,7 @@ function admin(b) {
     var row = Number(b.row);
     var bls = ss.getSheetByName(TAB_BLOCKED);
     if (row >= 2 && row <= bls.getLastRow()) bls.deleteRow(row);
+    slotsChanged();
     return { ok: true };
   }
 
@@ -548,6 +586,7 @@ function admin(b) {
     var vals2 = sh.getRange(r, 1, 1, BOOKING_HEADERS.length).getDisplayValues()[0];
     if (vals2[COL.id] !== String(b.id)) return { ok: false, error: 'mismatch' };
     sh.getRange(r, COL.status + 1).setValue('Cancelled');
+    slotsChanged();
     var sent = false;
     if (b.notify && vals2[COL.wa] === 'YES') sent = sendTemplate(s, s.WA_TEMPLATE_CANCEL, vals2[COL.phone], [vals2[COL.child], prettyDate(vals2[COL.date]), label(toMin(vals2[COL.time]))]);
     return { ok: true, notified: sent };
@@ -579,8 +618,9 @@ function clinicCalendar(s) {
 function syncCalendar() {
   var s = settings();
   if (String(s.CAL_ENABLED).toUpperCase() !== 'YES') { console.log('Calendar copy is off (CAL_ENABLED is not YES)'); return 'Calendar copy is off'; }
-  var lock = LockService.getScriptLock();
-  if (!lock.tryLock(3000)) { console.log('Busy, will try next time'); return 'Busy, will try next time'; }
+  // its own lock (not the booking lock), so a parent's booking never waits for the calendar
+  var lock = LockService.getUserLock();
+  if (!lock.tryLock(1000)) { console.log('Previous copy still running, will try next time'); return 'Busy, will try next time'; }
   var done = 0;
   try {
     var sheet = SS().getSheetByName(TAB_BOOKINGS);
