@@ -88,6 +88,10 @@ label small{font-weight:500;color:var(--muted)}
 input[type=text],input[type=tel]{font:500 18px var(--body);color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;min-height:50px;width:100%}
 input:focus{outline:3px solid var(--brand);outline-offset:1px;border-color:var(--brand)}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.visit{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.visit button{border:2px solid var(--line);background:var(--surface);color:var(--ink);border-radius:14px;min-height:54px;font:700 17px var(--body);cursor:pointer;padding:6px 8px;line-height:1.2}
+.visit button[aria-pressed="true"]{border-color:var(--brand);background:var(--brand-soft);color:var(--brand)}
+.vlbl{font-weight:600;font-size:15px;margin:0 0 -4px}
 @media (max-width:420px){.two{grid-template-columns:1fr}}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chip{border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;min-height:42px;padding:0 14px;font:600 15px var(--body);cursor:pointer}
@@ -152,6 +156,8 @@ input:focus{outline:3px solid var(--brand);outline-offset:1px;border-color:var(-
   <section class="step" id="s3" aria-labelledby="h3t">
     <div class="sh"><span class="n">3</span><h2 id="h3t"><span class="en">Name &amp; mobile</span><span class="hi">नाम और मोबाइल</span></h2></div>
     <form id="form" novalidate>
+      <p class="vlbl" id="vlbl"><span class="en">Visit for</span><span class="hi">किसलिए आ रहे हैं</span></p>
+      <div class="visit" role="group" aria-labelledby="vlbl"><button type="button" data-visit="Consultation" aria-pressed="false"><span class="en">Consultation</span><span class="hi">डॉक्टर को दिखाना</span></button><button type="button" data-visit="Vaccination" aria-pressed="false"><span class="en">Vaccination</span><span class="hi">टीका लगवाना</span></button></div>
       <div class="two">
         <label for="child"><span><span class="en">Child’s name</span><span class="hi">बच्चे का नाम</span></span><input id="child" type="text" autocomplete="off" maxlength="60" required></label>
         <label for="phone"><span><span class="en">Mobile number</span><span class="hi">मोबाइल नंबर</span></span><input id="phone" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="10" placeholder="10 digits" required></label>
@@ -314,16 +320,23 @@ input:focus{outline:3px solid var(--brand);outline-offset:1px;border-color:var(-
   });
   document.getElementById('phone').addEventListener('input', function(e){ e.target.value = e.target.value.replace(/\D/g,'').slice(0,10); });
   document.getElementById('form').addEventListener('submit', function(e){ e.preventDefault(); submit(); });
+  document.querySelector('.visit').addEventListener('click', function(e){
+    var b = e.target.closest('button[data-visit]'); if(!b) return;
+    state.visit = b.dataset.visit;
+    document.querySelectorAll('.visit button').forEach(function(x){ x.setAttribute('aria-pressed', String(x===b)); });
+    var err = document.getElementById('err'); if(err.dataset.v){ err.textContent=''; err.dataset.v=''; }
+  });
 
   function submit(){
     if(state.busy) return;
     var err = document.getElementById('err');
     var child = document.getElementById('child').value.trim(), phone = document.getElementById('phone').value.trim();
     if(!state.slot){ err.textContent = t('Please choose a time slot.','कृपया समय चुनें।'); return; }
+    if(!state.visit){ err.textContent = t('Please choose Consultation or Vaccination.','कृपया चुनें: डॉक्टर को दिखाना या टीका लगवाना।'); err.dataset.v='1'; return; }
     if(!child){ err.textContent = t('Please enter the child’s name.','कृपया बच्चे का नाम लिखें।'); document.getElementById('child').focus(); return; }
     if(!/^[6-9]\d{9}$/.test(phone)){ err.textContent = t('Please enter a valid 10-digit mobile number.','कृपया सही 10 अंकों का मोबाइल नंबर लिखें।'); document.getElementById('phone').focus(); return; }
     err.textContent = '';
-    var body = { action:'book', date:state.day, time:state.slot, childName:child, childAge:'', parentName:'', phone:phone, reason:'', whatsapp:document.getElementById('wa').checked || !document.getElementById('waKnown').hidden, website:document.getElementById('website').value };
+    var body = { action:'book', date:state.day, time:state.slot, childName:child, childAge:'', parentName:'', phone:phone, reason:'', visit:state.visit, whatsapp:document.getElementById('wa').checked || !document.getElementById('waKnown').hidden, website:document.getElementById('website').value };
     try{ localStorage.setItem('clinicBookingDetails', JSON.stringify({child:body.childName, phone:phone, wa:body.whatsapp})); }catch(e){}
     state.busy = true;
     var go = document.getElementById('go'); go.disabled = true; go.innerHTML = '<span class="spin" aria-hidden="true"></span>'+t('Booking…','बुक हो रहा है…');
@@ -360,6 +373,7 @@ input:focus{outline:3px solid var(--brand);outline-offset:1px;border-color:var(-
       '<svg class="check" viewBox="0 0 76 76" aria-hidden="true"><circle cx="38" cy="38" r="36"/><path d="M23 39l10 10 20-22" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>'+
       '<h1 style="font-size:30px">'+t('Appointment booked','अपॉइंटमेंट बुक हो गया')+'</h1>'+
       '<dl class="ticket"><dt>'+t('Child','बच्चा')+'</dt><dd>'+escapeHtml(res.childName)+'</dd>'+
+      (body.visit ? '<dt>'+t('Visit','किसलिए')+'</dt><dd>'+(body.visit==='Vaccination'?t('Vaccination','टीका लगवाना'):t('Consultation','डॉक्टर को दिखाना'))+'</dd>' : '')+
       '<dt>'+t('Day','दिन')+'</dt><dd>'+p.long+'</dd>'+
       '<dt>'+t('Time','समय')+'</dt><dd class="big">'+res.timeLabel+'</dd>'+
       '<dt>'+t('Booking ID','बुकिंग ID')+'</dt><dd style="font-variant-numeric:tabular-nums">'+escapeHtml(res.id)+'</dd>'+
@@ -376,13 +390,13 @@ input:focus{outline:3px solid var(--brand);outline-offset:1px;border-color:var(-
   function demoGet(){
     return new Promise(function(res){ setTimeout(function(){
       var days = [], now = new Date();
-      for(var i=0;i<7;i++){
+      for(var i=0;i<3;i++){
         var d = new Date(now); d.setDate(now.getDate()+i);
         var ds = d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
         var sun = d.getDay()===0;
         var sess = sun ? [[660,720]] : [[600,780],[1080,1230]];
         var day = {date:ds, label:ds, sessions:[], blockedMsg:'', closed:false};
-        if(i===4){ day.blockedMsg = 'Dr. Mittal is on leave on this day. Clinic reopens tomorrow.'; }
+        if(i===9){ day.blockedMsg = 'Dr. Mittal is on leave on this day. Clinic reopens tomorrow.'; }
         sess.forEach(function(se){
           var slots=[];
           for(var m=se[0]; m+15<=se[1]; m+=15){
@@ -390,7 +404,7 @@ input:focus{outline:3px solid var(--brand);outline-offset:1px;border-color:var(-
             var seed = (i*97 + m) % 7;
             var left = seed<2 ? 0 : seed<4 ? 1 : 2;
             var past = i===0 && (m <= now.getHours()*60+now.getMinutes()+30);
-            var st = i===4 ? 'blocked' : past ? 'past' : left ? 'open' : 'full';
+            var st = i===9 ? 'blocked' : past ? 'past' : left ? 'open' : 'full';
             slots.push({time:String(h).padStart(2,'0')+':'+String(mm).padStart(2,'0'), label:h12+':'+String(mm).padStart(2,'0')+' '+ap, left: st==='open'?left:0, cap:2, state:st});
           }
           day.sessions.push({name: se[0]<720?'morning':'evening', from: se[0]===600?'10:00 AM':se[0]===660?'11:00 AM':'6:00 PM', to: se[1]===780?'1:00 PM':se[1]===720?'12:00 PM':'8:30 PM', slots:slots});

@@ -36,7 +36,7 @@ var DAYS = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 var DEFAULT_SETTINGS = [
   ['SLOT_MINUTES', 15, 'Length of each slot in minutes (10, 15, 20, 30)'],
   ['PER_SLOT', 2, 'Default number of patients allowed in one slot'],
-  ['DAYS_AHEAD', 7, 'How many days ahead parents can book'],
+  ['DAYS_AHEAD', 3, 'Days open for booking, counting today: 1 = today only, 2 = today + tomorrow, 3 = today + 2 days, 4 = today + 3 days (maximum)'],
   ['MIN_NOTICE_MINUTES', 30, 'A slot closes this many minutes before it starts'],
   ['SESSIONS_MON', '10:00-13:00, 18:00-20:30', 'Sessions; add @3 after a session to allow 3 per slot in it, e.g. 18:00-20:30@3'],
   ['SESSIONS_TUE', '10:00-13:00, 18:00-20:30', ''],
@@ -60,6 +60,8 @@ var DEFAULT_SETTINGS = [
   ['LEGACY_ACTIVE_STATUS', 'Confirmed', 'Status text that means the old booking is still active'],
   ['NOTICE', '', 'Message shown at the top of the booking page (each line shows separately). Edit it from the doctor panel.'],
   ['NOTICE_UNTIL', '', 'Hide the message after this date (YYYY-MM-DD). Empty = keep showing'],
+  ['CAL_ENABLED', 'YES', 'YES = copy online bookings to Google Calendar every 5 minutes (never slows booking)'],
+  ['CAL_NAME', 'Clinic Appointments', 'Name of the Google Calendar that receives the copies (created automatically)'],
   ['WA_ENABLED', 'NO', 'YES after WhatsApp Cloud API is set up'],
   ['WA_TOKEN', '', 'Permanent access token from Meta (keep private)'],
   ['WA_PHONE_NUMBER_ID', '', 'Phone number ID from Meta WhatsApp settings'],
@@ -70,8 +72,9 @@ var DEFAULT_SETTINGS = [
   ['WA_TEMPLATE_CANCEL', 'appointment_cancelled', 'Approved template name']
 ];
 
-var BOOKING_HEADERS = ['Booking ID', 'Created', 'Date', 'Time', 'Child name', 'Child age', 'Parent name', 'Phone', 'Reason', 'WhatsApp OK', 'Status', 'Reminded', 'Note'];
-var COL = { id: 0, created: 1, date: 2, time: 3, child: 4, age: 5, parent: 6, phone: 7, reason: 8, wa: 9, status: 10, reminded: 11, note: 12 };
+var BOOKING_HEADERS = ['Booking ID', 'Created', 'Date', 'Time', 'Child name', 'Child age', 'Parent name', 'Phone', 'Reason', 'WhatsApp OK', 'Status', 'Reminded', 'Note', 'Visit type', 'Calendar'];
+var COL = { id: 0, created: 1, date: 2, time: 3, child: 4, age: 5, parent: 6, phone: 7, reason: 8, wa: 9, status: 10, reminded: 11, note: 12, visit: 13, cal: 14 };
+var VISITS = ['Consultation', 'Vaccination'];
 
 /* ------------------------------------------------------------------ setup */
 
@@ -105,8 +108,13 @@ function setup() {
     bk.getRange('C:D').setNumberFormat('@');
     bk.getRange('H:H').setNumberFormat('@');
     bk.setFrozenRows(1);
+  } else {
+    // after an upgrade: add the new column headings (Visit type, Calendar) if missing
+    var head = bk.getRange(1, 1, 1, BOOKING_HEADERS.length).getDisplayValues()[0];
+    BOOKING_HEADERS.forEach(function (h, i) { if (!head[i]) bk.getRange(1, i + 1).setValue(h).setFontWeight('bold'); });
   }
   consentSheet();
+  installCalendarSync();
   return 'Setup done';
 }
 
@@ -172,7 +180,7 @@ function settings() {
   rows.forEach(function (r) { var k = String(r[0]).trim(); if (k) s[k] = r[1]; });
   s.SLOT_MINUTES = clampNum(s.SLOT_MINUTES, 5, 120, 15);
   s.PER_SLOT = clampNum(s.PER_SLOT, 1, 20, 2);
-  s.DAYS_AHEAD = clampNum(s.DAYS_AHEAD, 1, 60, 7);
+  s.DAYS_AHEAD = clampNum(s.DAYS_AHEAD, 1, 4, 3); // never more than today + 3 days
   s.MIN_NOTICE_MINUTES = clampNum(s.MIN_NOTICE_MINUTES, 0, 1440, 30);
   s.MAX_BOOKINGS_PER_PHONE_PER_DAY = clampNum(s.MAX_BOOKINGS_PER_PHONE_PER_DAY, 1, 20, 3);
   return s;
@@ -327,6 +335,7 @@ function book(b) {
   var s = settings();
   var date = String(b.date || ''), time = String(b.time || '');
   var child = cleanText(b.childName, 60), parent = cleanText(b.parentName, 60), age = cleanText(b.childAge, 20), reason = cleanText(b.reason, 200);
+  var visit = VISITS.indexOf(String(b.visit)) >= 0 ? String(b.visit) : '';
   var phone = String(b.phone || '').replace(/\D/g, '').replace(/^91(?=\d{10}$)/, '').replace(/^0(?=\d{10}$)/, '');
   if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || !/^\d{2}:\d{2}$/.test(time)) return { ok: false, error: 'bad_slot' };
   if (!child) return { ok: false, error: 'need_child_name' };
@@ -350,7 +359,7 @@ function book(b) {
     var id = 'DM' + Utilities.formatDate(new Date(), TZ, 'yyMMdd') + '-' + Math.floor(1000 + Math.random() * 9000);
     var wa = waConsent(phone, !!b.whatsapp) ? 'YES' : 'NO';
     var sheet = SS().getSheetByName(TAB_BOOKINGS);
-    sheet.appendRow([id, Utilities.formatDate(new Date(), TZ, 'yyyy-MM-dd HH:mm'), "'" + date, "'" + time, child, age, parent, "'" + phone, reason, wa, 'Booked', '', '']);
+    sheet.appendRow([id, Utilities.formatDate(new Date(), TZ, 'yyyy-MM-dd HH:mm'), "'" + date, "'" + time, child, age, parent, "'" + phone, reason, wa, 'Booked', '', '', visit, '']);
     SpreadsheetApp.flush();
   } finally {
     lock.releaseLock();
@@ -358,7 +367,7 @@ function book(b) {
 
   var waSent = false;
   if (wa === 'YES') waSent = sendTemplate(s, s.WA_TEMPLATE_CONFIRM, phone, [child, prettyDate(date), label(toMin(time))]);
-  return { ok: true, id: id, date: date, dateLabel: prettyDate(date), time: time, timeLabel: label(toMin(time)), childName: child, whatsapp: wa === 'YES', whatsappSent: waSent };
+  return { ok: true, id: id, date: date, dateLabel: prettyDate(date), time: time, timeLabel: label(toMin(time)), childName: child, visit: visit, whatsapp: wa === 'YES', whatsappSent: waSent };
 }
 
 /* WhatsApp permission is asked only once per mobile number.
@@ -452,7 +461,7 @@ function admin(b) {
     var lk = LockService.getScriptLock(); lk.waitLock(15000);
     try {
       var wid = 'WALKIN-' + Utilities.formatDate(new Date(), TZ, 'yyMMdd-HHmm') + '-' + Math.floor(100 + Math.random() * 900);
-      ss.getSheetByName(TAB_BOOKINGS).appendRow([wid, Utilities.formatDate(new Date(), TZ, 'yyyy-MM-dd HH:mm'), "'" + wdate, "'" + wtime, 'Walk-in', '', '', '', '', 'NO', 'Booked', '', 'Added by clinic']);
+      ss.getSheetByName(TAB_BOOKINGS).appendRow([wid, Utilities.formatDate(new Date(), TZ, 'yyyy-MM-dd HH:mm'), "'" + wdate, "'" + wtime, 'Walk-in', '', '', '', '', 'NO', 'Booked', '', 'Added by clinic', '', '']);
       SpreadsheetApp.flush();
     } finally { lk.releaseLock(); }
     return { ok: true, id: wid, timeLabel: label(toMin(wtime)) };
@@ -522,7 +531,7 @@ function admin(b) {
   if (b.action === 'admin_day') {
     var d = /^\d{4}-\d{2}-\d{2}$/.test(String(b.date)) ? String(b.date) : ymd(new Date());
     var list = bookingRows().filter(function (r) { return r[COL.date] === d; }).map(function (r) {
-      return { row: r.row, id: r[COL.id], time: r[COL.time], timeLabel: label(toMin(r[COL.time])), child: r[COL.child], age: r[COL.age], parent: r[COL.parent], phone: r[COL.phone], reason: r[COL.reason], status: r[COL.status], wa: r[COL.wa] };
+      return { row: r.row, id: r[COL.id], time: r[COL.time], timeLabel: label(toMin(r[COL.time])), child: r[COL.child], age: r[COL.age], parent: r[COL.parent], phone: r[COL.phone], reason: r[COL.reason], status: r[COL.status], wa: r[COL.wa], visit: r[COL.visit] || '' };
     });
     legacyRows().filter(function (r) { return r.date === d; }).forEach(function (r) {
       list.push({ row: 0, id: 'Old form', time: r.time, timeLabel: label(toMin(r.time)), child: r.child, age: '', parent: '', phone: r.phone, reason: '', status: 'Booked (old form)', wa: 'NO', legacy: true });
@@ -544,6 +553,63 @@ function admin(b) {
   }
 
   return { ok: false, error: 'unknown_action' };
+}
+
+/* ------------------------------------------------------------------ Google Calendar copy */
+
+/* Bookings are copied to Google Calendar by a background job every 5 minutes,
+   so a parent's booking is never slowed down. Cancelled bookings are removed
+   from the calendar on the next run. Walk-ins and past days are skipped. */
+
+function installCalendarSync() {
+  ScriptApp.getProjectTriggers().forEach(function (t) {
+    if (t.getHandlerFunction() === 'syncCalendar') ScriptApp.deleteTrigger(t);
+  });
+  ScriptApp.newTrigger('syncCalendar').timeBased().everyMinutes(5).create();
+  return 'Calendar copy installed (every 5 minutes)';
+}
+
+function clinicCalendar(s) {
+  var name = String(s.CAL_NAME || 'Clinic Appointments').trim();
+  var list = CalendarApp.getCalendarsByName(name);
+  return list.length ? list[0] : CalendarApp.createCalendar(name, { color: CalendarApp.Color.PURPLE, timeZone: TZ });
+}
+
+function syncCalendar() {
+  var s = settings();
+  if (String(s.CAL_ENABLED).toUpperCase() !== 'YES') return 'Calendar copy is off';
+  var lock = LockService.getScriptLock();
+  if (!lock.tryLock(3000)) return 'Busy, will try next time';
+  var done = 0;
+  try {
+    var sheet = SS().getSheetByName(TAB_BOOKINGS);
+    var today = ymd(new Date());
+    var cal = null;
+    bookingRows().forEach(function (r) {
+      if (String(r[COL.id]).indexOf('WALKIN') === 0 || r[COL.date] < today) return;
+      var mark = String(r[COL.cal] || '');
+      try {
+        if (isActive(r) && !mark) {
+          cal = cal || clinicCalendar(s);
+          var start = atIST(r[COL.date], toMin(r[COL.time]));
+          var end = new Date(start.getTime() + s.SLOT_MINUTES * 60000);
+          var title = r[COL.child] + (r[COL.visit] ? ' · ' + r[COL.visit] : '');
+          var ev = cal.createEvent(title, start, end, { description: 'Phone: ' + r[COL.phone] + '\nBooking ID: ' + r[COL.id] + (r[COL.visit] ? '\nVisit: ' + r[COL.visit] : '') });
+          sheet.getRange(r.row, COL.cal + 1).setValue(ev.getId());
+          done++;
+        } else if (!isActive(r) && mark && mark !== 'Removed') {
+          cal = cal || clinicCalendar(s);
+          var old = cal.getEventById(mark);
+          if (old) old.deleteEvent();
+          sheet.getRange(r.row, COL.cal + 1).setValue('Removed');
+          done++;
+        }
+      } catch (e) { console.warn('Calendar copy failed for ' + r[COL.id] + ': ' + e); }
+    });
+  } finally {
+    lock.releaseLock();
+  }
+  return 'Calendar updated: ' + done;
 }
 
 /* ------------------------------------------------------------------ WhatsApp */

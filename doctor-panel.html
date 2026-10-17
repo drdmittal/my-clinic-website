@@ -70,6 +70,9 @@ textarea{min-height:120px;resize:vertical;line-height:1.45}
 .stats{display:flex;gap:8px;flex-wrap:wrap}
 .pill{border-radius:999px;padding:3px 12px;font-weight:700;font-size:14px;background:var(--brand-soft);color:var(--brand)}
 .pill.g{background:var(--leaf-soft);color:var(--leaf)} .pill.r{background:var(--rose-soft);color:var(--rose)}
+.vt{display:inline-block;border-radius:999px;padding:0 9px;font-size:13px;font-weight:700;background:var(--brand-soft);color:var(--brand);vertical-align:2px}
+.vt.vac{background:var(--leaf-soft);color:var(--leaf)}
+[hidden]{display:none!important}
 .appt{display:grid;grid-template-columns:76px 1fr auto;gap:10px;align-items:start;padding:10px 0;border-top:1px solid var(--line)}
 .appt:first-child{border-top:0}
 .appt time{font:800 17px var(--display);font-variant-numeric:tabular-nums;color:var(--brand)}
@@ -143,13 +146,13 @@ textarea{min-height:120px;resize:vertical;line-height:1.45}
       S.day = r;
       document.getElementById('dl').textContent = r.dateLabel;
       var act = r.bookings.filter(function(b){ return /^Booked/.test(b.status); }), cx = r.bookings.length - act.length;
-      document.getElementById('stats').innerHTML = '<span class="pill">'+act.length+' booked</span>'+(cx?'<span class="pill r">'+cx+' cancelled</span>':'')+'<span class="pill g">'+act.filter(function(b){return b.wa==='YES';}).length+' on WhatsApp</span>';
+      document.getElementById('stats').innerHTML = '<span class="pill">'+act.length+' booked</span>'+(cx?'<span class="pill r">'+cx+' cancelled</span>':'')+'<span class="pill">'+act.filter(function(b){return b.visit==='Consultation';}).length+' consultation</span><span class="pill">'+act.filter(function(b){return b.visit==='Vaccination';}).length+' vaccination</span><span class="pill g">'+act.filter(function(b){return b.wa==='YES';}).length+' on WhatsApp</span>';
       var L = document.getElementById('list');
       if(after) setTimeout(after, 0);
       if(!r.bookings.length){ L.innerHTML = '<p class="muted">No online bookings for this day.</p>'; return; }
       L.innerHTML = r.bookings.map(function(b){
         var on = /^Booked/.test(b.status);
-        return '<div class="appt'+(on?'':' cx')+'" data-row="'+b.row+'"><time>'+esc(b.timeLabel)+'</time><div><b>'+esc(b.child)+'</b>'+(b.age?' <span class="sub">· '+esc(b.age)+'</span>':'')+'<div class="sub">'+(b.parent?esc(b.parent)+' · ':'')+(b.phone?'<a href="tel:+91'+esc(b.phone)+'">'+esc(b.phone)+'</a>':'Added by clinic')+(b.reason?' · '+esc(b.reason):'')+'</div><div class="sub">'+esc(b.id)+(on?'':' · '+esc(b.status))+'</div></div>'+(on && !b.legacy?'<button class="btn ghost sm" data-cx="'+b.row+'" data-id="'+esc(b.id)+'">'+(b.phone?'Cancel':'Remove')+'</button>':'<span></span>')+'</div>';
+        return '<div class="appt'+(on?'':' cx')+'" data-row="'+b.row+'"><time>'+esc(b.timeLabel)+'</time><div><b>'+esc(b.child)+'</b>'+(b.visit?' <span class="vt'+(b.visit==='Vaccination'?' vac':'')+'">'+esc(b.visit)+'</span>':'')+(b.age?' <span class="sub">· '+esc(b.age)+'</span>':'')+'<div class="sub">'+(b.parent?esc(b.parent)+' · ':'')+(b.phone?'<a href="tel:+91'+esc(b.phone)+'">'+esc(b.phone)+'</a>':'Added by clinic')+(b.reason?' · '+esc(b.reason):'')+'</div><div class="sub">'+esc(b.id)+(on?'':' · '+esc(b.status))+'</div></div>'+(on && !b.legacy?'<button class="btn ghost sm" data-cx="'+b.row+'" data-id="'+esc(b.id)+'">'+(b.phone?'Cancel':'Remove')+'</button>':'<span></span>')+'</div>';
       }).join('');
     }).catch(net);
   }
@@ -253,7 +256,7 @@ textarea{min-height:120px;resize:vertical;line-height:1.45}
       v.innerHTML = '<div class="card"><h3>Slots</h3><div class="grid2">'+
         '<label for="sl">Slot length<select id="sl">'+[10,15,20,30].map(function(n){ return '<option value="'+n+'"'+(+s.SLOT_MINUTES===n?' selected':'')+'>'+n+' minutes</option>'; }).join('')+'</select></label>'+
         '<div><span style="font-weight:600;font-size:14.5px">Patients per slot</span><div class="stepper"><button type="button" data-ps="-1" aria-label="Fewer">−</button><output id="ps">'+(+s.PER_SLOT)+'</output><button type="button" data-ps="1" aria-label="More">+</button></div></div>'+
-        '<label for="da">Parents can book up to<select id="da">'+[3,5,7,10,14,21,30].map(function(n){ return '<option value="'+n+'"'+(+s.DAYS_AHEAD===n?' selected':'')+'>'+n+' days ahead</option>'; }).join('')+'</select></label>'+
+        '<label for="da">Parents can book for<select id="da">'+[[1,'Today only'],[2,'Today + 1 day (tomorrow)'],[3,'Today + 2 days'],[4,'Today + 3 days (maximum)']].map(function(o){ return '<option value="'+o[0]+'"'+(Math.min(4,+s.DAYS_AHEAD)===o[0]?' selected':'')+'>'+o[1]+'</option>'; }).join('')+'</select></label>'+
         '<label for="mn">Close a slot before it starts<select id="mn">'+[0,15,30,60,120].map(function(n){ return '<option value="'+n+'"'+(+s.MIN_NOTICE_MINUTES===n?' selected':'')+'>'+(n?n+' minutes before':'Keep open till it starts')+'</option>'; }).join('')+'</select></label>'+
         '</div></div>'+
         '<div class="card"><h3>OPD timings</h3><p class="muted">Format: <b>10:00-13:00, 18:00-20:30</b> (24-hour). Leave a day empty if closed. To allow a different number per slot in one session, add @ and the number, e.g. <b>18:00-20:30@3</b>.</p>'+
@@ -321,11 +324,11 @@ textarea{min-height:120px;resize:vertical;line-height:1.45}
   });
 
   /* ---------- demo backend for previews */
-  var DM = { settings:{SLOT_MINUTES:15,PER_SLOT:2,DAYS_AHEAD:7,MIN_NOTICE_MINUTES:30,SESSIONS_MON:'10:00-13:00, 18:00-20:30',SESSIONS_TUE:'10:00-13:00, 18:00-20:30',SESSIONS_WED:'10:00-13:00, 18:00-20:30',SESSIONS_THU:'10:00-13:00, 18:00-20:30',SESSIONS_FRI:'10:00-13:00, 18:00-20:30',SESSIONS_SAT:'10:00-13:00, 18:00-20:30',SESSIONS_SUN:'11:00-12:00'}, blocks:[{row:2, from:'Mon 20 Oct, 10:00 AM', to:'Mon 27 Oct, 8:30 PM', msg:'Dr. Mittal is on leave. Clinic reopens on 28 Oct.'}],
+  var DM = { settings:{SLOT_MINUTES:15,PER_SLOT:2,DAYS_AHEAD:3,MIN_NOTICE_MINUTES:30,SESSIONS_MON:'10:00-13:00, 18:00-20:30',SESSIONS_TUE:'10:00-13:00, 18:00-20:30',SESSIONS_WED:'10:00-13:00, 18:00-20:30',SESSIONS_THU:'10:00-13:00, 18:00-20:30',SESSIONS_FRI:'10:00-13:00, 18:00-20:30',SESSIONS_SAT:'10:00-13:00, 18:00-20:30',SESSIONS_SUN:'11:00-12:00'}, blocks:[{row:2, from:'Mon 20 Oct, 10:00 AM', to:'Mon 27 Oct, 8:30 PM', msg:'Dr. Mittal is on leave. Clinic reopens on 28 Oct.'}],
     appts:[['10:00','Aarav Sharma','3 yrs','Neha Sharma','9810012345','Fever / cough / cold','YES'],['10:00','Myra Gupta','8 months','Rohit Gupta','9899012345','Vaccination','YES'],['10:15','Kabir Jain','6 yrs','Pooja Jain','9711012345','Stomach problem','NO'],['10:45','Anaya Singh','1.5 yrs','','9958012345','Follow-up','YES'],['18:00','Vivaan Arora','10 yrs','Sunil Arora','9873012345','Growth / routine check','NO'],['18:15','Ishaan Bansal','4 yrs','Ritu Bansal','9650012345','Fever / cough / cold','YES']] };
   function demo(b){ return new Promise(function(res){ setTimeout(function(){
     if(b.action==='admin_load') return res({ok:true, role: b.pin==='2' ? 'staff' : 'doctor', staffPinSet: !!DM.spin, settings:DM.settings, blocks:DM.blocks, whatsapp:true, notice:DM.notice||'', noticeUntil:DM.until||'', noticeLive:!!DM.notice});
-    if(b.action==='admin_day'){ var p=b.date.split('-'); var d=new Date(+p[0],+p[1]-1,+p[2]); return res({ok:true, date:b.date, dateLabel:d.toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short',year:'numeric'}), bookings: DM.appts.map(function(a,i){ var h=+a[0].slice(0,2), m=a[0].slice(3); return {row:i+2, id:'DM'+b.date.slice(2).replace(/-/g,'')+'-'+(4100+i*37), time:a[0], timeLabel:(((h+11)%12)+1)+':'+m+' '+(h>=12?'PM':'AM'), child:a[1], age:a[2], parent:a[3], phone:a[4], reason:a[5], wa:a[6], status: DM['cx'+i] ? 'Cancelled' : 'Booked'}; })}); }
+    if(b.action==='admin_day'){ var p=b.date.split('-'); var d=new Date(+p[0],+p[1]-1,+p[2]); return res({ok:true, date:b.date, dateLabel:d.toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short',year:'numeric'}), bookings: DM.appts.map(function(a,i){ var h=+a[0].slice(0,2), m=a[0].slice(3); return {row:i+2, id:'DM'+b.date.slice(2).replace(/-/g,'')+'-'+(4100+i*37), time:a[0], timeLabel:(((h+11)%12)+1)+':'+m+' '+(h>=12?'PM':'AM'), child:a[1], age:a[2], parent:a[3], phone:a[4], reason:a[5], wa:a[6], visit: i%3===1 ? 'Vaccination' : 'Consultation', status: DM['cx'+i] ? 'Cancelled' : 'Booked'}; })}); }
     if(b.action==='admin_cancel'){ DM['cx'+(b.row-2)] = true; return res({ok:true}); }
     if(b.action==='admin_block'){ DM.blocks.push({row:DM.blocks.length+2, from:b.from.replace('T',' ').slice(0,16), to:b.to.replace('T',' ').slice(0,16), msg:b.message||'Dr. Mittal is not available at this time.'}); return res({ok:true, affected:[], cancelled:0, notified:0}); }
     if(b.action==='admin_unblock'){ DM.blocks = DM.blocks.filter(function(x){ return x.row!==b.row; }); return res({ok:true}); }

@@ -40,17 +40,18 @@ Last updated: 17 Oct 2026 (newborn care page added).
   - Old tabs: APPOINTMENTS (old bookings still block slots), extra slots, HOLIDAYS (no longer used), BLACKLIST (not used yet).
   - New tabs: Booking Settings, Blocked Times, Online Bookings, WhatsApp Consent.
 - **To update the script:** paste the new Code.gs at script.google.com, Save, run `setup` once, then Deploy → Manage deployments → pencil → New version → Deploy. Never "New deployment" (that makes a new link).
-- **Doctor panel features:** walk-in (fills a place, no name), cancel, block any period (incl. future holidays) with a message, slot length, patients per slot, days ahead (7), OPD sessions per day (`18:00-20:30@3` = 3 per slot), message box for parents with auto-hide date, staff PIN (Appointments + Block time only).
+- **Doctor panel features:** walk-in (fills a place, no name), cancel, block any period (incl. future holidays) with a message, slot length, patients per slot, days open for booking (today only up to today + 3 days, maximum; doctor's rule), OPD sessions per day (`18:00-20:30@3` = 3 per slot), message box for parents with auto-hide date, staff PIN (Appointments + Block time only), Consultation / Vaccination count and badge on each appointment.
+- **Visit type:** parents tap Consultation or Vaccination (required) before name and mobile. Saved in the "Visit type" column of Online Bookings.
+- **Google Calendar copy:** background job `syncCalendar` every 5 minutes copies upcoming online bookings to the calendar "Clinic Appointments" (event = child · visit type, phone in notes) and removes cancelled ones. Event ID kept in the "Calendar" column. Never runs during a booking. Turn off with `CAL_ENABLED` = NO in Booking Settings.
 
 ### Pending, on the doctor's side
 
-1. **Paste the latest Code.gs into Apps Script** (adds Walk-in, Message and Staff PIN; until then those show "Could not complete").
+1. **Paste the latest Code.gs and appsscript.json into Apps Script** (17 Oct 2026 version: Walk-in, Message, Staff PIN, visit type, 3-day limit, Google Calendar copy). Then run `setup` once and allow the Calendar permission, then New version deploy. Until then Walk-in / Message / Staff PIN show "Could not complete" and visit type is not saved.
 2. **WhatsApp confirmations** (Cloud API, direct with Meta):
    - Buy a new SIM for automatic messages only. The clinic number stays on WhatsApp Business.
    - Then do the Meta setup in `booking-backend/SETUP.md` section C: business portfolio, app, number, 3 Utility templates, permanent token, Phone number ID.
    - Fill in Booking Settings, then run `testWhatsApp` and `installReminderTrigger`, and redeploy.
    - Messages end with "This is an automatic message … WhatsApp or call +91 81305 21456".
-3. Optional: Google Calendar copy of bookings via a background job (the doctor did not want anything that slows booking).
 
 ## 4. Rules for all website work
 
