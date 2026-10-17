@@ -1,7 +1,7 @@
 # Clinic Website & Booking — Handbook
 
 Everything needed to keep working on Dr. Dinesh Mittal's website and online booking in any new chat.
-Last updated: 17 Oct 2026.
+Last updated: 17 Oct 2026 (newborn care page added).
 
 ## 1. Basics
 
@@ -24,6 +24,7 @@ Last updated: 17 Oct 2026.
 | `doctor-panel.html` | "Appointments" app (PIN). Tabs: Appointments (+ Walk-in, Cancel), Message, Block time, Slot settings (incl. Staff PIN). Installable on phone home screen. |
 | `baby-diet-planner.html` | Diet & feeding guide: 4 age groups (0–6 m, 6–12 m with 6 / 7–8 / 9–11 m steps, 1–2 y, 2–18 y), Veg / +Egg / Non-veg, English or Hindi, print with clinic header |
 | `parent-tools/` | Fever chart, Constipation guide, Golu Potty Hero game, feeding guide PDF, tools index. `fever-care.html` only redirects to the fever chart. |
+| `parent-tools/newborn-care.html` | Newborn care (first 28 days, up to 3 months): 4 tabs — Normal or worry? (danger signs first, then 15 normal things each with "see the doctor if"), Bathing (sponge bath till cord falls, then mug bath; no tub), Massage (family only, coconut oil, 6 drawn steps), Please avoid. English/Hindi, prints all tabs with clinic header. Tabs open by link: `#normal`, `#bath`, `#massage`, `#avoid`. |
 | 12 article pages + `blog.html` | Health articles (older design) |
 | `site-nav.js` | Side tile menu on every page (rail on computer, "Menu" tab on phone). Not on the Golu game or doctor panel. |
 | `icons/`, `doctor-panel.webmanifest` | DM logo icons, home-screen app |
@@ -70,6 +71,7 @@ Last updated: 17 Oct 2026.
   - Breast milk first; formula only on a doctor's advice.
   - Amounts are only a guide: follow the child's appetite, no force-feeding.
   - No fever "what to do" protocol on the website (the doctor advises in person).
+  - Newborn care rules: sponge bath until the cord falls off, then mug bath (no bath tub or bath seat, accident risk); massage by mother, father or family only (not a maid); coconut oil (sunflower also OK per IAP), no mustard or olive oil; never squeeze a newborn's breasts.
 - **Before publishing:** check the JavaScript syntax, test the page on a phone-size screen, and check booking still works (`book.html?demo=1` is a safe preview).
 - **Commit author:** "Dr. Dinesh Mittal (via Claude)" <drdmittal@users.noreply.github.com>.
 
