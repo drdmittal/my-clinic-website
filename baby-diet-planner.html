@@ -29,6 +29,7 @@
   --font:'Anek Devanagari',system-ui,sans-serif;color-scheme:light}
 @media (prefers-color-scheme:dark){:root{--paper:#12112b;--surface:#1c1a3d;--ink:#eceafd;--muted:#aeacd2;--line:#2f2c5c;--indigo-soft:#262356;--pink-soft:#3a1a2a;--sun-soft:#3a2d10;--teal-soft:#0f312e;--sky-soft:#13304c;--grape-soft:#2c1f48;--leaf-soft:#173219;--orange-soft:#3a2510;--red-soft:#3a1c1c;color-scheme:dark}}
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--paper);color:var(--ink);font:450 17.5px/1.55 var(--font)}
 h1,h2,h3{font-family:var(--font);font-weight:800;font-stretch:112%;line-height:1.12;margin:0;text-wrap:balance}
@@ -216,6 +217,10 @@ var C = {};
 C.m0 = {
   glance:[['8–12','feeds in 24 hours, on demand','दूध 24 घंटे में, भूख के हिसाब से','pink'],['Only','breast milk. No water, ghutti or honey.','माँ का दूध। पानी, घुट्टी, शहद नहीं।','sky'],['6+','wet nappies a day = enough milk','गीली नैपी रोज़ = दूध काफ़ी है','leaf'],['400 IU','vitamin D drops daily, as advised','विटामिन D ड्रॉप रोज़, डॉक्टर की सलाह से','grape']],
   day:{items:[['6:00 am','M'],['8:30 am','M'],['11:00 am','M'],['1:30 pm','M'],['4:00 pm','M'],['6:30 pm','M'],['9:00 pm','M'],['11:30 pm','M'],['3:00 am','M']],
+    night:[['First 2–3 weeks: newborns feed day and night. If the baby sleeps more than 3–4 hours, wake for a feed until birth weight is regained.','पहले 2–3 हफ़्ते: नवजात दिन-रात दूध पीता है। अगर 3–4 घंटे से ज़्यादा सोए तो जन्म का वज़न वापस आने तक जगाकर पिलाएँ।'],
+           ['In the next few weeks the baby’s day and night settle: feeds about every 2–3 hours by day and sleeps longer at night.','अगले कुछ हफ़्तों में दिन और रात का पैटर्न बन जाता है: दिन में लगभग हर 2–3 घंटे दूध, रात में लंबी नींद।'],
+           ['Once weight gain is good, there is no need to wake the baby at night. Feed when the baby wakes up hungry.','वज़न ठीक बढ़ने लगे तो रात में जगाकर पिलाने की ज़रूरत नहीं। बच्चा भूख से उठे तब पिलाएँ।'],
+           ['Help the baby learn day and night: daytime feeds in light and normal noise; night feeds in dim light, quietly, without play.','दिन-रात का फ़र्क सिखाएँ: दिन में रोशनी और सामान्य आवाज़ में; रात में हल्की रोशनी में, चुपचाप, बिना खेले पिलाएँ।']],
     note:['Feed when the baby shows hunger signs (rooting, sucking hands, restless). The times above are only an example of a usual day: about every 2–3 hours by day and 1–2 feeds at night. Do not wait for crying; crying is a late hunger sign.','जब बच्चा भूख के संकेत दे (मुँह खोलकर ढूँढना, हाथ चूसना, बेचैनी), तब पिलाएँ। ऊपर का समय सिर्फ़ उदाहरण है: दिन में लगभग हर 2–3 घंटे, रात में 1–2 बार। रोने का इंतज़ार न करें; रोना भूख का देर वाला संकेत है।']},
   extra:[
     {h:['Starting breastfeeding','स्तनपान की शुरुआत'], c:'pink', pts:[
@@ -235,7 +240,6 @@ C.m0 = {
       ['A feed usually lasts 10–30 minutes. Let the baby finish; do not take the baby off by the clock.','एक बार में आमतौर पर 10–30 मिनट लगते हैं। बच्चे को पूरा पीने दें, घड़ी देखकर न हटाएँ।'],
       ['Next feed: start with the breast you finished on last time.','अगली बार उस स्तन से शुरू करें जिस पर पिछली बार ख़त्म किया था।'],
       ['Burp the baby after each feed, holding upright for 5–10 minutes.','हर बार के बाद बच्चे को 5–10 मिनट सीधा पकड़कर डकार दिलाएँ।'],
-      ['Night feeds are important: they keep the milk supply up.','रात का दूध ज़रूरी है: इससे दूध बनना जारी रहता है।'],
       ['Positions: cradle, cross-cradle, football hold (good after caesarean), side-lying (stay awake).','तरीके: गोद में (क्रेडल), क्रॉस-क्रेडल, बगल में (फ़ुटबॉल, सिज़ेरियन के बाद अच्छा), करवट लेकर (जागते रहें)।']]},
     {h:['Is my baby getting enough milk?','क्या बच्चे को दूध काफ़ी मिल रहा है?'], c:'leaf', pts:[
       ['6 or more wet nappies in 24 hours (after day 5), with pale yellow urine.','24 घंटे में 6 या ज़्यादा गीली नैपी (5वें दिन के बाद), पेशाब हल्का पीला।'],
@@ -243,6 +247,12 @@ C.m0 = {
       ['Baby is alert and settles after most feeds. You can hear swallowing during feeds.','बच्चा चुस्त है और ज़्यादातर बार दूध के बाद शांत हो जाता है। पीते समय निगलने की आवाज़ आती है।'],
       ['Crying, frequent feeding or soft breasts alone do NOT mean low milk.','सिर्फ़ रोना, बार-बार पीना या स्तन नरम होना कम दूध का सबूत नहीं है।'],
       ['Growth spurts at about 2–3 weeks, 6 weeks and 3 months: the baby feeds more often for 2–3 days. Keep feeding; supply catches up.','लगभग 2–3 हफ़्ते, 6 हफ़्ते और 3 महीने पर बच्चा 2–3 दिन ज़्यादा बार पीता है। पिलाते रहें, दूध अपने आप बढ़ेगा।']]},
+    {h:['Cluster feeding: baby wants to feed again and again','क्लस्टर फ़ीडिंग: बच्चा बार-बार दूध माँगे'], c:'pink', pts:[
+      ['Some evenings the baby feeds every 30–60 minutes for 2–4 hours. This is called cluster feeding and is normal, especially in the first weeks and during growth spurts.','कुछ शामों को बच्चा 2–4 घंटे तक हर 30–60 मिनट पर दूध माँगता है। इसे क्लस्टर फ़ीडिंग कहते हैं; यह सामान्य है, ख़ासकर शुरू के हफ़्तों में और तेज़ बढ़त के समय।'],
+      ['It does NOT mean low milk. It increases your supply for the coming days.','इसका मतलब कम दूध नहीं है। इससे अगले दिनों के लिए दूध बढ़ता है।'],
+      ['Keep feeding on demand. Do not start formula or a bottle because of it.','भूख के हिसाब से पिलाते रहें। इस वजह से फ़ॉर्मूला या बोतल शुरू न करें।'],
+      ['It usually settles in 2–3 days. Rest during the day, keep water nearby, and let family handle other work.','आमतौर पर 2–3 दिन में ठीक हो जाता है। दिन में आराम करें, पानी पास रखें, बाकी काम परिवार संभाले।'],
+      ['See the doctor if the baby also has fewer wet nappies, poor weight gain, or seems unwell.','अगर साथ में गीली नैपी कम हों, वज़न न बढ़े या बच्चा बीमार लगे तो डॉक्टर को दिखाएँ।']]},
     {h:['Mother’s food and care','माँ का खाना और देखभाल'], c:'teal', pts:[
       ['Eat normal home food plus one extra meal a day (for example dal-roti or khichdi with curd).','घर का सामान्य खाना और दिन में एक बार अतिरिक्त खाना (जैसे दाल-रोटी या दही के साथ खिचड़ी)।'],
       ['Drink water whenever thirsty; keep a glass of water near you while feeding. About 3 litres of fluids a day.','प्यास लगे तब पानी पिएँ; पिलाते समय पास में पानी रखें। दिन में लगभग 3 लीटर।'],
@@ -277,6 +287,13 @@ var SCHED = {
 };
 
 C.m6 = {
+  milkHabit:{h:['Baby wants only breast milk or bottle, not food','बच्चा सिर्फ़ माँ का दूध या बोतल चाहे, खाना नहीं'], pts:[
+      ['From 6 months, milk alone is not enough. If milk is given whenever the baby cries or refuses food, the baby stays full and does not learn to eat.','6 महीने के बाद सिर्फ़ दूध काफ़ी नहीं। हर बार रोने या खाना मना करने पर दूध देने से पेट भरा रहता है और बच्चा खाना नहीं सीखता।'],
+      ['Follow the timetable: milk only at milk times, food at food times. Do not give milk within 1 hour before a meal.','टाइम-टेबल मानें: दूध सिर्फ़ दूध के समय, खाना खाने के समय। खाने से 1 घंटा पहले दूध न दें।'],
+      ['If the baby refuses a meal, do not replace it with milk. Offer the next meal at its time.','बच्चा खाना मना करे तो उसकी जगह दूध न दें। अगला खाना उसके समय पर दें।'],
+      ['Do not use breast or bottle to put the baby to sleep every time, or for every cry. Comfort with cuddling, rocking or a walk.','हर बार सुलाने या हर रोने पर दूध न पिलाएँ। गोद, झुलाकर या टहलाकर चुप कराएँ।'],
+      ['Night: after 6 months most healthy babies need only 1 night feed or none. Reduce night feeds slowly; let another family member settle the baby.','रात: 6 महीने के बाद ज़्यादातर स्वस्थ बच्चों को रात में 1 बार या बिल्कुल दूध की ज़रूरत नहीं। रात का दूध धीरे-धीरे कम करें; परिवार का कोई और सदस्य बच्चे को सुलाए।'],
+      ['Bottle: start a cup (paladai or open cup) now. Plan to stop the bottle completely by 12–15 months.','बोतल: अभी से कप (पलाड़ी या खुला कप) शुरू करें। 12–15 महीने तक बोतल पूरी तरह छुड़ाने का लक्ष्य रखें।']]},
   steps:{
     s6:{glance:[['2','semisolid meals','ठोस खाना','orange'],['5','milk feeds','दूध','sky'],['10–15 ml','to start (2–3 tsp), increase to 50–60 ml by month end','शुरुआत (2–3 छोटी चम्मच), महीने के अंत तक 50–60 ml','pink'],['Thick','smooth mash, like thick dal','गाढ़ा, मसला हुआ, गाढ़ी दाल जैसा','teal']],
         foods:[{n:['Week 1–2','पहले 2 हफ़्ते'],e:['Rice + moong dal khichdi mashed with ghee, ragi porridge, mashed banana, boiled mashed potato or carrot','मूँग दाल-चावल की मसली खिचड़ी घी के साथ, रागी की खीर, मसला केला, उबला मसला आलू या गाजर']},
@@ -303,6 +320,13 @@ C.m6 = {
 };
 
 C.y1 = {
+  milkHabit:{h:['Too much breast milk or bottle: how to cut down','ज़्यादा माँ का दूध या बोतल: कैसे कम करें'], pts:[
+      ['Signs: drinks a lot of milk but eats little food, wakes at night for milk, wants milk to sleep, is pale or constipated.','संकेत: दूध बहुत पीता है पर खाना कम, रात में दूध के लिए उठता है, सोने के लिए दूध चाहिए, पीलापन या कब्ज़।'],
+      ['Keep only 2 fixed milk times (morning and bedtime). Total milk about 400 ml a day, including dahi and paneer.','सिर्फ़ 2 तय समय दूध (सुबह और सोते समय)। कुल दूध रोज़ लगभग 400 ml, दही-पनीर मिलाकर।'],
+      ['Stop the bottle: replace one bottle feed with a cup every 3–4 days. Remove the bedtime bottle last. Do not give the bottle back when the child cries.','बोतल छुड़ाएँ: हर 3–4 दिन में एक बोतल की जगह कप दें। सोते समय वाली बोतल सबसे आख़िर में हटाएँ। रोने पर बोतल वापस न दें।'],
+      ['Breastfeeding can continue, but at fixed times, not on demand all day and night and not as the only way to settle.','माँ का दूध जारी रख सकते हैं, पर तय समय पर; पूरे दिन-रात माँगने पर नहीं, और सिर्फ़ इसी से सुलाना नहीं।'],
+      ['Night: no night milk is needed at this age. Cut night feeds over 1–2 weeks (shorter feeds, then water, then cuddling). Let the father or another family member settle the child.','रात: इस उम्र में रात के दूध की ज़रूरत नहीं। 1–2 हफ़्ते में रात का दूध बंद करें (पहले कम देर, फिर पानी, फिर सिर्फ़ गोद)। पापा या परिवार का कोई और सदस्य सुलाए।'],
+      ['Expect 3–5 difficult nights. Stay consistent; appetite for food improves within 1–2 weeks.','3–5 रातें मुश्किल होंगी। एक जैसा नियम रखें; 1–2 हफ़्ते में खाने की भूख बढ़ जाती है।']]},
   glance:[['5','semisolid (3 meals + 2 snacks)','ठोस (3 खाने + 2 नाश्ते)','orange'],['2','milk feeds','दूध','sky'],['150–250 ml','per meal','एक बार में','pink'],['400 ml','total milk a day, including dahi and paneer','कुल दूध रोज़, दही-पनीर मिलाकर','teal']],
   foods:[{n:['Breakfast','नाश्ता'],e:['Vegetable poha, suji upma, besan or moong chilla, paratha with dahi, idli','सब्ज़ी पोहा, सूजी उपमा, बेसन या मूँग चीला, दही के साथ पराठा, इडली']},
          {n:['Lunch and dinner','दोपहर और रात'],e:['Roti or rice with dal and sabzi, khichdi with vegetables, rajma-chawal (mashed)','दाल-सब्ज़ी के साथ रोटी या चावल, सब्ज़ी वाली खिचड़ी, राजमा-चावल (मसला)']},
@@ -335,7 +359,7 @@ C.y2 = {
          {n:['Chicken, fish, mutton','चिकन, मछली, मटन'],e:['2–3 times a week, home-cooked; grilled or curry rather than fried','हफ़्ते में 2–3 बार, घर का बना; तला हुआ नहीं, ग्रिल या करी'],tag:'nv'}],
   rules:[['Fixed meal and snack times. Nothing except water in between.','खाने और नाश्ते का तय समय। बीच में पानी के अलावा कुछ नहीं।'],['Parents decide what, when and where. The child decides how much.','क्या, कब और कहाँ — माता-पिता तय करें। कितना — बच्चा तय करे।'],['Iron foods daily: green leafy vegetables, dal, chana, rajma, ragi; plus egg or meat if eaten. Fruit after meals helps iron absorption.','रोज़ आयरन वाला खाना: हरी पत्तेदार सब्ज़ी, दाल, चना, राजमा, रागी; और अंडा या मांस अगर खाते हैं। खाने के बाद फल आयरन लगने में मदद करता है।'],['Teenagers: protein at every meal, calcium (dairy, ragi, til) daily; girls need extra iron after periods start.','किशोर: हर खाने में प्रोटीन, रोज़ कैल्शियम (दूध की चीज़ें, रागी, तिल); पीरियड शुरू होने के बाद लड़कियों को ज़्यादा आयरन चाहिए।']],
   ok:[['Eat at least one meal a day together as a family, without screens.','दिन में कम से कम एक बार परिवार साथ बैठकर, बिना स्क्रीन के खाए।'],['Keep fruit and roasted chana at home instead of packets.','घर में पैकेट की जगह फल और भुने चने रखें।'],['Involve children in choosing vegetables and simple cooking.','सब्ज़ी चुनने और आसान खाना बनाने में बच्चों को शामिल करें।'],['Sleep: 10–13 hours (2–5 y), 9–12 hours (6–12 y), 8–10 hours (teens).','नींद: 10–13 घंटे (2–5 साल), 9–12 घंटे (6–12 साल), 8–10 घंटे (किशोर)।']],
-  no:[['Outside or junk food (pizza, burger, chips, noodles) at most once a week.','बाहर का या जंक फ़ूड (पिज़्ज़ा, बर्गर, चिप्स, नूडल्स) हफ़्ते में अधिक से अधिक एक बार।'],['No cold drinks, packet juice or energy drinks; plain water is the drink.','कोल्ड ड्रिंक, पैकेट जूस या एनर्जी ड्रिंक नहीं; पीने के लिए सादा पानी।'],['Sweets small and occasional, not daily. No food as a reward or punishment.','मिठाई कम और कभी-कभी, रोज़ नहीं। खाने को इनाम या सज़ा न बनाएँ।'],['Teenagers: no protein powder or supplements without a doctor’s advice; no crash diets.','किशोर: डॉक्टर की सलाह के बिना प्रोटीन पाउडर या सप्लीमेंट नहीं; अचानक डाइटिंग नहीं।']],
+  no:[['No bottle at this age. If the child still uses one, stop it now using the 1–2 years steps.','इस उम्र में बोतल नहीं। अगर अब भी चलती है तो 1–2 साल वाले तरीके से अभी छुड़ाएँ।'],['Outside or junk food (pizza, burger, chips, noodles) at most once a week.','बाहर का या जंक फ़ूड (पिज़्ज़ा, बर्गर, चिप्स, नूडल्स) हफ़्ते में अधिक से अधिक एक बार।'],['No cold drinks, packet juice or energy drinks; plain water is the drink.','कोल्ड ड्रिंक, पैकेट जूस या एनर्जी ड्रिंक नहीं; पीने के लिए सादा पानी।'],['Sweets small and occasional, not daily. No food as a reward or punishment.','मिठाई कम और कभी-कभी, रोज़ नहीं। खाने को इनाम या सज़ा न बनाएँ।'],['Teenagers: no protein powder or supplements without a doctor’s advice; no crash diets.','किशोर: डॉक्टर की सलाह के बिना प्रोटीन पाउडर या सप्लीमेंट नहीं; अचानक डाइटिंग नहीं।']],
   doc:[['Not gaining height or weight for 6 months, or gaining weight very fast.','6 महीने से लंबाई या वज़न नहीं बढ़ा, या वज़न बहुत तेज़ी से बढ़ रहा है।'],['Pale, tired, poor concentration.','पीलापन, थकान, ध्यान न लगना।'],['Eats only a few foods, or gags on most textures.','सिर्फ़ गिनी-चुनी चीज़ें खाता है, या ज़्यादातर खाने पर उबकाई।'],['Teen: skipping meals, fear of gaining weight, vomiting after meals, or excessive exercise.','किशोर: खाना छोड़ना, वज़न बढ़ने का डर, खाने के बाद उल्टी, या बहुत ज़्यादा कसरत।']],
   er:[['Swelling of lips or face, or breathing difficulty after a food.','खाने के बाद होंठ या चेहरा सूजे, या साँस में दिक्कत।'],['Choking: cannot speak, cough or breathe.','गले में कुछ फँसा: बोल, खाँस या साँस न ले पाए।']]
 };
@@ -386,7 +410,7 @@ function render(){
   if(st.age==='m0'){
     var d = C.m0;
     o += sec(n++, UI.glance, glance(d.glance), a.c);
-    o += sec(n++, UI.day, timeline(d.day.items)+'<p class="note">'+esc(t(d.day.note))+'</p>', 'sky');
+    o += sec(n++, UI.day, timeline(d.day.items)+'<p class="note">'+esc(t(d.day.note))+'</p><h3>'+esc(L==='hi'?'दिन और रात का दूध':'Day and night feeds')+'</h3>'+ul(d.day.night,'dot'), 'sky');
     d.extra.forEach(function(x){ o += sec(n++, x.h, ul(x.pts,'dot'), x.c); });
     o += sec(n++, UI.dont, dodont(d), 'leaf');
     o += sec(n++, UI.doc, doctor(d), 'red');
@@ -396,6 +420,7 @@ function render(){
     o += sec(n++, UI.day, timeline(SCHED[st.step])+'<p class="note">'+esc(t(UI.shift))+'</p>', 'sky');
     o += sec(n++, UI.what, foods(s.foods)+'<h3>'+esc(t(UI.groups))+'</h3>'+groupsBlock()+'<p class="note">'+esc(t(UI.jain))+'</p>', 'teal');
     o += sec(n++, UI.how, mealsTable()+'<p class="note">'+esc(t(UI.katori))+'</p><a class="pdfdl noprint" href="/parent-tools/complementary-feeding-guide.pdf" download>'+esc(t(UI.pdf))+'</a>', 'orange');
+    o += sec(n++, d.milkHabit.h, ul(d.milkHabit.pts,'dot'), 'grape');
     o += sec(n++, UI.dont, dodont(d)+'<h3>'+esc(L==='hi'?'गले में फँसने से बचाव':'Prevent choking')+'</h3>'+ul(CHOKING,'warn'), 'leaf');
     o += sec(n++, UI.doc, doctor(d), 'red');
   } else if(st.age==='y1'){
@@ -404,6 +429,7 @@ function render(){
     o += sec(n++, UI.day, timeline(SCHED.y1)+'<p class="note">'+esc(t(UI.shift))+'</p>', 'sky');
     o += sec(n++, UI.what, foods(d.foods)+'<h3>'+esc(t(UI.groups))+'</h3>'+groupsBlock()+'<p class="note">'+esc(t(UI.jain))+'</p>', 'teal');
     o += sec(n++, UI.how, '<p>'+esc(L==='hi'?'हर खाने में 150–250 ml (¾ से 1 कटोरी)। नाश्ते में ½ कटोरी या 1 फल।':'150–250 ml per meal (¾ to 1 katori). Snack: ½ katori or 1 fruit.')+'</p><p class="note">'+esc(t(UI.katori))+'</p><a class="pdfdl noprint" href="/parent-tools/complementary-feeding-guide.pdf" download>'+esc(t(UI.pdf))+'</a>', 'orange');
+    o += sec(n++, d.milkHabit.h, ul(d.milkHabit.pts,'dot'), 'grape');
     o += sec(n++, UI.dont, dodont(d)+'<h3>'+esc(L==='hi'?'गले में फँसने से बचाव':'Prevent choking')+'</h3>'+ul(CHOKING,'warn'), 'leaf');
     o += sec(n++, UI.doc, doctor(d), 'red');
   } else {
