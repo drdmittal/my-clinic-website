@@ -116,7 +116,17 @@ td b{font-weight:750}
 .plate span{font-size:15px}
 .foot{color:var(--muted);font-size:14.5px;margin-top:20px}
 .pdfdl{display:inline-flex;align-items:center;gap:8px;background:var(--indigo);color:#fff;text-decoration:none;font-weight:700;border-radius:14px;padding:10px 16px;margin-top:10px}
+/* print header / footer */
+.printhead,.printfoot,.printage{display:none}
 @media print{
+  .printhead{display:flex;justify-content:space-between;gap:16px;border-bottom:3px solid #2a2580;padding:0 0 8px;margin:0 0 6px;font-size:11px;line-height:1.4;color:#1c1950}
+  .printhead b{font-size:17px;font-weight:800}
+  .printhead .ph-r{text-align:right}
+  .hero #intro{display:none}
+  .printage{display:block;font-weight:700;font-size:14px;margin-top:4px}
+  .printfoot{display:block;border-top:1px solid #ccc;margin-top:10px;padding-top:6px;font-size:10px;color:#555}
+  @page{margin:12mm}
+
   .top,.controls,.dmr-rail,.dmr-tab,.printbtn,.noprint{display:none!important}
   body{background:#fff;font-size:12.5px}
   .sec{break-inside:avoid;padding:10px;margin-top:8px;border:1px solid #ddd}
@@ -135,9 +145,14 @@ td b{font-weight:750}
   </div>
 </header>
 
+<div class="wrap printhead" aria-hidden="true">
+  <div class="ph-top"><b>Dr. Dinesh Mittal</b> &nbsp;MBBS, DCH<br><span>Delhi Medical Council Reg. No. DMC/R/00668</span></div>
+  <div class="ph-r">Dr. Dinesh Mittal Child Clinic<br>H-34/69, Sector 3, Rohini, Delhi 110085<br>Phone +91 81305 21456 · Mon–Sat 10 am–1 pm, 6–8:30 pm · Sun 11 am–12 pm</div>
+</div>
 <div class="wrap hero">
   <h1 id="title"></h1>
   <p id="intro"></p>
+  <p class="printage" id="printAge"></p>
 </div>
 
 <div class="controls">
@@ -153,6 +168,7 @@ td b{font-weight:750}
 </div>
 
 <main class="wrap" id="out" aria-live="polite"></main>
+<div class="wrap printfoot" aria-hidden="true"><span id="pfText"></span></div>
 
 <script>
 (function(){
@@ -183,6 +199,7 @@ var UI = {
   katori:['Measure your katori once: fill it with water and pour it into a measuring cup or feeding bottle. Most small katoris hold 100–150 ml.','अपनी कटोरी एक बार नाप लें: पानी भरकर नापने वाले कप या बोतल में डालें। ज़्यादातर छोटी कटोरी में 100–150 ml आता है।'],
   pdf:['Download the printable 6 months – 2 years guide (PDF)','6 महीने – 2 साल की प्रिंट वाली गाइड डाउनलोड करें (PDF)'],
   jain:['Jain families: choose Veg and skip onion, garlic and root vegetables.','जैन परिवार: शाकाहारी चुनें और प्याज़, लहसुन व ज़मीन के नीचे उगने वाली सब्ज़ियाँ छोड़ दें।'],
+  pfoot:['Health education material for parents. General information only; it does not replace a consultation with your doctor. Dr. Dinesh Mittal, MBBS, DCH · DMC/R/00668 · childspecialistrohini.com','माता-पिता के लिए स्वास्थ्य जानकारी। यह सामान्य जानकारी है, डॉक्टर से परामर्श का विकल्प नहीं। डॉ. दिनेश मित्तल, MBBS, DCH · DMC/R/00668 · childspecialistrohini.com'],
   foot:['Based on IAP infant and young child feeding guidelines, WHO guidance and ICMR-NIN dietary guidelines. General advice only: follow your doctor’s advice for your child.','IAP, WHO और ICMR-NIN के दिशानिर्देशों पर आधारित। यह सामान्य सलाह है; अपने बच्चे के लिए डॉक्टर की सलाह मानें।']
 };
 
@@ -357,6 +374,17 @@ C.y1 = {
 };
 
 C.y2 = {
+  recipes:[
+    {n:['Moong dal vegetable chilla','मूँग दाल सब्ज़ी चीला'], i:['1 katori moong dal (soaked 3–4 hours), ½ katori grated carrot or lauki, a handful of chopped palak, a little ginger, pinch of salt, 1 tsp oil','1 कटोरी मूँग दाल (3–4 घंटे भिगोई), ½ कटोरी कद्दूकस गाजर या लौकी, मुट्ठी भर कटा पालक, थोड़ा अदरक, चुटकी नमक, 1 छोटी चम्मच तेल'], s:['Grind the dal to a thick batter, mix the vegetables, spread thin on a hot tawa, cook both sides with a few drops of oil. Serve with dahi or green chutney. Good for breakfast and tiffin.','दाल को गाढ़ा पीस लें, सब्ज़ियाँ मिलाएँ, गरम तवे पर पतला फैलाएँ, कुछ बूँद तेल से दोनों तरफ़ सेकें। दही या हरी चटनी के साथ दें। नाश्ते और टिफ़िन के लिए अच्छा।']},
+    {n:['Vegetable dalia khichdi','सब्ज़ी दलिया खिचड़ी'], i:['½ katori dalia, ¼ katori moong dal, 1 katori mixed vegetables (peas, carrot, beans), 1 tsp ghee, jeera, haldi, salt','½ कटोरी दलिया, ¼ कटोरी मूँग दाल, 1 कटोरी मिली सब्ज़ियाँ (मटर, गाजर, बीन्स), 1 छोटी चम्मच घी, जीरा, हल्दी, नमक'], s:['Roast dalia in ghee with jeera, add dal, vegetables, haldi and 3 katori water. Pressure cook 3–4 whistles. Serve with dahi.','घी में जीरा डालकर दलिया भूनें, दाल, सब्ज़ियाँ, हल्दी और 3 कटोरी पानी डालें। कुकर में 3–4 सीटी लें। दही के साथ दें।']},
+    {n:['Paneer vegetable roll','पनीर सब्ज़ी रोल'], i:['2 whole-wheat rotis, ½ katori crumbled paneer, chopped capsicum, tomato, onion (optional), pinch of haldi and salt','2 गेहूँ की रोटी, ½ कटोरी मसला पनीर, कटी शिमला मिर्च, टमाटर, प्याज़ (चाहें तो), चुटकी हल्दी और नमक'], s:['Make a quick paneer-vegetable bhurji, fill it in the roti, roll and cut in half. A tiffin children enjoy, and much better than bread sandwiches.','पनीर-सब्ज़ी की भुर्जी बनाएँ, रोटी में भरें, रोल करके आधा काटें। बच्चों को पसंद आने वाला टिफ़िन, ब्रेड सैंडविच से कहीं बेहतर।']},
+    {n:['Sprouts chaat','अंकुरित चाट'], i:['1 katori sprouted moong or chana (steamed 5 minutes), chopped cucumber, tomato, boiled potato cubes, lemon juice, roasted jeera powder','1 कटोरी अंकुरित मूँग या चना (5 मिनट भाप में पका), कटा खीरा, टमाटर, उबले आलू के टुकड़े, नींबू का रस, भुना जीरा पाउडर'], s:['Mix everything and serve fresh. A filling evening snack with protein and iron; lemon helps iron absorption.','सब मिलाकर ताज़ा दें। शाम का पेट भरने वाला नाश्ता, प्रोटीन और आयरन के साथ; नींबू आयरन को शरीर में लगने में मदद करता है।']},
+    {n:['Ragi banana pancake (no sugar)','रागी केला पैनकेक (बिना चीनी)'], i:['½ katori ragi flour, ¼ katori wheat flour, 1 ripe banana mashed, milk or water to mix, pinch of elaichi, 1 tsp ghee','½ कटोरी रागी आटा, ¼ कटोरी गेहूँ आटा, 1 पका केला मसला, घोलने के लिए दूध या पानी, चुटकी इलायची, 1 छोटी चम्मच घी'], s:['Make a thick batter, cook small pancakes on a tawa with ghee. The banana gives sweetness. Rich in calcium and iron.','गाढ़ा घोल बनाएँ, तवे पर घी से छोटे पैनकेक सेकें। केले से मिठास आती है। कैल्शियम और आयरन से भरपूर।']},
+    {n:['Vegetable oats or suji upma','सब्ज़ी ओट्स या सूजी उपमा'], i:['½ katori oats or suji, 1 katori chopped vegetables, roasted peanuts powder (after 4 years whole), rai, curry leaves, 1 tsp oil','½ कटोरी ओट्स या सूजी, 1 कटोरी कटी सब्ज़ियाँ, भुनी मूँगफली का पाउडर (4 साल के बाद साबुत), राई, करी पत्ता, 1 छोटी चम्मच तेल'], s:['Temper rai and curry leaves, sauté vegetables, add oats or roasted suji and 1½ katori water, cook till soft. Ready in 10 minutes.','राई और करी पत्ते का तड़का लगाएँ, सब्ज़ियाँ भूनें, ओट्स या भुनी सूजी और 1½ कटोरी पानी डालकर नरम होने तक पकाएँ। 10 मिनट में तैयार।']},
+    {n:['Vegetable egg omelette roll','सब्ज़ी अंडा ऑमलेट रोल'], i:['1–2 eggs, chopped tomato, capsicum, palak, 1 roti, few drops of oil','1–2 अंडे, कटा टमाटर, शिमला मिर्च, पालक, 1 रोटी, कुछ बूँद तेल'], s:['Make a vegetable omelette, place the roti on top while it cooks, flip and roll. Cook the egg fully.','सब्ज़ी वाला ऑमलेट बनाएँ, पकते समय ऊपर रोटी रखें, पलटकर रोल करें। अंडा पूरा पकाएँ।'], tag:'egg'},
+    {n:['Chicken vegetable pulao','चिकन सब्ज़ी पुलाव'], i:['1 katori rice, 1 katori boneless chicken pieces, 1 katori vegetables (peas, carrot, beans), dahi, whole spices, 2 tsp oil','1 कटोरी चावल, 1 कटोरी बिना हड्डी चिकन, 1 कटोरी सब्ज़ियाँ (मटर, गाजर, बीन्स), दही, साबुत मसाले, 2 छोटी चम्मच तेल'], s:['Marinate chicken in dahi for 30 minutes. Sauté spices, add chicken and vegetables, then washed rice and 2 katori water. Pressure cook 2 whistles. Less oil than biryani, full meal in one pot.','चिकन को 30 मिनट दही में रखें। मसाले भूनें, चिकन और सब्ज़ियाँ डालें, फिर धुले चावल और 2 कटोरी पानी। कुकर में 2 सीटी। बिरयानी से कम तेल, एक बर्तन में पूरा खाना।'], tag:'nv'},
+    {n:['Grilled fish with lemon','नींबू वाली ग्रिल्ड मछली'], i:['Boneless fish pieces (rohu or basa), haldi, lemon, ajwain, salt, 1 tsp oil','बिना काँटे की मछली (रोहू या बासा), हल्दी, नींबू, अजवाइन, नमक, 1 छोटी चम्मच तेल'], s:['Marinate 20 minutes, cook on a non-stick tawa 4–5 minutes each side. Check carefully for bones. Serve with roti and salad.','20 मिनट मसाले में रखें, नॉन-स्टिक तवे पर हर तरफ़ 4–5 मिनट पकाएँ। काँटे ध्यान से जाँचें। रोटी और सलाद के साथ दें।'], tag:'nv'}
+  ],
   glance:[['3 + 2','3 meals and 2 snacks at fixed times','3 खाने और 2 नाश्ते, तय समय पर','orange'],['1–2 L','water a day, by age','पानी रोज़, उम्र के हिसाब से','leaf'],['400–500 ml','milk & dairy a day (500 ml from 10 years)','दूध और दूध की चीज़ें रोज़ (10 साल से 500 ml)','sky'],['60 min','active play or sport every day','रोज़ सक्रिय खेल या खेलकूद','pink']],
   table:{head:[['','',''],['2–5 years','2–5 साल'],['6–10 years','6–10 साल'],['11–18 years','11–18 साल']],
     rows:[[['Roti per meal','एक बार में रोटी'],['1–2','1–2'],['2–3','2–3'],['3–4','3–4']],
@@ -413,6 +441,9 @@ function render(){
   document.getElementById('sub').textContent = t(UI.sub);
   document.getElementById('lblAge').textContent = t(UI.lblAge);
   document.getElementById('print').textContent = t(UI.print);
+  document.getElementById('pfText').textContent = t(UI.pfoot);
+  var ag = AGES.filter(function(x){return x.id===st.age;})[0], stp = STEPS.filter(function(x){return x.id===st.step;})[0];
+  document.getElementById('printAge').textContent = (L==='hi'?'उम्र: ':'Age: ')+(st.age==='m6'? t(stp.l) : t(ag.name))+(st.age==='m0'?'':' · '+t(UI[st.diet]));
   document.querySelectorAll('.langs button').forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.lang===L)); });
   document.getElementById('ages').innerHTML = AGES.map(function(a){ return '<button type="button" class="age" data-age="'+a.id+'" aria-pressed="'+(a.id===st.age)+'" style="--c:var(--'+a.c+');--c-soft:var(--'+a.c+'-soft)"><b>'+esc(t(a.name))+'</b><small>'+esc(t(a.sub))+'</small></button>'; }).join('');
   var stepsEl = document.getElementById('steps');
@@ -454,6 +485,7 @@ function render(){
     o += sec(n++, UI.glance, glance(d.glance)+'<div class="plate" style="margin-top:12px"><div style="--c:var(--leaf);--s:var(--leaf-soft)"><b>½</b><span>'+esc(L==='hi'?'सब्ज़ी + फल':'Vegetables + fruit')+'</span></div><div style="--c:#b07a10;--s:var(--sun-soft)"><b>¼</b><span>'+esc(L==='hi'?'रोटी / चावल':'Roti / rice')+'</span></div><div style="--c:var(--pink);--s:var(--pink-soft)"><b>¼</b><span>'+esc(L==='hi'?'दाल / पनीर / अंडा / मांस':'Dal / paneer / egg / meat')+'</span></div></div><div class="note">'+ul(d.rules,'dot')+'</div>', a.c);
     o += sec(n++, UI.day, timeline(SCHED.y2)+'<p class="note">'+esc(t(UI.shift))+'</p>', 'sky');
     o += sec(n++, UI.what, foods(d.foods)+'<h3>'+esc(t(UI.groups))+'</h3>'+groupsBlock().replace(/<div style="--c:#8b4fd6[\s\S]*?<\/div>/,'')+'<p class="note">'+esc(t(UI.jain))+'</p>', 'teal');
+    o += sec(n++, ['Healthy recipes to make at home','घर पर बनाने वाली सेहतमंद रेसिपी'], '<div class="cards">'+d.recipes.filter(function(r){ return showItem(r.tag); }).map(function(r){ return '<div class="card"><b>'+esc(t(r.n))+tagHtml(r.tag)+'</b><p><b style="display:inline;font-size:15px">'+esc(L==='hi'?'सामग्री: ':'You need: ')+'</b>'+esc(t(r.i))+'</p><p style="margin-top:6px">'+esc(t(r.s))+'</p></div>'; }).join('')+'</div>', 'pink');
     o += sec(n++, UI.how, '<table><tr>'+d.table.head.map(function(h){ return '<th>'+esc(t(h))+'</th>'; }).join('')+'</tr>'+d.table.rows.map(function(r){ return '<tr>'+r.map(function(c,i){ return i? '<td>'+esc(t(c))+'</td>' : '<td><b>'+esc(t(c))+'</b></td>'; }).join('')+'</tr>'; }).join('')+'</table><p class="note">'+esc(t(d.table.note))+'</p>', 'orange');
     o += sec(n++, UI.dont, dodont(d), 'leaf');
     o += sec(n++, UI.doc, doctor(d), 'red');
