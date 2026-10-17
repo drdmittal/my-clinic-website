@@ -9,7 +9,7 @@
 <meta name="theme-color" content="#2a2580">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Newborn Corner | Dr. Dinesh Mittal">
-<meta property="og:description" content="Everything new parents need for the first months, in English and Hindi.">
+<meta property="og:description" content="Help for new parents in the baby’s first months: daily care, feeding, vaccines and when to seek medical care. English and Hindi.">
 <meta property="og:url" content="https://childspecialistrohini.com/newborn.html">
 <meta property="og:image" content="https://childspecialistrohini.com/icons/icon-512.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
@@ -65,9 +65,12 @@ h2.sh{font-size:24px;margin:26px 0 12px}
 .card b{font:800 20px/1.12 var(--font);font-stretch:108%;margin-top:auto}
 .card small{font-size:14.5px;line-height:1.3;opacity:.93}
 .card.wide{grid-column:1/-1;min-height:130px}
+@media (max-width:759px){.card.odd{grid-column:1/-1;min-height:130px}}
+.jump{display:inline-block;margin-top:12px;color:var(--red);font-weight:700;font-size:16px;text-decoration:none;border-bottom:1.5px dashed currentColor}
+#urgent{scroll-margin-top:72px;margin-top:22px}
 .card.dark{color:#3a2600}.card.dark svg{stroke:#3a2600}
 .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 20px;border-radius:14px;font:750 17px var(--font);text-decoration:none}
+.btn{flex:1 1 220px;display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 20px;border-radius:14px;font:750 17px var(--font);text-decoration:none}
 .btn-green{background:var(--leaf);color:#fff}.btn-indigo{background:var(--indigo);color:#fff}
 .foot{color:var(--muted);font-size:14.5px;margin-top:20px}
 .src{margin-top:22px;background:var(--surface);border:1px dashed var(--line);border-radius:16px;padding:12px 14px;font-size:14.5px;color:var(--muted);line-height:1.45}
@@ -93,10 +96,27 @@ h2.sh{font-size:24px;margin:26px 0 12px}
   <div class="hero">
     <span class="eyebrow"><span class="en">For new parents</span><span class="hi">नए माता-पिता के लिए</span></span>
     <h1><span class="en">Newborn corner</span><span class="hi">नवजात कॉर्नर</span></h1>
-    <p><span class="en">Everything you need for your baby’s first months, in one place: when to worry, daily care, feeding and vaccines.</span><span class="hi">बच्चे के पहले महीनों के लिए ज़रूरी सब कुछ, एक ही जगह: चिंता कब करें, रोज़ की देखभाल, दूध पिलाना और टीके।</span></p>
+    <p><span class="en">Help for your baby’s first months: daily care, feeding, vaccines, and when to seek medical care.</span><span class="hi">बच्चे के पहले महीनों के लिए मदद: रोज़ की देखभाल, दूध पिलाना, टीके, और डॉक्टरी सहायता कब लें।</span></p>
+    <a class="jump" href="#urgent"><span class="en">Signs that need urgent medical attention ↓</span><span class="hi">तुरंत डॉक्टरी सहायता वाले लक्षण ↓</span></a>
   </div>
 
-  <a class="alert" href="parent-tools/newborn-care.html#normal">
+
+  <h2 class="sh"><span class="en">Care at home</span><span class="hi">घर पर देखभाल</span></h2>
+  <div class="grid">
+    <a class="card wide" href="parent-tools/newborn-care.html#normal" style="--c:var(--teal)"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.5-7-11a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 6.5-7 11-7 11z"/><path d="M12 9v4M12 16h.01"/></svg></span><b><span class="en">Normal or worry?</span><span class="hi">सामान्य या चिंता?</span></b><small><span class="en">Blocked-nose sounds, spit-ups, hiccups, sneezing, crying before urine and more: what is normal and when to see the doctor</span><span class="hi">नाक बंद होने की आवाज़, दूध उलटना, हिचकी, छींक, पेशाब से पहले रोना और भी: क्या सामान्य है और डॉक्टर को कब दिखाएँ</span></small></a>
+    <a class="card" href="parent-tools/newborn-care.html#bath" style="--c:var(--sky)"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16v2a6 6 0 0 1-6 6h-4a6 6 0 0 1-6-6z"/><path d="M6 12V6a2 2 0 0 1 4 0"/></svg></span><b><span class="en">Bathing</span><span class="hi">नहलाना</span></b><small><span class="en">Sponge bath, then mug bath</span><span class="hi">स्पंज स्नान, फिर मग से स्नान</span></small></a>
+    <a class="card" href="parent-tools/newborn-care.html#massage" style="--c:var(--pink)"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 13V5a1.5 1.5 0 0 1 3 0v6M11 10V4a1.5 1.5 0 0 1 3 0v6M14 10V5.5a1.5 1.5 0 0 1 3 0V14a7 7 0 0 1-7 7h-.5a6 6 0 0 1-4.6-2.2L2.5 15.5a1.6 1.6 0 0 1 2.4-2.1L8 16"/></svg></span><b><span class="en">Massage</span><span class="hi">मालिश</span></b><small><span class="en">Step by step, with pictures</span><span class="hi">तस्वीरों के साथ, एक-एक करके</span></small></a>
+    <a class="card odd" href="parent-tools/newborn-care.html#avoid" style="--c:var(--red)"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></svg></span><b><span class="en">Please avoid</span><span class="hi">ये न करें</span></b><small><span class="en">Kajal, ghutti, oil in nose, squeezing breasts</span><span class="hi">काजल, घुट्टी, नाक में तेल, स्तन दबाना</span></small></a>
+  </div>
+
+  <h2 class="sh"><span class="en">Feeding, vaccines and growth</span><span class="hi">दूध, टीके और विकास</span></h2>
+  <div class="grid">
+    <a class="card wide dark" href="baby-diet-planner.html?age=m0" style="--c:var(--sun)"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11h18a9 9 0 0 1-18 0z"/><path d="M12 3v4M8 5v2M16 5v2"/></svg></span><b><span class="en">Feeding: first 6 months</span><span class="hi">दूध पिलाना: पहले 6 महीने</span></b><small><span class="en">Breast milk first; formula only on the doctor’s advice; how often to feed by day and night</span><span class="hi">पहले माँ का दूध; फ़ॉर्मूला सिर्फ़ डॉक्टर की सलाह पर; दिन और रात में कितनी बार पिलाएँ</span></small></a>
+    <a class="card" href="iap-immunization-schedule.html" style="--c:var(--leaf)"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m18 2 4 4M17 7l3-3M19 9 8.7 19.3a2.4 2.4 0 0 1-3.4 0l-.6-.6a2.4 2.4 0 0 1 0-3.4L15 5M9 11l4 4M5 19l-3 3"/></svg></span><b><span class="en">Vaccines</span><span class="hi">टीके</span></b><small><span class="en">IAP schedule from birth</span><span class="hi">जन्म से IAP टीकाकरण</span></small></a>
+    <a class="card" href="growth-development-nutrition-screener.html" style="--c:var(--orange)"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20V10M18 20V4M6 20v-4"/></svg></span><b><span class="en">Growth check</span><span class="hi">विकास की जाँच</span></b><small><span class="en">Weight, length, milestones</span><span class="hi">वज़न, लंबाई, विकास के पड़ाव</span></small></a>
+  </div>
+
+  <a class="alert" id="urgent" href="parent-tools/newborn-care.html#normal">
     <h2><span class="en">Seek urgent medical attention if your baby has</span><span class="hi">तुरंत डॉक्टरी सहायता लें अगर बच्चे को</span></h2>
     <ul>
       <li><span class="en">Not feeding well, or refusing feeds</span><span class="hi">दूध ठीक से न पीना, या मना करना</span></li>
@@ -107,22 +127,6 @@ h2.sh{font-size:24px;margin:26px 0 12px}
     </ul>
     <span class="go"><span class="en">All danger signs and what is normal →</span><span class="hi">सारे ख़तरे के लक्षण और क्या सामान्य है →</span></span>
   </a>
-
-  <h2 class="sh"><span class="en">Care at home</span><span class="hi">घर पर देखभाल</span></h2>
-  <div class="grid">
-    <a class="card wide" href="parent-tools/newborn-care.html#normal" style="--c:var(--teal)"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.5-7-11a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 6.5-7 11-7 11z"/><path d="M12 9v4M12 16h.01"/></svg></span><b><span class="en">Normal or worry?</span><span class="hi">सामान्य या चिंता?</span></b><small><span class="en">Blocked-nose sounds, spit-ups, hiccups, sneezing, crying before urine and more: what is normal and when to see the doctor</span><span class="hi">नाक बंद होने की आवाज़, दूध उलटना, हिचकी, छींक, पेशाब से पहले रोना और भी: क्या सामान्य है और डॉक्टर को कब दिखाएँ</span></small></a>
-    <a class="card" href="parent-tools/newborn-care.html#bath" style="--c:var(--sky)"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16v2a6 6 0 0 1-6 6h-4a6 6 0 0 1-6-6z"/><path d="M6 12V6a2 2 0 0 1 4 0"/></svg></span><b><span class="en">Bathing</span><span class="hi">नहलाना</span></b><small><span class="en">Sponge bath, then mug bath</span><span class="hi">स्पंज स्नान, फिर मग से स्नान</span></small></a>
-    <a class="card" href="parent-tools/newborn-care.html#massage" style="--c:var(--pink)"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 13V5a1.5 1.5 0 0 1 3 0v6M11 10V4a1.5 1.5 0 0 1 3 0v6M14 10V5.5a1.5 1.5 0 0 1 3 0V14a7 7 0 0 1-7 7h-.5a6 6 0 0 1-4.6-2.2L2.5 15.5a1.6 1.6 0 0 1 2.4-2.1L8 16"/></svg></span><b><span class="en">Massage</span><span class="hi">मालिश</span></b><small><span class="en">Step by step, with pictures</span><span class="hi">तस्वीरों के साथ, एक-एक करके</span></small></a>
-    <a class="card" href="parent-tools/newborn-care.html#avoid" style="--c:var(--red)"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></svg></span><b><span class="en">Please avoid</span><span class="hi">ये न करें</span></b><small><span class="en">Kajal, ghutti, oil in nose, squeezing breasts</span><span class="hi">काजल, घुट्टी, नाक में तेल, स्तन दबाना</span></small></a>
-    <a class="card" href="newborn-care-guide.html" style="--c:var(--grape)"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h6a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H4z"/><path d="M20 4h-6a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h7z"/></svg></span><b><span class="en">Newborn care tips</span><span class="hi">नवजात देखभाल के सुझाव</span></b><small><span class="en">Cord care, burping, jaundice</span><span class="hi">नाल की देखभाल, डकार, पीलिया</span></small></a>
-  </div>
-
-  <h2 class="sh"><span class="en">Feeding, vaccines and growth</span><span class="hi">दूध, टीके और विकास</span></h2>
-  <div class="grid">
-    <a class="card wide dark" href="baby-diet-planner.html?age=m0" style="--c:var(--sun)"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11h18a9 9 0 0 1-18 0z"/><path d="M12 3v4M8 5v2M16 5v2"/></svg></span><b><span class="en">Feeding: first 6 months</span><span class="hi">दूध पिलाना: पहले 6 महीने</span></b><small><span class="en">Breast milk only, how often to feed, day and night gaps, when formula is needed</span><span class="hi">सिर्फ़ माँ का दूध, कितनी बार पिलाएँ, दिन और रात का अंतर, फ़ॉर्मूला कब</span></small></a>
-    <a class="card" href="iap-immunization-schedule.html" style="--c:var(--leaf)"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m18 2 4 4M17 7l3-3M19 9 8.7 19.3a2.4 2.4 0 0 1-3.4 0l-.6-.6a2.4 2.4 0 0 1 0-3.4L15 5M9 11l4 4M5 19l-3 3"/></svg></span><b><span class="en">Vaccines</span><span class="hi">टीके</span></b><small><span class="en">IAP schedule from birth</span><span class="hi">जन्म से IAP टीकाकरण</span></small></a>
-    <a class="card" href="growth-development-nutrition-screener.html" style="--c:var(--orange)"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20V10M18 20V4M6 20v-4"/></svg></span><b><span class="en">Growth check</span><span class="hi">विकास की जाँच</span></b><small><span class="en">Weight, length, milestones</span><span class="hi">वज़न, लंबाई, विकास के पड़ाव</span></small></a>
-  </div>
 
   <div class="actions"><a class="btn btn-green" href="book.html"><span class="en">Book an appointment</span><span class="hi">अपॉइंटमेंट बुक करें</span></a><a class="btn btn-indigo" href="tel:+918130521456"><span class="en">Call the clinic</span><span class="hi">क्लिनिक को कॉल करें</span></a></div>
   <div class="src"><b><span class="en">Please read</span><span class="hi">कृपया ध्यान दें</span></b>
