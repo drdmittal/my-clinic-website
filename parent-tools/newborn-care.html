@@ -191,7 +191,7 @@ var UI = {
   print:['Print','प्रिंट करें'], call:['Call the clinic','क्लिनिक को कॉल करें'], book:['Book an appointment','अपॉइंटमेंट बुक करें'],
   worryIf:['See the doctor if: ','डॉक्टर को दिखाएँ अगर: '],
   pfoot:['Health education material for parents. General information only; it does not replace a consultation with your doctor. Dr. Dinesh Mittal, MBBS, DCH · DMC/R/00668 · www.drdineshmittal.com','माता-पिता के लिए स्वास्थ्य जानकारी। यह सामान्य जानकारी है, डॉक्टर से परामर्श का विकल्प नहीं। डॉ. दिनेश मित्तल, MBBS, DCH · DMC/R/00668 · www.drdineshmittal.com'],
-  basis:['Based on Indian Academy of Pediatrics (IAP) guidance, including the IAP guidelines for newborn skin care, and WHO newborn care advice. Small, early or unwell babies may need different care: follow your doctor’s advice for your baby.','भारतीय बाल रोग अकादमी (IAP) के दिशानिर्देशों (नवजात त्वचा देखभाल सहित) और WHO की सलाह पर आधारित। छोटे, समय से पहले जन्मे या बीमार बच्चों की देखभाल अलग हो सकती है: अपने बच्चे के लिए डॉक्टर की सलाह मानें।']
+  basis:['Based on Indian Academy of Pediatrics (IAP) guidance, including the IAP guidelines for newborn skin care, IMNCI danger signs and WHO newborn care advice. Small, early or unwell babies may need different care: follow your doctor’s advice for your baby.','भारतीय बाल रोग अकादमी (IAP) के दिशानिर्देशों (नवजात त्वचा देखभाल सहित), IMNCI ख़तरे के लक्षणों और WHO की सलाह पर आधारित। छोटे, समय से पहले जन्मे या बीमार बच्चों की देखभाल अलग हो सकती है: अपने बच्चे के लिए डॉक्टर की सलाह मानें।']
 };
 
 /* ---------- 1. Normal or worry */
@@ -200,7 +200,7 @@ var NORMAL = [
    p:['A newborn’s nose is small. Milk and mucus make a snoring, snorting or whistling sound, more while feeding and sleeping.','नवजात की नाक छोटी होती है। दूध और बलगम से खर्राटे, सुड़सुड़ या सीटी जैसी आवाज़ आती है, ख़ासकर दूध पीते और सोते समय।'],
    w:['breathing is fast, the chest pulls in, there is a grunt with every breath, or the baby cannot feed.','साँस तेज़ हो, पसली चले, हर साँस के साथ कराहने की आवाज़ हो, या बच्चा दूध न पी पाए।']},
   {h:['Spitting up milk (regurgitation)','दूध उलटना'],
-   p:['A little milk comes out of the mouth or nose after feeds. Common up to 4–6 months if the baby is happy and gaining weight. Burp the baby and keep upright for 15–20 minutes after feeds.','दूध पीने के बाद थोड़ा दूध मुँह या नाक से निकलना। बच्चा ख़ुश है और वज़न बढ़ रहा है तो 4–6 महीने तक आम है। दूध के बाद डकार दिलाएँ और 15–20 मिनट सीधा पकड़ें।'],
+   p:['A little milk comes out of the mouth or nose after feeds. Normal up to 4–6 months if the baby is happy and gaining weight. Burp the baby and keep upright for 15–20 minutes after feeds.','दूध पीने के बाद थोड़ा दूध मुँह या नाक से निकलना। बच्चा ख़ुश है और वज़न बढ़ रहा है तो 4–6 महीने तक आम है। दूध के बाद डकार दिलाएँ और 15–20 मिनट सीधा पकड़ें।'],
    w:['vomiting is forceful (shoots out), green or yellow, has blood, or the baby is not gaining weight.','उल्टी ज़ोर से फव्वारे जैसी हो, हरी या पीली हो, उसमें ख़ून हो, या वज़न न बढ़े।']},
   {h:['Hiccups','हिचकी'],
    p:['Very common, especially after feeds. They stop on their own and do not trouble the baby. No need to give water or gripe water.','बहुत आम, ख़ासकर दूध के बाद। अपने आप रुक जाती है और बच्चे को तकलीफ़ नहीं होती। पानी या ग्राइप वॉटर देने की ज़रूरत नहीं।']},
@@ -251,7 +251,7 @@ var ER = [
 ];
 var DOC = [
   ['Not feeding well, or refusing feeds','दूध ठीक से न पीना, या मना करना'],
-  ['Fever: 37.5 °C (99.5 °F) or more in the armpit. Or the body feels cold (below 35.5 °C). In a baby under 3 months, any fever needs the doctor.','बुख़ार: बगल में 37.5 °C (99.5 °F) या ज़्यादा। या शरीर ठंडा लगे (35.5 °C से कम)। 3 महीने से छोटे बच्चे में कोई भी बुख़ार हो तो डॉक्टर को दिखाएँ।'],
+  ['Fever: 99.5 °F or more in the armpit. Or the body is cold: below 95.9 °F. (Measure with a digital thermometer kept in the armpit.)','बुख़ार: बगल में 99.5 °F या ज़्यादा। या शरीर ठंडा: 95.9 °F से कम। (डिजिटल थर्मामीटर बगल में लगाकर नापें।)'],
   ['Fast breathing: 60 or more breaths in one minute (count for a full minute while the baby is calm)','तेज़ साँस: एक मिनट में 60 या ज़्यादा साँस (बच्चा शांत हो तब पूरा एक मिनट गिनें)'],
   ['Cough that continues, or cough with difficulty in breathing or feeding','लगातार खाँसी, या खाँसी के साथ साँस या दूध पीने में दिक्कत'],
   ['Forceful or repeated vomiting, or blood in vomit or stool','ज़ोर से या बार-बार उल्टी, या उल्टी या पॉटी में ख़ून'],
@@ -266,15 +266,15 @@ var DOC = [
 
 /* ---------- 2. Bathing */
 var BATH = {
-  glance:[['24 h','First bath after at least 24 hours of birth','जन्म के कम से कम 24 घंटे बाद पहला स्नान','sky'],
+  glance:[['24 h','First bath after 24 hours of birth','जन्म के 24 घंटे बाद पहला स्नान','sky'],
           ['5–10 min','Keep the bath short','स्नान छोटा रखें','teal'],
-          ['37 °C','Water just warm, checked with your elbow','पानी हल्का गुनगुना, कोहनी से जाँचें','pink']],
-  when:[['First bath after at least 24 hours of birth. Small or early babies (born early or under 2.5 kg): only when the doctor says.','पहला स्नान जन्म के कम से कम 24 घंटे बाद। छोटे या समय से पहले जन्मे बच्चे (2.5 kg से कम): डॉक्टर के बताने पर ही।'],
-        ['Sponge bath until the cord falls off and the navel is dry, usually by 1–2 weeks.','जब तक नाल गिरकर नाभि सूख न जाए, तब तक सिर्फ़ स्पंज स्नान। आमतौर पर 1–2 हफ़्ते में।'],
-        ['After that, a full bath with a mug. Daily is good; in winter, 2–3 times a week is enough.','उसके बाद मग से पूरा स्नान। रोज़ नहलाना अच्छा है; सर्दी में हफ़्ते में 2–3 बार काफ़ी है।'],
-        ['Choose the warmest time of the day, about 1 hour after a feed. Not right after a feed, and not when the baby is very hungry.','दिन का सबसे गर्म समय चुनें, दूध के लगभग 1 घंटे बाद। दूध के तुरंत बाद नहीं, और बहुत भूखा हो तब भी नहीं।']],
+          ['98–99 °F','Water just warm (37 °C), checked with your elbow','पानी हल्का गुनगुना (37 °C), कोहनी से जाँचें','pink']],
+  when:[['First bath: after 24 hours of birth. Baby born before 37 weeks or under 2.5 kg: first bath only when the doctor says.','पहला स्नान: जन्म के 24 घंटे बाद। 37 हफ़्ते से पहले जन्मा या 2.5 kg से कम वज़न का बच्चा: पहला स्नान डॉक्टर के बताने पर ही।'],
+        ['Until the cord falls off and the navel is dry (usually 1–2 weeks): sponge bath only, every day in summer, every 2–3 days in winter.','जब तक नाल गिरकर नाभि सूख न जाए (आमतौर पर 1–2 हफ़्ते): सिर्फ़ स्पंज स्नान, गर्मी में रोज़, सर्दी में हर 2–3 दिन।'],
+        ['After that, a full bath with a mug: every day in summer, 2–3 times a week in winter.','उसके बाद मग से पूरा स्नान: गर्मी में रोज़, सर्दी में हफ़्ते में 2–3 बार।'],
+        ['Time: the warmest part of the day (late morning), 1 hour after a feed. Never right after a feed.','समय: दिन का सबसे गर्म समय (दोपहर से पहले), दूध के 1 घंटे बाद। दूध के तुरंत बाद कभी नहीं।']],
   ready:[['A warm room: close doors and windows, switch off the fan or AC.','गर्म कमरा: दरवाज़े-खिड़कियाँ बंद, पंखा या AC बंद।'],
-         ['Water at about 37 °C. Mix hot and cold water in a bucket first, then check with your elbow: it should feel just warm, not hot. Never use water straight from the geyser.','पानी लगभग 37 °C। पहले बाल्टी में गर्म-ठंडा मिलाएँ, फिर कोहनी डालकर देखें: हल्का गुनगुना लगे, गर्म नहीं। गीज़र का पानी सीधे कभी न डालें।'],
+         ['Water at 98–99 °F (37 °C). Mix hot and cold water in a bucket first, then check with your elbow: it should feel just warm, not hot. Never use water straight from the geyser.','पानी 98–99 °F (37 °C)। पहले बाल्टी में गर्म-ठंडा मिलाएँ, फिर कोहनी डालकर देखें: हल्का गुनगुना लगे, गर्म नहीं। गीज़र का पानी सीधे कभी न डालें।'],
          ['A mild liquid baby cleanser (pH neutral). Avoid soap bars, bubble bath and bath additives.','हल्का लिक्विड बेबी क्लींज़र (pH न्यूट्रल)। साबुन की टिकिया, बबल बाथ और पानी में डालने वाली चीज़ें नहीं।'],
          ['A soft towel, clean clothes and a nappy kept ready before you start.','शुरू करने से पहले मुलायम तौलिया, साफ़ कपड़े और नैपी तैयार रखें।']],
   sponge:[['Lay the baby on a towel on your lap or on a bed, with you right beside. Keep the baby covered and open only the part you are cleaning.','बच्चे को अपनी गोद में या बिस्तर पर तौलिये पर लिटाएँ, आप बिल्कुल पास रहें। बच्चे को ढककर रखें, सिर्फ़ वही हिस्सा खोलें जो साफ़ कर रहे हैं।'],
@@ -296,19 +296,21 @@ var BATH = {
 
 /* ---------- 3. Massage */
 var MASSAGE = {
-  who:['Massage is best done by the mother, father or another family member. It is a time for closeness and bonding with the baby. Please do not hand it over to a maid or a paid massage worker: rough handling, pulling the arms and legs, or putting oil in the nose and ears can hurt the baby.','मालिश माँ, पिता या परिवार का कोई सदस्य ही करे। यह बच्चे के साथ प्यार और जुड़ाव का समय है। इसे नौकरानी या पैसे लेकर मालिश करने वाली को न सौंपें: ज़ोर से रगड़ना, हाथ-पैर खींचना, या नाक-कान में तेल डालना बच्चे को नुकसान पहुँचा सकता है।'],
-  glance:[['Coconut oil','Sunflower oil is also suitable. Not mustard oil.','सूरजमुखी का तेल भी ठीक है। सरसों का तेल नहीं।','teal'],
-          ['10–15 min','To start; later up to 20–30 minutes','शुरुआत में; बाद में 20–30 मिनट तक','pink'],
-          ['1–2 h','After a feed, when the baby is calm and awake','दूध के बाद, जब बच्चा शांत और जागा हो','sky']],
-  when:[['Healthy full-term babies can be massaged from the first week. Babies born early or small: only as the doctor advises.','स्वस्थ, पूरे समय पर जन्मे बच्चे की मालिश पहले हफ़्ते से की जा सकती है। समय से पहले जन्मे या छोटे बच्चे: डॉक्टर की सलाह से ही।'],
+  who:['Massage must be done by the mother, father or another family member. It is a time for closeness and bonding with the baby. Do not hand it over to a maid or a paid massage worker: rough handling, pulling the arms and legs, or putting oil in the nose and ears can hurt the baby.','मालिश माँ, पिता या परिवार का कोई सदस्य ही करे। यह बच्चे के साथ प्यार और जुड़ाव का समय है। इसे नौकरानी या पैसे लेकर मालिश करने वाली को न सौंपें: ज़ोर से रगड़ना, हाथ-पैर खींचना, या नाक-कान में तेल डालना बच्चे को नुकसान पहुँचा सकता है।'],
+  glance:[['Day 7','Start massage from day 7 (healthy, full-term baby)','मालिश 7वें दिन से शुरू करें (स्वस्थ, पूरे समय पर जन्मा बच्चा)','grape'],
+          ['Coconut oil','Use coconut oil. Never mustard oil.','नारियल का तेल लगाएँ। सरसों का तेल कभी नहीं।','teal'],
+          ['10–15 min','First month. After 1 month: 20–30 minutes.','पहला महीना। 1 महीने के बाद: 20–30 मिनट।','pink'],
+          ['1–2 h','After a feed, once a day','दूध के बाद, दिन में एक बार','sky']],
+  when:[['Start from day 7 if the baby was born at 37 weeks or later, weighs 2.5 kg or more, and is feeding well. Baby born before 37 weeks or under 2.5 kg: start only when the doctor says.','मालिश 7वें दिन से शुरू करें, अगर बच्चा 37 हफ़्ते या बाद में जन्मा है, वज़न 2.5 kg या ज़्यादा है और दूध ठीक से पी रहा है। 37 हफ़्ते से पहले जन्मा या 2.5 kg से कम: डॉक्टर के बताने पर ही शुरू करें।'],
+        ['Once a day, 1–2 hours after a feed, when the baby is calm and awake.','दिन में एक बार, दूध के 1–2 घंटे बाद, जब बच्चा शांत और जागा हो।'],
         ['Summer: massage before the bath. Winter: massage after the bath.','गर्मी में: नहलाने से पहले मालिश। सर्दी में: नहलाने के बाद मालिश।'],
-        ['Skip the massage if the baby has fever, is unwell, has a rash, or is crying or hungry.','बच्चे को बुख़ार हो, तबीयत ठीक न हो, दाने हों, या रो रहा हो या भूखा हो तो मालिश न करें।']],
-  oil:[['Use coconut oil. Sunflower oil is also suitable (IAP).','नारियल का तेल लगाएँ। सूरजमुखी का तेल भी ठीक है (IAP)।'],
-       ['Avoid mustard oil and olive oil: they can irritate the baby’s skin and damage its natural protective layer.','सरसों और जैतून (ऑलिव) का तेल नहीं: ये बच्चे की त्वचा में जलन कर सकते हैं और उसकी प्राकृतिक सुरक्षा परत को नुकसान पहुँचा सकते हैं।'],
+        ['No massage on that day if the baby has fever, is unwell, has a rash, or is crying or hungry.','उस दिन मालिश न करें अगर बच्चे को बुख़ार हो, तबीयत ठीक न हो, दाने हों, या रो रहा हो या भूखा हो।']],
+  oil:[['Use coconut oil. If coconut oil does not suit the baby, use sunflower oil (IAP).','नारियल का तेल लगाएँ। नारियल का तेल बच्चे को सूट न करे तो सूरजमुखी का तेल लगाएँ (IAP)।'],
+       ['Do not use mustard oil or olive oil: they irritate the baby’s skin and damage its natural protective layer.','सरसों या जैतून (ऑलिव) का तेल न लगाएँ: ये बच्चे की त्वचा में जलन करते हैं और उसकी प्राकृतिक सुरक्षा परत को नुकसान पहुँचाते हैं।'],
        ['Do not heat the oil on the stove. Rub a few drops between your palms to warm it.','तेल को चूल्हे पर गर्म न करें। कुछ बूँदें हथेलियों में रगड़कर गर्म करें।']],
   ready:[['Warm room, fan or AC off. Baby on a soft towel on your lap or on the bed, facing you.','गर्म कमरा, पंखा या AC बंद। बच्चा आपकी गोद में या बिस्तर पर मुलायम तौलिये पर, आपकी ओर मुँह करके।'],
          ['Wash your hands, keep nails short, and remove rings, bangles and watch.','हाथ धोएँ, नाख़ून छोटे रखें, अंगूठी, चूड़ियाँ और घड़ी उतार दें।'],
-         ['Use slow, gentle but firm strokes. Talk, sing and look at your baby. Stop if the baby keeps crying.','धीरे, हल्के पर मज़बूत हाथ से मालिश करें। बच्चे से बात करें, गाएँ, उसे देखें। बच्चा लगातार रोए तो रोक दें।']],
+         ['Use slow, gentle but firm strokes. Talk, sing and look at your baby. If the baby keeps crying, stop for today.','धीरे, हल्के पर मज़बूत हाथ से मालिश करें। बच्चे से बात करें, गाएँ, उसे देखें। बच्चा लगातार रोए तो आज के लिए रोक दें।']],
   steps:[
     {k:'legs', h:['Legs and feet','पैर और तलवे'], p:['Hold one foot. Stroke from the thigh down to the ankle, 4–6 times. Make small circles on the sole with your thumb. Then the other leg.','एक पैर पकड़ें। जाँघ से टखने की ओर 4–6 बार हाथ फेरें। अंगूठे से तलवे पर छोटे गोले बनाएँ। फिर दूसरा पैर।']},
     {k:'arms', h:['Arms and hands','बाँहें और हाथ'], p:['Stroke from the shoulder down to the wrist, 4–6 times. Open the fist gently and rub the palm with your thumb.','कंधे से कलाई की ओर 4–6 बार हाथ फेरें। मुट्ठी हल्के से खोलें और अंगूठे से हथेली सहलाएँ।']},
@@ -374,7 +376,7 @@ function baby(k){
 function ul(list, cls){ return '<ul class="pts '+cls+'">'+list.map(function(x){ return '<li><span>'+t(x)+'</span></li>'; }).join('')+'</ul>'; }
 function ol(list, c){ return '<ol class="steps" style="--c:var(--'+(c||'sky')+')">'+list.map(function(x){ return '<li><span>'+t(x)+'</span></li>'; }).join('')+'</ol>'; }
 function sec(icon, title, inner, c){ return '<section class="sec" style="--c:var(--'+(c||'indigo')+')"><h2><span class="n"><svg viewBox="0 0 24 24" aria-hidden="true">'+ICON[icon]+'</svg></span>'+t(title)+'</h2>'+inner+'</section>'; }
-function glance(g){ return '<div class="glance">'+g.map(function(x){ return '<div class="gl" style="--c:var(--'+x[3]+');--soft:var(--'+x[3]+'-soft)"><b>'+(L==='hi'&&x[0]==='Coconut oil'?'नारियल तेल':x[0])+'</b><span>'+(L==='hi'?x[2]:x[1])+'</span></div>'; }).join('')+'</div>'; }
+function glance(g){ return '<div class="glance">'+g.map(function(x){ return '<div class="gl" style="--c:var(--'+x[3]+');--soft:var(--'+x[3]+'-soft)"><b>'+(L==='hi'?({'Coconut oil':'नारियल तेल','Day 7':'7वाँ दिन'}[x[0]]||x[0]):x[0])+'</b><span>'+(L==='hi'?x[2]:x[1])+'</span></div>'; }).join('')+'</div>'; }
 
 function panelNormal(){
   var cards = '<div class="cards">'+NORMAL.map(function(n){
@@ -419,7 +421,7 @@ function render(){
   var o = PANELS.map(function(p){
     return '<div class="panel" role="tabpanel" id="p-'+p[0]+'" aria-labelledby="tab-'+p[0]+'"'+(p[0]===TAB?'':' hidden')+'><h2 class="ptitle">'+t(UI.tabs[p[0]])+'</h2>'+p[1]()+'</div>';
   }).join('');
-  o += '<div class="actions"><a class="btn btn-green" href="/book.html">'+t(UI.book)+'</a><a class="btn btn-indigo" href="tel:+918130521456">'+t(UI.call)+'</a><button type="button" class="btn btn-line" id="print">'+t(UI.print)+'</button></div>';
+  o += '<div class="actions"><a class="btn btn-line" href="/newborn.html">'+t(['← Newborn corner','← नवजात कॉर्नर'])+'</a><a class="btn btn-green" href="/book.html">'+t(UI.book)+'</a><a class="btn btn-indigo" href="tel:+918130521456">'+t(UI.call)+'</a><button type="button" class="btn btn-line" id="print">'+t(UI.print)+'</button></div>';
   o += '<p class="foot">'+t(UI.basis)+'</p><p class="foot">'+t(UI.pfoot)+'</p>';
   document.getElementById('out').innerHTML = o;
   document.getElementById('clinic').innerHTML = '<b>Dr. Dinesh Mittal Child Clinic</b>Dr. Dinesh Mittal, MBBS, DCH · DMC/R/00668<br>H-34/69, Sector 3, Rohini, Delhi 110085<br>'+(L==='hi'?'फ़ोन':'Phone')+': <a href="tel:+918130521456">+91 81305 21456</a><br>Mon–Sat 10:00 AM–1:00 PM &amp; 6:00–8:30 PM · Sun 11:00 AM–12:00 PM<br><a href="https://www.drdineshmittal.com">www.drdineshmittal.com</a>';
