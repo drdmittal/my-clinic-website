@@ -115,7 +115,7 @@ ol.steps li::before{content:counter(s);width:30px;height:30px;border-radius:50%;
 .src{margin-top:14px;background:var(--surface);border:1px dashed var(--line);border-radius:16px;padding:12px 14px;font-size:14.5px;color:var(--muted);line-height:1.45}
 .src b{color:var(--ink)}
 .src ul{margin:4px 0 8px;padding-left:18px}
-.src p{border-top:1px solid var(--line);padding-top:8px}
+.src p{margin-top:4px}
 @media print{.src{break-inside:avoid;font-size:10.5px;padding:6px 8px}}
 .clinic{text-align:center;color:var(--muted);font-size:14px;line-height:1.55;padding:6px 16px 30px}
 .clinic b{display:block;color:var(--indigo);font-size:17px}
@@ -197,7 +197,6 @@ var UI = {
   print:['Print','प्रिंट करें'], call:['Call the clinic','क्लिनिक को कॉल करें'], book:['Book an appointment','अपॉइंटमेंट बुक करें'],
   worryIf:['See the doctor if: ','डॉक्टर को दिखाएँ अगर: '],
   pfoot:['Health education material for parents. General information only; it does not replace a consultation with your doctor. Dr. Dinesh Mittal, MBBS, DCH · DMC/R/00668 · www.drdineshmittal.com','माता-पिता के लिए स्वास्थ्य जानकारी। यह सामान्य जानकारी है, डॉक्टर से परामर्श का विकल्प नहीं। डॉ. दिनेश मित्तल, MBBS, DCH · DMC/R/00668 · www.drdineshmittal.com'],
-  basis:['Based on Indian Academy of Pediatrics (IAP) guidance, including the IAP guidelines for newborn skin care, IMNCI danger signs and WHO newborn care advice. Small, early or unwell babies may need different care: follow your doctor’s advice for your baby.','भारतीय बाल रोग अकादमी (IAP) के दिशानिर्देशों (नवजात त्वचा देखभाल सहित), IMNCI ख़तरे के लक्षणों और WHO की सलाह पर आधारित। छोटे, समय से पहले जन्मे या बीमार बच्चों की देखभाल अलग हो सकती है: अपने बच्चे के लिए डॉक्टर की सलाह मानें।']
 };
 
 /* ---------- 1. Normal or worry */
@@ -303,7 +302,7 @@ var MASSAGE = {
         ['Once a day, 1–2 hours after a feed, when the baby is calm and awake.','दिन में एक बार, दूध के 1–2 घंटे बाद, जब बच्चा शांत और जागा हो।'],
         ['Summer: massage before the bath. Winter: massage after the bath.','गर्मी में: नहलाने से पहले मालिश। सर्दी में: नहलाने के बाद मालिश।'],
         ['No massage on that day if the baby has fever, is unwell, has a rash, or is crying or hungry.','उस दिन मालिश न करें अगर बच्चे को बुख़ार हो, तबीयत ठीक न हो, दाने हों, या रो रहा हो या भूखा हो।']],
-  oil:[['Use coconut oil. If coconut oil does not suit the baby, use sunflower oil (IAP).','नारियल का तेल लगाएँ। नारियल का तेल बच्चे को सूट न करे तो सूरजमुखी का तेल लगाएँ (IAP)।'],
+  oil:[['Use coconut oil. If coconut oil does not suit the baby, use sunflower oil.','नारियल का तेल लगाएँ। नारियल का तेल बच्चे को सूट न करे तो सूरजमुखी का तेल लगाएँ।'],
        ['Do not use mustard oil or olive oil: they irritate the baby’s skin and damage its natural protective layer.','सरसों या जैतून (ऑलिव) का तेल न लगाएँ: ये बच्चे की त्वचा में जलन करते हैं और उसकी प्राकृतिक सुरक्षा परत को नुकसान पहुँचाते हैं।'],
        ['Do not heat the oil on the stove. Rub a few drops between your palms to warm it.','तेल को चूल्हे पर गर्म न करें। कुछ बूँदें हथेलियों में रगड़कर गर्म करें।']],
   ready:[['Warm room, fan or AC off. Baby on a soft towel on your lap or on the bed, facing you.','गर्म कमरा, पंखा या AC बंद। बच्चा आपकी गोद में या बिस्तर पर मुलायम तौलिये पर, आपकी ओर मुँह करके।'],
@@ -405,14 +404,8 @@ function panelMassage(){
 function panelAvoid(){
   return sec('avoid',['Please avoid these','कृपया ये न करें'], '<p class="lead">'+t(['Some old practices are still common but can harm a newborn.','कुछ पुरानी प्रथाएँ आज भी आम हैं, पर नवजात को नुकसान पहुँचा सकती हैं।'])+'</p><div class="av">'+AVOID.map(function(a){ return '<div><span><b>'+t(a[0])+'</b><p>'+t(a[1])+'</p></span></div>'; }).join('')+'</div>','red');
 }
-var SRC = {
-  normal:['IMNCI danger signs for young infants: Ministry of Health and Family Welfare, Government of India.','WHO recommendations on maternal and newborn care for a positive postnatal experience (2022).'],
-  bath:['Indian Academy of Pediatrics (IAP) Guidelines for Pediatric Skin Care. Indian Pediatrics 2021;58:153–161.'],
-  massage:['Indian Academy of Pediatrics (IAP) Guidelines for Pediatric Skin Care. Indian Pediatrics 2021;58:153–161.'],
-  avoid:['Indian Academy of Pediatrics (IAP) Guidelines for Pediatric Skin Care. Indian Pediatrics 2021;58:153–161.','IAP Infant and Young Child Feeding Guidelines.','WHO recommendations on maternal and newborn care for a positive postnatal experience (2022).']
-};
-var DISC = ['<b>For health education only.</b> This is general information for parents. It does not replace a consultation or examination by your doctor, and it is not advice for any particular baby. If you are worried about your baby, see a doctor without delay.','<b>सिर्फ़ स्वास्थ्य शिक्षा के लिए।</b> यह माता-पिता के लिए सामान्य जानकारी है। यह डॉक्टर से परामर्श या जाँच का विकल्प नहीं है, और किसी ख़ास बच्चे के लिए सलाह नहीं है। बच्चे को लेकर चिंता हो तो बिना देर किए डॉक्टर को दिखाएँ।'];
-function srcBlock(k){ return '<div class="src"><b>'+t(['Sources','स्रोत'])+'</b><ul>'+SRC[k].map(function(x){ return '<li>'+x+'</li>'; }).join('')+'</ul><p>'+t(DISC)+'</p></div>'; }
+var NOTE = ['This information is for health education only. It describes what is seen in most babies, but every baby is different, and your baby may have a problem that is not covered here. Written advice can also be understood in a way we did not intend. So if you are worried about your baby in any way, please seek medical care without delay. This page does not replace a consultation or examination by a doctor.','यह जानकारी सिर्फ़ स्वास्थ्य शिक्षा के लिए है। इसमें वह बताया गया है जो ज़्यादातर बच्चों में देखा जाता है, पर हर बच्चा अलग होता है, और आपके बच्चे को ऐसी कोई समस्या भी हो सकती है जो यहाँ नहीं लिखी है। लिखी हुई बात का मतलब कभी-कभी हमारी कही बात से अलग भी समझा जा सकता है। इसलिए अगर बच्चे को लेकर आपको किसी भी तरह की चिंता हो, तो बिना देर किए डॉक्टर को दिखाएँ। यह पेज डॉक्टर से परामर्श या जाँच की जगह नहीं ले सकता।'];
+function srcBlock(){ return '<div class="src"><b>'+t(['Please read','कृपया ध्यान दें'])+'</b><p>'+t(NOTE)+'</p></div>'; }
 var PANELS = [['normal',panelNormal,'teal'],['bath',panelBath,'sky'],['massage',panelMassage,'pink'],['avoid',panelAvoid,'red']];
 
 function render(){
@@ -424,10 +417,9 @@ function render(){
     return '<button type="button" class="tab" role="tab" id="tab-'+p[0]+'" aria-controls="p-'+p[0]+'" data-tab="'+p[0]+'" aria-selected="'+(p[0]===TAB)+'" style="--c:var(--'+p[2]+');--c-soft:var(--'+p[2]+'-soft)"><svg viewBox="0 0 24 24" aria-hidden="true">'+ICON[p[0]]+'</svg><b>'+t(UI.tabs[p[0]])+'</b></button>';
   }).join('');
   var o = PANELS.map(function(p){
-    return '<div class="panel" role="tabpanel" id="p-'+p[0]+'" aria-labelledby="tab-'+p[0]+'"'+(p[0]===TAB?'':' hidden')+'><h2 class="ptitle">'+t(UI.tabs[p[0]])+'</h2>'+p[1]()+srcBlock(p[0])+'</div>';
+    return '<div class="panel" role="tabpanel" id="p-'+p[0]+'" aria-labelledby="tab-'+p[0]+'"'+(p[0]===TAB?'':' hidden')+'><h2 class="ptitle">'+t(UI.tabs[p[0]])+'</h2>'+p[1]()+srcBlock()+'</div>';
   }).join('');
   o += '<div class="actions"><a class="btn btn-line" href="/newborn.html">'+t(['← Newborn corner','← नवजात कॉर्नर'])+'</a><a class="btn btn-green" href="/book.html">'+t(UI.book)+'</a><a class="btn btn-indigo" href="tel:+918130521456">'+t(UI.call)+'</a><button type="button" class="btn btn-line" id="print">'+t(UI.print)+'</button></div>';
-  o += '<p class="foot">'+t(UI.basis)+'</p>';
   document.getElementById('out').innerHTML = o;
   document.getElementById('clinic').innerHTML = '<b>Dr. Dinesh Mittal Child Clinic</b>Dr. Dinesh Mittal, MBBS, DCH · DMC/R/00668<br>H-34/69, Sector 3, Rohini, Delhi 110085<br>'+(L==='hi'?'फ़ोन':'Phone')+': <a href="tel:+918130521456">+91 81305 21456</a><br>Mon–Sat 10:00 AM–1:00 PM &amp; 6:00–8:30 PM · Sun 11:00 AM–12:00 PM<br><a href="https://www.drdineshmittal.com">www.drdineshmittal.com</a>';
 }
