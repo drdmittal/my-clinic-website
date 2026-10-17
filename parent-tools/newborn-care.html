@@ -69,6 +69,7 @@ main{padding-top:6px;padding-bottom:30px}
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:10px}
 .nc{background:var(--paper);border-radius:16px;padding:12px 14px;border-left:6px solid var(--leaf);display:flex;flex-direction:column;gap:6px}
 .nc b{font-weight:750;font-size:17.5px;line-height:1.25}
+.nc p b{font-size:inherit;line-height:inherit}
 .nc p{font-size:16px;line-height:1.45}
 .nc .strong{background:var(--red-soft);border-radius:10px;padding:7px 10px;font-weight:650}
 .nc .worry{font-size:15px;color:var(--muted);border-top:1px dashed var(--line);padding-top:6px}
@@ -111,6 +112,11 @@ ol.steps li::before{content:counter(s);width:30px;height:30px;border-radius:50%;
 .btn-indigo{background:var(--indigo);color:#fff}
 .btn-line{background:var(--surface);color:var(--ink);border:1.5px solid var(--line)}
 .foot{color:var(--muted);font-size:14.5px;margin-top:20px}
+.src{margin-top:14px;background:var(--surface);border:1px dashed var(--line);border-radius:16px;padding:12px 14px;font-size:14.5px;color:var(--muted);line-height:1.45}
+.src b{color:var(--ink)}
+.src ul{margin:4px 0 8px;padding-left:18px}
+.src p{border-top:1px solid var(--line);padding-top:8px}
+@media print{.src{break-inside:avoid;font-size:10.5px;padding:6px 8px}}
 .clinic{text-align:center;color:var(--muted);font-size:14px;line-height:1.55;padding:6px 16px 30px}
 .clinic b{display:block;color:var(--indigo);font-size:17px}
 @media (prefers-color-scheme:dark){.clinic b{color:#c9c6ff}}
@@ -196,9 +202,9 @@ var UI = {
 
 /* ---------- 1. Normal or worry */
 var NORMAL = [
-  {h:['Noisy breathing, snuffly nose','साँस में आवाज़, नाक में घरघराहट'],
-   p:['A newborn’s nose is small. Milk and mucus make a snoring, snorting or whistling sound, more while feeding and sleeping.','नवजात की नाक छोटी होती है। दूध और बलगम से खर्राटे, सुड़सुड़ या सीटी जैसी आवाज़ आती है, ख़ासकर दूध पीते और सोते समय।'],
-   w:['breathing is fast, the chest pulls in, there is a grunt with every breath, or the baby cannot feed.','साँस तेज़ हो, पसली चले, हर साँस के साथ कराहने की आवाज़ हो, या बच्चा दूध न पी पाए।']},
+  {h:['Snuffly, blocked-nose sounds','नाक बंद होने की सुड़सुड़ आवाज़'],
+   p:['A newborn breathes mainly through the nose, which is small. Milk or mucus in the nose makes a snuffling or snorting sound <b>from the nose</b>, more while feeding or sleeping. The baby breathes comfortably, feeds well and is calm. The sound often changes after a sneeze or a change of position.','नवजात ज़्यादातर नाक से साँस लेता है, और उसकी नाक छोटी होती है। नाक में दूध या बलगम से <b>नाक से</b> सुड़सुड़ या खर्राटे जैसी आवाज़ आती है, ख़ासकर दूध पीते और सोते समय। बच्चा आराम से साँस लेता है, ठीक से दूध पीता है और शांत रहता है। छींक के बाद या करवट बदलने पर आवाज़ अक्सर बदल जाती है।'],
+   w:['the sound comes from the <b>chest or throat</b>: a whistling sound when breathing out, or a harsh sound when breathing in. Also if breathing is fast, the chest pulls in, there is a grunt with every breath, the lips turn blue, or the baby cannot feed.','आवाज़ <b>छाती या गले</b> से आए: साँस छोड़ते समय सीटी जैसी आवाज़, या साँस लेते समय कर्कश, खरखराती आवाज़। या साँस तेज़ हो, पसली चले, हर साँस के साथ कराहने की आवाज़ हो, होंठ नीले पड़ें, या बच्चा दूध न पी पाए।']},
   {h:['Spitting up milk (regurgitation)','दूध उलटना'],
    p:['A little milk comes out of the mouth or nose after feeds. Normal up to 4–6 months if the baby is happy and gaining weight. Burp the baby and keep upright for 15–20 minutes after feeds.','दूध पीने के बाद थोड़ा दूध मुँह या नाक से निकलना। बच्चा ख़ुश है और वज़न बढ़ रहा है तो 4–6 महीने तक आम है। दूध के बाद डकार दिलाएँ और 15–20 मिनट सीधा पकड़ें।'],
    w:['vomiting is forceful (shoots out), green or yellow, has blood, or the baby is not gaining weight.','उल्टी ज़ोर से फव्वारे जैसी हो, हरी या पीली हो, उसमें ख़ून हो, या वज़न न बढ़े।']},
@@ -239,8 +245,8 @@ var NORMAL = [
    p:['In the first 2–3 months, the eyes may cross or wander at times.','पहले 2–3 महीनों में आँखें कभी-कभी तिरछी या भटकती लग सकती हैं।'],
    w:['an eye stays turned after 4 months, there is a white shine in the pupil, or the eye is red with pus.','4 महीने के बाद भी आँख तिरछी रहे, पुतली में सफ़ेद चमक दिखे, या आँख लाल हो और मवाद आए।']},
   {h:['Crying','रोना'],
-   p:['Healthy babies may cry for up to 2–3 hours a day, often in the evening. Crying is usually most around 6 weeks of age and then settles.','स्वस्थ बच्चा दिन में 2–3 घंटे तक रो सकता है, अक्सर शाम को। लगभग 6 हफ़्ते की उम्र में रोना सबसे ज़्यादा होता है, फिर कम हो जाता है।'],
-   w:['the cry is high-pitched or very weak, the baby cannot be calmed for hours, or there is also fever, vomiting or poor feeding.','रोने की आवाज़ बहुत तीखी या बहुत कमज़ोर हो, घंटों चुप न हो, या साथ में बुख़ार, उल्टी या दूध कम पीना हो।']}
+   p:['All babies cry. It is how they tell you they are hungry, wet, too hot or cold, or want to be held. A healthy baby settles when fed, burped, changed or held.','सभी बच्चे रोते हैं। इसी तरह वे बताते हैं कि भूख लगी है, नैपी गीली है, गर्मी या ठंड लग रही है, या गोद चाहिए। स्वस्थ बच्चा दूध पिलाने, डकार दिलाने, नैपी बदलने या गोद में लेने पर चुप हो जाता है।'],
+   w:['the baby does not settle even after feeding, burping, changing and holding; the cry is high-pitched or very weak; or there is also fever, vomiting or poor feeding.','दूध पिलाने, डकार दिलाने, नैपी बदलने और गोद में लेने के बाद भी बच्चा चुप न हो; रोने की आवाज़ बहुत तीखी या बहुत कमज़ोर हो; या साथ में बुख़ार, उल्टी या दूध कम पीना हो।']}
 ];
 var ER = [
   ['Fits: jerking, stiffening, or staring with no response','दौरा: झटके, शरीर अकड़ना, या एकटक देखना और कोई जवाब न देना'],
@@ -254,6 +260,7 @@ var DOC = [
   ['Fever: 99.5 °F or more in the armpit. Or the body is cold: below 95.9 °F. (Measure with a digital thermometer kept in the armpit.)','बुख़ार: बगल में 99.5 °F या ज़्यादा। या शरीर ठंडा: 95.9 °F से कम। (डिजिटल थर्मामीटर बगल में लगाकर नापें।)'],
   ['Fast breathing: 60 or more breaths in one minute (count for a full minute while the baby is calm)','तेज़ साँस: एक मिनट में 60 या ज़्यादा साँस (बच्चा शांत हो तब पूरा एक मिनट गिनें)'],
   ['Cough that continues, or cough with difficulty in breathing or feeding','लगातार खाँसी, या खाँसी के साथ साँस या दूध पीने में दिक्कत'],
+  ['A whistling sound when breathing out, or a harsh sound when breathing in','साँस छोड़ते समय सीटी जैसी आवाज़, या साँस लेते समय कर्कश, खरखराती आवाज़'],
   ['Forceful or repeated vomiting, or blood in vomit or stool','ज़ोर से या बार-बार उल्टी, या उल्टी या पॉटी में ख़ून'],
   ['Yellow colour in the first 24 hours, on palms or soles, or after 2 weeks','पहले 24 घंटे में पीलापन, हथेली या तलवों पर पीलापन, या 2 हफ़्ते बाद भी'],
   ['White or very pale stools','सफ़ेद या बहुत हल्के रंग की पॉटी'],
@@ -261,7 +268,7 @@ var DOC = [
   ['Cord: pus, bad smell, bleeding, or redness spreading onto the tummy','नाल: मवाद, बदबू, ख़ून, या पेट की त्वचा पर फैलती लाली'],
   ['Many pus-filled spots on the skin, or red eyes with pus','त्वचा पर बहुत सारे मवाद वाले दाने, या लाल आँखें और मवाद'],
   ['Bulging soft spot on the head while the baby is calm','बच्चा शांत हो तब भी सिर का नरम हिस्सा (तालू) उभरा हुआ'],
-  ['High-pitched or very weak cry, or crying that cannot be calmed','बहुत तीखा या बहुत कमज़ोर रोना, या चुप न होना']
+  ['High-pitched or very weak cry, or crying that does not settle even after feeding and holding','बहुत तीखा या बहुत कमज़ोर रोना, या दूध पिलाने और गोद में लेने के बाद भी चुप न होना']
 ];
 
 /* ---------- 2. Bathing */
@@ -408,6 +415,14 @@ function panelMassage(){
 function panelAvoid(){
   return sec('avoid',['Please avoid these','कृपया ये न करें'], '<p class="lead">'+t(['Some old practices are still common but can harm a newborn.','कुछ पुरानी प्रथाएँ आज भी आम हैं, पर नवजात को नुकसान पहुँचा सकती हैं।'])+'</p><div class="av">'+AVOID.map(function(a){ return '<div><span><b>'+t(a[0])+'</b><p>'+t(a[1])+'</p></span></div>'; }).join('')+'</div>','red');
 }
+var SRC = {
+  normal:['IMNCI danger signs for young infants: Ministry of Health and Family Welfare, Government of India.','WHO recommendations on maternal and newborn care for a positive postnatal experience (2022).'],
+  bath:['Indian Academy of Pediatrics (IAP) Guidelines for Pediatric Skin Care. Indian Pediatrics 2021;58:153–161.'],
+  massage:['Indian Academy of Pediatrics (IAP) Guidelines for Pediatric Skin Care. Indian Pediatrics 2021;58:153–161.'],
+  avoid:['Indian Academy of Pediatrics (IAP) Guidelines for Pediatric Skin Care. Indian Pediatrics 2021;58:153–161.','IAP Infant and Young Child Feeding Guidelines.','WHO recommendations on maternal and newborn care for a positive postnatal experience (2022).']
+};
+var DISC = ['<b>For health education only.</b> This is general information for parents. It does not replace a consultation or examination by your doctor, and it is not advice for any particular baby. If you are worried about your baby, see a doctor without delay.','<b>सिर्फ़ स्वास्थ्य शिक्षा के लिए।</b> यह माता-पिता के लिए सामान्य जानकारी है। यह डॉक्टर से परामर्श या जाँच का विकल्प नहीं है, और किसी ख़ास बच्चे के लिए सलाह नहीं है। बच्चे को लेकर चिंता हो तो बिना देर किए डॉक्टर को दिखाएँ।'];
+function srcBlock(k){ return '<div class="src"><b>'+t(['Sources','स्रोत'])+'</b><ul>'+SRC[k].map(function(x){ return '<li>'+x+'</li>'; }).join('')+'</ul><p>'+t(DISC)+'</p></div>'; }
 var PANELS = [['normal',panelNormal,'teal'],['bath',panelBath,'sky'],['massage',panelMassage,'pink'],['avoid',panelAvoid,'red']];
 
 function render(){
@@ -419,10 +434,10 @@ function render(){
     return '<button type="button" class="tab" role="tab" id="tab-'+p[0]+'" aria-controls="p-'+p[0]+'" data-tab="'+p[0]+'" aria-selected="'+(p[0]===TAB)+'" style="--c:var(--'+p[2]+');--c-soft:var(--'+p[2]+'-soft)"><svg viewBox="0 0 24 24" aria-hidden="true">'+ICON[p[0]]+'</svg><b>'+t(UI.tabs[p[0]])+'</b></button>';
   }).join('');
   var o = PANELS.map(function(p){
-    return '<div class="panel" role="tabpanel" id="p-'+p[0]+'" aria-labelledby="tab-'+p[0]+'"'+(p[0]===TAB?'':' hidden')+'><h2 class="ptitle">'+t(UI.tabs[p[0]])+'</h2>'+p[1]()+'</div>';
+    return '<div class="panel" role="tabpanel" id="p-'+p[0]+'" aria-labelledby="tab-'+p[0]+'"'+(p[0]===TAB?'':' hidden')+'><h2 class="ptitle">'+t(UI.tabs[p[0]])+'</h2>'+p[1]()+srcBlock(p[0])+'</div>';
   }).join('');
   o += '<div class="actions"><a class="btn btn-line" href="/newborn.html">'+t(['← Newborn corner','← नवजात कॉर्नर'])+'</a><a class="btn btn-green" href="/book.html">'+t(UI.book)+'</a><a class="btn btn-indigo" href="tel:+918130521456">'+t(UI.call)+'</a><button type="button" class="btn btn-line" id="print">'+t(UI.print)+'</button></div>';
-  o += '<p class="foot">'+t(UI.basis)+'</p><p class="foot">'+t(UI.pfoot)+'</p>';
+  o += '<p class="foot">'+t(UI.basis)+'</p>';
   document.getElementById('out').innerHTML = o;
   document.getElementById('clinic').innerHTML = '<b>Dr. Dinesh Mittal Child Clinic</b>Dr. Dinesh Mittal, MBBS, DCH · DMC/R/00668<br>H-34/69, Sector 3, Rohini, Delhi 110085<br>'+(L==='hi'?'फ़ोन':'Phone')+': <a href="tel:+918130521456">+91 81305 21456</a><br>Mon–Sat 10:00 AM–1:00 PM &amp; 6:00–8:30 PM · Sun 11:00 AM–12:00 PM<br><a href="https://www.drdineshmittal.com">www.drdineshmittal.com</a>';
 }

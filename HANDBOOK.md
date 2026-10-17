@@ -72,6 +72,7 @@ Last updated: 17 Oct 2026 (newborn care page added).
   - Breast milk first; formula only on a doctor's advice.
   - Amounts are only a guide: follow the child's appetite, no force-feeding.
   - No fever "what to do" protocol on the website (the doctor advises in person).
+  - Every parent page/tab ends with its sources and the "For health education only…" disclaimer (medico-legal). Never call any amount of crying "normal" (parents may read inconsolable crying as normal); say a healthy baby settles when fed, burped, changed or held. Say "blocked-nose sounds", not "noisy breathing"; whistling or harsh sounds from chest/throat are danger signs.
   - Temperatures in °F first. Newborn fever / cold cut-offs follow IMNCI: 99.5 °F or more, below 95.9 °F (armpit). Write firm, clear instructions, not "may / can".
   - Newborn care rules: sponge bath until the cord falls off, then mug bath (no bath tub or bath seat, accident risk); massage by mother, father or family only (not a maid or nurse — home care setting), from day 7; coconut oil (sunflower also OK per IAP), no mustard or olive oil; never squeeze a newborn's breasts.
 - **Before publishing:** check the JavaScript syntax, test the page on a phone-size screen, and check booking still works (`book.html?demo=1` is a safe preview).
