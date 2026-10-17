@@ -83,3 +83,4 @@ Last updated: 17 Oct 2026 (newborn care page added).
 - QR card for reception linking to booking and the diet guide.
 - BLACKLIST support from the old sheet.
 - Bring older article pages to the new design.
+- Newborn corner additions (doctor approved the list; not built yet): breastfeeding help (latch, positions, enough milk, expressing and storing), safe sleep, visit plan for the first 3 months, feeding and nappy log, common skin problems (nappy rash, heat rash, cradle cap), crying and colic, mother's wellbeing (baby blues vs postnatal depression). Do NOT add a newborn screening checklist or kangaroo mother care (doctor's domain).
