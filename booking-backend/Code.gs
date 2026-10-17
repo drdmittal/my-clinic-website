@@ -115,6 +115,7 @@ function setup() {
   }
   consentSheet();
   installCalendarSync();
+  try { clinicCalendar(settings()); } catch (e) { console.warn('Calendar not created yet: ' + e); }
   return 'Setup done';
 }
 
@@ -577,20 +578,19 @@ function clinicCalendar(s) {
 
 function syncCalendar() {
   var s = settings();
-  if (String(s.CAL_ENABLED).toUpperCase() !== 'YES') return 'Calendar copy is off';
+  if (String(s.CAL_ENABLED).toUpperCase() !== 'YES') { console.log('Calendar copy is off (CAL_ENABLED is not YES)'); return 'Calendar copy is off'; }
   var lock = LockService.getScriptLock();
-  if (!lock.tryLock(3000)) return 'Busy, will try next time';
+  if (!lock.tryLock(3000)) { console.log('Busy, will try next time'); return 'Busy, will try next time'; }
   var done = 0;
   try {
     var sheet = SS().getSheetByName(TAB_BOOKINGS);
     var today = ymd(new Date());
-    var cal = null;
+    var cal = clinicCalendar(s); // creates the calendar on the first run
     bookingRows().forEach(function (r) {
       if (String(r[COL.id]).indexOf('WALKIN') === 0 || r[COL.date] < today) return;
       var mark = String(r[COL.cal] || '');
       try {
         if (isActive(r) && !mark) {
-          cal = cal || clinicCalendar(s);
           var start = atIST(r[COL.date], toMin(r[COL.time]));
           var end = new Date(start.getTime() + s.SLOT_MINUTES * 60000);
           var title = r[COL.child] + (r[COL.visit] ? ' · ' + r[COL.visit] : '');
@@ -598,7 +598,6 @@ function syncCalendar() {
           sheet.getRange(r.row, COL.cal + 1).setValue(ev.getId());
           done++;
         } else if (!isActive(r) && mark && mark !== 'Removed') {
-          cal = cal || clinicCalendar(s);
           var old = cal.getEventById(mark);
           if (old) old.deleteEvent();
           sheet.getRange(r.row, COL.cal + 1).setValue('Removed');
@@ -609,6 +608,7 @@ function syncCalendar() {
   } finally {
     lock.releaseLock();
   }
+  console.log('Calendar "' + String(s.CAL_NAME || 'Clinic Appointments') + '" updated: ' + done + ' change(s)');
   return 'Calendar updated: ' + done;
 }
 
