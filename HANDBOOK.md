@@ -46,7 +46,7 @@ Last updated: 17 Oct 2026 (newborn care page added).
 
 ### Pending, on the doctor's side
 
-1. **Paste the latest Code.gs and appsscript.json into Apps Script** (17 Oct 2026 version: Walk-in, Message, Staff PIN, visit type, 3-day limit, Google Calendar copy). Then run `setup` once and allow the Calendar permission, then New version deploy. Until then Walk-in / Message / Staff PIN show "Could not complete" and visit type is not saved.
+1. Done 17 Oct 2026: Code.gs + appsscript.json pasted, setup run, Calendar allowed; "Clinic Appointments" calendar working. (Repo Code.gs has a later small change — result message in the log, calendar created on setup — paste it with the next update; not urgent.)
 2. **WhatsApp confirmations** (Cloud API, direct with Meta):
    - Buy a new SIM for automatic messages only. The clinic number stays on WhatsApp Business.
    - Then do the Meta setup in `booking-backend/SETUP.md` section C: business portfolio, app, number, 3 Utility templates, permanent token, Phone number ID.
