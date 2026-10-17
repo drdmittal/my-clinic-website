@@ -8,6 +8,7 @@
   var I = {
     home: '<path d="M3 11 12 3l9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/>',
     book: '<rect x="3" y="4" width="18" height="17" rx="3"/><path d="M8 2v4M16 2v4M3 10h18M9 15l2 2 4-4"/>',
+    diet: '<path d="M3 11h18a9 9 0 0 1-18 0z"/><path d="M12 3v4M8 5v2M16 5v2"/>',
     tools: '<path d="M12 21s-7-4.5-7-11a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 6.5-7 11-7 11z"/>',
     chart: '<path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/>',
     guides: '<path d="M4 4h6a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H4z"/><path d="M20 4h-6a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h7z"/>',
@@ -19,8 +20,9 @@
   var ITEMS = [
     { k: 'home', href: '/', en: 'Home', hi: 'होम', c: '#3d36b8' },
     { k: 'book', href: '/book.html', en: 'Book', hi: 'बुक करें', c: '#e2457a' },
+    { k: 'diet', href: '/baby-diet-planner.html', en: 'Diet guide', hi: 'आहार गाइड', c: '#e0a100' },
     { k: 'chart', href: '/parent-tools/fever-chart.html', en: 'Fever chart', hi: 'बुख़ार चार्ट', c: '#f08a1c' },
-    { k: 'tools', href: '/#tools', en: 'Parent tools', hi: 'पेरेंट टूल्स', c: '#e0a100' },
+    { k: 'tools', href: '/#tools', en: 'Parent tools', hi: 'पेरेंट टूल्स', c: '#c2410c' },
     { k: 'vaccine', href: '/iap-immunization-schedule.html', en: 'Vaccines', hi: 'टीके', c: '#0f9b8e' },
     { k: 'guides', href: '/blog.html', en: 'Guides', hi: 'गाइड', c: '#8b4fd6' },
     { k: 'visit', href: '/#visit', en: 'Timings & map', hi: 'समय और पता', c: '#2f8fe0' },
