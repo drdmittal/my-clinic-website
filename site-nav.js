@@ -19,7 +19,7 @@
   };
   var ITEMS = [
     { k: 'home', href: '/', en: 'Home', hi: 'होम', c: '#3d36b8' },
-    { k: 'book', href: '/book.html', en: 'Book', hi: 'बुक करें', c: '#e2457a' },
+    { k: 'book', href: '/book.html', en: 'Book', hi: 'बुक करें', c: '#2f8f3a' },
     { k: 'diet', href: '/baby-diet-planner.html', en: 'Diet guide', hi: 'आहार गाइड', c: '#e0a100' },
     { k: 'chart', href: '/parent-tools/fever-chart.html', en: 'Fever chart', hi: 'बुख़ार चार्ट', c: '#f08a1c' },
     { k: 'tools', href: '/#tools', en: 'Parent tools', hi: 'पेरेंट टूल्स', c: '#c2410c' },
