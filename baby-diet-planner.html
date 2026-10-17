@@ -196,6 +196,7 @@ var UI = {
   legM:['Milk = breast milk / formula / milk','दूध = माँ का दूध / फ़ॉर्मूला / दूध'], legS:['Semisolid = home food','ठोस = घर का खाना'],
   shift:['Shift the times to suit your family (for example start at 7 am), but keep the same gaps.','समय अपने घर के हिसाब से आगे-पीछे कर लें (जैसे 7 बजे से शुरू), पर अंतर वही रखें।'],
   groups:['Food groups: give at least 5 of these 8 every day','खाने के समूह: रोज़ इन 8 में से कम से कम 5 दें'],
+  appetite:['These amounts are only a guide. Some days the child eats more, some days less, and both are normal. Never force the child to finish, and never stop a child who still wants more: if the mouth keeps opening, give more; if the child turns away or closes the mouth, stop. Steady weight gain on the growth chart is what matters.','यह मात्रा सिर्फ़ अंदाज़ा है। किसी दिन बच्चा ज़्यादा खाएगा, किसी दिन कम, दोनों सामान्य हैं। ज़बरदस्ती ख़त्म न कराएँ, और भूखे बच्चे को रोकें भी नहीं: मुँह खोलता रहे तो और दें; मुँह फेरे या बंद करे तो रुक जाएँ। असली बात यह है कि ग्रोथ चार्ट पर वज़न ठीक से बढ़ता रहे।'],
   katori:['Measure your katori once: fill it with water and pour it into a measuring cup or feeding bottle. Most small katoris hold 100–150 ml.','अपनी कटोरी एक बार नाप लें: पानी भरकर नापने वाले कप या बोतल में डालें। ज़्यादातर छोटी कटोरी में 100–150 ml आता है।'],
   pdf:['Download the printable 6 months – 2 years guide (PDF)','6 महीने – 2 साल की प्रिंट वाली गाइड डाउनलोड करें (PDF)'],
   jain:['Jain families: choose Veg and skip onion, garlic and root vegetables.','जैन परिवार: शाकाहारी चुनें और प्याज़, लहसुन व ज़मीन के नीचे उगने वाली सब्ज़ियाँ छोड़ दें।'],
@@ -467,7 +468,7 @@ function render(){
     o += sec(n++, UI.glance, glance(s.glance)+'<div class="note">'+ul(d.rules,'dot')+'</div>', a.c);
     o += sec(n++, UI.day, timeline(SCHED[st.step])+'<p class="note">'+esc(t(UI.shift))+'</p>', 'sky');
     o += sec(n++, UI.what, foods(s.foods)+'<h3>'+esc(t(UI.groups))+'</h3>'+groupsBlock()+'<p class="note">'+esc(t(UI.jain))+'</p>', 'teal');
-    o += sec(n++, UI.how, mealsTable()+'<p class="note">'+esc(t(UI.katori))+'</p><a class="pdfdl noprint" href="/parent-tools/complementary-feeding-guide.pdf" download>'+esc(t(UI.pdf))+'</a>', 'orange');
+    o += sec(n++, UI.how, mealsTable()+'<p class="note" style="background:var(--leaf-soft)">'+esc(t(UI.appetite))+'</p><p class="note">'+esc(t(UI.katori))+'</p><a class="pdfdl noprint" href="/parent-tools/complementary-feeding-guide.pdf" download>'+esc(t(UI.pdf))+'</a>', 'orange');
     o += sec(n++, d.milkHabit.h, ul(d.milkHabit.pts,'dot'), 'grape');
     o += sec(n++, UI.dont, dodont(d)+'<h3>'+esc(L==='hi'?'गले में फँसने से बचाव':'Prevent choking')+'</h3>'+ul(CHOKING,'warn'), 'leaf');
     o += sec(n++, UI.doc, doctor(d), 'red');
@@ -476,7 +477,7 @@ function render(){
     o += sec(n++, UI.glance, glance(d.glance)+'<div class="note">'+ul(d.rules,'dot')+'</div>', a.c);
     o += sec(n++, UI.day, timeline(SCHED.y1)+'<p class="note">'+esc(t(UI.shift))+'</p>', 'sky');
     o += sec(n++, UI.what, foods(d.foods)+'<h3>'+esc(t(UI.groups))+'</h3>'+groupsBlock()+'<p class="note">'+esc(t(UI.jain))+'</p>', 'teal');
-    o += sec(n++, UI.how, '<p>'+esc(L==='hi'?'हर खाने में 150–250 ml (¾ से 1 कटोरी)। नाश्ते में ½ कटोरी या 1 फल।':'150–250 ml per meal (¾ to 1 katori). Snack: ½ katori or 1 fruit.')+'</p><p class="note">'+esc(t(UI.katori))+'</p><a class="pdfdl noprint" href="/parent-tools/complementary-feeding-guide.pdf" download>'+esc(t(UI.pdf))+'</a>', 'orange');
+    o += sec(n++, UI.how, '<p>'+esc(L==='hi'?'हर खाने में 150–250 ml (¾ से 1 कटोरी)। नाश्ते में ½ कटोरी या 1 फल।':'150–250 ml per meal (¾ to 1 katori). Snack: ½ katori or 1 fruit.')+'</p><p class="note" style="background:var(--leaf-soft)">'+esc(t(UI.appetite))+'</p><p class="note">'+esc(t(UI.katori))+'</p><a class="pdfdl noprint" href="/parent-tools/complementary-feeding-guide.pdf" download>'+esc(t(UI.pdf))+'</a>', 'orange');
     o += sec(n++, d.milkHabit.h, ul(d.milkHabit.pts,'dot'), 'grape');
     o += sec(n++, UI.dont, dodont(d)+'<h3>'+esc(L==='hi'?'गले में फँसने से बचाव':'Prevent choking')+'</h3>'+ul(CHOKING,'warn'), 'leaf');
     o += sec(n++, UI.doc, doctor(d), 'red');
@@ -486,7 +487,7 @@ function render(){
     o += sec(n++, UI.day, timeline(SCHED.y2)+'<p class="note">'+esc(t(UI.shift))+'</p>', 'sky');
     o += sec(n++, UI.what, foods(d.foods)+'<h3>'+esc(t(UI.groups))+'</h3>'+groupsBlock().replace(/<div style="--c:#8b4fd6[\s\S]*?<\/div>/,'')+'<p class="note">'+esc(t(UI.jain))+'</p>', 'teal');
     o += sec(n++, ['Healthy recipes to make at home','घर पर बनाने वाली सेहतमंद रेसिपी'], '<div class="cards">'+d.recipes.filter(function(r){ return showItem(r.tag); }).map(function(r){ return '<div class="card"><b>'+esc(t(r.n))+tagHtml(r.tag)+'</b><p><b style="display:inline;font-size:15px">'+esc(L==='hi'?'सामग्री: ':'You need: ')+'</b>'+esc(t(r.i))+'</p><p style="margin-top:6px">'+esc(t(r.s))+'</p></div>'; }).join('')+'</div>', 'pink');
-    o += sec(n++, UI.how, '<table><tr>'+d.table.head.map(function(h){ return '<th>'+esc(t(h))+'</th>'; }).join('')+'</tr>'+d.table.rows.map(function(r){ return '<tr>'+r.map(function(c,i){ return i? '<td>'+esc(t(c))+'</td>' : '<td><b>'+esc(t(c))+'</b></td>'; }).join('')+'</tr>'; }).join('')+'</table><p class="note">'+esc(t(d.table.note))+'</p>', 'orange');
+    o += sec(n++, UI.how, '<table><tr>'+d.table.head.map(function(h){ return '<th>'+esc(t(h))+'</th>'; }).join('')+'</tr>'+d.table.rows.map(function(r){ return '<tr>'+r.map(function(c,i){ return i? '<td>'+esc(t(c))+'</td>' : '<td><b>'+esc(t(c))+'</b></td>'; }).join('')+'</tr>'; }).join('')+'</table><p class="note" style="background:var(--leaf-soft)">'+esc(t(UI.appetite))+'</p><p class="note">'+esc(t(d.table.note))+'</p>', 'orange');
     o += sec(n++, UI.dont, dodont(d), 'leaf');
     o += sec(n++, UI.doc, doctor(d), 'red');
   }
