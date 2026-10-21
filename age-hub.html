@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Child's Age | Dr. Dinesh Mittal Child Clinic</title>
+<meta name="description" content="Growth, milestones, food, vaccines, potty training and screening for your child's age, by Dr. Dinesh Mittal, Child Clinic, Sector 3 Rohini, Delhi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Anek+Devanagari:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--indigo:#2a2580;--pink:#e2457a;--turmeric:#f5ad1b;--teal:#0f9b8e;--sky:#2f8fe0;--grape:#8b4fd6;--green:#2f8f3a;--ink:#1f2140;--muted:#5b5f7a;--paper:#fffdf8;--line:#e6e2f3}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Anek Devanagari",system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.5;font-size:16px}
+  header{background:var(--indigo);color:#fff;padding:14px 16px}
+  header .name{font-weight:800;font-size:1.05rem}
+  header .sub{font-size:.85rem;opacity:.9}
+  .wrap{max-width:720px;margin:0 auto;padding:14px}
+  .lang{float:right;background:#fff;color:var(--indigo);border:0;border-radius:999px;padding:6px 12px;font:600 .85rem "Anek Devanagari";cursor:pointer}
+  h1{font-size:1.4rem;margin:8px 0 4px;color:var(--indigo)}
+  .lead{color:var(--muted);margin:0 0 12px}
+  .card{background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:14px;margin:12px 0}
+  .card h2{font-size:1.1rem;margin:0 0 8px;display:flex;align-items:center;gap:8px}
+  .dot{width:12px;height:12px;border-radius:50%;display:inline-block}
+  .ages{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+  .age{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:6px 11px;font:600 .9rem "Anek Devanagari";cursor:pointer;color:var(--ink)}
+  .age[aria-pressed="true"]{background:var(--indigo);color:#fff;border-color:var(--indigo)}
+  .age.soon{opacity:.55}
+  .field{display:flex;flex-direction:column;gap:4px;margin:8px 0}
+  .field input{font:500 1rem "Anek Devanagari";padding:9px 10px;border:1.5px solid var(--line);border-radius:10px}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media (max-width:480px){.row{grid-template-columns:1fr}}
+  .flag{border-radius:12px;padding:10px 12px;margin:8px 0;font-size:.95rem}
+  .g{background:#eaf7ec;border:1px solid #bfe5c6}.y{background:#fff6e0;border:1px solid #f6d68b}.r{background:#fdeaf0;border:1px solid #f4b8c9}.n{background:#f4f5fb;border:1px solid var(--line);color:var(--muted)}
+  ul{margin:6px 0 0;padding-left:20px}
+  li{margin:3px 0}
+  .btn{display:inline-block;background:var(--pink);color:#fff;text-decoration:none;border-radius:999px;padding:10px 16px;font-weight:700;border:0;cursor:pointer;font:700 .95rem "Anek Devanagari"}
+  .btn.alt{background:var(--teal)}
+  .btn.ghost{background:#fff;color:var(--indigo);border:1.5px solid var(--indigo)}
+  .links a{display:inline-block;margin:4px 6px 4px 0}
+  .tag{font-size:.78rem;font-weight:700;padding:2px 8px;border-radius:999px;background:#fff6e0;color:#8a5a00;margin-left:6px}
+  .note{font-size:.85rem;color:var(--muted);margin-top:8px}
+  .please{background:#fff;border:1.5px dashed var(--turmeric);border-radius:12px;padding:10px 12px;font-size:.85rem;color:#6b4a00;margin-top:14px}
+  footer{color:var(--muted);font-size:.8rem;text-align:center;padding:16px 10px 30px}
+  .print-head{display:none}
+  @media print{
+    .noprint,.lang,header,.ages,.btn,.links,.field,.age-picker{display:none!important}
+    .print-head{display:block;border-bottom:2px solid var(--indigo);padding-bottom:6px;margin-bottom:10px}
+    body{background:#fff}.card{break-inside:avoid;border-color:#ccc}
+  }
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<header>
+  <button class="lang noprint" id="langBtn" type="button">हिन्दी</button>
+  <div class="name" data-en="Dr. Dinesh Mittal Child Clinic" data-hi="डॉ. दिनेश मित्तल चाइल्ड क्लिनिक">Dr. Dinesh Mittal Child Clinic</div>
+  <div class="sub" data-en="H-34/69, Sector 3, Rohini, Delhi 110085 · +91 81305 21456" data-hi="H-34/69, सेक्टर 3, रोहिणी, दिल्ली 110085 · +91 81305 21456">H-34/69, Sector 3, Rohini, Delhi 110085 · +91 81305 21456</div>
+</header>
+
+<div class="wrap">
+  <div class="print-head">
+    <strong>Dr. Dinesh Mittal Child Clinic</strong> · Sector 3, Rohini, Delhi · www.drdineshmittal.com
+  </div>
+
+  <h1 id="title">My child's age</h1>
+  <p class="lead" id="leadText">Choose your child's age, or add the date of birth for exact dates.</p>
+
+  <div class="card age-picker noprint">
+    <div class="field">
+      <span><strong data-en="Child's age" data-hi="बच्चे की उम्र">Child's age</strong></span>
+      <div class="ages" id="ageButtons"></div>
+    </div>
+    <div class="field">
+      <label for="dob"><strong data-en="Date of birth (optional, for exact vaccine dates)" data-hi="जन्म तिथि (वैकल्पिक, सटीक टीके की तारीख के लिए)">Date of birth (optional, for exact vaccine dates)</strong></label>
+      <input type="date" id="dob">
+      <div class="note" data-en="Nothing is stored or sent. Calculated on this phone only." data-hi="कुछ भी सेव या भेजा नहीं जाता। सब कुछ केवल इसी फ़ोन पर गिना जाता है।">Nothing is stored or sent. Calculated on this phone only.</div>
+    </div>
+    <div class="flag n" id="ageNotice" hidden></div>
+  </div>
+
+  <!-- 1. Growth -->
+  <div class="card" id="sec-growth">
+    <h2><span class="dot" style="background:var(--sky)"></span><span data-en="1. Growth check" data-hi="1. विकास की जाँच">1. Growth check</span></h2>
+    <div class="row">
+      <div class="field"><label for="wt" data-en="Weight (kg)" data-hi="वज़न (kg)">Weight (kg)</label><input id="wt" type="number" step="0.1" inputmode="decimal"></div>
+      <div class="field"><label for="ln" data-en="Length (cm), lying down" data-hi="लंबाई (cm), लेटाकर">Length (cm), lying down</label><input id="ln" type="number" step="0.1" inputmode="decimal"></div>
+    </div>
+    <div class="field"><label for="hc" data-en="Head circumference (cm), under 2 years" data-hi="सिर का घेरा (cm), 2 साल से कम">Head circumference (cm), under 2 years</label><input id="hc" type="number" step="0.1" inputmode="decimal"></div>
+    <div id="growthResult"></div>
+    <p class="note" data-en="Typical ranges are shown for guidance only. The full WHO growth check comes in the next stage." data-hi="सामान्य सीमा केवल मार्गदर्शन के लिए है। पूरी WHO विकास जाँच अगले चरण में आएगी।">Typical ranges are shown for guidance only. The full WHO growth check comes in the next stage.</p>
+  </div>
+
+  <!-- 2. Milestones -->
+  <div class="card" id="sec-milestones">
+    <h2><span class="dot" style="background:var(--grape)"></span><span data-en="2. Milestones" data-hi="2. विकास के पड़ाव">2. Milestones</span></h2>
+    <div id="milestones"></div>
+    <p class="note" data-en="Children grow at their own pace. Use this as a guide, not a test." data-hi="हर बच्चा अपनी गति से बढ़ता है। इसे केवल मार्गदर्शन समझें, परीक्षा नहीं।">Children grow at their own pace. Use this as a guide, not a test.</p>
+  </div>
+
+  <!-- 3. Food -->
+  <div class="card" id="sec-food">
+    <h2><span class="dot" style="background:var(--teal)"></span><span data-en="3. Food" data-hi="3. आहार">3. Food</span></h2>
+    <div id="food"></div>
+    <div class="links"><a class="btn alt" id="foodLink" href="baby-diet-planner.html?age=y1" data-en="Full food guide for this age" data-hi="इस उम्र का पूरा आहार मार्गदर्शन">Full food guide for this age</a></div>
+  </div>
+
+  <!-- 4. Vaccines -->
+  <div class="card" id="sec-vaccines">
+    <h2><span class="dot" style="background:var(--pink)"></span><span data-en="4. Vaccines" data-hi="4. टीके">4. Vaccines</span></h2>
+    <div id="vaccines"></div>
+    <div class="links"><a class="btn ghost" href="iap-immunization-schedule.html" data-en="Full vaccine schedule" data-hi="पूरा टीका कैलेंडर">Full vaccine schedule</a></div>
+  </div>
+
+  <!-- 5. Potty -->
+  <div class="card" id="sec-potty">
+    <h2><span class="dot" style="background:var(--turmeric)"></span><span data-en="5. Potty training" data-hi="5. पॉटी ट्रेनिंग">5. Potty training</span></h2>
+    <p data-en="Potty training usually starts when your child shows readiness signs, often between 18 and 30 months. Please do not force it." data-hi="पॉटी ट्रेनिंग आमतौर पर तब शुरू होती है जब बच्चा तैयारी के संकेत दिखाए, अक्सर 18 से 30 माह के बीच। ज़बरदस्ती न करें।">Potty training usually starts when your child shows readiness signs, often between 18 and 30 months. Please do not force it.</p>
+    <div class="links"><a class="btn" href="parent-tools/golu-game.html" data-en="Potty guide and Golu game" data-hi="पॉटी गाइड और गोलू गेम">Potty guide and Golu game</a></div>
+  </div>
+
+  <!-- 6. Screening -->
+  <div class="card" id="sec-screening">
+    <h2><span class="dot" style="background:var(--green)"></span><span data-en="6. Development screening" data-hi="6. विकास की स्क्रीनिंग">6. Development screening</span></h2>
+    <div id="screening"></div>
+  </div>
+
+  <!-- 7. When to see the doctor -->
+  <div class="card" id="sec-care">
+    <h2><span class="dot" style="background:var(--indigo)"></span><span data-en="7. Safety and daily care" data-hi="7. सुरक्षा और दैनिक देखभाल">7. Safety and daily care</span></h2>
+    <div id="care"></div>
+    <h2 style="margin-top:14px"><span class="dot" style="background:var(--pink)"></span><span data-en="Come to the clinic if" data-hi="क्लिनिक आएं यदि">Come to the clinic if</span></h2>
+    <ul id="redFlags"></ul>
+    <div class="links" style="margin-top:12px"><a class="btn" href="book.html" data-en="Book a visit" data-hi="मिलने का समय बुक करें">Book a visit</a> <button class="btn ghost noprint" type="button" onclick="window.print()" data-en="Print this summary" data-hi="यह सारांश प्रिंट करें">Print this summary</button></div>
+  </div>
+
+  <div class="please">
+    <strong data-en="Please read:" data-hi="कृपया पढ़ें:">Please read:</strong>
+    <span data-en="This is educational information. Most babies follow these patterns, but your baby may differ. If you are worried, please seek medical care. This page is not a substitute for a consultation with a doctor." data-hi="यह शैक्षणिक जानकारी है। अधिकतर शिशु इन्हीं पैटर्न का पालन करते हैं, पर आपका शिशु अलग हो सकता है। चिंता हो तो चिकित्सकीय सहायता लें। यह पेज डॉक्टर से परामर्श का विकल्प नहीं है।">This is educational information. Most babies follow these patterns, but your baby may differ. If you are worried, please seek medical care. This page is not a substitute for a consultation with a doctor.</span>
+  </div>
+</div>
+
+<footer>
+  Dr. Dinesh Mittal, MBBS, DCH · Delhi Medical Council Reg. No. DMC/R/00668 · www.drdineshmittal.com
+</footer>
+
+<script>
+// TDSC milestones for 18 months (copied from data.js, which is truncated)
+var milestoneDatabase = {
+  "18m": {
+    name: { en: "18 Months (1.5 Years - TDSC)", hi: "18 माह (1.5 वर्ष - TDSC)" },
+    iap: {
+      boy: { minW: 8.8, maxW: 13.3, minH: 76.5, maxH: 86.5 },
+      girl: { minW: 8.1, maxW: 12.8, minH: 74.5, maxH: 85.0 }
+    },
+    green: {
+      en: ["Walks steadily without support and climbs steps with help", "Builds tower of 3 cubes", "Vocabulary of 6 to 10 clear words", "Drinks from an open cup and feeds self with spoon"],
+      hi: ["बिना सहारे चलना व सहारे से सीढ़ियां चढ़ना", "3 ब्लॉक्स की मीनार बनाना", "6 से 10 साफ शब्द बोलना", "कप से पानी पीना व चम्मच से खाना"]
+    },
+    yellow: {
+      en: ["Mild temper tantrums during frustration (normal toddler behavior)"],
+      hi: ["हल्की जिद्द या नखरे दिखाना"]
+    },
+    red: {
+      en: ["Not walking independently by 18 months", "Speaks fewer than 4 consistent words", "Does not imitate household actions or point to objects"],
+      hi: ["18 माह तक स्वतंत्र रूप से न चल पाना", "4 से कम शब्द बोलना", "नकल न करना या इशारा न करना"]
+    },
+    parentTips: {
+      nutrition: { en: "3 main meals + 2 healthy fruit/curd snacks.", hi: "3 मुख्य भोजन व 2 पौष्टिक नाश्ते।" },
+      safety: { en: "Store cleaning chemicals and medicines strictly locked away.", hi: "दवाएं व फिनाइल ऊंचे लॉकर में रखें।" },
+      play: { en: "Name body parts and familiar animals. Zero mobile screen time.", hi: "स्क्रीन से दूर रखें; बातें करें।" },
+      care: { en: "DTP booster, Hib booster, and IPV booster at 16-18 months.", hi: "डीटीपी व हिब का पहला बूस्टर डोज।" }
+    }
+  }
+};
+</script>
+<script>
+(function(){
+  // ---- Language ----
+  var lang = localStorage.getItem("preferredClinicLang") || "en";
+  function applyLang(){
+    document.documentElement.lang = lang;
+    document.querySelectorAll("[data-en]").forEach(function(el){
+      el.textContent = el.getAttribute("data-" + lang) || el.getAttribute("data-en");
+    });
+    document.getElementById("langBtn").textContent = lang === "en" ? "हिन्दी" : "English";
+    render();
+  }
+  document.getElementById("langBtn").onclick = function(){
+    lang = lang === "en" ? "hi" : "en";
+    localStorage.setItem("preferredClinicLang", lang);
+    applyLang();
+  };
+
+  // ---- Ages ----
+  var AGES = [
+    {k:"0m",en:"Newborn",hi:"नवजात",m:0,live:false},{k:"3m",en:"3 months",hi:"3 माह",m:3,live:false},
+    {k:"6m",en:"6 months",hi:"6 माह",m:6,live:false},{k:"9m",en:"9 months",hi:"9 माह",m:9,live:false},
+    {k:"12m",en:"12 months",hi:"12 माह",m:12,live:false},{k:"18m",en:"18 months",hi:"18 माह",m:18,live:true},
+    {k:"24m",en:"2 years",hi:"2 वर्ष",m:24,live:false},{k:"3y",en:"3 years",hi:"3 वर्ष",m:36,live:false}
+  ];
+  var current = "18m";
+
+  // ---- Content for live ages (pilot: 18 months) ----
+  // Milestones come from data.js (TDSC). Vaccines follow iap-immunization-schedule.html.
+  var VAX = {
+    "18m": {
+      now: [{en:"DTwP/DTaP booster 1, IPV booster, Hib booster",hi:"DTwP/DTaP बूस्टर 1, IPV बूस्टर, Hib बूस्टर",when:{en:"16–18 months",hi:"16–18 माह"}},{en:"Meningococcal ACWY, if not given earlier: 2 doses at least 3 months apart before 2 years, or 1 dose from 2 years",hi:"मेनिंगोकोकल ACWY, यदि पहले न लगा हो: 2 खुराक कम से कम 3 माह के अंतर से 2 वर्ष से पहले, या 2 वर्ष से एक खुराक",when:{en:"catch-up",hi:"छूटा हो तो"}}],
+      soon: [],
+      check: {en:"If any earlier dose was missed, please check with the clinic. Do not give extra doses without asking.",hi:"यदि कोई पिछली खुराक छूट गई हो, तो क्लिनिक से पूछें। बिना पूछे अतिरिक्त खुराक न दें।"}
+    }
+  };
+  var FOOD = {
+    "18m": {
+      en:["3 main meals and 2 healthy snacks (fruit or curd)","Family food, mashed or soft, with less salt and no added sugar","Milk about 400 ml a day, including dahi and paneer","Whole fruit instead of juice"],
+      hi:["3 मुख्य भोजन और 2 पौष्टिक नाश्ते (फल या दही)","घर का खाना, मसला या नरम, कम नमक और बिना चीनी","दूध लगभग 400 ml रोज़, दही व पनीर सहित","जूस की जगह साबुत फल"]
+    }
+  };
+  var CARE = {
+    "18m": {
+      en:["Keep medicines, cleaning liquids and phenyl locked high away","Supervise near water buckets and kitchen surfaces","Name body parts and familiar animals; keep screen time at zero","Walk, climb and play outdoors daily"],
+      hi:["दवाएं, सफाई के तरल और फिनाइल ऊंची अलमारी में बंद रखें","पानी की बाल्टी व रसोई से दूर निगरानी रखें","शरीर के अंग व जाने-पहचाने जानवरों के नाम सिखाएं; स्क्रीन समय शून्य रखें","रोज़ बाहर चलें, चढ़ें और खेलें"]
+    }
+  };
+  var FLAGS = {
+    "18m": {
+      en:["Not walking on their own by 18 months","Fewer than 4 clear words, or words are going away","Does not copy simple actions or point to things","Any loss of skills they once had"],
+      hi:["18 माह तक अपने आप न चलना","4 से कम साफ शब्द, या बोले हुए शब्द कम होना","सरल काम की नकल न करना या चीज़ों की ओर इशारा न करना","पहले सीखी हुई कोई भी क्षमता खोना"]
+    }
+  };
+  var SCREEN = {
+    "18m": {
+      en:"The M-CHAT autism screen is recommended at 18 and 24 months for every child. It will be added to this page after the content is approved.",
+      hi:"M-CHAT ऑटिज़्म स्क्रीन हर बच्चे के लिए 18 और 24 माह पर सुझाई जाती है। सामग्री स्वीकृत होने के बाद यह इस पेज पर जोड़ी जाएगी।"
+    }
+  };
+
+  function t(obj){ return (obj && obj[lang]) || (obj && obj.en) || ""; }
+  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
+  function list(arr){ return "<ul>" + arr.map(function(x){return "<li>"+esc(x)+"</li>";}).join("") + "</ul>"; }
+
+  // ---- Age buttons ----
+  function renderAges(){
+    var box = document.getElementById("ageButtons");
+    box.innerHTML = AGES.map(function(a){
+      var label = lang === "en" ? a.en : a.hi;
+      return '<button type="button" class="age' + (a.live?'':' soon') + '" aria-pressed="' + (a.k===current) + '" data-k="' + a.k + '">' + esc(label) + (a.live?'':(lang==="en"?' (soon)':' (जल्द)')) + '</button>';
+    }).join("");
+    box.querySelectorAll(".age").forEach(function(b){
+      b.onclick = function(){ setAge(b.getAttribute("data-k")); };
+    });
+  }
+  function setAge(k){
+    current = k;
+    document.getElementById("dob").value = "";
+    document.getElementById("ageNotice").hidden = true;
+    renderAges(); render();
+  }
+
+  // ---- Date of birth -> nearest age ----
+  document.getElementById("dob").onchange = function(){
+    var v = this.value; if(!v) return;
+    var b = new Date(v), now = new Date();
+    if (isNaN(b) || b > now) {
+      notice(lang==="en" ? "Please check the date of birth." : "कृपया जन्म तिथि जाँचें।");
+      return;
+    }
+    var months = (now.getFullYear()-b.getFullYear())*12 + (now.getMonth()-b.getMonth());
+    if (now.getDate() < b.getDate()) months--;
+    var best = AGES[0];
+    AGES.forEach(function(a){ if (Math.abs(a.m-months) < Math.abs(best.m-months)) best = a; });
+    current = best.k;
+    if (best.live) {
+      notice(lang==="en" ? "Your child is about " + months + " months old." : "आपका बच्चा लगभग " + months + " माह का है।");
+    } else {
+      notice(lang==="en" ? "Your child is about " + months + " months old. The page for this age is coming soon. If your child is 18 months, please choose 18 months above." : "आपका बच्चा लगभग " + months + " माह का है। इस उम्र का पेज जल्द आएगा। यदि बच्चा 18 माह का है, तो ऊपर 18 माह चुनें।");
+    }
+    renderAges(); render();
+  };
+  function notice(msg){ var n=document.getElementById("ageNotice"); n.textContent=msg; n.hidden=false; }
+
+  // ---- Growth (typical ranges from data.js, guidance only) ----
+  function growthCheck(){
+    var out = document.getElementById("growthResult");
+    var wt = parseFloat(document.getElementById("wt").value);
+    var ln = parseFloat(document.getElementById("ln").value);
+    var db = (typeof milestoneDatabase !== "undefined" && milestoneDatabase[current]) || null;
+    if (!db || !db.iap) { out.innerHTML = ""; return; }
+    var ref = db.iap.boy; // pilot: boy reference; sex selector comes in next stage
+    var html = "";
+    var lo = lang==="en";
+    if (!isNaN(wt) && wt > 0) {
+      if (wt < ref.minW) html += flag("y", lo ? "Weight is below the typical range ("+ref.minW+"–"+ref.maxW+" kg). Please discuss at your next visit." : "वज़न सामान्य सीमा ("+ref.minW+"–"+ref.maxW+" kg) से कम है। अगली बार डॉक्टर से बात करें।");
+      else if (wt > ref.maxW) html += flag("y", lo ? "Weight is above the typical range ("+ref.minW+"–"+ref.maxW+" kg). Please discuss at your next visit." : "वज़न सामान्य सीमा ("+ref.minW+"–"+ref.maxW+" kg) से अधिक है। अगली बार डॉक्टर से बात करें।");
+      else html += flag("g", lo ? "Weight is within the typical range ("+ref.minW+"–"+ref.maxW+" kg)." : "वज़न सामान्य सीमा ("+ref.minW+"–"+ref.maxW+" kg) में है।");
+    }
+    if (!isNaN(ln) && ln > 0) {
+      if (ln < ref.minH) html += flag("y", lo ? "Length is below the typical range ("+ref.minH+"–"+ref.maxH+" cm). Please discuss at your next visit." : "लंबाई सामान्य सीमा ("+ref.minH+"–"+ref.maxH+" cm) से कम है। अगली बार डॉक्टर से बात करें।");
+      else if (ln > ref.maxH) html += flag("y", lo ? "Length is above the typical range ("+ref.minH+"–"+ref.maxH+" cm). Please discuss at your next visit." : "लंबाई सामान्य सीमा ("+ref.minH+"–"+ref.maxH+" cm) से अधिक है। अगली बार डॉक्टर से बात करें।");
+      else html += flag("g", lo ? "Length is within the typical range ("+ref.minH+"–"+ref.maxH+" cm)." : "लंबाई सामान्य सीमा ("+ref.minH+"–"+ref.maxH+" cm) में है।");
+    }
+    out.innerHTML = html;
+  }
+  function flag(c, msg){ return '<div class="flag '+c+'">'+esc(msg)+'</div>'; }
+  ["wt","ln","hc"].forEach(function(id){ document.getElementById(id).oninput = growthCheck; });
+
+  // ---- Milestones (TDSC, from data.js) ----
+  function milestones(){
+    var db = (typeof milestoneDatabase !== "undefined" && milestoneDatabase[current]) || null;
+    if (!db) return '<div class="flag n">'+(lang==="en"?"Coming soon for this age.":"इस उम्र की जानकारी जल्द आएगी।")+'</div>';
+    var L = lang==="en"?"en":"hi";
+    var h = "";
+    h += '<div class="flag g"><strong>'+(lang==="en"?"Most children can do by now:":"अधिकतर बच्चे अब तक कर पाते हैं:")+'</strong>'+list(db.green[L])+'</div>';
+    h += '<div class="flag y"><strong>'+(lang==="en"?"Keep an eye on:":"ध्यान रखें:")+'</strong>'+list(db.yellow[L])+'</div>';
+    h += '<div class="flag r"><strong>'+(lang==="en"?"Talk to the doctor if:":"डॉक्टर से बात करें यदि:")+'</strong>'+list(db.red[L])+'</div>';
+    return h;
+  }
+
+  function vaccines(){
+    var v = VAX[current]; if (!v) return "";
+    var h = '<div class="flag g"><strong>'+(lang==="en"?"Due now:":"अभी लगने वाले:")+'</strong><ul>';
+    v.now.forEach(function(x){ h += '<li>'+esc(t(x))+' <span class="note">('+esc(t(x.when))+')</span></li>'; });
+    h += '</ul></div>';
+    h += '<div class="flag y"><strong>'+(lang==="en"?"Coming up:":"आगे आने वाले:")+'</strong><ul>';
+    if (v.soon.length) { v.soon.forEach(function(x){ h += '<li>'+esc(t(x))+' <span class="note">('+esc(t(x.when))+')</span></li>'; }); }
+    else { h += '<li>'+(lang==="en"?"No new vaccines in the next 3 months.":"अगले 3 माह में कोई नया टीका नहीं।")+'</li>'; }
+    h += '</ul></div>';
+    h += '<p class="note">'+esc(t(v.check))+'</p>';
+    return h;
+  }
+
+  function render(){
+    document.getElementById("title").textContent = (lang==="en" ? "My child's age: " : "मेरे बच्चे की उम्र: ") + (AGES.filter(function(a){return a.k===current;})[0] ? (lang==="en"?AGES.filter(function(a){return a.k===current;})[0].en:AGES.filter(function(a){return a.k===current;})[0].hi) : "");
+    document.getElementById("milestones").innerHTML = milestones();
+    document.getElementById("food").innerHTML = FOOD[current] ? list(FOOD[current][lang==="en"?"en":"hi"]) : "";
+    document.getElementById("vaccines").innerHTML = vaccines();
+    document.getElementById("screening").innerHTML = '<p>'+esc(t(SCREEN[current]||{en:"Coming soon for this age.",hi:"इस उम्र की जानकारी जल्द आएगी।"}))+'</p>';
+    document.getElementById("care").innerHTML = CARE[current] ? list(CARE[current][lang==="en"?"en":"hi"]) : "";
+    document.getElementById("redFlags").innerHTML = FLAGS[current] ? FLAGS[current][lang==="en"?"en":"hi"].map(function(x){return "<li>"+esc(x)+"</li>";}).join("") : "";
+    var foodLink = document.getElementById("foodLink");
+    foodLink.textContent = t({en:"Full food guide for this age",hi:"इस उम्र का पूरा आहार मार्गदर्शन"});
+    foodLink.hidden = !FOOD[current];
+    growthCheck();
+  }
+
+  renderAges();
+  applyLang();
+})();
+</script>
+<script src="site-nav.js"></script>
+</body>
+</html>
