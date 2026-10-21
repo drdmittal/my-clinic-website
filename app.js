@@ -16,7 +16,7 @@ window.siteTranslations = {
 
     hero_badge: "Child Specialist & Pediatrician",
     hero_heading: "Compassionate Healthcare For Your Little Ones",
-    hero_sub: "Specialized newborn care, WHO/IAP vaccination schedules, and growth & development monitoring in Sector 3 Rohini, Delhi.",
+    hero_sub: "Newborn care, WHO/IAP vaccination schedules, and growth & development monitoring in Sector 3 Rohini, Delhi.",
     hero_exp: "25+ Yrs Clinical Practice",
 
     sec_clinical_care: "Clinical Care",
@@ -93,7 +93,7 @@ window.siteTranslations = {
     hero_badge: "शिशु एवं बाल रोग विशेषज्ञ",
     hero_heading: "आपके बच्चों के लिए समर्पित एवं अनुभवी बाल चिकित्सा",
     hero_sub: "नवजात शिशु देखभाल, WHO/IAP टीकाकरण, एवं शारीरिक व मानसिक विकास मूल्यांकन — सेक्टर 3 रोहिणी, दिल्ली।",
-    hero_exp: "25+ वर्षों का नैदानिक अनुभव",
+    hero_exp: "25+ वर्षों का अनुभव",
 
     sec_clinical_care: "बाल स्वास्थ्य सेवाएं",
     sec_services_title: "प्रमुख चिकित्सा सेवाएं",
