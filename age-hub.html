@@ -148,28 +148,18 @@
 // TDSC milestones for 18 months (copied from data.js, which is truncated)
 var milestoneDatabase = {
   "18m": {
-    name: { en: "18 Months (1.5 Years - TDSC)", hi: "18 माह (1.5 वर्ष - TDSC)" },
-    iap: {
-      boy: { minW: 8.8, maxW: 13.3, minH: 76.5, maxH: 86.5 },
-      girl: { minW: 8.1, maxW: 12.8, minH: 74.5, maxH: 85.0 }
-    },
+    name: { en: "18 Months", hi: "18 माह" },
     green: {
-      en: ["Walks steadily without support and climbs steps with help", "Builds tower of 3 cubes", "Vocabulary of 6 to 10 clear words", "Drinks from an open cup and feeds self with spoon"],
-      hi: ["बिना सहारे चलना व सहारे से सीढ़ियां चढ़ना", "3 ब्लॉक्स की मीनार बनाना", "6 से 10 साफ शब्द बोलना", "कप से पानी पीना व चम्मच से खाना"]
+      en: ["Walks alone", "Says two words", "Throws a ball", "Walks backwards", "Walks upstairs with help", "Points to 3 parts of a doll"],
+      hi: ["अकेले चलना", "दो शब्द बोलना", "गेंद फेंकना", "पीछे की ओर चलना", "सहारे से सीढ़ियां चढ़ना", "गुड़िया के 3 अंग दिखाना"]
     },
     yellow: {
-      en: ["Mild temper tantrums during frustration (normal toddler behavior)"],
-      hi: ["हल्की जिद्द या नखरे दिखाना"]
+      en: ["Removes garments", "Uses words for personal needs"],
+      hi: ["कपड़े उतारना", "अपनी ज़रूरत के लिए शब्द बोलना"]
     },
     red: {
-      en: ["Not walking independently by 18 months", "Speaks fewer than 4 consistent words", "Does not imitate household actions or point to objects"],
-      hi: ["18 माह तक स्वतंत्र रूप से न चल पाना", "4 से कम शब्द बोलना", "नकल न करना या इशारा न करना"]
-    },
-    parentTips: {
-      nutrition: { en: "3 main meals + 2 healthy fruit/curd snacks.", hi: "3 मुख्य भोजन व 2 पौष्टिक नाश्ते।" },
-      safety: { en: "Store cleaning chemicals and medicines strictly locked away.", hi: "दवाएं व फिनाइल ऊंचे लॉकर में रखें।" },
-      play: { en: "Name body parts and familiar animals. Zero mobile screen time.", hi: "स्क्रीन से दूर रखें; बातें करें।" },
-      care: { en: "DTP booster, Hib booster, and IPV booster at 16-18 months.", hi: "डीटीपी व हिब का पहला बूस्टर डोज।" }
+      en: ["Social smile", "Follows a pen or pencil with eyes", "Holds head steady", "Rolls from back to stomach", "Turns head to a sound (bell or rattle)", "Passes objects from hand to hand", "Raises self to sitting", "Stands up holding furniture", "Picks up small objects with thumb and finger", "Claps (pat-a-cake)"],
+      hi: ["सामाजिक मुस्कान", "पेन या पेंसिल को आँखों से देखना", "सिर स्थिर रखना", "पीठ से पेट के बल पलटना", "घंटी या झुनझुने की आवाज़ की ओर सिर घुमाना", "एक हाथ से दूसरे हाथ में चीज़ देना", "सहारे से बैठना", "फर्नीचर पकड़कर खड़ा होना", "अंगूठे और उंगली से छोटी चीज़ उठाना", "ताली बजाना"]
     }
   }
 };
@@ -269,6 +259,8 @@ var milestoneDatabase = {
     if (now.getDate() < b.getDate()) months--;
     var best = AGES[0];
     AGES.forEach(function(a){ if (Math.abs(a.m-months) < Math.abs(best.m-months)) best = a; });
+    // Ages 18 to 20 months use the 18-month page: where the red-flag rule is unclear, the earlier, safer check applies.
+    if (months >= 18 && months <= 20) best = AGES.filter(function(a){ return a.k === "18m"; })[0];
     current = best.k;
     if (best.live) {
       notice(lang==="en" ? "Your child is about " + months + " months old." : "आपका बच्चा लगभग " + months + " माह का है।");
@@ -311,8 +303,9 @@ var milestoneDatabase = {
     var L = lang==="en"?"en":"hi";
     var h = "";
     h += '<div class="flag g"><strong>'+(lang==="en"?"Most children can do by now:":"अधिकतर बच्चे अब तक कर पाते हैं:")+'</strong>'+list(db.green[L])+'</div>';
-    h += '<div class="flag y"><strong>'+(lang==="en"?"Keep an eye on:":"ध्यान रखें:")+'</strong>'+list(db.yellow[L])+'</div>';
-    h += '<div class="flag r"><strong>'+(lang==="en"?"Talk to the doctor if:":"डॉक्टर से बात करें यदि:")+'</strong>'+list(db.red[L])+'</div>';
+    h += '<div class="flag y"><strong>'+(lang==="en"?"Coming up soon:":"जल्द आने वाले:")+'</strong>'+list(db.yellow[L])+'</div>';
+    h += '<div class="flag r"><strong>'+(lang==="en"?"Talk to the doctor if your child is not yet doing these (they should be):":"यदि बच्चा ये काम अभी तक नहीं कर रहा (उसे अब तक करना चाहिए), तो डॉक्टर से बात करें:")+'</strong>'+list(db.red[L])+'</div>';
+    h += '<p class="note">'+(lang==="en"?"Based on the TDSC developmental chart. Red-flag items are skills most children have reached before this age.":"यह TDSC विकास चार्ट पर आधारित है। लाल संकेत वे कौशल हैं जो अधिकतर बच्चे इस उम्र से पहले सीख लेते हैं।")+'</p>';
     return h;
   }
 
