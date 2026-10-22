@@ -149,6 +149,7 @@ button:focus-visible{outline:4px solid var(--ink);outline-offset:3px}
   <div class="top">
     <button type="button" class="back" id="backBtn" hidden>← <span data-t="home"></span></button>
     <div class="bank" id="bankBox" aria-label="Stars"><span class="st">⭐</span><span id="bank">0</span></div>
+    <button type="button" class="back" id="charBtn" data-charopen="1" aria-label="Change buddy" style="white-space:nowrap"></button>
     <button type="button" class="back" id="musicBtn" data-music="1" aria-pressed="true" aria-label="Music on">🎵</button>
     <div class="lang" role="group" aria-label="Language">
       <button type="button" data-lang="hi" aria-pressed="false">हिं</button>
@@ -187,6 +188,7 @@ button:focus-visible{outline:4px solid var(--ink);outline-offset:3px}
   <section class="screen" id="s-brush" hidden></section>
   <section class="screen" id="s-safe" hidden></section>
   <section class="screen" id="s-behave" hidden></section>
+  <section class="screen" id="s-char" hidden></section>
 </div>
 
 <script>
@@ -195,7 +197,7 @@ var T = {
   home:{en:'Home',hi:'होम'},
   title:{en:'Healthy Games for Kids',hi:'बच्चों के सेहतमंद खेल'},
   plateGame:{en:'Balanced Plate',hi:'संतुलित थाली'},
-  plateGameSub:{en:'Build a healthy plate for Golu',hi:'गोलू के लिए सही थाली बनाओ'},
+  plateGameSub:{en:'Build a healthy plate for {N}',hi:'{N} के लिए सही थाली बनाओ'},
   screenGame:{en:'Screen Time Traffic Light',hi:'स्क्रीन टाइम ट्रैफिक लाइट'},
   screenGameSub:{en:'Green, yellow or red? You decide!',hi:'हरा, पीला या लाल? फैसला तुम करो!'},
   brushGame:{en:'Brush Like a Hero',hi:'हीरो की तरह ब्रश करो'},
@@ -204,27 +206,29 @@ var T = {
   safeGameSub:{en:'Stay safe, say no, tell a grown-up',hi:'सुरक्षित रहो, ना कहो, बड़ों को बताओ'},
   behaveGame:{en:'Good or Not Good?',hi:'अच्छा या अच्छा नहीं?'},
   behaveGameSub:{en:'Kind words and good manners',hi:'प्यारे शब्द और अच्छे व्यवहार'},
-  plateAsk:{en:'Tap the foods to put on Golu\'s plate',hi:'गोलू की थाली में खाना चुनो'},
+  plateAsk:{en:'Tap the foods to put on {N}\'s plate',hi:'{N} की थाली में खाना चुनो'},
   plateEmpty:{en:'Empty plate',hi:'खाली थाली'},
   plateCheck:{en:'Check my plate',hi:'मेरी थाली जाँचो'},
-  plateGood:{en:'Balanced plate! Golu is happy. +1 star',hi:'संतुलित थाली! गोलू खुश है। +1 स्टार'},
+  plateGood:{en:'Balanced plate! {N} is happy. +1 star',hi:'संतुलित थाली! {N} खुश है। +1 स्टार'},
   plateJunk:{en:'Take away the junk food. It does not go on the plate.',hi:'जंक फूड हटाओ। यह थाली में नहीं जाता।'},
-  plateMissing:{en:'Add the groups still missing below. Golu needs all of them.',hi:'नीचे के छूटे हुए ग्रुप जोड़ो। गोलू को सबकी ज़रूरत है।'},
-  brushDone:{en:'Brushing done! Clean teeth, happy Golu. +1 star',hi:'ब्रश हो गया! साफ़ दाँत, खुश गोलू। +1 स्टार'},
+  plateMissing:{en:'Add the groups still missing below. {N} needs all of them.',hi:'नीचे के छूटे हुए ग्रुप जोड़ो। {N} को सबकी ज़रूरत है।'},
+  brushDone:{en:'Brushing done! Clean teeth, happy {N}. +1 star',hi:'ब्रश हो गया! साफ़ दाँत, खुश {N}। +1 स्टार'},
   brushParent:{en:'Parents: help your child brush until about 7–8 years, and check the back teeth.',hi:'माता-पिता: 7–8 साल तक बच्चे के साथ ब्रश करवाएँ और पीछे के दाँत ज़रूर देखें।'},
   screenAsk:{en:'Which colour is this?',hi:'यह कौन सा रंग है?'},
   safeAsk:{en:'Is this safe?',hi:'क्या यह सुरक्षित है?'},
   behaveAsk:{en:'Is this good behaviour?',hi:'क्या यह अच्छा व्यवहार है?'},
   foodGame:{en:'Tummy Food Game',hi:'पेट का खाना गेम'},
-  foodGameSub:{en:'Is it good for Golu? Yes or No!',hi:'गोलू के लिए अच्छा? हाँ या ना!'},
+  foodGameSub:{en:'Is it good for {N}? Yes or No!',hi:'{N} के लिए अच्छा? हाँ या ना!'},
   chart:{en:'Potty Hero Chart',hi:'पॉटी हीरो चार्ट'},
   chartSub:{en:'Do your jobs, win stars every day',hi:'रोज़ काम करो, स्टार जीतो'},
   report:{en:'Poop Report',hi:'पॉटी रिपोर्ट'},
-  reportSub:{en:'Came back from the potty? Tell Golu!',hi:'पॉटी से आए? गोलू को बताओ!'},
+  reportSub:{en:'Came back from the potty? Tell {N}!',hi:'पॉटी से आए? {N} को बताओ!'},
   forParents:{en:'For parents: reward & stool diary',hi:'माता-पिता के लिए: इनाम और पॉटी डायरी'},
-  homeSay:{en:"Hi! I'm Golu. Let's build good habits together!",hi:'नमस्ते! मैं गोलू हूँ। आओ, मिलकर अच्छी आदतें सीखें!'},
+  pickTitle:{en:'Who is your buddy?',hi:'तुम्हारा साथी कौन है?'},
+  pickSub:{en:'Your child can have a boy or a girl buddy. You can change it any time.',hi:'बच्चे का साथी लड़का या लड़की चुनें। आप इसे कभी भी बदल सकते हैं।'},
+  homeSay:{en:"Hi! I'm {N}. Let's build good habits together!",hi:'नमस्ते! मैं {N} हूँ। आओ, मिलकर अच्छी आदतें सीखें!'},
   homeSayStars:{en:'Wow, {n} stars! You are a superstar!',hi:'वाह, {n} स्टार! तुम सुपरस्टार हो!'},
-  ask:{en:'Is this good for Golu?',hi:'क्या यह गोलू के लिए अच्छा है?'},
+  ask:{en:'Is this good for {N}?',hi:'क्या यह {N} के लिए अच्छा है?'},
   yes:{en:'Yes',hi:'हाँ'}, no:{en:'No',hi:'ना'},
   right:{en:'Correct! +1 star',hi:'सही! +1 स्टार'}, wrong:{en:'Oops! Not this one',hi:'ओह! यह नहीं'},
   next:{en:'Next',hi:'अगला'},
@@ -245,7 +249,7 @@ var T = {
   repAgain:{en:'Done',hi:'हो गया'},
   repToday:{en:'Today',hi:'आज'}
 };
-var GOODWHY = {en:'Yes! This makes poop soft and easy for Golu.',hi:'हाँ! इससे पॉटी नरम और आसान होती है।'};
+var GOODWHY = {en:'Yes! This makes poop soft and easy for {N}.',hi:'हाँ! इससे पॉटी नरम और आसान होती है।'};
 var FOODS = [
   {p:'🍌',en:'Ripe banana',hi:'पका केला',g:1},
   {p:'🍎',en:'Apple',hi:'सेब',g:1},
@@ -261,15 +265,15 @@ var FOODS = [
   {p:'🫓',en:'Atta roti',hi:'आटे की रोटी',g:1},
   {p:'💧',en:'Water',hi:'पानी',g:1,why:{en:'Yes! Water helps poop slide out easily.',hi:'हाँ! पानी से पॉटी आसानी से निकलती है।'}},
   {p:'🍪',en:'Biscuit',hi:'बिस्किट',g:0,why:{en:'Biscuits are made of maida. Poop gets hard and stuck!',hi:'बिस्किट मैदे से बनते हैं। पॉटी सख़्त होकर अटक जाती है!'}},
-  {p:'🍜',en:'Maggi / noodles',hi:'मैगी / नूडल्स',g:0,why:{en:'Noodles are sticky maida. Golu gets a tummy ache!',hi:'नूडल्स चिपचिपा मैदा हैं। गोलू के पेट में दर्द!'}},
+  {p:'🍜',en:'Maggi / noodles',hi:'मैगी / नूडल्स',g:0,why:{en:'Noodles are sticky maida. {N} gets a tummy ache!',hi:'नूडल्स चिपचिपा मैदा हैं। {N} के पेट में दर्द!'}},
   {p:'🍕',en:'Pizza',hi:'पिज़्ज़ा',g:0,why:{en:'Maida and cheese make poop hard.',hi:'मैदा और चीज़ से पॉटी सख़्त होती है।'}},
-  {p:'🍔',en:'Burger',hi:'बर्गर',g:0,why:{en:'White bun is maida. Golu does not like it!',hi:'सफ़ेद बन मैदा है। गोलू को पसंद नहीं!'}},
+  {p:'🍔',en:'Burger',hi:'बर्गर',g:0,why:{en:'White bun is maida. {N} does not like it!',hi:'सफ़ेद बन मैदा है। {N} को पसंद नहीं!'}},
   {p:'🍟',en:'Chips / fries',hi:'चिप्स / फ्राइज़',g:0,why:{en:'Fried and salty. They dry up the poop.',hi:'तले और नमकीन। पॉटी सुखा देते हैं।'}},
   {p:'🍫',en:'Chocolate',hi:'चॉकलेट',g:0,why:{en:'Too much sugar, no fibre. Only a tiny treat sometimes!',hi:'बहुत चीनी, फाइबर नहीं। बस कभी-कभी थोड़ा सा!'}},
   {p:'🍬',en:'Toffee / candy',hi:'टॉफ़ी / कैंडी',g:0,why:{en:'Sugar fills the tummy, no room for good food.',hi:'चीनी से पेट भर जाता है, अच्छे खाने की जगह नहीं।'}},
-  {p:'🥤',en:'Cold drink',hi:'कोल्ड ड्रिंक',g:0,why:{en:'Sugar water. Plain water is Golu’s best friend!',hi:'चीनी वाला पानी। सादा पानी गोलू का सबसे अच्छा दोस्त!'}},
+  {p:'🥤',en:'Cold drink',hi:'कोल्ड ड्रिंक',g:0,why:{en:'Sugar water. Plain water is {N}’s best friend!',hi:'चीनी वाला पानी। सादा पानी {N} का सबसे अच्छा दोस्त!'}},
   {p:'🍦',en:'Ice cream',hi:'आइसक्रीम',g:0,why:{en:'Too much milk and sugar make poop hard.',hi:'ज़्यादा दूध और चीनी से पॉटी सख़्त होती है।'}},
-  {p:'🍰',en:'Cake / pastry',hi:'केक / पेस्ट्री',g:0,why:{en:'Maida plus sugar. Golu feels heavy!',hi:'मैदा और चीनी। गोलू भारी हो जाता है!'}},
+  {p:'🍰',en:'Cake / pastry',hi:'केक / पेस्ट्री',g:0,why:{en:'Maida plus sugar. {N} feels heavy!',hi:'मैदा और चीनी। {N} भारी हो जाता है!'}},
   {p:'🍩',en:'Donut',hi:'डोनट',g:0,why:{en:'Fried maida. Not for a happy tummy.',hi:'तला हुआ मैदा। खुश पेट के लिए नहीं।'}}
 ];
 
@@ -356,25 +360,30 @@ var BRUSH_STEPS = [
 var S = {lang:'hi', bonus:0, days:{}, reward:{text:'', goal:30}, mins:5};
 try{ var sv = JSON.parse(localStorage.getItem('golu-hero')||'null'); if(sv) Object.assign(S, sv); }catch(e){}
 function save(){ try{ localStorage.setItem('golu-hero', JSON.stringify(S)); }catch(e){} }
-function L(o){ return o[S.lang] || o.en; }
+var CHARS = {veer:{en:'Veer',hi:'वीर'}, pari:{en:'Pari',hi:'परी'}};
+function charKey(){ return (S.char && CHARS[S.char]) ? S.char : 'veer'; }
+function charName(){ var c = CHARS[charKey()]; return S.lang==='hi' ? c.hi : c.en; }
+function L(o){ var v = o[S.lang] || o.en; return v.indexOf('{N}')>=0 ? v.split('{N}').join(charName()) : v; }
 function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); }
 function dkey(d){ d = d || new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
 function totalStars(){ return S.bonus; }
 
-function goluSvg(mood, cls){
+function goluSvg(mood, cls, who){
   var mouth = mood==='sad' ? '<path d="M48 92 Q60 80 72 92" stroke="#21304a" stroke-width="5" fill="none" stroke-linecap="round"/>'
     : mood==='wow' ? '<ellipse cx="60" cy="88" rx="9" ry="11" fill="#21304a"/><ellipse cx="60" cy="92" rx="5" ry="5" fill="#ff7b8a"/>'
     : '<path d="M42 80 Q60 102 78 80 Z" fill="#21304a"/><path d="M50 88 Q60 96 70 88 Q60 92 50 88Z" fill="#ff7b8a"/>';
   var eyes = mood==='sad' ? '<path d="M38 60 Q44 56 50 60" stroke="#21304a" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M70 60 Q76 56 82 60" stroke="#21304a" stroke-width="5" fill="none" stroke-linecap="round"/>'
     : '<ellipse cx="44" cy="60" rx="7" ry="9" fill="#21304a"/><ellipse cx="76" cy="60" rx="7" ry="9" fill="#21304a"/><circle cx="46" cy="57" r="2.5" fill="#fff"/><circle cx="78" cy="57" r="2.5" fill="#fff"/>';
-  return '<svg class="golu '+(cls||'')+'" viewBox="0 0 120 120" role="img" aria-label="Golu">'+
+  var isPari = (who||charKey())==='pari';
+  var bow = isPari ? '<path d="M84 24 L100 12 L100 36 Z M84 24 L68 12 L68 36 Z" fill="#ff7b8a"/><circle cx="84" cy="24" r="4" fill="#e2457a"/>' : '';
+  return '<svg class="golu '+(cls||'')+'" viewBox="0 0 120 120" role="img" aria-label="'+esc(who?CHARS[who][S.lang==='hi'?'hi':'en']:charName())+'">'+
     '<ellipse cx="60" cy="112" rx="34" ry="5" fill="rgba(33,48,74,.15)"/>'+
     '<path d="M24 50 Q14 66 26 70" stroke="#e8812a" stroke-width="8" fill="none" stroke-linecap="round"/>'+
     '<path d="M96 50 Q106 66 94 70" stroke="#e8812a" stroke-width="8" fill="none" stroke-linecap="round"/>'+
     '<ellipse cx="60" cy="64" rx="40" ry="44" fill="#ffa94d"/>'+
     '<ellipse cx="60" cy="72" rx="26" ry="24" fill="#ffc285"/>'+
     '<path d="M60 70 q-4 3 0 6 q4 3 0 6" stroke="#e8812a" stroke-width="2.5" fill="none" stroke-linecap="round"/>'+
-    eyes+'<ellipse cx="32" cy="76" rx="7" ry="4.5" fill="#ff7b8a" opacity=".7"/><ellipse cx="88" cy="76" rx="7" ry="4.5" fill="#ff7b8a" opacity=".7"/>'+mouth+
+    bow+eyes+'<ellipse cx="32" cy="76" rx="7" ry="4.5" fill="#ff7b8a" opacity=".7"/><ellipse cx="88" cy="76" rx="7" ry="4.5" fill="#ff7b8a" opacity=".7"/>'+mouth+
     '<path d="M44 108 v6 M76 108 v6" stroke="#e8812a" stroke-width="7" stroke-linecap="round"/></svg>';
 }
 function react(el, mood){ var g = el.querySelector('.golu'); if(!g) return; var cls = mood==='sad'?'shake':'bounce'; g.outerHTML = goluSvg(mood, (g.classList.contains('small')?'small ':'')+cls); }
@@ -430,19 +439,29 @@ function show(name){
   stopTimer();
   current = name;
   musicFor(name); syncMusicBtn();
-  ['home','food','plate','screen','brush','safe','behave'].forEach(function(n){ document.getElementById('s-'+n).hidden = (n!==name); });
+  ['home','food','plate','screen','brush','safe','behave','char'].forEach(function(n){ document.getElementById('s-'+n).hidden = (n!==name); });
   document.getElementById('backBtn').hidden = (name==='home');
   if(name==='home') renderHome();
   if(name==='food') startGame();
   if(name==='plate') plateRender();
   if(name==='brush') brushRender();
+  if(name==='char') renderCharPick();
   if(name==='screen' || name==='safe' || name==='behave') qRender(name);
   window.scrollTo(0,0);
+}
+function syncCharBtn(){ var b = document.getElementById('charBtn'); if(b) b.textContent = '🙂 ' + charName() + ' ▾'; }
+function renderCharPick(){
+  document.getElementById('s-char').innerHTML =
+    '<div class="bubble" style="text-align:center"><b>'+L(T.pickTitle)+'</b><br>'+L(T.pickSub)+'</div>'+
+    '<div class="chips" style="grid-template-columns:1fr 1fr">'+['veer','pari'].map(function(k){
+      return '<button type="button" class="chip" style="flex-direction:column;padding:18px 10px" data-char="'+k+'" aria-pressed="'+(charKey()===k)+'">'+goluSvg('happy','small',k)+'<span>'+esc(S.lang==='hi'?CHARS[k].hi:CHARS[k].en)+'</span></button>';
+    }).join('')+'</div>';
 }
 function applyLang(){
   document.documentElement.lang = S.lang==='hi'?'hi':'en';
   document.querySelectorAll('[data-t]').forEach(function(el){ el.textContent = L(T[el.dataset.t]); });
   document.querySelectorAll('.lang button').forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.lang===S.lang)); });
+  syncCharBtn();
 }
 function renderHome(){
   var n = totalStars();
@@ -590,6 +609,8 @@ function brushNext(){
 document.getElementById('app').addEventListener('click', function(e){
   var b = e.target.closest('button'); if(!b) return;
   if(b.dataset.music !== undefined){ musicToggle(); return; }
+  if(b.dataset.charopen !== undefined){ show('char'); return; }
+  if(b.dataset.char){ S.char = b.dataset.char; save(); syncCharBtn(); show('home'); return; }
   if(b.dataset.lang){ S.lang = b.dataset.lang; save(); applyLang(); show(current==='food'?'home':current); return; }
   if(b.id==='backBtn'){ show('home'); return; }
   if(b.dataset.go){ show(b.dataset.go); return; }
@@ -605,7 +626,7 @@ document.getElementById('app').addEventListener('click', function(e){
   if(b.id==='again'){ startGame(); return; }
 });
 
-applyLang(); updateBank(); show('home');
+applyLang(); updateBank(); show(S.char ? 'home' : 'char');
 })();
 </script>
 <footer style="max-width:560px;margin:8px auto 24px;padding:0 16px;text-align:center;font:13px/1.5 Mukta,system-ui,sans-serif;color:#556175"><b style="display:block;font:800 16px 'Baloo 2',Mukta,sans-serif;color:#1f5fbf">Dr. Dinesh Mittal Child Clinic</b>Dr. Dinesh Mittal, MBBS, DCH · Child Specialist<br>H-34/69, Sector 3, Rohini, Delhi – 110085<br>Phone: <span style="user-select:all;font-weight:700">+91 81305 21456</span><br>Mon–Sat 10:00 AM–1:00 PM &amp; 6:00–8:30 PM · Sun 11:00 AM–12:00 PM<br><a href="https://www.drdineshmittal.com" style="color:#1f5fbf;font-weight:700">www.drdineshmittal.com</a></footer></body></html>
