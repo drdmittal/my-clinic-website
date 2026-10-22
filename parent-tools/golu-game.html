@@ -399,7 +399,7 @@ function updateBank(){ document.getElementById('bank').textContent = totalStars(
 /* ---------- navigation ---------- */
 var current = 'home';
 var MUS = {on:true};
-try{ MUS.on = localStorage.getItem('golu-music') !== 'off'; }catch(e){}
+try{ MUS.on = localStorage.getItem('golu-music-v2') !== 'off'; }catch(e){}
 /* simple original tunes (no recorded music), played with Web Audio after a tap */
 var MTR = {
   plate:[[523,1],[587,1],[659,1],[784,1],[659,1],[587,1],[523,2]],
@@ -422,7 +422,7 @@ function mPlay(name){
 function mStop(){ mGame = null; clearTimeout(mTimer); mTimer = null; }
 function musicFor(name){ mStop(); if(MUS.on && MTR[name]){ mGame = name; mPlay(name); } }
 function syncMusicBtn(){ var b = document.getElementById('musicBtn'); if(!b) return; b.textContent = MUS.on ? '🎵' : '🔇'; b.setAttribute('aria-pressed', String(MUS.on)); b.setAttribute('aria-label', MUS.on ? 'Music on' : 'Music off'); }
-function musicToggle(){ MUS.on = !MUS.on; try{ localStorage.setItem('golu-music', MUS.on ? 'on' : 'off'); }catch(e){} syncMusicBtn(); if(MUS.on) musicFor(current); else mStop(); }
+function musicToggle(){ MUS.on = !MUS.on; try{ localStorage.setItem('golu-music-v2', MUS.on ? 'on' : 'off'); }catch(e){} syncMusicBtn(); if(MUS.on) musicFor(current); else mStop(); }
 document.addEventListener('visibilitychange', function(){ if(document.hidden) mStop(); else if(MUS.on && MTR[current]) musicFor(current); });
 
 function show(name){
