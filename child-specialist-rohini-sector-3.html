@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    
+    
+    
+
+    
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-768Y52R8SC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-768Y52R8SC');
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --brand-primary: #0891b2; --brand-primary-dark: #0e7490; --brand-secondary: #0d9488;
+            --brand-accent: #f59e0b; --brand-accent-dark: #d97706; --dark-text: #0f172a; --muted-text: #64748b;
+            --card-shadow: 0 12px 32px -4px rgba(8, 145, 178, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', 'Noto Sans Devanagari', sans-serif; }
+        body { color: var(--dark-text); background-color: #f8fafc; line-height: 1.7; padding-bottom: 75px; -webkit-tap-highlight-color: transparent; }
+
+        header {
+            position: sticky; top: 0; background: rgba(255, 255, 255, 0.94); z-index: 1000;
+            backdrop-filter: blur(14px); padding: 12px 5%; display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+        }
+        .logo { font-family: 'Fredoka', cursive; font-size: 1.35rem; font-weight: 600; color: var(--brand-primary-dark); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+        .logo i { color: var(--brand-accent); font-size: 1.35rem; }
+
+        .lang-switch-btn {
+            background: #f0fdfa; border: 1.5px solid #99f6e4; color: #0f766e;
+            padding: 6px 14px; border-radius: 20px; font-size: 0.84rem; font-weight: 800;
+            cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s;
+        }
+        .lang-switch-btn:hover { background: #ccfbf1; transform: scale(1.04); }
+
+        .article-container { max-width: 860px; margin: 30px auto; padding: 0 16px; }
+        .article-card { background: #ffffff; border-radius: 26px; padding: 34px 28px; box-shadow: var(--card-shadow); border: 1px solid #e2e8f0; }
+
+        .breadcrumbs { font-size: 0.82rem; color: #64748b; margin-bottom: 14px; }
+        .breadcrumbs a { color: var(--brand-primary); text-decoration: none; font-weight: 600; }
+
+        .article-title { font-family: 'Fredoka', cursive; font-size: 1.95rem; color: #083344; line-height: 1.3; margin-bottom: 14px; }
+        .author-meta-bar { display: flex; align-items: center; gap: 12px; padding: 12px 0 16px; border-bottom: 1px solid #f1f5f9; margin-bottom: 22px; font-size: 0.84rem; color: var(--muted-text); }
+        .author-img { width: 46px; height: 46px; border-radius: 50%; object-fit: cover; border: 2px solid #bae6fd; }
+        .article-featured-img { width: 100%; max-height: 380px; object-fit: cover; border-radius: 18px; margin-bottom: 24px; }
+
+        h2 { font-family: 'Fredoka', cursive; font-size: 1.4rem; color: #083344; margin: 32px 0 12px; border-bottom: 2px solid #f1f5f9; padding-bottom: 6px; }
+        h3 { font-size: 1.08rem; color: #0e7490; margin: 20px 0 8px; font-weight: 700; }
+        p { font-size: 0.95rem; color: #334155; margin-bottom: 16px; line-height: 1.75; }
+        ul, ol { padding-left: 22px; margin-bottom: 18px; font-size: 0.94rem; color: #334155; line-height: 1.7; }
+        li { margin-bottom: 10px; }
+
+        .danger-alert-box { background: #fef2f2; border: 1.5px solid #fca5a5; border-radius: 16px; padding: 20px 22px; margin: 26px 0; }
+        .danger-alert-box h3 { color: #991b1b; margin-top: 0; font-size: 1.15rem; display: flex; align-items: center; gap: 8px; }
+        .danger-alert-box ul { color: #7f1d1d; margin-bottom: 0; }
+
+        .info-highlight-box { background: #f0fdfa; border-left: 4px solid var(--brand-secondary); border-radius: 12px; padding: 18px 20px; margin: 24px 0; font-size: 0.93rem; color: #134e4a; }
+        .doctor-cta-box { background: linear-gradient(135deg, #f0fdfa 0%, #e0f2fe 100%); border: 2px solid #bae6fd; border-radius: 20px; padding: 24px; text-align: center; margin-top: 32px; }
+        .hero-cta-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(135deg, var(--brand-accent), var(--brand-accent-dark)); color: #ffffff; padding: 12px 26px; border-radius: 30px; font-weight: 700; font-size: 0.94rem; text-decoration: none; cursor: pointer; border: none; }
+
+        footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 24px 15px; font-size: 0.85rem; margin-top: 40px; }
+        @media (max-width: 768px) { .article-card { padding: 20px 16px; } .article-title { font-size: 1.45rem; } }
+    </style>
+<script src="/site-nav.js" defer></script>
+<link rel="apple-touch-icon" href="/icons/icon-180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+<title>Child Specialist in Rohini Sector 3: When to Bring Your Child | Dr. Dinesh Mittal</title>
+    <meta name="description" content="Child specialist clinic in Rohini Sector 3, Delhi. When to bring your child, age-wise check-ups, what to bring, clinic timings and online booking with Dr. Dinesh Mittal.">
+    <link rel="canonical" href="https://childspecialistrohini.com/child-specialist-rohini-sector-3.html" />
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "MedicalWebPage", "url": "https://childspecialistrohini.com/child-specialist-rohini-sector-3.html", "name": "Child Specialist in Rohini Sector 3: When to Bring Your Child", "description": "Child specialist clinic in Rohini Sector 3, Delhi. When to bring your child, age-wise check-ups, what to bring, clinic timings and online booking with Dr. Dinesh Mittal.", "inLanguage": ["en", "hi"], "about": [{"@type": "MedicalCondition", "name": "Child Health Check-up"}, {"@type": "MedicalCondition", "name": "Pediatric Care"}], "author": {"@type": "Person", "name": "Dr. Dinesh Mittal", "jobTitle": "Child Specialist and Pediatrician", "hasCredential": {"@type": "EducationalOccupationalCredential", "name": "MBBS, DCH"}}, "publisher": {"@type": "MedicalClinic", "name": "Dr. Dinesh Mittal Child Clinic", "telephone": "+918130521456", "address": {"@type": "PostalAddress", "streetAddress": "H-34/69, Sector 3", "addressLocality": "Rohini", "addressRegion": "Delhi", "postalCode": "110085", "addressCountry": "IN"}}}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Where is the child specialist clinic in Rohini Sector 3?", "acceptedAnswer": {"@type": "Answer", "text": "Dr. Dinesh Mittal Child Clinic is at H-34/69, Sector 3, Rohini, New Delhi 110085. Phone +91 81305 21456."}}, {"@type": "Question", "name": "Do I need an appointment?", "acceptedAnswer": {"@type": "Answer", "text": "Booking online or by phone helps us plan your visit with less waiting. Please call to confirm the next available slot."}}, {"@type": "Question", "name": "What are the clinic timings?", "acceptedAnswer": {"@type": "Answer", "text": "Monday to Saturday: 10:00 AM to 1:00 PM and 6:00 PM to 8:30 PM. Sunday: 11:00 AM to 12:00 noon."}}, {"@type": "Question", "name": "Which vaccines are given at this clinic?", "acceptedAnswer": {"@type": "Answer", "text": "Vaccines are given as per the IAP immunisation schedule. Please bring your vaccination card so we can check what is due."}}]}</script>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo"><i class="fa-solid fa-shapes"></i> Dr. Dinesh Mittal</a>
+        <div style="display: flex; align-items: center; gap: 12px;">
+            <button type="button" onclick="toggleArticleLang()" id="articleLangBtn" class="lang-switch-btn">
+                <i class="fa-solid fa-language"></i> <span id="articleLangText">हिन्दी में पढ़ें</span>
+            </button>
+            <a href="index.html" style="text-decoration: none; color: var(--brand-primary); font-weight: 700; font-size: 0.88rem;">Home</a>
+        </div>
+    </header>
+
+    <main class="article-container">
+<div class="article-card">
+<div class="breadcrumbs"><a href="index.html"><i class="fa-solid fa-house"></i> Home</a> &rsaquo; <a href="blog.html">Health Library</a> &rsaquo; <span>Child Specialist Rohini</span></div>
+<div id="content-en">
+<h1 class="article-title">Child Specialist in Rohini Sector 3: When to Bring Your Child</h1>
+<div class="author-meta-bar"><img src="/icons/icon-192.png" alt="Dr. Dinesh Mittal Child Clinic logo" class="author-img"><div><strong>Dr. Dinesh Mittal, MBBS, DCH</strong><br><span>Child Specialist and Pediatrician | Sector 3 Rohini, Delhi</span></div></div>
+<figure style="margin:0 0 24px"><svg viewBox="0 0 720 250" role="img" aria-label="Illustration of a clinic building, a calendar, and a parent with a child" style="width:100%;height:auto;border-radius:18px;display:block">
+<rect width="720" height="250" rx="18" fill="#fff7ed"/>
+<rect x="70" y="70" width="190" height="160" rx="6" fill="#bfdbfe"/>
+<path d="M60 76 L165 22 L270 76 Z" fill="#1e3a8a"/>
+<rect x="150" y="150" width="40" height="80" rx="4" fill="#1e3a8a"/>
+<rect x="176" y="46" width="10" height="34" fill="#dc2626"/><rect x="160" y="54" width="42" height="10" fill="#dc2626"/>
+<rect x="96" y="112" width="30" height="30" rx="3" fill="#ffffff"/><rect x="202" y="112" width="30" height="30" rx="3" fill="#ffffff"/>
+<rect x="300" y="60" width="130" height="120" rx="14" fill="#ffffff" stroke="#0f766e" stroke-width="3"/>
+<rect x="300" y="60" width="130" height="30" rx="14" fill="#0f766e"/>
+<g fill="#cbd5e1"><rect x="318" y="106" width="18" height="16" rx="3"/><rect x="346" y="106" width="18" height="16" rx="3"/><rect x="374" y="106" width="18" height="16" rx="3"/><rect x="318" y="132" width="18" height="16" rx="3"/><rect x="346" y="132" width="18" height="16" rx="3"/></g>
+<rect x="374" y="132" width="18" height="16" rx="3" fill="#f2a33a"/>
+<circle cx="500" cy="110" r="30" fill="#fcd9b6"/>
+<path d="M472 102 Q474 74 500 76 Q526 76 528 102 Q516 90 500 92 Q484 90 472 102Z" fill="#7c4a21"/>
+<rect x="458" y="146" width="84" height="90" rx="32" fill="#0f766e"/>
+<circle cx="588" cy="150" r="22" fill="#fcd9b6"/>
+<path d="M570 144 Q572 126 588 128 Q604 128 606 144 Q598 136 588 137 Q578 136 570 144Z" fill="#1e293b"/>
+<rect x="566" y="176" width="44" height="60" rx="20" fill="#f2a33a"/>
+<path d="M480 200 Q525 186 566 204" stroke="#fcd9b6" stroke-width="10" fill="none" stroke-linecap="round"/>
+</svg></figure>
+
+<p>Parents in Rohini often look for a child specialist close to home when a child is unwell, needs a vaccine, or has a growth or behaviour concern. This page explains when to bring your child to the clinic, what to bring, and how to reach us. It is for information only and does not replace an examination.</p>
+
+<h2>1. Our clinic</h2>
+<p><strong>Dr. Dinesh Mittal Child Clinic</strong><br>
+H-34/69, Sector 3, Rohini, New Delhi 110085<br>
+Phone: <a href="tel:+918130521456">+91 81305 21456</a><br>
+Dr. Dinesh Mittal, MBBS, DCH, Delhi Medical Council Reg. No. DMC/R/00668</p>
+<table style="width:100%;border-collapse:collapse;margin:14px 0;font-size:0.95rem"><thead><tr style="background:#eef2ff"><th style="padding:8px;text-align:left">Day</th><th style="padding:8px;text-align:left">Timings</th></tr></thead><tbody><tr><td style="padding:8px">Monday to Saturday, morning</td><td style="padding:8px">10:00 AM to 1:00 PM</td></tr><tr><td style="padding:8px">Monday to Saturday, evening</td><td style="padding:8px">6:00 PM to 8:30 PM</td></tr><tr><td style="padding:8px">Sunday</td><td style="padding:8px">11:00 AM to 12:00 noon</td></tr></tbody></table>
+<p>Please book your visit online through the <a href="book.html">appointment page</a>, or call to confirm the next available slot.</p>
+
+<h2>2. When to bring your child for a check-up</h2>
+<ul>
+<li><strong>Fever</strong> that lasts more than 2 to 3 days, or fever that comes back again and again</li>
+<li><strong>Cough or wheeze</strong> lasting more than 2 weeks, or breathing that looks fast or effortful (see our <a href="cough-wheeze-children-guide.html">guide on cough and wheezing</a>)</li>
+<li><strong>Vomiting or loose motions</strong> that continue, or signs of dehydration such as less urine, dry lips or no tears</li>
+<li><strong>Poor feeding or weight gain</strong> that seems slow, in babies and toddlers</li>
+<li><strong>Rash, skin infection or allergy</strong>, including eczema flare-ups and reactions to food</li>
+<li><strong>Vaccines</strong> on the routine schedule, or catch-up vaccines for a child who has missed some</li>
+<li><strong>Growth, height or development</strong> worries, such as delayed speech, sitting or walking</li>
+<li><strong>Sleep, behaviour, school, or screen-time</strong> concerns</li>
+<li><strong>Adolescent health</strong> questions about growth, puberty and mental well-being</li>
+</ul>
+<p>For any emergency, such as difficulty breathing, blue lips, a convulsion, unresponsiveness, or severe bleeding, call <strong>112</strong> or go to the nearest hospital emergency department first.</p>
+
+<h2>3. Age-wise check-ups</h2>
+<table style="width:100%;border-collapse:collapse;margin:14px 0;font-size:0.95rem"><thead><tr style="background:#eef2ff"><th style="padding:8px;text-align:left">Age</th><th style="padding:8px;text-align:left">What is usually needed</th></tr></thead><tbody><tr><td style="padding:8px">Newborn (first weeks)</td><td style="padding:8px">Feeding and weight check, jaundice review, first vaccines on schedule, parent questions</td></tr><tr><td style="padding:8px">Infant (2 to 12 months)</td><td style="padding:8px">Vaccines at the scheduled visits, growth checks, weaning and diet guidance</td></tr><tr><td style="padding:8px">Toddler (1 to 5 years)</td><td style="padding:8px">Vaccine boosters, growth and development, speech and language, recurrent colds or cough</td></tr><tr><td style="padding:8px">School age (6 to 12 years)</td><td style="padding:8px">School health, vision and dental checks, learning and attention concerns, sports fitness, screen time</td></tr><tr><td style="padding:8px">Adolescent (12 years and above)</td><td style="padding:8px">Growth and puberty, nutrition, sleep, stress, and confidential discussion when needed</td></tr></tbody></table>
+<p>Vaccines are given as per the <a href="iap-immunization-schedule.html">IAP immunisation schedule</a>. If your child has missed any vaccine, bring the card and we will plan the catch-up.</p>
+
+<h2>4. What to bring to the visit</h2>
+<ul>
+<li>Vaccination card and previous prescriptions</li>
+<li>Any old reports, such as blood tests, X-rays or ultrasound</li>
+<li>Growth and feeding notes, and the birth weight if known</li>
+<li>A list of medicines the child is taking now, with the doses given at home</li>
+<li>Temperature readings and the time of each fever episode</li>
+<li>A short video of a cough, breathing, or a seizure episode, if it happened at home, which helps the doctor</li>
+<li>Your questions written down, so none is missed during the visit</li>
+</ul>
+
+<h2>5. How to prepare your child</h2>
+<ul>
+<li>Keep the child calm and hydrated before the visit, and bring a snack and water for longer waits</li>
+<li>For injections, a calm talk at home helps. Our <a href="painless-vs-painful-vaccines.html">guide on painless and painful vaccines</a> explains the options</li>
+<li>Older children can be told in simple words what the doctor will do</li>
+</ul>
+
+<h2>6. Our approach</h2>
+<p>We examine the child first, then discuss the findings with the parents in simple words. Treatment decisions are made based on examination and, where needed, tests. We will tell you when a child can be managed at home and when a follow-up or further test is needed.</p>
+
+<div class="doctor-cta-box">
+<h3>Book a visit for your child in Rohini Sector 3</h3>
+<p>Choose a slot online or call +91 81305 21456.</p>
+<a href="book.html" class="hero-cta-btn"><i class="fa-solid fa-calendar-check"></i> Book an appointment</a>
+</div>
+
+<h2>Frequently asked questions</h2>
+<h3>Where is the child specialist clinic in Rohini Sector 3?</h3>
+<p>Dr. Dinesh Mittal Child Clinic is at H-34/69, Sector 3, Rohini, New Delhi 110085. Phone +91 81305 21456.</p>
+<h3>Do I need an appointment?</h3>
+<p>Booking online or by phone helps us plan your visit with less waiting. Please call to confirm the next available slot.</p>
+<h3>What are the clinic timings?</h3>
+<p>Monday to Saturday: 10:00 AM to 1:00 PM and 6:00 PM to 8:30 PM. Sunday: 11:00 AM to 12:00 noon.</p>
+<h3>Which vaccines are given at this clinic?</h3>
+<p>Vaccines are given as per the IAP immunisation schedule. Please bring your vaccination card so we can check what is due.</p>
+</div>
+<div id="content-hi" style="display:none;">
+<h1 class="article-title">रोहिणी सेक्टर 3 में बाल रोग विशेषज्ञ: बच्चे को कब दिखाएं</h1>
+<div class="author-meta-bar"><img src="/icons/icon-192.png" alt="Dr. Dinesh Mittal Child Clinic logo" class="author-img"><div><strong>डॉ. दिनेश मित्तल, MBBS, DCH</strong><br><span>शिशु रोग विशेषज्ञ | सेक्टर 3, रोहिणी, दिल्ली</span></div></div>
+<figure style="margin:0 0 24px"><svg viewBox="0 0 720 250" role="img" aria-label="Illustration of a clinic building, a calendar, and a parent with a child" style="width:100%;height:auto;border-radius:18px;display:block">
+<rect width="720" height="250" rx="18" fill="#fff7ed"/>
+<rect x="70" y="70" width="190" height="160" rx="6" fill="#bfdbfe"/>
+<path d="M60 76 L165 22 L270 76 Z" fill="#1e3a8a"/>
+<rect x="150" y="150" width="40" height="80" rx="4" fill="#1e3a8a"/>
+<rect x="176" y="46" width="10" height="34" fill="#dc2626"/><rect x="160" y="54" width="42" height="10" fill="#dc2626"/>
+<rect x="96" y="112" width="30" height="30" rx="3" fill="#ffffff"/><rect x="202" y="112" width="30" height="30" rx="3" fill="#ffffff"/>
+<rect x="300" y="60" width="130" height="120" rx="14" fill="#ffffff" stroke="#0f766e" stroke-width="3"/>
+<rect x="300" y="60" width="130" height="30" rx="14" fill="#0f766e"/>
+<g fill="#cbd5e1"><rect x="318" y="106" width="18" height="16" rx="3"/><rect x="346" y="106" width="18" height="16" rx="3"/><rect x="374" y="106" width="18" height="16" rx="3"/><rect x="318" y="132" width="18" height="16" rx="3"/><rect x="346" y="132" width="18" height="16" rx="3"/></g>
+<rect x="374" y="132" width="18" height="16" rx="3" fill="#f2a33a"/>
+<circle cx="500" cy="110" r="30" fill="#fcd9b6"/>
+<path d="M472 102 Q474 74 500 76 Q526 76 528 102 Q516 90 500 92 Q484 90 472 102Z" fill="#7c4a21"/>
+<rect x="458" y="146" width="84" height="90" rx="32" fill="#0f766e"/>
+<circle cx="588" cy="150" r="22" fill="#fcd9b6"/>
+<path d="M570 144 Q572 126 588 128 Q604 128 606 144 Q598 136 588 137 Q578 136 570 144Z" fill="#1e293b"/>
+<rect x="566" y="176" width="44" height="60" rx="20" fill="#f2a33a"/>
+<path d="M480 200 Q525 186 566 204" stroke="#fcd9b6" stroke-width="10" fill="none" stroke-linecap="round"/>
+</svg></figure>
+
+<p>रोहिणी में माता-पिता अक्सर बच्चे के बीमार होने, टीका लगवाने, या विकास और व्यवहार की चिंता होने पर घर के पास बाल रोग विशेषज्ञ खोजते हैं। यह पेज बताता है कि अपने बच्चे को क्लिनिक कब लाएं, क्या साथ लाएं और हमसे कैसे संपर्क करें। यह केवल जानकारी के लिए है और डॉक्टर की जाँच का विकल्प नहीं है।</p>
+
+<h2>1. हमारा क्लिनिक</h2>
+<p><strong>डॉ. दिनेश मित्तल चाइल्ड क्लिनिक</strong><br>
+H-34/69, सेक्टर 3, रोहिणी, नई दिल्ली 110085<br>
+फ़ोन: <a href="tel:+918130521456">+91 81305 21456</a><br>
+डॉ. दिनेश मित्तल, MBBS, DCH, दिल्ली मेडिकल काउंसिल पंजीकरण संख्या DMC/R/00668</p>
+<table style="width:100%;border-collapse:collapse;margin:14px 0;font-size:0.95rem"><thead><tr style="background:#eef2ff"><th style="padding:8px;text-align:left">दिन</th><th style="padding:8px;text-align:left">समय</th></tr></thead><tbody><tr><td style="padding:8px">सोमवार से शनिवार, सुबह</td><td style="padding:8px">10:00 AM से 1:00 PM</td></tr><tr><td style="padding:8px">सोमवार से शनिवार, शाम</td><td style="padding:8px">6:00 PM से 8:30 PM</td></tr><tr><td style="padding:8px">रविवार</td><td style="padding:8px">11:00 AM से 12:00 दोपहर</td></tr></tbody></table>
+<p>कृपया <a href="book.html">अपॉइंटमेंट पेज</a> से ऑनलाइन समय लें, या अगला उपलब्ध स्लॉट जानने के लिए फ़ोन करें।</p>
+
+<h2>2. कब बच्चे को जाँच के लिए लाएं</h2>
+<ul>
+<li><strong>बुखार</strong> जो 2 से 3 दिन से ज़्यादा रहे, या बार-बार लौट आए</li>
+<li><strong>खांसी या घरघराहट</strong> जो 2 हफ़्ते से ज़्यादा चले, या सांस तेज़ या मेहनत वाली लगे (हमारा <a href="cough-wheeze-children-guide.html">खांसी और घरघराहट पर लेख</a> देखें)</li>
+<li><strong>उल्टी या दस्त</strong> जो चलते रहें, या पानी की कमी के संकेत जैसे पेशाब कम होना, होंठ सूखना या आंसू न आना</li>
+<li><strong>शिशु और छोटे बच्चों में</strong> कम दूध या खाना, या वज़न धीरे बढ़ना</li>
+<li><strong>चकत्ते, त्वचा का संक्रमण या एलर्जी</strong>, जिसमें एक्ज़िमा और खाने से होने वाली प्रतिक्रिया शामिल है</li>
+<li><strong>टीके</strong> नियमित शेड्यूल के अनुसार, या जो टीके छूट गए हों उनका कैच-अप</li>
+<li><strong>कद, वज़न या विकास</strong> की चिंता, जैसे देर से बोलना, बैठना या चलना</li>
+<li><strong>नींद, व्यवहार, स्कूल या स्क्रीन-टाइम</strong> की चिंता</li>
+<li><strong>किशोरों की सेहत</strong> के सवाल, जैसे बढ़ोतरी, यौवन और मानसिक स्वास्थ्य</li>
+</ul>
+<p>किसी भी आपात स्थिति में, जैसे सांस लेने में तकलीफ़, होंठ नीले होना, दौरा, बेहोशी या ज़्यादा खून बहना, पहले <strong>112</strong> पर कॉल करें या नज़दीकी अस्पताल की इमरजेंसी में जाएं।</p>
+
+<h2>3. उम्र के अनुसार जाँच</h2>
+<table style="width:100%;border-collapse:collapse;margin:14px 0;font-size:0.95rem"><thead><tr style="background:#eef2ff"><th style="padding:8px;text-align:left">उम्र</th><th style="padding:8px;text-align:left">आम तौर पर क्या ज़रूरी है</th></tr></thead><tbody><tr><td style="padding:8px">नवजात (पहले कुछ हफ़्ते)</td><td style="padding:8px">दूध और वज़न की जाँच, पीलिया की समीक्षा, शेड्यूल के अनुसार पहले टीके, माता-पिता के सवाल</td></tr><tr><td style="padding:8px">शिशु (2 से 12 महीने)</td><td style="padding:8px">तय विज़िट पर टीके, विकास की जाँच, ऊपरी आहार (weaning) की सलाह</td></tr><tr><td style="padding:8px">छोटे बच्चे (1 से 5 साल)</td><td style="padding:8px">बूस्टर टीके, कद और विकास, बोलने की क्षमता, बार-बार सर्दी या खांसी</td></tr><tr><td style="padding:8px">स्कूल जाने वाले (6 से 12 साल)</td><td style="padding:8px">स्कूल स्वास्थ्य, आँख और दाँत की जाँच, पढ़ाई और ध्यान की चिंता, खेल और फिटनेस, स्क्रीन-टाइम</td></tr><tr><td style="padding:8px">किशोर (12 साल और ऊपर)</td><td style="padding:8px">बढ़ोतरी और यौवन, पोषण, नींद, तनाव, और ज़रूरत हो तो निजी बातचीत</td></tr></tbody></table>
+<p>टीके <a href="iap-immunization-schedule.html">IAP टीकाकरण शेड्यूल</a> के अनुसार लगते हैं। अगर कोई टीका छूट गया हो तो टीकाकरण कार्ड साथ लाएं, हम कैच-अप की योजना बनाएंगे।</p>
+
+<h2>4. विज़िट पर क्या साथ लाएं</h2>
+<ul>
+<li>टीकाकरण कार्ड और पुराने पर्चे</li>
+<li>पुरानी रिपोर्ट, जैसे ब्लड टेस्ट, एक्स-रे या अल्ट्रासाउंड</li>
+<li>वज़न और दूध/खाने के नोट्स, और अगर पता हो तो जन्म के समय का वज़न</li>
+<li>बच्चे की अभी की दवाओं की सूची और घर पर दी गई खुराक</li>
+<li>बुखार का तापमान और हर बार का समय</li>
+<li>खांसी, सांस या दौरे का कोई छोटा वीडियो, अगर घर पर हुआ हो तो यह डॉक्टर के लिए मददगार होता है</li>
+<li>अपने सवाल लिखकर लाएं, ताकि विज़िट में कुछ छूटे नहीं</li>
+</ul>
+
+<h2>5. बच्चे को कैसे तैयार करें</h2>
+<ul>
+<li>विज़िट से पहले बच्चे को शांत और पानी पिलाकर रखें, और लंबे इंतज़ार के लिए नाश्ता और पानी साथ रखें</li>
+<li>इंजेक्शन से पहले घर पर शांति से बात करने से मदद मिलती है। हमारा <a href="painless-vs-painful-vaccines.html">दर्द रहित और दर्द वाले टीकों पर लेख</a> विकल्प समझाता है</li>
+<li>बड़े बच्चों को सरल भाषा में बताएं कि डॉक्टर क्या करेंगे</li>
+</ul>
+
+<h2>6. हमारा तरीका</h2>
+<p>हम पहले बच्चे की जाँच करते हैं, फिर माता-पिता से सरल भाषा में बात करते हैं। इलाज का फ़ैसला जाँच और ज़रूरत पड़ने पर टेस्ट के आधार पर लिया जाता है। हम बताते हैं कि बच्चा घर पर कैसे संभाला जा सकता है और कब फ़ॉलो-अप या आगे की जाँच ज़रूरी है।</p>
+
+<div class="doctor-cta-box">
+<h3>रोहिणी सेक्टर 3 में बच्चे की विज़िट बुक करें</h3>
+<p>ऑनलाइन स्लॉट चुनें या +91 81305 21456 पर कॉल करें।</p>
+<a href="book.html" class="hero-cta-btn"><i class="fa-solid fa-calendar-check"></i> अपॉइंटमेंट बुक करें</a>
+</div>
+
+<h2>अक्सर पूछे जाने वाले सवाल</h2>
+<h3>रोहिणी सेक्टर 3 में बाल रोग क्लिनिक कहाँ है?</h3>
+<p>डॉ. दिनेश मित्तल चाइल्ड क्लिनिक, H-34/69, सेक्टर 3, रोहिणी, नई दिल्ली 110085 पर है। फ़ोन +91 81305 21456।</p>
+<h3>क्या अपॉइंटमेंट लेना ज़रूरी है?</h3>
+<p>ऑनलाइन या फ़ोन से समय लेने से इंतज़ार कम होता है। अगला उपलब्ध स्लॉट जानने के लिए फ़ोन करें।</p>
+<h3>क्लिनिक का समय क्या है?</h3>
+<p>सोमवार से शनिवार: सुबह 10:00 से 1:00 बजे तक और शाम 6:00 से 8:30 बजे तक। रविवार: सुबह 11:00 से 12:00 बजे तक।</p>
+<h3>इस क्लिनिक में कौन से टीके लगते हैं?</h3>
+<p>टीके IAP टीकाकरण शेड्यूल के अनुसार लगते हैं। कौन सा टीका बाकी है, यह जानने के लिए टीकाकरण कार्ड साथ लाएं।</p>
+</div>
+<p style="font-size:0.8rem;color:#64748b;margin-top:24px;text-align:center;line-height:1.5;"><strong>Medical disclaimer:</strong> This article is for education only and does not replace an examination by a doctor. Please do not give any medicine without your doctor’s advice. <br>चिकित्सा सूचना: यह लेख केवल जानकारी के लिए है और डॉक्टर की जाँच का विकल्प नहीं है। बिना डॉक्टर की सलाह के कोई दवा न दें।</p>
+</div>
+</main>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong>Dr. Dinesh Mittal, MBBS, DCH</strong> | Delhi Medical Council Reg. No: <strong>DMC/R/00668</strong></p>
+        <p style="font-size: 0.78rem; color: #64748b; margin-top: 6px;">&copy; 2026 Dr. Dinesh Mittal Child Clinic, Sector 3 Rohini, New Delhi.</p>
+    </footer>
+
+    <!-- Bilingual Switcher Script -->
+    <script>
+      let currentLang = localStorage.getItem("preferredClinicLang") || "en";
+
+      function updateArticleView() {
+        const enBox = document.getElementById("content-en");
+        const hiBox = document.getElementById("content-hi");
+        const btnText = document.getElementById("articleLangText");
+
+        if (currentLang === "hi") {
+          if (enBox) enBox.style.display = "none";
+          if (hiBox) hiBox.style.display = "block";
+          if (btnText) btnText.textContent = "Read in English";
+        } else {
+          if (enBox) enBox.style.display = "block";
+          if (hiBox) hiBox.style.display = "none";
+          if (btnText) btnText.textContent = "हिन्दी में पढ़ें";
+        }
+      }
+
+      function toggleArticleLang() {
+        currentLang = (currentLang === "en") ? "hi" : "en";
+        localStorage.setItem("preferredClinicLang", currentLang);
+        updateArticleView();
+      }
+
+      document.addEventListener("DOMContentLoaded", updateArticleView);
+    </script>
+</body>
+</html>

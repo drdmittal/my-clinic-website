@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 260" role="img" aria-label="Illustration of a child with a cough, and the airways and lungs" style="width:100%;height:auto;border-radius:18px;display:block">
+<rect width="720" height="260" rx="18" fill="#e6fffb"/>
+<circle cx="170" cy="105" r="46" fill="#fcd9b6"/>
+<path d="M124 96 Q130 50 170 54 Q214 54 216 96 Q200 74 170 78 Q140 74 124 96Z" fill="#7c4a21"/>
+<circle cx="154" cy="110" r="4" fill="#1e293b"/><circle cx="186" cy="110" r="4" fill="#1e293b"/>
+<ellipse cx="170" cy="134" rx="8" ry="6" fill="#9a3412"/>
+<path d="M222 118 q10 -7 16 0 M228 138 q12 -7 18 0 M222 158 q10 -7 16 0" stroke="#0f766e" stroke-width="4" fill="none" stroke-linecap="round"/>
+<rect x="128" y="158" width="84" height="98" rx="34" fill="#38bdf8"/>
+<rect x="104" y="172" width="22" height="66" rx="11" fill="#fcd9b6" transform="rotate(12 115 205)"/>
+<rect x="214" y="172" width="22" height="66" rx="11" fill="#fcd9b6" transform="rotate(-12 225 205)"/>
+<rect x="516" y="28" width="22" height="96" rx="11" fill="#0f766e"/>
+<path d="M527 118 L476 166 M527 118 L578 166" stroke="#0f766e" stroke-width="14" stroke-linecap="round" fill="none"/>
+<path d="M466 160 C420 150 398 200 410 234 C424 252 458 242 470 206 Z" fill="#fca5a5"/>
+<path d="M588 160 C634 150 656 200 644 234 C630 252 596 242 584 206 Z" fill="#fca5a5"/>
+<path d="M430 190 q18 -10 26 6 M612 190 q-18 -10 -26 6" stroke="#f87171" stroke-width="3" fill="none" stroke-linecap="round"/>
+</svg>

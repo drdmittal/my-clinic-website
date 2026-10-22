@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    
+    
+    
+
+    
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-768Y52R8SC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-768Y52R8SC');
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --brand-primary: #0891b2; --brand-primary-dark: #0e7490; --brand-secondary: #0d9488;
+            --brand-accent: #f59e0b; --brand-accent-dark: #d97706; --dark-text: #0f172a; --muted-text: #64748b;
+            --card-shadow: 0 12px 32px -4px rgba(8, 145, 178, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', 'Noto Sans Devanagari', sans-serif; }
+        body { color: var(--dark-text); background-color: #f8fafc; line-height: 1.7; padding-bottom: 75px; -webkit-tap-highlight-color: transparent; }
+
+        header {
+            position: sticky; top: 0; background: rgba(255, 255, 255, 0.94); z-index: 1000;
+            backdrop-filter: blur(14px); padding: 12px 5%; display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+        }
+        .logo { font-family: 'Fredoka', cursive; font-size: 1.35rem; font-weight: 600; color: var(--brand-primary-dark); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+        .logo i { color: var(--brand-accent); font-size: 1.35rem; }
+
+        .lang-switch-btn {
+            background: #f0fdfa; border: 1.5px solid #99f6e4; color: #0f766e;
+            padding: 6px 14px; border-radius: 20px; font-size: 0.84rem; font-weight: 800;
+            cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s;
+        }
+        .lang-switch-btn:hover { background: #ccfbf1; transform: scale(1.04); }
+
+        .article-container { max-width: 860px; margin: 30px auto; padding: 0 16px; }
+        .article-card { background: #ffffff; border-radius: 26px; padding: 34px 28px; box-shadow: var(--card-shadow); border: 1px solid #e2e8f0; }
+
+        .breadcrumbs { font-size: 0.82rem; color: #64748b; margin-bottom: 14px; }
+        .breadcrumbs a { color: var(--brand-primary); text-decoration: none; font-weight: 600; }
+
+        .article-title { font-family: 'Fredoka', cursive; font-size: 1.95rem; color: #083344; line-height: 1.3; margin-bottom: 14px; }
+        .author-meta-bar { display: flex; align-items: center; gap: 12px; padding: 12px 0 16px; border-bottom: 1px solid #f1f5f9; margin-bottom: 22px; font-size: 0.84rem; color: var(--muted-text); }
+        .author-img { width: 46px; height: 46px; border-radius: 50%; object-fit: cover; border: 2px solid #bae6fd; }
+        .article-featured-img { width: 100%; max-height: 380px; object-fit: cover; border-radius: 18px; margin-bottom: 24px; }
+
+        h2 { font-family: 'Fredoka', cursive; font-size: 1.4rem; color: #083344; margin: 32px 0 12px; border-bottom: 2px solid #f1f5f9; padding-bottom: 6px; }
+        h3 { font-size: 1.08rem; color: #0e7490; margin: 20px 0 8px; font-weight: 700; }
+        p { font-size: 0.95rem; color: #334155; margin-bottom: 16px; line-height: 1.75; }
+        ul, ol { padding-left: 22px; margin-bottom: 18px; font-size: 0.94rem; color: #334155; line-height: 1.7; }
+        li { margin-bottom: 10px; }
+
+        .danger-alert-box { background: #fef2f2; border: 1.5px solid #fca5a5; border-radius: 16px; padding: 20px 22px; margin: 26px 0; }
+        .danger-alert-box h3 { color: #991b1b; margin-top: 0; font-size: 1.15rem; display: flex; align-items: center; gap: 8px; }
+        .danger-alert-box ul { color: #7f1d1d; margin-bottom: 0; }
+
+        .info-highlight-box { background: #f0fdfa; border-left: 4px solid var(--brand-secondary); border-radius: 12px; padding: 18px 20px; margin: 24px 0; font-size: 0.93rem; color: #134e4a; }
+        .doctor-cta-box { background: linear-gradient(135deg, #f0fdfa 0%, #e0f2fe 100%); border: 2px solid #bae6fd; border-radius: 20px; padding: 24px; text-align: center; margin-top: 32px; }
+        .hero-cta-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(135deg, var(--brand-accent), var(--brand-accent-dark)); color: #ffffff; padding: 12px 26px; border-radius: 30px; font-weight: 700; font-size: 0.94rem; text-decoration: none; cursor: pointer; border: none; }
+
+        footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 24px 15px; font-size: 0.85rem; margin-top: 40px; }
+        @media (max-width: 768px) { .article-card { padding: 20px 16px; } .article-title { font-size: 1.45rem; } }
+    </style>
+<script src="/site-nav.js" defer></script>
+<link rel="apple-touch-icon" href="/icons/icon-180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+<title>Cough and Wheezing in Children: Viral or Asthma, and When to See a Doctor | Dr. Dinesh Mittal</title>
+    <meta name="description" content="Pediatric guide by Dr. Dinesh Mittal on child cough and wheezing: viral cough versus asthma, Delhi pollution triggers, safe home care, WHO fast-breathing limits, and when to visit.">
+    <link rel="canonical" href="https://childspecialistrohini.com/cough-wheeze-children-guide.html" />
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "MedicalWebPage", "url": "https://childspecialistrohini.com/cough-wheeze-children-guide.html", "name": "Cough and Wheezing in Children: Viral or Asthma, and When to See a Doctor", "description": "Pediatric guide by Dr. Dinesh Mittal on child cough and wheezing: viral cough versus asthma, Delhi pollution triggers, safe home care, WHO fast-breathing limits, and when to visit.", "inLanguage": ["en", "hi"], "about": [{"@type": "MedicalCondition", "name": "Cough in Children"}, {"@type": "MedicalCondition", "name": "Wheezing"}, {"@type": "MedicalCondition", "name": "Asthma in Children"}], "author": {"@type": "Person", "name": "Dr. Dinesh Mittal", "jobTitle": "Child Specialist and Pediatrician", "hasCredential": {"@type": "EducationalOccupationalCredential", "name": "MBBS, DCH"}}, "publisher": {"@type": "MedicalClinic", "name": "Dr. Dinesh Mittal Child Clinic", "telephone": "+918130521456", "address": {"@type": "PostalAddress", "streetAddress": "H-34/69, Sector 3", "addressLocality": "Rohini", "addressRegion": "Delhi", "postalCode": "110085", "addressCountry": "IN"}}}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is a cough at night always a sign of asthma?", "acceptedAnswer": {"@type": "Answer", "text": "No. Night-time cough is often post-viral or caused by allergies. But a night cough that keeps coming back, or comes with wheeze, should be checked by a doctor so that asthma can be identified and treated early."}}, {"@type": "Question", "name": "Can I give honey to my baby for cough?", "acceptedAnswer": {"@type": "Answer", "text": "Not before 1 year of age. Honey can be given after 1 year in a small amount. Babies under 1 year should not be given honey."}}, {"@type": "Question", "name": "My child has a cough for 10 days. Do I need antibiotics?", "acceptedAnswer": {"@type": "Answer", "text": "Usually not. Most coughs after a cold are viral, and antibiotics do not work against viruses. Your doctor will decide if an antibiotic is needed after examination."}}, {"@type": "Question", "name": "Is steam inhalation safe for children?", "acceptedAnswer": {"@type": "Answer", "text": "Hot-water steam can scald a child. A clean humidifier or sitting in a steamy bathroom for a short time is gentler. Ask your doctor before any other home remedy."}}]}</script>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo"><i class="fa-solid fa-shapes"></i> Dr. Dinesh Mittal</a>
+        <div style="display: flex; align-items: center; gap: 12px;">
+            <button type="button" onclick="toggleArticleLang()" id="articleLangBtn" class="lang-switch-btn">
+                <i class="fa-solid fa-language"></i> <span id="articleLangText">हिन्दी में पढ़ें</span>
+            </button>
+            <a href="index.html" style="text-decoration: none; color: var(--brand-primary); font-weight: 700; font-size: 0.88rem;">Home</a>
+        </div>
+    </header>
+
+    <main class="article-container">
+<div class="article-card">
+<div class="breadcrumbs"><a href="index.html"><i class="fa-solid fa-house"></i> Home</a> &rsaquo; <a href="blog.html">Health Library</a> &rsaquo; <span>Cough &amp; Wheezing</span></div>
+<div id="content-en">
+<h1 class="article-title">Cough and Wheezing in Children: Viral or Asthma, and When to See a Doctor</h1>
+<div class="author-meta-bar"><img src="/icons/icon-192.png" alt="Dr. Dinesh Mittal Child Clinic logo" class="author-img"><div><strong>Dr. Dinesh Mittal, MBBS, DCH</strong><br><span>Child Specialist and Pediatrician | Sector 3 Rohini, Delhi</span></div></div>
+<figure style="margin:0 0 24px"><svg viewBox="0 0 720 260" role="img" aria-label="Illustration of a child with a cough, and the airways and lungs" style="width:100%;height:auto;border-radius:18px;display:block">
+<rect width="720" height="260" rx="18" fill="#e6fffb"/>
+<circle cx="170" cy="105" r="46" fill="#fcd9b6"/>
+<path d="M124 96 Q130 50 170 54 Q214 54 216 96 Q200 74 170 78 Q140 74 124 96Z" fill="#7c4a21"/>
+<circle cx="154" cy="110" r="4" fill="#1e293b"/><circle cx="186" cy="110" r="4" fill="#1e293b"/>
+<ellipse cx="170" cy="134" rx="8" ry="6" fill="#9a3412"/>
+<path d="M222 118 q10 -7 16 0 M228 138 q12 -7 18 0 M222 158 q10 -7 16 0" stroke="#0f766e" stroke-width="4" fill="none" stroke-linecap="round"/>
+<rect x="128" y="158" width="84" height="98" rx="34" fill="#38bdf8"/>
+<rect x="104" y="172" width="22" height="66" rx="11" fill="#fcd9b6" transform="rotate(12 115 205)"/>
+<rect x="214" y="172" width="22" height="66" rx="11" fill="#fcd9b6" transform="rotate(-12 225 205)"/>
+<rect x="516" y="28" width="22" height="96" rx="11" fill="#0f766e"/>
+<path d="M527 118 L476 166 M527 118 L578 166" stroke="#0f766e" stroke-width="14" stroke-linecap="round" fill="none"/>
+<path d="M466 160 C420 150 398 200 410 234 C424 252 458 242 470 206 Z" fill="#fca5a5"/>
+<path d="M588 160 C634 150 656 200 644 234 C630 252 596 242 584 206 Z" fill="#fca5a5"/>
+<path d="M430 190 q18 -10 26 6 M612 190 q-18 -10 -26 6" stroke="#f87171" stroke-width="3" fill="none" stroke-linecap="round"/>
+</svg></figure>
+
+<p>Cough is one of the most common reasons parents bring a child to the clinic, especially in winter and during the monsoon. Most coughs are caused by viral infections and get better on their own. But a few coughs need a doctor’s review, and wheezing (a whistling sound while breathing) needs proper evaluation. This guide explains the difference in plain language.</p>
+
+<h2>1. Why children cough so often</h2>
+<p>A cough is the body’s way of clearing the airway. Young children catch several viral colds every year, and each cold can leave a cough behind for 2 to 3 weeks. Some children have a <strong>post-viral cough</strong> that lingers longer, even after the runny nose has gone. A child who is playful, eating and drinking, and sleeping reasonably well is usually recovering normally.</p>
+
+<h2>2. Understanding the type of cough</h2>
+<table style="width:100%;border-collapse:collapse;margin:14px 0;font-size:0.95rem">
+<thead><tr style="background:#eef2ff"><th style="padding:8px;text-align:left">Type of cough</th><th style="padding:8px;text-align:left">What parents notice</th><th style="padding:8px;text-align:left">What it may mean</th></tr></thead>
+<tbody>
+<tr><td style="padding:8px">Dry or wet cough after a cold</td><td style="padding:8px">Cough for a few days to 3 weeks, child otherwise active</td><td style="padding:8px">Usually viral; supportive care is enough</td></tr>
+<tr><td style="padding:8px">Night-time cough</td><td style="padding:8px">Cough mainly at night or early morning, wakes the child</td><td style="padding:8px">Can be post-viral, allergy or asthma; needs review if it recurs</td></tr>
+<tr><td style="padding:8px">Barking cough with harsh breathing in</td><td style="padding:8px">Seal-like cough, hoarse voice, often at night, child under 6 years</td><td style="padding:8px">Croup (viral swelling of the upper airway); needs same-day review</td></tr>
+<tr><td style="padding:8px">Cough in bouts with a “whoop” or vomiting after coughing</td><td style="padding:8px">Long fits lasting weeks, face turns red, child looks exhausted</td><td style="padding:8px">Whooping cough; check vaccination status and see a doctor urgently</td></tr>
+<tr><td style="padding:8px">Sudden cough and choking after eating or playing</td><td style="padding:8px">Starts suddenly, may be with gagging or a toy or food nearby</td><td style="padding:8px">Possible inhaled object; see the emergency box below</td></tr>
+</tbody></table>
+
+<h2>3. What is wheezing?</h2>
+<p><strong>Wheezing</strong> is a whistling or squeaky sound, mostly while breathing out. It happens when the small airways become narrow, swollen or full of mucus. Wheezing is not a disease by itself. It is a sign that needs to be explained. The most common causes in children are:</p>
+<ul>
+<li><strong>Viral wheeze</strong>, common in babies and toddlers during a chest infection (bronchiolitis). Usually improves in a week or two.</li>
+<li><strong>Asthma</strong>, when airways are inflamed and react to triggers. Often starts after repeated wheezing episodes.</li>
+<li><strong>Foreign body</strong> in the airway, especially if it starts suddenly.</li>
+</ul>
+
+<figure style="margin:24px 0"><svg viewBox="0 0 720 170" role="img" aria-label="Diagram comparing a normal airway with a narrowed airway during wheeze" style="width:100%;height:auto;display:block">
+<rect width="720" height="170" rx="16" fill="#f0f9ff"/>
+<rect x="70" y="50" width="220" height="70" rx="35" fill="#ffffff" stroke="#0f766e" stroke-width="10"/>
+<rect x="84" y="64" width="192" height="42" rx="21" fill="#e0f2fe"/>
+<path d="M120 85 H250" stroke="#0369a1" stroke-width="5" stroke-dasharray="10 8"/>
+<polygon points="252,77 264,85 252,93" fill="#0369a1"/>
+<rect x="430" y="50" width="220" height="70" rx="35" fill="#ffffff" stroke="#0f766e" stroke-width="10"/>
+<rect x="444" y="64" width="192" height="42" rx="21" fill="#e0f2fe"/>
+<ellipse cx="500" cy="70" rx="30" ry="16" fill="#fde68a"/>
+<ellipse cx="580" cy="112" rx="32" ry="16" fill="#fde68a"/>
+<path d="M480 85 H520" stroke="#0369a1" stroke-width="5" stroke-dasharray="6 6"/>
+<polygon points="522,80 530,85 522,90" fill="#0369a1"/>
+</svg>
+<figcaption style="font-size:0.85rem;color:#475569;margin-top:6px;text-align:center">Left: normal airway, air flows freely. Right: during wheeze, swelling and mucus narrow the airway, which makes the whistling sound.</figcaption></figure>
+<h2>4. Delhi triggers that make cough worse</h2>
+<p>In Delhi, air quality and seasonal changes often trigger coughs and wheezing in children who are prone to them:</p>
+<ul>
+<li><strong>Winter smog and dust:</strong> PM2.5 and smoke irritate the airways. On high-pollution days keep windows closed and keep outdoor play short. Our <a href="air-purifier-delhi-pollution-children.html">guide on air pollution and children</a> has more detail.</li>
+<li><strong>Dust storms and construction dust</strong> during summer and spring.</li>
+<li><strong>Damp and mould</strong> after the monsoon, in bathrooms and cupboards.</li>
+<li><strong>Smoke</strong> from mosquito coils, incense, cooking fuel and cigarettes, including smoke from people who smoke outside the house.</li>
+<li><strong>Dengue and flu season</strong> brings viral infections that can cause a cough to flare up. A child with fever and cough needs a clinical check.</li>
+</ul>
+
+<h2>5. Safe care at home</h2>
+<ul>
+<li><strong>Fluids:</strong> Offer small, frequent sips of water, breast milk, ORS or soup. Warm fluids can soothe the throat.</li>
+<li><strong>Rest and comfort:</strong> Let the child rest, and keep the room calm and not too dry.</li>
+<li><strong>Saline nasal drops and gentle suction</strong> for babies who cannot blow their nose. Blocked nose makes a cough worse.</li>
+<li><strong>Feeding babies:</strong> Feed in a slightly upright position. Infants should always sleep flat on their back. Do not prop a baby up with pillows to sleep.</li>
+<li><strong>Honey:</strong> Honey can be given <strong>only after 1 year of age</strong>. Never give honey to a baby under 1 year, because of the risk of infant botulism.</li>
+<li><strong>Warm mist:</strong> A clean humidifier may help comfort the child. Do not use hot-water steam inhalation, because children can get scalded by hot water or steam.</li>
+</ul>
+
+<div class="danger-alert-box">
+<h3><i class="fa-solid fa-triangle-exclamation"></i> Cough and cold medicines: please read</h3>
+<ul>
+<li><strong>Do not give over-the-counter cough or cold medicines to children under 2 years</strong> unless a doctor has specifically advised them. They have not been shown to help and can cause serious side effects.</li>
+<li>Even for older children, do not start cough syrups on your own. Ask your doctor first.</li>
+<li><strong>Antibiotics do not treat viral cough.</strong> Do not expect or demand antibiotics for a simple cold.</li>
+<li>Inhalers for wheeze must be prescribed and taught by a doctor. Do not stop a prescribed daily inhaler because the child seems well.</li>
+</ul>
+</div>
+
+<h2>6. When cough and wheeze may be asthma</h2>
+<p>Asthma is a long-term condition of the airways. It is common in children and can be controlled well with the right treatment and inhaler technique. Think about asthma if your child:</p>
+<ul>
+<li>Has repeated episodes of wheeze, or cough that returns with cold weather, exercise, laughing or crying</li>
+<li>Has a night-time cough that wakes the child, especially more than once a month</li>
+<li>Has a family history of asthma, eczema or allergies, or other allergic conditions such as runny nose with sneezing</li>
+<li>Gets breathless or tired while playing, or avoids running with friends</li>
+</ul>
+<p>Asthma is diagnosed by a doctor after history and examination, and sometimes breathing tests when the child is old enough. Good treatment often means a daily controller medicine taken regularly, with a rescue inhaler used when needed. Using a spacer correctly makes a big difference, and the doctor or nurse should show you how.</p>
+
+<h2>7. Red flags: see a doctor the same day</h2>
+<p>Breathing speed is one of the most important signs. The World Health Organization uses these thresholds for fast breathing, counted for one full minute while the child is calm, not crying or feverish:</p>
+<table style="width:100%;border-collapse:collapse;margin:14px 0;font-size:0.95rem">
+<thead><tr style="background:#eef2ff"><th style="padding:8px;text-align:left">Age</th><th style="padding:8px;text-align:left">Fast breathing (breaths per minute)</th></tr></thead>
+<tbody>
+<tr><td style="padding:8px">Under 2 months</td><td style="padding:8px">60 or more</td></tr>
+<tr><td style="padding:8px">2 to 11 months</td><td style="padding:8px">50 or more</td></tr>
+<tr><td style="padding:8px">1 to 5 years</td><td style="padding:8px">40 or more</td></tr>
+</tbody></table>
+
+<div class="danger-alert-box">
+<h3><i class="fa-solid fa-triangle-exclamation"></i> Go to hospital or call 112 now if your child has</h3>
+<ul>
+<li>Chest sucking in under the ribs or between the ribs, grunting with each breath, or nostrils flaring</li>
+<li>Blue, grey or pale lips or tongue</li>
+<li>Very drowsy, floppy, hard to wake, or not responding normally</li>
+<li>Unable to feed, drink or speak in full sentences, or drooling and unable to swallow</li>
+<li>A sudden choking episode after putting something in the mouth, followed by persistent cough or breathing difficulty</li>
+<li>Coughing up blood, or breathing pauses in a baby</li>
+</ul>
+</div>
+
+<h2>8. When to book a visit (not an emergency)</h2>
+<ul>
+<li>Cough lasting more than 2 to 3 weeks</li>
+<li>Cough with fever lasting more than 3 days, or fever returning after it had gone</li>
+<li>Any wheezing, especially if it happens again</li>
+<li>Night cough that keeps disturbing sleep</li>
+<li>Poor feeding, weight loss, or a child who seems unwell between coughs</li>
+<li>Coughing fits with vomiting, or a cough that is getting worse rather than better</li>
+</ul>
+
+<h2>9. Vaccines that protect against cough</h2>
+<p>Whooping cough (pertussis) is preventable with vaccines given on the routine schedule. Flu vaccination is also advised for some children, such as those with asthma or heart and lung conditions. Please check your child’s vaccines against the <a href="iap-immunization-schedule.html">IAP immunisation schedule</a>, and bring the vaccination card to every visit.</p>
+
+<h2>Frequently asked questions</h2>
+<h3>Is a cough at night always a sign of asthma?</h3>
+<p>No. Night-time cough is often post-viral or caused by allergies. But a night cough that keeps coming back, or comes with wheeze, should be checked by a doctor so that asthma can be identified and treated early.</p>
+<h3>Can I give honey to my baby for cough?</h3>
+<p>Not before 1 year of age. Honey can be given after 1 year in a small amount. Babies under 1 year should not be given honey.</p>
+<h3>My child has a cough for 10 days. Do I need antibiotics?</h3>
+<p>Usually not. Most coughs after a cold are viral, and antibiotics do not work against viruses. Your doctor will decide if an antibiotic is needed after examination.</p>
+<h3>Is steam inhalation safe for children?</h3>
+<p>Hot-water steam can scald a child. A clean humidifier or sitting in a steamy bathroom for a short time is gentler. Ask your doctor before any other home remedy.</p>
+</div>
+<div id="content-hi" style="display:none;">
+<h1 class="article-title">बच्चों में खांसी और घरघराहट: वायरल या अस्थमा, और डॉक्टर को कब दिखाएं</h1>
+<div class="author-meta-bar"><img src="/icons/icon-192.png" alt="Dr. Dinesh Mittal Child Clinic logo" class="author-img"><div><strong>डॉ. दिनेश मित्तल, MBBS, DCH</strong><br><span>शिशु रोग विशेषज्ञ | सेक्टर 3, रोहिणी, दिल्ली</span></div></div>
+<figure style="margin:0 0 24px"><svg viewBox="0 0 720 260" role="img" aria-label="Illustration of a child with a cough, and the airways and lungs" style="width:100%;height:auto;border-radius:18px;display:block">
+<rect width="720" height="260" rx="18" fill="#e6fffb"/>
+<circle cx="170" cy="105" r="46" fill="#fcd9b6"/>
+<path d="M124 96 Q130 50 170 54 Q214 54 216 96 Q200 74 170 78 Q140 74 124 96Z" fill="#7c4a21"/>
+<circle cx="154" cy="110" r="4" fill="#1e293b"/><circle cx="186" cy="110" r="4" fill="#1e293b"/>
+<ellipse cx="170" cy="134" rx="8" ry="6" fill="#9a3412"/>
+<path d="M222 118 q10 -7 16 0 M228 138 q12 -7 18 0 M222 158 q10 -7 16 0" stroke="#0f766e" stroke-width="4" fill="none" stroke-linecap="round"/>
+<rect x="128" y="158" width="84" height="98" rx="34" fill="#38bdf8"/>
+<rect x="104" y="172" width="22" height="66" rx="11" fill="#fcd9b6" transform="rotate(12 115 205)"/>
+<rect x="214" y="172" width="22" height="66" rx="11" fill="#fcd9b6" transform="rotate(-12 225 205)"/>
+<rect x="516" y="28" width="22" height="96" rx="11" fill="#0f766e"/>
+<path d="M527 118 L476 166 M527 118 L578 166" stroke="#0f766e" stroke-width="14" stroke-linecap="round" fill="none"/>
+<path d="M466 160 C420 150 398 200 410 234 C424 252 458 242 470 206 Z" fill="#fca5a5"/>
+<path d="M588 160 C634 150 656 200 644 234 C630 252 596 242 584 206 Z" fill="#fca5a5"/>
+<path d="M430 190 q18 -10 26 6 M612 190 q-18 -10 -26 6" stroke="#f87171" stroke-width="3" fill="none" stroke-linecap="round"/>
+</svg></figure>
+
+<p>खांसी बच्चों में डॉक्टर के पास ले जाने का सबसे आम कारण है, खासकर सर्दी और बरसात में। ज़्यादातर खांसी वायरल संक्रमण से होती है और अपने आप ठीक हो जाती है। लेकिन कुछ खांसी पर डॉक्टर की जाँच ज़रूरी है, और घरघराहट (सांस लेते समय सीटी जैसी आवाज़) की ठीक से जाँच होनी चाहिए। यह लेख आसान भाषा में बताता है कि कौन सी स्थिति सामान्य है और कौन सी नहीं।</p>
+
+<h2>1. बच्चों को बार-बार खांसी क्यों होती है?</h2>
+<p>खांसी गले और सांस की नली को साफ़ रखने का शरीर का तरीका है। छोटे बच्चों को हर साल कई बार वायरल सर्दी-जुकाम होता है, और हर बार खांसी 2 से 3 हफ़्ते तक रह सकती है। कुछ बच्चों की खांसी नाक बहना बंद होने के बाद भी कुछ समय चलती है, जिसे <strong>पोस्ट-वायरल खांसी</strong> कहते हैं। अगर बच्चा खेल रहा है, खा-पी रहा है और ठीक से सो रहा है, तो आमतौर पर वह सामान्य रूप से ठीक हो रहा है।</p>
+
+<h2>2. खांसी के प्रकार समझें</h2>
+<table style="width:100%;border-collapse:collapse;margin:14px 0;font-size:0.95rem">
+<thead><tr style="background:#eef2ff"><th style="padding:8px;text-align:left">खांसी का प्रकार</th><th style="padding:8px;text-align:left">माता-पिता क्या देखते हैं</th><th style="padding:8px;text-align:left">इसका मतलब हो सकता है</th></tr></thead>
+<tbody>
+<tr><td style="padding:8px">सर्दी के बाद सूखी या बलगम वाली खांसी</td><td style="padding:8px">कुछ दिन से 3 हफ़्ते तक, बच्चा फिर भी सक्रिय</td><td style="padding:8px">आमतौर पर वायरल; घरेलू देखभाल काफ़ी है</td></tr>
+<tr><td style="padding:8px">रात की खांसी</td><td style="padding:8px">रात या सुबह के समय ज़्यादा, बच्चा नींद से जागता है</td><td style="padding:8px">पोस्ट-वायरल, एलर्जी या अस्थमा हो सकता है; बार-बार हो तो जाँच कराएं</td></tr>
+<tr><td style="padding:8px">भौंकने जैसी खांसी और सांस लेते समय कर्कश आवाज़</td><td style="padding:8px">सील की तरह खांसी, आवाज़ बैठ जाना, अक्सर रात में, 6 साल से छोटे बच्चे</td><td style="padding:8px">क्रुप (गले का वायरल सूजन); उसी दिन डॉक्टर को दिखाएं</td></tr>
+<tr><td style="padding:8px">खांसी के लंबे दौरे, दौरे के बाद उल्टी या “हूप” जैसी आवाज़</td><td style="padding:8px">हफ़्तों तक चलने वाले दौरे, चेहरा लाल, बच्चा थका हुआ</td><td style="padding:8px">काली खांसी (कुकुर खांसी); टीकाकरण की जाँच करें और तुरंत डॉक्टर को दिखाएं</td></tr>
+<tr><td style="padding:8px">खाते या खेलते समय अचानक खांसी और दम घुटना</td><td style="padding:8px">अचानक शुरू होती है, मुँह में कोई चीज़ रही हो सकती है</td><td style="padding:8px">सांस की नली में कोई चीज़ फँसी हो सकती है; नीचे का आपातकालीन बॉक्स देखें</td></tr>
+</tbody></table>
+
+<h2>3. घरघराहट (wheezing) क्या है?</h2>
+<p><strong>घरघराहट</strong> सीटी जैसी या चरचराती आवाज़ है, जो ज़्यादातर सांस छोड़ते समय सुनाई देती है। यह तब होती है जब सांस की छोटी नलियाँ संकरी, सूजी हुई या बलगम से भरी होती हैं। घरघराहट अपने आप में कोई बीमारी नहीं है, बल्कि एक लक्षण है जिसका कारण डॉक्टर को पता करना होता है। बच्चों में आम कारण ये हैं:</p>
+<ul>
+<li><strong>वायरल घरघराहट:</strong> छाती के संक्रमण (ब्रॉन्कियोलाइटिस) के दौरान शिशुओं और छोटे बच्चों में आम। आमतौर पर एक-दो हफ़्ते में सुधर जाती है।</li>
+<li><strong>अस्थमा:</strong> जब सांस की नलियों में सूजन होती है और वे ट्रिगर पर प्रतिक्रिया देती हैं। अक्सर बार-बार घरघराहट के बाद पता चलता है।</li>
+<li><strong>सांस की नली में कोई बाहरी चीज़:</strong> खासकर अगर यह अचानक शुरू हुई हो।</li>
+</ul>
+
+<figure style="margin:24px 0"><svg viewBox="0 0 720 170" role="img" aria-label="Diagram comparing a normal airway with a narrowed airway during wheeze" style="width:100%;height:auto;display:block">
+<rect width="720" height="170" rx="16" fill="#f0f9ff"/>
+<rect x="70" y="50" width="220" height="70" rx="35" fill="#ffffff" stroke="#0f766e" stroke-width="10"/>
+<rect x="84" y="64" width="192" height="42" rx="21" fill="#e0f2fe"/>
+<path d="M120 85 H250" stroke="#0369a1" stroke-width="5" stroke-dasharray="10 8"/>
+<polygon points="252,77 264,85 252,93" fill="#0369a1"/>
+<rect x="430" y="50" width="220" height="70" rx="35" fill="#ffffff" stroke="#0f766e" stroke-width="10"/>
+<rect x="444" y="64" width="192" height="42" rx="21" fill="#e0f2fe"/>
+<ellipse cx="500" cy="70" rx="30" ry="16" fill="#fde68a"/>
+<ellipse cx="580" cy="112" rx="32" ry="16" fill="#fde68a"/>
+<path d="M480 85 H520" stroke="#0369a1" stroke-width="5" stroke-dasharray="6 6"/>
+<polygon points="522,80 530,85 522,90" fill="#0369a1"/>
+</svg>
+<figcaption style="font-size:0.85rem;color:#475569;margin-top:6px;text-align:center">बाएं: सामान्य सांस की नली, हवा आसानी से जाती है। दाएं: घरघराहट में सूजन और बलगम से नली संकरी होती है, जिससे सीटी जैसी आवाज़ आती है।</figcaption></figure>
+<h2>4. दिल्ली में खांसी बढ़ाने वाले कारण</h2>
+<p>दिल्ली में हवा की गुणवत्ता और मौसम में बदलाव अक्सर उन बच्चों में खांसी और घरघराहट बढ़ा देते हैं, जिन्हें पहले से यह समस्या होती है:</p>
+<ul>
+<li><strong>सर्दी का धुआँ और धूल:</strong> प्रदूषण वाले दिनों में खिड़कियाँ बंद रखें और बाहर खेलने का समय कम करें। वायु प्रदूषण पर हमारा <a href="air-purifier-delhi-pollution-children.html">लेख</a> देखें।</li>
+<li><strong>धूल भरी आंधी और निर्माण की धूल</strong> गर्मी और वसंत में।</li>
+<li><strong>बरसात के बाद सीलन और फफूंद</strong> बाथरूम और अलमारी में।</li>
+<li><strong>धुआँ:</strong> मच्छर कॉइल, अगरबत्ती, खाना बनाने का ईंधन और सिगरेट का धुआँ, जिसमें घर के बाहर पीने वालों का धुआँ भी शामिल है।</li>
+<li><strong>डेंगू और फ्लू का मौसम:</strong> वायरल संक्रमण से खांसी बढ़ सकती है। बुखार के साथ खांसी हो तो डॉक्टर से जाँच कराएं।</li>
+</ul>
+
+<h2>5. घर पर सुरक्षित देखभाल</h2>
+<ul>
+<li><strong>पानी और तरल पदार्थ:</strong> थोड़ा-थोड़ा करके बार-बार पानी, माँ का दूध, ORS या सूप दें। गुनगुने तरल से गला आराम पाता है।</li>
+<li><strong>आराम:</strong> बच्चे को आराम करने दें और कमरे का माहौल शांत और बहुत सूखा न रखें।</li>
+<li><strong>सेलाइन नेज़ल ड्रॉप और हल्का सक्शन:</strong> उन शिशुओं के लिए जो नाक साफ़ नहीं कर सकते। बंद नाक से खांसी बढ़ती है।</li>
+<li><strong>शिशु को दूध पिलाना:</strong> थोड़ा सीधा बैठाकर दूध पिलाएं। शिशु को हमेशा पीठ के बल, सपाट बिस्तर पर सुलाएं। सोते समय तकिए से शिशु का सिर ऊँचा न करें।</li>
+<li><strong>शहद:</strong> शहद <strong>सिर्फ़ 1 साल की उम्र के बाद</strong> दिया जा सकता है। 1 साल से छोटे शिशु को शहद कभी न दें, क्योंकि इससे इन्फैंट बोटुलिज़्म का खतरा होता है।</li>
+<li><strong>गर्म भाप:</strong> साफ़ ह्यूमिडिफ़ायर से आराम मिल सकता है। गर्म पानी की भाप न दें, क्योंकि बच्चे भाप या गर्म पानी से जल सकते हैं।</li>
+</ul>
+
+<div class="danger-alert-box">
+<h3><i class="fa-solid fa-triangle-exclamation"></i> खांसी और सर्दी की दवाओं के बारे में ज़रूरी बात</h3>
+<ul>
+<li><strong>2 साल से छोटे बच्चों को बिना डॉक्टर की सलाह के खांसी-सर्दी की दवा न दें।</strong> इनसे फ़ायदा साबित नहीं हुआ है और गंभीर दुष्प्रभाव हो सकते हैं।</li>
+<li>बड़े बच्चों को भी अपने मन से खांसी का सिरप शुरू न करें। पहले डॉक्टर से पूछें।</li>
+<li><strong>एंटीबायोटिक वायरल खांसी का इलाज नहीं है।</strong> सामान्य सर्दी में एंटीबायोटिक की मांग न करें।</li>
+<li>घरघराहट के इनहेलर डॉक्टर ही लिखते और सिखाते हैं। बच्चा ठीक लगे तो भी रोज़ वाला इनहेलर डॉक्टर की सलाह के बिना बंद न करें।</li>
+</ul>
+</div>
+
+<h2>6. कब खांसी और घरघराहट अस्थमा हो सकती है?</h2>
+<p>अस्थमा सांस की नलियों की लंबे समय चलने वाली स्थिति है। बच्चों में यह आम है और सही इलाज व इनहेलर की सही तकनीक से अच्छी तरह नियंत्रित हो सकती है। अगर आपके बच्चे में ये लक्षण हों तो अस्थमा के बारे में सोचें:</p>
+<ul>
+<li>बार-बार घरघराहट, या ठंड, दौड़ने, हँसने या रोने पर लौटने वाली खांसी</li>
+<li>रात की खांसी जो बच्चे को जगा दे, खासकर महीने में एक से ज़्यादा बार</li>
+<li>परिवार में अस्थमा, एक्ज़िमा या एलर्जी का इतिहास</li>
+<li>खेलते समय जल्दी सांस फूलना या थकान, दोस्तों के साथ दौड़ने से बचना</li>
+</ul>
+<p>अस्थमा की पुष्टि डॉक्टर बच्चे की जाँच और इतिहास के आधार पर करते हैं। अच्छे इलाज में अक्सर रोज़ की कंट्रोलर दवा नियमित लेनी होती है और ज़रूरत पड़ने पर रिलीफ़ इनहेलर। स्पेसर का सही इस्तेमाल बहुत फ़र्क डालता है, और यह डॉक्टर या नर्स से सीखें।</p>
+
+<h2>7. खतरे के संकेत: उसी दिन डॉक्टर को दिखाएं</h2>
+<p>सांस की गति सबसे ज़रूरी संकेतों में से एक है। विश्व स्वास्थ्य संगठन (WHO) तेज़ सांस के लिए ये सीमाएँ मानता है। बच्चा शांत हो, रो या बुखार में न हो, तब पूरे एक मिनट तक गिनें:</p>
+<table style="width:100%;border-collapse:collapse;margin:14px 0;font-size:0.95rem">
+<thead><tr style="background:#eef2ff"><th style="padding:8px;text-align:left">उम्र</th><th style="padding:8px;text-align:left">तेज़ सांस (प्रति मिनट)</th></tr></thead>
+<tbody>
+<tr><td style="padding:8px">2 महीने से छोटे</td><td style="padding:8px">60 या ज़्यादा</td></tr>
+<tr><td style="padding:8px">2 से 11 महीने</td><td style="padding:8px">50 या ज़्यादा</td></tr>
+<tr><td style="padding:8px">1 से 5 साल</td><td style="padding:8px">40 या ज़्यादा</td></tr>
+</tbody></table>
+
+<div class="danger-alert-box">
+<h3><i class="fa-solid fa-triangle-exclamation"></i> अभी अस्पताल जाएं या 112 पर कॉल करें, अगर बच्चे में ये हों</h3>
+<ul>
+<li>हर सांस के साथ पसलियों के नीचे या बीच में खिंचाव, सांस के साथ “घर-घर” या कराहने जैसी आवाज़, या नथुने फूलना</li>
+<li>होंठ या जीभ नीले, स्लेटी या बहुत पीले</li>
+<li>बहुत सुस्त, ढीला, जगाने पर न जागे, या सामान्य प्रतिक्रिया न दे</li>
+<li>खाना, पानी न पी पाए, पूरी बात न बोल पाए, या थूक न निगल पाए</li>
+<li>मुँह में कुछ डालने के बाद अचानक दम घुटना, फिर लगातार खांसी या सांस में तकलीफ़</li>
+<li>खांसी में खून आना, या शिशु में सांस रुक-रुक कर चलना</li>
+</ul>
+</div>
+
+<h2>8. कब क्लिनिक में समय लें (आपातकाल नहीं)</h2>
+<ul>
+<li>खांसी 2 से 3 हफ़्ते से ज़्यादा चले</li>
+<li>बुखार के साथ खांसी 3 दिन से ज़्यादा रहे, या बुखार उतरने के बाद फिर लौट आए</li>
+<li>कोई भी घरघराहट, खासकर अगर वह दोबारा हो</li>
+<li>रात की खांसी जो नींद बार-बार तोड़े</li>
+<li>खाना कम खाना, वज़न घटना, या खांसी के बीच बच्चा बीमार लगे</li>
+<li>खांसी के साथ उल्टी आना, या खांसी जो ठीक होने के बजाय बढ़ रही हो</li>
+</ul>
+
+<h2>9. टीके जो खांसी से बचाते हैं</h2>
+<p>काली खांसी (पर्टुसिस) से बचाव नियमित टीकाकरण से होता है। कुछ बच्चों, जैसे अस्थमा या दिल-फेफड़े की समस्या वाले बच्चों, को फ्लू का टीका लगवाने की भी सलाह दी जाती है। अपने बच्चे के टीके <a href="iap-immunization-schedule.html">IAP टीकाकरण शेड्यूल</a> से मिलाएं, और हर विज़िट पर टीकाकरण कार्ड साथ लाएं।</p>
+
+<h2>अक्सर पूछे जाने वाले सवाल</h2>
+<h3>क्या रात की खांसी हमेशा अस्थमा का संकेत है?</h3>
+<p>नहीं। रात की खांसी अक्सर वायरल संक्रमण के बाद या एलर्जी से होती है। लेकिन अगर बार-बार लौटे या घरघराहट के साथ हो, तो डॉक्टर से जाँच कराएं ताकि अस्थमा हो तो जल्दी इलाज शुरू हो सके।</p>
+<h3>क्या शिशु को खांसी में शहद दे सकते हैं?</h3>
+<p>1 साल से पहले नहीं। 1 साल के बाद थोड़ी मात्रा में दिया जा सकता है। 1 साल से छोटे शिशु को शहद न दें।</p>
+<h3>10 दिन से खांसी है, क्या एंटीबायोटिक चाहिए?</h3>
+<p>आमतौर पर नहीं। सर्दी के बाद की ज़्यादातर खांसी वायरल होती है और एंटीबायोटिक वायरस पर काम नहीं करता। जाँच के बाद डॉक्टर तय करेंगे।</p>
+<h3>क्या बच्चों के लिए भाप लेना सुरक्षित है?</h3>
+<p>गर्म पानी की भाप से बच्चा जल सकता है। साफ़ ह्यूमिडिफ़ायर या बाथरूम में थोड़ी देर बैठना ज़्यादा सुरक्षित है। कोई भी घरेलू उपाय करने से पहले डॉक्टर से पूछें।</p>
+</div>
+<p style="font-size:0.8rem;color:#64748b;margin-top:24px;text-align:center;line-height:1.5;"><strong>Medical disclaimer:</strong> This article is for education only and does not replace an examination by a doctor. Please do not give any medicine without your doctor’s advice. <br>चिकित्सा सूचना: यह लेख केवल जानकारी के लिए है और डॉक्टर की जाँच का विकल्प नहीं है। बिना डॉक्टर की सलाह के कोई दवा न दें।</p>
+</div>
+</main>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong>Dr. Dinesh Mittal, MBBS, DCH</strong> | Delhi Medical Council Reg. No: <strong>DMC/R/00668</strong></p>
+        <p style="font-size: 0.78rem; color: #64748b; margin-top: 6px;">&copy; 2026 Dr. Dinesh Mittal Child Clinic, Sector 3 Rohini, New Delhi.</p>
+    </footer>
+
+    <!-- Bilingual Switcher Script -->
+    <script>
+      let currentLang = localStorage.getItem("preferredClinicLang") || "en";
+
+      function updateArticleView() {
+        const enBox = document.getElementById("content-en");
+        const hiBox = document.getElementById("content-hi");
+        const btnText = document.getElementById("articleLangText");
+
+        if (currentLang === "hi") {
+          if (enBox) enBox.style.display = "none";
+          if (hiBox) hiBox.style.display = "block";
+          if (btnText) btnText.textContent = "Read in English";
+        } else {
+          if (enBox) enBox.style.display = "block";
+          if (hiBox) hiBox.style.display = "none";
+          if (btnText) btnText.textContent = "हिन्दी में पढ़ें";
+        }
+      }
+
+      function toggleArticleLang() {
+        currentLang = (currentLang === "en") ? "hi" : "en";
+        localStorage.setItem("preferredClinicLang", currentLang);
+        updateArticleView();
+      }
+
+      document.addEventListener("DOMContentLoaded", updateArticleView);
+    </script>
+</body>
+</html>
