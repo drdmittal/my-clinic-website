@@ -605,6 +605,21 @@ function brushNext(){
   brushRender();
 }
 
+/* ---------- parents: reset stars (hold the star counter for 3 seconds) ---------- */
+var holdT = null, bankEl = document.getElementById('bankBox');
+bankEl.title = 'Parents: hold for 3 seconds to reset stars';
+function startHold(){ clearTimeout(holdT); holdT = setTimeout(function(){
+  holdT = null;
+  var hi = S.lang === 'hi';
+  if(window.confirm(hi ? 'सारे स्टार मिटाएँ? (केवल माता-पिता के लिए)' : 'Reset all stars? (for parents only)')){
+    S.bonus = 0; save(); updateBank(); if(current === 'home') renderHome();
+  }
+}, 3000); }
+function endHold(){ clearTimeout(holdT); holdT = null; }
+bankEl.addEventListener('pointerdown', startHold);
+['pointerup','pointerleave','pointercancel'].forEach(function(ev){ bankEl.addEventListener(ev, endHold); });
+bankEl.addEventListener('contextmenu', function(e){ e.preventDefault(); });
+
 /* ---------- events ---------- */
 document.getElementById('app').addEventListener('click', function(e){
   var b = e.target.closest('button'); if(!b) return;
