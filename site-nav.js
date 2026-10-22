@@ -46,8 +46,8 @@
     '.dmr-tile:focus-visible{outline:3px solid #ffd166;outline-offset:2px}' +
     '.dmr-logo{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:#fff;color:#2a2580;font:800 19px "Anek Devanagari",system-ui,sans-serif;text-decoration:none;margin:4px auto 10px;font-stretch:112%}' +
     '.dmr-rail{display:none}' +
-    '.dmr-tab{position:fixed;left:0;top:42%;transform:translateY(-50%);z-index:60;width:64px;padding:12px 4px 10px;border:0;border-radius:0 18px 18px 0;background:#f5ad1b;color:#2a2580;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;box-shadow:0 0 0 2px #fff,0 6px 16px rgba(0,0,0,.35);animation:dmrPulse 1.8s ease-in-out 4' +
-    '.dmr-tab i{width:7px;height:7px;border-radius:50%;display:block}' +
+    '.dmr-tab{position:fixed;left:0;top:42%;transform:translateY(-50%);z-index:60;width:46px;padding:10px 4px;border:0;border-radius:0 14px 14px 0;background:#f5ad1b;color:#2a2580;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;box-shadow:0 0 0 2px #fff,0 4px 12px rgba(0,0,0,.35);animation:dmrPulse 1.8s ease-in-out 4}' +
+    '.dmr-tab i{display:none}' +
     '.dmr-tab b{font:800 14px "Anek Devanagari",system-ui,sans-serif;letter-spacing:.02em;margin-top:2px}' +
     '@keyframes dmrPulse{0%,100%{transform:translateY(-50%)}50%{transform:translateY(-50%) translateX(5px)}}@media (prefers-reduced-motion:reduce){.dmr-tab{animation:none}}' +
     '.dmr-tab:focus-visible{outline:3px solid #ffd166;outline-offset:2px}' +
