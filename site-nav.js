@@ -46,10 +46,9 @@
     '.dmr-tile:focus-visible{outline:3px solid #ffd166;outline-offset:2px}' +
     '.dmr-logo{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:#fff;color:#2a2580;font:800 19px "Anek Devanagari",system-ui,sans-serif;text-decoration:none;margin:4px auto 10px;font-stretch:112%}' +
     '.dmr-rail{display:none}' +
-    '.dmr-tab{position:fixed;left:0;top:42%;transform:translateY(-50%);z-index:60;width:46px;padding:10px 4px;border:0;border-radius:0 14px 14px 0;background:#f5ad1b;color:#2a2580;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;box-shadow:0 0 0 2px #fff,0 4px 12px rgba(0,0,0,.35);animation:dmrPulse 1.8s ease-in-out 4}' +
-    '.dmr-tab i{display:none}' +
-    '.dmr-tab b{font:800 14px "Anek Devanagari",system-ui,sans-serif;letter-spacing:.02em;margin-top:2px}' +
-    '@keyframes dmrPulse{0%,100%{transform:translateY(-50%)}50%{transform:translateY(-50%) translateX(5px)}}@media (prefers-reduced-motion:reduce){.dmr-tab{animation:none}}' +
+    '.dmr-tab{position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:60;width:20px;padding:10px 0;border:0;border-radius:0 14px 14px 0;background:#4d47c4;color:#fff;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;box-shadow:2px 4px 14px rgba(20,16,70,.3)}' +
+    '.dmr-tab i{width:7px;height:7px;border-radius:50%;display:block}' +
+    '.dmr-tab b{writing-mode:vertical-rl;transform:rotate(180deg);font:700 11px "Anek Devanagari",system-ui,sans-serif;letter-spacing:.04em;margin-top:4px}' +
     '.dmr-tab:focus-visible{outline:3px solid #ffd166;outline-offset:2px}' +
     '.dmr-back{position:fixed;inset:0;background:rgba(15,12,50,.5);z-index:70;opacity:0;pointer-events:none;transition:opacity .2s}' +
     '.dmr-drawer{position:fixed;left:0;top:0;bottom:0;width:min(320px,86vw);z-index:71;background:#2a2580;color:#fff;transform:translateX(-102%);transition:transform .25s ease;padding:16px 14px calc(16px + env(safe-area-inset-bottom,0px));overflow-y:auto;display:flex;flex-direction:column;gap:12px}' +
@@ -102,7 +101,7 @@
     function render() {
       l = lang();
       rail.innerHTML = '<a class="dmr-logo" href="/" aria-label="Dr. Dinesh Mittal — home">DM</a>' + tiles();
-      tab.innerHTML = '<i style="background:#e2457a"></i><i style="background:#f5ad1b"></i><i style="background:#0f9b8e"></i><i style="background:#2f8fe0"></i><b>' + (l === 'hi' ? '☰ मेन्यू' : '☰ Menu') + '</b>';
+      tab.innerHTML = '<i style="background:#e2457a"></i><i style="background:#f5ad1b"></i><i style="background:#0f9b8e"></i><i style="background:#2f8fe0"></i><b>' + (l === 'hi' ? 'मेन्यू' : 'Menu') + '</b>';
       drawer.innerHTML = '<div class="dmr-dh"><div><b>Dr. Dinesh Mittal</b><small>' + (l === 'hi' ? 'शिशु रोग विशेषज्ञ, रोहिणी' : 'Child Specialist, Rohini') + '</small></div><button type="button" class="dmr-x" aria-label="Close menu">×</button></div><div class="dmr-grid">' + tiles() + '</div>';
     }
     render();
