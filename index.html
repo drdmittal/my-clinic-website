@@ -306,6 +306,15 @@ dialog::backdrop{background:rgba(15,12,50,.55)}
 .ages li:nth-child(5) .band{animation-delay:.05s}.ages li:nth-child(4) .band{animation-delay:.15s}.ages li:nth-child(3) .band{animation-delay:.25s}.ages li:nth-child(2) .band{animation-delay:.35s}.ages li:nth-child(1) .band{animation-delay:.45s}
 @keyframes grow{from{transform:scaleY(0);transform-origin:bottom;opacity:0}to{transform:none;opacity:1}}
 @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.games-strip{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,#e2457a,#8b4fd6);color:#fff;border-radius:22px;padding:18px 20px;text-decoration:none;box-shadow:0 8px 22px rgba(226,69,122,.25)}
+.gs-head{flex:1;display:flex;flex-direction:column;gap:4px}
+.gs-head b{font-size:20px;line-height:1.2}
+.gs-head small{font-size:14px;opacity:.92;line-height:1.35}
+.gs-icons{display:flex;gap:4px;font-size:22px}
+.gs-icons i{font-style:normal}
+.gs-go{font-size:28px;font-weight:800}
+.games-float{position:fixed;right:14px;bottom:calc(96px + env(safe-area-inset-bottom,0px));z-index:35;display:flex;align-items:center;gap:8px;background:var(--pink);color:#fff;text-decoration:none;font-weight:800;font-size:15px;padding:12px 16px;border-radius:999px;box-shadow:0 6px 18px rgba(226,69,122,.35)}
+@media (max-width:420px){.games-strip{flex-wrap:wrap}.gs-icons{width:100%}}
 </style>
 <script src="/site-nav.js" defer></script>
 <link rel="apple-touch-icon" href="/icons/icon-180.png">
@@ -352,6 +361,15 @@ dialog::backdrop{background:rgba(15,12,50,.55)}
     </div>
   </section>
 
+  <section id="games" style="padding-top:18px">
+    <div class="wrap">
+      <a class="games-strip" href="parent-tools/golu-game.html">
+        <span class="gs-head"><b><span class="en">Healthy Games for Kids</span><span class="hi">बच्चों के सेहतमंद खेल</span></b><small><span class="en">Free games on healthy food, screen time, brushing, safety and good behaviour</span><span class="hi">मुफ़्त खेल: खाना, स्क्रीन, ब्रश, सुरक्षा और अच्छा व्यवहार</span></small></span>
+        <span class="gs-icons" aria-hidden="true"><i>🍽️</i><i>🚦</i><i>🪥</i><i>🛡️</i><i>😊</i></span>
+        <span class="gs-go" aria-hidden="true">›</span>
+      </a>
+    </div>
+  </section>
   <section id="tools">
     <div class="wrap">
       <div class="sh"><h2><span class="en">Free tools for parents</span><span class="hi">माता-पिता के लिए मुफ़्त टूल्स</span></h2><p><span class="en">Use them at home on your phone, in Hindi or English. What you enter stays on your phone.</span><span class="hi">घर पर फ़ोन में इस्तेमाल करें, हिंदी या अंग्रेज़ी में। आपकी जानकारी आपके फ़ोन में ही रहती है।</span></p></div>
@@ -360,7 +378,7 @@ dialog::backdrop{background:rgba(15,12,50,.55)}
         <a class="tool wide" href="newborn.html" style="--c:var(--sky)"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="5"/><path d="M9 7.5h.01M15 7.5h.01M10 10q2 1.5 4 0M7 21v-2a5 5 0 0 1 10 0v2"/></svg></span><b><span class="en">Newborn corner</span><span class="hi">नवजात कॉर्नर</span></b><small><span class="en">Everything for the first months: when to worry, bathing, massage, feeding till 6 months, vaccines</span><span class="hi">पहले महीनों के लिए सब कुछ: चिंता कब करें, नहलाना, मालिश, 6 महीने तक दूध, टीके</span></small></a>
         <a class="tool" href="parent-tools/fever-chart.html" style="--c:var(--orange)"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg></span><b><span class="en">Fever chart</span><span class="hi">बुख़ार चार्ट</span></b><small><span class="en">Note each fever and show the doctor</span><span class="hi">हर बार का बुख़ार लिखें, डॉक्टर को दिखाएँ</span></small></a>
         <a class="tool" href="parent-tools/constipation-guide.html" style="--c:var(--leaf)"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.5-7-11a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 6.5-7 11-7 11z"/></svg></span><b><span class="en">Constipation guide</span><span class="hi">कब्ज़ गाइड</span></b><small><span class="en">Diet, toilet habit, milk and medicine</span><span class="hi">खान-पान, टॉयलेट की आदत, दूध और दवा</span></small></a>
-        <a class="tool" href="parent-tools/golu-game.html" style="--c:var(--pink)"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 14.5q3.5 3 7 0M9 9.5h.01M15 9.5h.01"/></svg></span><b><span class="en">Golu's Good Habits</span><span class="hi">गोलू की अच्छी आदतें</span></b><small><span class="en">Kids' games: healthy food, screen time, brushing, safety and good behaviour</span><span class="hi">बच्चों के खेल: खाना, स्क्रीन, ब्रश, सुरक्षा और अच्छा व्यवहार</span></small></a>
+        <a class="tool" href="parent-tools/golu-game.html" style="--c:var(--pink)"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 14.5q3.5 3 7 0M9 9.5h.01M15 9.5h.01"/></svg></span><b><span class="en">Healthy Games for Kids</span><span class="hi">बच्चों के सेहतमंद खेल</span></b><small><span class="en">Free games on healthy food, screen time, brushing, safety and good behaviour</span><span class="hi">मुफ़्त खेल: खाना, स्क्रीन, ब्रश, सुरक्षा और अच्छा व्यवहार</span></small></a>
         <a class="tool" href="growth-development-nutrition-screener.html" style="--c:var(--teal)"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20V10M18 20V4M6 20v-4"/></svg></span><b><span class="en">Growth check</span><span class="hi">विकास की जाँच</span></b><small><span class="en">IAP growth charts and milestones</span><span class="hi">IAP ग्रोथ चार्ट और विकास के पड़ाव</span></small></a>
         <a class="tool" href="parenting-behavior-guide.html" style="--c:var(--grape)"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg></span><b><span class="en">Behaviour guide</span><span class="hi">व्यवहार गाइड</span></b><small><span class="en">Tantrums, thumb-sucking, screens</span><span class="hi">ज़िद, अंगूठा चूसना, स्क्रीन</span></small></a>
       </div>
@@ -436,6 +454,8 @@ dialog::backdrop{background:rgba(15,12,50,.55)}
   </div>
 </footer>
 
+<a class="games-float" href="parent-tools/golu-game.html">🎮 <span class="en">Kids' games</span><span class="hi">बच्चों के खेल</span></a>
+
 <div class="bar">
   <a class="btn btn-line" href="tel:+918130521456"><span class="en">Call</span><span class="hi">कॉल करें</span></a>
   <button type="button" class="btn btn-green" data-book><span class="en">Book now</span><span class="hi">बुक करें</span></button>
@@ -504,5 +524,6 @@ dialog::backdrop{background:rgba(15,12,50,.55)}
   document.getElementById('yr').textContent = new Date().getFullYear();
 })();
 </script>
+<script>(function(){var f=document.querySelector('.games-float'),g=document.getElementById('games');if(!f||!g||!('IntersectionObserver' in window))return;new IntersectionObserver(function(e){f.style.display=e[0].isIntersecting?'none':'flex';}).observe(g);})();</script>
 </body>
 </html>

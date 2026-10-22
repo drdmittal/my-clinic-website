@@ -25,6 +25,7 @@
     { k: 'newborn', href: '/newborn.html', en: 'Newborn', hi: 'नवजात', c: '#e2457a' },
     { k: 'chart', href: '/parent-tools/fever-chart.html', en: 'Fever chart', hi: 'बुख़ार चार्ट', c: '#f08a1c' },
     { k: 'tools', href: '/#tools', en: 'Parent tools', hi: 'पेरेंट टूल्स', c: '#c2410c' },
+    { k: 'games', href: '/parent-tools/golu-game.html', en: 'Healthy Games for Kids', hi: 'बच्चों के सेहतमंद खेल', c: '#e2457a' },
     { k: 'vaccine', href: '/iap-immunization-schedule.html', en: 'Vaccines', hi: 'टीके', c: '#0f9b8e' },
     { k: 'guides', href: '/blog.html', en: 'Guides', hi: 'गाइड', c: '#8b4fd6' },
     { k: 'visit', href: '/#visit', en: 'Timings & map', hi: 'समय और पता', c: '#2f8fe0' },
