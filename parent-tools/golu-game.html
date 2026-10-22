@@ -1,6 +1,6 @@
 <!doctype html><html lang="hi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style><link rel="apple-touch-icon" href="/icons/icon-180.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
-</head><body><title>Golu Potty Hero</title>
+</head><body><title>Golu's Good Habits</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -116,6 +116,22 @@ h2{margin:0;font-size:26px;line-height:1.1;font-weight:800;text-align:center;tex
 @keyframes fall{to{transform:translateY(110vh) rotate(540deg);opacity:.8}}
 .fly{position:fixed;font-size:34px;z-index:60;pointer-events:none;animation:fly .8s ease-in forwards}
 @keyframes fly{to{transform:translate(var(--dx),var(--dy)) scale(.5);opacity:.3}}
+.t-plate{background:#ffd9a8} .t-screen{background:#b9e4ff} .t-brush{background:#d4f5f0} .t-safe{background:#e4d4ff} .t-behave{background:#fff0b3}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+.opt{border:0;border-radius:22px;min-height:88px;font:800 19px var(--font);color:#fff;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;box-shadow:0 6px 0 rgba(0,0,0,.2);padding:6px}
+.opt .ic{font-size:34px;line-height:1}
+.opt.g{background:var(--grass)} .opt.y{background:var(--sun-deep);color:var(--ink)} .opt.r{background:var(--berry)}
+.chips{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.chip{border:3px solid transparent;background:var(--card);border-radius:18px;padding:8px 4px;display:flex;flex-direction:column;align-items:center;font:700 15px var(--font);color:var(--ink);cursor:pointer;min-height:92px;justify-content:center;box-shadow:0 4px 0 rgba(33,48,74,.12);text-align:center}
+.chip .pic{font-size:34px;line-height:1.1}
+.chip[aria-pressed="true"]{border-color:var(--grass);background:#e6f8ea}
+.plate{background:#fff3d6;border:4px dashed var(--sun-deep);border-radius:50%;width:210px;height:210px;margin:0 auto;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:800;font-size:28px;line-height:1.3;padding:24px;box-sizing:border-box}
+.checklist{background:var(--card);border-radius:20px;padding:12px 14px;display:flex;flex-direction:column;gap:6px;font-weight:700}
+.step{background:var(--card);border-radius:24px;padding:18px;display:flex;flex-direction:column;gap:8px;align-items:center;text-align:center;box-shadow:0 6px 0 rgba(33,48,74,.14)}
+.step .n{font-size:17px;color:var(--muted);font-weight:800}
+.step .ic{font-size:64px;line-height:1}
+.step .big{font-size:23px;font-weight:800;line-height:1.25}
+.pnote{font:600 15px system-ui,sans-serif;color:var(--muted);text-align:center}
 button:focus-visible{outline:4px solid var(--ink);outline-offset:3px}
 @media (prefers-reduced-motion: reduce){.golu.bounce,.golu.shake,.confetti span,.fly{animation:none}.balloon{transition:none}}
 </style>
@@ -141,6 +157,11 @@ button:focus-visible{outline:4px solid var(--ink);outline-offset:3px}
       <button type="button" class="tile t-food" data-go="food"><span class="ic">🍎</span><span><span data-t="foodGame"></span><small data-t="foodGameSub"></small></span></button>
       <button type="button" class="tile t-chart" data-go="chart"><span class="ic">🏆</span><span><span data-t="chart"></span><small data-t="chartSub"></small></span></button>
       <button type="button" class="tile t-timer" data-go="report"><span class="ic">🚽</span><span><span data-t="report"></span><small data-t="reportSub"></small></span></button>
+      <button type="button" class="tile t-plate" data-go="plate"><span class="ic">🍽️</span><span><span data-t="plateGame"></span><small data-t="plateGameSub"></small></span></button>
+      <button type="button" class="tile t-screen" data-go="screen"><span class="ic">🚦</span><span><span data-t="screenGame"></span><small data-t="screenGameSub"></small></span></button>
+      <button type="button" class="tile t-brush" data-go="brush"><span class="ic">🪥</span><span><span data-t="brushGame"></span><small data-t="brushGameSub"></small></span></button>
+      <button type="button" class="tile t-safe" data-go="safe"><span class="ic">🛡️</span><span><span data-t="safeGame"></span><small data-t="safeGameSub"></small></span></button>
+      <button type="button" class="tile t-behave" data-go="behave"><span class="ic">😊</span><span><span data-t="behaveGame"></span><small data-t="behaveGameSub"></small></span></button>
     </div>
     <button type="button" class="parents-link" data-go="parents" data-t="forParents"></button>
   </section>
@@ -156,13 +177,41 @@ button:focus-visible{outline:4px solid var(--ink);outline-offset:3px}
 
   <!-- PARENTS -->
   <section class="screen" id="s-parents" hidden></section>
+
+  <!-- HABIT GAMES -->
+  <section class="screen" id="s-plate" hidden></section>
+  <section class="screen" id="s-screen" hidden></section>
+  <section class="screen" id="s-brush" hidden></section>
+  <section class="screen" id="s-safe" hidden></section>
+  <section class="screen" id="s-behave" hidden></section>
 </div>
 
 <script>
 (function(){
 var T = {
   home:{en:'Home',hi:'होम'},
-  title:{en:'Golu the Tummy',hi:'गोलू पेट'},
+  title:{en:"Golu's Good Habits",hi:'गोलू की अच्छी आदतें'},
+  plateGame:{en:'Balanced Plate',hi:'संतुलित थाली'},
+  plateGameSub:{en:'Build a healthy plate for Golu',hi:'गोलू के लिए सही थाली बनाओ'},
+  screenGame:{en:'Screen Time Traffic Light',hi:'स्क्रीन टाइम ट्रैफिक लाइट'},
+  screenGameSub:{en:'Green, yellow or red? You decide!',hi:'हरा, पीला या लाल? फैसला तुम करो!'},
+  brushGame:{en:'Brush Like a Hero',hi:'हीरो की तरह ब्रश करो'},
+  brushGameSub:{en:'Twice a day, two minutes, before bed too',hi:'दिन में दो बार, दो मिनट, सोने से पहले भी'},
+  safeGame:{en:'Safe or Not Safe?',hi:'सुरक्षित या नहीं?'},
+  safeGameSub:{en:'Stay safe, say no, tell a grown-up',hi:'सुरक्षित रहो, ना कहो, बड़ों को बताओ'},
+  behaveGame:{en:'Good or Not Good?',hi:'अच्छा या अच्छा नहीं?'},
+  behaveGameSub:{en:'Kind words and good manners',hi:'प्यारे शब्द और अच्छे व्यवहार'},
+  plateAsk:{en:'Tap the foods to put on Golu\'s plate',hi:'गोलू की थाली में खाना चुनो'},
+  plateEmpty:{en:'Empty plate',hi:'खाली थाली'},
+  plateCheck:{en:'Check my plate',hi:'मेरी थाली जाँचो'},
+  plateGood:{en:'Balanced plate! Golu is happy. +1 star',hi:'संतुलित थाली! गोलू खुश है। +1 स्टार'},
+  plateJunk:{en:'Take away the junk food. It does not go on the plate.',hi:'जंक फूड हटाओ। यह थाली में नहीं जाता।'},
+  plateMissing:{en:'Add the groups still missing below. Golu needs all of them.',hi:'नीचे के छूटे हुए ग्रुप जोड़ो। गोलू को सबकी ज़रूरत है।'},
+  brushDone:{en:'Brushing done! Clean teeth, happy Golu. +1 star',hi:'ब्रश हो गया! साफ़ दाँत, खुश गोलू। +1 स्टार'},
+  brushParent:{en:'Parents: help your child brush until about 7–8 years, and check the back teeth.',hi:'माता-पिता: 7–8 साल तक बच्चे के साथ ब्रश करवाएँ और पीछे के दाँत ज़रूर देखें।'},
+  screenAsk:{en:'Which colour is this?',hi:'यह कौन सा रंग है?'},
+  safeAsk:{en:'Is this safe?',hi:'क्या यह सुरक्षित है?'},
+  behaveAsk:{en:'Is this good behaviour?',hi:'क्या यह अच्छा व्यवहार है?'},
   foodGame:{en:'Tummy Food Game',hi:'पेट का खाना गेम'},
   foodGameSub:{en:'Is it good for Golu? Yes or No!',hi:'गोलू के लिए अच्छा? हाँ या ना!'},
   chart:{en:'Potty Hero Chart',hi:'पॉटी हीरो चार्ट'},
@@ -170,7 +219,7 @@ var T = {
   report:{en:'Poop Report',hi:'पॉटी रिपोर्ट'},
   reportSub:{en:'Came back from the potty? Tell Golu!',hi:'पॉटी से आए? गोलू को बताओ!'},
   forParents:{en:'For parents: reward & stool diary',hi:'माता-पिता के लिए: इनाम और पॉटी डायरी'},
-  homeSay:{en:"Hi! I'm Golu, your tummy. Help me stay happy!",hi:'नमस्ते! मैं गोलू हूँ, तुम्हारा पेट। मुझे खुश रखने में मदद करो!'},
+  homeSay:{en:"Hi! I'm Golu. Let's build good habits together!",hi:'नमस्ते! मैं गोलू हूँ। आओ, मिलकर अच्छी आदतें सीखें!'},
   homeSayStars:{en:'Wow, {n} stars! You are a superstar!',hi:'वाह, {n} स्टार! तुम सुपरस्टार हो!'},
   ask:{en:'Is this good for Golu?',hi:'क्या यह गोलू के लिए अच्छा है?'},
   yes:{en:'Yes',hi:'हाँ'}, no:{en:'No',hi:'ना'},
@@ -229,6 +278,63 @@ var FOODS = [
   {p:'🍩',en:'Donut',hi:'डोनट',g:0,why:{en:'Fried maida. Not for a happy tummy.',hi:'तला हुआ मैदा। खुश पेट के लिए नहीं।'}}
 ];
 
+/* ---- habit games data ---- */
+var PLATE_ITEMS = [
+  {k:'roti',p:'🫓',en:'Roti',hi:'रोटी',g:'grain'},{k:'rice',p:'🍚',en:'Rice',hi:'चावल',g:'grain'},
+  {k:'dal',p:'🍲',en:'Dal',hi:'दाल',g:'protein'},{k:'egg',p:'🥚',en:'Egg',hi:'अंडा',g:'protein'},{k:'paneer',p:'🧀',en:'Paneer',hi:'पनीर',g:'protein'},
+  {k:'sabzi',p:'🥕',en:'Sabzi',hi:'सब्ज़ी',g:'veg'},{k:'salad',p:'🥗',en:'Salad',hi:'सलाद',g:'veg'},
+  {k:'apple',p:'🍎',en:'Apple',hi:'सेब',g:'fruit'},{k:'banana',p:'🍌',en:'Banana',hi:'केला',g:'fruit'},
+  {k:'milk',p:'🥛',en:'Milk',hi:'दूध',g:'dairy'},{k:'curd',p:'🥣',en:'Curd',hi:'दही',g:'dairy'},
+  {k:'chips',p:'🍟',en:'Chips',hi:'चिप्स',g:'junk'},{k:'cola',p:'🥤',en:'Cold drink',hi:'कोल्ड ड्रिंक',g:'junk'},{k:'biscuit',p:'🍪',en:'Biscuit',hi:'बिस्किट',g:'junk'}
+];
+var PLATE_GROUPS = {
+  grain:{en:'Roti or rice',hi:'रोटी या चावल'}, protein:{en:'Dal, egg or paneer',hi:'दाल, अंडा या पनीर'},
+  veg:{en:'Vegetable or salad',hi:'सब्ज़ी या सलाद'}, fruit:{en:'Fruit',hi:'फल'}, dairy:{en:'Milk or curd',hi:'दूध या दही'}
+};
+var QZ = {
+  screen:{ask:'screenAsk', opts:[{ic:'🟢',cls:'g',v:'g',en:'Green: OK',hi:'हरा: ठीक है'},{ic:'🟡',cls:'y',v:'y',en:'Yellow: with a limit',hi:'पीला: समय सीमा के साथ'},{ic:'🔴',cls:'r',v:'r',en:'Red: no screen',hi:'लाल: स्क्रीन नहीं'}],
+    list:[
+      {p:'📖',en:'Reading a picture book with Mummy',hi:'मम्मी के साथ चित्रों वाली किताब पढ़ना',a:'g',why:{en:'Reading together builds words and closeness.',hi:'साथ पढ़ने से शब्द और प्यार बढ़ते हैं।'}},
+      {p:'🎨',en:'Colouring at the table',hi:'मेज़ पर रंग भरना',a:'g',why:{en:'Drawing makes the hands and mind strong.',hi:'चित्र बनाने से हाथ और दिमाग मज़बूत होते हैं।'}},
+      {p:'⚽',en:'Playing outside in the park',hi:'पार्क में बाहर खेलना',a:'g',why:{en:'Running and jumping keep the body strong and sleep good.',hi:'दौड़ना-कूदना शरीर को मज़बूत और नींद को अच्छी रखता है।'}},
+      {p:'📞',en:'A 10-minute video call with grandparents, with a grown-up next to you',hi:'दादा-दादी से 10 मिनट वीडियो कॉल, पास में कोई बड़ा हो',a:'y',why:{en:'Short calls are fine, with a grown-up present.',hi:'छोटी कॉल ठीक है, पास में बड़ा हो।'}},
+      {p:'📺',en:'30 minutes of cartoons after school (age 4)',hi:'स्कूल के बाद 30 मिनट कार्टून (4 साल)',a:'y',why:{en:'Under 5: keep it to 1 hour a day or less, and watch together.',hi:'5 साल से छोटे: रोज़ 1 घंटा या कम, और साथ में देखो।'}},
+      {p:'🍽️',en:'A phone at the dinner table',hi:'खाने की मेज़ पर फ़ोन',a:'r',why:{en:'No screens at meals. Talk and eat together.',hi:'खाने के समय स्क्रीन नहीं। साथ बैठो, बातें करो, खाओ।'}},
+      {p:'🛏️',en:'A phone in bed before sleep',hi:'सोने से पहले बिस्तर पर फ़ोन',a:'r',why:{en:'Screens near bedtime keep the brain awake.',hi:'सोने से पहले की स्क्रीन दिमाग को जगाए रखती है।'}},
+      {p:'👶',en:'A phone for a 1-year-old',hi:'1 साल के बच्चे को फ़ोन',a:'r',why:{en:'Under 2 years: no screens at all.',hi:'2 साल से छोटे: बिल्कुल स्क्रीन नहीं।'}}
+    ]},
+  safe:{ask:'safeAsk', opts:[{ic:'✅',cls:'g',v:1,en:'Safe',hi:'सुरक्षित'},{ic:'⚠️',cls:'r',v:0,en:'Not safe',hi:'सुरक्षित नहीं'}],
+    list:[
+      {p:'🍬',en:'A stranger offers a toffee and says, "Come, I will show you a puppy."',hi:'एक अनजान आदमी टॉफ़ी देकर कहे, "आओ, मैं तुम्हें पिल्ला दिखाता हूँ।"',a:0,why:{en:'Never go with a stranger. Say NO, run to a grown-up you know, and tell a parent.',hi:'किसी अनजान के साथ कभी न जाओ। ना कहो, किसी जाने-पहचाने बड़े के पास भागो और माता-पिता को बताओ।'}},
+      {p:'🤫',en:'A grown-up asks you to keep a secret that feels uncomfortable.',hi:'कोई बड़ा ऐसा राज़ रखने को कहे जिससे तुम्हें असहज लगे।',a:0,why:{en:'Tell a parent right away. A secret that feels wrong must always be told.',hi:'तुरंत माता-पिता को बताओ। जो राज़ गलत लगे, वह ज़रूर बताना है।'}},
+      {p:'🚗',en:'Someone you do not know says Mummy sent them to pick you up from school.',hi:'कोई अनजान व्यक्ति कहे कि मम्मी ने उसे स्कूल से लेने भेजा है।',a:0,why:{en:'Do not go. Ask Mummy or Papa to confirm on the phone first.',hi:'मत जाओ। पहले मम्मी या पापा से फ़ोन पर पक्का करो।'}},
+      {p:'🛒',en:'You get lost in the market.',hi:'तुम बाज़ार में खो गए।',a:1,why:{en:'Stay where you are. Ask a shopkeeper or a police uncle, and tell them your parent’s name and phone number.',hi:'जहाँ हो वहीं रुको। किसी दुकानदार या पुलिस अंकल से मदद लो और माता-पिता का नाम व फ़ोन नंबर बताओ।'}},
+      {p:'🙅',en:'Someone touches the parts of your body covered by your underwear.',hi:'कोई तुम्हारे अंडरवियर से ढके अंगों को छूए।',a:0,why:{en:'Say NO loudly, move away, and tell a parent. Your body belongs to you.',hi:'ज़ोर से ना कहो, वहाँ से दूर हटो, और माता-पिता को बताओ। तुम्हारा शरीर तुम्हारा है।'}},
+      {p:'🏫',en:'Mummy is waiting at the school gate, and you go home with her.',hi:'मम्मी स्कूल के गेट पर इंतज़ार कर रही हैं, और तुम उनके साथ घर जाते हो।',a:1,why:{en:'Going with a parent you know is safe.',hi:'जाने-पहचाने माता-पिता के साथ जाना सुरक्षित है।'}}
+    ]},
+  behave:{ask:'behaveAsk', opts:[{ic:'👍',cls:'g',v:1,en:'Good',hi:'अच्छा'},{ic:'👎',cls:'r',v:0,en:'Not good',hi:'अच्छा नहीं'}],
+    list:[
+      {p:'🧸',en:'You share your toy with a friend.',hi:'तुम अपना खिलौना दोस्त के साथ बाँटते हो।',a:1,why:{en:'Sharing makes friends happy.',hi:'बाँटने से दोस्त खुश होते हैं।'}},
+      {p:'😠',en:'You hit a friend when you are angry.',hi:'गुस्से में तुम दोस्त को मारते हो।',a:0,why:{en:'Say "I am angry" in words instead of hitting.',hi:'मारने की जगह कहो, "मुझे गुस्सा आ रहा है।"'}},
+      {p:'🙏',en:'You say sorry after making a mistake.',hi:'गलती होने पर तुम "सॉरी" कहते हो।',a:1,why:{en:'Saying sorry helps mend friendships.',hi:'सॉरी कहने से दोस्ती फिर जुड़ती है।'}},
+      {p:'🍚',en:'You throw food on the floor.',hi:'तुम खाना ज़मीन पर फेंकते हो।',a:0,why:{en:'Food is for eating. Say "I am full" when you have had enough.',hi:'खाना खाने के लिए है। पेट भर जाए तो कहो, "मेरा पेट भर गया।"'}},
+      {p:'💬',en:'You say "please" and "thank you".',hi:'तुम "प्लीज़" और "थैंक यू" कहते हो।',a:1,why:{en:'Good manners make everyone smile.',hi:'अच्छे तौर-तरीके सबको खुश करते हैं।'}},
+      {p:'🧺',en:'You help put your toys back in the box.',hi:'तुम खिलौने वापस डिब्बे में रखने में मदद करते हो।',a:1,why:{en:'Tidying up is a helpful habit.',hi:'कमरा साफ़ रखना अच्छी आदत है।'}},
+      {p:'📢',en:'You shout at your grandparents.',hi:'तुम दादा-दादी पर चिल्लाते हो।',a:0,why:{en:'Speak softly and kindly, even when upset.',hi:'परेशान हो तो भी धीरे और प्यार से बोलो।'}},
+      {p:'🥛',en:'You break a cup and tell Mummy the truth.',hi:'कप टूट जाता है और तुम मम्मी को सच बताते हो।',a:1,why:{en:'Telling the truth builds trust.',hi:'सच बोलने से भरोसा बनता है।'}}
+    ]}
+};
+var BRUSH_STEPS = [
+  {ic:'🌅',en:'Brush 2 times a day: morning and night',hi:'दिन में 2 बार ब्रश: सुबह और रात'},
+  {ic:'🪥',en:'Use a little fluoride paste: rice-grain size under 3 years, pea size from 3 years',hi:'फ्लोराइड पेस्ट थोड़ा लो: 3 साल से छोटे बच्चे चावल के दाने जितना, 3 साल से बड़े मटर के दाने जितना'},
+  {ic:'↗️',en:'Hold the brush at a slant, pointing towards the gums',hi:'ब्रश को तिरछा रखो, मसूड़ों की ओर'},
+  {ic:'🔄',en:'Gently brush the outer, inner and chewing side of every tooth, in small circles',hi:'हर दाँत के बाहर, अंदर और चबाने वाली सतह पर हल्के गोल-गोल ब्रश करो'},
+  {ic:'👅',en:'Brush your tongue too',hi:'जीभ भी साफ़ करो'},
+  {ic:'⏱️',en:'Brush for 2 full minutes. Spit, do not rinse with lots of water',hi:'पूरे 2 मिनट ब्रश करो। थूक दो, ज़्यादा पानी से कुल्ला न करो'},
+  {ic:'🌙',en:'Last brush before bed. No milk or food after brushing at night',hi:'सोने से पहले आख़िरी ब्रश। रात को ब्रश के बाद दूध या खाना नहीं'},
+  {ic:'🔁',en:'Change the brush every 3 months',hi:'हर 3 महीने में ब्रश बदलो'}
+];
+
 var S = {lang:'hi', bonus:0, days:{}, reward:{text:'', goal:30}, mins:5};
 try{ var sv = JSON.parse(localStorage.getItem('golu-hero')||'null'); if(sv) Object.assign(S, sv); }catch(e){}
 function save(){ try{ localStorage.setItem('golu-hero', JSON.stringify(S)); }catch(e){} }
@@ -278,13 +384,16 @@ var current = 'home';
 function show(name){
   stopTimer();
   current = name;
-  ['home','food','chart','report','parents'].forEach(function(n){ document.getElementById('s-'+n).hidden = (n!==name); });
+  ['home','food','chart','report','parents','plate','screen','brush','safe','behave'].forEach(function(n){ document.getElementById('s-'+n).hidden = (n!==name); });
   document.getElementById('backBtn').hidden = (name==='home');
   if(name==='home') renderHome();
   if(name==='food') startGame();
   if(name==='chart') renderChart();
   if(name==='report') renderReport();
   if(name==='parents') renderParents();
+  if(name==='plate') plateRender();
+  if(name==='brush') brushRender();
+  if(name==='screen' || name==='safe' || name==='behave') qRender(name);
   window.scrollTo(0,0);
 }
 function applyLang(){
@@ -478,6 +587,83 @@ function renderParents(msg){
     '<div style="text-align:center;color:var(--muted);font-size:14px;font-family:system-ui,sans-serif">Dr. Dinesh Mittal, MBBS, DCH</div>';
 }
 
+/* ---------- quiz games: screen, safe, behave ---------- */
+var QS = {};
+function progHtml2(st){ return '<div class="prog">'+st.list.map(function(f,k){ var c = k<st.res.length ? (st.res[k]?'ok':'no') : (k===st.i?'now':''); return '<i class="'+c+'"></i>'; }).join('')+'</div>'; }
+function qStart(name){ QS[name] = {list: shuffle(QZ[name].list), i:0, won:0, res:[], answered:false}; qRender(name); }
+function qRender(name){
+  if(!QS[name]){ qStart(name); return; }
+  var el = document.getElementById('s-'+name), cfg = QZ[name], st = QS[name];
+  if(st.i >= st.list.length){
+    var mood = st.won >= st.list.length-1 ? 'wow' : st.won >= Math.ceil(st.list.length/2) ? 'happy' : 'sad';
+    el.innerHTML = progHtml2(st)+'<div class="result">'+goluSvg(mood,'bounce')+'<h2>'+L(T.done)+'</h2><div class="score">⭐ '+st.won+' / '+st.list.length+'</div></div>'+
+      '<button type="button" class="go" data-qstart="'+name+'">'+L(T.playAgain)+'</button>';
+    if(st.won >= st.list.length-1) confetti();
+    return;
+  }
+  var it = st.list[st.i];
+  var h = progHtml2(st)+'<div style="display:flex;justify-content:center">'+goluSvg('happy','small')+'</div>'+
+    '<div class="food" id="qCard"><span class="pic" aria-hidden="true">'+it.p+'</span><span class="nm">'+esc(L(it))+'</span><span class="stamp" id="qStamp"></span></div>';
+  if(!st.answered){
+    h += '<div class="ask">'+L(T[cfg.ask])+'</div><div class="opts">'+cfg.opts.map(function(o,k){
+      return '<button type="button" class="opt '+o.cls+'" data-qname="'+name+'" data-qi="'+k+'"><span class="ic">'+o.ic+'</span>'+esc(L(o))+'</button>';
+    }).join('')+'</div>';
+  }
+  el.innerHTML = h;
+}
+function qAnswer(name, k){
+  var st = QS[name], cfg = QZ[name];
+  if(!st || st.answered) return;
+  var it = st.list[st.i], ok = (cfg.opts[k].v === it.a);
+  st.answered = true; st.res.push(ok);
+  var el = document.getElementById('s-'+name), card = document.getElementById('qCard'), stamp = document.getElementById('qStamp');
+  el.querySelector('.ask').remove(); el.querySelector('.opts').remove();
+  if(ok){ st.won++; S.bonus++; save(); stamp.className='stamp good show'; stamp.textContent='✓'; react(el,'wow'); flyStar(card); }
+  else { stamp.className='stamp bad show'; stamp.textContent='✗'; react(el,'sad'); }
+  var w = document.createElement('div'); w.className = 'why '+(ok?'good':'bad');
+  w.innerHTML = '<div style="font-size:22px;font-weight:800">'+(ok?L(T.right):L(T.wrong))+'</div>'+esc(L(it.why));
+  var nx = document.createElement('button'); nx.type='button'; nx.className='go'; nx.dataset.qnext = name; nx.textContent = L(T.next)+' →';
+  el.appendChild(w); el.appendChild(nx); el.querySelector('.prog').outerHTML = progHtml2(st); nx.focus();
+}
+function qNext(name){ var st = QS[name]; st.i++; st.answered = false; qRender(name); }
+
+/* ---------- balanced plate ---------- */
+var PL = {sel:{}, scored:false};
+function plateRender(){
+  var el = document.getElementById('s-plate');
+  var chips = PLATE_ITEMS.map(function(x,k){ return '<button type="button" class="chip" aria-pressed="'+(!!PL.sel[k])+'" data-pl="'+k+'"><span class="pic" aria-hidden="true">'+x.p+'</span>'+esc(L(x))+'</button>'; }).join('');
+  var picked = PLATE_ITEMS.filter(function(x,k){ return PL.sel[k]; }).map(function(x){ return x.p; }).join(' ');
+  el.innerHTML = '<div class="bubble" style="text-align:center">'+L(T.plateAsk)+'</div>'+
+    '<div class="plate" aria-live="polite">'+(picked ? picked : esc(L(T.plateEmpty)))+'</div>'+
+    '<div class="chips">'+chips+'</div>'+
+    '<button type="button" class="go" data-pcheck="1">'+L(T.plateCheck)+'</button>'+
+    '<div id="plateRes"></div>';
+}
+function plateCheck(){
+  var have = {}, junk = 0;
+  PLATE_ITEMS.forEach(function(x,k){ if(PL.sel[k]){ if(x.g==='junk') junk++; else have[x.g]=true; } });
+  var rows = Object.keys(PLATE_GROUPS).map(function(g){ return '<div>'+(have[g]?'✅':'⬜')+' '+esc(L(PLATE_GROUPS[g]))+'</div>'; }).join('');
+  var allOk = Object.keys(PLATE_GROUPS).every(function(g){ return have[g]; }) && junk === 0;
+  var msg = allOk ? L(T.plateGood) : (junk ? L(T.plateJunk) : L(T.plateMissing));
+  document.getElementById('plateRes').innerHTML = '<div class="checklist">'+rows+'</div><div class="why '+(allOk?'good':'bad')+'">'+msg+'</div>';
+  if(allOk && !PL.scored){ PL.scored = true; S.bonus++; save(); updateBank(); confetti(); }
+}
+
+/* ---------- brushing ---------- */
+var BR = {i:0, done:false};
+function brushRender(){
+  var el = document.getElementById('s-brush'), N = BRUSH_STEPS.length, s = BRUSH_STEPS[BR.i];
+  var last = BR.i === N-1;
+  el.innerHTML = '<div class="step"><div class="n">'+(BR.i+1)+' / '+N+'</div><div class="ic" aria-hidden="true">'+s.ic+'</div><div class="big">'+esc(L(s))+'</div></div>'+
+    (!last ? '<button type="button" class="go" data-bnext="1">'+L(T.next)+' →</button>'
+           : '<div class="why good">'+L(T.brushDone)+'</div><button type="button" class="go" data-bagain="1">'+L(T.playAgain)+'</button>')+
+    '<div class="pnote">'+L(T.brushParent)+'</div>';
+}
+function brushNext(){
+  if(BR.i < BRUSH_STEPS.length-1){ BR.i++; if(BR.i === BRUSH_STEPS.length-1 && !BR.done){ BR.done = true; S.bonus++; save(); updateBank(); confetti(); } }
+  brushRender();
+}
+
 /* ---------- events ---------- */
 document.getElementById('app').addEventListener('click', function(e){
   var b = e.target.closest('button'); if(!b) return;
@@ -485,6 +671,13 @@ document.getElementById('app').addEventListener('click', function(e){
   if(b.id==='backBtn'){ show('home'); return; }
   if(b.dataset.go){ show(b.dataset.go); return; }
   if(b.dataset.ans !== undefined){ answer(b.dataset.ans==='1', b); return; }
+  if(b.dataset.qname !== undefined){ qAnswer(b.dataset.qname, +b.dataset.qi); return; }
+  if(b.dataset.qnext){ qNext(b.dataset.qnext); return; }
+  if(b.dataset.qstart){ qStart(b.dataset.qstart); return; }
+  if(b.dataset.pl !== undefined){ var pk = +b.dataset.pl; PL.sel[pk] = !PL.sel[pk]; plateRender(); return; }
+  if(b.dataset.pcheck){ plateCheck(); return; }
+  if(b.dataset.bnext){ brushNext(); return; }
+  if(b.dataset.bagain){ BR.i = 0; brushRender(); return; }
   if(b.id==='nextFood'){ G.i++; G.answered=false; renderFood(); return; }
   if(b.id==='again'){ startGame(); return; }
   if(b.dataset.task !== undefined){ toggleTask(+b.dataset.task, b); return; }
