@@ -131,6 +131,15 @@ h2{margin:0;font-size:26px;line-height:1.1;font-weight:800;text-align:center;tex
 .step .n{font-size:17px;color:var(--muted);font-weight:800}
 .step .ic{font-size:64px;line-height:1}
 .step .big{font-size:23px;font-weight:800;line-height:1.25}
+.step .ic.scrub{animation:scrub .5s ease-in-out infinite}
+.step .ic.bob{animation:bob 1.1s ease-in-out infinite}
+.step .ic.tilt{animation:tilt 1.4s ease-in-out infinite}
+.step .ic.spin{animation:spin 2.4s linear infinite}
+@keyframes scrub{0%,100%{transform:rotate(-16deg) translateX(-6px)}50%{transform:rotate(16deg) translateX(6px)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes tilt{0%,100%{transform:rotate(-30deg)}50%{transform:rotate(-40deg)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion: reduce){.step .ic{animation:none!important}}
 .pnote{font:600 15px system-ui,sans-serif;color:var(--muted);text-align:center}
 button:focus-visible{outline:4px solid var(--ink);outline-offset:3px}
 @media (prefers-reduced-motion: reduce){.golu.bounce,.golu.shake,.confetti span,.fly{animation:none}.balloon{transition:none}}
@@ -325,14 +334,14 @@ var QZ = {
     ]}
 };
 var BRUSH_STEPS = [
-  {ic:'🌅',en:'Brush 2 times a day: morning and night',hi:'दिन में 2 बार ब्रश: सुबह और रात'},
-  {ic:'🪥',en:'Use a little fluoride paste: rice-grain size under 3 years, pea size from 3 years',hi:'फ्लोराइड पेस्ट थोड़ा लो: 3 साल से छोटे बच्चे चावल के दाने जितना, 3 साल से बड़े मटर के दाने जितना'},
-  {ic:'↗️',en:'Hold the brush at a slant, pointing towards the gums',hi:'ब्रश को तिरछा रखो, मसूड़ों की ओर'},
-  {ic:'🔄',en:'Gently brush the outer, inner and chewing side of every tooth, in small circles',hi:'हर दाँत के बाहर, अंदर और चबाने वाली सतह पर हल्के गोल-गोल ब्रश करो'},
-  {ic:'👅',en:'Brush your tongue too',hi:'जीभ भी साफ़ करो'},
-  {ic:'⏱️',en:'Brush for 2 full minutes. Spit, do not rinse with lots of water',hi:'पूरे 2 मिनट ब्रश करो। थूक दो, ज़्यादा पानी से कुल्ला न करो'},
-  {ic:'🌙',en:'Last brush before bed. No milk or food after brushing at night',hi:'सोने से पहले आख़िरी ब्रश। रात को ब्रश के बाद दूध या खाना नहीं'},
-  {ic:'🔁',en:'Change the brush every 3 months',hi:'हर 3 महीने में ब्रश बदलो'}
+  {ic:'🌅',a:'bob',en:'Brush 2 times a day: morning and night',hi:'दिन में 2 बार ब्रश: सुबह और रात'},
+  {ic:'🪥',a:'scrub',en:'Use a little toothpaste: rice-grain size under 3 years, pea size from 3 years',hi:'थोड़ा टूथपेस्ट लो: 3 साल से छोटे बच्चे चावल के दाने जितना, 3 साल से बड़े मटर के दाने जितना'},
+  {ic:'🪥',a:'tilt',en:'Hold the brush at a slant, pointing towards the gums',hi:'ब्रश को तिरछा रखो, मसूड़ों की ओर'},
+  {ic:'🦷',a:'scrub',en:'Gently brush the outer, inner and chewing side of every tooth, in small circles',hi:'हर दाँत के बाहर, अंदर और चबाने वाली सतह पर हल्के गोल-गोल ब्रश करो'},
+  {ic:'👅',a:'bob',en:'Brush your tongue too',hi:'जीभ भी साफ़ करो'},
+  {ic:'⏱️',a:'bob',en:'Brush for 2 full minutes. Spit, do not rinse with lots of water',hi:'पूरे 2 मिनट ब्रश करो। थूक दो, ज़्यादा पानी से कुल्ला न करो'},
+  {ic:'🌙',a:'bob',en:'Last brush before bed. No milk or food after brushing at night',hi:'सोने से पहले आख़िरी ब्रश। रात को ब्रश के बाद दूध या खाना नहीं'},
+  {ic:'🔁',a:'spin',en:'Change the brush every 3 months',hi:'हर 3 महीने में ब्रश बदलो'}
 ];
 
 var S = {lang:'hi', bonus:0, days:{}, reward:{text:'', goal:30}, mins:5};
@@ -654,7 +663,7 @@ var BR = {i:0, done:false};
 function brushRender(){
   var el = document.getElementById('s-brush'), N = BRUSH_STEPS.length, s = BRUSH_STEPS[BR.i];
   var last = BR.i === N-1;
-  el.innerHTML = '<div class="step"><div class="n">'+(BR.i+1)+' / '+N+'</div><div class="ic" aria-hidden="true">'+s.ic+'</div><div class="big">'+esc(L(s))+'</div></div>'+
+  el.innerHTML = '<div class="step"><div class="n">'+(BR.i+1)+' / '+N+'</div><div class="ic '+s.a+' " aria-hidden="true">'+s.ic+'</div><div class="big">'+esc(L(s))+'</div></div>'+
     (!last ? '<button type="button" class="go" data-bnext="1">'+L(T.next)+' →</button>'
            : '<div class="why good">'+L(T.brushDone)+'</div><button type="button" class="go" data-bagain="1">'+L(T.playAgain)+'</button>')+
     '<div class="pnote">'+L(T.brushParent)+'</div>';
