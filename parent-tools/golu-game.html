@@ -165,28 +165,21 @@ button:focus-visible{outline:4px solid var(--ink);outline-offset:3px}
     </div>
     <div class="menu">
       <button type="button" class="tile t-food" data-go="food"><span class="ic">🍎</span><span><span data-t="foodGame"></span><small data-t="foodGameSub"></small></span></button>
-      <button type="button" class="tile t-chart" data-go="chart"><span class="ic">🏆</span><span><span data-t="chart"></span><small data-t="chartSub"></small></span></button>
-      <button type="button" class="tile t-timer" data-go="report"><span class="ic">🚽</span><span><span data-t="report"></span><small data-t="reportSub"></small></span></button>
       <button type="button" class="tile t-plate" data-go="plate"><span class="ic">🍽️</span><span><span data-t="plateGame"></span><small data-t="plateGameSub"></small></span></button>
       <button type="button" class="tile t-screen" data-go="screen"><span class="ic">🚦</span><span><span data-t="screenGame"></span><small data-t="screenGameSub"></small></span></button>
       <button type="button" class="tile t-brush" data-go="brush"><span class="ic">🪥</span><span><span data-t="brushGame"></span><small data-t="brushGameSub"></small></span></button>
       <button type="button" class="tile t-safe" data-go="safe"><span class="ic">🛡️</span><span><span data-t="safeGame"></span><small data-t="safeGameSub"></small></span></button>
       <button type="button" class="tile t-behave" data-go="behave"><span class="ic">😊</span><span><span data-t="behaveGame"></span><small data-t="behaveGameSub"></small></span></button>
     </div>
-    <button type="button" class="parents-link" data-go="parents" data-t="forParents"></button>
   </section>
 
   <!-- FOOD GAME -->
   <section class="screen" id="s-food" hidden></section>
 
   <!-- CHART -->
-  <section class="screen" id="s-chart" hidden></section>
 
-  <!-- POOP REPORT -->
-  <section class="screen" id="s-report" hidden></section>
 
   <!-- PARENTS -->
-  <section class="screen" id="s-parents" hidden></section>
 
   <!-- HABIT GAMES -->
   <section class="screen" id="s-plate" hidden></section>
@@ -252,14 +245,6 @@ var T = {
   repAgain:{en:'Done',hi:'हो गया'},
   repToday:{en:'Today',hi:'आज'}
 };
-var TASKS = [
-  {ic:'🚽', en:'Sat on potty after a meal', hi:'खाने के बाद पॉटी पर बैठे'},
-  {ic:'🍎', en:'Ate a fruit', hi:'फल खाया'},
-  {ic:'🥕', en:'Ate sabzi / salad', hi:'सब्ज़ी / सलाद खाया'},
-  {ic:'💧', en:'Drank lots of water', hi:'खूब पानी पिया'},
-  {ic:'🥄', en:'Took my medicine', hi:'दवा ली'},
-  {ic:'⚽', en:'Played outside', hi:'बाहर खेले'}
-];
 var GOODWHY = {en:'Yes! This makes poop soft and easy for Golu.',hi:'हाँ! इससे पॉटी नरम और आसान होती है।'};
 var FOODS = [
   {p:'🍌',en:'Ripe banana',hi:'पका केला',g:1},
@@ -374,8 +359,7 @@ function save(){ try{ localStorage.setItem('golu-hero', JSON.stringify(S)); }cat
 function L(o){ return o[S.lang] || o.en; }
 function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); }
 function dkey(d){ d = d || new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
-function chartStars(){ var n=0; for(var k in S.days){ for(var t in S.days[k]){ if(S.days[k][t]) n++; } } return n; }
-function totalStars(){ return chartStars() + S.bonus; }
+function totalStars(){ return S.bonus; }
 
 function goluSvg(mood, cls){
   var mouth = mood==='sad' ? '<path d="M48 92 Q60 80 72 92" stroke="#21304a" stroke-width="5" fill="none" stroke-linecap="round"/>'
@@ -445,13 +429,10 @@ function show(name){
   stopTimer();
   current = name;
   musicFor(name); syncMusicBtn();
-  ['home','food','chart','report','parents','plate','screen','brush','safe','behave'].forEach(function(n){ document.getElementById('s-'+n).hidden = (n!==name); });
+  ['home','food','plate','screen','brush','safe','behave'].forEach(function(n){ document.getElementById('s-'+n).hidden = (n!==name); });
   document.getElementById('backBtn').hidden = (name==='home');
   if(name==='home') renderHome();
   if(name==='food') startGame();
-  if(name==='chart') renderChart();
-  if(name==='report') renderReport();
-  if(name==='parents') renderParents();
   if(name==='plate') plateRender();
   if(name==='brush') brushRender();
   if(name==='screen' || name==='safe' || name==='behave') qRender(name);
@@ -525,128 +506,7 @@ function answer(v, btn){
   nx.focus();
 }
 
-/* ---------- hero chart ---------- */
-function renderChart(){
-  var k = dkey(), today = S.days[k] || {};
-  var done = TASKS.filter(function(t,i){return today[i];}).length;
-  var now = new Date(), dow = (now.getDay()+6)%7; // Monday = 0
-  var names = S.lang==='hi' ? ['सो','मं','बु','गु','शु','श','र'] : ['Mo','Tu','We','Th','Fr','Sa','Su'];
-  var week = '';
-  for(var i=0;i<7;i++){
-    var d = new Date(now); d.setDate(now.getDate() - dow + i);
-    var dd = S.days[dkey(d)] || {}, cnt = 0; for(var t in dd){ if(dd[t]) cnt++; }
-    var won = cnt >= 4, isT = (i===dow);
-    week += '<div class="day'+(won?' won':'')+(isT?' today':'')+'"><span class="b">'+(won?'⭐':(cnt? cnt : ''))+'</span>'+names[i]+'</div>';
-  }
-  var tot = totalStars(), goal = Math.max(5, +S.reward.goal||30);
-  var pct = Math.min(100, tot/goal*100);
-  var goalHtml = S.reward.text ?
-    '<div class="goal"><div style="font-weight:800">🎁 '+L(T.goalFor)+': '+esc(S.reward.text)+'</div><div class="bar"><i style="width:'+pct+'%"></i></div><div class="lbl"><span>⭐ '+tot+'</span><span>'+goal+'</span></div>'+(tot>=goal?'<div style="font-weight:800;color:var(--grass-deep)">'+L(T.rewardWon)+'</div>':'')+'</div>'
-    : '<div class="goal" style="text-align:center;font-weight:700">🎁 '+L(T.noGoal)+'</div>';
-  document.getElementById('s-chart').innerHTML =
-    '<h2>'+L(T.todayJobs)+'</h2><div style="text-align:center;color:var(--muted);font-weight:600">'+L(T.tapWhenDone)+'</div>'+
-    '<div class="today">'+TASKS.map(function(t,i){ return '<button type="button" class="task" data-task="'+i+'" aria-pressed="'+(!!today[i])+'"><span class="got">⭐</span><span class="ic" aria-hidden="true">'+t.ic+'</span>'+esc(L(t))+'</button>'; }).join('')+'</div>'+
-    '<div class="counter">'+done+' / '+TASKS.length+(done===TASKS.length?' 🏆':'')+'</div>'+
-    '<div style="font-weight:800;text-align:center">'+L(T.thisWeek)+'</div><div class="week">'+week+'</div>'+goalHtml;
-}
-function toggleTask(i, btn){
-  var k = dkey(); S.days[k] = S.days[k] || {};
-  var on = !S.days[k][i]; S.days[k][i] = on; save();
-  if(on){ flyStar(btn); var c = TASKS.filter(function(t,j){return S.days[k][j];}).length; if(c===TASKS.length) confetti(); }
-  setTimeout(renderChart, on?250:0); updateBank();
-}
-
-/* ---------- poop report ---------- */
-var POOP = [
-  {n:1, en:'Rabbit pellets', hi:'खरगोश जैसी गोलियाँ', mood:'sad', say:{en:'Too hard! Golu needs more water and fruit today.',hi:'बहुत सख़्त! आज गोलू को ज़्यादा पानी और फल चाहिए।'},
-   svg:'<circle cx="14" cy="22" r="7" fill="#6b4226"/><circle cx="32" cy="20" r="6.5" fill="#6b4226"/><circle cx="50" cy="23" r="7" fill="#6b4226"/><circle cx="66" cy="20" r="6" fill="#6b4226"/>'},
-  {n:2, en:'Lumpy snake', hi:'गांठ वाला साँप', mood:'sad', say:{en:'A bit hard. Eat a fruit and drink water!',hi:'थोड़ा सख़्त। फल खाओ और पानी पियो!'},
-   svg:'<circle cx="14" cy="21" r="9" fill="#7a4b2c"/><circle cx="26" cy="21" r="9" fill="#7a4b2c"/><circle cx="38" cy="21" r="9" fill="#7a4b2c"/><circle cx="50" cy="21" r="9" fill="#7a4b2c"/><circle cx="62" cy="21" r="9" fill="#7a4b2c"/>'},
-  {n:3, en:'Snake with cracks', hi:'दरार वाला साँप', mood:'happy', say:{en:'Good job! Golu is happy.',hi:'शाबाश! गोलू खुश है।'},
-   svg:'<rect x="4" y="12" width="70" height="18" rx="9" fill="#86552f"/><path d="M20 12 L23 19 M38 30 L40 23 M56 12 L58 19" stroke="#fff" stroke-width="2"/>'},
-  {n:4, en:'Smooth snake', hi:'चिकना साँप', mood:'wow', say:{en:'PERFECT poop! You are a Potty Hero!',hi:'एकदम सही पॉटी! तुम पॉटी हीरो हो!'},
-   svg:'<rect x="4" y="13" width="70" height="16" rx="8" fill="#a5703f"/><circle cx="62" cy="19" r="2.4" fill="#fff"/><circle cx="68" cy="19" r="2.4" fill="#fff"/><circle cx="62" cy="19" r="1.1" fill="#21304a"/><circle cx="68" cy="19" r="1.1" fill="#21304a"/>'},
-  {n:5, en:'Soft blobs', hi:'नरम टुकड़े', mood:'happy', say:{en:'Nice and soft. Well done!',hi:'अच्छी नरम। बहुत बढ़िया!'},
-   svg:'<ellipse cx="16" cy="21" rx="11" ry="8" fill="#b07c4d"/><ellipse cx="40" cy="22" rx="10" ry="7.5" fill="#b07c4d"/><ellipse cx="63" cy="20" rx="10" ry="8" fill="#b07c4d"/>'},
-  {n:6, en:'Mushy', hi:'गूदेदार', mood:'happy', say:{en:'Very soft. Tell Mummy or Papa about it.',hi:'बहुत नरम। मम्मी या पापा को बताओ।'},
-   svg:'<path d="M5 26 Q9 15 16 20 Q20 10 28 18 Q33 11 39 19 Q46 11 51 19 Q58 12 62 20 Q72 18 73 26 Q56 31 39 29 Q20 33 5 26 Z" fill="#c49a6c"/>'},
-  {n:7, en:'Watery', hi:'पानी जैसी', mood:'sad', say:{en:'Too watery! Tell Mummy or Papa now.',hi:'बहुत पतली! अभी मम्मी या पापा को बताओ।'},
-   svg:'<path d="M4 25 Q14 17 24 25 T44 25 T64 25 T76 24 L76 32 L4 32 Z" fill="#d4ad7f"/>'},
-  {n:0, en:'Nothing came', hi:'कुछ नहीं निकला', mood:'happy', say:{en:"That's OK! Sitting on the potty is a win.",hi:'कोई बात नहीं! पॉटी पर बैठना भी जीत है।'},
-   svg:'<circle cx="40" cy="22" r="13" fill="none" stroke="#56637a" stroke-width="3" stroke-dasharray="4 4"/>'}
-];
-function todayReports(){ var k=dkey(); return (S.log||[]).filter(function(r){return r.d===k;}); }
-function renderReport(picked){
-  var el = document.getElementById('s-report');
-  var tr = todayReports();
-  var h = '<div class="hero"><div class="bubble">'+(picked ? esc(L(picked.say)) : L(T.repSay))+'</div>'+goluSvg(picked?picked.mood:'happy', 'small'+(picked?(picked.mood==='sad'?' shake':' bounce'):''))+'</div>';
-  if(!picked){
-    h += '<h2>'+L(T.repAsk)+'</h2><div class="poops">'+POOP.map(function(p){
-      return '<button type="button" class="poop" data-poop="'+p.n+'"><svg width="78" height="40" viewBox="0 0 78 40" aria-hidden="true">'+p.svg+'</svg><span>'+esc(L(p))+'</span></button>';
-    }).join('')+'</div>';
-  } else {
-    h += '<div class="why '+(picked.mood==='sad'?'bad':'good')+'" style="font-size:22px;font-weight:800">'+(picked.capped?L(T.repCap):'⭐ '+L(T.repStar))+'</div>'+
-      '<button type="button" class="go" id="repDone">'+L(T.repAgain)+' ✓</button>';
-  }
-  if(tr.length){
-    h += '<div class="goal"><div style="font-weight:800">'+L(T.repToday)+'</div><div style="display:flex;gap:8px;flex-wrap:wrap">'+tr.map(function(r){
-      var p = POOP.filter(function(x){return x.n===r.type;})[0];
-      return '<span style="background:var(--sky2);border-radius:12px;padding:4px 10px;font-weight:700">'+r.t+' · '+esc(L(p))+'</span>';
-    }).join('')+'</div></div>';
-  }
-  el.innerHTML = h;
-}
-function logPoop(n, btn){
-  var now = new Date();
-  S.log = S.log || [];
-  var tr = todayReports();
-  var capped = tr.length >= 3;
-  S.log.push({d:dkey(now), t:String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0'), type:n});
-  if(S.log.length > 120) S.log = S.log.slice(-120);
-  if(!capped) S.bonus++;
-  save();
-  var p = POOP.filter(function(x){return x.n===n;})[0];
-  var shown = Object.assign({}, p, {capped:capped});
-  if(!capped) flyStar(btn);
-  if(n===4 || n===3 || n===5) confetti();
-  renderReport(shown);
-}
 function stopTimer(){}
-
-/* ---------- parents ---------- */
-function diaryHtml(hi){
-  var log = (S.log||[]).slice(-14).reverse();
-  var names = {1:'Type 1 (hard)',2:'Type 2 (hard)',3:'Type 3',4:'Type 4 (ideal)',5:'Type 5',6:'Type 6 (loose)',7:'Type 7 (watery)',0:hi?'कुछ नहीं':'Nothing'};
-  var since = new Date(); since.setDate(since.getDate()-6); var sk = dkey(since);
-  var wk = (S.log||[]).filter(function(r){return r.d>=sk && r.type>0;});
-  var hard = wk.filter(function(r){return r.type<=2;}).length, loose = wk.filter(function(r){return r.type>=6;}).length;
-  var note = '';
-  if(wk.length && hard/wk.length >= .5) note = hi?'पिछले 7 दिनों में ज़्यादातर पॉटी सख़्त (टाइप 1–2) — डॉक्टर को बताएँ।':'Most stools in the last 7 days were hard (type 1–2). Tell the doctor.';
-  else if(loose >= 3) note = hi?'पिछले 7 दिनों में कई बार पतली पॉटी — दवा थोड़ी कम करने के बारे में डॉक्टर से पूछें।':'Several loose stools in the last 7 days. Ask the doctor about reducing the dose.';
-  return '<div class="pcard"><h3>'+(hi?'पॉटी डायरी (फ़ॉलो-अप पर डॉक्टर को दिखाएँ)':'Stool diary (show the doctor at follow-up)')+'</h3>'+
-    (log.length ? '<div style="overflow-x:auto"><table class="diary"><thead><tr><th>'+(hi?'तारीख़':'Date')+'</th><th>'+(hi?'समय':'Time')+'</th><th>'+(hi?'पॉटी':'Stool')+'</th></tr></thead><tbody>'+
-      log.map(function(r){ var d=r.d.split('-'); return '<tr><td>'+d[2]+'/'+d[1]+'</td><td>'+r.t+'</td><td class="n">'+names[r.type]+'</td></tr>'; }).join('')+'</tbody></table></div>'
-      : '<p style="margin:0;color:#56637a">'+(hi?'अभी कोई रिपोर्ट नहीं। बच्चा पॉटी से आकर "पॉटी रिपोर्ट" भरे।':'No reports yet. The child fills "Poop Report" after coming out of the toilet.')+'</p>')+
-    (note?'<p style="margin:0;font-weight:700;color:#a92a21">'+note+'</p>':'')+'</div>';
-}
-function renderParents(msg){
-  var hi = S.lang==='hi';
-  document.getElementById('s-parents').innerHTML =
-    '<div class="pcard"><h3>'+(hi?'इनाम तय करें':'Set a reward')+'</h3>'+
-    '<label for="rw">'+(hi?'इनाम (खाने की चीज़ नहीं) — जैसे पार्क जाना, नई किताब, स्टिकर':'Reward (not food) — e.g. park trip, new book, stickers')+'</label>'+
-    '<input id="rw" type="text" maxlength="60" value="'+esc(S.reward.text||'')+'">'+
-    '<label for="gl">'+(hi?'कितने स्टार पर इनाम?':'Stars needed for the reward')+'</label>'+
-    '<select id="gl">'+[20,30,50,75,100].map(function(n){return '<option value="'+n+'"'+(+S.reward.goal===n?' selected':'')+'>'+n+' ⭐</option>';}).join('')+'</select>'+
-    '<button type="button" class="save" id="saveRw">'+(hi?'सेव करें':'Save')+'</button>'+(msg?'<div class="msg">'+msg+'</div>':'')+'</div>'+
-    diaryHtml(hi)+
-    '<div class="pcard"><h3>'+(hi?'माता-पिता के लिए टिप्स':'Tips for parents')+'</h3><ul>'+
-      (hi ? '<li>पॉटी पर बैठने पर शाबाशी और स्टार दें, पॉटी हो या न हो।</li><li>दिन में एक बार, नाश्ते या रात के खाने के 15–30 मिनट बाद, 5–10 मिनट बिठाएँ; पैरों के नीचे स्टूल रखें। दिन में एक बार पॉटी होना बिल्कुल ठीक है — दो बार ज़बरदस्ती न करें।</li><li>इनाम कभी चॉकलेट या जंक फूड न रखें।</li><li>दवा डॉक्टर की सलाह के बिना बंद न करें।</li><li>फ़ोन टॉयलेट में न ले जाएँ — बच्चा बाहर आकर रिपोर्ट भरे।</li><li>स्टार और डायरी इसी फ़ोन में सेव रहते हैं।</li>'
-          : '<li>Praise and give a star for sitting, whether or not poop comes.</li><li>Once a day, 15–30 minutes after breakfast or dinner, sit for 5–10 minutes with a stool under the feet. One stool a day is perfectly fine — do not force a second sitting.</li><li>Never make the reward chocolate or junk food.</li><li>Do not stop the medicine without asking the doctor.</li><li>Keep the phone out of the toilet — the child fills the report after coming out.</li><li>Stars and the diary are saved on this phone only.</li>')+
-    '</ul></div>'+
-    '<div class="pcard"><h3>'+(hi?'सब कुछ फिर से शुरू करें':'Start over')+'</h3>'+
-    '<div id="resetZone"><button type="button" class="danger" id="resetAsk">'+(hi?'सारे स्टार मिटाएँ':'Clear all stars')+'</button></div></div>'+
-    '<div style="text-align:center;color:var(--muted);font-size:14px;font-family:system-ui,sans-serif">Dr. Dinesh Mittal, MBBS, DCH</div>';
-}
 
 /* ---------- quiz games: screen, safe, behave ---------- */
 var QS = {};
@@ -742,13 +602,6 @@ document.getElementById('app').addEventListener('click', function(e){
   if(b.dataset.bagain){ BR.i = 0; brushRender(); return; }
   if(b.id==='nextFood'){ G.i++; G.answered=false; renderFood(); return; }
   if(b.id==='again'){ startGame(); return; }
-  if(b.dataset.task !== undefined){ toggleTask(+b.dataset.task, b); return; }
-  if(b.dataset.poop !== undefined){ logPoop(+b.dataset.poop, b); return; }
-  if(b.id==='repDone'){ show('home'); return; }
-  if(b.id==='saveRw'){ S.reward = {text: document.getElementById('rw').value.trim(), goal: +document.getElementById('gl').value}; save(); renderParents(S.lang==='hi'?'सेव हो गया ✓':'Saved ✓'); return; }
-  if(b.id==='resetAsk'){ var hi=S.lang==='hi'; document.getElementById('resetZone').innerHTML = '<p style="margin:0 0 8px">'+(hi?'पक्का? सारे स्टार मिट जाएँगे।':'Sure? All stars will be cleared.')+'</p><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><button type="button" class="danger" id="resetYes">'+(hi?'हाँ, मिटाएँ':'Yes, clear')+'</button><button type="button" class="save" id="resetNo">'+(hi?'नहीं':'No')+'</button></div>'; return; }
-  if(b.id==='resetYes'){ S.bonus=0; S.days={}; S.log=[]; save(); updateBank(); renderParents(S.lang==='hi'?'साफ़ हो गया':'Cleared'); return; }
-  if(b.id==='resetNo'){ renderParents(); return; }
 });
 
 applyLang(); updateBank(); show('home');
