@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /doctor-panel.html
+Disallow: /booking-backend/
+
+Sitemap: https://childspecialistrohini.com/sitemap.xml
