@@ -46,7 +46,7 @@
     '.dmr-tile:focus-visible{outline:3px solid #ffd166;outline-offset:2px}' +
     '.dmr-logo{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:#fff;color:#2a2580;font:800 19px "Anek Devanagari",system-ui,sans-serif;text-decoration:none;margin:4px auto 10px;font-stretch:112%}' +
     '.dmr-rail{display:none}' +
-    '.dmr-tab{position:fixed;left:0;top:42%;transform:translateY(-50%);z-index:60;width:60px;padding:12px 4px 10px;border:0;border-radius:0 18px 18px 0;background:#f5ad1b;color:#2a2580;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;box-shadow:0 6px 16px rgba(42,37,128,.3);animation:dmrPulse 1.8s ease-in-out 4' +
+    '.dmr-tab{position:fixed;left:0;top:42%;transform:translateY(-50%);z-index:60;width:64px;padding:12px 4px 10px;border:0;border-radius:0 18px 18px 0;background:#f5ad1b;color:#2a2580;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;box-shadow:0 0 0 2px #fff,0 6px 16px rgba(0,0,0,.35);animation:dmrPulse 1.8s ease-in-out 4' +
     '.dmr-tab i{width:7px;height:7px;border-radius:50%;display:block}' +
     '.dmr-tab b{font:800 14px "Anek Devanagari",system-ui,sans-serif;letter-spacing:.02em;margin-top:2px}' +
     '@keyframes dmrPulse{0%,100%{transform:translateY(-50%)}50%{transform:translateY(-50%) translateX(5px)}}@media (prefers-reduced-motion:reduce){.dmr-tab{animation:none}}' +
@@ -102,7 +102,7 @@
     function render() {
       l = lang();
       rail.innerHTML = '<a class="dmr-logo" href="/" aria-label="Dr. Dinesh Mittal — home">DM</a>' + tiles();
-      tab.innerHTML = '<i style="background:#e2457a"></i><i style="background:#f5ad1b"></i><i style="background:#0f9b8e"></i><i style="background:#2f8fe0"></i><b>' + (l === 'hi' ? 'मेन्यू' : 'Menu') + '</b>';
+      tab.innerHTML = '<i style="background:#e2457a"></i><i style="background:#f5ad1b"></i><i style="background:#0f9b8e"></i><i style="background:#2f8fe0"></i><b>' + (l === 'hi' ? '☰ मेन्यू' : '☰ Menu') + '</b>';
       drawer.innerHTML = '<div class="dmr-dh"><div><b>Dr. Dinesh Mittal</b><small>' + (l === 'hi' ? 'शिशु रोग विशेषज्ञ, रोहिणी' : 'Child Specialist, Rohini') + '</small></div><button type="button" class="dmr-x" aria-label="Close menu">×</button></div><div class="dmr-grid">' + tiles() + '</div>';
     }
     render();
