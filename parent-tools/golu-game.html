@@ -148,7 +148,7 @@ button:focus-visible{outline:4px solid var(--ink);outline-offset:3px}
 <div class="app" id="app">
   <div class="top">
     <button type="button" class="back" id="backBtn" hidden>← <span data-t="home"></span></button>
-    <div class="bank" id="bankBox" aria-label="Stars"><span class="st">⭐</span><span id="bank">0</span></div>
+    <div class="bank" id="bankBox" aria-label="Stars" style="-webkit-touch-callout:none;-webkit-user-select:none;user-select:none"><span class="st">⭐</span><span id="bank">0</span></div>
     <button type="button" class="back" id="charBtn" data-charopen="1" aria-label="Change buddy" style="white-space:nowrap"></button>
     <button type="button" class="back" id="musicBtn" data-music="1" aria-pressed="true" aria-label="Music on">🎵</button>
     <div class="lang" role="group" aria-label="Language">
@@ -605,19 +605,29 @@ function brushNext(){
   brushRender();
 }
 
-/* ---------- parents: reset stars (hold the star counter for 3 seconds) ---------- */
-var holdT = null, bankEl = document.getElementById('bankBox');
-bankEl.title = 'Parents: hold for 3 seconds to reset stars';
-function startHold(){ clearTimeout(holdT); holdT = setTimeout(function(){
-  holdT = null;
+/* ---------- parents: reset stars ----------
+   Hold the star counter for 3 seconds, or tap it 5 times quickly. Both ask for confirmation. */
+var holdT = null, tapN = 0, tapT = null, bankEl = document.getElementById('bankBox');
+bankEl.title = 'Parents: hold for 3 seconds, or tap 5 times, to reset stars';
+function askReset(){
   var hi = S.lang === 'hi';
   if(window.confirm(hi ? 'सारे स्टार मिटाएँ? (केवल माता-पिता के लिए)' : 'Reset all stars? (for parents only)')){
     S.bonus = 0; save(); updateBank(); if(current === 'home') renderHome();
   }
-}, 3000); }
+}
+function startHold(){ clearTimeout(holdT); holdT = setTimeout(function(){ holdT = null; tapN = 0; askReset(); }, 3000); }
 function endHold(){ clearTimeout(holdT); holdT = null; }
-bankEl.addEventListener('pointerdown', startHold);
-['pointerup','pointerleave','pointercancel'].forEach(function(ev){ bankEl.addEventListener(ev, endHold); });
+bankEl.addEventListener('touchstart', startHold, {passive:true});
+bankEl.addEventListener('touchend', endHold);
+bankEl.addEventListener('touchcancel', endHold);
+bankEl.addEventListener('touchmove', endHold, {passive:true});
+bankEl.addEventListener('mousedown', startHold);
+bankEl.addEventListener('mouseup', endHold);
+bankEl.addEventListener('mouseleave', endHold);
+bankEl.addEventListener('click', function(){
+  tapN++; clearTimeout(tapT); tapT = setTimeout(function(){ tapN = 0; }, 3000);
+  if(tapN >= 5){ tapN = 0; clearTimeout(tapT); endHold(); askReset(); }
+});
 bankEl.addEventListener('contextmenu', function(e){ e.preventDefault(); });
 
 /* ---------- events ---------- */
