@@ -406,7 +406,8 @@ var MTR = {
   screen:[[392,1],[392,1],[523,1],[523,1],[659,1],[659,1],[523,2]],
   brush:[[659,.5],[659,.5],[784,.5],[659,.5],[587,1],[523,.5],[587,.5],[659,2]],
   safe:[[523,1],[659,1],[784,1],[659,1],[523,1],[392,2]],
-  behave:[[784,1],[659,1],[784,1],[880,1],[784,2],[659,1],[587,1],[523,2]]
+  behave:[[784,1],[659,1],[784,1],[880,1],[784,2],[659,1],[587,1],[523,2]],
+  food:[[523,1],[659,1],[587,1],[523,1],[392,2],[523,1],[659,1],[784,2]]
 };
 var MC = null, mTimer = null, mGame = null;
 function mNote(f,t,d){ var o=MC.createOscillator(), g=MC.createGain(); o.type='triangle'; o.frequency.value=f; g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(.25,t+.02); g.gain.linearRampToValueAtTime(0,t+d*.9); o.connect(g); g.connect(MC.destination); o.start(t); o.stop(t+d); }
