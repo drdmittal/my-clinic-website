@@ -621,7 +621,7 @@ function answer(v, btn){
   }
   // Junk food always gets struck out, so the lesson sticks even when the child answered right.
   if(!f.g) card.classList.add('struck');
-  var w = document.createElement('div'); w.className = 'why '+(f.g?'good':'bad');
+  var w = document.createElement('div'); w.className = 'why '+(ok?'good':'bad');
   w.innerHTML = '<div style="font-size:22px;font-weight:800">'+(ok?L(T.right):L(T.wrong))+'</div>'+esc(L(why));
   var nx = document.createElement('button'); nx.type='button'; nx.className='go'; nx.id='nextFood'; nx.textContent = L(T.next)+' →';
   el.appendChild(w); el.appendChild(nx);
