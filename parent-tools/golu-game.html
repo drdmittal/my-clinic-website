@@ -213,6 +213,11 @@ var T = {
   plateJunk:{en:'Take away the junk food. It does not go on the plate.',hi:'जंक फूड हटाओ। यह थाली में नहीं जाता।'},
   plateMissing:{en:'Add the groups still missing below. {N} needs all of them.',hi:'नीचे के छूटे हुए ग्रुप जोड़ो। {N} को सबकी ज़रूरत है।'},
   brushDone:{en:'Brushing done! Clean teeth, happy {N}. +1 star',hi:'ब्रश हो गया! साफ़ दाँत, खुश {N}। +1 स्टार'},
+  brushGame_girl:{en:'Brush Like a Superhero',hi:'हीरोइन की तरह ब्रश करो'},
+  homeSay_boy:{en:"Hi {N}, my brave boy! Let's build good habits together!",hi:'नमस्ते {N}, प्यारे दोस्त! आओ, मिलकर अच्छी आदतें सीखें!'},
+  homeSay_girl:{en:"Hi {N}, my brave girl! Let's build good habits together!",hi:'नमस्ते {N}, प्यारी दोस्त! आओ, मिलकर अच्छी आदतें सीखें!'},
+  homeSayStars_boy:{en:'Wow {N}, {n} stars! You are a superstar!',hi:'शाबाश {N}, {n} स्टार! तुम सुपरस्टार हो!'},
+  homeSayStars_girl:{en:'Wow {N}, {n} stars! You are a superstar!',hi:'शाबाश {N}, {n} स्टार! तू सुपरस्टार है!'},
   brushParent:{en:'Parents: help your child brush until about 7–8 years, and check the back teeth.',hi:'माता-पिता: 7–8 साल तक बच्चे के साथ ब्रश करवाएँ और पीछे के दाँत ज़रूर देखें।'},
   screenAsk:{en:'Which colour is this?',hi:'यह कौन सा रंग है?'},
   safeAsk:{en:'Is this safe?',hi:'क्या यह सुरक्षित है?'},
@@ -367,6 +372,7 @@ if(!S.active || !S.kids.some(function(k){ return k.id===S.active; })) S.active =
 delete S.bonus; delete S.char;
 function save(){ try{ localStorage.setItem('golu-hero', JSON.stringify(S)); }catch(e){} }
 function KID(){ return S.kids.filter(function(k){ return k.id===S.active; })[0] || S.kids[0]; }
+function LG(key){ var g = KID().gender; var o = (g && T[key+'_'+g]) || T[key]; return L(o); }
 function charName(){ var k = KID(); return (k && k.name) ? k.name : (S.lang==='hi' ? 'दोस्त' : 'friend'); }
 function L(o){ var v = o[S.lang] || o.en; return v.indexOf('{N}')>=0 ? v.split('{N}').join(charName()) : v; }
 function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'); }
@@ -374,6 +380,10 @@ function dkey(d){ d = d || new Date(); return d.getFullYear()+'-'+String(d.getMo
 function totalStars(){ return KID().bonus; }
 
 function goluSvg(mood, cls, who){
+  var gen = KID().gender;
+  var hairBack = gen==='girl' ? '<path d="M18 54 Q12 14 60 16 Q108 14 102 54 L100 94 Q84 98 80 86 L40 86 Q36 98 20 94 Z" fill="#6b3f22"/>' : '';
+  var hairFront = gen==='girl' ? '<path d="M22 56 Q30 26 60 28 Q90 26 98 56 Q84 38 60 40 Q36 38 22 56Z" fill="#6b3f22"/><circle cx="34" cy="36" r="6" fill="#ff7b8a"/><circle cx="86" cy="36" r="6" fill="#ff7b8a"/>'
+    : gen==='boy' ? '<path d="M24 56 Q22 22 60 22 Q98 22 96 56 Q88 38 74 36 Q60 42 46 36 Q32 38 24 56Z" fill="#4a2f1b"/>' : '';
   var mouth = mood==='sad' ? '<path d="M48 92 Q60 80 72 92" stroke="#21304a" stroke-width="5" fill="none" stroke-linecap="round"/>'
     : mood==='wow' ? '<ellipse cx="60" cy="88" rx="9" ry="11" fill="#21304a"/><ellipse cx="60" cy="92" rx="5" ry="5" fill="#ff7b8a"/>'
     : '<path d="M42 80 Q60 102 78 80 Z" fill="#21304a"/><path d="M50 88 Q60 96 70 88 Q60 92 50 88Z" fill="#ff7b8a"/>';
@@ -383,7 +393,7 @@ function goluSvg(mood, cls, who){
     '<ellipse cx="60" cy="112" rx="34" ry="5" fill="rgba(33,48,74,.15)"/>'+
     '<path d="M24 50 Q14 66 26 70" stroke="#e8812a" stroke-width="8" fill="none" stroke-linecap="round"/>'+
     '<path d="M96 50 Q106 66 94 70" stroke="#e8812a" stroke-width="8" fill="none" stroke-linecap="round"/>'+
-    '<ellipse cx="60" cy="64" rx="40" ry="44" fill="#ffa94d"/>'+
+    hairBack+'<ellipse cx="60" cy="64" rx="40" ry="44" fill="#ffa94d"/>'+hairFront+
     '<ellipse cx="60" cy="72" rx="26" ry="24" fill="#ffc285"/>'+
     '<path d="M60 70 q-4 3 0 6 q4 3 0 6" stroke="#e8812a" stroke-width="2.5" fill="none" stroke-linecap="round"/>'+
     eyes+'<ellipse cx="32" cy="76" rx="7" ry="4.5" fill="#ff7b8a" opacity=".7"/><ellipse cx="88" cy="76" rx="7" ry="4.5" fill="#ff7b8a" opacity=".7"/>'+mouth+
@@ -441,7 +451,7 @@ document.addEventListener('visibilitychange', function(){ if(document.hidden) mS
 function show(name){
   stopTimer();
   current = name;
-  updateBank();
+  updateBank(); applyLang();
   musicFor(name); syncMusicBtn();
   ['home','food','plate','screen','brush','safe','behave','char'].forEach(function(n){ document.getElementById('s-'+n).hidden = (n!==name); });
   document.getElementById('backBtn').hidden = (name==='home');
@@ -454,7 +464,7 @@ function show(name){
   window.scrollTo(0,0);
 }
 function syncCharBtn(){ var b = document.getElementById('charBtn'); if(b) b.textContent = '🙂 ' + charName() + ' ▾'; }
-var GENDERS = [{k:'boy', en:'Boy', hi:'लड़का'}, {k:'girl', en:'Girl', hi:'लड़की'}, {k:'skip', en:'Prefer not to say', hi:'बताना नहीं'}];
+var GENDERS = [{k:'boy', en:'Boy', hi:'लड़का'}, {k:'girl', en:'Girl', hi:'लड़की'}];
 /* keep whatever name is typed before the screen is redrawn */
 function stashName(){ var i = document.getElementById('kidName'); if(!i) return ''; var v = i.value.trim().slice(0,20); if(v) KID().name = v; return v; }
 function renderCharPick(){
@@ -470,19 +480,20 @@ function renderCharPick(){
     '<div class="chips" style="grid-template-columns:1fr 1fr">'+kids+'<button type="button" class="chip" data-kidnew="1"><span>'+(hi?'+ दूसरा बच्चा':'+ Add another child')+'</span></button></div>'+
     '<label for="kidName" style="display:block;margin:16px 0 6px;font-weight:700">'+(hi?'बच्चे का पहला नाम':'Child’s first name')+'</label>'+
     '<input id="kidName" type="text" maxlength="20" value="'+esc(kid.name)+'" autocomplete="off" style="width:100%;font:600 18px system-ui,sans-serif;padding:12px;border-radius:14px;border:2px solid #ccc;box-sizing:border-box">'+
-    '<div class="chips" style="grid-template-columns:1fr 1fr 1fr;margin-top:12px">'+genders+'</div>'+
+    '<div class="chips" style="grid-template-columns:1fr 1fr;margin-top:12px">'+genders+'</div>'+
+    '<div id="genderHint" style="color:#b91c1c;font-weight:700;margin-top:8px" '+(kid.gender?'hidden':'')+'>'+(hi?'कृपया लड़का या लड़की चुनें':'Please choose boy or girl')+'</div>'+
     '<button type="button" class="go" data-kidsave="1" style="margin-top:16px">'+(hi?'सेव करें':'Save')+'</button>'+
     (S.kids.length>1 ? '<button type="button" class="go" data-kidremove="1" style="margin-top:8px;background:#fff;color:#b91c1c">'+(hi?'यह बच्चा हटाएँ':'Remove this child')+'</button>' : '');
 }
 function applyLang(){
   document.documentElement.lang = S.lang==='hi'?'hi':'en';
-  document.querySelectorAll('[data-t]').forEach(function(el){ el.textContent = L(T[el.dataset.t]); });
+  document.querySelectorAll('[data-t]').forEach(function(el){ el.textContent = LG(el.dataset.t); });
   document.querySelectorAll('.lang button').forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.lang===S.lang)); });
   syncCharBtn();
 }
 function renderHome(){
   var n = totalStars();
-  document.getElementById('homeSay').textContent = n>0 ? L(T.homeSayStars).replace('{n}', n) : L(T.homeSay);
+  document.getElementById('homeSay').textContent = n>0 ? LG('homeSayStars').replace('{n}', n) : LG('homeSay');
   document.getElementById('goluHome').innerHTML = goluSvg('happy','bounce');
 }
 
@@ -655,7 +666,7 @@ document.getElementById('app').addEventListener('click', function(e){
   if(b.dataset.kid){ stashName(); S.active = b.dataset.kid; save(); updateBank(); renderCharPick(); return; }
   if(b.dataset.kidnew!==undefined){ stashName(); var nk = {id:'k'+Date.now().toString(36), name:'', gender:'', bonus:0}; S.kids.push(nk); S.active = nk.id; save(); updateBank(); renderCharPick(); var ni = document.getElementById('kidName'); if(ni) ni.focus(); return; }
   if(b.dataset.gender){ stashName(); KID().gender = b.dataset.gender; save(); renderCharPick(); return; }
-  if(b.dataset.kidsave!==undefined){ if(!stashName()){ var ip = document.getElementById('kidName'); if(ip) ip.focus(); return; } save(); syncCharBtn(); show('home'); return; }
+  if(b.dataset.kidsave!==undefined){ if(!stashName()){ var ip = document.getElementById('kidName'); if(ip) ip.focus(); return; } if(!KID().gender){ var gh = document.getElementById('genderHint'); if(gh) gh.hidden = false; return; } save(); syncCharBtn(); show('home'); return; }
   if(b.dataset.kidremove!==undefined){ var gone = KID(); if(window.confirm(S.lang==='hi' ? (gone.name||'यह बच्चा')+' की प्रोफ़ाइल और स्टार हटाएँ?' : 'Remove '+(gone.name||'this child')+' and their stars?')){ S.kids = S.kids.filter(function(k){ return k.id!==gone.id; }); S.active = S.kids[0].id; save(); renderCharPick(); } return; }
   if(b.dataset.lang){ S.lang = b.dataset.lang; save(); applyLang(); show(current==='food'?'home':current); return; }
   if(b.id==='backBtn'){ show('home'); return; }
@@ -672,7 +683,7 @@ document.getElementById('app').addEventListener('click', function(e){
   if(b.id==='again'){ startGame(); return; }
 });
 
-applyLang(); updateBank(); show(KID().name ? 'home' : 'char');
+applyLang(); updateBank(); show(KID().name && KID().gender ? 'home' : 'char');
 })();
 </script>
 <footer style="max-width:560px;margin:8px auto 24px;padding:0 16px;text-align:center;font:13px/1.5 Mukta,system-ui,sans-serif;color:#556175"><b style="display:block;font:800 16px 'Baloo 2',Mukta,sans-serif;color:#1f5fbf">Dr. Dinesh Mittal Child Clinic</b>Dr. Dinesh Mittal, MBBS, DCH · Child Specialist<br>H-34/69, Sector 3, Rohini, Delhi – 110085<br>Phone: <span style="user-select:all;font-weight:700">+91 81305 21456</span><br>Mon–Sat 10:00 AM–1:00 PM &amp; 6:00–8:30 PM · Sun 11:00 AM–12:00 PM<br><a href="https://www.drdineshmittal.com" style="color:#1f5fbf;font-weight:700">www.drdineshmittal.com</a></footer></body></html>
