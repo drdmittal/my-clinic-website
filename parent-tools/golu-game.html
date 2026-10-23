@@ -142,7 +142,28 @@ h2{margin:0;font-size:26px;line-height:1.1;font-weight:800;text-align:center;tex
 @media (prefers-reduced-motion: reduce){.step .ic{animation:none!important}}
 .pnote{font:600 15px system-ui,sans-serif;color:var(--muted);text-align:center}
 button:focus-visible{outline:4px solid var(--ink);outline-offset:3px}
-@media (prefers-reduced-motion: reduce){.golu.bounce,.golu.shake,.confetti span,.fly{animation:none}.balloon{transition:none}}
+@keyframes hello{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
+@keyframes bobUp{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes twinkle{0%,100%{opacity:.25;transform:scale(.8)}50%{opacity:1;transform:scale(1.15)}}
+@keyframes popIn{0%{transform:scale(.92)}70%{transform:scale(1.04)}100%{transform:scale(1)}}
+.intro{position:relative;display:flex;flex-direction:column;align-items:center;padding:6px 0 4px}
+.intro .golu{width:120px;height:120px;animation:bobUp 2.4s ease-in-out infinite}
+.intro .wave{display:inline-block;transform-origin:70% 70%;animation:hello 1.2s ease-in-out infinite}
+.spark{position:absolute;font-size:22px;pointer-events:none;animation:twinkle 2.2s ease-in-out infinite}
+.kidbig{font:800 18px system-ui,sans-serif;border:none;border-radius:22px;padding:16px 12px;width:100%;box-shadow:0 6px 0 rgba(33,48,74,.18);cursor:pointer;color:#21304a;background:#fff}
+.kidbig[aria-pressed="true"]{background:#c8f7d7;animation:popIn .45s ease-out}
+.kidbig .em{display:block;font-size:34px;line-height:1.1;margin-bottom:4px}
+.kidrow{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.kidname{width:100%;box-sizing:border-box;font:700 22px system-ui,sans-serif;padding:14px;border-radius:20px;border:3px solid #9bd3ff;text-align:center;color:#21304a}
+.kidname:focus{outline:4px solid #ffc93c;border-color:#ffc93c}
+.letsgo{width:100%;margin-top:16px;font:800 22px system-ui,sans-serif;padding:18px;border:none;border-radius:24px;background:#3fb66b;color:#fff;box-shadow:0 7px 0 #2a8a4d;cursor:pointer}
+.kidcard{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 8px;min-width:96px;border-radius:20px;border:3px solid transparent;background:#fff;font:700 16px system-ui,sans-serif;color:#21304a;cursor:pointer}
+.kidcard[aria-pressed="true"]{border-color:#3fb66b;background:#e9fbef}
+.kidcard .golu{width:64px;height:64px}
+.kidcards{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:10px 0 2px}
+.kidsmall{margin-top:14px;background:none;border:none;font:700 15px system-ui,sans-serif;color:#2563eb;cursor:pointer;text-decoration:underline}
+.parentnote{margin-top:22px;font:600 12px system-ui,sans-serif;color:#64748b;text-align:center}
+@media (prefers-reduced-motion: reduce){.golu.bounce,.golu.shake,.confetti span,.fly,.intro .golu,.intro .wave,.spark,.kidbig[aria-pressed="true"]{animation:none}.balloon{transition:none}}
 </style>
 
 <div class="app" id="app">
@@ -385,7 +406,7 @@ function dkey(d){ d = d || new Date(); return d.getFullYear()+'-'+String(d.getMo
 function totalStars(){ return KID().bonus; }
 
 function goluSvg(mood, cls, who){
-  var gen = KID().gender;
+  var gen = (who==='boy'||who==='girl') ? who : KID().gender;
   var hairBack = gen==='girl' ? '<path d="M18 54 Q12 14 60 16 Q108 14 102 54 L100 94 Q84 98 80 86 L40 86 Q36 98 20 94 Z" fill="#6b3f22"/>' : '';
   var hairFront = gen==='girl' ? '<path d="M22 56 Q30 26 60 28 Q90 26 98 56 Q84 38 60 40 Q36 38 22 56Z" fill="#6b3f22"/><circle cx="34" cy="36" r="6" fill="#ff7b8a"/><circle cx="86" cy="36" r="6" fill="#ff7b8a"/>'
     : gen==='boy' ? '<path d="M24 56 Q22 22 60 22 Q98 22 96 56 Q88 38 74 36 Q60 42 46 36 Q32 38 24 56Z" fill="#4a2f1b"/>' : '';
@@ -512,23 +533,30 @@ function syncCharBtn(){ var b = document.getElementById('charBtn'); if(b) b.text
 var GENDERS = [{k:'boy', en:'Boy', hi:'लड़का'}, {k:'girl', en:'Girl', hi:'लड़की'}];
 /* keep whatever name is typed before the screen is redrawn */
 function stashName(){ var i = document.getElementById('kidName'); if(!i) return ''; var v = i.value.trim().slice(0,20); if(v) KID().name = v; return v; }
+function tx(en, hi){ return S.lang==='hi' ? hi : en; }
 function renderCharPick(){
-  var hi = S.lang==='hi', kid = KID();
-  var kids = S.kids.map(function(k){
-    return '<button type="button" class="chip" data-kid="'+k.id+'" aria-pressed="'+(k.id===S.active)+'" style="flex-direction:column;padding:14px 10px"><span>'+esc(k.name || (hi?'बिना नाम':'No name'))+'</span><small>⭐ '+k.bonus+'</small></button>';
-  }).join('');
-  var genders = GENDERS.map(function(g){
-    return '<button type="button" class="chip" data-gender="'+g.k+'" aria-pressed="'+(kid.gender===g.k)+'"><span>'+(hi?g.hi:g.en)+'</span></button>';
-  }).join('');
+  var kid = KID();
+  var cards = S.kids.length>1 ? '<div class="kidcards">'+S.kids.map(function(k){
+    var gen = k.gender || 'girl';
+    return '<button type="button" class="kidcard" data-kid="'+k.id+'" aria-pressed="'+(k.id===S.active)+'">'+goluSvg('happy','small',gen)+'<span>'+esc(k.name || tx('No name','बिना नाम'))+'</span><small>⭐ '+k.bonus+'</small></button>';
+  }).join('')+'</div><div style="text-align:center;font:700 16px system-ui,sans-serif;color:#21304a;margin-top:6px">'+tx('Who is playing?','कौन खेल रहा है?')+'</div>' : '';
   document.getElementById('s-char').innerHTML =
-    '<div class="bubble" style="text-align:center"><b>'+L(T.pickTitle)+'</b><br>'+L(T.pickSub)+'</div>'+
-    '<div class="chips" style="grid-template-columns:1fr 1fr">'+kids+'<button type="button" class="chip" data-kidnew="1"><span>'+(hi?'+ दूसरा बच्चा':'+ Add another child')+'</span></button></div>'+
-    '<label for="kidName" style="display:block;margin:16px 0 6px;font-weight:700">'+(hi?'बच्चे का पहला नाम':'Child’s first name')+'</label>'+
-    '<input id="kidName" type="text" maxlength="20" value="'+esc(kid.name)+'" autocomplete="off" style="width:100%;font:600 18px system-ui,sans-serif;padding:12px;border-radius:14px;border:2px solid #ccc;box-sizing:border-box">'+
-    '<div class="chips" style="grid-template-columns:1fr 1fr;margin-top:12px">'+genders+'</div>'+
-    '<div id="genderHint" style="color:#b91c1c;font-weight:700;margin-top:8px" '+(kid.gender?'hidden':'')+'>'+(hi?'कृपया लड़का या लड़की चुनें':'Please choose boy or girl')+'</div>'+
-    '<button type="button" class="go" data-kidsave="1" style="margin-top:16px">'+(hi?'सेव करें':'Save')+'</button>'+
-    (S.kids.length>1 ? '<button type="button" class="go" data-kidremove="1" style="margin-top:8px;background:#fff;color:#b91c1c">'+(hi?'यह बच्चा हटाएँ':'Remove this child')+'</button>' : '');
+    '<div class="intro">'+
+      '<span class="spark" style="left:6%;top:8%">⭐</span><span class="spark" style="right:8%;top:4%;animation-delay:.6s">✨</span><span class="spark" style="left:14%;bottom:14%;animation-delay:1.1s">⭐</span><span class="spark" style="right:12%;bottom:18%;animation-delay:1.6s">✨</span>'+
+      goluSvg('happy','bounce', kid.gender || 'girl')+
+      '<div class="bubble" style="text-align:center;margin-top:6px"><span class="wave">👋</span> <b>'+tx('Hi there! What is your name?','नमस्ते! तुम्हारा नाम क्या है?')+'</b></div>'+
+    '</div>'+
+    cards+
+    '<input id="kidName" class="kidname" type="text" maxlength="20" autocomplete="off" placeholder="'+tx('Type your name','अपना नाम लिखो')+'" value="'+esc(kid.name)+'" style="margin-top:12px">'+
+    '<div style="text-align:center;font:700 18px system-ui,sans-serif;color:#21304a;margin:14px 0 2px">'+tx('I am a…','मैं हूँ…')+'</div>'+
+    '<div class="kidrow">'+
+      '<button type="button" class="kidbig" data-gender="boy" aria-pressed="'+(kid.gender==='boy')+'"><span class="em">👦</span>'+tx('a boy','लड़का')+'</button>'+
+      '<button type="button" class="kidbig" data-gender="girl" aria-pressed="'+(kid.gender==='girl')+'"><span class="em">👧</span>'+tx('a girl','लड़की')+'</button>'+
+    '</div>'+
+    '<div id="genderHint" style="color:#b91c1c;font-weight:700;text-align:center;margin-top:8px" '+(kid.gender?'hidden':'')+'>'+tx('Pick boy or girl first','पहले लड़का या लड़की चुनो')+'</div>'+
+    '<button type="button" class="letsgo" data-kidsave="1">'+tx("Let's play!",'चलो खेलें!')+'</button>'+
+    '<button type="button" class="kidsmall" data-kidnew="1">'+tx('+ Add another child','+ एक और बच्चा जोड़ो')+'</button>'+
+    (S.kids.length>1 ? '<div class="parentnote"><button type="button" class="kidsmall" style="font-size:12px;color:#64748b" data-kidremove="1">'+tx('Parents: remove this child','माता-पिता: यह बच्चा हटाएँ')+'</button></div>' : '');
 }
 function applyLang(){
   document.documentElement.lang = S.lang==='hi'?'hi':'en';
@@ -711,7 +739,7 @@ document.getElementById('app').addEventListener('click', function(e){
   if(b.dataset.kid){ stashName(); S.active = b.dataset.kid; save(); updateBank(); renderCharPick(); return; }
   if(b.dataset.kidnew!==undefined){ stashName(); var nk = {id:'k'+Date.now().toString(36), name:'', gender:'', bonus:0}; S.kids.push(nk); S.active = nk.id; save(); updateBank(); renderCharPick(); var ni = document.getElementById('kidName'); if(ni) ni.focus(); return; }
   if(b.dataset.gender){ stashName(); KID().gender = b.dataset.gender; save(); renderCharPick(); return; }
-  if(b.dataset.kidsave!==undefined){ if(!stashName()){ var ip = document.getElementById('kidName'); if(ip) ip.focus(); return; } if(!KID().gender){ var gh = document.getElementById('genderHint'); if(gh) gh.hidden = false; return; } save(); syncCharBtn(); show('home'); return; }
+  if(b.dataset.kidsave!==undefined){ if(!stashName()){ var ip = document.getElementById('kidName'); if(ip) ip.focus(); return; } if(!KID().gender){ var gh = document.getElementById('genderHint'); if(gh) gh.hidden = false; return; } save(); syncCharBtn(); confetti(); show('home'); return; }
   if(b.dataset.kidremove!==undefined){ var gone = KID(); if(window.confirm(S.lang==='hi' ? (gone.name||'यह बच्चा')+' की प्रोफ़ाइल और स्टार हटाएँ?' : 'Remove '+(gone.name||'this child')+' and their stars?')){ S.kids = S.kids.filter(function(k){ return k.id!==gone.id; }); S.active = S.kids[0].id; save(); renderCharPick(); } return; }
   if(b.dataset.lang){ S.lang = b.dataset.lang; save(); applyLang(); show(current==='food'?'home':current); return; }
   if(b.id==='backBtn'){ show('home'); return; }
