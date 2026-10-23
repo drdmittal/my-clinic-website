@@ -16,7 +16,7 @@
 html,body{height:100%}
 body{background:linear-gradient(180deg,var(--sky) 0%,var(--sky2) 70%);background-color:var(--sky);color:var(--ink);font-family:var(--font);font-size:18px;line-height:1.35}
 .app{max-width:520px;margin:0 auto;min-height:100%;display:flex;flex-direction:column;gap:12px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:12px 20px;position:relative}
-.top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px}
 .bank{display:flex;align-items:center;gap:6px;background:var(--card);border-radius:999px;padding:4px 14px 4px 8px;font-weight:800;font-size:20px;box-shadow:0 3px 0 rgba(33,48,74,.12)}
 .bank .st{font-size:24px}
 .lang{display:flex;background:var(--card);border-radius:999px;padding:3px;box-shadow:0 3px 0 rgba(33,48,74,.12)}
@@ -556,7 +556,10 @@ function renderCharPick(){
     '<div id="genderHint" style="color:#b91c1c;font-weight:700;text-align:center;margin-top:8px" '+(kid.gender?'hidden':'')+'>'+tx('Pick boy or girl first','पहले लड़का या लड़की चुनो')+'</div>'+
     '<button type="button" class="letsgo" data-kidsave="1">'+tx("Let's play!",'चलो खेलें!')+'</button>'+
     '<button type="button" class="kidsmall" data-kidnew="1">'+tx('+ Add another child','+ एक और बच्चा जोड़ो')+'</button>'+
-    (S.kids.length>1 ? '<div class="parentnote"><button type="button" class="kidsmall" style="font-size:12px;color:#64748b" data-kidremove="1">'+tx('Parents: remove this child','माता-पिता: यह बच्चा हटाएँ')+'</button></div>' : '');
+    '<div class="parentnote">'+
+      tx('Parents: to reset this child’s stars, press and hold the ⭐ counter for 3 seconds, or tap it 5 times.','माता-पिता: इस बच्चे के स्टार मिटाने के लिए ⭐ गिनती को 3 सेकंड दबाकर रखें, या 5 बार टैप करें।')+
+      (S.kids.length>1 ? '<br><button type="button" class="kidsmall" style="font-size:12px;color:#64748b;margin-top:6px" data-kidremove="1">'+tx('Remove this child','यह बच्चा हटाएँ')+'</button>' : '')+
+    '</div>';
 }
 function applyLang(){
   document.documentElement.lang = S.lang==='hi'?'hi':'en';
