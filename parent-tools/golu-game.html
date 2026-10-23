@@ -116,7 +116,7 @@ h2{margin:0;font-size:26px;line-height:1.1;font-weight:800;text-align:center;tex
 @keyframes fall{to{transform:translateY(110vh) rotate(540deg);opacity:.8}}
 .fly{position:fixed;font-size:34px;z-index:60;pointer-events:none;animation:fly .8s ease-in forwards}
 @keyframes fly{to{transform:translate(var(--dx),var(--dy)) scale(.5);opacity:.3}}
-.t-plate{background:#ffd9a8} .t-screen{background:#b9e4ff} .t-brush{background:#d4f5f0} .t-safe{background:#e4d4ff} .t-behave{background:#fff0b3}
+.t-story{background:#d9f7c4} .t-plate{background:#ffd9a8} .t-screen{background:#b9e4ff} .t-brush{background:#d4f5f0} .t-safe{background:#e4d4ff} .t-behave{background:#fff0b3}
 .opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
 .opt{border:0;border-radius:22px;min-height:88px;font:800 19px var(--font);color:#fff;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;box-shadow:0 6px 0 rgba(0,0,0,.2);padding:6px}
 .opt .ic{font-size:34px;line-height:1}
@@ -168,6 +168,7 @@ button:focus-visible{outline:4px solid var(--ink);outline-offset:3px}
       <button type="button" class="tile t-food" data-go="food"><span class="ic">🍎</span><span><span data-t="foodGame"></span><small data-t="foodGameSub"></small></span></button>
       <button type="button" class="tile t-plate" data-go="plate"><span class="ic">🍽️</span><span><span data-t="plateGame"></span><small data-t="plateGameSub"></small></span></button>
       <button type="button" class="tile t-screen" data-go="screen"><span class="ic">🚦</span><span><span data-t="screenGame"></span><small data-t="screenGameSub"></small></span></button>
+      <button type="button" class="tile t-story" data-go="story"><span class="ic">📖</span><span><span data-t="storyGame"></span><small data-t="storyGameSub"></small></span></button>
       <button type="button" class="tile t-brush" data-go="brush"><span class="ic">🪥</span><span><span data-t="brushGame"></span><small data-t="brushGameSub"></small></span></button>
       <button type="button" class="tile t-safe" data-go="safe"><span class="ic">🛡️</span><span><span data-t="safeGame"></span><small data-t="safeGameSub"></small></span></button>
       <button type="button" class="tile t-behave" data-go="behave"><span class="ic">😊</span><span><span data-t="behaveGame"></span><small data-t="behaveGameSub"></small></span></button>
@@ -189,6 +190,7 @@ button:focus-visible{outline:4px solid var(--ink);outline-offset:3px}
   <section class="screen" id="s-safe" hidden></section>
   <section class="screen" id="s-behave" hidden></section>
   <section class="screen" id="s-char" hidden></section>
+  <section class="screen" id="s-story" hidden></section>
 </div>
 
 <script>
@@ -213,6 +215,9 @@ var T = {
   plateJunk:{en:'Take away the junk food. It does not go on the plate.',hi:'जंक फूड हटाओ। यह थाली में नहीं जाता।'},
   plateMissing:{en:'Add the groups still missing below. {N} needs all of them.',hi:'नीचे के छूटे हुए ग्रुप जोड़ो। {N} को सबकी ज़रूरत है।'},
   brushDone:{en:'Brushing done! Clean teeth, happy {N}. +1 star',hi:'ब्रश हो गया! साफ़ दाँत, खुश {N}। +1 स्टार'},
+  storyGame:{en:'Stories for {N}',hi:'{N} के लिए कहानियाँ'},
+  storyGameSub:{en:'Short stories about everyday life',hi:'रोज़ की ज़िंदगी की छोटी कहानियाँ'},
+  storyTitle:{en:'Story time with {N}',hi:'{N} के साथ कहानी का समय'},
   brushGame_girl:{en:'Brush Like a Superhero',hi:'हीरोइन की तरह ब्रश करो'},
   homeSay_boy:{en:"Hi {N}, my brave boy! Let's build good habits together!",hi:'नमस्ते {N}, प्यारे दोस्त! आओ, मिलकर अच्छी आदतें सीखें!'},
   homeSay_girl:{en:"Hi {N}, my brave girl! Let's build good habits together!",hi:'नमस्ते {N}, प्यारी दोस्त! आओ, मिलकर अच्छी आदतें सीखें!'},
@@ -448,18 +453,58 @@ function syncMusicBtn(){ var b = document.getElementById('musicBtn'); if(!b) ret
 function musicToggle(){ MUS.on = !MUS.on; try{ localStorage.setItem('golu-music-v2', MUS.on ? 'on' : 'off'); }catch(e){} syncMusicBtn(); if(MUS.on) musicFor(current); else mStop(); }
 document.addEventListener('visibilitychange', function(){ if(document.hidden) mStop(); else if(MUS.on && MTR[current]) musicFor(current); });
 
+
+/* Short stories about everyday life for Indian families. Each has a boy and a girl version; {N} is the child's name. */
+var STORIES = [
+ {ic:'🪥', en:'Brave brushing', hi:'बहादुर ब्रश',
+  boy:{en:"{N} woke up late one morning. He ran to the bathroom, brushed for two whole minutes and counted the seconds like a superhero. His teeth sparkled! At school his friend said, “Your smile is so bright!” {N} smiled back. Brush twice a day, just like a hero.",
+       hi:"{N} एक सुबह देर से उठा। वह भागकर बाथरूम गया और पूरे दो मिनट ब्रश किया। सेकंड गिनते-गिनते दाँत चमकने लगे! स्कूल में दोस्त ने कहा, “तुम्हारी मुस्कान कितनी चमकदार है!” {N} मुस्कुरा दिया। दिन में दो बार ब्रश करो, हीरो की तरह।"},
+  girl:{en:"{N} woke up late one morning. She ran to the bathroom, brushed for two whole minutes and counted the seconds like a superhero. Her teeth sparkled! At school her friend said, “Your smile is so bright!” {N} smiled back. Brush twice a day, just like a superhero.",
+       hi:"{N} एक सुबह देर से उठी। वह भागकर बाथरूम गई और पूरे दो मिनट ब्रश किया। सेकंड गिनते-गिनते दाँत चमकने लगे! स्कूल में दोस्त ने कहा, “तुम्हारी मुस्कान कितनी चमकदार है!” {N} मुस्कुरा दी। दिन में दो बार ब्रश करो, सुपरहीरोइन की तरह।"}},
+ {ic:'🍽️', en:'A colourful plate', hi:'रंग-बिरंगी थाली',
+  boy:{en:"{N} came home from the park, very hungry. Mummy put a plate in front of him: dal, roti, sabzi, curd and a few slices of apple. “My plate has all the colours!” said {N}. He ate it all and felt strong for his cricket match.",
+       hi:"{N} पार्क से भूखा होकर घर आया। मम्मी ने थाली लगाई: दाल, रोटी, सब्ज़ी, दही और सेब की कुछ फाँकें। {N} ने कहा, “मेरी थाली में सारे रंग हैं!” उसने सब खाया और क्रिकेट मैच के लिए ताक़तवर महसूस किया।"},
+  girl:{en:"{N} came home from dance class, very hungry. Mummy put a plate in front of her: dal, roti, sabzi, curd and a few slices of apple. “My plate has all the colours!” said {N}. She ate it all and felt strong for her dance show.",
+       hi:"{N} डांस क्लास से भूखी होकर घर आई। मम्मी ने थाली लगाई: दाल, रोटी, सब्ज़ी, दही और सेब की कुछ फाँकें। {N} ने कहा, “मेरी थाली में सारे रंग हैं!” उसने सब खाया और डांस शो के लिए ताक़तवर महसूस किया।"}},
+ {ic:'🚦', en:'Traffic light time', hi:'ट्रैफ़िक लाइट का समय',
+  boy:{en:"{N} wanted to play games on the tablet all evening. Then he remembered the traffic light: green for drawing and reading, yellow for one short show, red for too much screen. He put the tablet down, took his cycle and went to the society park, where three friends were playing.",
+       hi:"{N} शाम भर टैबलेट पर गेम खेलना चाहता था। फिर उसे ट्रैफ़िक लाइट याद आई: हरा मतलब ड्रॉइंग और किताबें, पीला मतलब एक छोटा शो, लाल मतलब बहुत ज़्यादा स्क्रीन। उसने टैबलेट रखा, साइकिल ली और सोसाइटी पार्क गया, जहाँ तीन दोस्त खेल रहे थे।"},
+  girl:{en:"{N} wanted to play games on the tablet all evening. Then she remembered the traffic light: green for drawing and reading, yellow for one short show, red for too much screen. She put the tablet down, took her cycle and went to the society park, where three friends were playing.",
+       hi:"{N} शाम भर टैबलेट पर गेम खेलना चाहती थी। फिर उसे ट्रैफ़िक लाइट याद आई: हरा मतलब ड्रॉइंग और किताबें, पीला मतलब एक छोटा शो, लाल मतलब बहुत ज़्यादा स्क्रीन। उसने टैबलेट रखा, साइकिल ली और सोसाइटी पार्क गई, जहाँ तीन दोस्त खेल रहे थे।"}},
+ {ic:'🛡️', en:'Lost in the market', hi:'बाज़ार में खो गए',
+  boy:{en:"At the market, {N} lost sight of Mummy for a moment. He did not panic. He stayed near a shop and asked the shopkeeper for help. He said his name and Mummy's mobile number. When Mummy came running, he hugged her. If you ever get lost, stay where you are and tell a grown-up you trust.",
+       hi:"बाज़ार में {N} एक पल के लिए मम्मी से बिछड़ गया। वह घबराया नहीं। वह एक दुकान के पास रुका और दुकानदार से मदद माँगी। उसने अपना नाम और मम्मी का मोबाइल नंबर बताया। मम्मी भागकर आईं और उसे गले लगा लिया। खो जाओ तो जहाँ हो वहीं रुको और किसी भरोसेमंद बड़े को बताओ।"},
+  girl:{en:"At the market, {N} lost sight of Mummy for a moment. She did not panic. She stayed near a shop and asked the shopkeeper for help. She said her name and Mummy's mobile number. When Mummy came running, she hugged her. If you ever get lost, stay where you are and tell a grown-up you trust.",
+       hi:"बाज़ार में {N} एक पल के लिए मम्मी से बिछड़ गई। वह घबराई नहीं। वह एक दुकान के पास रुकी और दुकानदार से मदद माँगी। उसने अपना नाम और मम्मी का मोबाइल नंबर बताया। मम्मी भागकर आईं और उसे गले लगा लिया। खो जाओ तो जहाँ हो वहीं रुको और किसी भरोसेमंद बड़े को बताओ।"}},
+ {ic:'😊', en:'Sharing the toy car', hi:'खिलौना कार बाँटना',
+  boy:{en:"{N}'s cousin came over with a new toy car. The little sister started crying because she wanted a turn. {N} said, “Please, you play first.” Then everyone took turns. Everyone said, “Thank you, {N}!” Sharing makes everyone happy.",
+       hi:"{N} के चचेरे भाई के पास नई खिलौना कार थी। छोटी बहन रोने लगी, क्योंकि उसे भी बारी चाहिए थी। {N} ने कहा, “पहले तुम खेलो, प्लीज़।” फिर सबने बारी-बारी से खेला। सबने कहा, “शुक्रिया {N}!” मिल-बाँटकर खेलने से सब खुश होते हैं।"},
+  girl:{en:"{N}'s cousin came over with a new toy car. The little brother started crying because he wanted a turn. {N} said, “Please, you play first.” Then she shared the car and they took turns. Everyone said, “Thank you, {N}!” Sharing makes everyone happy.",
+       hi:"{N} के चचेरे भाई के पास नई खिलौना कार थी। छोटा भाई रोने लगा, क्योंकि उसे भी बारी चाहिए थी। {N} ने कहा, “पहले तुम खेलो, प्लीज़।” फिर उसने बारी-बारी से कार बाँटी। सबने कहा, “शुक्रिया {N}!” मिल-बाँटकर खेलने से सब खुश होते हैं।"}}
+];
+function renderStories(){
+  var g = KID().gender === 'girl' ? 'girl' : 'boy';
+  document.getElementById('s-story').innerHTML =
+    '<div class="bubble" style="text-align:center"><b>'+L(T.storyTitle)+'</b></div>' +
+    STORIES.map(function(st){
+      return '<div class="bubble" style="margin-top:12px;text-align:left"><b>'+st.ic+' '+esc(S.lang==='hi'?st.hi:st.en)+'</b>'+
+             '<p style="margin:8px 0 0;line-height:1.55">'+esc(L(st[g]))+'</p></div>';
+    }).join('');
+}
+
 function show(name){
   stopTimer();
   current = name;
   updateBank(); applyLang();
   musicFor(name); syncMusicBtn();
-  ['home','food','plate','screen','brush','safe','behave','char'].forEach(function(n){ document.getElementById('s-'+n).hidden = (n!==name); });
+  ['home','food','plate','screen','brush','safe','behave','char','story'].forEach(function(n){ document.getElementById('s-'+n).hidden = (n!==name); });
   document.getElementById('backBtn').hidden = (name==='home');
   if(name==='home') renderHome();
   if(name==='food') startGame();
   if(name==='plate') plateRender();
   if(name==='brush') brushRender();
   if(name==='char') renderCharPick();
+  if(name==='story') renderStories();
   if(name==='screen' || name==='safe' || name==='behave') qRender(name);
   window.scrollTo(0,0);
 }
