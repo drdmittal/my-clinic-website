@@ -53,6 +53,8 @@ h2{margin:0;font-size:26px;line-height:1.1;font-weight:800;text-align:center;tex
 .food.struck .nm{text-decoration:line-through;text-decoration-color:var(--berry);text-decoration-thickness:4px}
 .stamp{position:absolute;top:14px;right:14px;width:64px;height:64px;border-radius:50%;display:grid;place-items:center;font-size:40px;font-weight:800;color:#fff;transform:scale(0) rotate(-20deg);transition:transform .25s cubic-bezier(.3,1.6,.5,1)}
 .stamp.show{transform:scale(1) rotate(-12deg)}
+.food{position:relative}
+.bigx{position:absolute;inset:0;display:grid;place-items:center;font-size:150px;font-weight:900;line-height:1;color:var(--berry);opacity:.85;pointer-events:none;animation:popIn .4s ease-out}
 .stamp.good{background:var(--grass)} .stamp.bad{background:var(--berry)}
 .big-x{position:absolute;inset:0;pointer-events:none}
 .ask{font-size:22px;font-weight:700;text-align:center}
@@ -613,14 +615,18 @@ function answer(v, btn){
   var why = f.g ? (f.why || GOODWHY) : f.why;
   if(ok){
     G.won++; KID().bonus++; save();
-    stamp.className='stamp good show'; stamp.textContent='✓';
     react(el,'wow'); flyStar(card);
   } else {
-    stamp.className='stamp bad show'; stamp.textContent='✗';
-    card.classList.add('struck'); react(el,'sad');
+    react(el,'sad');
   }
-  // Junk food always gets struck out, so the lesson sticks even when the child answered right.
-  if(!f.g) card.classList.add('struck');
+  // The mark shows the food, not the answer: healthy food gets a green tick, junk food gets a big red cross.
+  if(f.g){
+    stamp.className='stamp good show'; stamp.textContent='✓';
+  } else {
+    card.classList.add('struck');
+    var bx = document.createElement('div'); bx.className='bigx'; bx.setAttribute('aria-hidden','true'); bx.textContent='✗';
+    card.appendChild(bx);
+  }
   var w = document.createElement('div'); w.className = 'why '+(ok?'good':'bad');
   w.innerHTML = '<div style="font-size:22px;font-weight:800">'+(ok?L(T.right):L(T.wrong))+'</div>'+esc(L(why));
   var nx = document.createElement('button'); nx.type='button'; nx.className='go'; nx.id='nextFood'; nx.textContent = L(T.next)+' →';
