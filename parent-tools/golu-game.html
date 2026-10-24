@@ -124,6 +124,14 @@ h2{margin:0;font-size:26px;line-height:1.1;font-weight:800;text-align:center;tex
 .opt .ic{font-size:34px;line-height:1}
 .opt.g{background:var(--grass)} .opt.y{background:var(--sun-deep);color:var(--ink)} .opt.r{background:var(--berry)}
 .chips{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.chip.wide{grid-column:1 / -1;min-height:64px;flex-direction:row;gap:10px;justify-content:center}
+.chip.xj,.chip.xj[aria-pressed="true"]{border-color:#d7263d!important;background:#ffe9ec!important;color:#a92a21;text-decoration:line-through;text-decoration-thickness:3px}
+.chip.xj .pic{opacity:.55}
+.junkbox{background:#fff1f0;border:2px solid #d7263d;border-radius:18px;padding:12px 14px;display:flex;flex-direction:column;gap:10px;color:#7a1a14}
+.jx{display:flex;gap:10px;align-items:flex-start;font-size:16px;line-height:1.4}
+.jx .jp{font-size:28px;flex:none;opacity:.7}
+.jn{color:#c0271c;font-size:18px}
+.jnote{font-weight:700;color:#a92a21;font-size:16px}
 .chip{border:3px solid transparent;background:var(--card);border-radius:18px;padding:8px 4px;display:flex;flex-direction:column;align-items:center;font:700 15px var(--font);color:var(--ink);cursor:pointer;min-height:92px;justify-content:center;box-shadow:0 4px 0 rgba(33,48,74,.12);text-align:center}
 .chip .pic{font-size:34px;line-height:1.1}
 .chip[aria-pressed="true"]{border-color:var(--grass);background:#e6f8ea}
@@ -236,6 +244,7 @@ var T = {
   plateCheck:{en:'Check my plate',hi:'मेरी थाली जाँचो'},
   plateGood:{en:'Balanced plate! {N} is happy. +1 star',hi:'संतुलित थाली! {N} खुश है। +1 स्टार'},
   plateJunk:{en:'Take away the junk food. It does not go on the plate.',hi:'जंक फूड हटाओ। यह थाली में नहीं जाता।'},
+  junkNote:{en:'{N}, do not eat these. They are unhealthy for your body. Eat roti, dal, sabzi, fruit and milk instead.',hi:'{N}, ये न खाएँ। ये शरीर के लिए अच्छे नहीं हैं। इनकी जगह रोटी, दाल, सब्ज़ी, फल और दूध खाओ।'},
   plateMissing:{en:'Add the groups still missing below. {N} needs all of them.',hi:'नीचे के छूटे हुए ग्रुप जोड़ो। {N} को सबकी ज़रूरत है।'},
   brushDone:{en:'Brushing done! Clean teeth, happy {N}. +1 star',hi:'ब्रश हो गया! साफ़ दाँत, खुश {N}। +1 स्टार'},
   storyGame:{en:'Stories for {N}',hi:'{N} के लिए कहानियाँ'},
@@ -313,14 +322,15 @@ var FOODS = [
 /* ---- habit games data ---- */
 var PLATE_ITEMS = [
   {k:'roti',p:'🫓',en:'Roti',hi:'रोटी',g:'grain'},{k:'rice',p:'🍚',en:'Rice',hi:'चावल',g:'grain'},
-  {k:'dal',p:'🍲',en:'Dal',hi:'दाल',g:'protein'},{k:'egg',p:'🥚',en:'Egg',hi:'अंडा',g:'protein'},{k:'paneer',p:'🧀',en:'Paneer',hi:'पनीर',g:'protein'},
+  {k:'dal',p:'🍲',en:'Dal',hi:'दाल',g:'protein'},{k:'paneer',p:'🧀',en:'Paneer',hi:'पनीर',g:'protein'},
   {k:'sabzi',p:'🥕',en:'Sabzi',hi:'सब्ज़ी',g:'veg'},{k:'salad',p:'🥗',en:'Salad',hi:'सलाद',g:'veg'},
   {k:'apple',p:'🍎',en:'Apple',hi:'सेब',g:'fruit'},{k:'banana',p:'🍌',en:'Banana',hi:'केला',g:'fruit'},
   {k:'milk',p:'🥛',en:'Milk',hi:'दूध',g:'dairy'},{k:'curd',p:'🥣',en:'Curd',hi:'दही',g:'dairy'},
-  {k:'chips',p:'🍟',en:'Chips',hi:'चिप्स',g:'junk'},{k:'cola',p:'🥤',en:'Cold drink',hi:'कोल्ड ड्रिंक',g:'junk'},{k:'biscuit',p:'🍪',en:'Biscuit',hi:'बिस्किट',g:'junk'}
+  {k:'chips',p:'🍟',en:'Chips',hi:'चिप्स',g:'junk',why:{en:'Chips have too much salt. Too much salt is not good for your kidneys and can raise blood pressure. They are fried, so they add fat and weight too.',hi:'चिप्स में बहुत ज़्यादा नमक होता है। ज़्यादा नमक किडनी के लिए अच्छा नहीं और बीपी बढ़ा सकता है। तले होने से चर्बी और वज़न भी बढ़ता है।'}},{k:'cola',p:'🥤',en:'Cold drink',hi:'कोल्ड ड्रिंक',g:'junk',why:{en:'Cold drink has a lot of sugar. Sugar causes tooth decay and weight gain, and can lead to diabetes later. Plain water is best.',hi:'कोल्ड ड्रिंक में बहुत चीनी होती है। चीनी से दाँत ख़राब होते हैं, वज़न बढ़ता है और आगे चलकर डायबिटीज़ का ख़तरा हो सकता है। सादा पानी सबसे अच्छा है।'}},{k:'biscuit',p:'🍪',en:'Biscuit',hi:'बिस्किट',g:'junk',why:{en:'Biscuits are made of refined flour and sugar. They give energy that does not last, cause tooth decay and weight gain.',hi:'बिस्किट मैदे और चीनी से बनते हैं। इनसे ऊर्जा जल्दी ख़त्म होती है, दाँत ख़राब होते हैं और वज़न बढ़ता है।'}},
+  {k:'nonveg',p:'🍗',en:'I also eat egg or non-veg',hi:'मैं अंडा या नॉन-वेज भी खाता/खाती हूँ',g:'protein',extra:true}
 ];
 var PLATE_GROUPS = {
-  grain:{en:'Roti or rice',hi:'रोटी या चावल'}, protein:{en:'Dal, egg or paneer',hi:'दाल, अंडा या पनीर'},
+  grain:{en:'Roti or rice',hi:'रोटी या चावल'}, protein:{en:'Dal or paneer (or egg / non-veg)',hi:'दाल या पनीर (या अंडा / नॉन-वेज)'},
   veg:{en:'Vegetable or salad',hi:'सब्ज़ी या सलाद'}, fruit:{en:'Fruit',hi:'फल'}, dairy:{en:'Milk or curd',hi:'दूध या दही'}
 };
 var QZ = {
@@ -682,11 +692,14 @@ function qNext(name){ var st = QS[name]; st.i++; st.answered = false; qRender(na
 var PL = {sel:{}, scored:false};
 function plateRender(){
   var el = document.getElementById('s-plate');
-  var chips = PLATE_ITEMS.map(function(x,k){ return '<button type="button" class="chip" aria-pressed="'+(!!PL.sel[k])+'" data-pl="'+k+'"><span class="pic" aria-hidden="true">'+x.p+'</span>'+esc(L(x))+'</button>'; }).join('');
+  var chips = PLATE_ITEMS.map(function(x,k){ if(x.extra) return ''; return '<button type="button" class="chip" aria-pressed="'+(!!PL.sel[k])+'" data-pl="'+k+'"><span class="pic" aria-hidden="true">'+x.p+'</span>'+esc(L(x))+'</button>'; }).join('');
+  var extraIdx = PLATE_ITEMS.findIndex(function(x){ return x.extra; });
+  var extra = extraIdx<0 ? '' : '<button type="button" class="chip wide" aria-pressed="'+(!!PL.sel[extraIdx])+'" data-pl="'+extraIdx+'"><span class="pic" aria-hidden="true">'+PLATE_ITEMS[extraIdx].p+'</span>'+esc(L(PLATE_ITEMS[extraIdx]))+'</button>';
   var picked = PLATE_ITEMS.filter(function(x,k){ return PL.sel[k]; }).map(function(x){ return x.p; }).join(' ');
   el.innerHTML = '<div class="bubble" style="text-align:center">'+L(T.plateAsk)+'</div>'+
     '<div class="plate" aria-live="polite">'+(picked ? picked : esc(L(T.plateEmpty)))+'</div>'+
     '<div class="chips">'+chips+'</div>'+
+    extra+
     '<button type="button" class="go" data-pcheck="1">'+L(T.plateCheck)+'</button>'+
     '<div id="plateRes"></div>';
 }
@@ -696,7 +709,14 @@ function plateCheck(){
   var rows = Object.keys(PLATE_GROUPS).map(function(g){ return '<div>'+(have[g]?'✅':'⬜')+' '+esc(L(PLATE_GROUPS[g]))+'</div>'; }).join('');
   var allOk = Object.keys(PLATE_GROUPS).every(function(g){ return have[g]; }) && junk === 0;
   var msg = allOk ? L(T.plateGood) : (junk ? L(T.plateJunk) : L(T.plateMissing));
-  document.getElementById('plateRes').innerHTML = '<div class="checklist">'+rows+'</div><div class="why '+(allOk?'good':'bad')+'">'+msg+'</div>';
+  var junkBox = '';
+  if(junk){
+    document.querySelectorAll('[data-pl]').forEach(function(b){ var x=PLATE_ITEMS[+b.getAttribute('data-pl')]; if(x && x.g==='junk' && PL.sel[+b.getAttribute('data-pl')]) b.classList.add('xj'); });
+    junkBox = '<div class="junkbox">'+PLATE_ITEMS.filter(function(x,k){ return x.g==='junk' && PL.sel[k]; }).map(function(x){
+      return '<div class="jx"><span class="jp" aria-hidden="true">'+x.p+'</span><div><b class="jn">✖ '+esc(L(x))+'</b><br>'+esc(L(x.why))+'</div></div>';
+    }).join('')+'<div class="jnote">'+L(T.junkNote)+'</div></div>';
+  }
+  document.getElementById('plateRes').innerHTML = '<div class="checklist">'+rows+'</div><div class="why '+(allOk?'good':'bad')+'">'+msg+'</div>'+junkBox;
   if(allOk && !PL.scored){ PL.scored = true; KID().bonus++; save(); updateBank(); confetti(); }
 }
 
