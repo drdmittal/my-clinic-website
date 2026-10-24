@@ -257,6 +257,7 @@ function render(){
   document.getElementById('ttl').textContent = t('Fever Episode Chart','बुख़ार का चार्ट');
   document.querySelectorAll('.seg button').forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.lang===S.lang)); });
   var eps = sorted(), h = '';
+  h += '<a href="first-aid-guide.html" style="display:block;background:#fdecea;border:2px solid #c2362b;border-radius:14px;padding:12px 14px;margin:0 0 12px;text-decoration:none;color:#12302b;font:700 16px Mukta,system-ui,sans-serif">'+t('Managing fever at home: first aid →','घर पर बुख़ार संभालें: प्राथमिक उपचार →')+'</a>';
   h += '<div class="card"><h1>'+t('Every time fever comes, write it here','जब भी बुख़ार आए, यहाँ लिखें')+'</h1>'+
     '<div class="example"><svg viewBox="0 0 96 56" aria-hidden="true"><polyline points="6,44 22,14 40,22 58,40 90,46" fill="none" stroke="var(--temp)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="22" cy="14" r="5" fill="var(--temp)" stroke="var(--surface)" stroke-width="2"/><text x="28" y="12" font-size="10" font-weight="800" fill="var(--ink)">101</text><text x="60" y="36" font-size="9" fill="var(--muted)">100</text></svg>'+
     '<span>'+t('Write the <b>highest</b> reading of that fever. Example: 101°F at 10 am, 100°F at 11 am after medicine → write <b>101</b> at <b>10:00</b>.','उस बुख़ार की <b>सबसे ज़्यादा</b> रीडिंग लिखें। जैसे: सुबह 10 बजे 101°F, दवा के बाद 11 बजे 100°F → <b>10:00</b> पर <b>101</b> लिखें।')+'</span></div>'+
