@@ -102,6 +102,9 @@ details.alert-ms p{padding:0 14px 12px}
   body.printone #out .pick .legend{font-size:9pt}
 }
 .chartc{display:block;width:100%;height:230px;margin:6px 0}
+.chartwrap{position:relative}
+.gtip{position:absolute;display:none;max-width:250px;background:#fff;color:#1f2140;border:1px solid #2a2580;border-radius:8px;padding:6px 8px;font-size:13px;line-height:1.4;box-shadow:0 2px 8px rgba(0,0,0,.2);pointer-events:none;z-index:5}
+@media print{.gtip{display:none !important}}
 .chartcard .legend{color:#1f2140;opacity:1}
 footer{font-size:13px;opacity:.85;margin:20px 0 40px;border-top:1px solid var(--line);padding-top:12px}
 </style>
@@ -227,6 +230,8 @@ hi:{clinic:'डॉ. दिनेश मित्तल चाइल्ड क्
  footer:'यह एक शैक्षिक गाइड है, जो WHO ग्रोथ मानकों पर आधारित है। यह जाँच की जगह नहीं लेती। ये नतीजे डॉक्टर दिनेश मित्तल को अगली विज़िट में दिखाएँ। केवल डॉक्टर बता सकते हैं कि बच्चे की ग्रोथ सामान्य है या नहीं।',
  yr:'साल',yrs:'साल',mo:'महीना',mos:'महीने',dy:'दिन',and:' ',prev:'पहले की जाँचें (वैकल्पिक)',prevnote:'पहले की हर जाँच जोड़ें। ज़्यादा जाँचें हों तो ग्रोथ का रुझान साफ़ दिखता है।',addV:'+ पहले की एक और जाँच जोड़ें',rm:'हटाएँ',prevT:'पहले की जाँच',trend:'रुझान',ageOn:'इस तारीख को उम्र',beforeDob:'तारीख जन्म की तारीख से पहले है',child:'बच्चा',addChild:'+ दूसरा बच्चा जोड़ें',unnamed:'बिना नाम का बच्चा',cname:'बच्चे का नाम (वैकल्पिक)',savenote:'नाम, जन्म की तारीख और जाँचें सिर्फ़ इसी फ़ोन में सेव होती हैं, ताकि अगली बार दोबारा भरने की ज़रूरत न हो।',resFor:'{name} के नतीजे',newChild:'+ दूसरा बच्चा जोड़ें',delChild:'बच्चे को हटाएँ',delConfirm:'हटाने के लिए फिर दबाएँ',howremove:'बच्चे को हटाने के लिए ऊपर से बच्चा चुनें, फिर बच्चा हटाएँ दबाएँ और दोबारा दबाएँ।',privacy:'आपका सारा डेटा इसी फ़ोन में रहता है। कुछ भी किसी सर्वर पर सेव नहीं होता।'}
 };
+T.en.tipOn='On this visit';T.en.tipNow='Latest visit';T.en.tipGap='Time between';T.en.tipMonths='months';T.en.tipIsLatest='This is the latest visit';
+T.hi.tipOn='इस जाँच पर';T.hi.tipNow='ताज़ा जाँच पर';T.hi.tipGap='दोनों के बीच का समय';T.hi.tipMonths='महीने';T.hi.tipIsLatest='यह ताज़ा जाँच है';
 function tr(k){return T[LANG][k]||T.en[k]||k;}
 function fill(s,o){return s.replace(/\{(\w+)\}/g,function(_,k){return o[k];});}
 
@@ -356,7 +361,7 @@ function visitBlock(label,dob,vd,w,l,sex,h){
   var dA=daysBetween(dob,vd), d=corrDays(dA);
   var ageTxt=(CORR>0&&dA<=730)?(tr('corrAge')+': '+fmtAge(d)+' · '+tr('actualAge')+': '+fmtAge(dA)):(tr('age')+': '+fmtAge(d));
   var html='<div class="card"><h3>'+label+'</h3><p class="note">'+ageTxt+' ('+fmtDate(vd)+')</p><div class="visit">';
-  var res={d:d,wv:w,lv:l,hv:h};
+  var res={d:d,vd:vd,wv:w,lv:l,hv:h};
   if(w!=null){
     var mw=measurement('w',sex,d,w); res.w=mw;
     if(!mw.na) html+='<div class="k">'+tr('wName')+'</div><div>'+w+' kg · <span class="pill" style="'+pillFor(mw)+'">'+describePct(mw)+'</span></div>';
@@ -458,13 +463,53 @@ function drawChart(c0){
     pts.forEach(function(vs,j){var v=valOf(kind,vs);var x=X(vs.d/DAY),y=Y(Math.max(ymin,Math.min(ymax,v)));if(j)g.lineTo(x,y);else g.moveTo(x,y);});
     g.stroke(); g.globalAlpha=1;
   }
+  c0.dots=[];
   visits.forEach(function(vs,idx){
     var v=valOf(kind,vs);
     if(v==null||offRange(kind,vs.d)) return;
-    g.beginPath(); g.arc(X(vs.d/DAY),Y(Math.max(ymin,Math.min(ymax,v))),5,0,2*Math.PI);
+    var dx=X(vs.d/DAY), dy=Y(Math.max(ymin,Math.min(ymax,v)));
+    c0.dots.push({x:dx,y:dy,vs:vs});
+    g.beginPath(); g.arc(dx,dy,5,0,2*Math.PI);
     g.fillStyle=idx===0?'#e2457a':'#0f9b8e'; g.fill(); g.lineWidth=1.5; g.strokeStyle='#ffffff'; g.stroke();
   });
+  cv._c=c0;
+  if(!cv._tipOn){
+    cv._tipOn=true;
+    cv.addEventListener('pointerdown',function(e){showTip(cv,e);});
+    cv.addEventListener('pointermove',function(e){if(e.pointerType==='mouse')showTip(cv,e);});
+    cv.addEventListener('pointerleave',function(e){if(e.pointerType==='mouse')hideTip();});
+    cv.addEventListener('pointercancel',hideTip);
+  }
 }
+var TIP=null;
+function hideTip(){ if(TIP) TIP.style.display='none'; }
+function showTip(cv,e){
+  var c0=cv._c; if(!c0||!c0.dots||!c0.dots.length) return hideTip();
+  var r=cv.getBoundingClientRect(), mx=e.clientX-r.left, my=e.clientY-r.top;
+  var hits=c0.dots.filter(function(p){return Math.hypot(p.x-mx,p.y-my)<=14;});
+  if(!hits.length) return hideTip();
+  var latest=c0.dots.reduce(function(a,b){return b.vs.d>a.vs.d?b:a;}).vs;
+  var html='';
+  hits.sort(function(a,b){return a.vs.d-b.vs.d;}).forEach(function(p){
+    var m=p.vs[c0.kind];
+    html+='<div style="margin-bottom:5px"><b>'+fmtDate(p.vs.vd)+'</b> · '+fmtAge(p.vs.d)+'<br>'+tr('tipOn')+': '+(m?describePct(m):'—');
+    if(p.vs!==latest){
+      var lm=latest[c0.kind];
+      var months=((latest.d-p.vs.d)/DAY).toFixed(1);
+      html+='<br>'+tr('tipNow')+' ('+fmtDate(latest.vd)+'): '+(lm?describePct(lm):'—')+'<br>'+tr('tipGap')+': '+months+' '+tr('tipMonths');
+    } else html+='<br><i>'+tr('tipIsLatest')+'</i>';
+    html+='</div>';
+  });
+  var card=cv.parentNode;
+  if(!TIP||TIP.parentNode!==card){ if(TIP&&TIP.parentNode) TIP.parentNode.removeChild(TIP); TIP=document.createElement('div'); TIP.className='gtip noprint'; card.appendChild(TIP); }
+  TIP.innerHTML=html; TIP.style.display='block';
+  var left=cv.offsetLeft+mx+12, top=cv.offsetTop+my-8;
+  TIP.style.left='0px'; TIP.style.top='0px';
+  var maxL=card.clientWidth-TIP.offsetWidth-6;
+  TIP.style.left=Math.max(4,Math.min(left,maxL))+'px';
+  TIP.style.top=Math.max(4,top)+'px';
+}
+document.addEventListener('pointerdown',function(e){ if(!(e.target.tagName==='CANVAS')) hideTip(); });
 function drawAllCharts(){ CHARTS.forEach(drawChart); }
 
 function ageHint(el,dob,dv){
