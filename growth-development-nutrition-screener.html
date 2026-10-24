@@ -75,6 +75,7 @@ details.alert-ms p{padding:0 14px 12px}
 @media (prefers-color-scheme: dark){.linkbtn{color:#c9c4ff}}
 .chartcard{background:#fff !important;color:#1f2140}
 .phead{display:none}
+.cprint{width:100%;min-height:40px;margin:6px 0 2px;border:1.5px solid var(--indigo);border-radius:12px;background:transparent;color:var(--indigo);font:700 14px var(--font);cursor:pointer}
 .printbtn{width:100%;min-height:48px;margin:12px 0 4px;border:2px solid var(--indigo);border-radius:14px;background:transparent;color:var(--indigo);font:800 16px var(--font);cursor:pointer}
 @page{size:A4;margin:8mm}
 @media print{
@@ -88,10 +89,13 @@ details.alert-ms p{padding:0 14px 12px}
   #out h2{font-size:11pt;margin:4px 0 2px;color:#000}
   #out .msg{font-size:8.5pt;padding:2px 5px;margin:1px 0;line-height:1.25}
   #out .card{padding:2px;margin:2px 0;border:0;box-shadow:none}
-  #out .chartc{height:112px!important;margin:0}
+  #out .chartc{margin:0}
   #out .legend{font-size:7.5pt;margin:0;line-height:1.2}
   #out .prevrow,#out table{font-size:8.5pt}
   .msh,#out details.ms{display:none!important}
+  body.printone #out > *:not(.pick){display:none!important}
+  body.printone #out .pick{margin:0;padding:0;border:0;box-shadow:none}
+  body.printone #out .pick .legend{font-size:9pt}
 }
 .chartc{display:block;width:100%;height:230px;margin:6px 0}
 .chartcard .legend{color:#1f2140;opacity:1}
@@ -352,15 +356,22 @@ function chartHTML(kind,sex,visits,xmax){
   var id='chart'+CHARTS.length;
   CHARTS.push({id:id,kind:kind,sex:sex,visits:visits,xmax:xmax});
   var cfg=chartCfg(kind,sex,xmax);
-  return '<canvas id="'+id+'" class="chartc" role="img" aria-label="'+cfg.title+'"></canvas><p class="legend">'+cfg.title+'. '+tr('legend')+'</p>';
+  return '<canvas id="'+id+'" class="chartc" role="img" aria-label="'+cfg.title+'"></canvas><p class="legend">'+cfg.title+'. '+tr('legend')+'</p><button type="button" class="cprint noprint" onclick="printOne(\''+id+'\')">'+(LANG==='hi'?'यह चार्ट प्रिंट करें (पूरा A4)':'Print this chart (full A4 page)')+'</button>';
 }
-var PRINTING=false;
+var PRINTING=false, ONE=null;
 window.addEventListener('beforeprint',function(){PRINTING=true;drawAllCharts();});
-window.addEventListener('afterprint',function(){PRINTING=false;drawAllCharts();});
+window.addEventListener('afterprint',function(){PRINTING=false;ONE=null;document.body.classList.remove('printone');document.querySelectorAll('.pick').forEach(function(e){e.classList.remove('pick');});drawAllCharts();});
+window.printOne=function(id){
+  ONE=id;
+  var cv=document.getElementById(id); var card=cv&&cv.closest('.chartwrap');
+  if(card) card.classList.add('pick');
+  document.body.classList.add('printone');
+  window.print();
+};
 function drawChart(c0){
   var cv=document.getElementById(c0.id); if(!cv) return;
   var cfg=chartCfg(c0.kind,c0.sex,c0.xmax), xmax=c0.xmax, visits=c0.visits, kind=c0.kind;
-  var cssW, cssH=PRINTING?112:230, dpr=window.devicePixelRatio||1;
+  var cssW, cssH=(PRINTING&&ONE===c0.id)?470:(PRINTING?170:230), dpr=window.devicePixelRatio||1;
   if(PRINTING){cssW=700; cv.style.width='700px';} else {cv.style.width=''; cssW=cv.clientWidth||320;}
   cv.width=Math.round(cssW*dpr); cv.height=Math.round(cssH*dpr);
   cv.style.height=cssH+'px';
@@ -612,10 +623,10 @@ window.run=function(keepScroll){
   html+='<div class="msg ok">'+tr('closing')+'</div>';
   html+=msForAge((vd-dob)/86400000/DAY);
   html+='<h2>'+tr('chartsT')+'</h2>';
-  if(xmax===60) html+='<div class="card chartcard">'+chartHTML('w',sex,visits,60)+'</div>';
+  if(xmax===60) html+='<div class="card chartcard chartwrap">'+chartHTML('w',sex,visits,60)+'</div>';
   else html+='<p class="note">'+tr('noWeightChart')+'</p>';
-  html+='<div class="card chartcard">'+chartHTML('l',sex,visits,xmax)+'</div>';
-  if(visits.some(function(v){return v.bmi!=null;})) html+='<div class="card chartcard">'+chartHTML('b',sex,visits,xmax)+'</div>';
+  html+='<div class="card chartcard chartwrap">'+chartHTML('l',sex,visits,xmax)+'</div>';
+  if(visits.some(function(v){return v.bmi!=null;})) html+='<div class="card chartcard chartwrap">'+chartHTML('b',sex,visits,xmax)+'</div>';
   html+='<button type="button" class="printbtn noprint" onclick="window.print()">'+(LANG==='hi'?'चार्ट प्रिंट करें (A4 पेज)':'Print chart (one A4 page)')+'</button>';
   document.getElementById('phName').textContent=nm?('Child: '+nm):'';
   document.getElementById('phInfo').textContent='DOB '+dobRaw.split('-').reverse().join('/')+' · Latest visit '+vdRaw.split('-').reverse().join('/')+' · '+(sex==='b'?'Boy':'Girl');
