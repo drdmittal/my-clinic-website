@@ -80,7 +80,7 @@ details.alert-ms p{padding:0 14px 12px}
 .phead{display:none}
 .cprint{width:100%;min-height:40px;margin:6px 0 2px;border:1.5px solid var(--indigo);border-radius:12px;background:transparent;color:var(--indigo);font:700 14px var(--font);cursor:pointer}
 .printbtn{width:100%;min-height:48px;margin:12px 0 4px;border:2px solid var(--indigo);border-radius:14px;background:transparent;color:var(--indigo);font:800 16px var(--font);cursor:pointer}
-@page{size:A4;margin:8mm}
+@page{margin:8mm}
 @media print{
   header,main>h1,main>p,main>form,main>.mslink,main>.privacy,main>footer,.noprint,.btn,.btn2{display:none!important}
   .phead{display:block;border-bottom:1px solid #999;padding-bottom:4px;margin-bottom:4px;font-size:9pt;line-height:1.3;color:#000}
@@ -358,7 +358,7 @@ function chartHTML(kind,sex,visits,xmax){
   var id='chart'+CHARTS.length;
   CHARTS.push({id:id,kind:kind,sex:sex,visits:visits,xmax:xmax});
   var cfg=chartCfg(kind,sex,xmax);
-  return '<canvas id="'+id+'" class="chartc" role="img" aria-label="'+cfg.title+'"></canvas><p class="legend">'+cfg.title+'. '+tr('legend')+'</p><button type="button" class="cprint noprint" onclick="printOne(\''+id+'\')">'+(LANG==='hi'?'यह चार्ट प्रिंट करें (पूरा A4)':'Print this chart (full A4 page)')+'</button>';
+  return '<canvas id="'+id+'" class="chartc" role="img" aria-label="'+cfg.title+'"></canvas><p class="legend">'+cfg.title+'. '+tr('legend')+'</p><button type="button" class="cprint noprint" onclick="printOne(\''+id+'\')">'+(LANG==='hi'?'यह चार्ट प्रिंट करें':'Print this chart')+'</button>';
 }
 var PRINTING=false, ONE=null;
 window.addEventListener('beforeprint',function(){PRINTING=true;drawAllCharts();});
@@ -629,7 +629,7 @@ window.run=function(keepScroll){
   msgs.forEach(function(m){html+='<div class="msg '+m.cls+'">'+m.txt+'</div>';});
   html+='<div class="msg ok">'+tr('closing')+'</div>';
   html+=msForAge((vd-dob)/86400000/DAY);
-  html+='<button type="button" class="printbtn noprint" onclick="window.print()">'+(LANG==='hi'?'चार्ट प्रिंट करें (A4 पेज)':'Print chart (one A4 page)')+'</button>';
+  html+='<button type="button" class="printbtn noprint" onclick="window.print()">'+(LANG==='hi'?'चार्ट प्रिंट करें':'Print chart')+'</button>';
   document.getElementById('phName').textContent=nm?('Child: '+nm):'';
   document.getElementById('phInfo').textContent='DOB '+dobRaw.split('-').reverse().join('/')+' · Latest visit '+vdRaw.split('-').reverse().join('/')+' · '+(sex==='b'?'Boy':'Girl');
   out.innerHTML=html;
