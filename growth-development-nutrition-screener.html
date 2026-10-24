@@ -100,7 +100,7 @@ footer{font-size:13px;opacity:.85;margin:20px 0 40px;border-top:1px solid var(--
   <button type="button" class="btn2" data-i18n="addV" onclick="addPrev()">+ Add an earlier visit</button>
   <p class="note" data-i18n="measnote">Length is measured lying down up to 2 years, and standing height after that. Use the same method each time.</p>
   <button class="btn" type="submit" data-i18n="btn">Check growth</button>
-  <p class="addlink"><button type="button" class="linkbtn" data-i18n="addChild" onclick="addChild()">+ Add another child</button></p>
+  <p class="addlink"><button type="button" class="linkbtn" data-i18n="addChild" onclick="addChild()">+ Add another child</button><br><button type="button" class="linkbtn" id="delBtn" data-i18n="delChild" onclick="delTap(this)">Remove this child from this phone</button></p>
 </form>
 
 <div id="out"></div>
@@ -142,7 +142,7 @@ en:{clinic:'Dr. Dinesh Mittal Child Clinic',h1:'Child growth check (birth to 19 
  legend:'Lines show 3rd, 15th, 50th, 85th and 97th percentile. Pink = latest visit, teal = previous visit.',
  noWeightChart:'The weight chart is available up to 5 years in this version.',
  footer:'This is an educational guide based on WHO growth standards. It gives a screening view only, and it does not replace a clinical examination. Please show these results to Dr. Dinesh Mittal at your next visit. Only the doctor can say whether your child\'s growth is normal.',
- yr:'year',yrs:'years',mo:'month',mos:'months',dy:'days',and:' ',prev:'Earlier visits (optional)',prevnote:'Add each earlier visit you have. More visits make the growth trend clearer.',addV:'+ Add an earlier visit',rm:'Remove',prevT:'Earlier visit',trend:'Trend',ageOn:'Age on this date',beforeDob:'Date is before date of birth',child:'Child',addChild:'+ Add another child',unnamed:'Unnamed child',cname:"Child's name (optional)",savenote:'Name, date of birth and visits are saved on this phone only, so you do not need to enter them again next time.',resFor:'Results for {name}',newChild:'New child'},
+ yr:'year',yrs:'years',mo:'month',mos:'months',dy:'days',and:' ',prev:'Earlier visits (optional)',prevnote:'Add each earlier visit you have. More visits make the growth trend clearer.',addV:'+ Add an earlier visit',rm:'Remove',prevT:'Earlier visit',trend:'Trend',ageOn:'Age on this date',beforeDob:'Date is before date of birth',child:'Child',addChild:'+ Add another child',unnamed:'Unnamed child',cname:"Child's name (optional)",savenote:'Name, date of birth and visits are saved on this phone only, so you do not need to enter them again next time.',resFor:'Results for {name}',newChild:'New child',delChild:'Remove this child from this phone',delConfirm:'Tap again to remove this child'},
 hi:{clinic:'डॉ. दिनेश मित्तल चाइल्ड क्लिनिक',h1:'बच्चे की ग्रोथ जाँच (जन्म से 19 साल तक)',
  intro:'बच्चे की जन्म तारीख और नाप भरें। यह बताएगा कि WHO ग्रोथ चार्ट पर बच्चा कहाँ है, और कौन सी बात डॉक्टर को दिखानी चाहिए।',
  sex:'बच्चे का लिंग',boy:'लड़का',girl:'लड़की',dob:'जन्म की तारीख',latest:'ताज़ा जाँच (या आज की)',prev:'पहले की जाँचें (वैकल्पिक)',
@@ -169,7 +169,7 @@ hi:{clinic:'डॉ. दिनेश मित्तल चाइल्ड क्
  legend:'रेखाएँ 3वें, 15वें, 50वें, 85वें और 97वें प्रतिशत को दिखाती हैं। गुलाबी = ताज़ा जाँच, हरा = पहले की जाँच।',
  noWeightChart:'इस संस्करण में वजन का चार्ट 5 साल तक उपलब्ध है।',
  footer:'यह एक शैक्षिक गाइड है, जो WHO ग्रोथ मानकों पर आधारित है। यह जाँच की जगह नहीं लेती। ये नतीजे डॉक्टर दिनेश मित्तल को अगली विज़िट में दिखाएँ। केवल डॉक्टर बता सकते हैं कि बच्चे की ग्रोथ सामान्य है या नहीं।',
- yr:'साल',yrs:'साल',mo:'महीना',mos:'महीने',dy:'दिन',and:' ',prev:'पहले की जाँचें (वैकल्पिक)',prevnote:'पहले की हर जाँच जोड़ें। ज़्यादा जाँचें हों तो ग्रोथ का रुझान साफ़ दिखता है।',addV:'+ पहले की एक और जाँच जोड़ें',rm:'हटाएँ',prevT:'पहले की जाँच',trend:'रुझान',ageOn:'इस तारीख को उम्र',beforeDob:'तारीख जन्म की तारीख से पहले है',child:'बच्चा',addChild:'+ दूसरा बच्चा जोड़ें',unnamed:'बिना नाम का बच्चा',cname:'बच्चे का नाम (वैकल्पिक)',savenote:'नाम, जन्म की तारीख और जाँचें सिर्फ़ इसी फ़ोन में सेव होती हैं, ताकि अगली बार दोबारा भरने की ज़रूरत न हो।',resFor:'{name} के नतीजे',newChild:'नया बच्चा'}
+ yr:'साल',yrs:'साल',mo:'महीना',mos:'महीने',dy:'दिन',and:' ',prev:'पहले की जाँचें (वैकल्पिक)',prevnote:'पहले की हर जाँच जोड़ें। ज़्यादा जाँचें हों तो ग्रोथ का रुझान साफ़ दिखता है।',addV:'+ पहले की एक और जाँच जोड़ें',rm:'हटाएँ',prevT:'पहले की जाँच',trend:'रुझान',ageOn:'इस तारीख को उम्र',beforeDob:'तारीख जन्म की तारीख से पहले है',child:'बच्चा',addChild:'+ दूसरा बच्चा जोड़ें',unnamed:'बिना नाम का बच्चा',cname:'बच्चे का नाम (वैकल्पिक)',savenote:'नाम, जन्म की तारीख और जाँचें सिर्फ़ इसी फ़ोन में सेव होती हैं, ताकि अगली बार दोबारा भरने की ज़रूरत न हो।',resFor:'{name} के नतीजे',newChild:'नया बच्चा',delChild:'इस बच्चे को इस फ़ोन से हटाएँ',delConfirm:'हटाने के लिए फिर से दबाएँ'}
 };
 function tr(k){return T[LANG][k]||T.en[k]||k;}
 function fill(s,o){return s.replace(/\{(\w+)\}/g,function(_,k){return o[k];});}
@@ -426,12 +426,24 @@ function renderKidSel(){
   if(!active){var n=document.createElement('option');n.value='__new';n.textContent=tr('newChild');sel.appendChild(n);}
   ST.kids.forEach(function(k){var o=document.createElement('option');o.value=k.id;o.textContent=k.name||tr('unnamed');sel.appendChild(o);});
   sel.value=active?ST.cur:'__new';
+  var del=document.getElementById('delBtn'); if(del){del.style.display=active?'':'none';}
 }
+window.delTap=function(btn){
+  if(btn.dataset.armed){
+    var kid=ST.cur?kidById(ST.cur):null;
+    if(kid){ST.kids=ST.kids.filter(function(k){return k.id!==kid.id;});}
+    ST.cur=ST.kids.length?ST.kids[0].id:null;
+    saveStore(); renderKidSel(); fillForm(ST.cur?kidById(ST.cur):null);
+  } else {
+    btn.dataset.armed='1'; btn.textContent=tr('delConfirm');
+  }
+};
 window.addChild=function(){
   ST.cur=null; saveStore(); fillForm(null); renderKidSel();
   document.getElementById('kname').focus();
 };
 function fillForm(kid){
+  var db=document.getElementById('delBtn'); if(db){delete db.dataset.armed; db.textContent=tr('delChild');}
   document.getElementById('kname').value=kid?(kid.name||''):'';
   var sx=kid?kid.sex:'b';
   document.querySelector('input[name=sex][value="'+sx+'"]').checked=true;
