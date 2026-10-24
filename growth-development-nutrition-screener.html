@@ -51,6 +51,7 @@ svg{width:100%;height:auto;display:block;margin:6px 0}
 .btn2{width:100%;min-height:48px;margin-top:10px;border:2px dashed var(--indigo);border-radius:14px;background:transparent;color:var(--indigo);font:800 16px var(--font);cursor:pointer}
 .rmb{margin-top:8px;border:0;background:none;color:var(--red);font:700 14px var(--font);text-decoration:underline;cursor:pointer;padding:0}
 .addlink{text-align:center;margin:12px 0 0}
+.none{display:none!important}
 .rmbox{text-align:center;margin:18px 0 0}
 .rmbox .linkbtn{font:600 12px var(--font)}
 .rmnote{display:block;font-size:11px;opacity:.8;margin-top:2px;line-height:1.35}
@@ -130,6 +131,11 @@ footer{font-size:13px;opacity:.85;margin:20px 0 40px;border-top:1px solid var(--
   </div>
   <label for="dob" data-i18n="dob">Date of birth</label>
   <input type="date" id="dob" required>
+  <p style="margin:6px 0 0"><button type="button" class="linkbtn" id="prebtn" data-i18n="preBtn" onclick="togglePre(true)">Child was born early (before 37 weeks)</button></p>
+  <div id="preBox" class="none">
+    <div class="fullrow"><label for="ga" data-i18n="gaLabel">Weeks of pregnancy at birth</label><input type="number" inputmode="numeric" step="1" min="24" max="36" id="ga" placeholder="e.g. 32"></div>
+    <p class="note" data-i18n="gaNote">For babies born early, charts use corrected age (counted from the due date) until 2 years.</p>
+  </div>
 
   <h3 style="margin-top:14px" data-i18n="latest">Latest visit (or today)</h3>
   <div class="fullrow"><label for="vdate" data-i18n="date">Date</label><input type="date" id="vdate" required><div class="agehint" id="vage"></div></div>
@@ -160,6 +166,8 @@ var GD={"wfa_b":[[2.5,2.9,3.3,3.9,4.3],[3.4,3.9,4.5,5.1,5.7],[4.4,4.9,5.6,6.3,7.
 (function(){
 var DAY=30.4375, MAXD=1856, MAX19=Math.floor(228*DAY), BMI_MIN=730;
 var LANG='en';
+var CORR=0;
+function corrDays(dA){ return (CORR>0 && dA<=730) ? Math.max(0,dA-CORR) : dA; }
 var KN=[3,15,50,85,97];
 var ZS=[-1.8808,-1.0364,0,1.0364,1.8808];
 
@@ -169,7 +177,7 @@ en:{clinic:'Dr. Dinesh Mittal Child Clinic',h1:'Child growth check (birth to 19 
  sex:"Child's sex",boy:'Boy',girl:'Girl',dob:'Date of birth',latest:'Latest visit (or today)',prev:'Earlier visits (optional)',
  date:'Date',weight:'Weight (kg)',length:'Length / height (cm)',measnote:'Length is measured lying down up to 2 years, and standing height after that. Use the same method each time. BMI is checked from 2 years of age.',
  btn:'Check growth',results:'Results',latestT:'Latest visit',prevT:'Previous visit',age:'Age',bmi:'BMI',
- wName:'Weight',lName:'Length / height',hName:'Head circumference',hc:'Head circumference (cm)',hChart:'Head circumference for age (cm)',
+ preBtn:'Child was born early (before 37 weeks)',gaLabel:'Weeks of pregnancy at birth',gaNote:'For babies born early, charts use corrected age (counted from the due date) until 2 years.',corrAge:'Corrected age',actualAge:'Actual age',errGa:'Please enter weeks between 24 and 36.',wName:'Weight',lName:'Length / height',hName:'Head circumference',hc:'Head circumference (cm)',hChart:'Head circumference for age (cm)',
  low:'below the 3rd percentile',high:'above the 97th percentile',about:'about the {n} percentile',
  errDates:'Please enter the date of birth and the latest visit date.',
  errMeas:'Please enter at least the weight or the length of your child.',
@@ -196,7 +204,7 @@ hi:{clinic:'डॉ. दिनेश मित्तल चाइल्ड क्
  sex:'बच्चे का लिंग',boy:'लड़का',girl:'लड़की',dob:'जन्म की तारीख',latest:'ताज़ा जाँच (या आज की)',prev:'पहले की जाँचें (वैकल्पिक)',
  date:'तारीख',weight:'वजन (kg)',length:'लंबाई / कद (cm)',measnote:'2 साल तक बच्चे की लंबाई लेटाकर नापें, उसके बाद खड़े होकर कद। हर बार एक ही तरीका रखें। BMI 2 साल की उम्र से देखा जाता है।',
  btn:'जाँच करें',results:'नतीजे',latestT:'ताज़ा जाँच',prevT:'पहले की जाँच',age:'उम्र',bmi:'BMI',
- wName:'वजन',lName:'लंबाई / कद',hName:'सिर की परिधि',hc:'सिर की परिधि (cm)',hChart:'आयु अनुसार सिर की परिधि (cm)',
+ preBtn:'बच्चा समय से पहले (37 हफ़्ते से पहले) पैदा हुआ था',gaLabel:'जन्म के समय गर्भ के हफ़्ते',gaNote:'समय से पहले जन्मे बच्चों में 2 साल तक सुधरी हुई उम्र (due date से गिनी) से चार्ट देखे जाते हैं।',corrAge:'सुधरी हुई उम्र',actualAge:'असली उम्र',errGa:'कृपया 24 से 36 हफ़्ते के बीच लिखें।',wName:'वजन',lName:'लंबाई / कद',hName:'सिर की परिधि',hc:'सिर की परिधि (cm)',hChart:'आयु अनुसार सिर की परिधि (cm)',
  low:'3वें प्रतिशत से नीचे',high:'97वें प्रतिशत से ऊपर',about:'लगभग {n}वें प्रतिशत पर',
  errDates:'कृपया जन्म की तारीख और ताज़ा जाँच की तारीख भरें।',
  errMeas:'कृपया कम से कम बच्चे का वजन या लंबाई भरें।',
@@ -339,8 +347,9 @@ function flagFor(kind,m,d){
 }
 
 function visitBlock(label,dob,vd,w,l,sex,h){
-  var d=daysBetween(dob,vd);
-  var html='<div class="card"><h3>'+label+'</h3><p class="note">'+tr('age')+': '+fmtAge(d)+' ('+fmtDate(vd)+')</p><div class="visit">';
+  var dA=daysBetween(dob,vd), d=corrDays(dA);
+  var ageTxt=(CORR>0&&dA<=730)?(tr('corrAge')+': '+fmtAge(d)+' · '+tr('actualAge')+': '+fmtAge(dA)):(tr('age')+': '+fmtAge(d));
+  var html='<div class="card"><h3>'+label+'</h3><p class="note">'+ageTxt+' ('+fmtDate(vd)+')</p><div class="visit">';
   var res={d:d,wv:w,lv:l,hv:h};
   if(w!=null){
     var mw=measurement('w',sex,d,w); res.w=mw;
@@ -543,16 +552,20 @@ function fillForm(kid){
   document.getElementById('w1').value=(last&&last.w!=null)?last.w:'';
   document.getElementById('l1').value=(last&&last.l!=null)?last.l:'';
   document.getElementById('h1').value=(last&&last.h!=null)?last.h:'';
+  var hasGa=!!(kid&&kid.ga);
+  document.getElementById('ga').value=hasGa?kid.ga:'';
+  togglePre(hasGa);
   document.getElementById('prevs').innerHTML='';
   vs.slice(0,-1).forEach(function(v){window.addPrev(v.date,v.w,v.l,v.h);});
   document.getElementById('out').innerHTML='';
   updAges();
   if(kid&&kid.dob&&last&&(last.w!=null||last.l!=null||last.h!=null)){ setTimeout(function(){ window.run(true); },0); }
 }
-function saveKid(nm,sex,dobRaw,vdRaw,latestW,latestL,earlierArr,latestH){
+window.togglePre=function(show){ var b=document.getElementById('preBox'); b.classList.toggle('none', !show); document.getElementById('prebtn').classList.toggle('none', !!show); if(show) document.getElementById('ga').focus(); };
+function saveKid(nm,sex,dobRaw,vdRaw,latestW,latestL,earlierArr,latestH,ga){
   var kid=ST.cur?kidById(ST.cur):null;
   if(!kid){kid={id:newId(),name:'',sex:sex,dob:dobRaw,visits:[]};ST.kids.push(kid);}
-  kid.name=nm; kid.sex=sex; kid.dob=dobRaw;
+  kid.name=nm; kid.sex=sex; kid.dob=dobRaw; kid.ga=ga||null;
   var map={};
   if(vdRaw&&(latestW!=null||latestL!=null||latestH!=null)) map[vdRaw]={date:vdRaw,w:latestW,l:latestL,h:latestH};
   earlierArr.forEach(function(e){ if(e.raw&&(e.w!=null||e.l!=null||e.h!=null)) map[e.raw]={date:e.raw,w:e.w,l:e.l,h:e.h}; });
@@ -602,6 +615,11 @@ window.run=function(keepScroll){
   function err(x){out.innerHTML='<div class="msg warn">'+x+'</div>';out.scrollIntoView({behavior:'smooth',block:'center'});}
   if(!dob||!vd){err(tr('errDates'));return;}
   if(isNaN(w1)&&isNaN(l1)&&isNaN(h1)){err(tr('errMeas'));return;}
+  var gaOpen=!document.getElementById('preBox').classList.contains('none');
+  var gaV=gaOpen?parseFloat(document.getElementById('ga').value):NaN;
+  if(!isNaN(gaV)&&(gaV<24||gaV>36||gaV%1!==0)){err(tr('errGa'));return;}
+  var ga=isNaN(gaV)?null:gaV;
+  CORR=ga?(40-ga)*7:0;
   var d1=daysBetween(dob,vd);
   if(d1<0||d1>MAX19){err(tr('errRange'));return;}
 
@@ -619,15 +637,15 @@ window.run=function(keepScroll){
     earlier.push({raw:r.querySelector('.pd').value,date:dv,w:isNaN(w)?null:w,l:isNaN(l)?null:l,h:isNaN(hh)?null:hh,d:d});
   });
   earlier.sort(function(a,b){return b.d-a.d;}); // most recent first
-  saveKid(nm,sex,dobRaw,vdRaw,isNaN(w1)?null:w1,isNaN(l1)?null:l1,earlier,isNaN(h1)?null:h1);
+  saveKid(nm,sex,dobRaw,vdRaw,isNaN(w1)?null:w1,isNaN(l1)?null:l1,earlier,isNaN(h1)?null:h1,ga);
   var visits=[latest];
   earlier.forEach(function(e){ visits.push(visitBlock(tr('prevT'),dob,e.date,e.w,e.l,sex,e.h)); });
   var prev=visits.length>1?visits[1]:null;
 
-  if(latest.w && !latest.w.na) msgs.push(flagFor('w',latest.w,d1));
-  if(latest.l) msgs.push(flagFor('l',latest.l,d1));
-  if(latest.h) msgs.push(flagFor('h',latest.h,d1));
-  if(latest.b) msgs.push(flagFor('b',latest.b,d1));
+  if(latest.w && !latest.w.na) msgs.push(flagFor('w',latest.w,latest.d));
+  if(latest.l) msgs.push(flagFor('l',latest.l,latest.d));
+  if(latest.h) msgs.push(flagFor('h',latest.h,latest.d));
+  if(latest.b) msgs.push(flagFor('b',latest.b,latest.d));
 
   if(prev){
     [['w',tr('wName')],['l',tr('lName')],['h',tr('hName')]].forEach(function(pr){
@@ -657,7 +675,7 @@ window.run=function(keepScroll){
   html+='<h2>'+(LANG==='hi'?'इसका मतलब':'What this means')+'</h2>';
   msgs.forEach(function(m){html+='<div class="msg '+m.cls+'">'+m.txt+'</div>';});
   html+='<div class="msg ok">'+tr('closing')+'</div>';
-  html+=msForAge((vd-dob)/86400000/DAY);
+  html+=msForAge(latest.d/DAY);
   html+='<button type="button" class="printbtn noprint" onclick="window.print()">'+(LANG==='hi'?'चार्ट प्रिंट करें':'Print charts')+'</button>';
   document.getElementById('phName').textContent=nm?('Child: '+nm):'';
   document.getElementById('phInfo').textContent='DOB '+dobRaw.split('-').reverse().join('/')+' · Latest visit '+vdRaw.split('-').reverse().join('/')+' · '+(sex==='b'?'Boy':'Girl');
