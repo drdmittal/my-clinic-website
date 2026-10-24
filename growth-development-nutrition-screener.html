@@ -621,12 +621,12 @@ window.run=function(keepScroll){
   html+='<h2>'+(LANG==='hi'?'इसका मतलब':'What this means')+'</h2>';
   msgs.forEach(function(m){html+='<div class="msg '+m.cls+'">'+m.txt+'</div>';});
   html+='<div class="msg ok">'+tr('closing')+'</div>';
-  html+=msForAge((vd-dob)/86400000/DAY);
   html+='<h2>'+tr('chartsT')+'</h2>';
   if(xmax===60) html+='<div class="card chartcard chartwrap">'+chartHTML('w',sex,visits,60)+'</div>';
   else html+='<p class="note">'+tr('noWeightChart')+'</p>';
   html+='<div class="card chartcard chartwrap">'+chartHTML('l',sex,visits,xmax)+'</div>';
   if(visits.some(function(v){return v.bmi!=null;})) html+='<div class="card chartcard chartwrap">'+chartHTML('b',sex,visits,xmax)+'</div>';
+  html+=msForAge((vd-dob)/86400000/DAY);
   html+='<button type="button" class="printbtn noprint" onclick="window.print()">'+(LANG==='hi'?'चार्ट प्रिंट करें (A4 पेज)':'Print chart (one A4 page)')+'</button>';
   document.getElementById('phName').textContent=nm?('Child: '+nm):'';
   document.getElementById('phInfo').textContent='DOB '+dobRaw.split('-').reverse().join('/')+' · Latest visit '+vdRaw.split('-').reverse().join('/')+' · '+(sex==='b'?'Boy':'Girl');
