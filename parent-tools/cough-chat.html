@@ -242,14 +242,17 @@ function say(hi,en){
 function me(text){ log.push({who:'me',t:text}); renderLog(); }
 function speak(text,l){
   try {
-    if (!('speechSynthesis' in window)) return;
-    speechSynthesis.cancel();
+    if (!canSpeak) return;
+    // no cancel(): each message is queued so every line is spoken in order
     var u=new SpeechSynthesisUtterance(text.replace(/\*\*/g,''));
-    u.lang = l==='hi' ? 'hi-IN' : 'en-IN'; u.rate = 0.92;
-    var v = speechSynthesis.getVoices().filter(function(x){return x.lang===u.lang;})[0];
+    u.lang = l==='hi' ? 'hi-IN' : 'en-IN'; u.rate = 0.92; u.volume = 1;
+    var vs = speechSynthesis.getVoices() || [];
+    var v = vs.filter(function(x){return x.lang===u.lang;})[0] || vs.filter(function(x){return x.lang.indexOf(u.lang.slice(0,2))===0;})[0];
     if (v) u.voice=v;
+    u.onerror = function(e){ if (e && e.error !== 'interrupted' && e.error !== 'canceled') notice('आवाज़ नहीं चल पाई। फ़ोन की आवाज़ (volume) जाँचें, या Chrome / Safari में खोलें।','Voice did not play. Check the phone volume, or open in Chrome or Safari.'); };
+    try { speechSynthesis.resume(); } catch(e){}
     speechSynthesis.speak(u);
-  } catch(e){}
+  } catch(e){ notice('इस फ़ोन पर आवाज़ सुविधा उपलब्ध नहीं है।','Voice is not available on this phone.'); }
 }
 function notice(hi,en,emerg){
   var n=$('notice'); n.className='notice'+(emerg?' emerg':''); n.textContent=t(hi,en);
