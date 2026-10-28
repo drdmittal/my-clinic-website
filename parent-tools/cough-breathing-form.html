@@ -559,6 +559,11 @@
   document.getElementById('waBtn').addEventListener('click', sendWA);
   document.querySelectorAll('.fld input, .fld textarea').forEach(function(el){ el.addEventListener('input', refresh); });
   (function(){ var d = new Date(), p = function(n){ return String(n).padStart(2,'0'); }; document.getElementById('date').value = d.getFullYear() + '-' + p(d.getMonth()+1) + '-' + p(d.getDate()); })();
+  // Open in the language given by the link: ?lang=en or ?lang=hi (default English)
+  var urlLang = new URLSearchParams(location.search).get('lang');
+  if (urlLang === 'en' || urlLang === 'hi') {
+    document.querySelector('.switch button[data-lang="' + urlLang + '"]').click();
+  }
   refresh();
 })();
 </script>
