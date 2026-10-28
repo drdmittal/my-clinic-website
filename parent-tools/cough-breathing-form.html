@@ -189,6 +189,11 @@
     .sumgrid{gap:6px}
     .sumbox.pos,.sumbox.neg,.sumbox.unk{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   }
+  /* In-page confirmation panels */
+  .confirm{background:#fff;border:2px solid var(--indigo);border-radius:16px;padding:16px 18px;margin-top:14px;box-shadow:0 8px 24px rgba(42,37,128,.15)}
+  .confirm p{margin:0 0 10px;font-size:15px;line-height:1.45}
+  .cbtns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:8px}
+  @media print{ .confirm{display:none!important} }
 </style>
 <link rel="apple-touch-icon" href="/icons/icon-180.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
@@ -397,6 +402,24 @@
     <button class="btn" type="button" onclick="window.print()"><span class="hi">🖨️ प्रिंट करें / PDF सेव करें</span><span class="en">🖨️ Print / Save as PDF</span></button>
   </div>
 
+  <!-- In-page confirmation (replaces the browser popup, which parents mistook for a scam) -->
+  <div class="confirm hide" id="waConfirm" role="dialog" aria-labelledby="waQ">
+    <p id="waQ"><b><span class="hi">क्लिनिक को WhatsApp पर भेजें?</span><span class="en">Send this form to the clinic on WhatsApp?</span></b></p>
+    <p><span class="hi">WhatsApp खुलेगा और संदेश क्लिनिक के नंबर <b>+91 81305 21456</b> पर जाएगा। WhatsApp में <b>Send</b> दबाने तक कुछ नहीं भेजा जाएगा। आप बिना भेजे WhatsApp बंद भी कर सकते हैं।</span><span class="en">WhatsApp will open with a short message to Dr. Dinesh Mittal Child Clinic (<b>+91 81305 21456</b>). Nothing is sent until you tap <b>Send</b> in WhatsApp. You can close WhatsApp without sending.</span></p>
+    <div class="cbtns">
+      <button class="btn wa" type="button" id="waYes"><span class="hi">हाँ, WhatsApp खोलें</span><span class="en">Yes, open WhatsApp</span></button>
+      <button class="btn ghost" type="button" id="waNo"><span class="hi">रद्द करें</span><span class="en">Cancel</span></button>
+    </div>
+  </div>
+
+  <div class="confirm hide" id="clearConfirm" role="dialog" aria-labelledby="clrQ">
+    <p id="clrQ"><b><span class="hi">सभी जवाब मिटाएँ?</span><span class="en">Clear all answers?</span></b></p>
+    <div class="cbtns">
+      <button class="btn" type="button" id="clearYes"><span class="hi">हाँ, मिटाएँ</span><span class="en">Yes, clear</span></button>
+      <button class="btn ghost" type="button" id="clearNo"><span class="hi">नहीं, रहने दें</span><span class="en">No, keep</span></button>
+    </div>
+  </div>
+
   <footer>
     <b>Dr. Dinesh Mittal Child Clinic</b>
     Dr. Dinesh Mittal, MBBS, DCH · Delhi Medical Council Reg. No. DMC/R/00668<br>
@@ -444,7 +467,13 @@
   });
 
   document.getElementById('clearBtn').addEventListener('click', function(){
-    if (!confirm('Clear all answers? / सभी जवाब मिटाएँ?')) return;
+    document.getElementById('clearConfirm').classList.remove('hide');
+  });
+  document.getElementById('clearNo').addEventListener('click', function(){
+    document.getElementById('clearConfirm').classList.add('hide');
+  });
+  document.getElementById('clearYes').addEventListener('click', function(){
+    document.getElementById('clearConfirm').classList.add('hide');
     document.querySelectorAll('input:not(#date),textarea').forEach(function(el){ el.value = ''; });
     groups.forEach(function(g){ g.querySelectorAll('button').forEach(function(b){ b.classList.remove('on'); }); });
     refresh();
@@ -551,9 +580,17 @@
   }
 
   function sendWA(){
-    if (!confirm('Send this form to the clinic WhatsApp? WhatsApp will open with the message ready. Tap Send in WhatsApp.\n\nक्लिनिक के WhatsApp पर भेजें? WhatsApp खुलेगा, वहाँ Send दबाएँ।')) return;
-    window.open('https://wa.me/918130521456?text=' + encodeURIComponent(waText()), '_blank', 'noopener');
+    var box = document.getElementById('waConfirm');
+    box.classList.remove('hide');
+    box.scrollIntoView({behavior:'smooth', block:'center'});
   }
+  document.getElementById('waYes').addEventListener('click', function(){
+    document.getElementById('waConfirm').classList.add('hide');
+    window.open('https://wa.me/918130521456?text=' + encodeURIComponent(waText()), '_blank', 'noopener');
+  });
+  document.getElementById('waNo').addEventListener('click', function(){
+    document.getElementById('waConfirm').classList.add('hide');
+  });
 
   document.getElementById('medname').addEventListener('input', refresh);
   document.getElementById('waBtn').addEventListener('click', sendWA);
