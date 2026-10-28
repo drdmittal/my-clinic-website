@@ -124,6 +124,7 @@ function listenStatus(on){
 function speakingNow(){ return canSpeak && (speechSynthesis.speaking || speechSynthesis.pending); }
 function waitThenListen(){
   if (!talk || !SR || !cur || cur.type!=='text') return;
+  if (canSpeak && !voiceOn) return;
   var tries=0;
   (function poll(){
     if (!cur || cur.type!=='text' || !talk) return;
@@ -273,6 +274,7 @@ function speak(text,l){
   try {
     if (!canSpeak) return;
     // no cancel(): each message is queued so every line is spoken in order
+    if (listening && rec){ try { rec.abort(); } catch(e){} listening=false; }
     var u=new SpeechSynthesisUtterance(text.replace(/\*\*/g,''));
     u.lang = l==='hi' ? 'hi-IN' : 'en-IN'; u.rate = 0.92; u.volume = 1;
     var vs = speechSynthesis.getVoices() || [];
