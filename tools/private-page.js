@@ -6,7 +6,7 @@
  * Commands (pass the password in an environment variable, so it is not kept in shell history):
  *   PASSWORD='...' node tools/private-page.js encrypt <source.html> <private-tools/name.enc.json>
  *   PASSWORD='...' node tools/private-page.js decrypt <private-tools/name.enc.json> <out.html>
- *   OLD='...' NEW='...' node tools/private-page.js rekey <private-tools/name.enc.json>
+ *   OLD='...' NEW='...' node tools/private-page.js rekey <private-tools/*.enc.json>
  *
  * Format: PBKDF2-SHA256 (310,000 rounds) -> AES-256-GCM. The browser decrypts it with
  * Web Crypto in private-tools/index.html. The same format is used on both sides.
@@ -64,10 +64,14 @@ if (cmd === 'encrypt') {
   fs.writeFileSync(b, decrypt(need('PASSWORD'), obj));
   console.log('Decrypted ->', b);
 } else if (cmd === 'rekey') {
-  const obj = JSON.parse(fs.readFileSync(a, 'utf8'));
-  const html = decrypt(need('OLD'), obj);
-  fs.writeFileSync(a, JSON.stringify(encrypt(need('NEW'), html)) + '\n');
-  console.log('Re-encrypted with new password:', path.basename(a));
+  // Accepts one or more files: rekey private-tools/*.enc.json
+  const files = process.argv.slice(3);
+  for (const f of files) {
+    const obj = JSON.parse(fs.readFileSync(f, 'utf8'));
+    const html = decrypt(need('OLD'), obj);
+    fs.writeFileSync(f, JSON.stringify(encrypt(need('NEW'), html)) + '\n');
+    console.log('Re-encrypted with new password:', path.basename(f));
+  }
 } else {
   console.log('Usage: see header of tools/private-page.js');
   process.exit(1);
