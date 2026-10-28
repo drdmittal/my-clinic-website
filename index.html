@@ -400,7 +400,7 @@ dialog::backdrop{background:rgba(15,12,50,.55)}
     </div>
   </section>
 
-    <section id="search" style="padding-top:8px"><form class="sitesearch" action="/search.html" method="get" role="search" style="display:flex;gap:8px;margin:0 0 4px"><input type="search" name="q" placeholder="Search / खोजें (fever, teething, diet…)" aria-label="Search the website" style="flex:1;font:500 16px 'Anek Devanagari',sans-serif;padding:11px 13px;border:2px solid #2a2580;border-radius:14px;min-height:48px"><button type="submit" style="font:700 16px 'Anek Devanagari',sans-serif;background:#2a2580;color:#fff;border:0;border-radius:14px;padding:0 16px;cursor:pointer">Search / खोजें</button></form>
+    <section id="search" style="padding-top:8px"><div class="wrap"><form class="sitesearch" action="/search.html" method="get" role="search" style="display:flex;gap:8px;margin:12px 0 4px;width:100%"><input type="search" name="q" placeholder="Search" aria-label="Search the website" style="flex:1 1 0;min-width:0;font:500 16px 'Anek Devanagari',sans-serif;padding:11px 13px;border:2px solid #2a2580;border-radius:14px;min-height:48px;background:#fff;color:#1d2540"><button type="submit" style="flex:none;white-space:nowrap;font:700 16px 'Anek Devanagari',sans-serif;background:#2a2580;color:#fff;border:0;border-radius:14px;padding:0 16px;cursor:pointer"><span class="en">Search</span><span class="hi">खोजें</span></button></form></div>
 </section>
     <section id="tools">
     <div class="wrap">
@@ -529,5 +529,6 @@ dialog::backdrop{background:rgba(15,12,50,.55)}
   document.getElementById('yr').textContent = new Date().getFullYear();
 })();
 </script>
+<script>(function(){function set(){var hi=document.documentElement.getAttribute('data-lang')==='hi';document.querySelectorAll('form.sitesearch input[name=q]').forEach(function(i){i.placeholder=hi?'खोजें (बुखार, दाँत, आहार…)':'Search (fever, teething, diet…)';});}set();new MutationObserver(set).observe(document.documentElement,{attributes:true,attributeFilter:['data-lang']});})();</script>
 </body>
 </html>

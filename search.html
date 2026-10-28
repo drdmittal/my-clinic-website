@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-lang="en">
+<script>try{document.documentElement.setAttribute('data-lang',localStorage.getItem('preferredClinicLang')==='hi'?'hi':'en');}catch(e){}</script>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -10,6 +11,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anek+Devanagari:wght@400;600;700;800&display=swap">
 <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
 <style>
+[data-lang="hi"] .en,html:not([data-lang="hi"]) .hi{display:none!important}
 :root{--ink:#1d2540;--muted:#556175;--indigo:#2a2580;--pink:#e2457a;--line:#e3e6f2}
 *{box-sizing:border-box}
 body{margin:0;background:#fbfbfe;color:var(--ink);font-family:'Anek Devanagari',system-ui,sans-serif;font-size:17px;line-height:1.5}
@@ -37,20 +39,20 @@ footer{text-align:center;font-size:13px;color:var(--muted);margin:24px 0}
 </head>
 <body>
 <div class="wrap">
-  <div class="top"><a href="/">← Home / होम</a><a href="/health-articles.html">Health articles / लेख</a></div>
-  <h1>Search the website / वेबसाइट में खोजें</h1>
-  <p class="sub">Type a word in English or Hindi, for example: fever, teething, diet, bath, vaccine, cough.<br>अंग्रेज़ी या हिंदी में शब्द लिखें, जैसे: बुखार, दाँत, आहार, टीका।</p>
+  <div class="top"><a href="/"><span class="en">← Home</span><span class="hi">← होम</span></a><a href="/health-articles.html"><span class="en">Health articles</span><span class="hi">लेख</span></a></div>
+  <h1><span class="en">Search the website</span><span class="hi">वेबसाइट में खोजें</span></h1>
+  <p class="sub"><span class="en">Type a word, for example: fever, teething, diet, bath, vaccine, cough.</span><span class="hi">कोई शब्द लिखें, जैसे: बुखार, दाँत, आहार, टीका, खाँसी।</span></p>
   <form id="f" role="search" action="/search.html" method="get">
-    <input type="search" id="q" name="q" placeholder="Search / खोजें" autocomplete="off" aria-label="Search">
-    <button type="submit">Search / खोजें</button>
+    <input type="search" id="q" name="q" placeholder="Search" autocomplete="off" aria-label="Search">
+    <button type="submit"><span class="en">Search</span><span class="hi">खोजें</span></button>
   </form>
   <div class="chips" id="chips">
-    <a href="/search.html?q=fever">fever / बुखार</a>
-    <a href="/search.html?q=teething">teething / दाँत</a>
-    <a href="/search.html?q=diet">diet / आहार</a>
-    <a href="/search.html?q=vaccine">vaccine / टीका</a>
-    <a href="/search.html?q=cough">cough / खाँसी</a>
-    <a href="/search.html?q=newborn">newborn / नवजात</a>
+    <a href="/search.html?q=fever"><span class="en">fever</span><span class="hi">बुखार</span></a>
+    <a href="/search.html?q=teething"><span class="en">teething</span><span class="hi">दाँत</span></a>
+    <a href="/search.html?q=diet"><span class="en">diet</span><span class="hi">आहार</span></a>
+    <a href="/search.html?q=vaccine"><span class="en">vaccine</span><span class="hi">टीका</span></a>
+    <a href="/search.html?q=cough"><span class="en">cough</span><span class="hi">खाँसी</span></a>
+    <a href="/search.html?q=newborn"><span class="en">newborn</span><span class="hi">नवजात</span></a>
   </div>
   <div id="out" aria-live="polite"></div>
   <footer>Dr. Dinesh Mittal Child Clinic · +91 81305 21456 · www.drdineshmittal.com</footer>
@@ -61,6 +63,9 @@ footer{text-align:center;font-size:13px;color:var(--muted);margin:24px 0}
   var out = document.getElementById('out');
   var data = null;
 
+  var HI = document.documentElement.getAttribute('data-lang') === 'hi';
+  function L(en, hi){ return HI ? hi : en; }
+  input.placeholder = L('Search', 'खोजें');
   function esc(s){ return s.replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
   function norm(s){ return s.toLowerCase(); }
 
@@ -81,7 +86,7 @@ footer{text-align:center;font-size:13px;color:var(--muted);margin:24px 0}
     q = (q || '').trim();
     if (!q){ out.innerHTML = ''; return; }
     var terms = norm(q).split(/\s+/).filter(Boolean);
-    if (!data){ out.innerHTML = '<p class="hint">Loading… / लोड हो रहा है…</p>'; return; }
+    if (!data){ out.innerHTML = '<p class="hint">' + L('Loading…', 'लोड हो रहा है…') + '</p>'; return; }
     var hits = [];
     data.pages.forEach(function(p){
       var titleLow = norm(p.title), headLow = norm(p.headings.join(' ')), descLow = norm(p.description), textLow = norm(p.text);
@@ -98,10 +103,10 @@ footer{text-align:center;font-size:13px;color:var(--muted);margin:24px 0}
     });
     hits.sort(function(a,b){ return b.score - a.score; });
     if (!hits.length){
-      out.innerHTML = '<div class="empty">Nothing found for "' + esc(q) + '". Try a shorter word, or call the clinic: <b>+91 81305 21456</b>.<br>कुछ नहीं मिला। छोटा शब्द लिखें, या क्लिनिक को फ़ोन करें: <b>+91 81305 21456</b>।</div>';
+      out.innerHTML = '<div class="empty">' + L('Nothing found for "' + esc(q) + '". Try a shorter word, or call the clinic: ', 'इस शब्द पर कुछ नहीं मिला: "' + esc(q) + '"। छोटा शब्द लिखें, या क्लिनिक को फ़ोन करें: ') + '<b>+91 81305 21456</b>.</div>';
       return;
     }
-    var html = '<p class="count">' + hits.length + (hits.length === 1 ? ' page' : ' pages') + ' found / पेज मिले</p>';
+    var html = '<p class="count">' + hits.length + ' ' + L(hits.length === 1 ? 'page found' : 'pages found', 'पेज मिले') + '</p>';
     hits.slice(0, 20).forEach(function(h){
       var p = h.p;
       var body = p.description || p.text;
@@ -115,7 +120,7 @@ footer{text-align:center;font-size:13px;color:var(--muted);margin:24px 0}
     data = d;
     run(input.value || new URLSearchParams(location.search).get('q'));
   }).catch(function(){
-    out.innerHTML = '<div class="empty">Search is not available right now. Please call <b>+91 81305 21456</b>.</div>';
+    out.innerHTML = '<div class="empty">' + L('Search is not available right now. Please call ', 'खोज अभी उपलब्ध नहीं है। कृपया फ़ोन करें ') + '<b>+91 81305 21456</b>.</div>';
   });
 
   var initial = new URLSearchParams(location.search).get('q') || '';

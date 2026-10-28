@@ -129,11 +129,6 @@ button:focus-visible{outline:3px solid var(--mango);outline-offset:2px}
 <div class="app">
   <header>
     <div class="brand"><b>Dr. Dinesh Mittal</b><span>MBBS, DCH · Child Specialist · Rohini</span></div>
-    <div class="lang" role="group" aria-label="Language">
-      <button type="button" data-lang="en" aria-pressed="false">English</button>
-      <button type="button" data-lang="hi" aria-pressed="false">हिंदी</button>
-      <button type="button" data-lang="both" aria-pressed="true">Both</button>
-    </div>
   </header>
   <div class="progress"><div class="bar"><i id="bar"></i></div><span class="count" id="count"></span></div>
   <main><div class="card fade" id="card"></div></main>
@@ -144,6 +139,7 @@ button:focus-visible{outline:3px solid var(--mango);outline-offset:2px}
 (function(){
 var S = {lang:'both', step:0, stool:null, milk:500, prods:{}, age:null, quizI:0, quizA:{}, tfA:{}, plan:{}, tab:'food'};
 try{ var saved = JSON.parse(localStorage.getItem('kabz-guide')||'null'); if(saved){ Object.assign(S, saved); } }catch(e){}
+S.lang = (function(){ try{ return localStorage.getItem('preferredClinicLang')==='hi' ? 'hi' : 'en'; }catch(e){ return 'en'; } })();
 function save(){ try{ localStorage.setItem('kabz-guide', JSON.stringify(S)); }catch(e){} }
 
 function t(en, hi){
@@ -243,12 +239,7 @@ var STEPS = [
       return '<div class="eyebrow">'+t('Parent guide','माता-पिता के लिए')+'</div>'+
       '<h1>'+t('Helping your child with constipation','बच्चे की कब्ज़ में मदद')+'</h1>'+
       '<p class="lead">'+t('A 5-minute guide with small quizzes. Tap through at your own pace.','5 मिनट की गाइड, छोटे-छोटे सवालों के साथ। आराम से एक-एक करके देखें।')+'</p>'+
-      '<p style="font-weight:700">Choose language / भाषा चुनें</p>'+
-      '<div class="welcome-langs">'+
-        '<button type="button" class="choice" data-setlang="hi" aria-pressed="'+(S.lang==='hi')+'"><span class="t">हिंदी</span></button>'+
-        '<button type="button" class="choice" data-setlang="en" aria-pressed="'+(S.lang==='en')+'"><span class="t">English</span></button>'+
-        '<button type="button" class="choice" data-setlang="both" aria-pressed="'+(S.lang==='both')+'"><span class="t">Both / दोनों</span></button>'+
-      '</div>';
+      '';
     }
   },
   { // 1 what is it
@@ -482,7 +473,7 @@ var backBtn = document.getElementById('back');
 
 function render(anim){
   if(S.step >= STEPS.length) S.step = STEPS.length-1;
-  card.className = 'card' + (S.lang==='both'?' both':'') + (anim?' fade':'');
+  card.className = 'card' + ('') + (anim?' fade':'');
   card.innerHTML = STEPS[S.step].render();
   document.getElementById('bar').style.width = ((S.step+1)/STEPS.length*100) + '%';
   document.getElementById('count').textContent = (S.step+1) + ' / ' + STEPS.length;
@@ -490,7 +481,6 @@ function render(anim){
   backBtn.textContent = '← ' + plain('Back','पीछे');
   nextBtn.textContent = S.step===STEPS.length-1 ? plain('Finish ✓','पूरा ✓') : (S.step===0 ? plain('Start →','शुरू करें →') : plain('Next →','आगे →'));
   nextBtn.disabled = (S.step===STEPS.length-1);
-  document.querySelectorAll('.lang button').forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.lang===S.lang)); });
   document.documentElement.lang = S.lang==='hi' ? 'hi' : 'en';
   syncForm();
   save();
@@ -499,9 +489,6 @@ function go(d){ S.step = Math.max(0, Math.min(STEPS.length-1, S.step+d)); render
 
 nextBtn.addEventListener('click', function(){ go(1); });
 backBtn.addEventListener('click', function(){ go(-1); });
-document.querySelector('.lang').addEventListener('click', function(e){
-  var b = e.target.closest('button[data-lang]'); if(!b) return; S.lang = b.dataset.lang; render(false);
-});
 
 card.addEventListener('click', function(e){
   var b = e.target.closest('button'); if(!b) return;
