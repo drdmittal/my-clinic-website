@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Doctor's Shelf (private)</title>
+<meta name="theme-color" content="#2a2580">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anek+Devanagari:wdth,wght@75..125,400..800&display=swap">
+<style>
+:root{--paper:#f4f6ff;--surface:#fff;--ink:#1c1950;--muted:#565a85;--line:#dfe3f5;--indigo:#2a2580;--pink:#e2457a;--turmeric:#f5ad1b;--teal:#0f9b8e;--sky:#2f8fe0;--grape:#8b4fd6;--green:#2f8f3a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Anek Devanagari',system-ui,sans-serif;font-size:16px;line-height:1.5}
+header{background:var(--indigo);color:#fff;padding:16px 16px 14px}
+header h1{margin:0;font-size:1.25rem;font-weight:700}
+header p{margin:4px 0 0;font-size:.9rem;opacity:.85}
+main{max-width:720px;margin:0 auto;padding:14px 14px 40px}
+.warn{background:#fff4d6;border:1px solid var(--turmeric);border-radius:10px;padding:10px 12px;font-size:.9rem;margin-bottom:12px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+input[type=search]{flex:1 1 200px;font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
+.chip{font:inherit;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:999px;padding:7px 12px;cursor:pointer}
+.chip.on{background:var(--indigo);color:#fff;border-color:var(--indigo)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:10px}
+.tag{display:inline-block;font-size:.75rem;font-weight:600;padding:2px 8px;border-radius:999px;color:#fff;background:var(--teal);margin-right:6px}
+.tag.Video{background:var(--pink)}.tag.Tool{background:var(--grape)}.tag.Other{background:var(--sky)}
+.card h2{font-size:1rem;margin:6px 0 4px;line-height:1.35}
+.card .note{margin:0 0 8px;color:var(--muted);font-size:.9rem}
+.card .url{font-size:.8rem;color:var(--muted);word-break:break-all;margin-bottom:8px}
+.btns{display:flex;flex-wrap:wrap;gap:8px}
+.btn{font:inherit;font-size:.9rem;border:0;border-radius:8px;padding:8px 12px;cursor:pointer;background:var(--indigo);color:#fff;text-decoration:none;display:inline-block}
+.btn.alt{background:#fff;color:var(--indigo);border:1px solid var(--indigo)}
+.btn.ok{background:var(--green)}
+.empty{color:var(--muted);text-align:center;padding:24px 0}
+.how{font-size:.88rem;color:var(--muted);border-top:1px solid var(--line);margin-top:18px;padding-top:12px}
+.how code{background:#eceefa;padding:1px 5px;border-radius:4px}
+#toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:9px 14px;border-radius:999px;font-size:.9rem;opacity:0;transition:opacity .2s;pointer-events:none}
+#toast.show{opacity:1}
+</style>
+</head>
+<body>
+<header>
+  <h1>Doctor's shelf (private)</h1>
+  <p>Links to share with specific parents. Not linked from the website.</p>
+</header>
+<main>
+  <div class="warn"><b>Hidden, not locked.</b> Anyone who has this exact address can open it. Do not post it or put it on the menu, and do not share it in public. Share only the individual links.</div>
+
+  <div class="bar">
+    <input type="search" id="q" placeholder="Search title, topic or note" aria-label="Search">
+    <button class="chip on" data-type="All">All</button>
+    <button class="chip" data-type="Article">Articles</button>
+    <button class="chip" data-type="Video">Videos</button>
+    <button class="chip" data-type="Tool">Tools</button>
+    <button class="chip" data-type="Other">Other</button>
+  </div>
+
+  <div id="list"></div>
+
+  <div class="how">
+    <b>To add a link:</b> open <code>shelf.html</code> on GitHub, edit the <code>SHELF</code> list at the bottom of this file, copy one block as a template, fill in title, type, URL, note and topics, then commit. The page updates in 2 to 3 minutes.<br><br>
+    <b>Types:</b> Article, Video, Tool, Other. <b>Topics</b> are short words used for search (for example <code>fever</code>, <code>newborn</code>).
+  </div>
+</main>
+<div id="toast"></div>
+
+<script>
+/* ---------- Your shelf. Add one block per link. ---------- */
+const SHELF = [
+  {title:"Newborn Care Tips for First-Time Parents", type:"Article",
+   url:"https://childspecialistrohini.com/newborn-care-guide.html",
+   note:"Feeding, cord care, safe sleep and when to see the doctor in the first weeks.",
+   topics:"newborn, first weeks, feeding"},
+  {title:"Newborn Care at Home: Normal or Worry, Bath, Massage", type:"Tool",
+   url:"https://childspecialistrohini.com/parent-tools/newborn-care.html",
+   note:"Normal or worry signs, bathing and massage, with tabs. Prints with clinic header.",
+   topics:"newborn, bath, massage, danger signs"},
+  {title:"How to Safely Manage High Fever in Toddlers", type:"Article",
+   url:"https://childspecialistrohini.com/child-fever-management-guide.html",
+   note:"Fever in toddlers: when to worry and when to call the clinic.",
+   topics:"fever, toddler"},
+  {title:"Fever chart and temperature log", type:"Tool",
+   url:"https://childspecialistrohini.com/parent-tools/fever-chart.html",
+   note:"Record temperature and medicine times.",
+   topics:"fever, chart, log"},
+  {title:"Cough and Wheezing in Children: Viral or Asthma", type:"Article",
+   url:"https://childspecialistrohini.com/cough-wheeze-children-guide.html",
+   note:"Viral cough or asthma, and when to see a doctor.",
+   topics:"cough, wheeze, asthma, respiratory"},
+  {title:"Constipation in Children: Parent Guide", type:"Article",
+   url:"https://childspecialistrohini.com/parent-tools/constipation-guide.html",
+   note:"Causes, diet and when to get help.",
+   topics:"constipation, stool, toilet"},
+  {title:"Diarrhoea and ORS at Home: Parent Guide", type:"Article",
+   url:"https://childspecialistrohini.com/parent-tools/diarrhoea-ors-guide.html",
+   note:"Fluids, ORS and danger signs.",
+   topics:"diarrhoea, ors, dehydration, loose motion"},
+  {title:"Painless vs Painful Vaccines for Babies", type:"Article",
+   url:"https://childspecialistrohini.com/painless-vs-painful-vaccines.html",
+   note:"Comparing vaccine options for babies.",
+   topics:"vaccine, injection, babies"},
+  {title:"Pediatric Vaccine FAQs", type:"Article",
+   url:"https://childspecialistrohini.com/pediatric-vaccine-faqs-guide.html",
+   note:"Common vaccine questions answered for parents.",
+   topics:"vaccine, faq, immunisation"},
+  {title:"Reduce Screen Time in Children", type:"Article",
+   url:"https://childspecialistrohini.com/reduce-screen-time-in-children.html",
+   note:"Screen time limits and simple routines.",
+   topics:"screen time, mobile, behaviour"},
+  {title:"Child Behaviour Problems: Tantrums, Thumb Sucking, Stammering", type:"Article",
+   url:"https://childspecialistrohini.com/parenting-behavior-guide.html",
+   note:"Common behaviour concerns in children and what helps.",
+   topics:"behaviour, tantrum, thumb sucking, stammering"}
+  /* Add YouTube or other links like this:
+  {title:"Video title", type:"Video", url:"https://www.youtube.com/watch?v=...", note:"One line.", topics:"topic words"},
+  */
+];
+/* ---------------------------------------------------------- */
+
+const MSG_FOOT = "\n\nDr. Dinesh Mittal Child Clinic, Rohini, Delhi\nwww.drdineshmittal.com | +91 81305 21456\nHealth education material, not a substitute for consultation.";
+let activeType = "All";
+
+const $ = s => document.querySelector(s);
+
+function toast(text){
+  const t = $("#toast");
+  t.textContent = text; t.classList.add("show");
+  clearTimeout(toast._t); toast._t = setTimeout(()=>t.classList.remove("show"), 1600);
+}
+
+function copyText(text, doneMsg){
+  const fallback = () => {
+    const ta = document.createElement("textarea");
+    ta.value = text; ta.setAttribute("readonly", "");
+    ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.select();
+    let ok = false;
+    try { ok = document.execCommand("copy"); } catch(e) { ok = false; }
+    document.body.removeChild(ta);
+    toast(ok ? doneMsg : "Could not copy. Select the text manually.");
+  };
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text).then(()=>toast(doneMsg), fallback);
+  } else { fallback(); }
+}
+
+function parentMessage(item){
+  return "Dear parent, this may help:\n\n" + item.title + "\n" + item.url + MSG_FOOT;
+}
+
+function render(){
+  const q = $("#q").value.trim().toLowerCase();
+  const list = $("#list");
+  list.textContent = "";
+  const items = SHELF.filter(it => {
+    if (activeType !== "All" && it.type !== activeType) return false;
+    if (!q) return true;
+    return (it.title + " " + it.note + " " + it.topics + " " + it.type).toLowerCase().includes(q);
+  });
+  if (!items.length) {
+    const e = document.createElement("div");
+    e.className = "empty";
+    e.textContent = SHELF.length ? "No match." : "No links yet. Add them in the SHELF list in this file.";
+    list.appendChild(e);
+    return;
+  }
+  items.forEach(it => {
+    const card = document.createElement("div");
+    card.className = "card";
+
+    const tag = document.createElement("span");
+    tag.className = "tag " + it.type;
+    tag.textContent = it.type;
+    card.appendChild(tag);
+
+    const h = document.createElement("h2");
+    h.textContent = it.title;
+    card.appendChild(h);
+
+    const n = document.createElement("p");
+    n.className = "note";
+    n.textContent = it.note;
+    card.appendChild(n);
+
+    const u = document.createElement("div");
+    u.className = "url";
+    u.textContent = it.url;
+    card.appendChild(u);
+
+    const b = document.createElement("div");
+    b.className = "btns";
+
+    const open = document.createElement("a");
+    open.className = "btn alt";
+    open.href = it.url; open.target = "_blank"; open.rel = "noopener";
+    open.textContent = "Open";
+    b.appendChild(open);
+
+    const cl = document.createElement("button");
+    cl.className = "btn";
+    cl.textContent = "Copy link";
+    cl.addEventListener("click", ()=>copyText(it.url, "Link copied"));
+    b.appendChild(cl);
+
+    const cm = document.createElement("button");
+    cm.className = "btn ok";
+    cm.textContent = "Copy message for parent";
+    cm.addEventListener("click", ()=>copyText(parentMessage(it), "Message copied. Paste into WhatsApp."));
+    b.appendChild(cm);
+
+    card.appendChild(b);
+    list.appendChild(card);
+  });
+}
+
+document.querySelectorAll(".chip").forEach(c => c.addEventListener("click", ()=>{
+  document.querySelectorAll(".chip").forEach(x=>x.classList.remove("on"));
+  c.classList.add("on");
+  activeType = c.dataset.type;
+  render();
+}));
+$("#q").addEventListener("input", render);
+render();
+</script>
+</body>
+</html>

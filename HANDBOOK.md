@@ -28,6 +28,7 @@ Last updated: 17 Oct 2026 (newborn care page added).
 | `parent-tools/newborn-care.html` | Newborn care (first 28 days, up to 3 months): 4 tabs — Normal or worry? (normal cards first so parents are not scared, then one "Seek urgent medical attention" danger list, then 12 normal things each with "see the doctor if"), Bathing (sponge bath till cord falls, then mug bath; no tub), Massage (family only, start day 7 if ≥37 wk and ≥2.5 kg, coconut oil, 6 drawn steps), Please avoid. English/Hindi, prints all tabs with clinic header. Tabs open by link: `#normal`, `#bath`, `#massage`, `#avoid`. |
 | 12 article pages + `blog.html` | Health articles (older design) |
 | `site-nav.js` | Side tile menu on every page (rail on computer, "Menu" tab on phone). Not on the Golu game or doctor panel. |
+| `shelf.html` | **Private** doctor's shelf (28 Oct 2026): searchable list of articles, videos and tools to send to individual parents, with "Copy link" and "Copy message for parent" buttons. Not linked from any page, not in sitemap, `noindex`. Hidden, not locked: anyone with the exact address can open it, so never post it. Add links by editing the `SHELF` list in the file. |
 | `icons/`, `doctor-panel.webmanifest` | DM logo icons, home-screen app |
 
 ## 3. Booking system
