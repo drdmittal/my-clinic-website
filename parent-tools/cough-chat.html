@@ -283,8 +283,8 @@ function speak(text,l){
     var vs = speechSynthesis.getVoices() || [];
     var v = vs.filter(function(x){return x.lang===u.lang;})[0] || vs.filter(function(x){return x.lang.indexOf(u.lang.slice(0,2))===0;})[0];
     if (v) u.voice=v;
-    u.onerror = function(e){ if (e && e.error !== 'interrupted' && e.error !== 'canceled') notice('आवाज़ नहीं चल पाई। फ़ोन की आवाज़ (volume) जाँचें, या Chrome / Safari में खोलें।','Voice did not play. Check the phone volume, or open in Chrome or Safari.'); };
-    var started=false; u.onstart=function(){ started=true; }; u.onend=function(){ lastSpeechEnd=Date.now(); }; u.onerror=function(){ lastSpeechEnd=Date.now(); };
+    u.onerror = function(e){ lastSpeechEnd=Date.now(); if (e && e.error !== 'interrupted' && e.error !== 'canceled') notice('आवाज़ नहीं चल पाई। फ़ोन की आवाज़ (volume) जाँचें, या Chrome / Safari में खोलें।','Voice did not play. Check the phone volume, or open in Chrome or Safari.'); };
+    var started=false; u.onstart=function(){ started=true; }; u.onend=function(){ lastSpeechEnd=Date.now(); };
     setTimeout(function(){ if (!started && !speechSynthesis.speaking && !speechSynthesis.pending){ notice('फ़ोन ने आवाज़ शुरू नहीं की। वॉल्यूम जाँचें, या Chrome / Safari में खोलें।','Your phone did not start the voice. Check the volume, or open in Chrome or Safari.'); } }, 2500);
     try { speechSynthesis.resume(); } catch(e){}
     speechSynthesis.speak(u);
