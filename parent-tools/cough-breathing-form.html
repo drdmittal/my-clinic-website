@@ -194,17 +194,16 @@
 <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
 <script src="/site-nav.js" defer></script>
 </head>
-<body>
+<body class="only-en">
 <div class="app">
 
   <!-- Top bar: language + progress (hidden on print) -->
   <div class="top">
     <div class="switch" role="group" aria-label="Language">
-      <button type="button" data-lang="both" aria-pressed="true">हिंदी + English</button>
-      <button type="button" data-lang="en" aria-pressed="false">English</button>
+      <button type="button" data-lang="en" aria-pressed="true">English</button>
       <button type="button" data-lang="hi" aria-pressed="false">हिंदी</button>
     </div>
-    <div class="prog-row"><span>Questions answered · उत्तर दिए गए सवाल</span><span id="count">0 / 25</span></div>
+    <div class="prog-row"><span><span class="hi">उत्तर दिए गए सवाल</span><span class="en">Questions answered</span></span><span id="count">0 / 25</span></div>
     <div class="bar"><span id="bar"></span></div>
   </div>
 
