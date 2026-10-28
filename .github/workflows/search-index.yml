@@ -1,0 +1,22 @@
+name: Rebuild search index
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**/*.html'
+      - 'tools/build-search-index.py'
+permissions:
+  contents: write
+jobs:
+  index:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build search-index.json
+        run: python3 tools/build-search-index.py
+      - name: Commit if changed
+        run: |
+          git config user.name "Dr. Dinesh Mittal (via Claude)"
+          git config user.email "drdmittal@users.noreply.github.com"
+          git add search-index.json
+          git diff --cached --quiet || (git commit -m "Rebuild search index" && git push)

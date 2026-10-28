@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Search the website | Dr. Dinesh Mittal, Rohini</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anek+Devanagari:wght@400;600;700;800&display=swap">
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+<style>
+:root{--ink:#1d2540;--muted:#556175;--indigo:#2a2580;--pink:#e2457a;--line:#e3e6f2}
+*{box-sizing:border-box}
+body{margin:0;background:#fbfbfe;color:var(--ink);font-family:'Anek Devanagari',system-ui,sans-serif;font-size:17px;line-height:1.5}
+.wrap{max-width:560px;margin:0 auto;padding:16px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.top a{color:var(--indigo);font-weight:700;text-decoration:none}
+h1{font-size:26px;color:var(--indigo);font-weight:800;margin:14px 0 4px}
+.sub{color:var(--muted);margin:0 0 12px;font-size:15px}
+form{display:flex;gap:8px}
+input[type=search]{flex:1;font:500 17px 'Anek Devanagari',sans-serif;padding:12px 14px;border:2px solid var(--indigo);border-radius:14px;min-height:50px;background:#fff;color:var(--ink);width:100%}
+input[type=search]:focus{outline:3px solid #f5ad1b;outline-offset:1px}
+button{font:700 17px 'Anek Devanagari',sans-serif;background:var(--indigo);color:#fff;border:0;border-radius:14px;padding:0 18px;min-height:50px;cursor:pointer}
+.hint{font-size:14px;color:var(--muted);margin:8px 0 0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.chips a{font-size:14px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 12px;color:var(--indigo);text-decoration:none}
+.count{font-size:14px;color:var(--muted);margin:14px 0 6px}
+.res{display:block;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin:10px 0;text-decoration:none;color:var(--ink)}
+.res b{display:block;color:var(--indigo);font-size:17px;font-weight:700;margin-bottom:4px}
+.res small{display:block;color:var(--muted);font-size:13px;margin-bottom:4px}
+.res p{margin:0;font-size:15px}
+mark{background:#ffe08a;color:inherit;border-radius:3px;padding:0 1px}
+.empty{background:#fff7e0;border:1px solid #f1d58e;border-radius:12px;padding:12px 14px;margin-top:10px}
+footer{text-align:center;font-size:13px;color:var(--muted);margin:24px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><a href="/">← Home / होम</a><a href="/health-articles.html">Health articles / लेख</a></div>
+  <h1>Search the website / वेबसाइट में खोजें</h1>
+  <p class="sub">Type a word in English or Hindi, for example: fever, teething, diet, bath, vaccine, cough.<br>अंग्रेज़ी या हिंदी में शब्द लिखें, जैसे: बुखार, दाँत, आहार, टीका।</p>
+  <form id="f" role="search" action="/search.html" method="get">
+    <input type="search" id="q" name="q" placeholder="Search / खोजें" autocomplete="off" aria-label="Search">
+    <button type="submit">Search / खोजें</button>
+  </form>
+  <div class="chips" id="chips">
+    <a href="/search.html?q=fever">fever / बुखार</a>
+    <a href="/search.html?q=teething">teething / दाँत</a>
+    <a href="/search.html?q=diet">diet / आहार</a>
+    <a href="/search.html?q=vaccine">vaccine / टीका</a>
+    <a href="/search.html?q=cough">cough / खाँसी</a>
+    <a href="/search.html?q=newborn">newborn / नवजात</a>
+  </div>
+  <div id="out" aria-live="polite"></div>
+  <footer>Dr. Dinesh Mittal Child Clinic · +91 81305 21456 · www.drdineshmittal.com</footer>
+</div>
+<script>
+(function(){
+  var input = document.getElementById('q');
+  var out = document.getElementById('out');
+  var data = null;
+
+  function esc(s){ return s.replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function norm(s){ return s.toLowerCase(); }
+
+  function snippet(text, terms){
+    var low = norm(text), pos = -1;
+    for (var i = 0; i < terms.length; i++){ var p = low.indexOf(terms[i]); if (p >= 0 && (pos < 0 || p < pos)) pos = p; }
+    var start = Math.max(0, (pos < 0 ? 0 : pos) - 70), s = text.substr(start, 220);
+    var html = esc(s);
+    terms.forEach(function(t){
+      if (!t) return;
+      var re = new RegExp(t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+      html = html.replace(re, function(m){ return '<mark>' + m + '</mark>'; });
+    });
+    return (start > 0 ? '… ' : '') + html + (start + 220 < text.length ? ' …' : '');
+  }
+
+  function run(q){
+    q = (q || '').trim();
+    if (!q){ out.innerHTML = ''; return; }
+    var terms = norm(q).split(/\s+/).filter(Boolean);
+    if (!data){ out.innerHTML = '<p class="hint">Loading… / लोड हो रहा है…</p>'; return; }
+    var hits = [];
+    data.pages.forEach(function(p){
+      var titleLow = norm(p.title), headLow = norm(p.headings.join(' ')), descLow = norm(p.description), textLow = norm(p.text);
+      var score = 0, ok = true;
+      terms.forEach(function(t){
+        var found = false;
+        if (titleLow.indexOf(t) >= 0){ score += 10; found = true; }
+        if (headLow.indexOf(t) >= 0){ score += 5; found = true; }
+        if (descLow.indexOf(t) >= 0){ score += 3; found = true; }
+        if (textLow.indexOf(t) >= 0){ score += 1; found = true; }
+        if (!found) ok = false;
+      });
+      if (ok && score > 0) hits.push({p:p, score:score, terms:terms});
+    });
+    hits.sort(function(a,b){ return b.score - a.score; });
+    if (!hits.length){
+      out.innerHTML = '<div class="empty">Nothing found for "' + esc(q) + '". Try a shorter word, or call the clinic: <b>+91 81305 21456</b>.<br>कुछ नहीं मिला। छोटा शब्द लिखें, या क्लिनिक को फ़ोन करें: <b>+91 81305 21456</b>।</div>';
+      return;
+    }
+    var html = '<p class="count">' + hits.length + (hits.length === 1 ? ' page' : ' pages') + ' found / पेज मिले</p>';
+    hits.slice(0, 20).forEach(function(h){
+      var p = h.p;
+      var body = p.description || p.text;
+      var sn = snippet(body, terms);
+      html += '<a class="res" href="' + esc(p.url) + '"><b>' + esc(p.title.split('|')[0].trim()) + '</b><small>' + esc(p.url) + '</small><p>' + sn + '</p></a>';
+    });
+    out.innerHTML = html;
+  }
+
+  fetch('/search-index.json', {cache:'no-cache'}).then(function(r){ return r.json(); }).then(function(d){
+    data = d;
+    run(input.value || new URLSearchParams(location.search).get('q'));
+  }).catch(function(){
+    out.innerHTML = '<div class="empty">Search is not available right now. Please call <b>+91 81305 21456</b>.</div>';
+  });
+
+  var initial = new URLSearchParams(location.search).get('q') || '';
+  input.value = initial;
+  document.getElementById('f').addEventListener('submit', function(e){
+    e.preventDefault();
+    var q = input.value.trim();
+    history.replaceState(null, '', '/search.html' + (q ? '?q=' + encodeURIComponent(q) : ''));
+    run(q);
+  });
+  input.addEventListener('input', function(){ run(input.value); });
+})();
+</script>
+</body>
+</html>
