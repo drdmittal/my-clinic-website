@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow,noarchive">
-<title>Private · Dr. Dinesh Mittal Child Clinic</title>
+<title>Clinic login · Dr. Dinesh Mittal Child Clinic</title>
 <style>
   :root{--indigo:#2a2580;--pink:#e2457a;--bg:#f6f5fc;--ink:#1d1b3a;--muted:#5d5a7a;--line:#e3e1f0}
   *{box-sizing:border-box}
@@ -22,13 +22,24 @@
   button:disabled{opacity:.6}
   .err{color:var(--pink);font-size:14px;margin-top:12px;min-height:20px}
   .foot{margin-top:18px;font-size:12.5px;color:var(--muted)}
+  .btnlink{display:block;margin-top:12px;padding:13px;border-radius:12px;background:var(--indigo);color:#fff;font-weight:700;font-size:16px;text-decoration:none}
+  .btnlink.alt{background:#0f9b8e}
 </style>
 </head>
 <body>
+<div class="box" id="choose" style="display:none">
+  <div class="mark">DM</div>
+  <h1>Clinic login</h1>
+  <p class="muted">Choose your login.</p>
+  <a class="btnlink" href="?f=doctor-hub">Doctor login · डॉक्टर लॉगिन</a>
+  <a class="btnlink alt" href="?f=reception">Reception login · रिसेप्शन लॉगिन</a>
+  <div class="foot">Dr. Dinesh Mittal Child Clinic · Rohini, Delhi · +91 81305 21456</div>
+</div>
+
 <div class="box" id="gate">
   <div class="mark">DM</div>
-  <h1>Private patient page</h1>
-  <p class="muted">Enter the password given by Dr. Dinesh Mittal.</p>
+  <h1>Clinic login</h1>
+  <p class="muted">Enter your password.</p>
   <form id="f" autocomplete="off">
     <label for="pw">Password</label>
     <input id="pw" type="password" required autofocus>
@@ -59,8 +70,8 @@
   }
 
   if (!name) {
-    err.textContent = 'This link is incomplete. Please ask the clinic for the correct link.';
-    form.style.display = 'none';
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('choose').style.display = 'block';
     return;
   }
 

@@ -101,7 +101,7 @@ Last updated: 28 Oct 2026 (private patient section added; cough and breathing fo
 - **Edit a tool:** keep the plain source on your own computer only (never commit it). Decrypt with `PASSWORD=... node tools/private-page.js decrypt <file.enc.json> <out.html>`, edit, and encrypt again with the same password.
 - **Search index:** `tools/build-search-index.py` skips `private-tools/`.
 ### 6b. Reception form sender (`?f=reception`)
-- **Open:** `https://childspecialistrohini.com/private-tools/?f=reception`. Its own password, different from the doctor's hub. The password is not written in the repo or here.
+- **Open:** from the side menu's **Clinic login** (it opens a chooser: Doctor login or Reception login), or `private-tools/?f=reception`. Its own password, different from the doctor's hub. The password is not written in the repo or here.
 - **Use:** type the parent's 10-digit mobile, choose the form, tap **Open WhatsApp and send**. The message has the form link in English and Hindi. Nothing is stored.
 - **Add a form:** edit the `FORMS` list in the source, then encrypt it again with the reception password (same method as section 6). Forms marked `ready: false` show greyed out.
 - **Source:** kept on the developer's side only, never committed in plain form.
