@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Voice test · Dr. Dinesh Mittal</title>
+<style>
+  body{margin:0;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:#f5f4fc;color:#1d1b3a;font-size:17px;line-height:1.5}
+  .box{max-width:560px;margin:0 auto;padding:20px 16px}
+  h1{font-size:20px;color:#2a2580;margin:0 0 12px}
+  button{width:100%;padding:16px;border:0;border-radius:14px;background:#2a2580;color:#fff;font:inherit;font-size:18px;font-weight:700;cursor:pointer;margin:8px 0}
+  pre{background:#fff;border:1px solid #e4e1f3;border-radius:12px;padding:12px;white-space:pre-wrap;font-size:14px;min-height:80px}
+</style>
+</head>
+<body>
+<div class="box">
+  <h1>Voice test · आवाज़ जाँच</h1>
+  <p>Tap the button. You should hear a short English line and a short Hindi line.<br>बटन दबाएँ। आपको एक छोटी अंग्रेज़ी और एक छोटी हिंदी लाइन सुनाई देनी चाहिए।</p>
+  <button id="go" type="button">🔊 Speak · बोलें</button>
+  <pre id="log">Not tested yet.</pre>
+</div>
+<script>
+(function(){
+  var log = document.getElementById('log');
+  function line(s){ log.textContent += '\n' + s; }
+  document.getElementById('go').addEventListener('click', function(){
+    log.textContent = 'Testing…';
+    if (!('speechSynthesis' in window)) { line('This browser does not support speech.'); return; }
+    var voices = speechSynthesis.getVoices() || [];
+    line('Voices listed by browser: ' + voices.length);
+    var en = voices.filter(function(v){ return v.lang === 'en-IN'; });
+    var hi = voices.filter(function(v){ return v.lang === 'hi-IN'; });
+    line('English (India) voices: ' + en.length + ' · Hindi voices: ' + hi.length);
+    function say(text, lang, voice){
+      var u = new SpeechSynthesisUtterance(text);
+      u.lang = lang; u.rate = 0.95; u.volume = 1;
+      if (voice) u.voice = voice;
+      u.onstart = function(){ line('Started: ' + lang); };
+      u.onend = function(){ line('Finished: ' + lang); };
+      u.onerror = function(e){ line('Error (' + lang + '): ' + (e.error || 'unknown')); };
+      speechSynthesis.speak(u);
+    }
+    try { speechSynthesis.resume(); } catch(e){}
+    say('Namaste. This is a voice test from Dr Mittal\'s clinic.', 'en-IN', en[0]);
+    say('नमस्ते। यह डॉ. मित्तल के क्लिनिक की आवाज़ जाँच है।', 'hi-IN', hi[0]);
+    setTimeout(function(){
+      if (!speechSynthesis.speaking && !speechSynthesis.pending) line('Nothing is playing. Check volume, or try another browser.');
+    }, 3000);
+  });
+})();
+</script>
+</body>
+</html>
