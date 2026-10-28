@@ -1,7 +1,7 @@
 # Clinic Website & Booking — Handbook
 
 Everything needed to keep working on Dr. Dinesh Mittal's website and online booking in any new chat.
-Last updated: 17 Oct 2026 (newborn care page added).
+Last updated: 28 Oct 2026 (cough and breathing history form added under Parent tools).
 
 ## 1. Basics
 
@@ -24,6 +24,7 @@ Last updated: 17 Oct 2026 (newborn care page added).
 | `doctor-panel.html` | "Appointments" app (PIN). Tabs: Appointments (+ Walk-in, Cancel), Message, Block time, Slot settings (incl. Staff PIN). Installable on phone home screen. |
 | `baby-diet-planner.html` | Diet & feeding guide (`?age=m0|m6|y1|y2` opens an age): 4 age groups (0–6 m, 6–12 m with 6 / 7–8 / 9–11 m steps, 1–2 y, 2–18 y), Veg / +Egg / Non-veg, English or Hindi, print with clinic header |
 | `parent-tools/` | Fever chart, Constipation guide, Golu Potty Hero game, feeding guide PDF, tools index. `fever-care.html` only redirects to the fever chart. |
+| `parent-tools/cough-cold-history-form.html` | Cough & breathing history form for children under 5 (28 Oct 2026). 5 sections, 25 tap-to-answer questions, English / हिंदी / both switch, progress bar, print to A4 with clinic header and www.drdineshmittal.com. Linked from the Parent tools index and from the cough & wheeze guide (section 8, EN and HI). Wording follows the doctor's own form (lightly shortened). |
 | `newborn.html` | Newborn corner (hub): care cards first (Normal or worry, Bathing, Massage, Please avoid), then Feeding 0–6 m (`baby-diet-planner.html?age=m0`), Vaccines, Growth check; the short red "Seek urgent medical attention" box comes after the cards (small link to it at the top); then Book / Call and the Please read note. Also links `newborn-care-guide.html` ("Newborn care tips"), rewritten 17 Oct 2026 in the new design: feeding, burping, cord care, yellow colour = see doctor, safe sleep (separate surface), vaccines at birth, urgent box, Please read note. Linked from homepage tile and side menu ("Newborn"). |
 | `parent-tools/newborn-care.html` | Newborn care (first 28 days, up to 3 months): 4 tabs — Normal or worry? (normal cards first so parents are not scared, then one "Seek urgent medical attention" danger list, then 12 normal things each with "see the doctor if"), Bathing (sponge bath till cord falls, then mug bath; no tub), Massage (family only, start day 7 if ≥37 wk and ≥2.5 kg, coconut oil, 6 drawn steps), Please avoid. English/Hindi, prints all tabs with clinic header. Tabs open by link: `#normal`, `#bath`, `#massage`, `#avoid`. |
 | 12 article pages + `blog.html` | Health articles (older design) |
