@@ -162,6 +162,33 @@
     .ch button{flex:1 1 30%;min-width:0}
     .ch.wide button{flex:1 1 45%}
   }
+  /* Doctor summary + WhatsApp option */
+  .sumcard{background:#fff;border:1.5px solid var(--indigo);border-radius:18px;padding:16px 18px;margin-top:14px}
+  .sumcard h2{margin:0;font-size:18px;color:var(--indigo);font-weight:800}
+  .sumcard .sumhead{font-size:13px;color:var(--muted);margin:4px 0 12px}
+  .sumgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .sumbox{border-radius:12px;padding:10px 12px;background:#fafaff;border:1px solid var(--line)}
+  .sumbox.full{grid-column:1/-1}
+  .sumbox h3{margin:0 0 6px;font-size:14px;font-weight:800}
+  .sumbox ul{margin:0;padding-left:18px;font-size:14px}
+  .sumbox li{margin:2px 0}
+  .sumbox li.none{color:var(--muted);font-style:italic;list-style:none;margin-left:-18px}
+  .sumbox.pos{border-color:#f3c9d5}.sumbox.pos h3{color:var(--pink)}
+  .sumbox.neg{border-color:#c9e9d3}.sumbox.neg h3{color:var(--green)}
+  .sumbox.unk{border-color:#fde5b8}.sumbox.unk h3{color:#a16207}
+  .sendopt{flex:1 1 100%;font-size:14px;color:var(--muted);text-align:center;margin:0 0 4px}
+  .btn.wa{background:#25d366;color:#fff}
+  @media (max-width:520px){ .sumgrid{grid-template-columns:1fr} }
+  @media print{
+    .sumcard{box-shadow:none;border-color:#777;border-radius:10px;padding:10px 12px;margin-top:8px;break-inside:auto;page-break-before:always}
+    .sumcard h2{font-size:14px}
+    .sumcard .sumhead{font-size:11px;margin:2px 0 6px}
+    .sumbox{padding:6px 8px}
+    .sumbox h3{font-size:11.5px;margin-bottom:3px}
+    .sumbox ul{font-size:11px}
+    .sumgrid{gap:6px}
+    .sumbox.pos,.sumbox.neg,.sumbox.unk{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  }
 </style>
 <link rel="apple-touch-icon" href="/icons/icon-180.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
@@ -350,7 +377,23 @@
     <span class="en">This form helps the doctor understand your child's history. It is not a substitute for a consultation. If your child has severe breathing difficulty, a blue lip or face, or is very drowsy, go to the nearest hospital immediately.</span>
   </div>
 
+  <!-- Doctor summary: built from the answers; printed, saved and sent with the form -->
+  <section class="sumcard" id="summary">
+    <h2>Summary for the doctor · डॉक्टर के लिए सारांश</h2>
+    <div class="sumhead" id="sumhead"></div>
+    <div class="sumgrid">
+      <div class="sumbox pos full"><h3>Positive history (YES)</h3><ul id="s-pos"></ul></div>
+      <div class="sumbox neg"><h3>Negative history (NO)</h3><ul id="s-neg"></ul></div>
+      <div class="sumbox unk"><h3>Not sure / not answered</h3><ul id="s-unk"></ul></div>
+      <div class="sumbox full"><h3>Episodes, severity and treatment</h3><ul id="s-num"></ul></div>
+      <div class="sumbox full"><h3>Family history (allergy symptoms, now or in childhood)</h3><ul id="s-fam"></ul></div>
+      <div class="sumbox full"><h3>Parent's note</h3><ul id="s-note"></ul></div>
+    </div>
+  </section>
+
   <div class="btns">
+    <p class="sendopt"><span class="hi">प्रिंटर नहीं है? इस फ़ॉर्म को क्लिनिक के WhatsApp पर भेजें। क्लिनिक इसे प्रिंट करके दे देगा। सिर्फ़ तभी भेजें जब आप सहमत हों।</span><span class="en">No printer? Send this form to the clinic WhatsApp and the clinic will print it for you. Send only if you agree.</span></p>
+    <button class="btn wa" type="button" id="waBtn"><span class="hi">💬 क्लिनिक के WhatsApp पर भेजें</span><span class="en">💬 Send to clinic WhatsApp</span></button>
     <button class="btn ghost" type="button" id="clearBtn"><span class="hi">फ़ॉर्म साफ़ करें</span><span class="en">Clear answers</span></button>
     <button class="btn" type="button" onclick="window.print()"><span class="hi">🖨️ प्रिंट करें / PDF सेव करें</span><span class="en">🖨️ Print / Save as PDF</span></button>
   </div>
@@ -372,6 +415,7 @@
   var TOTAL = required.length + 1;   // 25 questions: medicine (typed or "don't remember") counts as one
 
   function refresh(){
+    buildSummary();
     var n = 0;
     required.forEach(function(g){ if (g.querySelector('button.on')) n++; });
     if (document.getElementById('medname').value.trim() !== '' || document.querySelector('[data-group="med"] button.on')) n++;
@@ -407,7 +451,114 @@
     refresh();
   });
 
+  // ---------- Doctor summary and WhatsApp ----------
+  var SYM = {
+    s1:'Repeated cough, wheeze or breathing difficulty',
+    s2:'Symptoms come and go, with well periods in between',
+    s3:'Cough or wheeze at night or early morning',
+    s4:'Cough, wheeze or breathlessness with play, laughing or crying',
+    s5:'Episodes start 1–2 days after a cold',
+    s6:'Cough or breathing symptoms without runny nose or fever',
+    s7:'Triggered by dust, smoke, pollution, cold air, smells or season change',
+    s8:'Breathing symptoms disturb sleep or play',
+    o1:'Sneezing, itchy, runny or blocked nose',
+    o2:'Itchy, red or watery eyes',
+    o3:'Eczema or repeated itchy rash',
+    o4:'Possible food reaction',
+    o5:'Frequent snoring, mouth breathing or restless sleep',
+    o6:'Heartburn, regurgitation or repeated vomiting',
+    o7:'Persistent wet cough, repeated chest infections, choking on feeds or poor weight gain'
+  };
+  var FAM = {fm:'Mother', fa:'Father', sib:'Brother or sister', gp:'Grandparents'};
+  var RESP = {clearly:'Clear improvement after nebuliser', little:'A little improvement', no:'No improvement', never:'Never tried', unsure:'Not sure'};
+  var YN = {yes:'Yes', no:'No', unsure:'Not sure'};
+  function ans(g){ var b = document.querySelector('[data-group="' + g + '"] button.on'); return b ? b.dataset.v : null; }
+  function val(id){ return (document.getElementById(id).value || '').trim(); }
+  function esc(t){ return String(t).replace(/[&<>]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]; }); }
+  function li(t){ return '<li>' + esc(t) + '</li>'; }
+
+  function collect(){
+    var pos = [], neg = [], unk = [];
+    Object.keys(SYM).forEach(function(g){
+      var a = ans(g);
+      if (a === 'yes') pos.push(SYM[g]); else if (a === 'no') neg.push(SYM[g]); else unk.push(SYM[g]);
+    });
+    var num = [];
+    num.push('Episodes, past 6 months: ' + (val('e6') || 'not stated'));
+    num.push('Episodes, past 12 months: ' + (val('e12') || 'not stated'));
+    num.push('Emergency / urgent-care visits, past 12 months: ' + (val('er') || 'not stated'));
+    num.push('Hospital admissions, past 12 months: ' + (val('adm') || 'not stated'));
+    var st = ans('steroid');
+    if (st === 'yes') {
+      var extra = [];
+      if (val('courses')) extra.push(val('courses') + ' course(s)');
+      if (val('months')) extra.push('months: ' + val('months'));
+      num.push('Oral steroids in past 12 months: YES' + (extra.length ? ' (' + extra.join('; ') + ')' : ''));
+    } else {
+      num.push('Oral steroids in past 12 months: ' + (YN[st] || 'not answered'));
+    }
+    num.push('Oxygen / ICU / breathing support in hospital: ' + (YN[ans('oxygen')] || 'not answered'));
+    num.push('Response to nebuliser: ' + (RESP[ans('resp')] || 'not answered'));
+    var med = val('medname');
+    num.push('Medicine used: ' + (med || (ans('med') === 'dk' ? "Don't remember" : 'not answered')));
+    num.push('Symptoms came back after treatment: ' + (YN[ans('back')] || 'not answered'));
+    num.push('Inhaler or nebuliser used in the past: ' + (YN[ans('inh')] || 'not answered'));
+    var fam = [];
+    Object.keys(FAM).forEach(function(g){ fam.push(FAM[g] + ': ' + (YN[ans(g)] || 'not answered')); });
+    return {pos: pos, neg: neg, unk: unk, num: num, fam: fam};
+  }
+
+  function headLine(){
+    var parts = [val('cname') ? 'Child: ' + val('cname') : 'Child: name not given'];
+    if (val('age')) parts.push('Age: ' + val('age'));
+    if (val('date')) parts.push('Date: ' + val('date'));
+    if (val('phone')) parts.push('Parent phone: ' + val('phone'));
+    return parts.join('  ·  ') + '  ·  Not a diagnosis; for the doctor to review.';
+  }
+
+  function buildSummary(){
+    var d = collect();
+    function fill(id, arr, empty){
+      document.getElementById(id).innerHTML = arr.length ? arr.map(li).join('') : '<li class="none">' + empty + '</li>';
+    }
+    fill('s-pos', d.pos, 'None marked YES');
+    fill('s-neg', d.neg, 'None marked NO');
+    fill('s-unk', d.unk, 'None');
+    fill('s-num', d.num, '—');
+    fill('s-fam', d.fam, '—');
+    fill('s-note', [val('notes') || 'Nothing written'], '—');
+    document.getElementById('sumhead').textContent = headLine();
+  }
+
+  function waText(){
+    var d = collect(), L = [];
+    L.push('*Child breathing & cough history (under 5)*');
+    L.push(headLine());
+    L.push('');
+    L.push('*POSITIVE (yes):*');
+    (d.pos.length ? d.pos : ['None marked yes']).forEach(function(t){ L.push('• ' + t); });
+    L.push('*NEGATIVE (no):*');
+    (d.neg.length ? d.neg : ['None marked no']).forEach(function(t){ L.push('• ' + t); });
+    L.push('*NOT SURE / not answered:*');
+    (d.unk.length ? d.unk : ['None']).forEach(function(t){ L.push('• ' + t); });
+    L.push('*EPISODES, SEVERITY & TREATMENT:*');
+    d.num.forEach(function(t){ L.push('• ' + t); });
+    L.push('*FAMILY (allergy symptoms, now or in childhood):*');
+    d.fam.forEach(function(t){ L.push('• ' + t); });
+    L.push('*PARENT\'S NOTE:* ' + (val('notes') || 'none'));
+    L.push('');
+    L.push('Please print for Dr. Dinesh Mittal. Dr. Dinesh Mittal Child Clinic, +91 81305 21456');
+    return L.join('\n');
+  }
+
+  function sendWA(){
+    if (!confirm('Send this form to the clinic WhatsApp? WhatsApp will open with the message ready. Tap Send in WhatsApp.\n\nक्लिनिक के WhatsApp पर भेजें? WhatsApp खुलेगा, वहाँ Send दबाएँ।')) return;
+    window.open('https://wa.me/918130521456?text=' + encodeURIComponent(waText()), '_blank', 'noopener');
+  }
+
   document.getElementById('medname').addEventListener('input', refresh);
+  document.getElementById('waBtn').addEventListener('click', sendWA);
+  document.querySelectorAll('.fld input, .fld textarea').forEach(function(el){ el.addEventListener('input', refresh); });
   (function(){ var d = new Date(), p = function(n){ return String(n).padStart(2,'0'); }; document.getElementById('date').value = d.getFullYear() + '-' + p(d.getMonth()+1) + '-' + p(d.getDate()); })();
   refresh();
 })();
