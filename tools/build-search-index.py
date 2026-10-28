@@ -109,7 +109,7 @@ def main():
                 continue
             full = os.path.join(dirpath, fn)
             rel = os.path.relpath(full, ROOT).replace(os.sep, '/')
-            if rel in EXCLUDE:
+            if rel in EXCLUDE or rel.startswith('private-tools/'):
                 continue
             e = page_entry(full)
             if e:

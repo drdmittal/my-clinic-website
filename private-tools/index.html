@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Private · Dr. Dinesh Mittal Child Clinic</title>
+<style>
+  :root{--indigo:#2a2580;--pink:#e2457a;--bg:#f6f5fc;--ink:#1d1b3a;--muted:#5d5a7a;--line:#e3e1f0}
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;display:grid;place-items:center;background:var(--bg);color:var(--ink);
+       font-family:system-ui,-apple-system,'Segoe UI',sans-serif;padding:20px}
+  .box{width:100%;max-width:380px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px 22px;
+       box-shadow:0 8px 24px rgba(42,37,128,.08);text-align:center}
+  .mark{width:56px;height:56px;border-radius:16px;margin:0 auto 12px;background:var(--indigo);color:#fff;display:grid;place-items:center;font-weight:800;font-size:20px}
+  h1{font-size:19px;margin:0 0 4px}
+  .muted{color:var(--muted);font-size:14px;margin:0 0 16px}
+  label{display:block;text-align:left;font-size:13.5px;font-weight:600;color:var(--muted);margin-bottom:6px}
+  input{width:100%;font:inherit;font-size:16px;padding:11px 12px;border:1.5px solid var(--line);border-radius:12px}
+  input:focus{outline:none;border-color:var(--indigo)}
+  button{width:100%;margin-top:12px;font:inherit;font-weight:700;font-size:16px;padding:12px;border:none;border-radius:12px;background:var(--indigo);color:#fff;cursor:pointer}
+  button:disabled{opacity:.6}
+  .err{color:var(--pink);font-size:14px;margin-top:12px;min-height:20px}
+  .foot{margin-top:18px;font-size:12.5px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="box" id="gate">
+  <div class="mark">DM</div>
+  <h1>Private patient page</h1>
+  <p class="muted">Enter the password given by Dr. Dinesh Mittal.</p>
+  <form id="f" autocomplete="off">
+    <label for="pw">Password</label>
+    <input id="pw" type="password" required autofocus>
+    <button id="go" type="submit">Open</button>
+    <div class="err" id="err" role="alert"></div>
+  </form>
+  <div class="foot">Dr. Dinesh Mittal Child Clinic · Rohini, Delhi · +91 81305 21456</div>
+</div>
+
+<script>
+(function(){
+  var params = new URLSearchParams(location.search);
+  var name = (params.get('f') || '').replace(/[^a-z0-9-]/gi, '');
+  var form = document.getElementById('f');
+  var err = document.getElementById('err');
+  var go = document.getElementById('go');
+
+  function b64(s){ var bin = atob(s), u = new Uint8Array(bin.length); for (var i=0;i<bin.length;i++) u[i]=bin.charCodeAt(i); return u; }
+
+  async function decryptWith(pw, obj){
+    var enc = new TextEncoder();
+    var base = await crypto.subtle.importKey('raw', enc.encode(pw), 'PBKDF2', false, ['deriveKey']);
+    var key = await crypto.subtle.deriveKey(
+      {name:'PBKDF2', salt:b64(obj.salt), iterations:obj.iter, hash:'SHA-256'},
+      base, {name:'AES-GCM', length:256}, false, ['decrypt']);
+    var pt = await crypto.subtle.decrypt({name:'AES-GCM', iv:b64(obj.iv)}, key, b64(obj.data));
+    return new TextDecoder().decode(pt);
+  }
+
+  if (!name) {
+    err.textContent = 'This link is incomplete. Please ask the clinic for the correct link.';
+    form.style.display = 'none';
+    return;
+  }
+
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    err.textContent = '';
+    go.disabled = true; go.textContent = 'Opening…';
+    try {
+      var res = await fetch(name + '.enc.json', {cache:'no-store'});
+      if (!res.ok) throw new Error('missing');
+      var obj = await res.json();
+      var html = await decryptWith(document.getElementById('pw').value, obj);
+      document.open(); document.write(html); document.close();
+    } catch (x) {
+      go.disabled = false; go.textContent = 'Open';
+      err.textContent = (x && x.message === 'missing')
+        ? 'This page is not available. Please ask the clinic for the correct link.'
+        : 'Wrong password. Please try again.';
+    }
+  });
+})();
+</script>
+</body>
+</html>

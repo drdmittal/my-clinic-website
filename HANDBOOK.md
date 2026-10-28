@@ -1,7 +1,7 @@
 # Clinic Website & Booking — Handbook
 
 Everything needed to keep working on Dr. Dinesh Mittal's website and online booking in any new chat.
-Last updated: 28 Oct 2026 (cough and breathing history form added under Parent tools).
+Last updated: 28 Oct 2026 (private patient section added; cough and breathing form moved there).
 
 ## 1. Basics
 
@@ -24,7 +24,7 @@ Last updated: 28 Oct 2026 (cough and breathing history form added under Parent t
 | `doctor-panel.html` | "Appointments" app (PIN). Tabs: Appointments (+ Walk-in, Cancel), Message, Block time, Slot settings (incl. Staff PIN). Installable on phone home screen. |
 | `baby-diet-planner.html` | Diet & feeding guide (`?age=m0|m6|y1|y2` opens an age): 4 age groups (0–6 m, 6–12 m with 6 / 7–8 / 9–11 m steps, 1–2 y, 2–18 y), Veg / +Egg / Non-veg, English or Hindi, print with clinic header |
 | `parent-tools/` | Fever chart, Constipation guide, Golu Potty Hero game, feeding guide PDF, tools index. `fever-care.html` only redirects to the fever chart. |
-| `parent-tools/cough-cold-history-form.html` | Cough & breathing history form for children under 5 (28 Oct 2026). 5 sections, 25 tap-to-answer questions, English / हिंदी / both switch, progress bar, print to A4 with clinic header and www.drdineshmittal.com. Linked from the Parent tools index and from the cough & wheeze guide (section 8, EN and HI). Wording follows the doctor's own form (lightly shortened). |
+| `private-tools/` | **Private patient section (28 Oct 2026).** Tools only for diagnosed patients, not listed anywhere public. Each tool is encrypted with a password (see section 6). Not in the menu, search, sitemap, or any page link; `noindex`. Current tool: `cough-breathing-form.enc.json` (under-5 breathing and cough history form). Open as `private-tools/?f=cough-breathing-form`. |
 | `newborn.html` | Newborn corner (hub): care cards first (Normal or worry, Bathing, Massage, Please avoid), then Feeding 0–6 m (`baby-diet-planner.html?age=m0`), Vaccines, Growth check; the short red "Seek urgent medical attention" box comes after the cards (small link to it at the top); then Book / Call and the Please read note. Also links `newborn-care-guide.html` ("Newborn care tips"), rewritten 17 Oct 2026 in the new design: feeding, burping, cord care, yellow colour = see doctor, safe sleep (separate surface), vaccines at birth, urgent box, Please read note. Linked from homepage tile and side menu ("Newborn"). |
 | `parent-tools/newborn-care.html` | Newborn care (first 28 days, up to 3 months): 4 tabs — Normal or worry? (normal cards first so parents are not scared, then one "Seek urgent medical attention" danger list, then 12 normal things each with "see the doctor if"), Bathing (sponge bath till cord falls, then mug bath; no tub), Massage (family only, start day 7 if ≥37 wk and ≥2.5 kg, coconut oil, 6 drawn steps), Please avoid. English/Hindi, prints all tabs with clinic header. Tabs open by link: `#normal`, `#bath`, `#massage`, `#avoid`. |
 | 12 article pages + `blog.html` | Health articles (older design) |
@@ -89,3 +89,16 @@ Last updated: 28 Oct 2026 (cough and breathing history form added under Parent t
 - BLACKLIST support from the old sheet.
 - Bring older article pages to the new design. Next: review Vaccines and Growth check pages (old design).
 - Newborn corner additions (doctor approved the list on 17 Oct 2026): breastfeeding help (latch, positions, enough milk, expressing and storing), safe sleep, visit plan for the first 3 months, feeding and nappy log, common skin problems (nappy rash, heat rash, cradle cap), crying and colic, mother's wellbeing. **Do not add** a newborn screening checklist or kangaroo mother care (doctor's domain; would confuse parents).
+
+## 6. Private patient section (`private-tools/`)
+
+- **What it is:** a password-protected section for tools meant only for patients the doctor has diagnosed. Parents at large must not see it.
+- **How the password works:** each tool is stored encrypted (PBKDF2 + AES-256-GCM, done in the browser). Without the password the file is unreadable. The password is **never** stored in the repo or in this handbook.
+- **Protection level (be honest with the doctor):** this is protection from casual viewing and search, plus strong encryption only as strong as the password. The encrypted files are public on GitHub Pages, so anyone could try to guess the password offline. Use a long passphrase (five or more random words, or 16+ random characters). Better still, put the section behind real server-side protection (see the options below).
+- **Link to send a patient:** `https://childspecialistrohini.com/private-tools/?f=cough-breathing-form`, sent on WhatsApp separately from the password (send the password in a separate message or by voice).
+- **Add a new tool:** write the page as a normal HTML file (no `site-nav.js`, add `<meta name="robots" content="noindex,nofollow,noarchive">`), then run `PASSWORD='...' node tools/private-page.js encrypt <source.html> private-tools/<name>.enc.json`. Then tell the page name to use in the link (`?f=<name>`).
+- **Change the password:** `OLD='current' NEW='new' node tools/private-page.js rekey private-tools/cough-breathing-form.enc.json`, then commit and push. Repeat for every `.enc.json` file.
+- **Edit a tool:** keep the plain source on your own computer only (never commit it). Decrypt with `PASSWORD=... node tools/private-page.js decrypt <file.enc.json> <out.html>`, edit, and encrypt again with the same password.
+- **Search index:** `tools/build-search-index.py` skips `private-tools/`.
+- **Stronger options (not done yet):** Cloudflare Pages with Cloudflare Access (free email one-time-PIN gate in front of the folder), or a Google Drive / Google Form file shared only with patients. Both give real access control, which GitHub Pages cannot.
+- **Old public copy:** the form was publicly visible for a short time on 28 Oct 2026. It is removed from the site, but the repo history still holds it. It is a blank form with no patient data, so no action is needed.
