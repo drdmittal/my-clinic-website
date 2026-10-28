@@ -102,7 +102,7 @@ Last updated: 28 Oct 2026 (private patient section added; cough and breathing fo
 - **Search index:** `tools/build-search-index.py` skips `private-tools/`.
 ### 6a. Doctor's resource hub (`?f=doctor-hub`)
 
-- **Open:** `https://childspecialistrohini.com/private-tools/?f=doctor-hub` (password as usual). One page for the doctor with every public and private tool.
+- **Open:** the **Clinic login** item at the bottom of the side menu on every page (also `https://childspecialistrohini.com/private-tools/?f=doctor-hub`), password as usual. The menu item is visible to everyone, by choice of the doctor, so the hub is still protected by the password. One page for the doctor with every public and private tool.
 - **Send to a parent:** type the mobile number, choose the tool, check the message, tap "Open WhatsApp and send". WhatsApp opens on the doctor's phone with the message ready, and the doctor taps send. This works now with no Meta setup. The message comes from the clinic's WhatsApp Business number. The number typed on the hub is not stored or sent to any server.
 - **Never send the password in the same message as the private link.** Send the password separately.
 - **Source:** the hub is written as a plain HTML file kept on the developer's side and never committed in plain form. Its list of tools is a `TOOLS` array at the top of the script. To add a tool, edit that array in the source, then encrypt it again: `PASSWORD='...' node tools/private-page.js encrypt <hub-source.html> private-tools/doctor-hub.enc.json`.
