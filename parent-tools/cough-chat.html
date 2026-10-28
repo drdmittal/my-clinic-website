@@ -44,6 +44,8 @@
   a{color:var(--indigo)}
   .hide{display:none!important}
   #micBtn{background:#fff;border:2px solid var(--indigo)!important;color:var(--indigo)!important;font-size:18px;min-width:48px}
+  #micBtn.hot{background:var(--indigo)!important;color:#fff!important;animation:pulse 1.4s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(42,37,128,.45)}70%{box-shadow:0 0 0 12px rgba(42,37,128,0)}100%{box-shadow:0 0 0 0 rgba(42,37,128,0)}}
   body.only-en .hi{display:none!important}
   body.only-hi .en{display:none!important}
 </style>
@@ -145,14 +147,14 @@ function listen(){
     my.onerror = function(e){
       if (rec!==my) return;
       if (e && (e.error==='not-allowed' || e.error==='service-not-allowed')){
-        talk=false; listenStatus(false);
-        notice('माइक्रोफ़ोन की अनुमति नहीं है। लिखकर या बटन से जवाब दें।','Microphone is not allowed. Please type or tap a button.');
+        listenStatus(false);
+        notice('🎤 बोलने के लिए नीचे का 🎤 बटन दबाएँ। (माइक्रोफ़ोन की अनुमति दें)','Tap the 🎤 button to speak. (Allow the microphone if asked)');
       }
     };
     my.onend = function(){
       if (rec!==my) return;
       listening=false; $('micBtn').textContent='🎤'; listenStatus(false);
-      if (!got && talk && cur && cur.type==='text' && retries<4){ retries++; setTimeout(waitThenListen, 400); }
+      if (!got && talk && cur && cur.type==='text' && retries<2){ retries++; setTimeout(waitThenListen, 400); }
     };
     my.start();
   } catch(e){ listening=false; $('micBtn').textContent='🎤'; }
@@ -303,6 +305,8 @@ function controls(spec){
   if (spec.type==='text'){
     typeRow.classList.remove('hide');
     $('micBtn').classList.toggle('hide', !SR);
+    $('micBtn').classList.toggle('hot', !!SR && talk && !listening);
+    if (SR && talk && voiceOn) listenStatus(false);
     var inp=$('typeIn'); inp.value=''; inp.placeholder=t(spec.ph.hi,spec.ph.en);
     inp.inputMode = spec.numeric ? 'decimal' : 'text';
     setTimeout(function(){ inp.focus(); },50);
