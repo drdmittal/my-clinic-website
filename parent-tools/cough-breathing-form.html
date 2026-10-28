@@ -209,7 +209,6 @@
       <div class="fld"><label for="cname"><span class="hi">बच्चे का नाम</span><span class="en">Child's name</span></label><input id="cname" type="text"></div>
       <div class="fld"><label for="age"><span class="hi">उम्र</span><span class="en">Age</span></label><input id="age" type="text" placeholder="e.g. 2 years 4 months"></div>
       <div class="fld"><label for="date"><span class="hi">तारीख</span><span class="en">Date</span></label><input id="date" type="date"></div>
-      <div class="fld"><label for="parent"><span class="hi">माता-पिता / अभिभावक</span><span class="en">Parent / caregiver</span></label><input id="parent" type="text"></div>
       <div class="fld"><label for="phone"><span class="hi">फ़ोन (वैकल्पिक)</span><span class="en">Phone (optional)</span></label><input id="phone" type="tel"></div>
     </div>
   </section>
@@ -227,7 +226,7 @@
     <div class="q"><div class="qt"><span class="qn">3</span><span><span class="hi">क्या रात में या सुबह जल्दी खांसी या घरघराहट होती है?</span><span class="en">Does cough or wheeze occur at night or early in the morning?</span></span></div>
       <div class="ch" data-group="s3"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
 
-    <div class="q"><div class="qt"><span class="qn">4</span><span><span class="hi">क्या खेलने, हँसने या रोने पर बच्चे को खांसी, घरघराहट या साँस फूलती है?</span><span class="en">Does your child cough, wheeze or become breathless while playing, laughing or crying?</span></span></div>
+    <div class="q"><div class="qt"><span class="qn">4</span><span><span class="hi">क्या खेलने, हँसने या रोने पर बच्चे को खांसी, घरघराहट या साँस फूलती है? <em style="color:var(--muted)">(जैसे: दौड़ना-कूदना जैसा ज़ोर वाला खेल, या ज़ोर से रोना या हँसना।)</em></span><span class="en">Does your child cough, wheeze or become breathless while playing, laughing or crying? <em style="color:var(--muted)">(For example: exertion play such as jumping or running, or intense crying or laughing.)</em></span></span></div>
       <div class="ch" data-group="s4"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
 
     <div class="q"><div class="qt"><span class="qn">5</span><span><span class="hi">क्या ज़्यादातर बार खांसी, घरघराहट या साँस की तकलीफ़ सर्दी-ज़ुकाम के 1–2 दिन बाद शुरू होती है (नाक बहना शुरू होने के बाद)?</span><span class="en">Do most episodes start after your child catches a cold, usually 1–2 days after the runny nose begins?</span></span></div>
@@ -245,11 +244,11 @@
 
   <!-- SECTION 2 -->
   <section class="card s2">
-    <div class="head"><div class="no">2</div><div><h2><span class="hi">इलाज और अस्पताल</span><span class="en">Episodes &amp; treatment</span></h2><p><span class="hi">संख्या लिखें, पता न हो तो खाली छोड़ें</span><span class="en">Write a number, or leave blank if unknown</span></p></div></div>
+    <div class="head"><div class="no">2</div><div><h2><span class="hi">इलाज और अस्पताल</span><span class="en">Episodes &amp; treatment</span></h2><p><span class="hi"><b>सिर्फ़ खांसी, सर्दी या साँस फूलने के दौरे गिनें</b> (सीने/साँस की तकलीफ़)। पेट के इन्फ़ेक्शन जैसे गैस्ट्रोएन्टेराइटिस को न गिनें। संख्या लिखें, पता न हो तो खाली छोड़ें।</span><span class="en"><b>Count only episodes of cough, cold or breathlessness</b> (chest/breathing problems). Do not count stomach infections such as gastroenteritis. Write a number, or leave blank if unknown.</span></p></div></div>
 
     <div class="grid">
-      <div class="fld"><label for="e6"><span class="hi">पिछले 6 महीने में अलग-अलग दौरे</span><span class="en">Separate episodes, past 6 months</span></label><input id="e6" type="number" min="0" inputmode="numeric"></div>
-      <div class="fld"><label for="e12"><span class="hi">पिछले 12 महीने में अलग-अलग दौरे</span><span class="en">Separate episodes, past 12 months</span></label><input id="e12" type="number" min="0" inputmode="numeric"></div>
+      <div class="fld"><label for="e6"><span class="hi">पिछले 6 महीने में खांसी, सर्दी या साँस फूलने के दौरे</span><span class="en">Episodes of cough, cold or breathlessness, past 6 months</span></label><input id="e6" type="number" min="0" inputmode="numeric"></div>
+      <div class="fld"><label for="e12"><span class="hi">पिछले 12 महीने में खांसी, सर्दी या साँस फूलने के दौरे</span><span class="en">Episodes of cough, cold or breathlessness, past 12 months</span></label><input id="e12" type="number" min="0" inputmode="numeric"></div>
       <div class="fld"><label for="er"><span class="hi">पिछले 12 महीने में इमरजेंसी / अर्जेंट-केयर विज़िट</span><span class="en">Emergency / urgent-care visits, past 12 months</span></label><input id="er" type="number" min="0" inputmode="numeric"></div>
       <div class="fld"><label for="adm"><span class="hi">पिछले 12 महीने में अस्पताल में भर्ती</span><span class="en">Hospital admissions, past 12 months</span></label><input id="adm" type="number" min="0" inputmode="numeric"></div>
     </div>
@@ -271,9 +270,9 @@
 
   <!-- SECTION 3 -->
   <section class="card s3">
-    <div class="head"><div class="no">3</div><div><h2><span class="hi">इनहेलर या नेबुलाइज़र से फ़ायदा हुआ?</span><span class="en">Did an inhaler or nebuliser help?</span></h2><p><span class="hi">साँस की तकलीफ़ के समय</span><span class="en">During breathing symptoms</span></p></div></div>
+    <div class="head"><div class="no">3</div><div><h2><span class="hi">नेबुलाइज़र से फ़ायदा हुआ?</span><span class="en">Did a nebuliser help?</span></h2><p><span class="hi">साँस की तकलीफ़ के समय</span><span class="en">During breathing symptoms</span></p></div></div>
 
-    <div class="q"><div class="qt"><span class="qn">11</span><span><span class="hi">क्या इनहेलर या नेबुलाइज़र से बच्चे को आराम मिला?</span><span class="en">Did your child improve after an inhaler or nebulisation?</span></span></div>
+    <div class="q"><div class="qt"><span class="qn">11</span><span><span class="hi">क्या नेबुलाइज़र देने के बाद बच्चे को आराम मिला?</span><span class="en">Did your child improve after a nebuliser treatment?</span></span></div>
       <div class="ch wide" data-group="resp">
         <button data-v="clearly"><span class="hi">हाँ, साफ़ आराम</span><span class="en">YES, CLEARLY</span></button>
         <button data-v="little"><span class="hi">थोड़ा</span><span class="en">A LITTLE</span></button>
@@ -282,25 +281,17 @@
         <button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button>
       </div></div>
 
-    <div class="q"><div class="qt"><span class="qn">12</span><span><span class="hi">कौन सी दवा दी गई थी? (पता हो तो)</span><span class="en">Which medicine was used? (if known)</span></span></div>
-      <div class="ch wide" data-group="med">
-        <button data-v="salb"><span class="hi">Salbutamol / Levolin</span></button>
-        <button data-v="ipra"><span class="hi">Ipratropium</span></button>
-        <button data-v="bud"><span class="hi">Budesonide / Pulmicort</span></button>
-        <button data-v="combo"><span class="hi">मिली-जुली दवा</span><span class="en">Combination</span></button>
-        <button data-v="dk"><span class="hi">पता नहीं</span><span class="en">Don't know</span></button>
+    <div class="q"><div class="qt"><span class="qn">12</span><span><span class="hi">कौन सी दवा दी गई थी? याद हो तो नाम लिखें।</span><span class="en">Which medicine was used? If you remember, please type the name.</span></span></div>
+      <div style="flex:1 1 100%">
+        <div class="fld"><input id="medname" type="text" placeholder="यहाँ दवा का नाम लिखें… / Type the medicine name here…"></div>
+        <div class="ch" data-group="med" style="margin-top:8px"><button data-v="dk"><span class="hi">याद नहीं</span><span class="en">I don't remember</span></button></div>
       </div></div>
 
-    <div class="q"><div class="qt"><span class="qn">13</span><span><span class="hi">आराम कितनी जल्दी मिला?</span><span class="en">How soon did they improve?</span></span></div>
-      <div class="ch wide" data-group="speed">
-        <button data-v="min"><span class="hi">कुछ मिनट में</span><span class="en">Within minutes</span></button>
-        <button data-v="hrs"><span class="hi">कुछ घंटों में</span><span class="en">Over hours</span></button>
-        <button data-v="days"><span class="hi">कुछ दिनों में</span><span class="en">Over days</span></button>
-        <button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">Not sure</span></button>
-      </div></div>
-
-    <div class="q"><div class="qt"><span class="qn">14</span><span><span class="hi">क्या लक्षण वापस लौट आए?</span><span class="en">Did the symptoms come back?</span></span></div>
+    <div class="q"><div class="qt"><span class="qn">13</span><span><span class="hi">क्या लक्षण वापस लौट आए?</span><span class="en">Did the symptoms come back?</span></span></div>
       <div class="ch" data-group="back"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
+
+    <div class="q"><div class="qt"><span class="qn">14</span><span><span class="hi">क्या आपने या परिवार के किसी सदस्य ने पहले कभी इनहेलर या नेबुलाइज़र इस्तेमाल किया है?</span><span class="en">Have you or any family member used an inhaler or nebuliser in the past?</span></span></div>
+      <div class="ch" data-group="inh"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
   </section>
 
   <!-- SECTION 4 -->
@@ -319,7 +310,7 @@
     <div class="q"><div class="qt"><span class="qn">18</span><span><span class="hi">किसी खाने के बाद संभावित एलर्जी (छपाके, सूजन, उल्टी, या साँस की तकलीफ़)?</span><span class="en">Possible food reaction (hives, swelling, vomiting or breathing symptoms after a food)?</span></span></div>
       <div class="ch" data-group="o4"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
 
-    <div class="q"><div class="qt"><span class="qn">19</span><span><span class="hi">बार-बार खर्राटे, मुँह से साँस लेना, या नींद में साँस रुकना?</span><span class="en">Frequent snoring, mouth breathing or pauses in breathing during sleep?</span></span></div>
+    <div class="q"><div class="qt"><span class="qn">19</span><span><span class="hi">बार-बार खर्राटे, मुँह से साँस लेना, या बेचैन नींद?</span><span class="en">Frequent snoring, mouth breathing or restless sleep?</span></span></div>
       <div class="ch" data-group="o5"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
 
     <div class="q"><div class="qt"><span class="qn">20</span><span><span class="hi">बार-बार सीने या पेट में जलन, दूध/खाना ऊपर आना, या बार-बार उल्टी?</span><span class="en">Frequent heartburn, regurgitation or repeated vomiting?</span></span></div>
@@ -334,19 +325,19 @@
     <div class="head"><div class="no">5</div><div><h2><span class="hi">परिवार का इतिहास</span><span class="en">Family history</span></h2><p><span class="hi">लक्षणों के बारे में सोचें, केवल बीमारी के नाम नहीं। बचपन के वे लक्षण भी जो उम्र के साथ ठीक हो गए।</span><span class="en">Please think about symptoms, not only diagnoses. Include childhood symptoms that improved with age.</span></p></div></div>
 
     <div class="fam"><div class="who"><span class="hi">माँ</span><span class="en">Mother</span>
-        <small><span class="hi">क्या कभी घरघराहट, रात या सुबह की खांसी, कसरत या हँसने पर साँस फूलना, या धूल/ठंडी हवा से लक्षण हुए?</span><span class="en">Ever had wheezing, night or early-morning cough, breathlessness with exercise or laughter, or symptoms triggered by dust or cold air?</span></small></div>
+        <small><span class="hi">क्या उन्हें अभी या बचपन में खांसी, छींक, नाक बहना, साइनस आदि जैसे एलर्जी के लक्षण रहे हैं?</span><span class="en">Do they have any allergy symptoms like cough, sneezing, running nose, sinus etc. now or in their childhood?</span></small></div>
       <div class="ch" data-group="fm"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
 
     <div class="fam"><div class="who"><span class="hi">पिता</span><span class="en">Father</span>
-        <small><span class="hi">ऊपर वाले जैसे लक्षण</span><span class="en">Same symptoms as above</span></small></div>
+        <small><span class="hi">क्या उन्हें अभी या बचपन में खांसी, छींक, नाक बहना, साइनस आदि जैसे एलर्जी के लक्षण रहे हैं?</span><span class="en">Do they have any allergy symptoms like cough, sneezing, running nose, sinus etc. now or in their childhood?</span></small></div>
       <div class="ch" data-group="fa"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
 
-    <div class="fam"><div class="who"><span class="hi">भाई-बहन</span><span class="en">Siblings</span>
-        <small><span class="hi">साँस के मिलते-जुलते लक्षण, नाक या आँख की एलर्जी, या एक्ज़िमा?</span><span class="en">Any brother or sister with similar breathing symptoms, nasal or eye allergy, or eczema?</span></small></div>
+    <div class="fam"><div class="who"><span class="hi">भाई या बहन</span><span class="en">Brother or sister</span>
+        <small><span class="hi">क्या उन्हें अभी या बचपन में खांसी, छींक, नाक बहना, साइनस आदि जैसे एलर्जी के लक्षण रहे हैं?</span><span class="en">Do they have any allergy symptoms like cough, sneezing, running nose, sinus etc. now or in their childhood?</span></small></div>
       <div class="ch" data-group="sib"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
 
     <div class="fam"><div class="who"><span class="hi">दादा-दादी / नाना-नानी</span><span class="en">Grandparents</span>
-        <small><span class="hi">माँ या पिता की तरफ़ से, मिलते-जुलते साँस के लक्षण, नाक या आँख की एलर्जी, या एक्ज़िमा?</span><span class="en">Mother's or father's side, with similar breathing symptoms, nasal or eye allergy, or eczema?</span></small></div>
+        <small><span class="hi">माँ या पिता की तरफ़ से। क्या उन्हें अभी या बचपन में खांसी, छींक, नाक बहना, साइनस आदि जैसे एलर्जी के लक्षण रहे हैं?</span><span class="en">Mother's or father's side. Do they have any allergy symptoms like cough, sneezing, running nose, sinus etc. now or in their childhood?</span></small></div>
       <div class="ch" data-group="gp"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
 
     <div class="fld" style="margin:14px 0 8px"><label for="notes"><span class="hi">डॉक्टर को कुछ और बताना चाहते हैं?</span><span class="en">Anything else you want the doctor to know?</span></label>
@@ -377,11 +368,13 @@
 <script>
 (function(){
   var groups = document.querySelectorAll('.ch[data-group]');
-  var TOTAL = groups.length;   // 25 answerable questions
+  var required = Array.prototype.filter.call(groups, function(g){ return g.dataset.group !== 'med'; });
+  var TOTAL = required.length + 1;   // 25 questions: medicine (typed or "don't remember") counts as one
 
   function refresh(){
     var n = 0;
-    groups.forEach(function(g){ if (g.querySelector('button.on')) n++; });
+    required.forEach(function(g){ if (g.querySelector('button.on')) n++; });
+    if (document.getElementById('medname').value.trim() !== '' || document.querySelector('[data-group="med"] button.on')) n++;
     document.getElementById('count').textContent = n + ' / ' + TOTAL;
     document.getElementById('bar').style.width = (n / TOTAL * 100) + '%';
     var s = document.querySelector('[data-group="steroid"] button.on');
@@ -409,11 +402,13 @@
 
   document.getElementById('clearBtn').addEventListener('click', function(){
     if (!confirm('Clear all answers? / सभी जवाब मिटाएँ?')) return;
-    document.querySelectorAll('input,textarea').forEach(function(el){ el.value = ''; });
+    document.querySelectorAll('input:not(#date),textarea').forEach(function(el){ el.value = ''; });
     groups.forEach(function(g){ g.querySelectorAll('button').forEach(function(b){ b.classList.remove('on'); }); });
     refresh();
   });
 
+  document.getElementById('medname').addEventListener('input', refresh);
+  (function(){ var d = new Date(), p = function(n){ return String(n).padStart(2,'0'); }; document.getElementById('date').value = d.getFullYear() + '-' + p(d.getMonth()+1) + '-' + p(d.getDate()); })();
   refresh();
 })();
 </script>
