@@ -357,6 +357,8 @@
 
     <div class="q"><div class="qt"><span class="qn">21</span><span><span class="hi">लगातार गीली खांसी, बार-बार छाती का इन्फ़ेक्शन, दूध पीते समय अटकना, या वज़न कम बढ़ना?</span><span class="en">Persistent wet cough, repeated chest infections, choking during feeds or poor weight gain?</span></span></div>
       <div class="ch" data-group="o7"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
+    <div class="q"><div class="qt"><span class="qn">22</span><span><span class="hi">क्या घर में सीलन (damp), फफूंद (mould), तिलचट्टे (cockroach) या पालतू जानवर हैं?</span><span class="en">Is there damp, mould, cockroaches or a pet at home?</span></span></div>
+      <div class="ch" data-group="env"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
   </section>
 
   <!-- SECTION 5 -->
@@ -505,6 +507,7 @@
     o4:'Hives, swelling or breathing trouble, with or without food',
     o5:'Frequent snoring, mouth breathing or restless sleep',
     o6:'Heartburn, regurgitation or repeated vomiting',
+    env:'Damp, mould, cockroaches or pet at home',
     o7:'Persistent wet cough, repeated chest infections, choking on feeds or poor weight gain'
   };
   var FAM = {fm:'Mother', fa:'Father', sib:'Brother or sister', gp:'Grandparents'};
@@ -600,7 +603,7 @@
   }
 
   // ---------- WhatsApp: summary text + a link that reopens the filled form ----------
-  var FORM_URL = 'https://childspecialistrohini.com/parent-tools/cough-breathing-form.html';
+  var FORM_URL = 'https://childspecialistrohini.com/private-tools/?f=clinic-under5';
   function encodeState(){
     var st = {v: {}, g: {}};
     document.querySelectorAll('.fld input, .fld textarea').forEach(function(el){
@@ -651,7 +654,6 @@
   document.querySelectorAll('.fld input, .fld textarea').forEach(function(el){ el.addEventListener('input', refresh); });
   (function(){ var d = new Date(), p = function(n){ return String(n).padStart(2,'0'); }; document.getElementById('date').value = d.getFullYear() + '-' + p(d.getMonth()+1) + '-' + p(d.getDate()); })();
   if (location.hash.indexOf('#d=') === 0) {
-    document.body.classList.add('clinic');
     try { applyState(decodeState(location.hash.slice(3))); } catch (e) { /* bad link: leave the form empty */ }
   }
   document.getElementById('sumPrintBtn').addEventListener('click', function(){
