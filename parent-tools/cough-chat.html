@@ -115,22 +115,51 @@ function has(s, list){ var n = ' ' + norm(s) + ' '; return list.some(function(w)
 /* ---------- talking and listening (browser speech; optional) ---------- */
 var canSpeak = 'speechSynthesis' in window;
 var SR = window.SpeechRecognition || window.webkitSpeechRecognition || null;
-var rec = null, listening = false;
+var rec = null, listening = false, gotResult = false, retries = 0, talk = !!SR, unclear = 0;
+function listenStatus(on){
+  var n=$('notice');
+  if (on){ n.className='notice'; n.textContent=t('सुन रही हूँ… बोलिए','Listening… please speak'); }
+  else if (n.textContent.indexOf('Listening')===0 || n.textContent.indexOf('सुन रही')===0){ n.className='notice hide'; n.textContent=''; }
+}
+function speakingNow(){ return canSpeak && (speechSynthesis.speaking || speechSynthesis.pending); }
+function waitThenListen(){
+  if (!talk || !SR || !cur || cur.type!=='text') return;
+  var tries=0;
+  (function poll(){
+    if (!cur || cur.type!=='text' || !talk) return;
+    if (listening) return;
+    if (!speakingNow() || tries>=60){ listen(); return; }
+    tries++; setTimeout(poll,300);
+  })();
+}
 function listen(){
-  if (!SR) return;
-  if (listening){ try { rec.stop(); } catch(e){} return; }
+  if (!SR || listening || !talk) return;
   try {
-    rec = new SR();
-    rec.lang = lang==='hi' ? 'hi-IN' : 'en-IN';
-    rec.interimResults = false; rec.maxAlternatives = 1;
-    rec.onresult = function(e){ var txt = e.results[0][0].transcript; $('typeIn').value = txt; submitText(); };
-    rec.onerror = function(){ notice('आवाज़ समझ नहीं आई। लिखें या बटन दबाएँ।','Could not hear that. Please type or tap a button.'); };
-    rec.onend = function(){ listening=false; $('micBtn').textContent='🎤'; };
-    listening = true; $('micBtn').textContent='⏺';
-    rec.start();
+    var my = new SR(); rec = my;
+    my.lang = lang==='hi' ? 'hi-IN' : 'en-IN';
+    my.interimResults = false; my.maxAlternatives = 1; my.continuous = false;
+    var got = false;
+    gotResult = false; listening = true; $('micBtn').textContent='⏺'; listenStatus(true);
+    my.onresult = function(e){ if (rec!==my) return; got=true; gotResult=true; retries=0; listenStatus(false); $('typeIn').value = e.results[0][0].transcript; submitText(); };
+    my.onerror = function(e){
+      if (rec!==my) return;
+      if (e && (e.error==='not-allowed' || e.error==='service-not-allowed')){
+        talk=false; listenStatus(false);
+        notice('माइक्रोफ़ोन की अनुमति नहीं है। लिखकर या बटन से जवाब दें।','Microphone is not allowed. Please type or tap a button.');
+      }
+    };
+    my.onend = function(){
+      if (rec!==my) return;
+      listening=false; $('micBtn').textContent='🎤'; listenStatus(false);
+      if (!got && talk && cur && cur.type==='text' && retries<4){ retries++; setTimeout(waitThenListen, 400); }
+    };
+    my.start();
   } catch(e){ listening=false; $('micBtn').textContent='🎤'; }
 }
-$('micBtn').addEventListener('click', listen);
+$('micBtn').addEventListener('click', function(){
+  if (listening){ try { rec.stop(); } catch(e){} return; }
+  talk=true; retries=0; listen();
+});
 function chooseLang(l){ setLang(l); voiceOn = canSpeak; setLang(l); start(); }
 
 /* ---------- typed-answer understanding (Hindi, English, mixed) ---------- */
@@ -250,6 +279,8 @@ function speak(text,l){
     var v = vs.filter(function(x){return x.lang===u.lang;})[0] || vs.filter(function(x){return x.lang.indexOf(u.lang.slice(0,2))===0;})[0];
     if (v) u.voice=v;
     u.onerror = function(e){ if (e && e.error !== 'interrupted' && e.error !== 'canceled') notice('आवाज़ नहीं चल पाई। फ़ोन की आवाज़ (volume) जाँचें, या Chrome / Safari में खोलें।','Voice did not play. Check the phone volume, or open in Chrome or Safari.'); };
+    var started=false; u.onstart=function(){ started=true; };
+    setTimeout(function(){ if (!started && !speechSynthesis.speaking && !speechSynthesis.pending){ notice('फ़ोन ने आवाज़ शुरू नहीं की। वॉल्यूम जाँचें, या Chrome / Safari में खोलें।','Your phone did not start the voice. Check the volume, or open in Chrome or Safari.'); } }, 2500);
     try { speechSynthesis.resume(); } catch(e){}
     speechSynthesis.speak(u);
   } catch(e){ notice('इस फ़ोन पर आवाज़ सुविधा उपलब्ध नहीं है।','Voice is not available on this phone.'); }
@@ -275,12 +306,14 @@ function controls(spec){
     setTimeout(function(){ inp.focus(); },50);
   }
   if (spec.extra) spec.extra();
+  if (spec.type==='text') waitThenListen();
 }
 $('typeGo').addEventListener('click', submitText);
 $('typeIn').addEventListener('keydown', function(e){ if(e.key==='Enter') submitText(); });
 function submitText(){
   if (!cur || cur.type!=='text') return;
   var v=$('typeIn').value.trim(); if(!v) return;
+  if (listening){ try { rec.abort(); } catch(e){} listening=false; listenStatus(false); }
   $('typeIn').value=''; me(v);
   if (EMERG.test(v)) {
     notice('अगर साँस में बहुत तकलीफ़ है, होंठ नीले हैं, बच्चा बहुत सुस्त है या बोल नहीं पा रहा, तो अभी नज़दीकी अस्पताल जाएँ या 112 पर कॉल करें।','If the child is struggling to breathe, has blue lips, is very drowsy or cannot speak, go to the nearest hospital now or call 112.',true);
@@ -470,9 +503,12 @@ function answer(v){
     if (typeof v==='string') val = parseMed(v);
   }
   if (val===null || val===undefined){
-    say('माफ़ कीजिए, मैं समझ नहीं पाई। बटन दबाएँ, या "हाँ", "नहीं" या "पता नहीं" लिखें।','Sorry, I did not understand. Please tap a button, or type yes, no or not sure.');
+    unclear++;
+    if (unclear >= 3){ talk=false; listenStatus(false); notice('आवाज़ से समझ नहीं आ रहा। कृपया लिखें या बटन दबाएँ। (🎤 दबाकर फिर बोल सकते हैं)','Voice is not clear. Please type or tap a button. (Tap 🎤 to speak again)'); unclear=0; }
+    else say('माफ़ कीजिए, मैं समझ नहीं पाई। बटन दबाएँ, या "हाँ", "नहीं" या "पता नहीं" लिखें।','Sorry, I did not understand. Please tap a button, or type yes, no or not sure.');
     return ask();
   }
+  unclear = 0;
   apply(it, val);
   if (mode==='asking'){ hist.push(idx); idx = nextIdx(idx+1); return ask(); }
   var nxt=-1; for (var i=0;i<items.length;i++){ if (applicable(items[i]) && !answered(items[i])){ nxt=i; break; } }
