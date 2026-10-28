@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Child's Breathing &amp; Cough History (Age 6–12) · Dr. Dinesh Mittal</title>
+<meta name="description" content="Breathing and cough history form for children aged 6 to 12 years, by Dr. Dinesh Mittal, Child Specialist, Rohini, Delhi. Print it and bring it to the visit.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anek+Devanagari:wght@500;600;700;800&display=swap">
+<style>
+  :root{
+    --indigo:#2a2580; --pink:#e2457a; --turmeric:#f5ad1b; --teal:#0f9b8e; --sky:#2f8fe0;
+    --grape:#8b4fd6; --green:#2f8f3a; --red:#c62840;
+    --bg:#f6f5fc; --surface:#fff; --ink:#1d1b3a; --muted:#5d5a7a; --line:#e3e1f0;
+    --font:'Anek Devanagari',system-ui,-apple-system,'Segoe UI',sans-serif;
+  }
+  *{box-sizing:border-box}
+  .hi,.en{display:block}
+  .ch.wide button .hi,.ch.wide button .en{display:inline}
+  .ch.wide button{flex-direction:row}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:17px;line-height:1.5;
+       padding-bottom:env(safe-area-inset-bottom,0px)}
+  .app{max-width:760px;margin:0 auto;padding:14px 14px 40px;display:flex;flex-direction:column;gap:14px}
+  p{margin:0}
+
+  /* Language switch + sticky progress */
+  .top{position:sticky;top:0;z-index:20;background:rgba(246,245,252,.96);backdrop-filter:blur(6px);
+       margin:-14px -14px 0;padding:10px 14px;border-bottom:1px solid var(--line)}
+  .switch{display:flex;gap:6px;justify-content:center;margin-bottom:8px}
+  .switch button{font:inherit;font-size:14px;font-weight:700;padding:7px 14px;border-radius:99px;border:2px solid var(--indigo);
+                 background:#fff;color:var(--indigo);cursor:pointer}
+  .switch button[aria-pressed="true"]{background:var(--indigo);color:#fff}
+  .prog-row{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-bottom:5px}
+  .bar{height:8px;border-radius:99px;background:#e4e1f5;overflow:hidden}
+  .bar span{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--teal),var(--sky),var(--grape));transition:width .3s}
+
+  /* Hero */
+  .hero{position:relative;overflow:hidden;border-radius:22px;padding:22px 20px;color:#fff;
+        background:linear-gradient(135deg,var(--indigo) 0%,var(--grape) 60%,var(--pink) 130%);
+        box-shadow:0 12px 30px rgba(42,37,128,.25)}
+  .hero::after{content:"";position:absolute;right:-50px;top:-50px;width:190px;height:190px;border-radius:50%;background:rgba(255,255,255,.1)}
+  .hero::before{content:"";position:absolute;left:-30px;bottom:-60px;width:150px;height:150px;border-radius:50%;background:rgba(245,173,27,.25)}
+  .clinic{font-size:14px;font-weight:700;opacity:.95}
+  .clinic span{display:block;font-weight:500;font-size:13px;opacity:.9}
+  .hero h1{margin:12px 0 4px;font-size:clamp(23px,5vw,31px);line-height:1.2;font-weight:800;position:relative;z-index:1}
+  .hero .sub{font-size:15.5px;opacity:.95;position:relative;z-index:1}
+  .chip{display:inline-block;margin-top:12px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);
+        padding:4px 12px;border-radius:99px;font-size:13.5px;position:relative;z-index:1}
+
+  /* How to answer */
+  .how{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}
+  .how div{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px;font-size:14.5px;color:var(--muted)}
+  .how b{display:block;color:var(--ink);font-size:15px}
+
+  /* Cards */
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px 18px 6px;
+        box-shadow:0 1px 2px rgba(29,27,58,.05);--c:var(--indigo)}
+  .head{display:flex;gap:12px;align-items:center;margin-bottom:6px}
+  .no{flex:0 0 auto;width:42px;height:42px;border-radius:13px;background:var(--c);color:#fff;display:grid;place-items:center;font-weight:800;font-size:19px}
+  .head h2{margin:0;font-size:19px;line-height:1.3;font-weight:800}
+  .head p{margin:2px 0 0;font-size:14px;color:var(--muted)}
+  .card.s1{--c:var(--sky)} .card.s2{--c:var(--turmeric)} .card.s3{--c:var(--teal)}
+  .card.s4{--c:var(--grape)} .card.s5{--c:var(--pink)} .card.s0{--c:var(--indigo)}
+
+  /* Questions */
+  .q{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;justify-content:space-between;padding:14px 0;border-top:1px solid #efedf7}
+  .q:first-of-type{border-top:none}
+  .qt{flex:1 1 280px;display:flex;gap:10px;align-items:flex-start;font-size:16px}
+  .qn{flex:0 0 auto;width:27px;height:27px;border-radius:50%;background:color-mix(in srgb,var(--c) 18%,#fff);color:var(--c);
+      font-weight:800;font-size:13.5px;display:grid;place-items:center;margin-top:1px}
+  .qt small{display:block;color:var(--muted);font-size:14px}
+
+  /* Choices */
+  .ch{display:flex;gap:8px;flex-wrap:wrap}
+  .ch button{font:inherit;min-width:86px;padding:8px 12px;border-radius:13px;border:2px solid var(--line);background:#fff;color:#33304f;cursor:pointer;
+             display:flex;flex-direction:column;align-items:center;line-height:1.2;transition:transform .12s,background .15s}
+  .ch button:active{transform:scale(.97)}
+  .ch button:focus-visible{outline:3px solid var(--turmeric);outline-offset:2px}
+  .ch button .en{font-size:12.5px;font-weight:600;opacity:.8}
+  .ch button .hi{font-size:15px;font-weight:700}
+  .ch button.on{background:var(--indigo);border-color:var(--indigo);color:#fff}
+  .ch button.on[data-v="yes"]{background:var(--green);border-color:var(--green)}
+  .ch button.on[data-v="no"]{background:var(--red);border-color:var(--red)}
+  .ch button.on[data-v="unsure"]{background:#b7791f;border-color:#b7791f}
+  .ch.wide button{flex:1 1 auto;min-width:0;flex-direction:row;gap:6px;justify-content:center;align-items:baseline;padding:10px 12px}
+  .ch.wide button .en,.ch.wide button .hi{font-size:14.5px}
+
+  /* Fields */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:8px 0 6px}
+  .fld label{display:block;font-size:14px;font-weight:700;color:var(--muted);margin-bottom:5px}
+  .fld input,.fld textarea{width:100%;font:inherit;font-size:16px;padding:10px 12px;border:1.5px solid var(--line);border-radius:12px;background:#fcfcff;color:var(--ink)}
+  .fld input:focus,.fld textarea:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(15,155,142,.18);background:#fff}
+  .fld textarea{min-height:90px;resize:vertical}
+  .sub-block{background:#faf9ff;border:1.5px dashed #c9c4e8;border-radius:14px;padding:12px 14px;margin:10px 0 14px}
+  .sub-block .t{font-size:14.5px;font-weight:700;margin-bottom:6px}
+  .hide{display:none!important}
+  .clinic-only{display:none!important}
+  body.clinic .clinic-only{display:block!important}
+  @media print{ body:not(.clinic) .clinic-only{display:none!important} }
+
+  /* Family */
+  .fam{padding:13px 0;border-top:1px solid #efedf7}
+  .fam:first-of-type{border-top:none}
+  .fam .who{font-weight:700;margin-bottom:8px}
+  .fam .who small{display:block;font-weight:500;color:var(--muted);font-size:14px}
+
+  .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .btn{font:inherit;font-weight:700;padding:12px 20px;border-radius:13px;border:none;cursor:pointer;background:var(--indigo);color:#fff}
+  .btn.ghost{background:#fff;color:var(--indigo);border:2px solid var(--indigo)}
+
+  .note{font-size:14px;color:var(--muted);background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 16px}
+  .note b{color:var(--ink)}
+  footer{text-align:center;color:var(--muted);font-size:13.5px;padding-top:6px}
+  footer b{display:block;font-size:16px;color:var(--indigo)}
+  footer a{color:var(--indigo);font-weight:700}
+  .print-head{display:none}
+
+  /* Language modes */
+  body.only-en .hi{display:none!important}
+  body.only-hi .en{display:none!important}
+
+  /* Print: clean A4 with clinic header and brand domain */
+  @page{size:A4;margin:12mm}
+  @media print{
+    body{background:#fff;font-size:12px}
+    .app{max-width:none;padding:0;gap:9px}
+    .top,.btns{display:none!important}
+    .print-head{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2px solid var(--indigo);padding-bottom:6px;margin-bottom:4px}
+    .print-head b{font-size:15px;color:var(--indigo)}
+    .print-head span{font-size:10.5px;color:var(--muted);text-align:right}
+    .hero,.card,.note,.ch button.on{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .hero{box-shadow:none;border-radius:12px;padding:12px 14px}
+    .hero .chip{display:none}
+    .hero h1{font-size:19px;margin:4px 0 0}
+    .how{display:none}
+    .card{box-shadow:none;break-inside:avoid;page-break-inside:avoid;padding:10px 12px 2px;border-radius:10px;margin:0}
+    .head{margin-bottom:2px}
+    .no{width:28px;height:28px;font-size:14px;border-radius:9px}
+    .head h2{font-size:14px}
+    .head p{font-size:11px}
+    .q{padding:6px 0}
+    .qt{font-size:12.5px}
+    .qn{width:20px;height:20px;font-size:11px}
+    .ch button{min-width:0;padding:3px 7px;border-width:1.3px;border-radius:8px}
+    .ch button .en{font-size:9.5px}
+    .ch button .hi{font-size:11.5px}
+    .ch.wide button{padding:3px 6px}
+    .ch.wide button .en,.ch.wide button .hi{font-size:11px}
+    .fld input,.fld textarea{font-size:12px;padding:5px 7px}
+    .fld label{font-size:11px}
+    .fld textarea{min-height:40px}
+    .grid{gap:6px;margin:4px 0}
+    .fam{padding:6px 0}
+    .fam .who{margin-bottom:4px;font-size:12px}
+    .fam .who small{font-size:10.5px}
+    .sub-block{padding:6px 8px;margin:6px 0}
+    footer{padding-top:2px;font-size:10.5px}
+    footer b{font-size:12px}
+    .note{font-size:10.5px;padding:6px 8px}
+  }
+  @media (max-width:520px){
+    .card{padding:16px 13px 6px}
+    .ch button{flex:1 1 30%;min-width:0}
+    .ch.wide button{flex:1 1 45%}
+  }
+  /* Doctor summary + WhatsApp option */
+  .sumcard{background:#fff;border:1.5px solid var(--indigo);border-radius:18px;padding:16px 18px;margin-top:14px}
+  .sumcard h2{margin:0;font-size:18px;color:var(--indigo);font-weight:800}
+  .sumcard .sumhead{font-size:13px;color:var(--muted);margin:4px 0 12px}
+  .sumgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .sumbox{border-radius:12px;padding:10px 12px;background:#fafaff;border:1px solid var(--line)}
+  .sumbox.full{grid-column:1/-1}
+  .sumbox h3{margin:0 0 6px;font-size:14px;font-weight:800}
+  .sumbox ul{margin:0;padding-left:18px;font-size:14px}
+  .sumbox li{margin:2px 0}
+  .sumbox li.none{color:var(--muted);font-style:italic;list-style:none;margin-left:-18px}
+  .sumbox.pos{border-color:#f3c9d5}.sumbox.pos h3{color:var(--pink)}
+  .sumbox.neg{border-color:#c9e9d3}.sumbox.neg h3{color:var(--green)}
+  .sumbox.unk{border-color:#fde5b8}.sumbox.unk h3{color:#a16207}
+  .sendopt{flex:1 1 100%;font-size:14px;color:var(--muted);text-align:center;margin:0 0 4px}
+  .btn.wa{background:#25d366;color:#fff}
+  @media (max-width:520px){ .sumgrid{grid-template-columns:1fr} }
+  @media print{
+    .sumcard{box-shadow:none;border-color:#777;border-radius:10px;padding:10px 12px;margin-top:8px;break-inside:auto;page-break-before:always}
+    .sumcard h2{font-size:14px}
+    .sumcard .sumhead{font-size:11px;margin:2px 0 6px}
+    .sumbox{padding:6px 8px}
+    .sumbox h3{font-size:11.5px;margin-bottom:3px}
+    .sumbox ul{font-size:11px}
+    .sumgrid{gap:6px}
+    .sumbox.pos,.sumbox.neg,.sumbox.unk{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  }
+  /* In-page confirmation panels */
+  .confirm{background:#fff;border:2px solid var(--indigo);border-radius:16px;padding:16px 18px;margin-top:14px;box-shadow:0 8px 24px rgba(42,37,128,.15)}
+  .confirm p{margin:0 0 10px;font-size:15px;line-height:1.45}
+  .cbtns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:8px}
+  @media print{ .confirm{display:none!important} }
+  /* Summary-only print (for the patient file) */
+  @media print{
+    body.summary-only .app > :not(.print-head):not(.sumcard){display:none!important}
+    body.summary-only .sumcard{page-break-before:auto}
+  }
+</style>
+<link rel="apple-touch-icon" href="/icons/icon-180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+<script src="/site-nav.js" defer></script>
+</head>
+<body class="only-en">
+<div class="app">
+
+  <!-- Top bar: language + progress (hidden on print) -->
+  <div class="top">
+    <div class="switch" role="group" aria-label="Language">
+      <button type="button" data-lang="en" aria-pressed="true">English</button>
+      <button type="button" data-lang="hi" aria-pressed="false">हिंदी</button>
+    </div>
+    <div class="prog-row"><span><span class="hi">उत्तर दिए गए सवाल</span><span class="en">Questions answered</span></span><span id="count">0 / 25</span></div>
+    <div class="bar"><span id="bar"></span></div>
+  </div>
+
+  <!-- Print-only clinic header -->
+  <div class="print-head">
+    <div><b>Dr. Dinesh Mittal Child Clinic</b><br><span style="font-size:11px;color:var(--ink)">Dr. Dinesh Mittal, MBBS, DCH · DMC/R/00668 · H-34/69, Sector 3, Rohini, Delhi 110085</span></div>
+    <span>+91 81305 21456<br><b style="font-size:11px;color:var(--indigo)">www.drdineshmittal.com</b></span>
+  </div>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="clinic">Dr. Dinesh Mittal · MBBS, DCH<span>Child Specialist · शिशु रोग विशेषज्ञ · Rohini, Delhi</span></div>
+    <h1><span class="hi">बच्चे की साँस और खांसी का इतिहास (6–12 वर्ष)</span><span class="en">Child's Breathing &amp; Cough History (Age 6–12 years)</span></h1>
+    <p class="sub"><span class="hi">6 से 12 साल के बच्चों के लिए। हर सवाल का जवाब दें।</span><span class="en">For children aged 6 to 12 years. Please answer every question.</span></p>
+    <span class="chip"><span class="hi">लगभग 5 मिनट</span><span class="en">Takes about 5 minutes</span></span>
+  </header>
+
+  <!-- How to answer -->
+  <div class="how">
+    <div><b><span class="hi">कैसे भरें</span><span class="en">How to answer</span></b><span class="hi">हर सवाल पर एक जवाब चुनें।</span><span class="en">Tap one answer per question.</span></div>
+    <div><b><span class="hi">पता नहीं?</span><span class="en">Not sure?</span></b><span class="hi">"पता नहीं" चुनें। यह भी सही जवाब है।</span><span class="en">Choose NOT SURE. That is a fine answer.</span></div>
+    <div><b><span class="hi">सुझाव</span><span class="en">Tip</span></b><span class="hi">पिछले कुछ महीनों को याद करें।</span><span class="en">Think about the last few months.</span></div>
+  </div>
+
+  <!-- Child details -->
+  <section class="card s0">
+    <div class="head"><div class="no">👶</div><div><h2><span class="hi">बच्चे की जानकारी</span><span class="en">About your child</span></h2></div></div>
+    <div class="grid">
+      <div class="fld"><label for="cname"><span class="hi">बच्चे का नाम</span><span class="en">Child's name</span></label><input id="cname" type="text"></div>
+      <div class="fld"><label for="age"><span class="hi">उम्र</span><span class="en">Age</span></label><input id="age" type="text" placeholder="e.g. 2 years 4 months"></div>
+      <div class="fld"><label for="date"><span class="hi">तारीख</span><span class="en">Date</span></label><input id="date" type="date"></div>
+      <div class="fld"><label for="phone"><span class="hi">फ़ोन (वैकल्पिक)</span><span class="en">Phone (optional)</span></label><input id="phone" type="tel"></div>
+    </div>
+  </section>
+
+  <section class="card s1">
+    <div class="head"><div class="no">1</div><div><h2><span class="hi">बच्चे के खांसी और साँस के लक्षण</span><span class="en">Your child's cough and breathing</span></h2><p><span class="hi">पिछले 6 महीनों को याद करें</span><span class="en">Think about the last 6 months</span></p></div></div>
+
+    <div class="q"><div class="qt"><span class="qn">1</span><span><span class="hi">क्या बार-बार खांसी, घरघराहट (सीने से सीटी जैसी आवाज़) या साँस लेने में तकलीफ़ होती है?</span><span class="en">Has your child had repeated cough, wheezing (a whistling sound from the chest) or difficulty breathing?</span></span></div>
+      <div class="ch" data-group="s1"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
+    <div class="q"><div class="qt"><span class="qn">2</span><span><span class="hi">क्या लक्षण आते-जाते रहते हैं, और बीच में बच्चा काफ़ी ठीक या पूरी तरह ठीक रहता है?</span><span class="en">Do symptoms come and go, with times when your child is much better or completely well?</span></span></div>
+      <div class="ch" data-group="s2"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
+    <div class="q"><div class="qt"><span class="qn">3</span><span><span class="hi">क्या रात में या सुबह जल्दी खांसी या घरघराहट होती है?</span><span class="en">Does cough or wheeze occur at night or early in the morning?</span></span></div>
+      <div class="ch" data-group="s3"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
+    <div class="q"><div class="qt"><span class="qn">4</span><span><span class="hi">क्या तेज़ खेल (जैसे दौड़ना, कूदना), ज़ोर से हँसने या रोने पर खांसी, घरघराहट या साँस फूलती है?</span><span class="en">Does your child cough, wheeze or become breathless during intense play (such as running or jumping), or intense laughing or crying?</span></span></div>
+      <div class="ch" data-group="s4"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
+    <div class="q"><div class="qt"><span class="qn">5</span><span><span class="hi">क्या ज़्यादातर बार खांसी या साँस की तकलीफ़ सर्दी-ज़ुकाम के 1–2 दिन बाद शुरू होती है?</span><span class="en">Do most episodes start 1–2 days after a cold, runny nose begins?</span></span></div>
+      <div class="ch" data-group="s5"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
+    <div class="q"><div class="qt"><span class="qn">6</span><span><span class="hi">क्या बिना नाक बहे या बिना बुखार के भी खांसी या साँस के लक्षण होते हैं?</span><span class="en">Does your child cough or have breathing symptoms even when there is no runny nose or fever?</span></span></div>
+      <div class="ch" data-group="s6"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
+    <div class="q"><div class="qt"><span class="qn">7</span><span><span class="hi">क्या धूल, धुआँ, प्रदूषण, ठंडी हवा, तेज़ गंध या मौसम बदलने से लक्षण बढ़ते लगते हैं?</span><span class="en">Do dust, smoke, pollution, cold air, strong smells or seasonal changes seem to trigger symptoms?</span></span></div>
+      <div class="ch" data-group="s7"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
+    <div class="q"><div class="qt"><span class="qn">8</span><span><span class="hi">क्या साँस के इन लक्षणों से बच्चे की नींद या खेल में खलल पड़ा है?</span><span class="en">Have breathing symptoms disturbed your child's sleep or play?</span></span></div>
+      <div class="ch" data-group="s8"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
+    <div class="q"><div class="qt"><span class="qn">9</span><span><span class="hi">क्या खांसी एक बार में 10 दिन से ज़्यादा चलती है?</span><span class="en">Has a cough lasted more than 10 days at a time?</span></span></div>
+      <div class="ch" data-group="s9"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
+  </section>
+
+  <section class="card s2">
+    <div class="head"><div class="no">2</div><div><h2><span class="hi">इलाज और अस्पताल</span><span class="en">Episodes &amp; treatment</span></h2><p><span class="hi">संख्या लिखें, पता न हो तो खाली छोड़ें</span><span class="en">Write a number, or leave blank if unknown</span></p></div></div>
+
+    <div class="grid">
+      <div class="fld"><label for="e6"><span class="hi">पिछले 6 महीने में खांसी, सर्दी या साँस फूलने के दौरे</span><span class="en">Episodes of cough, cold or breathlessness, past 6 months</span></label><input id="e6" type="number" min="0" inputmode="numeric"></div>
+      <div class="fld"><label for="e12"><span class="hi">पिछले 12 महीने में खांसी, सर्दी या साँस फूलने के दौरे</span><span class="en">Episodes of cough, cold or breathlessness, past 12 months</span></label><input id="e12" type="number" min="0" inputmode="numeric"></div>
+      <div class="fld"><label for="er"><span class="hi">पिछले 12 महीने में इमरजेंसी / अर्जेंट-केयर विज़िट</span><span class="en">Emergency / urgent-care visits, past 12 months</span></label><input id="er" type="number" min="0" inputmode="numeric"></div>
+      <div class="fld"><label for="adm"><span class="hi">पिछले 12 महीने में अस्पताल में भर्ती</span><span class="en">Hospital admissions, past 12 months</span></label><input id="adm" type="number" min="0" inputmode="numeric"></div>
+      <div class="fld"><label for="abx"><span class="hi">पिछले 12 महीने में छाती के इन्फ़ेक्शन के लिए एंटीबायोटिक कोर्स</span><span class="en">Antibiotic courses for chest infections, past 12 months</span></label><input id="abx" type="number" min="0" inputmode="numeric"></div>
+    </div>
+
+    <div class="q"><div class="qt"><span class="qn">10</span><span><span class="hi">क्या पिछले 12 महीनों में साँस या खांसी की वजह से स्टेरॉयड दवा (जैसे Omnacortil / प्रेडनिसोलोन) दी गई?</span><span class="en">Were oral steroids (e.g. Omnacortil / prednisolone) given for breathing or cough problems in the past 12 months?</span></span></div>
+      <div class="ch" data-group="steroid"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
+    <div class="sub-block hide" id="steroidDetails">
+      <div class="t"><span class="hi">अगर हाँ, तो बताएँ:</span><span class="en">If yes, please tell us:</span></div>
+      <div class="grid">
+        <div class="fld"><label for="courses"><span class="hi">कितने कोर्स</span><span class="en">Number of courses</span></label><input id="courses" type="number" min="0" inputmode="numeric"></div>
+        <div class="fld"><label for="months"><span class="hi">लगभग कौन से महीने</span><span class="en">Approximate month(s)</span></label><input id="months" type="text"></div>
+      </div>
+    </div>
+
+    <div class="q"><div class="qt"><span class="qn">11</span><span><span class="hi">क्या कभी अस्पताल में ऑक्सीजन, ICU या साँस की मशीन (breathing support) की ज़रूरत पड़ी?</span><span class="en">Ever needed oxygen, ICU care or breathing support in hospital?</span></span></div>
+      <div class="ch" data-group="oxygen"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
+  </section>
+
+  <section class="card s3">
+    <div class="head"><div class="no">3</div><div><h2><span class="hi">दवाइयाँ और उनका असर</span><span class="en">Medicines and how they helped</span></h2><p><span class="hi">पिछले इलाज के बारे में बताएँ</span><span class="en">Tell us about past treatment</span></p></div></div>
+
+    <div class="q"><div class="qt"><span class="qn">12</span><span><span class="hi">क्या बच्चे को नेबुलाइज़र दिया गया, इनहेलर दिया गया, या दोनों?</span><span class="en">Has your child been given a nebuliser, an inhaler, or both?</span></span></div>
+      <div class="ch" data-group="dev"><button data-v="neb"><span class="hi">सिर्फ़ नेबुलाइज़र</span><span class="en">NEBULISER ONLY</span></button><button data-v="inh"><span class="hi">सिर्फ़ इनहेलर</span><span class="en">INHALER ONLY</span></button><button data-v="both"><span class="hi">दोनों</span><span class="en">BOTH</span></button><button data-v="never"><span class="hi">कभी नहीं दिया</span><span class="en">NEVER GIVEN</span></button></div></div>
+    <div class="q"><div class="qt"><span class="qn">13</span><span><span class="hi">क्या नेबुलाइज़र देने के बाद बच्चे को आराम मिला?</span><span class="en">Did your child improve after a nebuliser treatment?</span></span></div>
+      <div class="ch" data-group="resp"><button data-v="clearly"><span class="hi">हाँ, साफ़ आराम</span><span class="en">YES, CLEARLY</span></button><button data-v="little"><span class="hi">थोड़ा</span><span class="en">A LITTLE</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="never"><span class="hi">कभी नहीं दिया</span><span class="en">NEVER TRIED</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
+    <div class="q"><div class="qt"><span class="qn">14</span><span><span class="hi">कौन सी दवा दी गई थी? याद हो तो नाम लिखें।</span><span class="en">Which medicine was used? If you remember, please type the name.</span></span></div>
+      <div style="flex:1 1 100%">
+        <div class="fld"><input id="medname" type="text" placeholder="यहाँ दवा का नाम लिखें… / Type the medicine name here…"></div>
+        <div class="ch" data-group="med" style="margin-top:8px"><button data-v="dk"><span class="hi">याद नहीं</span><span class="en">I don't remember</span></button></div>
+      </div></div>
+    <div class="q"><div class="qt"><span class="qn">15</span><span><span class="hi">दवा बंद करने के बाद क्या लक्षण वापस लौट आए?</span><span class="en">After treatment was stopped, did the symptoms come back?</span></span></div>
+      <div class="ch" data-group="back"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div>
+      <div class="fld" style="margin-top:10px"><label for="backdays"><span class="hi">अगर हाँ, तो दवा बंद करने के कितने दिन बाद लक्षण लौटे?</span><span class="en">If yes, how many days after stopping treatment did the symptoms come back?</span></label><input id="backdays" type="number" min="0" inputmode="numeric"></div></div>
+    <div class="q"><div class="qt"><span class="qn">16</span><span><span class="hi">क्या इनहेलर के साथ स्पेसर (chamber) इस्तेमाल होता है?</span><span class="en">Is a spacer (chamber) used with the inhaler?</span></span></div>
+      <div class="ch" data-group="tech"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
+    <div class="fld" style="margin-top:12px"><label for="curmed"><span class="hi">अभी कौन सी दवाइयाँ दी जा रही हैं? (नाम और खुराक)</span><span class="en">Medicines given now (name and dose)</span></label><textarea id="curmed" placeholder="यहाँ लिखें… / Write here…"></textarea></div>
+  </section>
+
+  <section class="card s4">
+    <div class="head"><div class="no">4</div><div><h2><span class="hi">बच्चे के अन्य लक्षण</span><span class="en">Other symptoms in your child</span></h2><p><span class="hi">कोई और परेशानी जो आपने देखी हो</span><span class="en">Any other problems you have noticed</span></p></div></div>
+
+    <div class="q"><div class="qt"><span class="qn">17</span><span><span class="hi">बार-बार छींक, नाक में खुजली, या नाक बहना / बंद रहना?</span><span class="en">Frequent sneezing, itchy nose, or runny / blocked nose?</span></span></div>
+      <div class="ch" data-group="o1"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
+    <div class="q"><div class="qt"><span class="qn">18</span><span><span class="hi">आँखों में खुजली, लाल या पानी आना?</span><span class="en">Itchy, red or watery eyes?</span></span></div>
+      <div class="ch" data-group="o2"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
+    <div class="q"><div class="qt"><span class="qn">19</span><span><span class="hi">एक्ज़िमा या बार-बार खुजली वाले दाने?</span><span class="en">Eczema or repeated itchy skin rash?</span></span></div>
+      <div class="ch" data-group="o3"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
+    <div class="q"><div class="qt"><span class="qn">20</span><span><span class="hi">छपाके (उभरे हुए खुजली वाले दाने), सूजन, या साँस की तकलीफ़ — खाने के साथ हो या बिना खाने के?</span><span class="en">Hives (raised itchy rash), swelling or breathing trouble, with or without food?</span></span></div>
+      <div class="ch" data-group="o4"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
+    <div class="q"><div class="qt"><span class="qn">21</span><span><span class="hi">बार-बार खर्राटे, मुँह से साँस लेना, या बेचैन नींद?</span><span class="en">Frequent snoring, mouth breathing or restless sleep?</span></span></div>
+      <div class="ch" data-group="o5"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
+    <div class="q"><div class="qt"><span class="qn">22</span><span><span class="hi">बार-बार सीने या पेट में जलन, खाना ऊपर आना, या बार-बार उल्टी?</span><span class="en">Frequent heartburn, regurgitation or repeated vomiting?</span></span></div>
+      <div class="ch" data-group="o6"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
+    <div class="q"><div class="qt"><span class="qn">23</span><span><span class="hi">लगातार गीली खांसी, बार-बार छाती का इन्फ़ेक्शन, खाते समय अटकना, या वज़न/लंबाई कम बढ़ना?</span><span class="en">Persistent wet cough, repeated chest infections, choking on food, or poor weight or height gain?</span></span></div>
+      <div class="ch" data-group="o7"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
+  </section>
+
+  <section class="card s5">
+    <div class="head"><div class="no">5</div><div><h2><span class="hi">स्कूल, खेल और घर का माहौल</span><span class="en">School, play and home</span></h2><p><span class="hi">पिछले 4 हफ़्तों के बारे में</span><span class="en">About the last 4 weeks</span></p></div></div>
+
+    <div class="grid">
+      <div class="fld"><label for="school"><span class="hi">पिछले 4 हफ़्तों में स्कूल से कितने दिन छूटे?</span><span class="en">School days missed, past 4 weeks</span></label><input id="school" type="number" min="0" inputmode="numeric"></div>
+    </div>
+
+    <div class="q"><div class="qt"><span class="qn">24</span><span><span class="hi">क्या खांसी या साँस की तकलीफ़ से बच्चा खेल, दौड़ या स्पोर्ट्स में रुकता है?</span><span class="en">Does the cough or breathing trouble stop your child from playing, running or sports?</span></span></div>
+      <div class="ch" data-group="imp"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
+    <div class="q"><div class="qt"><span class="qn">25</span><span><span class="hi">क्या घर या गाड़ी में कोई धूम्रपान करता है?</span><span class="en">Does anyone smoke at home or in the car?</span></span></div>
+      <div class="ch" data-group="smoke"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
+    <div class="q"><div class="qt"><span class="qn">26</span><span><span class="hi">क्या घर में सीलन (damp), फफूंद (mould), तिलचट्टे (cockroach) या पालतू जानवर हैं?</span><span class="en">Is there damp, mould, cockroaches or a pet at home?</span></span></div>
+      <div class="ch" data-group="env"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
+  </section>
+
+  <section class="card s5">
+    <div class="head"><div class="no">6</div><div><h2><span class="hi">परिवार का इतिहास</span><span class="en">Family history</span></h2><p><span class="hi">लक्षणों के बारे में सोचें, केवल बीमारी के नाम नहीं। बचपन के वे लक्षण भी जो उम्र के साथ ठीक हो गए।</span><span class="en">Please think about symptoms, not only diagnoses. Include childhood symptoms that improved with age.</span></p></div></div>
+
+    <div class="fam"><div class="who"><span class="hi">माँ</span><span class="en">Mother</span>
+        <small><span class="hi">क्या उन्हें अभी या बचपन में खांसी, छींक, नाक बहना, साइनस आदि जैसे एलर्जी के लक्षण रहे हैं?</span><span class="en">Do they have any allergy symptoms like cough, sneezing, running nose, sinus etc. now or in their childhood?</span></small></div>
+      <div class="ch" data-group="fm"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
+    <div class="fam"><div class="who"><span class="hi">पिता</span><span class="en">Father</span>
+        <small><span class="hi">क्या उन्हें अभी या बचपन में खांसी, छींक, नाक बहना, साइनस आदि जैसे एलर्जी के लक्षण रहे हैं?</span><span class="en">Do they have any allergy symptoms like cough, sneezing, running nose, sinus etc. now or in their childhood?</span></small></div>
+      <div class="ch" data-group="fa"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
+    <div class="fam"><div class="who"><span class="hi">भाई या बहन</span><span class="en">Brother or sister</span>
+        <small><span class="hi">क्या उन्हें अभी या बचपन में खांसी, छींक, नाक बहना, साइनस आदि जैसे एलर्जी के लक्षण रहे हैं?</span><span class="en">Do they have any allergy symptoms like cough, sneezing, running nose, sinus etc. now or in their childhood?</span></small></div>
+      <div class="ch" data-group="sib"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
+    <div class="fam"><div class="who"><span class="hi">दादा-दादी / नाना-नानी</span><span class="en">Grandparents</span>
+        <small><span class="hi">माँ या पिता की तरफ़ से। क्या उन्हें अभी या बचपन में खांसी, छींक, नाक बहना, साइनस आदि जैसे एलर्जी के लक्षण रहे हैं?</span><span class="en">Mother's or father's side. Do they have any allergy symptoms like cough, sneezing, running nose, sinus etc. now or in their childhood?</span></small></div>
+      <div class="ch" data-group="gp"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
+    <div class="fld" style="margin:14px 0 8px"><label for="notes"><span class="hi">डॉक्टर को कुछ और बताना चाहते हैं?</span><span class="en">Anything else you want the doctor to know?</span></label>
+      <textarea id="notes" placeholder="यहाँ लिखें… / Write here…"></textarea></div>
+  </section>
+
+  <div class="note">
+    <b><span class="hi">ज़रूरी सूचना:</span><span class="en">Please note:</span></b>
+    <span class="hi">यह फ़ॉर्म डॉक्टर को बच्चे की जानकारी समझने में मदद के लिए है। यह डॉक्टर से जाँच का विकल्प नहीं है। बच्चे को साँस लेने में गंभीर तकलीफ़ हो, होंठ या चेहरा नीला दिखे, या बच्चा बहुत सुस्त हो, तो तुरंत नज़दीकी अस्पताल जाएँ।</span>
+    <span class="en">This form helps the doctor understand your child's history. It is not a substitute for a consultation. If your child has severe breathing difficulty, a blue lip or face, or is very drowsy, go to the nearest hospital immediately.</span>
+  </div>
+
+  <!-- Doctor summary: built from the answers; printed, saved and sent with the form -->
+  <section class="sumcard clinic-only" id="summary">
+    <h2>Summary for the doctor · डॉक्टर के लिए सारांश</h2>
+    <div class="sumhead" id="sumhead"></div>
+    <div class="sumgrid">
+      <div class="sumbox pos full"><h3>Positive history (YES)</h3><ul id="s-pos"></ul></div>
+      <div class="sumbox neg"><h3>Negative history (NO)</h3><ul id="s-neg"></ul></div>
+      <div class="sumbox unk"><h3>Not sure / not answered</h3><ul id="s-unk"></ul></div>
+      <div class="sumbox full"><h3>Episodes, severity and treatment</h3><ul id="s-num"></ul></div>
+      <div class="sumbox full"><h3>Family history (allergy symptoms, now or in childhood)</h3><ul id="s-fam"></ul></div>
+      <div class="sumbox full"><h3>Parent's note</h3><ul id="s-note"></ul></div>
+    </div>
+  </section>
+
+  <div class="btns">
+    <p class="sendopt"><span class="hi">प्रिंटर नहीं है? इस फ़ॉर्म को क्लिनिक के WhatsApp पर भेजें। क्लिनिक इसे प्रिंट करके दे देगा। सिर्फ़ तभी भेजें जब आप सहमत हों।</span><span class="en">No printer? Send this form to the clinic WhatsApp and the clinic will print it for you. Send only if you agree.</span></p>
+    <button class="btn wa" type="button" id="waBtn"><span class="hi">💬 क्लिनिक के WhatsApp पर भेजें</span><span class="en">💬 Send to clinic WhatsApp</span></button>
+    <button class="btn ghost" type="button" id="clearBtn"><span class="hi">फ़ॉर्म साफ़ करें</span><span class="en">Clear answers</span></button>
+    <div class="clinic-only" style="margin-top:10px"><button class="btn" type="button" id="sumPrintBtn"><span class="hi">📄 सिर्फ़ सारांश प्रिंट करें (फ़ाइल के लिए)</span><span class="en">📄 Print summary only (for patient file)</span></button></div>
+    <button class="btn" type="button" onclick="window.print()"><span class="hi">🖨️ प्रिंट करें / PDF सेव करें</span><span class="en">🖨️ Print / Save as PDF</span></button>
+  </div>
+
+  <!-- In-page confirmation (replaces the browser popup, which parents mistook for a scam) -->
+  <div class="confirm hide" id="waConfirm" role="dialog" aria-labelledby="waQ">
+    <p id="waQ"><b><span class="hi">क्लिनिक को WhatsApp पर भेजें?</span><span class="en">Send this form to the clinic on WhatsApp?</span></b></p>
+    <p><span class="hi">WhatsApp खुलेगा और संदेश क्लिनिक के नंबर <b>+91 81305 21456</b> पर जाएगा। WhatsApp में <b>Send</b> दबाने तक कुछ नहीं भेजा जाएगा। आप बिना भेजे WhatsApp बंद भी कर सकते हैं।</span><span class="en">WhatsApp will open with a short message to Dr. Dinesh Mittal Child Clinic (<b>+91 81305 21456</b>). Nothing is sent until you tap <b>Send</b> in WhatsApp. You can close WhatsApp without sending.</span></p>
+    <p id="waStatus" class="sendopt" style="font-weight:700;min-height:1em"></p>
+    <div class="cbtns">
+      <button class="btn wa" type="button" id="waYes"><span class="hi">हाँ, WhatsApp खोलें</span><span class="en">Yes, open WhatsApp</span></button>
+      <button class="btn ghost" type="button" id="waNo"><span class="hi">रद्द करें</span><span class="en">Cancel</span></button>
+    </div>
+  </div>
+
+  <div class="confirm hide" id="clearConfirm" role="dialog" aria-labelledby="clrQ">
+    <p id="clrQ"><b><span class="hi">सभी जवाब मिटाएँ?</span><span class="en">Clear all answers?</span></b></p>
+    <div class="cbtns">
+      <button class="btn" type="button" id="clearYes"><span class="hi">हाँ, मिटाएँ</span><span class="en">Yes, clear</span></button>
+      <button class="btn ghost" type="button" id="clearNo"><span class="hi">नहीं, रहने दें</span><span class="en">No, keep</span></button>
+    </div>
+  </div>
+
+  <footer>
+    <b>Dr. Dinesh Mittal Child Clinic</b>
+    Dr. Dinesh Mittal, MBBS, DCH · Delhi Medical Council Reg. No. DMC/R/00668<br>
+    H-34/69, Sector 3, Rohini, Delhi 110085 · Phone: <span style="user-select:all;font-weight:700">+91 81305 21456</span><br>
+    <a href="https://www.drdineshmittal.com">www.drdineshmittal.com</a><br>
+    <span class="hi">यह सामग्री केवल शिक्षा के लिए है और डॉक्टर से परामर्श का विकल्प नहीं।</span>
+    <span class="en">Health education material, not a substitute for consultation.</span>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var groups = document.querySelectorAll('.ch[data-group]');
+  var required = Array.prototype.filter.call(groups, function(g){ return g.dataset.group !== 'med'; });
+  var TOTAL = required.length + 1;   // 25 questions: medicine (typed or "don't remember") counts as one
+
+  function refresh(){
+    buildSummary();
+    var n = 0;
+    required.forEach(function(g){ if (g.querySelector('button.on')) n++; });
+    if (document.getElementById('medname').value.trim() !== '' || document.querySelector('[data-group="med"] button.on')) n++;
+    document.getElementById('count').textContent = n + ' / ' + TOTAL;
+    document.getElementById('bar').style.width = (n / TOTAL * 100) + '%';
+    var s = document.querySelector('[data-group="steroid"] button.on');
+    document.getElementById('steroidDetails').classList.toggle('hide', !(s && s.dataset.v === 'yes'));
+  }
+
+  groups.forEach(function(g){
+    g.addEventListener('click', function(e){
+      var b = e.target.closest('button'); if (!b) return;
+      g.querySelectorAll('button').forEach(function(x){ x.classList.remove('on'); });
+      b.classList.add('on');
+      refresh();
+    });
+  });
+
+  // Language switch
+  document.querySelectorAll('.switch button').forEach(function(b){
+    b.addEventListener('click', function(){
+      var m = b.dataset.lang;
+      document.body.classList.toggle('only-en', m === 'en');
+      document.body.classList.toggle('only-hi', m === 'hi');
+      document.querySelectorAll('.switch button').forEach(function(x){ x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+    });
+  });
+
+  document.getElementById('clearBtn').addEventListener('click', function(){
+    document.getElementById('clearConfirm').classList.remove('hide');
+  });
+  document.getElementById('clearNo').addEventListener('click', function(){
+    document.getElementById('clearConfirm').classList.add('hide');
+  });
+  document.getElementById('clearYes').addEventListener('click', function(){
+    document.getElementById('clearConfirm').classList.add('hide');
+    document.querySelectorAll('input:not(#date),textarea').forEach(function(el){ el.value = ''; });
+    groups.forEach(function(g){ g.querySelectorAll('button').forEach(function(b){ b.classList.remove('on'); }); });
+    refresh();
+  });
+
+  // ---------- Doctor summary and WhatsApp ----------
+  var SYM = {
+    s1:'Repeated cough, wheeze or breathing difficulty',
+    s2:'Symptoms come and go, with well periods in between',
+    s3:'Cough or wheeze at night or early morning',
+    s4:'Cough, wheeze or breathlessness with intense play, laughing or crying',
+    s5:'Episodes start 1–2 days after a cold',
+    s6:'Cough or breathing symptoms without runny nose or fever',
+    s7:'Triggered by dust, smoke, pollution, cold air, smells or season change',
+    s8:'Breathing symptoms disturb sleep or play',
+    s9:'A cough has lasted more than 10 days at a time',
+    o1:'Sneezing, itchy, runny or blocked nose',
+    o2:'Itchy, red or watery eyes',
+    o3:'Eczema or repeated itchy rash',
+    o4:'Hives, swelling or breathing trouble, with or without food',
+    o5:'Frequent snoring, mouth breathing or restless sleep',
+    o6:'Heartburn, regurgitation or repeated vomiting',
+    o7:'Persistent wet cough, repeated chest infections, choking on food or poor growth',
+    imp:'Cough or breathing trouble stops play, running or sports',
+    smoke:'Smoke exposure at home or in the car',
+    env:'Damp, mould, cockroaches or pet at home'
+  };
+  var FAM = {fm:'Mother', fa:'Father', sib:'Brother or sister', gp:'Grandparents'};
+  var RESP = {clearly:'Clear improvement after nebuliser', little:'A little improvement', no:'No improvement', never:'Never tried', unsure:'Not sure'};
+  var YN = {yes:'Yes', no:'No', unsure:'Not sure'};
+  var DEV = {neb:'Nebuliser only', inh:'Inhaler only', both:'Both nebuliser and inhaler', never:'Never given'};
+  function ans(g){ var b = document.querySelector('[data-group="' + g + '"] button.on'); return b ? b.dataset.v : null; }
+  function val(id){ return (document.getElementById(id).value || '').trim(); }
+  function esc(t){ return String(t).replace(/[&<>]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]; }); }
+  function li(t){ return '<li>' + esc(t) + '</li>'; }
+
+  function collect(){
+    var pos = [], neg = [], unk = [];
+    Object.keys(SYM).forEach(function(g){
+      var a = ans(g);
+      if (a === 'yes') pos.push(SYM[g]); else if (a === 'no') neg.push(SYM[g]); else unk.push(SYM[g]);
+    });
+    var num = [];
+    num.push('Episodes, past 6 months: ' + (val('e6') || 'not stated'));
+    num.push('Episodes, past 12 months: ' + (val('e12') || 'not stated'));
+    num.push('Emergency / urgent-care visits, past 12 months: ' + (val('er') || 'not stated'));
+    num.push('Hospital admissions, past 12 months: ' + (val('adm') || 'not stated'));
+    var st = ans('steroid');
+    if (st === 'yes') {
+      var extra = [];
+      if (val('courses')) extra.push(val('courses') + ' course(s)');
+      if (val('months')) extra.push('months: ' + val('months'));
+      num.push('Oral steroids in past 12 months: YES' + (extra.length ? ' (' + extra.join('; ') + ')' : ''));
+    } else {
+      num.push('Oral steroids in past 12 months: ' + (YN[st] || 'not answered'));
+    }
+    num.push('Oxygen / ICU / breathing support in hospital: ' + (YN[ans('oxygen')] || 'not answered'));
+    num.push('Response to nebuliser: ' + (RESP[ans('resp')] || 'not answered'));
+    var med = val('medname');
+    num.push('Medicine used: ' + (med || (ans('med') === 'dk' ? "Don't remember" : 'not answered')));
+    num.push('Symptoms came back after stopping treatment: ' + (YN[ans('back')] || 'not answered') + (val('backdays') ? ' (after ' + val('backdays') + ' day(s))' : ''));
+    num.push('Device given: ' + (DEV[ans('dev')] || 'not answered'));
+    num.push('School days missed, past 4 weeks: ' + (val('school') || 'not stated'));
+    num.push('Antibiotic courses for chest infection, past 12 months: ' + (val('abx') || 'not stated'));
+    num.push('Medicines given now: ' + (val('curmed') || 'not stated'));
+    num.push('Spacer used with inhaler: ' + (YN[ans('tech')] || 'not answered'));
+    var fam = [];
+    Object.keys(FAM).forEach(function(g){ fam.push(FAM[g] + ': ' + (YN[ans(g)] || 'not answered')); });
+    return {pos: pos, neg: neg, unk: unk, num: num, fam: fam};
+  }
+
+  function headLine(){
+    var parts = [val('cname') ? 'Child: ' + val('cname') : 'Child: name not given'];
+    if (val('age')) parts.push('Age: ' + val('age'));
+    if (val('date')) parts.push('Date: ' + val('date'));
+    if (val('phone')) parts.push('Parent phone: ' + val('phone'));
+    return parts.join('  ·  ') + '  ·  Not a diagnosis; for the doctor to review.';
+  }
+
+  function buildSummary(){
+    var d = collect();
+    function fill(id, arr, empty){
+      document.getElementById(id).innerHTML = arr.length ? arr.map(li).join('') : '<li class="none">' + empty + '</li>';
+    }
+    fill('s-pos', d.pos, 'None marked YES');
+    fill('s-neg', d.neg, 'None marked NO');
+    fill('s-unk', d.unk, 'None');
+    fill('s-num', d.num, '—');
+    fill('s-fam', d.fam, '—');
+    fill('s-note', [val('notes') || 'Nothing written'], '—');
+    document.getElementById('sumhead').textContent = headLine();
+  }
+
+  function waText(){
+    var L = [];
+    L.push('*Child breathing & cough history (age 6–12)*');
+    L.push(val('cname') ? 'Child: ' + val('cname') : 'Child: name not given');
+    if (val('date')) L.push('Date: ' + val('date'));
+    L.push('');
+    L.push('Please open the link below and print the one-page summary for Dr. Dinesh Mittal.');
+    return L.join('\n');
+  }
+  function waTextFull(){
+    var d = collect(), L = [];
+    L.push('*Child breathing & cough history (age 6–12)*');
+    L.push(headLine());
+    L.push('');
+    L.push('*POSITIVE (yes):*');
+    (d.pos.length ? d.pos : ['None marked yes']).forEach(function(t){ L.push('• ' + t); });
+    L.push('*NEGATIVE (no):*');
+    (d.neg.length ? d.neg : ['None marked no']).forEach(function(t){ L.push('• ' + t); });
+    L.push('*NOT SURE / not answered:*');
+    (d.unk.length ? d.unk : ['None']).forEach(function(t){ L.push('• ' + t); });
+    L.push('*EPISODES, SEVERITY & TREATMENT:*');
+    d.num.forEach(function(t){ L.push('• ' + t); });
+    L.push('*FAMILY (allergy symptoms, now or in childhood):*');
+    d.fam.forEach(function(t){ L.push('• ' + t); });
+    L.push('*PARENT\'S NOTE:* ' + (val('notes') || 'none'));
+    L.push('');
+    L.push('Please print for Dr. Dinesh Mittal. Dr. Dinesh Mittal Child Clinic, +91 81305 21456');
+    return L.join('\n');
+  }
+
+  // ---------- WhatsApp: summary text + a link that reopens the filled form ----------
+  var FORM_URL = 'https://childspecialistrohini.com/parent-tools/cough-breathing-form-6-12.html';
+  function encodeState(){
+    var st = {v: {}, g: {}};
+    document.querySelectorAll('.fld input, .fld textarea').forEach(function(el){
+      if (el.id && el.value) st.v[el.id] = el.value;
+    });
+    groups.forEach(function(g){
+      var btn = g.querySelector('button.on');
+      if (btn) st.g[g.dataset.group] = btn.dataset.v;
+    });
+    var json = JSON.stringify(st);
+    return btoa(unescape(encodeURIComponent(json))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  }
+  function decodeState(code){
+    var s2 = code.replace(/-/g, '+').replace(/_/g, '/');
+    while (s2.length % 4) s2 += '=';
+    return JSON.parse(decodeURIComponent(escape(atob(s2))));
+  }
+  function applyState(st){
+    Object.keys(st.v || {}).forEach(function(id){
+      var el = document.getElementById(id); if (el) el.value = st.v[id];
+    });
+    Object.keys(st.g || {}).forEach(function(g){
+      var btn = document.querySelector('[data-group="' + g + '"] button[data-v="' + st.g[g] + '"]');
+      if (btn) btn.click();
+    });
+    refresh();
+  }
+
+  function sendWA(){
+    var box = document.getElementById('waConfirm');
+    document.getElementById('waStatus').textContent = '';
+    box.classList.remove('hide');
+    box.scrollIntoView({behavior: 'smooth', block: 'center'});
+  }
+  document.getElementById('waYes').addEventListener('click', function(){
+    var st = document.getElementById('waStatus');
+    var text = waText() + '\n\n' + FORM_URL + '#d=' + encodeState();
+    var wa = 'https://wa.me/918130521456?text=' + encodeURIComponent(text);
+    window.open(wa, '_blank', 'noopener');   // opened directly from the tap, so browsers allow it
+    st.innerHTML = 'WhatsApp खुल रहा है… / Opening WhatsApp… <a href="' + wa + '" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">WhatsApp खोलें / Open WhatsApp</a>';
+  });
+  document.getElementById('waNo').addEventListener('click', function(){
+    document.getElementById('waConfirm').classList.add('hide');
+  });
+
+  document.getElementById('medname').addEventListener('input', refresh);
+  document.getElementById('waBtn').addEventListener('click', sendWA);
+  document.querySelectorAll('.fld input, .fld textarea').forEach(function(el){ el.addEventListener('input', refresh); });
+  (function(){ var d = new Date(), p = function(n){ return String(n).padStart(2,'0'); }; document.getElementById('date').value = d.getFullYear() + '-' + p(d.getMonth()+1) + '-' + p(d.getDate()); })();
+  if (location.hash.indexOf('#d=') === 0) {
+    try { applyState(decodeState(location.hash.slice(3))); } catch (e) { /* bad link: leave the form empty */ }
+  }
+  document.getElementById('sumPrintBtn').addEventListener('click', function(){
+    buildSummary();
+    document.body.classList.add('summary-only');
+    window.print();
+  });
+  window.addEventListener('afterprint', function(){ document.body.classList.remove('summary-only'); });
+  // Open in the language given by the link: ?lang=en or ?lang=hi (default English)
+  var urlLang = new URLSearchParams(location.search).get('lang');
+  if (urlLang === 'en' || urlLang === 'hi') {
+    document.querySelector('.switch button[data-lang="' + urlLang + '"]').click();
+  }
+  refresh();
+})();
+</script>
+</body>
+</html>
