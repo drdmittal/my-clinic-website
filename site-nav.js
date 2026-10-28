@@ -34,8 +34,7 @@
     { k: 'visit', href: '/#visit', en: 'Timings & map', hi: 'समय और पता', c: '#2f8fe0' },
     { k: 'call', href: 'tel:+918130521456', en: 'Call', hi: 'कॉल', c: '#3c9d3c' },
     { k: 'review', href: 'https://g.page/r/CZbdcrNILSkGEBM/review', en: 'Review us on Google', hi: 'Google पर समीक्षा', c: '#c77d00', ext: true },
-    { k: 'wa', href: 'https://wa.me/918130521456', en: 'WhatsApp', hi: 'WhatsApp', c: '#1fae5b', ext: true },
-    { k: 'lock', href: '/private-tools/', en: 'Clinic login', hi: 'डॉक्टर लॉगिन', c: '#5d5a7a' }
+    { k: 'wa', href: 'https://wa.me/918130521456', en: 'WhatsApp', hi: 'WhatsApp', c: '#1fae5b', ext: true }
   ];
 
   var css = '' +
