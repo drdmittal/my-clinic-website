@@ -96,6 +96,8 @@
   .sub-block{background:#faf9ff;border:1.5px dashed #c9c4e8;border-radius:14px;padding:12px 14px;margin:10px 0 14px}
   .sub-block .t{font-size:14.5px;font-weight:700;margin-bottom:6px}
   .hide{display:none!important}
+  .clinic-only{display:none!important}
+  body.clinic .clinic-only{display:block!important}
 
   /* Family */
   .fam{padding:13px 0;border-top:1px solid #efedf7}
@@ -323,11 +325,12 @@
         <div class="ch" data-group="med" style="margin-top:8px"><button data-v="dk"><span class="hi">याद नहीं</span><span class="en">I don't remember</span></button></div>
       </div></div>
 
-    <div class="q"><div class="qt"><span class="qn">13</span><span><span class="hi">क्या लक्षण वापस लौट आए?</span><span class="en">Did the symptoms come back?</span></span></div>
-      <div class="ch" data-group="back"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
+    <div class="q"><div class="qt"><span class="qn">13</span><span><span class="hi">दवा बंद करने के बाद क्या लक्षण वापस लौट आए?</span><span class="en">After treatment was stopped, did the symptoms come back?</span></span></div>
+      <div class="ch" data-group="back"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div>
+      <div class="fld" style="margin-top:10px"><label for="backdays"><span class="hi">अगर हाँ, तो दवा बंद करने के कितने दिन बाद लक्षण लौटे?</span><span class="en">If yes, how many days after stopping treatment did the symptoms come back?</span></label><input id="backdays" type="number" min="0" inputmode="numeric"></div></div>
 
-    <div class="q"><div class="qt"><span class="qn">14</span><span><span class="hi">क्या आपने या परिवार के किसी सदस्य ने पहले कभी इनहेलर या नेबुलाइज़र इस्तेमाल किया है?</span><span class="en">Have you or any family member used an inhaler or nebuliser in the past?</span></span></div>
-      <div class="ch" data-group="inh"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
+    <div class="q"><div class="qt"><span class="qn">14</span><span><span class="hi">क्या आपने या परिवार के किसी सदस्य ने पहले कभी नेबुलाइज़र, इनहेलर, या दोनों इस्तेमाल किए हैं?</span><span class="en">Have you or any family member used a nebuliser, an inhaler, or both in the past?</span></span></div>
+      <div class="ch" data-group="inh"><button data-v="neb"><span class="hi">सिर्फ़ नेबुलाइज़र</span><span class="en">NEBULISER ONLY</span></button><button data-v="inh"><span class="hi">सिर्फ़ इनहेलर</span><span class="en">INHALER ONLY</span></button><button data-v="both"><span class="hi">दोनों</span><span class="en">BOTH</span></button><button data-v="never"><span class="hi">कभी नहीं</span><span class="en">NEVER</span></button></div></div>
   </section>
 
   <!-- SECTION 4 -->
@@ -343,7 +346,7 @@
     <div class="q"><div class="qt"><span class="qn">17</span><span><span class="hi">एक्ज़िमा या बार-बार खुजली वाले दाने?</span><span class="en">Eczema or repeated itchy skin rash?</span></span></div>
       <div class="ch" data-group="o3"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
 
-    <div class="q"><div class="qt"><span class="qn">18</span><span><span class="hi">किसी खाने के बाद संभावित एलर्जी (छपाके, सूजन, उल्टी, या साँस की तकलीफ़)?</span><span class="en">Possible food reaction (hives, swelling, vomiting or breathing symptoms after a food)?</span></span></div>
+    <div class="q"><div class="qt"><span class="qn">18</span><span><span class="hi">छपाके (उभरे हुए खुजली वाले दाने), सूजन, या साँस की तकलीफ़ — खाने के साथ हो या बिना खाने के?</span><span class="en">Hives (raised itchy rash), swelling or breathing trouble, with or without food?</span></span></div>
       <div class="ch" data-group="o4"><button data-v="yes"><span class="hi">हाँ</span><span class="en">YES</span></button><button data-v="no"><span class="hi">नहीं</span><span class="en">NO</span></button><button data-v="unsure"><span class="hi">पता नहीं</span><span class="en">NOT SURE</span></button></div></div>
 
     <div class="q"><div class="qt"><span class="qn">19</span><span><span class="hi">बार-बार खर्राटे, मुँह से साँस लेना, या बेचैन नींद?</span><span class="en">Frequent snoring, mouth breathing or restless sleep?</span></span></div>
@@ -387,7 +390,7 @@
   </div>
 
   <!-- Doctor summary: built from the answers; printed, saved and sent with the form -->
-  <section class="sumcard" id="summary">
+  <section class="sumcard clinic-only" id="summary">
     <h2>Summary for the doctor · डॉक्टर के लिए सारांश</h2>
     <div class="sumhead" id="sumhead"></div>
     <div class="sumgrid">
@@ -404,7 +407,7 @@
     <p class="sendopt"><span class="hi">प्रिंटर नहीं है? इस फ़ॉर्म को क्लिनिक के WhatsApp पर भेजें। क्लिनिक इसे प्रिंट करके दे देगा। सिर्फ़ तभी भेजें जब आप सहमत हों।</span><span class="en">No printer? Send this form to the clinic WhatsApp and the clinic will print it for you. Send only if you agree.</span></p>
     <button class="btn wa" type="button" id="waBtn"><span class="hi">💬 क्लिनिक के WhatsApp पर भेजें</span><span class="en">💬 Send to clinic WhatsApp</span></button>
     <button class="btn ghost" type="button" id="clearBtn"><span class="hi">फ़ॉर्म साफ़ करें</span><span class="en">Clear answers</span></button>
-    <button class="btn" type="button" id="sumPrintBtn"><span class="hi">📄 सिर्फ़ सारांश प्रिंट करें (फ़ाइल के लिए)</span><span class="en">📄 Print summary only (for patient file)</span></button>
+    <div class="clinic-only" style="margin-top:10px"><button class="btn" type="button" id="sumPrintBtn"><span class="hi">📄 सिर्फ़ सारांश प्रिंट करें (फ़ाइल के लिए)</span><span class="en">📄 Print summary only (for patient file)</span></button></div>
     <button class="btn" type="button" onclick="window.print()"><span class="hi">🖨️ प्रिंट करें / PDF सेव करें</span><span class="en">🖨️ Print / Save as PDF</span></button>
   </div>
 
@@ -499,7 +502,7 @@
     o1:'Sneezing, itchy, runny or blocked nose',
     o2:'Itchy, red or watery eyes',
     o3:'Eczema or repeated itchy rash',
-    o4:'Possible food reaction',
+    o4:'Hives, swelling or breathing trouble, with or without food',
     o5:'Frequent snoring, mouth breathing or restless sleep',
     o6:'Heartburn, regurgitation or repeated vomiting',
     o7:'Persistent wet cough, repeated chest infections, choking on feeds or poor weight gain'
@@ -507,6 +510,7 @@
   var FAM = {fm:'Mother', fa:'Father', sib:'Brother or sister', gp:'Grandparents'};
   var RESP = {clearly:'Clear improvement after nebuliser', little:'A little improvement', no:'No improvement', never:'Never tried', unsure:'Not sure'};
   var YN = {yes:'Yes', no:'No', unsure:'Not sure'};
+  var DEV = {neb:'Nebuliser only', inh:'Inhaler only', both:'Both nebuliser and inhaler', never:'Never used'};
   function ans(g){ var b = document.querySelector('[data-group="' + g + '"] button.on'); return b ? b.dataset.v : null; }
   function val(id){ return (document.getElementById(id).value || '').trim(); }
   function esc(t){ return String(t).replace(/[&<>]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]; }); }
@@ -536,8 +540,8 @@
     num.push('Response to nebuliser: ' + (RESP[ans('resp')] || 'not answered'));
     var med = val('medname');
     num.push('Medicine used: ' + (med || (ans('med') === 'dk' ? "Don't remember" : 'not answered')));
-    num.push('Symptoms came back after treatment: ' + (YN[ans('back')] || 'not answered'));
-    num.push('Inhaler or nebuliser used in the past: ' + (YN[ans('inh')] || 'not answered'));
+    num.push('Symptoms came back after stopping treatment: ' + (YN[ans('back')] || 'not answered') + (val('backdays') ? ' (after ' + val('backdays') + ' day(s))' : ''));
+    num.push('Nebuliser / inhaler used in the past (you or family): ' + (DEV[ans('inh')] || 'not answered'));
     var fam = [];
     Object.keys(FAM).forEach(function(g){ fam.push(FAM[g] + ': ' + (YN[ans(g)] || 'not answered')); });
     return {pos: pos, neg: neg, unk: unk, num: num, fam: fam};
@@ -566,6 +570,15 @@
   }
 
   function waText(){
+    var L = [];
+    L.push('*Child breathing & cough history (under 5)*');
+    L.push(val('cname') ? 'Child: ' + val('cname') : 'Child: name not given');
+    if (val('date')) L.push('Date: ' + val('date'));
+    L.push('');
+    L.push('Please open the link below and print the one-page summary for Dr. Dinesh Mittal.');
+    return L.join('\n');
+  }
+  function waTextFull(){
     var d = collect(), L = [];
     L.push('*Child breathing & cough history (under 5)*');
     L.push(headLine());
@@ -624,7 +637,7 @@
   }
   document.getElementById('waYes').addEventListener('click', function(){
     var st = document.getElementById('waStatus');
-    var text = waText() + '\n\nTo print: open this link and tap Print / Save as PDF\n' + FORM_URL + '#d=' + encodeState();
+    var text = waText() + '\n\n' + FORM_URL + '#d=' + encodeState();
     var wa = 'https://wa.me/918130521456?text=' + encodeURIComponent(text);
     window.open(wa, '_blank', 'noopener');   // opened directly from the tap, so browsers allow it
     st.innerHTML = 'WhatsApp खुल रहा है… / Opening WhatsApp… <a href="' + wa + '" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">WhatsApp खोलें / Open WhatsApp</a>';
@@ -638,6 +651,7 @@
   document.querySelectorAll('.fld input, .fld textarea').forEach(function(el){ el.addEventListener('input', refresh); });
   (function(){ var d = new Date(), p = function(n){ return String(n).padStart(2,'0'); }; document.getElementById('date').value = d.getFullYear() + '-' + p(d.getMonth()+1) + '-' + p(d.getDate()); })();
   if (location.hash.indexOf('#d=') === 0) {
+    document.body.classList.add('clinic');
     try { applyState(decodeState(location.hash.slice(3))); } catch (e) { /* bad link: leave the form empty */ }
   }
   document.getElementById('sumPrintBtn').addEventListener('click', function(){
