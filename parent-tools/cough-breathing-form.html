@@ -194,6 +194,11 @@
   .confirm p{margin:0 0 10px;font-size:15px;line-height:1.45}
   .cbtns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:8px}
   @media print{ .confirm{display:none!important} }
+  /* Summary-only print (for the patient file) */
+  @media print{
+    body.summary-only .app > :not(.print-head):not(.sumcard){display:none!important}
+    body.summary-only .sumcard{page-break-before:auto}
+  }
 </style>
 <link rel="apple-touch-icon" href="/icons/icon-180.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
@@ -399,6 +404,7 @@
     <p class="sendopt"><span class="hi">प्रिंटर नहीं है? इस फ़ॉर्म को क्लिनिक के WhatsApp पर भेजें। क्लिनिक इसे प्रिंट करके दे देगा। सिर्फ़ तभी भेजें जब आप सहमत हों।</span><span class="en">No printer? Send this form to the clinic WhatsApp and the clinic will print it for you. Send only if you agree.</span></p>
     <button class="btn wa" type="button" id="waBtn"><span class="hi">💬 क्लिनिक के WhatsApp पर भेजें</span><span class="en">💬 Send to clinic WhatsApp</span></button>
     <button class="btn ghost" type="button" id="clearBtn"><span class="hi">फ़ॉर्म साफ़ करें</span><span class="en">Clear answers</span></button>
+    <button class="btn" type="button" id="sumPrintBtn"><span class="hi">📄 सिर्फ़ सारांश प्रिंट करें (फ़ाइल के लिए)</span><span class="en">📄 Print summary only (for patient file)</span></button>
     <button class="btn" type="button" onclick="window.print()"><span class="hi">🖨️ प्रिंट करें / PDF सेव करें</span><span class="en">🖨️ Print / Save as PDF</span></button>
   </div>
 
@@ -634,6 +640,12 @@
   if (location.hash.indexOf('#d=') === 0) {
     try { applyState(decodeState(location.hash.slice(3))); } catch (e) { /* bad link: leave the form empty */ }
   }
+  document.getElementById('sumPrintBtn').addEventListener('click', function(){
+    buildSummary();
+    document.body.classList.add('summary-only');
+    window.print();
+  });
+  window.addEventListener('afterprint', function(){ document.body.classList.remove('summary-only'); });
   // Open in the language given by the link: ?lang=en or ?lang=hi (default English)
   var urlLang = new URLSearchParams(location.search).get('lang');
   if (urlLang === 'en' || urlLang === 'hi') {
