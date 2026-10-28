@@ -131,7 +131,7 @@ function listen(){
   } catch(e){ listening=false; $('micBtn').textContent='🎤'; }
 }
 $('micBtn').addEventListener('click', listen);
-function startChat(){ voiceOn = canSpeak; setLang(lang); start(); }
+function chooseLang(l){ setLang(l); voiceOn = canSpeak; setLang(l); start(); }
 
 /* ---------- typed-answer understanding (Hindi, English, mixed) ---------- */
 var UNSURE = ['pata nahi','pata nahin','pta nahi','pata nhi','nahi pata','nahin pata','malum nahi','maloom nahi','malum nahin','maalum nahi','not sure','dont know','don t know','idk','shayad','पता नहीं','पता नही','मालूम नहीं','मालुम नहीं','शायद','याद नहीं','याद नही','pata nahin'];
@@ -411,6 +411,7 @@ function pickPath(y){
     controls(null); return;
   }
   items = DATA[path];
+  document.body.dataset.path = path;
   say('बहुत अच्छा। अब कुछ सवाल। आप किसी भी समय "पीछे" बटन से पिछला सवाल बदल सकते हैं।','Thank you. Now a few questions. You can tap Back at any time to change the previous answer.');
   idx = nextIdx(0); hist=[]; mode='asking';
   ask();
@@ -530,7 +531,14 @@ function sendWA(){
 
 /* ---------- boot ---------- */
 setLang(new URLSearchParams(location.search).get('lang')==='hi' ? 'hi' : 'en');
-controls({type:'none', chips:[{hi:canSpeak?'शुरू करें (बातचीत आवाज़ में सुनाई देगी)':'शुरू करें', en:canSpeak?'Start (the chat will speak)':'Start', cls:'main', on:startChat}]});
+say('कृपया अपनी भाषा चुनें · Please choose your language','कृपया अपनी भाषा चुनें · Please choose your language');
+controls({type:'text', ph:{hi:'English या हिंदी लिखें',en:'Type English or हिंदी'},
+  onText:function(v){
+    var l = /हिंदी|हिन्दी|hindi|\bhi\b/i.test(v) ? 'hi' : (/english|अंग्रेज़ी|अंग्रेजी|angrezi|\ben\b/i.test(v) ? 'en' : null);
+    if (!l){ say('कृपया English या हिंदी लिखें।','Please type English or हिंदी.'); return; }
+    chooseLang(l);
+  },
+  chips:[{hi:'हिंदी',en:'हिंदी',cls:'main',on:function(){chooseLang('hi');}},{hi:'English',en:'English',cls:'main',on:function(){chooseLang('en');}}]});
 })();
 </script>
 </body>
