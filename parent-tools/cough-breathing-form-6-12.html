@@ -90,7 +90,7 @@
   /* Fields */
   .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:8px 0 6px}
   .fld label{display:block;font-size:14px;font-weight:700;color:var(--muted);margin-bottom:5px}
-  .fld input,.fld textarea{width:100%;font:inherit;font-size:16px;padding:10px 12px;border:1.5px solid var(--line);border-radius:12px;background:#fcfcff;color:var(--ink)}
+  .fld input,.fld textarea,.fld select{width:100%;font:inherit;font-size:16px;padding:10px 12px;border:1.5px solid var(--line);border-radius:12px;background:#fcfcff;color:var(--ink)}
   .fld input:focus,.fld textarea:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(15,155,142,.18);background:#fff}
   .fld textarea{min-height:90px;resize:vertical}
   .sub-block{background:#faf9ff;border:1.5px dashed #c9c4e8;border-radius:14px;padding:12px 14px;margin:10px 0 14px}
@@ -247,6 +247,7 @@
     <div class="grid">
       <div class="fld"><label for="cname"><span class="hi">बच्चे का नाम</span><span class="en">Child's name</span></label><input id="cname" type="text"></div>
       <div class="fld"><label for="age"><span class="hi">उम्र</span><span class="en">Age</span></label><input id="age" type="text" placeholder="e.g. 2 years 4 months"></div>
+      <div class="fld"><label for="gender"><span class="hi">लिंग</span><span class="en">Gender</span></label><select id="gender"><option value="">—</option><option value="boy">Boy · लड़का</option><option value="girl">Girl · लड़की</option></select></div>
       <div class="fld"><label for="date"><span class="hi">तारीख</span><span class="en">Date</span></label><input id="date" type="date"></div>
       <div class="fld"><label for="phone"><span class="hi">फ़ोन (वैकल्पिक)</span><span class="en">Phone (optional)</span></label><input id="phone" type="tel"></div>
     </div>
@@ -548,6 +549,7 @@
   function headLine(){
     var parts = [val('cname') ? 'Child: ' + val('cname') : 'Child: name not given'];
     if (val('age')) parts.push('Age: ' + val('age'));
+    if (val('gender')) parts.push('Gender: ' + (val('gender')==='boy' ? 'Boy' : 'Girl'));
     if (val('date')) parts.push('Date: ' + val('date'));
     if (val('phone')) parts.push('Parent phone: ' + val('phone'));
     return parts.join('  ·  ') + '  ·  Not a diagnosis; for the doctor to review.';
@@ -601,7 +603,7 @@
   var FORM_URL = 'https://childspecialistrohini.com/parent-tools/cough-breathing-form-6-12.html';
   function encodeState(){
     var st = {v: {}, g: {}};
-    document.querySelectorAll('.fld input, .fld textarea').forEach(function(el){
+    document.querySelectorAll('.fld input, .fld textarea, .fld select').forEach(function(el){
       if (el.id && el.value) st.v[el.id] = el.value;
     });
     groups.forEach(function(g){
@@ -646,7 +648,7 @@
 
   document.getElementById('medname').addEventListener('input', refresh);
   document.getElementById('waBtn').addEventListener('click', sendWA);
-  document.querySelectorAll('.fld input, .fld textarea').forEach(function(el){ el.addEventListener('input', refresh); });
+  document.querySelectorAll('.fld input, .fld textarea, .fld select').forEach(function(el){ el.addEventListener('input', refresh); });
   (function(){ var d = new Date(), p = function(n){ return String(n).padStart(2,'0'); }; document.getElementById('date').value = d.getFullYear() + '-' + p(d.getMonth()+1) + '-' + p(d.getDate()); })();
   if (location.hash.indexOf('#d=') === 0) {
     try { applyState(decodeState(location.hash.slice(3))); } catch (e) { /* bad link: leave the form empty */ }

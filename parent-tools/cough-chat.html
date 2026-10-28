@@ -84,6 +84,7 @@ var CLINIC_WA = '918130521456';
 
 var $ = function(id){ return document.getElementById(id); };
 var lang = 'en', voiceOn = false;
+var gender = null;
 var pre = readPrefill();                   // {n: name, a: age} from #p=
 var state = {v:{}, g:{}};
 var name = pre.n || '', age = pre.a || '';
@@ -301,28 +302,97 @@ $('voiceBtn').addEventListener('click', function(){
   if (voiceOn) speak(t('बोलकर सुनाने की सुविधा चालू है।','Read aloud is on.'), lang);
 });
 
+var CHATQ = {
+ s1:{en:"Has {N} had repeated cough, wheezing (a whistling sound from the chest) or difficulty breathing?",hi:"क्या {N} को बार-बार खांसी, घरघराहट (सीने से सीटी जैसी आवाज़) या साँस लेने में तकलीफ़ होती है?"},
+ s2:{en:"Do {NS} symptoms come and go, with times when {N} is much better or completely well?",hi:"क्या {N} की खांसी या तकलीफ़ आती-जाती रहती है, और बीच में {N} काफ़ी ठीक या पूरी तरह ठीक [[रहता|रहती]] है?"},
+ s3:{en:"Does {N} have cough or wheeze at night or early in the morning?",hi:"क्या {N} को रात में या सुबह जल्दी खांसी या घरघराहट होती है?"},
+ s4:{en:"Does {N} cough, wheeze or become breathless with intense play, laughing or crying?",hi:"क्या {N} को तेज़ खेल, दौड़ने-कूदने, या ज़ोर से हँसने-रोने पर खांसी, घरघराहट या साँस फूलती है?"},
+ s5:{en:"Do most of {NS} episodes start 1–2 days after a cold?",hi:"क्या ज़्यादातर बार {N} की खांसी या तकलीफ़ सर्दी-ज़ुकाम लगने के 1–2 दिन बाद शुरू होती है?"},
+ s6:{en:"Does {N} cough or have breathing symptoms even without a runny nose or fever?",hi:"क्या बिना नाक बहे या बिना बुखार के भी {N} को खांसी या साँस की तकलीफ़ होती है?"},
+ s7:{en:"Do dust, smoke, pollution, cold air, strong smells or seasonal changes make {NS} symptoms worse?",hi:"क्या धूल, धुआँ, प्रदूषण, ठंडी हवा, तेज़ गंध या मौसम बदलने से {N} की तकलीफ़ बढ़ती है?"},
+ s8:{en:"Do these breathing problems disturb {NS} sleep or play?",hi:"क्या इन साँस की तकलीफ़ों से {N} की नींद या खेल में खलल पड़ता है?"},
+ s9:{en:"Has {NS} cough lasted more than 10 days at a time?",hi:"क्या {N} की खांसी एक बार में 10 दिन से ज़्यादा चलती है?"},
+ steroid:{en:"In the past 12 months, was oral steroid medicine (e.g. Omnacortil / prednisolone) given to {N} for breathing or cough problems?",hi:"क्या पिछले 12 महीनों में {N} को साँस या खांसी की वजह से स्टेरॉयड दवा (जैसे Omnacortil / प्रेडनिसोलोन) दी गई?"},
+ courses:{en:"How many courses?",hi:"कितने कोर्स दिए गए?"},
+ months:{en:"Approximately which month(s)?",hi:"लगभग किन महीनों में?"},
+ oxygen:{en:"Has {N} ever needed oxygen, ICU care or breathing support in hospital?",hi:"क्या कभी {N} को अस्पताल में ऑक्सीजन, ICU या साँस की मशीन (breathing support) की ज़रूरत पड़ी?"},
+ resp:{en:"After nebuliser treatment, did {N} improve?",hi:"नेबुलाइज़र देने के बाद क्या {N} को आराम मिला?"},
+ dev:{en:"Has {N} been given a nebuliser, an inhaler, or both?",hi:"क्या {N} को नेबुलाइज़र दिया गया, इनहेलर दिया गया, या दोनों?"},
+ tech:{en:"Is a spacer (chamber) used with the inhaler?",hi:"क्या इनहेलर के साथ स्पेसर (chamber) इस्तेमाल होता है?"},
+ med:{en:"Which medicine was {N} given? If you remember, please type the name.",hi:"{N} को कौन सी दवा दी गई थी? याद हो तो नाम लिखें।"},
+ curmed:{en:"Which medicines is {N} taking now? (name and dose)",hi:"अभी {N} को कौन सी दवाइयाँ दी जा रही हैं? (नाम और खुराक)"},
+ back:{en:"After treatment was stopped, did {NS} symptoms come back?",hi:"दवा बंद करने के बाद क्या {N} की तकलीफ़ वापस लौट आई?"},
+ backdays:{en:"If yes, how many days after stopping treatment did the symptoms come back?",hi:"अगर हाँ, तो दवा बंद करने के कितने दिन बाद तकलीफ़ लौटी?"},
+ o1:{en:"Does {N} get frequent sneezing, an itchy nose, or a runny or blocked nose?",hi:"क्या {N} को बार-बार छींक आती है, नाक में खुजली होती है, या नाक बहती / बंद रहती है?"},
+ o2:{en:"Are {NS} eyes itchy, red or watery?",hi:"क्या {N} की आँखों में खुजली होती है, या आँखें लाल या पानी वाली रहती हैं?"},
+ o3:{en:"Does {N} have eczema or repeated itchy skin rashes?",hi:"क्या {N} को एक्ज़िमा या बार-बार खुजली वाले दाने होते हैं?"},
+ o4:{en:"Does {N} get hives (raised itchy rash), swelling or breathing trouble, with or without food?",hi:"क्या {N} को छपाके (उभरे हुए खुजली वाले दाने), सूजन, या साँस की तकलीफ़ होती है — खाने के साथ हो या बिना खाने के?"},
+ o5:{en:"Does {N} have frequent snoring, mouth breathing or restless sleep?",hi:"क्या {N} को बार-बार खर्राटे, मुँह से साँस लेने, या बेचैन नींद की शिकायत है?"},
+ o6:{en:"Does {N} have frequent heartburn, regurgitation or repeated vomiting?",hi:"क्या {N} को बार-बार सीने या पेट में जलन, दूध/खाना ऊपर आना, या बार-बार उल्टी होती है?"},
+ o7:{en:"Does {N} have a persistent wet cough, repeated chest infections, choking during feeds, or poor weight or height gain?",hi:"क्या {N} को लगातार गीली खांसी, बार-बार छाती का इन्फ़ेक्शन, खाते समय अटकना, या वज़न/लंबाई कम बढ़ना होता है?"},
+ env:{en:"Is there damp, mould, cockroaches or a pet at home?",hi:"क्या घर में सीलन (damp), फफूंद (mould), तिलचट्टे (cockroach) या पालतू जानवर हैं?"},
+ imp:{en:"Does the cough or breathing trouble stop {N} from playing, running or sports?",hi:"क्या खांसी या साँस की तकलीफ़ से {N} खेल, दौड़ या स्पोर्ट्स में [[रुकता|रुकती]] है?"},
+ smoke:{en:"Does anyone smoke at home or in the car?",hi:"क्या घर या गाड़ी में कोई धूम्रपान करता है?"},
+ school:{en:"In the past 4 weeks, how many school days did {N} miss?",hi:"पिछले 4 हफ़्तों में {N} के स्कूल से कितने दिन छूटे?"},
+ e6:{en:"How many episodes of cough, cold or breathlessness did {N} have in the past 6 months?",hi:"पिछले 6 महीने में {N} को खांसी, सर्दी या साँस फूलने के कितने दौरे आए?"},
+ e12:{en:"How many episodes of cough, cold or breathlessness did {N} have in the past 12 months?",hi:"पिछले 12 महीने में {N} को खांसी, सर्दी या साँस फूलने के कितने दौरे आए?"},
+ er:{en:"How many emergency or urgent-care visits did {N} have in the past 12 months?",hi:"पिछले 12 महीने में {N} को इमरजेंसी या अर्जेंट-केयर में कितनी बार ले जाना पड़ा?"},
+ adm:{en:"How many times was {N} admitted to hospital in the past 12 months?",hi:"पिछले 12 महीने में {N} कितनी बार अस्पताल में भर्ती [[हुआ|हुई]]?"},
+ abx:{en:"How many antibiotic courses were given for chest infections in the past 12 months?",hi:"पिछले 12 महीने में छाती के इन्फ़ेक्शन के लिए {N} को एंटीबायोटिक के कितने कोर्स दिए गए?"},
+ notes:{en:"Anything else you want the doctor to know?",hi:"डॉक्टर को कुछ और बताना चाहते हैं?"}
+};
+
+function fill(s, l){
+  var nm = name || (l==='hi' ? 'आपके बच्चे' : 'your child');
+  var ns = name ? name+"'s" : "your child's";
+  s = s.replace(/\{NS\}/g, l==='en' ? ns : nm).replace(/\{N\}/g, nm);
+  s = s.replace(/\[\[([^|\]]*)\|([^\]]*)\]\]/g, function(m,mas,fem){ return gender==='girl' ? fem : mas; });
+  return s;
+}
+function qkey(it){ return it.kind==='q' || it.kind==='fam' ? it.group : (it.kind==='med' ? 'med' : it.id); }
+function qpair(it){
+  var c = CHATQ[qkey(it)];
+  if (!c || it.kind==='fam') return {hi:it.hi, en:it.en};
+  return {hi:fill(c.hi,'hi'), en:fill(c.en,'en')};
+}
+
 /* ---------- flow ---------- */
 function start(){
-  say('नमस्ते! मैं बच्चे की खांसी और साँस की जानकारी भरने में आपकी मदद करूँगी। इसमें लगभग 5 मिनट लगेंगे। आप बटन दबा सकते हैं, या हिंदी/अंग्रेज़ी में लिख सकते हैं।',
-      'Namaste! I will help you fill in your child\'s cough and breathing history. It takes about 5 minutes. You can tap the buttons, or type in Hindi, English or both.');
+  say('नमस्ते, मैं डॉ. दिनेश मित्तल की असिस्टेंट हूँ। मैं आपके बच्चे की तकलीफ़ के बारे में कुछ जानकारी लेना चाहती हूँ। इससे डॉ. मित्तल को आपके बच्चे की तकलीफ़ पहचानने और आपके बच्चे को सबसे अच्छा इलाज देने में मदद मिलेगी।',
+      'Namaste, I am Dr Dinesh Mittal\'s Assistant. I want to know some history about your child\'s problem. It will help Dr Mittal diagnose your child\'s problem and give your child the best treatment.');
+  say('आप बटन दबा सकते हैं, या हिंदी/अंग्रेज़ी में लिख सकते हैं। इसमें लगभग 5 मिनट लगेंगे।','You can tap the buttons, or type in Hindi or English. It takes about 5 minutes.');
+  continueChild();
+}
+function continueChild(){
   if (!name) return askName();
-  say('बच्चे का नाम: '+name,'Child\'s name: '+name);
   if (!age) return askAge();
-  return confirmAge();
+  if (!gender) return askGender();
+  state.v.cname = name; state.v.age = age; state.v.gender = gender;
+  pickPath(parseAge(age));
 }
 function askName(){
-  say('बच्चे का नाम बताइए।','What is your child\'s name?');
-  controls({type:'text', ph:{hi:'बच्चे का नाम लिखें',en:'Type your child\'s name'}, onText:function(v){ name=v; state.v.cname=v; if (age) return confirmAge(); askAge(); }});
+  say('आपके बच्चे का नाम क्या है?','What is your child\'s name?');
+  controls({type:'text', ph:{hi:'बच्चे का नाम लिखें',en:'Type your child\'s name'}, onText:function(v){ name=v; state.v.cname=v; continueChild(); }});
 }
 function askAge(){
-  say('बच्चे की उम्र कितनी है? जैसे: 3 साल, या 2 साल 4 महीने।','How old is your child? For example: 3 years, or 2 years 4 months.');
+  say(fill('{N} की उम्र कितनी है? जैसे: 3 साल, या 2 साल 4 महीने।','hi')+'', fill('How old is {N}? For example: 3 years, or 2 years 4 months.','en'));
   controls({type:'text', numeric:true, ph:{hi:'जैसे: 3 साल या 2 साल 4 महीने',en:'e.g. 3 years or 2 years 4 months'}, onText:function(v){
-    var y = parseAge(v);
-    if (y===null){ say('माफ़ कीजिए, उम्र समझ नहीं आई। साल में लिखें, जैसे 3 या 7।','Sorry, I did not get the age. Please write it in years, for example 3 or 7.'); return askAge(); }
-    age=v; state.v.age=v; pickPath(y);
+    if (parseAge(v)===null){ say('माफ़ कीजिए, उम्र समझ नहीं आई। साल में लिखें, जैसे 3 या 7।','Sorry, I did not get the age. Please write it in years, for example 3 or 7.'); return askAge(); }
+    age=v; continueChild();
   }});
 }
-function confirmAge(){ state.v.age=age; state.v.cname=name; pickPath(parseAge(age)); }
+function askGender(){
+  say(fill('क्या {N} लड़का है या लड़की?','hi'), fill('Is {N} a boy or a girl?','en'));
+  controls({type:'text', ph:{hi:'लड़का या लड़की लिखें',en:'Type boy or girl'}, onText:onGender,
+    chips:[{hi:'लड़का',en:'Boy',cls:'main',on:function(){onGender('boy');}},{hi:'लड़की',en:'Girl',cls:'main',on:function(){onGender('girl');}}]});
+}
+function onGender(v){
+  var g = /^(boy|girl)$/.test(v) ? v : null;
+  if (!g){ var n=norm(v); if (has(v,['boy','ladka','beta','male','लड़का','बेटा','ladke'])) g='boy'; else if (has(v,['girl','ladki','beti','female','लड़की','बेटी'])) g='girl'; }
+  if (!g){ say('माफ़ कीजिए, लड़का या लड़की लिखें, या बटन दबाएँ।','Sorry, please type boy or girl, or tap a button.'); return askGender(); }
+  gender = g; state.v.gender = g;
+  continueChild();
+}
 function parseAge(s){
   var n=norm(s);
   var y=n.match(/(\d+(\.\d+)?)\s*(y|yr|yrs|year|years|saal|sal|साल|वर्ष)/);
@@ -351,7 +421,7 @@ function ask(){
   var back = hist.length ? [{hi:LBL.back.hi,en:LBL.back.en,on:goBack}] : [];
   if (it.kind==='q' && it.opts.length===3 || it.kind==='fam'){
     var prefix = it.kind==='fam' ? (t(it.who_hi,it.who_en)+': ') : '';
-    say(prefix + t(it.hi,it.en), prefix + it.en);
+    var qq0=qpair(it); say(prefix + qq0.hi, prefix + qq0.en);
     var chips=[{hi:LBL.yes.hi,en:LBL.yes.en,cls:'main',on:function(){answer('yes');}},
                {hi:LBL.no.hi,en:LBL.no.en,on:function(){answer('no');}},
                {hi:LBL.unsure.hi,en:LBL.unsure.en,cls:'ghost',on:function(){answer('unsure');}}].concat(back);
@@ -359,19 +429,19 @@ function ask(){
     return;
   }
   if (it.kind==='q'){
-    say(t(it.hi,it.en), it.en);
+    var qq=qpair(it); say(qq.hi, qq.en);
     var chips2 = it.opts.map(function(o,i){ return {hi:o.hi,en:o.en,cls:i===0?'main':'',on:function(){answer(o.v);}}; }).concat(back);
     controls({type:'text', ph:{hi:'जवाब लिखें या बटन दबाएँ',en:'Type your answer or tap a button'}, onText:function(v){ answer(v); }, chips:chips2});
     return;
   }
   if (it.kind==='med'){
-    say(t(it.hi,it.en), it.en);
+    var qq=qpair(it); say(qq.hi, qq.en);
     controls({type:'text', ph:{hi:'दवा का नाम लिखें',en:'Type the medicine name'}, onText:function(v){ answer(parseMed(v)); },
       chips:[{hi:LBL.dk.hi,en:LBL.dk.en,cls:'ghost',on:function(){answer({dk:true});}}].concat(back)});
     return;
   }
   if (it.kind==='num'){
-    say(t(it.hi,it.en), it.en);
+    var qq=qpair(it); say(qq.hi, qq.en);
     controls({type:'text', numeric:true, ph:{hi:'संख्या लिखें',en:'Type a number'}, onText:function(v){
       var r=parseNum(v);
       if (r===null){ say('माफ़ कीजिए, संख्या समझ नहीं आई। जैसे 2 या 0 लिखें, या छोड़ें दबाएँ।','Sorry, I did not get a number. Please type a number like 2 or 0, or tap Skip.'); return ask(); }
@@ -380,7 +450,7 @@ function ask(){
     return;
   }
   if (it.kind==='text'){
-    say(t(it.hi,it.en), it.en);
+    var qq=qpair(it); say(qq.hi, qq.en);
     controls({type:'text', ph:{hi:'यहाँ लिखें (ज़रूरी नहीं)',en:'Type here (optional)'}, onText:function(v){ answer(v); },
       chips:[{hi:LBL.skip.hi,en:LBL.skip.en,cls:'ghost',on:function(){answer('skip');}}].concat(back)});
     return;
@@ -447,7 +517,7 @@ function encodeState(){
 function sendWA(){
   var code = encodeState();
   var url = FORM[path] + '#d=' + code;
-  var text = '*Child breathing & cough history (chat)*\n' + 'Child: ' + (name||'name not given') + '  ·  Age: ' + (age||'not given') + '\n\nPlease open the link below and paste it in the clinic summary page.\n\n' + url;
+  var text = '*Child breathing & cough history (chat)*\n' + 'Child: ' + (name||'name not given') + '  ·  Age: ' + (age||'not given') + '  ·  ' + (gender==='girl'?'Girl':'Boy') + '\n\nPlease open the link below and paste it in the clinic summary page.\n\n' + url;
   var wa = 'https://wa.me/' + CLINIC_WA + '?text=' + encodeURIComponent(text);
   window.open(wa, '_blank', 'noopener');
   say('भेजने के लिए धन्यवाद। WhatsApp में "Send" दबाएँ। क्लिनिक आपका फ़ॉर्म प्रिंट करेगा।','Thank you. Tap Send in WhatsApp. The clinic will print your form.');
