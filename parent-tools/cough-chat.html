@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Cough &amp; Breathing Chat · Dr. Dinesh Mittal</title>
+<meta name="description" content="Chat to answer your child's cough and breathing questions. Dr. Dinesh Mittal, Child Specialist, Rohini, Delhi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anek+Devanagari:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--indigo:#2a2580;--ink:#1d1b3a;--muted:#6b6890;--line:#e4e1f3;--soft:#f5f4fc;--bot:#ffffff;--me:#e7e4fb;--warn:#fde68a;--warnink:#78350f}
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ink:#f2f1ff;--muted:#b9b6d9;--line:#3a3760;--soft:#1c1a33;--bot:#25233f;--me:#34305e;--warnink:#fde68a;--warn:#5b4a12}}
+  :root[data-theme="dark"]{--ink:#f2f1ff;--muted:#b9b6d9;--line:#3a3760;--soft:#1c1a33;--bot:#25233f;--me:#34305e;--warnink:#fde68a;--warn:#5b4a12}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--soft);color:var(--ink);font-family:'Anek Devanagari',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;font-size:16px;line-height:1.5}
+  .app{max-width:640px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;padding:0 0 12px}
+  header{position:sticky;top:0;background:var(--indigo);color:#fff;padding:12px 16px;z-index:5}
+  header h1{margin:0;font-size:17px;font-weight:800}
+  header small{opacity:.85;font-size:12.5px}
+  .bar{display:flex;gap:8px;align-items:center;justify-content:space-between;margin-top:8px}
+  .switch button,.tools button{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:5px 12px;font:inherit;font-size:13px;font-weight:700;cursor:pointer}
+  .switch button[aria-pressed="true"]{background:#fff;color:var(--indigo)}
+  .prog{height:5px;background:rgba(255,255,255,.25);border-radius:4px;margin-top:10px;overflow:hidden}
+  .prog i{display:block;height:100%;width:0;background:#fff;transition:width .3s}
+  .notice{margin:10px 12px 0;padding:10px 12px;border-radius:12px;background:var(--warn);color:var(--warnink);font-size:13.5px;font-weight:700}
+  .emerg{background:#b91c1c;color:#fff}
+  #log{flex:1;padding:14px 12px 8px;display:flex;flex-direction:column;gap:10px}
+  .b{max-width:88%;padding:10px 14px;border-radius:16px;font-size:16px;white-space:pre-wrap;word-wrap:break-word}
+  .bot{background:var(--bot);border:1px solid var(--line);border-bottom-left-radius:4px;align-self:flex-start}
+  .me{background:var(--me);border-bottom-right-radius:4px;align-self:flex-end}
+  .bot b{color:var(--indigo)}
+  #ctrl{position:sticky;bottom:0;background:var(--soft);padding:10px 12px 14px;border-top:1px solid var(--line)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{border:2px solid var(--indigo);background:var(--bot);color:var(--ink);border-radius:999px;padding:10px 16px;font:inherit;font-weight:700;font-size:15px;cursor:pointer;min-height:44px}
+  .chip.main{background:var(--indigo);color:#fff}
+  .chip.ghost{border-color:var(--line);color:var(--muted);font-weight:600}
+  .typebox{display:flex;gap:8px;margin-top:8px}
+  .typebox input{flex:1;padding:12px;border:1.5px solid var(--line);border-radius:12px;font:inherit;font-size:16px;background:var(--bot);color:var(--ink);min-width:0}
+  .typebox button{padding:0 16px;border:0;border-radius:12px;background:var(--indigo);color:#fff;font:inherit;font-weight:700;cursor:pointer}
+  select{width:100%;padding:10px;border-radius:10px;border:1.5px solid var(--line);font:inherit;font-size:15px;background:var(--bot);color:var(--ink)}
+  .sendbox{margin-top:8px}
+  .foot{font-size:12px;color:var(--muted);padding:10px 14px 0;text-align:center}
+  a{color:var(--indigo)}
+  .hide{display:none!important}
+  body.only-en .hi{display:none!important}
+  body.only-hi .en{display:none!important}
+</style>
+</head>
+<body class="only-en">
+<div class="app">
+  <header>
+    <h1><span class="hi">बच्चे की खांसी और साँस की बातचीत</span><span class="en">Child's Cough &amp; Breathing Chat</span></h1>
+    <small><span class="hi">डॉ. दिनेश मित्तल · शिशु रोग विशेषज्ञ, रोहिणी</span><span class="en">Dr. Dinesh Mittal · Child Specialist, Rohini</span></small>
+    <div class="bar">
+      <div class="switch" role="group" aria-label="Language">
+        <button type="button" data-lang="en" aria-pressed="true">English</button>
+        <button type="button" data-lang="hi" aria-pressed="false">हिंदी</button>
+      </div>
+      <div class="tools"><button type="button" id="voiceBtn" aria-pressed="false">🔊 <span class="en">Read aloud: off</span><span class="hi">बोलकर सुनाएँ: बंद</span></button></div>
+    </div>
+    <div class="prog"><i id="progBar"></i></div>
+  </header>
+  <div id="notice" class="notice hide"></div>
+  <div id="log" aria-live="polite"></div>
+  <div id="ctrl">
+    <div id="chips" class="chips"></div>
+    <div id="typeRow" class="typebox hide">
+      <input id="typeIn" type="text" autocomplete="off">
+      <button id="typeGo" type="button">OK</button>
+    </div>
+    <div id="sendRow" class="sendbox hide"></div>
+  </div>
+  <p class="foot"><span class="hi">यह बातचीत डॉक्टर के लिए जानकारी जमा करती है। यह बीमारी की पहचान नहीं है। आपात स्थिति में तुरंत नज़दीकी अस्पताल जाएँ या 112 पर कॉल करें।</span><span class="en">This chat collects information for the doctor. It is not a diagnosis. In an emergency, go to the nearest hospital now or call 112.</span></p>
+</div>
+<script>
+(function(){
+'use strict';
+var DATA = {"u5": [{"kind": "q", "qn": 1, "hi": "क्या बच्चे को बार-बार खांसी, घरघराहट (सीने से सीटी जैसी आवाज़), या साँस लेने में तकलीफ़ हुई है?", "en": "Has your child had repeated episodes of cough, wheezing (a whistling sound from the chest), or difficulty breathing?", "group": "s1", "opts": [{"v": "yes", "hi": "हाँ", "en": "YES"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "q", "qn": 2, "hi": "क्या लक्षण आते-जाते रहते हैं, और बीच में बच्चा काफ़ी ठीक या पूरी तरह ठीक रहता है?", "en": "Do symptoms come and go, with times when your child is much better or completely well?", "group": "s2", "opts": [{"v": "yes", "hi": "हाँ", "en": "YES"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "q", "qn": 3, "hi": "क्या रात में या सुबह जल्दी खांसी या घरघराहट होती है?", "en": "Does cough or wheeze occur at night or early in the morning?", "group": "s3", "opts": [{"v": "yes", "hi": "हाँ", "en": "YES"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "q", "qn": 4, "hi": "क्या खेलने, हँसने या रोने पर बच्चे को खांसी, घरघराहट या साँस फूलती है? (जैसे: दौड़ना-कूदना जैसा ज़ोर वाला खेल, या ज़ोर से रोना या हँसना।)", "en": "Does your child cough, wheeze or become breathless while playing, laughing or crying? (For example: exertion play such as jumping or running, or intense crying or laughing.)", "group": "s4", "opts": [{"v": "yes", "hi": "हाँ", "en": "YES"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "q", "qn": 5, "hi": "क्या ज़्यादातर बार खांसी, घरघराहट या साँस की तकलीफ़ सर्दी-ज़ुकाम के 1–2 दिन बाद शुरू होती है (नाक बहना शुरू होने के बाद)?", "en": "Do most episodes start after your child catches a cold, usually 1–2 days after the runny nose begins?", "group": "s5", "opts": [{"v": "yes", "hi": "हाँ", "en": "YES"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "q", "qn": 6, "hi": "क्या बिना नाक बहे या बिना बुखार के भी बच्चे को खांसी या साँस के लक्षण होते हैं?", "en": "Does your child cough or have breathing symptoms even when there is no runny nose or viral fever?", "group": "s6", "opts": [{"v": "yes", "hi": "हाँ", "en": "YES"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "q", "qn": 7, "hi": "क्या धूल, धुआँ, प्रदूषण, ठंडी हवा, तेज़ गंध या मौसम बदलने से लक्षण बढ़ते लगते हैं?", "en": "Do dust, smoke, pollution, cold air, strong smells or seasonal changes seem to trigger symptoms?", "group": "s7", "opts": [{"v": "yes", "hi": "हाँ", "en": "YES"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "q", "qn": 8, "hi": "क्या साँस के इन लक्षणों से बच्चे की नींद या खेल में खलल पड़ा है?", "en": "Have breathing symptoms disturbed your child's sleep or play?", "group": "s8", "opts": [{"v": "yes", "hi": "हाँ", "en": "YES"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "num", "id": "e6", "hi": "पिछले 6 महीने में खांसी, सर्दी या साँस फूलने के दौरे", "en": "Episodes of cough, cold or breathlessness, past 6 months"}, {"kind": "num", "id": "e12", "hi": "पिछले 12 महीने में खांसी, सर्दी या साँस फूलने के दौरे", "en": "Episodes of cough, cold or breathlessness, past 12 months"}, {"kind": "num", "id": "er", "hi": "पिछले 12 महीने में इमरजेंसी / अर्जेंट-केयर विज़िट", "en": "Emergency / urgent-care visits, past 12 months"}, {"kind": "num", "id": "adm", "hi": "पिछले 12 महीने में अस्पताल में भर्ती", "en": "Hospital admissions, past 12 months"}, {"kind": "q", "qn": 9, "hi": "क्या पिछले 12 महीनों में साँस की वजह से स्टेरॉयड दवा (जैसे Omnacortil / प्रेडनिसोलोन) दी गई?", "en": "Oral steroids (e.g. Omnacortil / prednisolone) for breathing problems in the past 12 months?", "group": "steroid", "opts": [{"v": "yes", "hi": "हाँ", "en": "YES"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "num", "id": "courses", "hi": "कितने कोर्स", "en": "Number of courses"}, {"kind": "text", "id": "months", "hi": "लगभग कौन से महीने", "en": "Approximate month(s)"}, {"kind": "q", "qn": 10, "hi": "क्या कभी अस्पताल में ऑक्सीजन, ICU या साँस की मशीन (breathing support) की ज़रूरत पड़ी?", "en": "Ever needed oxygen, ICU care or breathing support in hospital?", "group": "oxygen", "opts": [{"v": "yes", "hi": "हाँ", "en": "YES"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "q", "qn": 11, "hi": "क्या नेबुलाइज़र देने के बाद बच्चे को आराम मिला?", "en": "Did your child improve after a nebuliser treatment?", "group": "resp", "opts": [{"v": "clearly", "hi": "हाँ, साफ़ आराम", "en": "YES, CLEARLY"}, {"v": "little", "hi": "थोड़ा", "en": "A LITTLE"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "never", "hi": "कभी नहीं दिया", "en": "NEVER TRIED"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "med", "qn": 12, "hi": "कौन सी दवा दी गई थी? याद हो तो नाम लिखें।", "en": "Which medicine was used? If you remember, please type the name.", "group": "med", "opts": [{"v": "dk", "hi": "याद नहीं", "en": "I don't remember"}]}, {"kind": "q", "qn": 13, "hi": "दवा बंद करने के बाद क्या लक्षण वापस लौट आए?", "en": "After treatment was stopped, did the symptoms come back?", "group": "back", "opts": [{"v": "yes", "hi": "हाँ", "en": "YES"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "num", "id": "backdays", "hi": "अगर हाँ, तो दवा बंद करने के कितने दिन बाद लक्षण लौटे?", "en": "If yes, how many days after stopping treatment did the symptoms come back?"}, {"kind": "q", "qn": 14, "hi": "क्या आपने या परिवार के किसी सदस्य ने पहले कभी नेबुलाइज़र, इनहेलर, या दोनों इस्तेमाल किए हैं?", "en": "Have you or any family member used a nebuliser, an inhaler, or both in the past?", "group": "inh", "opts": [{"v": "neb", "hi": "सिर्फ़ नेबुलाइज़र", "en": "NEBULISER ONLY"}, {"v": "inh", "hi": "सिर्फ़ इनहेलर", "en": "INHALER ONLY"}, {"v": "both", "hi": "दोनों", "en": "BOTH"}, {"v": "never", "hi": "कभी नहीं", "en": "NEVER"}]}, {"kind": "q", "qn": 15, "hi": "बार-बार छींक, नाक में खुजली, या नाक बहना / बंद रहना?", "en": "Frequent sneezing, itchy nose, or runny / blocked nose?", "group": "o1", "opts": [{"v": "yes", "hi": "हाँ", "en": "YES"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "q", "qn": 16, "hi": "आँखों में खुजली, लाल या पानी आना?", "en": "Itchy, red or watery eyes?", "group": "o2", "opts": [{"v": "yes", "hi": "हाँ", "en": "YES"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "q", "qn": 17, "hi": "एक्ज़िमा या बार-बार खुजली वाले दाने?", "en": "Eczema or repeated itchy skin rash?", "group": "o3", "opts": [{"v": "yes", "hi": "हाँ", "en": "YES"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "q", "qn": 18, "hi": "छपाके (उभरे हुए खुजली वाले दाने), सूजन, या साँस की तकलीफ़ — खाने के साथ हो या बिना खाने के?", "en": "Hives (raised itchy rash), swelling or breathing trouble, with or without food?", "group": "o4", "opts": [{"v": "yes", "hi": "हाँ", "en": "YES"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "q", "qn": 19, "hi": "बार-बार खर्राटे, मुँह से साँस लेना, या बेचैन नींद?", "en": "Frequent snoring, mouth breathing or restless sleep?", "group": "o5", "opts": [{"v": "yes", "hi": "हाँ", "en": "YES"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "q", "qn": 20, "hi": "बार-बार सीने या पेट में जलन, दूध/खाना ऊपर आना, या बार-बार उल्टी?", "en": "Frequent heartburn, regurgitation or repeated vomiting?", "group": "o6", "opts": [{"v": "yes", "hi": "हाँ", "en": "YES"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "q", "qn": 21, "hi": "लगातार गीली खांसी, बार-बार छाती का इन्फ़ेक्शन, दूध पीते समय अटकना, या वज़न कम बढ़ना?", "en": "Persistent wet cough, repeated chest infections, choking during feeds or poor weight gain?", "group": "o7", "opts": [{"v": "yes", "hi": "हाँ", "en": "YES"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "q", "qn": 22, "hi": "क्या घर में सीलन (damp), फफूंद (mould), तिलचट्टे (cockroach) या पालतू जानवर हैं?", "en": "Is there damp, mould, cockroaches or a pet at home?", "group": "env", "opts": [{"v": "yes", "hi": "हाँ", "en": "YES"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "fam", "group": "fm", "who_hi": "माँ", "who_en": "Mother", "hi": "क्या उन्हें अभी या बचपन में खांसी, छींक, नाक बहना, साइनस आदि जैसे एलर्जी के लक्षण रहे हैं?", "en": "Do they have any allergy symptoms like cough, sneezing, running nose, sinus etc. now or in their childhood?"}, {"kind": "fam", "group": "fa", "who_hi": "पिता", "who_en": "Father", "hi": "क्या उन्हें अभी या बचपन में खांसी, छींक, नाक बहना, साइनस आदि जैसे एलर्जी के लक्षण रहे हैं?", "en": "Do they have any allergy symptoms like cough, sneezing, running nose, sinus etc. now or in their childhood?"}, {"kind": "fam", "group": "sib", "who_hi": "भाई या बहन", "who_en": "Brother or sister", "hi": "क्या उन्हें अभी या बचपन में खांसी, छींक, नाक बहना, साइनस आदि जैसे एलर्जी के लक्षण रहे हैं?", "en": "Do they have any allergy symptoms like cough, sneezing, running nose, sinus etc. now or in their childhood?"}, {"kind": "fam", "group": "gp", "who_hi": "दादा-दादी / नाना-नानी", "who_en": "Grandparents", "hi": "माँ या पिता की तरफ़ से। क्या उन्हें अभी या बचपन में खांसी, छींक, नाक बहना, साइनस आदि जैसे एलर्जी के लक्षण रहे हैं?", "en": "Mother's or father's side. Do they have any allergy symptoms like cough, sneezing, running nose, sinus etc. now or in their childhood?"}, {"kind": "text", "id": "notes", "hi": "डॉक्टर को कुछ और बताना चाहते हैं?", "en": "Anything else you want the doctor to know?"}], "s612": [{"kind": "q", "qn": 1, "hi": "क्या बार-बार खांसी, घरघराहट (सीने से सीटी जैसी आवाज़) या साँस लेने में तकलीफ़ होती है?", "en": "Has your child had repeated cough, wheezing (a whistling sound from the chest) or difficulty breathing?", "group": "s1", "opts": [{"v": "yes", "hi": "हाँ", "en": "YES"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "q", "qn": 2, "hi": "क्या लक्षण आते-जाते रहते हैं, और बीच में बच्चा काफ़ी ठीक या पूरी तरह ठीक रहता है?", "en": "Do symptoms come and go, with times when your child is much better or completely well?", "group": "s2", "opts": [{"v": "yes", "hi": "हाँ", "en": "YES"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "q", "qn": 3, "hi": "क्या रात में या सुबह जल्दी खांसी या घरघराहट होती है?", "en": "Does cough or wheeze occur at night or early in the morning?", "group": "s3", "opts": [{"v": "yes", "hi": "हाँ", "en": "YES"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "q", "qn": 4, "hi": "क्या तेज़ खेल (जैसे दौड़ना, कूदना), ज़ोर से हँसने या रोने पर खांसी, घरघराहट या साँस फूलती है?", "en": "Does your child cough, wheeze or become breathless during intense play (such as running or jumping), or intense laughing or crying?", "group": "s4", "opts": [{"v": "yes", "hi": "हाँ", "en": "YES"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "q", "qn": 5, "hi": "क्या ज़्यादातर बार खांसी या साँस की तकलीफ़ सर्दी-ज़ुकाम के 1–2 दिन बाद शुरू होती है?", "en": "Do most episodes start 1–2 days after a cold, runny nose begins?", "group": "s5", "opts": [{"v": "yes", "hi": "हाँ", "en": "YES"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "q", "qn": 6, "hi": "क्या बिना नाक बहे या बिना बुखार के भी खांसी या साँस के लक्षण होते हैं?", "en": "Does your child cough or have breathing symptoms even when there is no runny nose or fever?", "group": "s6", "opts": [{"v": "yes", "hi": "हाँ", "en": "YES"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "q", "qn": 7, "hi": "क्या धूल, धुआँ, प्रदूषण, ठंडी हवा, तेज़ गंध या मौसम बदलने से लक्षण बढ़ते लगते हैं?", "en": "Do dust, smoke, pollution, cold air, strong smells or seasonal changes seem to trigger symptoms?", "group": "s7", "opts": [{"v": "yes", "hi": "हाँ", "en": "YES"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "q", "qn": 8, "hi": "क्या साँस के इन लक्षणों से बच्चे की नींद या खेल में खलल पड़ा है?", "en": "Have breathing symptoms disturbed your child's sleep or play?", "group": "s8", "opts": [{"v": "yes", "hi": "हाँ", "en": "YES"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "q", "qn": 9, "hi": "क्या खांसी एक बार में 10 दिन से ज़्यादा चलती है?", "en": "Has a cough lasted more than 10 days at a time?", "group": "s9", "opts": [{"v": "yes", "hi": "हाँ", "en": "YES"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "num", "id": "e6", "hi": "पिछले 6 महीने में खांसी, सर्दी या साँस फूलने के दौरे", "en": "Episodes of cough, cold or breathlessness, past 6 months"}, {"kind": "num", "id": "e12", "hi": "पिछले 12 महीने में खांसी, सर्दी या साँस फूलने के दौरे", "en": "Episodes of cough, cold or breathlessness, past 12 months"}, {"kind": "num", "id": "er", "hi": "पिछले 12 महीने में इमरजेंसी / अर्जेंट-केयर विज़िट", "en": "Emergency / urgent-care visits, past 12 months"}, {"kind": "num", "id": "adm", "hi": "पिछले 12 महीने में अस्पताल में भर्ती", "en": "Hospital admissions, past 12 months"}, {"kind": "num", "id": "abx", "hi": "पिछले 12 महीने में छाती के इन्फ़ेक्शन के लिए एंटीबायोटिक कोर्स", "en": "Antibiotic courses for chest infections, past 12 months"}, {"kind": "q", "qn": 10, "hi": "क्या पिछले 12 महीनों में साँस या खांसी की वजह से स्टेरॉयड दवा (जैसे Omnacortil / प्रेडनिसोलोन) दी गई?", "en": "Were oral steroids (e.g. Omnacortil / prednisolone) given for breathing or cough problems in the past 12 months?", "group": "steroid", "opts": [{"v": "yes", "hi": "हाँ", "en": "YES"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "num", "id": "courses", "hi": "कितने कोर्स", "en": "Number of courses"}, {"kind": "text", "id": "months", "hi": "लगभग कौन से महीने", "en": "Approximate month(s)"}, {"kind": "q", "qn": 11, "hi": "क्या कभी अस्पताल में ऑक्सीजन, ICU या साँस की मशीन (breathing support) की ज़रूरत पड़ी?", "en": "Ever needed oxygen, ICU care or breathing support in hospital?", "group": "oxygen", "opts": [{"v": "yes", "hi": "हाँ", "en": "YES"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "q", "qn": 12, "hi": "क्या बच्चे को नेबुलाइज़र दिया गया, इनहेलर दिया गया, या दोनों?", "en": "Has your child been given a nebuliser, an inhaler, or both?", "group": "dev", "opts": [{"v": "neb", "hi": "सिर्फ़ नेबुलाइज़र", "en": "NEBULISER ONLY"}, {"v": "inh", "hi": "सिर्फ़ इनहेलर", "en": "INHALER ONLY"}, {"v": "both", "hi": "दोनों", "en": "BOTH"}, {"v": "never", "hi": "कभी नहीं दिया", "en": "NEVER GIVEN"}]}, {"kind": "q", "qn": 13, "hi": "क्या नेबुलाइज़र देने के बाद बच्चे को आराम मिला?", "en": "Did your child improve after a nebuliser treatment?", "group": "resp", "opts": [{"v": "clearly", "hi": "हाँ, साफ़ आराम", "en": "YES, CLEARLY"}, {"v": "little", "hi": "थोड़ा", "en": "A LITTLE"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "never", "hi": "कभी नहीं दिया", "en": "NEVER TRIED"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "med", "qn": 14, "hi": "कौन सी दवा दी गई थी? याद हो तो नाम लिखें।", "en": "Which medicine was used? If you remember, please type the name.", "group": "med", "opts": [{"v": "dk", "hi": "याद नहीं", "en": "I don't remember"}]}, {"kind": "q", "qn": 15, "hi": "दवा बंद करने के बाद क्या लक्षण वापस लौट आए?", "en": "After treatment was stopped, did the symptoms come back?", "group": "back", "opts": [{"v": "yes", "hi": "हाँ", "en": "YES"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "num", "id": "backdays", "hi": "अगर हाँ, तो दवा बंद करने के कितने दिन बाद लक्षण लौटे?", "en": "If yes, how many days after stopping treatment did the symptoms come back?"}, {"kind": "q", "qn": 16, "hi": "क्या इनहेलर के साथ स्पेसर (chamber) इस्तेमाल होता है?", "en": "Is a spacer (chamber) used with the inhaler?", "group": "tech", "opts": [{"v": "yes", "hi": "हाँ", "en": "YES"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "text", "id": "curmed", "hi": "अभी कौन सी दवाइयाँ दी जा रही हैं? (नाम और खुराक)", "en": "Medicines given now (name and dose)"}, {"kind": "q", "qn": 17, "hi": "बार-बार छींक, नाक में खुजली, या नाक बहना / बंद रहना?", "en": "Frequent sneezing, itchy nose, or runny / blocked nose?", "group": "o1", "opts": [{"v": "yes", "hi": "हाँ", "en": "YES"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "q", "qn": 18, "hi": "आँखों में खुजली, लाल या पानी आना?", "en": "Itchy, red or watery eyes?", "group": "o2", "opts": [{"v": "yes", "hi": "हाँ", "en": "YES"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "q", "qn": 19, "hi": "एक्ज़िमा या बार-बार खुजली वाले दाने?", "en": "Eczema or repeated itchy skin rash?", "group": "o3", "opts": [{"v": "yes", "hi": "हाँ", "en": "YES"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "q", "qn": 20, "hi": "छपाके (उभरे हुए खुजली वाले दाने), सूजन, या साँस की तकलीफ़ — खाने के साथ हो या बिना खाने के?", "en": "Hives (raised itchy rash), swelling or breathing trouble, with or without food?", "group": "o4", "opts": [{"v": "yes", "hi": "हाँ", "en": "YES"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "q", "qn": 21, "hi": "बार-बार खर्राटे, मुँह से साँस लेना, या बेचैन नींद?", "en": "Frequent snoring, mouth breathing or restless sleep?", "group": "o5", "opts": [{"v": "yes", "hi": "हाँ", "en": "YES"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "q", "qn": 22, "hi": "बार-बार सीने या पेट में जलन, खाना ऊपर आना, या बार-बार उल्टी?", "en": "Frequent heartburn, regurgitation or repeated vomiting?", "group": "o6", "opts": [{"v": "yes", "hi": "हाँ", "en": "YES"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "q", "qn": 23, "hi": "लगातार गीली खांसी, बार-बार छाती का इन्फ़ेक्शन, खाते समय अटकना, या वज़न/लंबाई कम बढ़ना?", "en": "Persistent wet cough, repeated chest infections, choking on food, or poor weight or height gain?", "group": "o7", "opts": [{"v": "yes", "hi": "हाँ", "en": "YES"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "num", "id": "school", "hi": "पिछले 4 हफ़्तों में स्कूल से कितने दिन छूटे?", "en": "School days missed, past 4 weeks"}, {"kind": "q", "qn": 24, "hi": "क्या खांसी या साँस की तकलीफ़ से बच्चा खेल, दौड़ या स्पोर्ट्स में रुकता है?", "en": "Does the cough or breathing trouble stop your child from playing, running or sports?", "group": "imp", "opts": [{"v": "yes", "hi": "हाँ", "en": "YES"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "q", "qn": 25, "hi": "क्या घर या गाड़ी में कोई धूम्रपान करता है?", "en": "Does anyone smoke at home or in the car?", "group": "smoke", "opts": [{"v": "yes", "hi": "हाँ", "en": "YES"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "q", "qn": 26, "hi": "क्या घर में सीलन (damp), फफूंद (mould), तिलचट्टे (cockroach) या पालतू जानवर हैं?", "en": "Is there damp, mould, cockroaches or a pet at home?", "group": "env", "opts": [{"v": "yes", "hi": "हाँ", "en": "YES"}, {"v": "no", "hi": "नहीं", "en": "NO"}, {"v": "unsure", "hi": "पता नहीं", "en": "NOT SURE"}]}, {"kind": "fam", "group": "fm", "who_hi": "माँ", "who_en": "Mother", "hi": "क्या उन्हें अभी या बचपन में खांसी, छींक, नाक बहना, साइनस आदि जैसे एलर्जी के लक्षण रहे हैं?", "en": "Do they have any allergy symptoms like cough, sneezing, running nose, sinus etc. now or in their childhood?"}, {"kind": "fam", "group": "fa", "who_hi": "पिता", "who_en": "Father", "hi": "क्या उन्हें अभी या बचपन में खांसी, छींक, नाक बहना, साइनस आदि जैसे एलर्जी के लक्षण रहे हैं?", "en": "Do they have any allergy symptoms like cough, sneezing, running nose, sinus etc. now or in their childhood?"}, {"kind": "fam", "group": "sib", "who_hi": "भाई या बहन", "who_en": "Brother or sister", "hi": "क्या उन्हें अभी या बचपन में खांसी, छींक, नाक बहना, साइनस आदि जैसे एलर्जी के लक्षण रहे हैं?", "en": "Do they have any allergy symptoms like cough, sneezing, running nose, sinus etc. now or in their childhood?"}, {"kind": "fam", "group": "gp", "who_hi": "दादा-दादी / नाना-नानी", "who_en": "Grandparents", "hi": "माँ या पिता की तरफ़ से। क्या उन्हें अभी या बचपन में खांसी, छींक, नाक बहना, साइनस आदि जैसे एलर्जी के लक्षण रहे हैं?", "en": "Mother's or father's side. Do they have any allergy symptoms like cough, sneezing, running nose, sinus etc. now or in their childhood?"}, {"kind": "text", "id": "notes", "hi": "डॉक्टर को कुछ और बताना चाहते हैं?", "en": "Anything else you want the doctor to know?"}]};
+var FORM = {u5:'https://childspecialistrohini.com/parent-tools/cough-breathing-form.html', s612:'https://childspecialistrohini.com/parent-tools/cough-breathing-form-6-12.html'};
+var CLINIC_WA = '918130521456';
+
+var $ = function(id){ return document.getElementById(id); };
+var lang = 'en', voiceOn = false;
+var pre = readPrefill();                   // {n: name, a: age} from #p=
+var state = {v:{}, g:{}};
+var name = pre.n || '', age = pre.a || '';
+var path = null, items = [], idx = 0, hist = [], phase = 'start', cur = null, mode = 'asking', log = [], warned = false;
+
+var LBL = {
+  yes:{en:'Yes',hi:'हाँ'}, no:{en:'No',hi:'नहीं'}, unsure:{en:'Not sure',hi:'पता नहीं'},
+  dk:{en:"I don't remember",hi:'याद नहीं'}, skip:{en:'Skip',hi:'छोड़ें'}, back:{en:'⬅ Back',hi:'⬅ पीछे'},
+  send:{en:'Send to clinic WhatsApp',hi:'क्लिनिक के WhatsApp पर भेजें'}, change:{en:'Change an answer',hi:'कोई जवाब बदलें'}
+};
+var EMERG = /neela|neele|nila|blue|नीला|नीले|saans nahi|saans nahin|sans nahi|sans nahin|साँस नहीं|सांस नहीं|saans phool|sans phool|साँस फूल|सांस फूल|bol nahi|bol nahin|बोल नहीं|behosh|बेहोश|sust|सुस्त|drowsy|unconscious|chest pull|chhati dhans|छाती धँस|छाती धंस/i;
+
+function t(hi,en){ return lang==='hi' ? hi : en; }
+function readPrefill(){
+  try {
+    var h = location.hash; if (h.indexOf('#p=') !== 0) return {};
+    var s = h.slice(3).replace(/-/g,'+').replace(/_/g,'/'); while (s.length%4) s += '=';
+    var o = JSON.parse(decodeURIComponent(escape(atob(s))));
+    return {n:o.n||'', a:o.a||''};
+  } catch(e){ return {}; }
+}
+function norm(s){
+  return String(s||'').toLowerCase().replace(/[०-९]/g,function(d){return String('०१२३४५६७८९'.indexOf(d));})
+    .replace(/[.,!?;:()\[\]"'।]/g,' ').replace(/\s+/g,' ').trim();
+}
+function has(s, list){ var n = ' ' + norm(s) + ' '; return list.some(function(w){ return n.indexOf(' ' + w + ' ') >= 0 || (w.length>3 && norm(s).indexOf(w)>=0); }); }
+
+/* ---------- typed-answer understanding (Hindi, English, mixed) ---------- */
+var UNSURE = ['pata nahi','pata nahin','pta nahi','pata nhi','nahi pata','nahin pata','malum nahi','maloom nahi','malum nahin','maalum nahi','not sure','dont know','don t know','idk','shayad','पता नहीं','पता नही','मालूम नहीं','मालुम नहीं','शायद','याद नहीं','याद नही','pata nahin'];
+var YES = ['yes','y','haan','han','haa','ha','ji','jee','ji haan','ji han','yup','yeah','हाँ','हां','हा','जी','जी हाँ','जी हां','हाँ जी','हां जी'];
+var NO  = ['no','n','nahi','nahin','nhi','nai','na','नहीं','नही','ना','नहि'];
+function parseYN(s){
+  var n = norm(s);
+  if (!n || n.split(' ').length > 4) return null;
+  if (UNSURE.some(function(p){ return n.indexOf(norm(p))>=0; })) return 'unsure';
+  var y = has(s, YES), no = has(s, NO);
+  if (y && !no) return 'yes';
+  if (no && !y) return 'no';
+  return null;
+}
+var WORDNUM = {ek:1,do:2,teen:3,char:4,chaar:4,paanch:5,panch:5,chhe:6,che:6,chah:6,saat:7,sat:7,aath:8,nau:9,das:10,gyarah:11,barah:12,bees:20,tees:30,pachas:50,sau:100,zero:0,none:0,'एक':1,'दो':2,'तीन':3,'चार':4,'पाँच':5,'पांच':5,'छह':6,'छः':6,'सात':7,'आठ':8,'नौ':9,'दस':10,'ग्यारह':11,'बारह':12,'बीस':20,'तीस':30,'पचास':50,'सौ':100,'शून्य':0};
+function parseNum(s){
+  var n = norm(s);
+  if (!n) return null;
+  if (UNSURE.some(function(p){ return n.indexOf(norm(p))>=0; })) return 'skip';
+  if (/kabhi nahi|kabhi nahin|कभी नहीं|none|zero/.test(n)) return '0';
+  var m = n.match(/\d+(\.\d+)?/);
+  if (m) return m[0];
+  var parts = n.split(' ');
+  for (var i=0;i<parts.length;i++){ if (WORDNUM.hasOwnProperty(parts[i]) ) return String(WORDNUM[parts[i]]); }
+  return null;
+}
+var RESP = {
+  unsure: ['pata nahi','pata nahin','nahi pata','malum nahi','पता नहीं','मालूम नहीं'],
+  never:  ['kabhi nahi','kabhi nahin','nahi diya','nahin diya','never','कभी नहीं'],
+  little: ['thoda','thodi','thoda sa','little','kam','kuch','थोड़ा','थोड़ी'],
+  clearly:['bahut','bahut achha','saaf','clear','clearly','achha hua','theek ho gaya','theek hogaya','fark','ruk gaya','बहुत','साफ़','साफ','आराम','ठीक हो गया'],
+  no:     ['no','nahi','nahin','nhi','koi fayda nahi','fayda nahi','asar nahi','नहीं','नही']
+};
+function parseResp(s){
+  var order = ['unsure','never','little','clearly','no'];
+  for (var i=0;i<order.length;i++){ var k=order[i]; if (has(s, RESP[k])) return k; }
+  return null;
+}
+function parseDevice(s){
+  var n = norm(s);
+  var hasNeb = /neb|नेबुल/.test(n), hasInh = /inhal|puff|pump|इनहेल/.test(n);
+  var both = /both|dono|दोनों/.test(n);
+  var neg = /never|kabhi nahi|kabhi nahin|nahi diya|nahin diya|कभी नहीं|none/.test(n);
+  if (both || (hasNeb && hasInh)) return 'both';
+  if (neg) return 'never';
+  if (hasNeb) return 'neb';
+  if (hasInh) return 'inh';
+  if (/^(nahi|nahin|no|नहीं)$/.test(n)) return 'never';
+  return null;
+}
+function parseMed(s){ var n=norm(s); if (/yaad|yad|याद|pata nahi|don t remember|dont remember|nahi yaad|nahin yaad/.test(n)) return {dk:true}; return {name:s.trim()}; }
+
+/* ---------- labels ---------- */
+function optLabel(it, v){
+  var o = (it.opts||[]).filter(function(x){return x.v===v;})[0];
+  if (o) return t(o.hi, o.en);
+  if (LBL[v]) return t(LBL[v].hi, LBL[v].en);
+  return v;
+}
+function answerText(it){
+  if (it.kind==='q'||it.kind==='fam'){ var g=state.g[it.group]; return g===undefined?null:optLabel(it,g); }
+  if (it.kind==='med'){ if (state.g.med==='dk') return t(LBL.dk.hi,LBL.dk.en); return state.v.medname===undefined?null:state.v.medname; }
+  return state.v[it.id]===undefined?null:state.v[it.id];
+}
+function answered(it){ return answerText(it)!==null; }
+function applicable(it){
+  if (it.id==='courses'||it.id==='months') return state.g.steroid==='yes';
+  if (it.id==='backdays') return state.g.back==='yes';
+  return true;
+}
+function nextIdx(from){ var i=from; while(i<items.length && !applicable(items[i])) i++; return i; }
+function apply(it, val){
+  if (it.kind==='q'||it.kind==='fam') { if (val===undefined) delete state.g[it.group]; else state.g[it.group]=val; }
+  else if (it.kind==='med') {
+    if (val===undefined){ delete state.g.med; delete state.v.medname; }
+    else if (val.dk){ state.g.med='dk'; delete state.v.medname; }
+    else { state.v.medname=val.name; delete state.g.med; }
+  } else {
+    if (val===undefined || val==='skip' || val==='') delete state.v[it.id]; else state.v[it.id]=val;
+  }
+  if (state.g.steroid!=='yes'){ delete state.v.courses; delete state.v.months; }
+  if (state.g.back!=='yes'){ delete state.v.backdays; }
+}
+
+/* ---------- rendering ---------- */
+function renderLog(){
+  var box=$('log'); box.innerHTML='';
+  log.forEach(function(e){
+    var d=document.createElement('div'); d.className='b '+(e.who==='bot'?'bot':'me');
+    if (e.who==='bot' && e.summary){ d.innerHTML = summaryHTML(); }
+    else if (e.who==='bot'){ d.innerHTML = esc(t(e.hi,e.en)); } else d.textContent=e.t;
+    box.appendChild(d);
+  });
+  box.lastElementChild && box.lastElementChild.scrollIntoView({block:'end',behavior:'smooth'});
+  var done=0,total=0; items.forEach(function(it,i){ if(applicable(it)){ total++; if(answered(it)) done++; } });
+  $('progBar').style.width = (total? Math.round(done/total*100):0) + '%';
+}
+function esc(s){ return String(s).replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];}); }
+function summaryHTML(){
+  var rows=items.filter(function(it){return applicable(it) && answered(it);});
+  return '<b>'+esc(t('सारांश','Summary'))+'</b><br>' + rows.map(function(it){ return esc(t(it.hi,it.en).slice(0,70))+' → <b>'+esc(answerText(it))+'</b>'; }).join('<br>');
+}
+function say(hi,en){
+  log.push({who:'bot',hi:hi,en:en});
+  renderLog();
+  if (voiceOn) speak(t(hi,en), lang);
+}
+function me(text){ log.push({who:'me',t:text}); renderLog(); }
+function speak(text,l){
+  try {
+    if (!('speechSynthesis' in window)) return;
+    speechSynthesis.cancel();
+    var u=new SpeechSynthesisUtterance(text.replace(/\*\*/g,''));
+    u.lang = l==='hi' ? 'hi-IN' : 'en-IN'; u.rate = 0.92;
+    var v = speechSynthesis.getVoices().filter(function(x){return x.lang===u.lang;})[0];
+    if (v) u.voice=v;
+    speechSynthesis.speak(u);
+  } catch(e){}
+}
+function notice(hi,en,emerg){
+  var n=$('notice'); n.className='notice'+(emerg?' emerg':''); n.textContent=t(hi,en);
+}
+function controls(spec){
+  cur = spec;
+  var chips=$('chips'), typeRow=$('typeRow'), sendRow=$('sendRow');
+  chips.innerHTML=''; sendRow.classList.add('hide'); sendRow.innerHTML='';
+  typeRow.classList.add('hide');
+  if (!spec) return;
+  (spec.chips||[]).forEach(function(c){
+    var b=document.createElement('button'); b.type='button'; b.className='chip'+(c.cls?' '+c.cls:'');
+    b.textContent=t(c.hi,c.en); b.addEventListener('click',function(){ c.on(); }); chips.appendChild(b);
+  });
+  if (spec.type==='text'){
+    typeRow.classList.remove('hide');
+    var inp=$('typeIn'); inp.value=''; inp.placeholder=t(spec.ph.hi,spec.ph.en);
+    inp.inputMode = spec.numeric ? 'decimal' : 'text';
+    setTimeout(function(){ inp.focus(); },50);
+  }
+  if (spec.extra) spec.extra();
+}
+$('typeGo').addEventListener('click', submitText);
+$('typeIn').addEventListener('keydown', function(e){ if(e.key==='Enter') submitText(); });
+function submitText(){
+  if (!cur || cur.type!=='text') return;
+  var v=$('typeIn').value.trim(); if(!v) return;
+  $('typeIn').value=''; me(v);
+  if (EMERG.test(v)) {
+    notice('अगर साँस में बहुत तकलीफ़ है, होंठ नीले हैं, बच्चा बहुत सुस्त है या बोल नहीं पा रहा, तो अभी नज़दीकी अस्पताल जाएँ या 112 पर कॉल करें।','If the child is struggling to breathe, has blue lips, is very drowsy or cannot speak, go to the nearest hospital now or call 112.',true);
+    say('आपने जो लिखा, उसे मैंने जवाब नहीं माना। कृपया ऊपर का संदेश पढ़ें। अगर बच्चा ठीक है तो सवाल का जवाब दें।','I have not counted that as an answer. Please read the message above. If your child is safe, please answer the question.');
+    if (path && idx < items.length) return ask();
+    return;
+  }
+  cur.onText(v);
+}
+function setLang(l){
+  lang=l;
+  document.body.className = 'only-' + l;
+  document.querySelectorAll('.switch button').forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.lang===l?'true':'false'); });
+  $('voiceBtn').innerHTML = '🔊 ' + (voiceOn ? t('बोलकर सुनाएँ: चालू','Read aloud: on') : t('बोलकर सुनाएँ: बंद','Read aloud: off'));
+  renderLog();
+  if (cur) controls(cur);
+  if (lang==='hi') document.documentElement.lang='hi'; else document.documentElement.lang='en';
+}
+document.querySelectorAll('.switch button').forEach(function(b){ b.addEventListener('click', function(){ setLang(b.dataset.lang); }); });
+$('voiceBtn').addEventListener('click', function(){
+  voiceOn=!voiceOn; setLang(lang);
+  if (voiceOn) speak(t('बोलकर सुनाने की सुविधा चालू है।','Read aloud is on.'), lang);
+});
+
+/* ---------- flow ---------- */
+function start(){
+  say('नमस्ते! मैं बच्चे की खांसी और साँस की जानकारी भरने में आपकी मदद करूँगी। इसमें लगभग 5 मिनट लगेंगे। आप बटन दबा सकते हैं, या हिंदी/अंग्रेज़ी में लिख सकते हैं।',
+      'Namaste! I will help you fill in your child\'s cough and breathing history. It takes about 5 minutes. You can tap the buttons, or type in Hindi, English or both.');
+  if (!name) return askName();
+  say('बच्चे का नाम: '+name,'Child\'s name: '+name);
+  if (!age) return askAge();
+  return confirmAge();
+}
+function askName(){
+  say('बच्चे का नाम बताइए।','What is your child\'s name?');
+  controls({type:'text', ph:{hi:'बच्चे का नाम लिखें',en:'Type your child\'s name'}, onText:function(v){ name=v; state.v.cname=v; if (age) return confirmAge(); askAge(); }});
+}
+function askAge(){
+  say('बच्चे की उम्र कितनी है? जैसे: 3 साल, या 2 साल 4 महीने।','How old is your child? For example: 3 years, or 2 years 4 months.');
+  controls({type:'text', numeric:true, ph:{hi:'जैसे: 3 साल या 2 साल 4 महीने',en:'e.g. 3 years or 2 years 4 months'}, onText:function(v){
+    var y = parseAge(v);
+    if (y===null){ say('माफ़ कीजिए, उम्र समझ नहीं आई। साल में लिखें, जैसे 3 या 7।','Sorry, I did not get the age. Please write it in years, for example 3 or 7.'); return askAge(); }
+    age=v; state.v.age=v; pickPath(y);
+  }});
+}
+function confirmAge(){ state.v.age=age; state.v.cname=name; pickPath(parseAge(age)); }
+function parseAge(s){
+  var n=norm(s);
+  var y=n.match(/(\d+(\.\d+)?)\s*(y|yr|yrs|year|years|saal|sal|साल|वर्ष)/);
+  var m=n.match(/(\d+)\s*(m|mo|mon|month|months|mahina|mahine|महीने|महीना)/);
+  if (y){ var yy=parseFloat(y[1]); if (m) yy+=parseInt(m[1],10)/12; return yy; }
+  if (m) return parseInt(m[1],10)/12;
+  var p=n.match(/^\d+(\.\d+)?$/); if (p) return parseFloat(p[0]);
+  return null;
+}
+function pickPath(y){
+  if (y===null){ return askAge(); }
+  if (y < 5){ path='u5'; }
+  else if (y >= 6 && y < 13){ path='s612'; }
+  else {
+    say('यह चैट 5 साल से छोटे बच्चों और 6 से 12 साल के बच्चों के लिए है। कृपया क्लिनिक से संपर्क करें।','This chat is for children under 5 and for children aged 6 to 12. Please contact the clinic for your child\'s form.');
+    controls(null); return;
+  }
+  items = DATA[path];
+  say('बहुत अच्छा। अब कुछ सवाल। आप किसी भी समय "पीछे" बटन से पिछला सवाल बदल सकते हैं।','Thank you. Now a few questions. You can tap Back at any time to change the previous answer.');
+  idx = nextIdx(0); hist=[]; mode='asking';
+  ask();
+}
+function ask(){
+  if (idx >= items.length) return review();
+  var it = items[idx];
+  var back = hist.length ? [{hi:LBL.back.hi,en:LBL.back.en,on:goBack}] : [];
+  if (it.kind==='q' && it.opts.length===3 || it.kind==='fam'){
+    var prefix = it.kind==='fam' ? (t(it.who_hi,it.who_en)+': ') : '';
+    say(prefix + t(it.hi,it.en), prefix + it.en);
+    var chips=[{hi:LBL.yes.hi,en:LBL.yes.en,cls:'main',on:function(){answer('yes');}},
+               {hi:LBL.no.hi,en:LBL.no.en,on:function(){answer('no');}},
+               {hi:LBL.unsure.hi,en:LBL.unsure.en,cls:'ghost',on:function(){answer('unsure');}}].concat(back);
+    controls({type:'text', ph:{hi:'हाँ / नहीं / पता नहीं लिखें',en:'Type yes / no / not sure'}, onText:function(v){ answer(v); }, chips:chips});
+    return;
+  }
+  if (it.kind==='q'){
+    say(t(it.hi,it.en), it.en);
+    var chips2 = it.opts.map(function(o,i){ return {hi:o.hi,en:o.en,cls:i===0?'main':'',on:function(){answer(o.v);}}; }).concat(back);
+    controls({type:'text', ph:{hi:'जवाब लिखें या बटन दबाएँ',en:'Type your answer or tap a button'}, onText:function(v){ answer(v); }, chips:chips2});
+    return;
+  }
+  if (it.kind==='med'){
+    say(t(it.hi,it.en), it.en);
+    controls({type:'text', ph:{hi:'दवा का नाम लिखें',en:'Type the medicine name'}, onText:function(v){ answer(parseMed(v)); },
+      chips:[{hi:LBL.dk.hi,en:LBL.dk.en,cls:'ghost',on:function(){answer({dk:true});}}].concat(back)});
+    return;
+  }
+  if (it.kind==='num'){
+    say(t(it.hi,it.en), it.en);
+    controls({type:'text', numeric:true, ph:{hi:'संख्या लिखें',en:'Type a number'}, onText:function(v){
+      var r=parseNum(v);
+      if (r===null){ say('माफ़ कीजिए, संख्या समझ नहीं आई। जैसे 2 या 0 लिखें, या छोड़ें दबाएँ।','Sorry, I did not get a number. Please type a number like 2 or 0, or tap Skip.'); return ask(); }
+      answer(r);
+    }, chips:[{hi:LBL.skip.hi,en:LBL.skip.en,cls:'ghost',on:function(){answer('skip');}}].concat(back)});
+    return;
+  }
+  if (it.kind==='text'){
+    say(t(it.hi,it.en), it.en);
+    controls({type:'text', ph:{hi:'यहाँ लिखें (ज़रूरी नहीं)',en:'Type here (optional)'}, onText:function(v){ answer(v); },
+      chips:[{hi:LBL.skip.hi,en:LBL.skip.en,cls:'ghost',on:function(){answer('skip');}}].concat(back)});
+    return;
+  }
+}
+function answer(v){
+  var it=items[idx], val=v;
+  if ((it.kind==='q' && it.opts.length===3) || it.kind==='fam'){
+    if (!/^(yes|no|unsure)$/.test(v)) val = parseYN(v);
+  } else if (it.kind==='q'){
+    if (!it.opts.some(function(o){return o.v===v;})) val = (it.group==='resp') ? parseResp(v) : parseDevice(v);
+  } else if (it.kind==='med'){
+    if (typeof v==='string') val = parseMed(v);
+  }
+  if (val===null || val===undefined){
+    say('माफ़ कीजिए, मैं समझ नहीं पाई। बटन दबाएँ, या "हाँ", "नहीं" या "पता नहीं" लिखें।','Sorry, I did not understand. Please tap a button, or type yes, no or not sure.');
+    return ask();
+  }
+  apply(it, val);
+  if (mode==='asking'){ hist.push(idx); idx = nextIdx(idx+1); return ask(); }
+  var nxt=-1; for (var i=0;i<items.length;i++){ if (applicable(items[i]) && !answered(items[i])){ nxt=i; break; } }
+  if (nxt<0){ mode='asking'; return review(); }
+  idx=nxt; return ask();
+}
+function goBack(){
+  if (!hist.length) return;
+  idx = hist.pop();
+  var it=items[idx];
+  apply(it, undefined);
+  log.push({who:'bot',hi:'ठीक है, पिछला सवाल।',en:'Okay, the previous question.'}); renderLog();
+  ask();
+}
+
+/* ---------- review and send ---------- */
+function review(){
+  mode='asking';
+  say('धन्यवाद! सारांश देख लीजिए। कुछ बदलना हो तो नीचे से चुनें। नहीं तो "क्लिनिक के WhatsApp पर भेजें" दबाएँ।',
+      'Thank you! Please check the summary. To change something, choose it below. Otherwise tap "Send to clinic WhatsApp".');
+  log.push({who:'bot',summary:true}); renderLog();
+  var sel = document.createElement('select'); sel.id='changeSel';
+  var opt0=document.createElement('option'); opt0.value=''; opt0.textContent=t('कौन सा जवाब बदलना है?','Which answer to change?'); sel.appendChild(opt0);
+  items.forEach(function(it,i){ if(applicable(it) && answered(it)){ var o=document.createElement('option'); o.value=String(i); o.textContent=(lang==='hi'?it.hi:it.en).slice(0,70); sel.appendChild(o);} });
+  controls({type:'review', chips:[
+    {hi:LBL.send.hi,en:LBL.send.en,cls:'main',on:sendWA}
+  ], extra:function(){
+    var row=$('sendRow'); row.classList.remove('hide');
+    var wrap=document.createElement('div'); wrap.style.display='flex'; wrap.style.gap='8px'; wrap.style.marginTop='8px';
+    sel.style.flex='1'; wrap.appendChild(sel);
+    var b=document.createElement('button'); b.type='button'; b.className='chip ghost'; b.textContent=t(LBL.change.hi,LBL.change.en);
+    b.addEventListener('click', function(){ if(sel.value!==''){ mode='change'; idx=parseInt(sel.value,10); ask(); } });
+    wrap.appendChild(b); row.appendChild(wrap);
+  }});
+}
+function encodeState(){
+  var st={v:{}, g:{}};
+  Object.keys(state.v).forEach(function(k){ st.v[k]=state.v[k]; });
+  Object.keys(state.g).forEach(function(k){ st.g[k]=state.g[k]; });
+  st.v.cname = name || st.v.cname || ''; st.v.age = age || st.v.age || '';
+  var d=new Date(), p=function(n){return String(n).padStart(2,'0');};
+  st.v.date = d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate());
+  var json=JSON.stringify(st);
+  return btoa(unescape(encodeURIComponent(json))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+}
+function sendWA(){
+  var code = encodeState();
+  var url = FORM[path] + '#d=' + code;
+  var text = '*Child breathing & cough history (chat)*\n' + 'Child: ' + (name||'name not given') + '  ·  Age: ' + (age||'not given') + '\n\nPlease open the link below and paste it in the clinic summary page.\n\n' + url;
+  var wa = 'https://wa.me/' + CLINIC_WA + '?text=' + encodeURIComponent(text);
+  window.open(wa, '_blank', 'noopener');
+  say('भेजने के लिए धन्यवाद। WhatsApp में "Send" दबाएँ। क्लिनिक आपका फ़ॉर्म प्रिंट करेगा।','Thank you. Tap Send in WhatsApp. The clinic will print your form.');
+  controls(null);
+  var row=$('sendRow'); row.classList.remove('hide');
+  var p=document.createElement('p'); p.style.cssText='font-weight:700;margin:6px 0;font-size:14px';
+  p.innerHTML = esc(t('WhatsApp खुल रहा है। अगर नहीं खुला तो नीचे दबाएँ।','WhatsApp is opening. If it did not open, tap below.'))+' <a href="'+wa+'" target="_blank" rel="noopener">'+esc(t('WhatsApp खोलें','Open WhatsApp'))+'</a>';
+  row.appendChild(p);
+}
+
+/* ---------- boot ---------- */
+setLang(new URLSearchParams(location.search).get('lang')==='hi' ? 'hi' : 'en');
+start();
+})();
+</script>
+</body>
+</html>
