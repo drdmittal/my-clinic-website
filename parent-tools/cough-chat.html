@@ -306,7 +306,9 @@ function speak(text,l){
     var same = function(x){ return (x.lang||'').replace('_','-').toLowerCase() === u.lang.toLowerCase(); };
     var near = function(x){ return (x.lang||'').toLowerCase().indexOf(u.lang.slice(0,2).toLowerCase())===0; };
     // prefer a Google voice for the exact accent, then any exact accent, then any voice in the language
-    var v = vs.filter(function(x){ return same(x) && /google/i.test(x.name); })[0]
+    // a female-named Indian voice first, when the phone has one (browsers do not report gender, so this matches names only)
+    var v = vs.filter(function(x){ return same(x) && /female|neerja|swara|heera|kalpana|lekha|veena|priya|sunita/i.test(x.name); })[0]
+         || vs.filter(function(x){ return same(x) && /google/i.test(x.name); })[0]
          || vs.filter(same)[0]
          || vs.filter(function(x){ return near(x) && /google/i.test(x.name); })[0]
          || vs.filter(near)[0];
