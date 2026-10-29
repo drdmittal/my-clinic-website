@@ -642,16 +642,16 @@
   }
   // Save a copy of the submission to the clinic's record sheet and Drive (fire and forget; WhatsApp still opens)
   var SUBMIT_URL = 'https://script.google.com/macros/s/AKfycbzY3GF6DDgr8cIVK-3oSTci3xOiZPaz-0aBWLhBumW8PAIxmI2gI4BIWAGGVjiRDE_d/exec';  // set to the submissions web app URL (see submissions-backend/SETUP.md)
-  function saveRecord(form, summary, code){
+  function saveRecord(form, lines, code){
     try {
       if (!SUBMIT_URL) return;
       fetch(SUBMIT_URL, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, keepalive:true,
-        body: JSON.stringify({action:'summary_submit', form: form, summary: summary, code: code})}).catch(function(){});
+        body: JSON.stringify({action:'summary_submit', form: form, lines: lines, code: code})}).catch(function(){});
     } catch(e){}
   }
   document.getElementById('waYes').addEventListener('click', function(){
     var st = document.getElementById('waStatus');
-    saveRecord('under5', waTextFull(), encodeState());
+    saveRecord('under5', waTextFull().split('\n'), encodeState());
     var text = waText() + '\n\n' + FORM_URL + '#d=' + encodeState();
     var wa = 'https://wa.me/918130521456?text=' + encodeURIComponent(text);
     window.open(wa, '_blank', 'noopener');   // opened directly from the tap, so browsers allow it

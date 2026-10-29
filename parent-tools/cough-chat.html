@@ -667,16 +667,18 @@ function encodeState(){
 }
   // Save a copy of the submission to the clinic's record sheet and Drive (fire and forget; WhatsApp still opens)
   var SUBMIT_URL = 'https://script.google.com/macros/s/AKfycbzY3GF6DDgr8cIVK-3oSTci3xOiZPaz-0aBWLhBumW8PAIxmI2gI4BIWAGGVjiRDE_d/exec';  // set to the submissions web app URL (see submissions-backend/SETUP.md)
-  function saveRecord(form, summary, code){
+  function saveRecord(form, lines, code){
     try {
       if (!SUBMIT_URL) return;
       fetch(SUBMIT_URL, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, keepalive:true,
-        body: JSON.stringify({action:'summary_submit', form: form, summary: summary, code: code})}).catch(function(){});
+        body: JSON.stringify({action:'summary_submit', form: form, lines: lines, code: code})}).catch(function(){});
     } catch(e){}
   }
 function sendWA(){
   var code = encodeState();
-  saveRecord('chat-'+path, 'Child: '+(name||'name not given')+' · Age: '+(age||'not given')+' · '+(gender==='girl'?'Girl':'Boy'), code);
+  var sumTmp=document.createElement('div'); sumTmp.innerHTML=summaryHTML().replace(/<br>/g,'\n');
+  var chatLines=['*Child breathing & cough history (chat)*','Child: '+(name||'name not given')+'  ·  Age: '+(age||'not given')+'  ·  '+(gender==='girl'?'Girl':'Boy'),''].concat(sumTmp.textContent.split('\n'));
+  saveRecord('chat-'+path, chatLines, code);
   var url = FORM[path] + '#d=' + code;
   var text = '*Child breathing & cough history (chat)*\n' + 'Child: ' + (name||'name not given') + '  ·  Age: ' + (age||'not given') + '  ·  ' + (gender==='girl'?'Girl':'Boy') + '\n\nPlease open the link below and paste it in the clinic summary page.\n\n' + url;
   var wa = 'https://wa.me/' + CLINIC_WA + '?text=' + encodeURIComponent(text);
