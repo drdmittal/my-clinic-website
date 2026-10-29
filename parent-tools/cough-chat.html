@@ -44,6 +44,8 @@
   a{color:var(--indigo)}
   .hide{display:none!important}
   .replayRow{text-align:right;margin:0 0 6px}
+  .speedRow button{background:#fff;border:1px solid #c9d3e6;color:var(--indigo);border-radius:14px;padding:4px 8px;font-size:12px;margin-left:4px}
+  .speedRow button[aria-pressed="true"]{background:var(--indigo);color:#fff}
   #replayBtn{background:#fff;border:1.5px solid var(--indigo);color:var(--indigo);border-radius:20px;padding:6px 12px;font-size:14px}
   #micBtn{background:#fff;border:2px solid var(--indigo)!important;color:var(--indigo)!important;font-size:18px;min-width:48px}
   #micBtn.hot{background:var(--indigo)!important;color:#fff!important;animation:pulse 1.4s infinite}
@@ -69,7 +71,7 @@
   <div id="notice" class="notice hide"></div>
   <div id="log" aria-live="polite"></div>
   <div id="ctrl">
-    <div class="replayRow"><button id="replayBtn" type="button" class="hide" aria-label="Repeat question / प्रश्न दोबारा सुनें">🔁 <span class="hi">दोबारा सुनें</span><span class="en">Repeat question</span></button></div>
+    <div class="replayRow"><span class="speedRow" aria-label="Speed / गति"><button type="button" data-sp="slow">🐢 <span class="hi">धीमा</span><span class="en">Slow</span></button><button type="button" data-sp="normal">▶ <span class="hi">सामान्य</span><span class="en">Normal</span></button><button type="button" data-sp="fast">⏩ <span class="hi">तेज़</span><span class="en">Fast</span></button></span> <button id="replayBtn" type="button" class="hide" aria-label="Repeat question / प्रश्न दोबारा सुनें">🔁 <span class="hi">दोबारा सुनें</span><span class="en">Repeat question</span></button></div>
     <div id="chips" class="chips"></div>
     <div id="typeRow" class="typebox hide">
       <input id="typeIn" type="text" autocomplete="off">
@@ -132,6 +134,22 @@ function listenStatus(on){
 }
 var TTS_URL = 'https://script.google.com/macros/s/AKfycbzZZJon_KvK0ibezOQT0ktfkxIB8-ee_-BnRKra6kvejGrbG1dFjMSD8f9zhR3ZXeWbXA/exec';
 var cloudBusy = 0, audioQ = Promise.resolve();
+// speed: base rates by language, times a multiplier the parent can choose (remembered on this device)
+var SPEEDS = { slow: 0.75, normal: 1, fast: 1.25 };
+var speedLevel = 'normal';
+try { var sv = localStorage.getItem('chatSpeed'); if (SPEEDS[sv]) speedLevel = sv; } catch(e){}
+function rateFor(l){ return ((l==='hi') ? 1.375 : 1.1) * SPEEDS[speedLevel]; }
+function setSpeed(k){
+  if (!SPEEDS[k]) return;
+  speedLevel = k;
+  try { localStorage.setItem('chatSpeed', k); } catch(e){}
+  paintSpeed();
+}
+function paintSpeed(){
+  document.querySelectorAll('.speedRow button').forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.sp===speedLevel?'true':'false'); });
+}
+document.querySelectorAll('.speedRow button').forEach(function(b){ b.addEventListener('click', function(){ setSpeed(b.dataset.sp); }); });
+paintSpeed();
 function speakingNow(){ return cloudBusy > 0 || (canSpeak && (speechSynthesis.speaking || speechSynthesis.pending)); }
 function waitThenListen(){
   if (!talk || !SR || !cur || cur.type!=='text') return;
@@ -341,7 +359,7 @@ function speakCloud(text,l){
         if (!j || !j.ok) throw new Error((j && j.error) || 'tts');
         return new Promise(function(done){
           var a = new Audio('data:audio/mp3;base64,' + j.audio);
-          a.playbackRate = (l==='hi') ? 1.375 : 1.1;
+          a.playbackRate = rateFor(l);
           a.onended = a.onerror = function(){ lastSpeechEnd = Date.now(); done(); };
           var pr = a.play();
           if (pr && pr.catch) pr.catch(function(){ done(); });
@@ -357,7 +375,7 @@ function speakPhone(text,l){
     // no cancel(): each message is queued so every line is spoken in order
     if (listening && rec){ try { rec.abort(); } catch(e){} listening=false; }
     var u=new SpeechSynthesisUtterance(pron(text));
-    u.lang = l==='hi' ? 'hi-IN' : 'en-IN'; u.rate = (l==='hi') ? 1.375 : 1.1; u.pitch = 1; u.volume = 1;
+    u.lang = l==='hi' ? 'hi-IN' : 'en-IN'; u.rate = rateFor(l); u.pitch = 1; u.volume = 1;
     var vs = VOICES.length ? VOICES : (speechSynthesis.getVoices() || []);
     var same = function(x){ return (x.lang||'').replace('_','-').toLowerCase() === u.lang.toLowerCase(); };
     var near = function(x){ return (x.lang||'').toLowerCase().indexOf(u.lang.slice(0,2).toLowerCase())===0; };
