@@ -198,8 +198,13 @@
   @media print{ .confirm{display:none!important} }
   /* Summary-only print (for the patient file) */
   @media print{
-    body.summary-only .app > :not(.print-head):not(.sumcard){display:none!important}
-    body.summary-only .sumcard{page-break-before:auto}
+    /* Print only the doctor summary, on one A4 page: hide everything except the summary and its parents */
+    body.summary-only *:not(.pt-anc):not(#summary):not(#summary *):not(.print-head):not(.print-head *){display:none!important}
+    body.summary-only .pt-anc{display:block!important;margin:0!important;padding:0!important;border:0!important;box-shadow:none!important;background:#fff!important;max-width:none!important}
+    body.summary-only #summary{margin:0!important;padding:0!important;box-shadow:none!important;border:0!important;background:#fff!important;page-break-before:auto}
+    body.summary-only #summary button, body.summary-only #summary .no-print{display:none!important}
+    body.summary-only #summary, body.summary-only #summary *{font-size:11px!important;line-height:1.3!important}
+    body.summary-only{margin:0!important;padding:0!important;background:#fff!important}
   }
 </style>
 <link rel="apple-touch-icon" href="/icons/icon-180.png">
@@ -670,10 +675,16 @@
   }
   document.getElementById('sumPrintBtn').addEventListener('click', function(){
     buildSummary();
+    var sumEl = document.getElementById('summary'), anc = [];
+    for (var el = sumEl.parentElement; el && el !== document.body; el = el.parentElement){ el.classList.add('pt-anc'); anc.push(el); }
+    window.__ptAnc = anc;
     document.body.classList.add('summary-only');
     window.print();
   });
-  window.addEventListener('afterprint', function(){ document.body.classList.remove('summary-only'); });
+  window.addEventListener('afterprint', function(){
+    document.body.classList.remove('summary-only');
+    (window.__ptAnc || []).forEach(function(el){ el.classList.remove('pt-anc'); });
+  });
   // Open in the language given by the link: ?lang=en or ?lang=hi (default English)
   var urlLang = new URLSearchParams(location.search).get('lang');
   if (urlLang === 'en' || urlLang === 'hi') {
