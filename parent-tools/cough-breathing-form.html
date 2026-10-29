@@ -641,7 +641,7 @@
     box.scrollIntoView({behavior: 'smooth', block: 'center'});
   }
   // Save a copy of the submission to the clinic's record sheet and Drive (fire and forget; WhatsApp still opens)
-  var SUBMIT_URL = '';  // set to the submissions web app URL (see submissions-backend/SETUP.md)
+  var SUBMIT_URL = 'https://script.google.com/macros/s/AKfycbzY3GF6DDgr8cIVK-3oSTci3xOiZPaz-0aBWLhBumW8PAIxmI2gI4BIWAGGVjiRDE_d/exec';  // set to the submissions web app URL (see submissions-backend/SETUP.md)
   function saveRecord(form, summary, code){
     try {
       if (!SUBMIT_URL) return;
