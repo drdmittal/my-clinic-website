@@ -135,6 +135,7 @@ function doGet(e) {
   try {
     if (p.action === 'slots') return out(publicSlots(p.from, Number(p.days || 0)));
     if (p.action === 'ping') return out({ ok: true });
+    if (p.action === 'tts') return out(tts(p));
     if (!p.action) return redirectPage();
     return out({ ok: false, error: 'unknown_action' });
   } catch (err) {
@@ -152,6 +153,40 @@ function doPost(e) {
   } catch (err) {
     return out({ ok: false, error: String(err && err.message || err) });
   }
+}
+
+/* ---- Chat voice: Google Cloud neural voice (female Indian voices) ----
+   Key is kept in Script Properties as TTS_API_KEY (never in this file).
+   Only short chat lines are accepted; results are cached and a daily cap applies. */
+var TTS_VOICE = { en: 'en-IN-Neural2-A', hi: 'hi-IN-Neural2-A' };
+var TTS_DAILY_CAP = 20000;
+function tts(p) {
+  var lang = p.lang === 'hi' ? 'hi' : 'en';
+  var text = String(p.text || '').replace(/\s+/g, ' ').trim().slice(0, 400);
+  if (!text) return { ok: false, error: 'no_text' };
+  var props = PropertiesService.getScriptProperties();
+  var key = props.getProperty('TTS_API_KEY');
+  if (!key) return { ok: false, error: 'tts_not_configured' };
+  var cache = CacheService.getScriptCache();
+  var ck = 'tts|' + lang + '|' + text;
+  var hit = cache.get(ck);
+  if (hit) return { ok: true, audio: hit };
+  var day = Utilities.formatDate(new Date(), TZ, 'yyyy-MM-dd');
+  var n = Number(props.getProperty('TTS_' + day) || 0);
+  if (n >= TTS_DAILY_CAP) return { ok: false, error: 'daily_limit' };
+  props.setProperty('TTS_' + day, String(n + 1));
+  var res = UrlFetchApp.fetch('https://texttospeech.googleapis.com/v1/text:synthesize?key=' + encodeURIComponent(key), {
+    method: 'post', contentType: 'application/json', muteHttpExceptions: true,
+    payload: JSON.stringify({
+      input: { text: text },
+      voice: { languageCode: lang === 'hi' ? 'hi-IN' : 'en-IN', name: TTS_VOICE[lang] },
+      audioConfig: { audioEncoding: 'MP3', speakingRate: 1.0 }
+    })
+  });
+  if (res.getResponseCode() !== 200) return { ok: false, error: 'tts_failed' };
+  var audio = JSON.parse(res.getContentText()).audioContent;
+  cache.put(ck, audio, 21600);
+  return { ok: true, audio: audio };
 }
 
 /** Old booking links open this page, which sends parents to the new booking page. */

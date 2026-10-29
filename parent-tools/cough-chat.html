@@ -130,7 +130,9 @@ function listenStatus(on){
   if (on){ n.className='notice'; n.textContent=t('सुन रही हूँ… बोलिए','Listening… please speak'); }
   else if (n.textContent.indexOf('Listening')===0 || n.textContent.indexOf('सुन रही')===0){ n.className='notice hide'; n.textContent=''; }
 }
-function speakingNow(){ return canSpeak && (speechSynthesis.speaking || speechSynthesis.pending); }
+var TTS_URL = 'https://script.google.com/macros/s/AKfycbzZZJon_KvK0ibezOQT0ktfkxIB8-ee_-BnRKra6kvejGrbG1dFjMSD8f9zhR3ZXeWbXA/exec';
+var cloudBusy = 0, audioQ = Promise.resolve();
+function speakingNow(){ return cloudBusy > 0 || (canSpeak && (speechSynthesis.speaking || speechSynthesis.pending)); }
 function waitThenListen(){
   if (!talk || !SR || !cur || cur.type!=='text') return;
   if (canSpeak && !voiceOn) return;
@@ -169,7 +171,7 @@ function listen(){
 }
 $('replayBtn').addEventListener('click', function(){
   if (!lastSay) return;
-  if (!canSpeak){ notice('इस फ़ोन पर आवाज़ सुविधा उपलब्ध नहीं है।','Voice is not available on this phone.'); return; }
+  if (!canSpeak && !TTS_URL){ notice('इस फ़ोन पर आवाज़ सुविधा उपलब्ध नहीं है।','Voice is not available on this phone.'); return; }
   voiceOn = true;
   speak(t(lastSay.hi,lastSay.en), lang);
 });
@@ -177,7 +179,7 @@ $('micBtn').addEventListener('click', function(){
   if (listening){ try { rec.stop(); } catch(e){} return; }
   talk=true; retries=0; listen();
 });
-function chooseLang(l){ setLang(l); voiceOn = canSpeak; setLang(l); start(); }
+function chooseLang(l){ setLang(l); voiceOn = canSpeak || !!TTS_URL; setLang(l); start(); }
 
 /* ---------- typed-answer understanding (Hindi, English, mixed) ---------- */
 var UNSURE = ['pata nahi','pata nahin','pta nahi','pata nhi','nahi pata','nahin pata','malum nahi','maloom nahi','malum nahin','maalum nahi','not sure','dont know','don t know','idk','shayad','पता नहीं','पता नही','मालूम नहीं','मालुम नहीं','शायद','याद नहीं','याद नही','pata nahin'];
@@ -296,6 +298,32 @@ function pron(t){
     .replace(/\bchild(ren)?\b/gi,function(m,r){ return 'chahyld'+(r?'ren':''); });
 }
 function speak(text,l){
+  if (TTS_URL) { speakCloud(text,l); return; }
+  speakPhone(text,l);
+}
+// Neural female voice from the Apps Script backend; each line is queued and plays in order
+function speakCloud(text,l){
+  if (listening && rec){ try { rec.abort(); } catch(e){} listening=false; }
+  cloudBusy++;
+  var clean = text.replace(/\*\*/g,'').replace(/\bDr\.?\s/g,'Doctor ');
+  audioQ = audioQ.then(function(){
+    return fetch(TTS_URL + '?action=tts&lang=' + (l==='hi'?'hi':'en') + '&text=' + encodeURIComponent(clean))
+      .then(function(r){ return r.json(); })
+      .then(function(j){
+        if (!j || !j.ok) throw new Error((j && j.error) || 'tts');
+        return new Promise(function(done){
+          var a = new Audio('data:audio/mp3;base64,' + j.audio);
+          a.playbackRate = (l==='hi') ? 1.375 : 1.1;
+          a.onended = a.onerror = function(){ lastSpeechEnd = Date.now(); done(); };
+          var pr = a.play();
+          if (pr && pr.catch) pr.catch(function(){ done(); });
+        });
+      })
+      .catch(function(){ speakPhone(text,l); })
+      .then(function(){ cloudBusy--; if (cloudBusy<0) cloudBusy=0; });
+  });
+}
+function speakPhone(text,l){
   try {
     if (!canSpeak) return;
     // no cancel(): each message is queued so every line is spoken in order
