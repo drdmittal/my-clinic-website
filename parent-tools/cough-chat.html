@@ -523,7 +523,7 @@ function askName(){
 }
 function askAge(){
   say(fill('{N} की उम्र कितनी है? जैसे: 3 साल।','hi'), fill('How old is {N}? For example: 3 years.','en'));
-  controls({type:'text', numeric:true, ph:{hi:'जैसे: 3 साल या 2 साल 4 महीने',en:'e.g. 3 years or 2 years 4 months'}, onText:function(v){
+  controls({type:'text', numeric:true, ph:{hi:'जैसे: 3 (साल में)',en:'e.g. 3 (in years)'}, onText:function(v){
     if (parseAge(v)===null){ say('माफ़ कीजिए, उम्र समझ नहीं आई। साल में लिखें, जैसे 3 या 7।','Sorry, I did not get the age. Please write it in years, for example 3 or 7.'); return askAge(); }
     age=v; continueChild();
   }});
