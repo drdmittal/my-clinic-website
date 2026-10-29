@@ -116,6 +116,10 @@ function has(s, list){ var n = ' ' + norm(s) + ' '; return list.some(function(w)
 
 /* ---------- talking and listening (browser speech; optional) ---------- */
 var canSpeak = 'speechSynthesis' in window;
+// Chrome on Android fills the voice list late; keep it loaded so the first line uses the right voice
+var VOICES=[]; var warnedVoice={en:false,hi:false};
+function loadVoices(){ try { VOICES = speechSynthesis.getVoices() || []; } catch(e){} }
+if (canSpeak){ loadVoices(); try { speechSynthesis.onvoiceschanged = loadVoices; } catch(e){} }
 var SR = window.SpeechRecognition || window.webkitSpeechRecognition || null;
 var rec = null, listening = false, gotResult = false, retries = 0, talk = !!SR, unclear = 0, lastSpeechEnd = 0;
 function listenStatus(on){
@@ -280,7 +284,7 @@ function speak(text,l){
     if (listening && rec){ try { rec.abort(); } catch(e){} listening=false; }
     var u=new SpeechSynthesisUtterance(text.replace(/\*\*/g,''));
     u.lang = l==='hi' ? 'hi-IN' : 'en-IN'; u.rate = 0.88; u.pitch = 1; u.volume = 1;
-    var vs = speechSynthesis.getVoices() || [];
+    var vs = VOICES.length ? VOICES : (speechSynthesis.getVoices() || []);
     var same = function(x){ return (x.lang||'').replace('_','-').toLowerCase() === u.lang.toLowerCase(); };
     var near = function(x){ return (x.lang||'').toLowerCase().indexOf(u.lang.slice(0,2).toLowerCase())===0; };
     // prefer a Google voice for the exact accent, then any exact accent, then any voice in the language
@@ -289,6 +293,7 @@ function speak(text,l){
          || vs.filter(function(x){ return near(x) && /google/i.test(x.name); })[0]
          || vs.filter(near)[0];
     if (v) u.voice=v;
+    if (!v || !same(v)) { var k = l==='hi'?'hi':'en'; if (!warnedVoice[k]) { warnedVoice[k]=true; notice('इस फ़ोन में भारतीय '+(k==='hi'?'हिंदी':'अंग्रेज़ी')+' आवाज़ नहीं है। फ़ोन की Settings → Text-to-speech में Google की भारतीय आवाज़ डाउनलोड करें।','This phone has no Indian '+(k==='hi'?'Hindi':'English')+' voice. Install the Google Indian voice in phone Settings → Text-to-speech.'); } }
     u.onerror = function(e){ lastSpeechEnd=Date.now(); if (e && e.error !== 'interrupted' && e.error !== 'canceled') notice('आवाज़ नहीं चल पाई। फ़ोन की आवाज़ (volume) जाँचें, या Chrome / Safari में खोलें।','Voice did not play. Check the phone volume, or open in Chrome or Safari.'); };
     var started=false; u.onstart=function(){ started=true; }; u.onend=function(){ lastSpeechEnd=Date.now(); };
     setTimeout(function(){ if (!started && !speechSynthesis.speaking && !speechSynthesis.pending){ notice('फ़ोन ने आवाज़ शुरू नहीं की। वॉल्यूम जाँचें, या Chrome / Safari में खोलें।','Your phone did not start the voice. Check the volume, or open in Chrome or Safari.'); } }, 2500);
