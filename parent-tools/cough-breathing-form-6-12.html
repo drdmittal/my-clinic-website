@@ -635,8 +635,16 @@
     box.classList.remove('hide');
     box.scrollIntoView({behavior: 'smooth', block: 'center'});
   }
+  // Save a copy of the submission to the clinic's record sheet and Drive (fire and forget; WhatsApp still opens)
+  function saveRecord(form, summary, code){
+    try {
+      fetch('https://script.google.com/macros/s/AKfycbzZZJon_KvK0ibezOQT0ktfkxIB8-ee_-BnRKra6kvejGrbG1dFjMSD8f9zhR3ZXeWbXA/exec', {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, keepalive:true,
+        body: JSON.stringify({action:'summary_submit', form: form, summary: summary, code: code})}).catch(function(){});
+    } catch(e){}
+  }
   document.getElementById('waYes').addEventListener('click', function(){
     var st = document.getElementById('waStatus');
+    saveRecord('6-12', waTextFull(), encodeState());
     var text = waText() + '\n\n' + FORM_URL + '#d=' + encodeState();
     var wa = 'https://wa.me/918130521456?text=' + encodeURIComponent(text);
     window.open(wa, '_blank', 'noopener');   // opened directly from the tap, so browsers allow it
