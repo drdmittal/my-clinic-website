@@ -148,7 +148,6 @@ function doPost(e) {
   try { body = JSON.parse((e && e.postData && e.postData.contents) || '{}'); } catch (x) { return out({ ok: false, error: 'bad_json' }); }
   try {
     if (body.action === 'book') return out(book(body));
-    if (body.action === 'summary_submit') return out(saveSummary(body));
     if (body.action && body.action.indexOf('admin_') === 0) return out(admin(body));
     return out({ ok: false, error: 'unknown_action' });
   } catch (err) {
@@ -188,42 +187,6 @@ function tts(p) {
   var audio = JSON.parse(res.getContentText()).audioContent;
   cache.put(ck, audio, 21600);
   return { ok: true, audio: audio };
-}
-
-/* ---- Patient submissions: a separate sheet + Drive folder (not the appointment sheet) ----
-   Run setupSummaryStore() once from the script editor. It creates the sheet and folder in the
-   owner's Google account and remembers their IDs. Keep both private (share only with doctor/reception). */
-function setupSummaryStore() {
-  var props = PropertiesService.getScriptProperties();
-  var ss = SpreadsheetApp.create('Patient submissions (Dr Dinesh Mittal Clinic)');
-  var sh = ss.getActiveSheet();
-  sh.setName('Submissions');
-  sh.getRange(1, 1, 1, 5).setValues([['Received (IST)', 'Form', 'Summary', 'Answers code', 'Drive file']]).setFontWeight('bold');
-  sh.setFrozenRows(1);
-  var folder = DriveApp.createFolder('Patient submissions (private)');
-  props.setProperty('SUMMARY_SHEET_ID', ss.getId());
-  props.setProperty('SUMMARY_FOLDER_ID', folder.getId());
-  Logger.log('Sheet: ' + ss.getUrl());
-  Logger.log('Folder: ' + folder.getUrl());
-}
-
-function saveSummary(body) {
-  var props = PropertiesService.getScriptProperties();
-  var forms = { 'under5': 'Under 5', '6-12': 'Age 6-12', 'chat-u5': 'Chat under 5', 'chat-s612': 'Chat 6-12' };
-  var form = forms[body.form] ? body.form : null;
-  var summary = String(body.summary || '').slice(0, 4000);
-  var code = String(body.code || '').slice(0, 20000);
-  if (!form || !code) return { ok: false, error: 'bad_input' };
-  var day = Utilities.formatDate(new Date(), TZ, 'yyyy-MM-dd');
-  var n = Number(props.getProperty('SUB_' + day) || 0);
-  if (n >= 500) return { ok: false, error: 'daily_limit' };
-  props.setProperty('SUB_' + day, String(n + 1));
-  var when = Utilities.formatDate(new Date(), TZ, 'yyyy-MM-dd HH:mm:ss');
-  var file = DriveApp.getFolderById(props.getProperty('SUMMARY_FOLDER_ID')).createFile(
-    when + ' ' + forms[form] + '.txt', summary + '\n\nAnswers code (paste into the clinic summary page):\n' + code, MimeType.PLAIN_TEXT);
-  SpreadsheetApp.openById(props.getProperty('SUMMARY_SHEET_ID')).getSheetByName('Submissions')
-    .appendRow([when, forms[form], summary, code, file.getUrl()]);
-  return { ok: true };
 }
 
 /** Old booking links open this page, which sends parents to the new booking page. */
