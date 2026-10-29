@@ -297,7 +297,35 @@ function pron(t){
     .replace(/\bDr\.?\s/g,'Doctor ')
     .replace(/\bchild(ren)?\b/gi,function(m,r){ return 'chahyld'+(r?'ren':''); });
 }
+// speech-only: write a Latin-letter name in Devanagari so the Hindi voice reads it
+var DEV_CONS = [['chh','छ'],['sh','श'],['ch','च'],['th','थ'],['dh','ध'],['bh','भ'],['kh','ख'],['gh','घ'],['ph','फ'],['jh','झ'],
+  ['k','क'],['g','ग'],['j','ज'],['t','त'],['d','द'],['n','न'],['p','प'],['b','ब'],['m','म'],['y','य'],['r','र'],['l','ल'],
+  ['v','व'],['w','व'],['s','स'],['h','ह'],['f','फ'],['q','क'],['c','क'],['x','क्स'],['z','ज']];
+var DEV_V = [['aa','आ','ा'],['ee','ई','ी'],['ii','ई','ी'],['oo','ऊ','ू'],['uu','ऊ','ू'],['ai','ऐ','ै'],['au','औ','ौ'],
+  ['a','अ',''],['i','इ','ि'],['u','उ','ु'],['e','ए','े'],['o','ओ','ो']];
+function devWord(w){
+  var out='', pos=0, prevC=false;
+  while (pos < w.length){
+    var rest = w.slice(pos), hit=null;
+    for (var i=0;i<DEV_V.length;i++){ if (rest.indexOf(DEV_V[i][0])===0){ hit=DEV_V[i]; break; } }
+    if (hit){
+      var len=hit[0].length, last = (pos+len===w.length);
+      if (prevC) out += (last && hit[0]==='a') ? 'ा' : hit[2];
+      else out += hit[1];
+      prevC=false; pos+=len; continue;
+    }
+    var hitC=null;
+    for (var j=0;j<DEV_CONS.length;j++){ if (rest.indexOf(DEV_CONS[j][0])===0){ hitC=DEV_CONS[j]; break; } }
+    if (hitC){ if (prevC) out += '्'; out += hitC[1]; prevC=true; pos+=hitC[0].length; continue; }
+    pos++; // unknown character: skip
+  }
+  return out;
+}
+function devName(n){ return String(n).split(/(\s+)/).map(function(p){ return /^\s+$/.test(p) ? p : devWord(p.toLowerCase()); }).join(''); }
+
 function speak(text,l){
+  // Hindi voice: read the child's name in Devanagari (the screen keeps the name as typed)
+  if (l==='hi' && name) text = text.split(name).join(devName(name));
   if (TTS_URL) { speakCloud(text,l); return; }
   speakPhone(text,l);
 }
