@@ -43,6 +43,8 @@
   .foot{font-size:12px;color:var(--muted);padding:10px 14px 0;text-align:center}
   a{color:var(--indigo)}
   .hide{display:none!important}
+  .replayRow{text-align:right;margin:0 0 6px}
+  #replayBtn{background:#fff;border:1.5px solid var(--indigo);color:var(--indigo);border-radius:20px;padding:6px 12px;font-size:14px}
   #micBtn{background:#fff;border:2px solid var(--indigo)!important;color:var(--indigo)!important;font-size:18px;min-width:48px}
   #micBtn.hot{background:var(--indigo)!important;color:#fff!important;animation:pulse 1.4s infinite}
   @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(42,37,128,.45)}70%{box-shadow:0 0 0 12px rgba(42,37,128,0)}100%{box-shadow:0 0 0 0 rgba(42,37,128,0)}}
@@ -67,6 +69,7 @@
   <div id="notice" class="notice hide"></div>
   <div id="log" aria-live="polite"></div>
   <div id="ctrl">
+    <div class="replayRow"><button id="replayBtn" type="button" class="hide" aria-label="Repeat question / प्रश्न दोबारा सुनें">🔁 <span class="hi">दोबारा सुनें</span><span class="en">Repeat question</span></button></div>
     <div id="chips" class="chips"></div>
     <div id="typeRow" class="typebox hide">
       <input id="typeIn" type="text" autocomplete="off">
@@ -164,6 +167,12 @@ function listen(){
     my.start();
   } catch(e){ listening=false; $('micBtn').textContent='🎤'; }
 }
+$('replayBtn').addEventListener('click', function(){
+  if (!lastSay) return;
+  if (!canSpeak){ notice('इस फ़ोन पर आवाज़ सुविधा उपलब्ध नहीं है।','Voice is not available on this phone.'); return; }
+  voiceOn = true;
+  speak(t(lastSay.hi,lastSay.en), lang);
+});
 $('micBtn').addEventListener('click', function(){
   if (listening){ try { rec.stop(); } catch(e){} return; }
   talk=true; retries=0; listen();
@@ -271,7 +280,10 @@ function summaryHTML(){
   var rows=items.filter(function(it){return applicable(it) && answered(it);});
   return '<b>'+esc(t('सारांश','Summary'))+'</b><br>' + rows.map(function(it){ return esc(t(it.hi,it.en).slice(0,70))+' → <b>'+esc(answerText(it))+'</b>'; }).join('<br>');
 }
+var lastSay=null;
 function say(hi,en){
+  lastSay={hi:hi,en:en};
+  $('replayBtn').classList.remove('hide');
   log.push({who:'bot',hi:hi,en:en});
   renderLog();
   if (voiceOn) speak(t(hi,en), lang);
