@@ -104,6 +104,7 @@ Last updated: 29 Oct 2026 (wheeze parent guide added as an unlisted page, `paren
 ### 6b. Reception form sender (`?f=reception`)
 - **Open:** from the side menu's **Clinic login** (it opens a chooser: Doctor login or Reception login), or `private-tools/?f=reception`. Its own password, different from the doctor's hub. The password is not written in the repo or here.
 - **Use:** type the parent's 10-digit mobile, choose the form, tap **Open WhatsApp and send**. The message has the form link in English and Hindi. Nothing is stored.
+- **Wheeze guide (added 29 Oct 2026):** listed as "Wheeze guide for parents". Its message sends the guide link only (English or Hindi, the page has its own toggle and print button). It has no "Submit to clinic" step, since it is information only.
 - **Add a form:** edit the `FORMS` list in the source, then encrypt it again with the reception password (same method as section 6). Forms marked `ready: false` show greyed out.
 - **Source:** kept on the developer's side only, never committed in plain form.
 
