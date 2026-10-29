@@ -100,7 +100,7 @@ var path = null, items = [], idx = 0, hist = [], phase = 'start', cur = null, mo
 var LBL = {
   yes:{en:'Yes',hi:'हाँ'}, no:{en:'No',hi:'नहीं'}, unsure:{en:'Not sure',hi:'पता नहीं'},
   dk:{en:"I don't remember",hi:'याद नहीं'}, skip:{en:'Skip',hi:'छोड़ें'}, back:{en:'⬅ Back',hi:'⬅ पीछे'},
-  send:{en:'Send to clinic WhatsApp',hi:'क्लिनिक के WhatsApp पर भेजें'}, change:{en:'Change an answer',hi:'कोई जवाब बदलें'}
+  send:{en:'Submit to clinic',hi:'क्लिनिक को जमा करें'}, change:{en:'Change an answer',hi:'कोई जवाब बदलें'}
 };
 var EMERG = /neela|neele|nila|blue|नीला|नीले|saans nahi|saans nahin|sans nahi|sans nahin|साँस नहीं|सांस नहीं|saans phool|sans phool|साँस फूल|सांस फूल|bol nahi|bol nahin|बोल नहीं|behosh|बेहोश|sust|सुस्त|drowsy|unconscious|chest pull|chhati dhans|छाती धँस|छाती धंस/i;
 
@@ -668,27 +668,30 @@ function encodeState(){
   // Save a copy of the submission to the clinic's record sheet and Drive (fire and forget; WhatsApp still opens)
   var SUBMIT_URL = 'https://script.google.com/macros/s/AKfycbzY3GF6DDgr8cIVK-3oSTci3xOiZPaz-0aBWLhBumW8PAIxmI2gI4BIWAGGVjiRDE_d/exec';  // set to the submissions web app URL (see submissions-backend/SETUP.md)
   function saveRecord(form, lines, code){
-    try {
-      if (!SUBMIT_URL) return;
-      fetch(SUBMIT_URL, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, keepalive:true,
-        body: JSON.stringify({action:'summary_submit', form: form, lines: lines, code: code})}).catch(function(){});
-    } catch(e){}
+    if (!SUBMIT_URL) return Promise.resolve(false);
+    return fetch(SUBMIT_URL, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body: JSON.stringify({action:'summary_submit', form: form, lines: lines, code: code})})
+      .then(function(r){ return r.json(); }).then(function(j){ return !!(j && j.ok); }).catch(function(){ return false; });
   }
 function sendWA(){
   var code = encodeState();
   var sumTmp=document.createElement('div'); sumTmp.innerHTML=summaryHTML().replace(/<br>/g,'\n');
   var chatLines=['*Child breathing & cough history (chat)*','Child: '+(name||'name not given')+'  ·  Age: '+(age||'not given')+'  ·  '+(gender==='girl'?'Girl':'Boy'),''].concat(sumTmp.textContent.split('\n'));
-  saveRecord('chat-'+path, chatLines, code);
   var url = FORM[path] + '#d=' + code;
   var text = '*Child breathing & cough history (chat)*\n' + 'Child: ' + (name||'name not given') + '  ·  Age: ' + (age||'not given') + '  ·  ' + (gender==='girl'?'Girl':'Boy') + '\n\nPlease open the link below and paste it in the clinic summary page.\n\n' + url;
   var wa = 'https://wa.me/' + CLINIC_WA + '?text=' + encodeURIComponent(text);
-  window.open(wa, '_blank', 'noopener');
-  say('भेजने के लिए धन्यवाद। WhatsApp में "Send" दबाएँ। क्लिनिक आपका फ़ॉर्म प्रिंट करेगा।','Thank you. Tap Send in WhatsApp. The clinic will print your form.');
-  controls(null);
-  var row=$('sendRow'); row.classList.remove('hide');
-  var p=document.createElement('p'); p.style.cssText='font-weight:700;margin:6px 0;font-size:14px';
-  p.innerHTML = esc(t('WhatsApp खुल रहा है। अगर नहीं खुला तो नीचे दबाएँ।','WhatsApp is opening. If it did not open, tap below.'))+' <a href="'+wa+'" target="_blank" rel="noopener">'+esc(t('WhatsApp खोलें','Open WhatsApp'))+'</a>';
-  row.appendChild(p);
+  saveRecord('chat-'+path, chatLines, code).then(function(ok){
+    controls(null);
+    if (ok){
+      say('जमा हो गया। धन्यवाद! क्लिनिक आपका फ़ॉर्म प्रिंट करेगा।','Submitted. Thank you! The clinic will print your form.');
+      return;
+    }
+    say('जमा नहीं हो सका। नीचे दिए बटन से WhatsApp पर भेजें।','Could not submit. Send by WhatsApp using the button below.');
+    var row=$('sendRow'); row.classList.remove('hide');
+    var p=document.createElement('p'); p.style.cssText='font-weight:700;margin:6px 0;font-size:14px';
+    p.innerHTML = '<a href="'+wa+'" target="_blank" rel="noopener">'+esc(t('WhatsApp खोलें','Open WhatsApp'))+'</a>';
+    row.appendChild(p);
+  });
 }
 
 /* ---------- boot ---------- */
