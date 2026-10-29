@@ -281,7 +281,7 @@ function me(text){ log.push({who:'me',t:text}); renderLog(); }
 function pron(t){
   return t.replace(/\*\*/g,'')
     .replace(/\bDr\.?\s/g,'Doctor ')
-    .replace(/\bchild(ren)?\b/gi,function(m,r){ return 'chaild'+(r?'ren':''); });
+    .replace(/\bchild(ren)?\b/gi,function(m,r){ return 'chahyld'+(r?'ren':''); });
 }
 function speak(text,l){
   try {
@@ -289,7 +289,7 @@ function speak(text,l){
     // no cancel(): each message is queued so every line is spoken in order
     if (listening && rec){ try { rec.abort(); } catch(e){} listening=false; }
     var u=new SpeechSynthesisUtterance(pron(text));
-    u.lang = l==='hi' ? 'hi-IN' : 'en-IN'; u.rate = 1.1; u.pitch = 1; u.volume = 1;
+    u.lang = l==='hi' ? 'hi-IN' : 'en-IN'; u.rate = (l==='hi') ? 1.375 : 1.1; u.pitch = 1; u.volume = 1;
     var vs = VOICES.length ? VOICES : (speechSynthesis.getVoices() || []);
     var same = function(x){ return (x.lang||'').replace('_','-').toLowerCase() === u.lang.toLowerCase(); };
     var near = function(x){ return (x.lang||'').toLowerCase().indexOf(u.lang.slice(0,2).toLowerCase())===0; };
