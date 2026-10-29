@@ -277,12 +277,18 @@ function say(hi,en){
   if (voiceOn) speak(t(hi,en), lang);
 }
 function me(text){ log.push({who:'me',t:text}); renderLog(); }
+// spelling tweaks for the speech engine only (the screen text is unchanged)
+function pron(t){
+  return t.replace(/\*\*/g,'')
+    .replace(/\bDr\.?\s/g,'Doctor ')
+    .replace(/\bchild(ren)?\b/gi,function(m,r){ return 'chaild'+(r?'ren':''); });
+}
 function speak(text,l){
   try {
     if (!canSpeak) return;
     // no cancel(): each message is queued so every line is spoken in order
     if (listening && rec){ try { rec.abort(); } catch(e){} listening=false; }
-    var u=new SpeechSynthesisUtterance(text.replace(/\*\*/g,''));
+    var u=new SpeechSynthesisUtterance(pron(text));
     u.lang = l==='hi' ? 'hi-IN' : 'en-IN'; u.rate = 1.1; u.pitch = 1; u.volume = 1;
     var vs = VOICES.length ? VOICES : (speechSynthesis.getVoices() || []);
     var same = function(x){ return (x.lang||'').replace('_','-').toLowerCase() === u.lang.toLowerCase(); };
