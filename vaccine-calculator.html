@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="index,follow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vaccine Calculator: due dates from date of birth | Dr. Dinesh Mittal Child Clinic</title>
+<meta name="description" content="Enter your child's date of birth to see the IAP vaccines due, approximate due dates, and what to do if a dose is overdue. Dr. Dinesh Mittal, Rohini, Delhi.">
+<link rel="canonical" href="https://childspecialistrohini.com/vaccine-calculator.html">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-768Y52R8SC"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-768Y52R8SC");</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anek+Devanagari:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--indigo:#2a2580;--pink:#e2457a;--turmeric:#f5ad1b;--teal:#0f9b8e;--sky:#2f8fe0;--grape:#8b4fd6;--green:#2f8f3a;--ink:#1d1b3a;--muted:#5b5878;--bg:#fbf9ff}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Anek Devanagari",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+header{background:var(--indigo);color:#fff;padding:18px 16px}
+header .clinic{font-size:13px;opacity:.9}
+header h1{margin:4px 0 2px;font-size:22px;font-weight:800}
+header .sub{font-size:14px;opacity:.9}
+.wrap{max-width:720px;margin:0 auto;padding:14px 14px 40px}
+.bar{display:flex;justify-content:flex-end;margin:6px 0 12px}
+.lang{border:2px solid var(--indigo);background:#fff;color:var(--indigo);border-radius:10px;padding:6px 12px;font:700 14px "Anek Devanagari",sans-serif;cursor:pointer}
+.panel{background:#fff;border-radius:14px;padding:14px;box-shadow:0 1px 4px rgba(42,37,128,.08);margin-bottom:14px}
+.panel label{display:block;font-weight:700;margin-bottom:6px}
+.panel input,.panel select{width:100%;font:600 16px "Anek Devanagari",sans-serif;padding:10px;border:2px solid #d9d6f2;border-radius:10px;background:#fff;color:var(--ink)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.small{font-size:13px;color:var(--muted);margin-top:6px}
+.summary{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.pill{border-radius:999px;padding:6px 12px;font-weight:700;font-size:14px}
+.p-over{background:#fde6ee;color:#a8214d}
+.p-now{background:#fff4dc;color:#7a4b00}
+.p-up{background:#e6f0fd;color:#1e5fa8}
+.p-given{background:#e7f6e9;color:#1f6b28}
+h2.group{font-size:17px;margin:18px 0 8px;color:var(--indigo)}
+.vax{background:#fff;border-radius:14px;padding:12px 14px;margin-bottom:10px;box-shadow:0 1px 4px rgba(42,37,128,.08);border-left:6px solid var(--teal)}
+.vax.over{border-left-color:var(--pink)}
+.vax.now{border-left-color:var(--turmeric)}
+.vax.given{border-left-color:var(--green);opacity:.85}
+.vax h3{margin:0 0 4px;font-size:16px}
+.vax .due{font-size:15px;font-weight:700;color:var(--indigo)}
+.vax .prot{font-size:14px;color:var(--muted)}
+.vax .act{font-size:14px;margin-top:6px}
+.vax label.tick{display:flex;gap:8px;align-items:center;margin-top:8px;font-weight:700;font-size:14px;cursor:pointer}
+.vax label.tick input{width:20px;height:20px}
+.vax input.date{font:600 14px "Anek Devanagari",sans-serif;padding:4px 6px;border:1px solid #d9d6f2;border-radius:6px}
+.note{margin-top:20px;background:#f1efff;border-radius:12px;padding:12px 14px;font-size:14px;color:var(--muted)}
+.urgent{margin-top:12px;background:#fff4dc;border-radius:12px;padding:12px 14px;font-size:14px}
+footer{margin-top:18px;font-size:13px;color:var(--muted);text-align:center}
+</style>
+</head>
+<body>
+<header>
+  <div class="clinic" id="clinicLine"></div>
+  <h1 id="title"></h1>
+  <div class="sub" id="subtitle"></div>
+</header>
+
+<div class="wrap">
+  <div class="bar"><button class="lang" id="langBtn">हिन्दी</button></div>
+
+  <div class="panel">
+    <div class="row2">
+      <div>
+        <label for="dob" id="lblDob"></label>
+        <input type="date" id="dob">
+      </div>
+      <div>
+        <label for="sex" id="lblSex"></label>
+        <select id="sex"></select>
+      </div>
+    </div>
+    <div class="small" id="hintDob"></div>
+  </div>
+
+  <div class="summary" id="summary"></div>
+  <div id="list"></div>
+
+  <div class="urgent" id="catchup"></div>
+  <div class="note" id="note"></div>
+  <footer>
+    <div id="foot1"></div>
+    <div><a href="vaccine-sheets.html">Vaccine sheets</a> · <a href="vaccination.html">Vaccination guide</a></div>
+    <div><b>www.drdineshmittal.com</b></div>
+  </footer>
+</div>
+
+<script src="/site-nav.js" defer></script>
+<script>
+const UI = {
+  en: {
+    clinic: "Dr. Dinesh Mittal Child Clinic · MBBS, DCH · Reg. No. DMC/R/00668 · Rohini, Delhi",
+    title: "Vaccine calculator",
+    sub: "IAP schedule: when each vaccine is due, from date of birth",
+    dob: "Child's date of birth", sex: "Child", boy: "Boy", girl: "Girl",
+    hint: "Your entries stay on this phone. Tick a dose once it is given, and enter the date if you remember it.",
+    s_over: "Overdue", s_now: "Due now", s_up: "Upcoming", s_given: "Given",
+    due: "Due", window: "Due between", on: "Due on", given: "Given on",
+    protects: "Protects against", tick: "Given",
+    gr_over: "Overdue: give as soon as possible", gr_now: "Due now", gr_up: "Upcoming", gr_given: "Already given",
+    act_over: "Do not wait for the next dose. Book a visit to the clinic. Do not double up doses to catch up; the doctor will plan the catch-up.",
+    act_now: "Book this visit, or ask the doctor if it can be given with another vaccine.",
+    act_up: "Plan this visit in advance.",
+    catchup: "<b>If a dose is overdue:</b> do not give extra doses to catch up on your own. Book a visit, and the doctor will decide the catch-up schedule. Missed vaccines are still worth giving.",
+    note: "<b>Please read:</b> The dates are approximate and follow the IAP schedule shown on this website. Your child's doctor decides the actual timing, catch-up plan and any special needs. Vaccines are not given if the child is unwell on the day, so check with the doctor first. This tool is not a substitute for a consultation.",
+    foot: "Health education material · Dr. Dinesh Mittal Child Clinic",
+    enterDob: "Enter the date of birth to see the schedule.",
+    futureDob: "Date of birth cannot be in the future.",
+    weeks: "weeks", months: "months", years: "years",
+    v: {
+      bcg: ["At birth: BCG, OPV-0, Hepatitis B-1", "Tuberculosis, polio, hepatitis B"],
+      p6w: ["6 weeks: 6-in-1 (DTP, polio, Hib), Hep B-2, rotavirus-1, PCV-1", "Diphtheria, tetanus, whooping cough, polio, Hib, diarrhoea, pneumonia"],
+      p10w: ["10 weeks: 6-in-1 dose 2, rotavirus-2, PCV-2", "Primary series, dose 2"],
+      p14w: ["14 weeks: 6-in-1 dose 3, rotavirus-3, PCV-3", "Primary series completed"],
+      flu1: ["6 months: influenza (flu) dose 1", "Seasonal flu and pneumonia"],
+      flu2: ["7 months: influenza (flu) dose 2", "Seasonal flu and pneumonia"],
+      tcv1: ["6 to 9 months: typhoid conjugate vaccine (TCV)", "Typhoid fever"],
+      m9: ["9 months: MMR-1, oral polio booster, MenACWY dose 1", "Measles, mumps, rubella, meningitis"],
+      m12: ["12 months: hepatitis A dose 1, MenACWY dose 2", "Jaundice (hepatitis A), meningitis"],
+      m15: ["15 months: MMR-2, chickenpox-1, PCV booster", "Measles, mumps, rubella, chickenpox, pneumonia"],
+      b16: ["16 to 18 months: DTP booster 1, IPV booster, Hib booster", "Diphtheria, tetanus, whooping cough, polio, Hib"],
+      men2: ["2 years onward: MenACWY single dose, only if not given earlier", "Meningitis"],
+      tcv2: ["3 to 5 years: typhoid booster (before school)", "Typhoid fever"],
+      b4: ["4 to 5 years: DTP booster 2, MMR-3, chickenpox-2, OPV", "Diphtheria, tetanus, whooping cough, measles, chickenpox, polio"],
+      hpv: ["9 to 14 years: HPV vaccine, 2 doses (girls)", "Cervical cancer and related cancers"],
+      tdap: ["9 to 14 years: Tdap booster", "Tetanus and whooping cough"]
+    }
+  },
+  hi: {
+    clinic: "डॉ. दिनेश मित्तल चाइल्ड क्लिनिक · MBBS, DCH · पंजीकरण संख्या DMC/R/00668 · रोहिणी, दिल्ली",
+    title: "टीका कैलकुलेटर",
+    sub: "IAP चार्ट: जन्म की तारीख से हर टीका कब लगना है",
+    dob: "बच्चे की जन्म तिथि", sex: "बच्चा", boy: "लड़का", girl: "लड़की",
+    hint: "आपकी जानकारी इसी फ़ोन में रहती है। टीका लगने पर उसे टिक करें, और याद हो तो तारीख लिखें।",
+    s_over: "देरी से", s_now: "अभी लगना है", s_up: "आगे आने वाले", s_given: "लग चुके",
+    due: "लगना है", window: "इस अवधि में लगना है", on: "लगना है", given: "लगा था",
+    protects: "किससे बचाव", tick: "लग चुका है",
+    gr_over: "देरी से: जल्द से जल्द लगवाएँ", gr_now: "अभी लगना है", gr_up: "आगे आने वाले", gr_given: "लग चुके",
+    act_over: "अगली खुराक का इंतज़ार न करें। क्लिनिक में समय लें। खुद से दोगुनी खुराक न दें; डॉक्टर बाद का कार्यक्रम तय करेंगे।",
+    act_now: "यह विज़िट बुक करें, या डॉक्टर से पूछें कि इसे दूसरे टीके के साथ लग सकता है या नहीं।",
+    act_up: "यह विज़िट पहले से प्लान करें।",
+    catchup: "<b>अगर कोई खुराक देरी से है:</b> खुद से अतिरिक्त खुराक न दें। क्लिनिक में समय लें, डॉक्टर बाद का कार्यक्रम तय करेंगे। छूटे टीके फिर भी लगवाने चाहिए।",
+    note: "<b>कृपया पढ़ें:</b> तारीखें अनुमानित हैं और इस वेबसाइट पर दिए IAP चार्ट पर आधारित हैं। टीके का सही समय, कैच-अप योजना और कोई विशेष ज़रूरत आपके बच्चे के डॉक्टर तय करेंगे। अगर उस दिन बच्चे की तबीयत ठीक न हो तो टीका न लगवाएँ, पहले डॉक्टर से पूछें। यह टूल डॉक्टर से परामर्श का विकल्प नहीं है।",
+    foot: "स्वास्थ्य शिक्षा सामग्री · डॉ. दिनेश मित्तल चाइल्ड क्लिनिक",
+    enterDob: "कार्यक्रम देखने के लिए जन्म तिथि लिखें।",
+    futureDob: "जन्म तिथि भविष्य में नहीं हो सकती।",
+    weeks: "हफ़्ते", months: "महीने", years: "साल",
+    v: {
+      bcg: ["जन्म के समय: BCG, OPV-0, हेपेटाइटिस-बी 1", "टीबी, पोलियो, हेपेटाइटिस-बी"],
+      p6w: ["6 हफ़्ते: 6-in-1 (DTP, पोलियो, Hib), हेप-बी 2, रोटावायरस 1, PCV 1", "डिप्थीरिया, टिटनेस, काली खाँसी, पोलियो, Hib, दस्त, निमोनिया"],
+      p10w: ["10 हफ़्ते: 6-in-1 दूसरी खुराक, रोटावायरस 2, PCV 2", "प्राथमिक सीरीज़ की दूसरी खुराक"],
+      p14w: ["14 हफ़्ते: 6-in-1 तीसरी खुराक, रोटावायरस 3, PCV 3", "प्राथमिक सीरीज़ पूरी"],
+      flu1: ["6 महीने: फ्लू (इन्फ्लूएंजा) पहली खुराक", "मौसमी फ्लू और निमोनिया"],
+      flu2: ["7 महीने: फ्लू (इन्फ्लूएंजा) दूसरी खुराक", "मौसमी फ्लू और निमोनिया"],
+      tcv1: ["6 से 9 महीने: टाइफाइड कंजुगेट वैक्सीन (TCV)", "टाइफाइड (मियादी बुखार)"],
+      m9: ["9 महीने: MMR-1, पोलियो बूस्टर, MenACWY पहली खुराक", "खसरा, गलसुआ, रूबेला, मेनिंजाइटिस"],
+      m12: ["12 महीने: हेपेटाइटिस-ए पहली खुराक, MenACWY दूसरी खुराक", "पीलिया (हेपेटाइटिस-ए), मेनिंजाइटिस"],
+      m15: ["15 महीने: MMR-2, चिकनपॉक्स-1, PCV बूस्टर", "खसरा, गलसुआ, रूबेला, चिकनपॉक्स, निमोनिया"],
+      b16: ["16 से 18 महीने: DTP बूस्टर 1, IPV बूस्टर, Hib बूस्टर", "डिप्थीरिया, टिटनेस, काली खाँसी, पोलियो, Hib"],
+      men2: ["2 साल से: MenACWY एक खुराक, सिर्फ़ तब अगर पहले न लगी हो", "मेनिंजाइटिस"],
+      tcv2: ["3 से 5 साल: टाइफाइड बूस्टर (स्कूल से पहले)", "टाइफाइड (मियादी बुखार)"],
+      b4: ["4 से 5 साल: DTP बूस्टर 2, MMR-3, चिकनपॉक्स-2, OPV", "डिप्थीरिया, टिटनेस, काली खाँसी, खसरा, चिकनपॉक्स, पोलियो"],
+      hpv: ["9 से 14 साल: HPV टीका, 2 खुराक (लड़कियों के लिए)", "सर्वाइकल कैंसर और उससे जुड़े कैंसर"],
+      tdap: ["9 से 14 साल: Tdap बूस्टर", "टिटनेस और काली खाँसी"]
+    }
+  }
+};
+
+// Each item: id, when (function of dob -> {from, to}), sexFilter (optional)
+const addDays = (d, n) => { const x = new Date(d); x.setDate(x.getDate() + n); return x; };
+const addMonths = (d, n) => { const x = new Date(d); x.setMonth(x.getMonth() + n); return x; };
+const addYears = (d, n) => addMonths(d, 12 * n);
+
+const ITEMS = [
+  {id:"bcg",   when: d => ({from: d, to: null})},
+  {id:"p6w",   when: d => ({from: addDays(d, 42), to: null})},
+  {id:"p10w",  when: d => ({from: addDays(d, 70), to: null})},
+  {id:"p14w",  when: d => ({from: addDays(d, 98), to: null})},
+  {id:"flu1",  when: d => ({from: addMonths(d, 6), to: null})},
+  {id:"flu2",  when: d => ({from: addDays(addMonths(d, 6), 28), to: null})},
+  {id:"tcv1",  when: d => ({from: addMonths(d, 6), to: addMonths(d, 9)})},
+  {id:"m9",    when: d => ({from: addMonths(d, 9), to: null})},
+  {id:"m12",   when: d => ({from: addMonths(d, 12), to: null})},
+  {id:"m15",   when: d => ({from: addMonths(d, 15), to: null})},
+  {id:"b16",   when: d => ({from: addMonths(d, 16), to: addMonths(d, 18)})},
+  {id:"men2",  when: d => ({from: addMonths(d, 24), to: null})},
+  {id:"tcv2",  when: d => ({from: addYears(d, 3), to: addYears(d, 5)})},
+  {id:"b4",    when: d => ({from: addYears(d, 4), to: addYears(d, 5)})},
+  {id:"hpv",   when: d => ({from: addYears(d, 9), to: addYears(d, 14)}), girlsOnly: true},
+  {id:"tdap",  when: d => ({from: addYears(d, 9), to: addYears(d, 14)})}
+];
+
+let lang = "en";
+const KEY = "vaxcalc-v1";
+
+function load(){ try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e){ return {}; } }
+function save(state){ try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){} }
+
+function startOfToday(){ const t = new Date(); t.setHours(0,0,0,0); return t; }
+function fmt(d){ return d.toLocaleDateString(lang === "en" ? "en-IN" : "hi-IN", {day:"numeric", month:"short", year:"numeric"}); }
+
+function status(item, dob, given, today){
+  const w = item.when(dob);
+  if (given) return {k:"given"};
+  if (w.to) {
+    if (today < w.from) return {k:"up", from: w.from, to: w.to};
+    if (today <= w.to) return {k:"now", from: w.from, to: w.to};
+    return {k:"over", from: w.from, to: w.to};
+  }
+  if (today < w.from) return {k:"up", from: w.from};
+  const days = Math.floor((today - w.from) / 86400000);
+  if (days <= 28) return {k:"now", from: w.from};
+  return {k:"over", from: w.from};
+}
+
+function render(){
+  const T = UI[lang];
+  document.getElementById("clinicLine").textContent = T.clinic;
+  document.getElementById("title").textContent = T.title;
+  document.getElementById("subtitle").textContent = T.sub;
+  document.getElementById("langBtn").textContent = lang === "en" ? "हिन्दी" : "English";
+  document.documentElement.lang = lang === "en" ? "en" : "hi";
+  document.getElementById("lblDob").textContent = T.dob;
+  document.getElementById("lblSex").textContent = T.sex;
+  document.getElementById("hintDob").textContent = T.hint;
+  const sex = document.getElementById("sex");
+  const cur = sex.value || "boy";
+  sex.innerHTML = `<option value="boy">${T.boy}</option><option value="girl">${T.girl}</option>`;
+  sex.value = cur;
+  document.getElementById("catchup").innerHTML = T.catchup;
+  document.getElementById("note").innerHTML = T.note;
+  document.getElementById("foot1").textContent = T.foot;
+
+  const dobVal = document.getElementById("dob").value;
+  const summary = document.getElementById("summary");
+  const list = document.getElementById("list");
+  if (!dobVal) { summary.innerHTML = ""; list.innerHTML = `<div class="small">${T.enterDob}</div>`; return; }
+  const [y,m,d] = dobVal.split("-").map(Number);
+  const dob = new Date(y, m-1, d);
+  const today = startOfToday();
+  if (dob > today) { summary.innerHTML = ""; list.innerHTML = `<div class="small">${T.futureDob}</div>`; return; }
+
+  const state = load();
+  const given = state.given || {};
+  const dates = state.dates || {};
+  const groups = {over:[], now:[], up:[], given:[]};
+  ITEMS.forEach(it => {
+    if (it.girlsOnly && sex.value !== "girl") return;
+    const s = status(it, dob, !!given[it.id], today);
+    groups[s.k].push({it, s});
+  });
+
+  summary.innerHTML = [
+    `<span class="pill p-over">${T.s_over}: ${groups.over.length}</span>`,
+    `<span class="pill p-now">${T.s_now}: ${groups.now.length}</span>`,
+    `<span class="pill p-up">${T.s_up}: ${groups.up.length}</span>`,
+    `<span class="pill p-given">${T.s_given}: ${groups.given.length}</span>`
+  ].join("");
+
+  const cardFor = ({it, s}) => {
+    const V = T.v[it.id];
+    const cls = s.k === "over" ? "over" : s.k === "now" ? "now" : s.k === "given" ? "given" : "";
+    let dueLine;
+    if (s.k === "given") dueLine = `${T.given}: ${dates[it.id] ? fmt(new Date(dates[it.id])) : "—"}`;
+    else if (s.to) dueLine = `${T.window}: ${fmt(s.from)} – ${fmt(s.to)}`;
+    else dueLine = `${T.on}: ${fmt(s.from)}`;
+    const act = s.k === "over" ? T.act_over : s.k === "now" ? T.act_now : s.k === "up" ? T.act_up : "";
+    return `<div class="vax ${cls}">
+      <h3>${V[0]}</h3>
+      <div class="due">${dueLine}</div>
+      <div class="prot">${T.protects}: ${V[1]}</div>
+      ${act ? `<div class="act">${act}</div>` : ""}
+      <label class="tick"><input type="checkbox" data-id="${it.id}" ${s.k === "given" ? "checked" : ""}> ${T.tick}</label>
+      ${s.k === "given" || s.k === "up" ? "" : `<label class="small">${lang === "en" ? "Date given (optional)" : "लगवाने की तारीख (वैकल्पिक)"} <input class="date" type="date" data-date="${it.id}" value="${dates[it.id] || ""}"></label>`}
+    </div>`;
+  };
+
+  const section = (k, title) => groups[k].length ? `<h2 class="group">${title}</h2>` + groups[k].map(cardFor).join("") : "";
+  list.innerHTML = section("over", T.gr_over) + section("now", T.gr_now) + section("up", T.gr_up) + section("given", T.gr_given);
+}
+
+document.getElementById("langBtn").addEventListener("click", () => { lang = lang === "en" ? "hi" : "en"; render(); });
+document.getElementById("dob").addEventListener("change", render);
+document.getElementById("sex").addEventListener("change", render);
+document.getElementById("list").addEventListener("change", e => {
+  const state = load();
+  state.given = state.given || {};
+  state.dates = state.dates || {};
+  if (e.target.matches("input[type=checkbox][data-id]")) state.given[e.target.dataset.id] = e.target.checked;
+  if (e.target.matches("input[data-date]")) state.dates[e.target.dataset.date] = e.target.value;
+  save(state);
+  render();
+});
+render();
+</script>
+</body>
+</html>
