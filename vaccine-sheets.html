@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vaccine Sheets: one page for each vaccine | Dr. Dinesh Mittal Child Clinic</title>
+    <meta name="description" content="Short, easy sheets for each childhood vaccine in the IAP schedule: what it protects against, what is common after it, and when to call the doctor. English and Hindi.">
+    <link rel="canonical" href="https://childspecialistrohini.com/vaccine-sheets.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anek+Devanagari:wght@400;600;700;800&display=swap">
+    <style>
+        :root { --indigo:#2a2580; --pink:#e2457a; --turmeric:#f5ad1b; --teal:#0f9b8e; --sky:#2f8fe0; --grape:#8b4fd6; --green:#2f8f3a; --ink:#1d1b3a; --muted:#5b5878; --bg:#fbf9ff; }
+        * { box-sizing:border-box; }
+        body { margin:0; font-family:"Anek Devanagari",system-ui,sans-serif; background:var(--bg); color:var(--ink); line-height:1.6; }
+        header { background:var(--indigo); color:#fff; padding:18px 16px; }
+        header .clinic { font-size:13px; opacity:.9; }
+        header h1 { margin:4px 0 2px; font-size:22px; font-weight:800; }
+        .wrap { max-width:720px; margin:0 auto; padding:14px 14px 40px; }
+        .bar { display:flex; justify-content:flex-end; margin:6px 0 12px; }
+        .lang { border:2px solid var(--indigo); background:#fff; color:var(--indigo); border-radius:10px; padding:6px 12px; font:700 14px "Anek Devanagari",sans-serif; cursor:pointer; }
+        .intro { background:#fff; border-radius:14px; padding:12px 14px; margin-bottom:14px; border-top:5px solid var(--turmeric); font-size:15px; }
+        .sheet { background:#fff; border-radius:14px; padding:14px; margin-bottom:12px; box-shadow:0 1px 4px rgba(42,37,128,.08); border-left:6px solid var(--teal); }
+        .sheet:nth-of-type(3n+2) { border-left-color:var(--sky); }
+        .sheet:nth-of-type(3n) { border-left-color:var(--grape); }
+        .sheet h2 { margin:0 0 6px; font-size:18px; color:var(--indigo); }
+        .sheet h3 { margin:10px 0 2px; font-size:14px; color:var(--muted); }
+        .sheet ul { margin:0; padding-left:20px; font-size:15px; }
+        .sheet p { margin:0; font-size:15px; }
+        .call { background:#fde6ee; border-radius:8px; padding:8px 10px; margin-top:8px; }
+        .src { font-size:12px; color:var(--muted); margin-top:8px; }
+        .note { margin-top:18px; background:#f1efff; border-radius:12px; padding:12px 14px; font-size:14px; color:var(--muted); }
+        footer { margin-top:18px; font-size:13px; color:var(--muted); text-align:center; }
+        .hi { display:none; }
+        body.hi-mode .hi { display:block; }
+        body.hi-mode .en { display:none; }
+        body.hi-mode span.hi { display:inline; }
+        body.hi-mode span.en { display:none; }
+        body.hi-mode li.hi, body.hi-mode p.hi, body.hi-mode h2.hi, body.hi-mode h3.hi, body.hi-mode div.hi { display:block; }
+        body.hi-mode li.en, body.hi-mode p.en, body.hi-mode h2.en, body.hi-mode h3.en { display:none; }
+    </style>
+</head>
+<body>
+<header>
+    <div class="clinic">Dr. Dinesh Mittal Child Clinic · MBBS, DCH · Reg. No. DMC/R/00668 · Rohini, Delhi</div>
+    <h1><span class="en">Vaccine sheets</span><span class="hi">टीकों की जानकारी</span></h1>
+</header>
+
+<div class="wrap">
+    <div class="bar"><button class="lang" id="langBtn" type="button"><span class="en">हिन्दी</span><span class="hi">English</span></button></div>
+
+    <div class="intro">
+        <p class="en">One short page for each vaccine. Read the part you need. Common reactions are mild and last 1 to 3 days. Call the clinic if you are worried.</p>
+        <p class="hi">हर टीके का एक छोटा पन्ना। जितना चाहिए उतना पढ़ें। आम प्रतिक्रियाएँ हल्की होती हैं और 1 से 3 दिन रहती हैं। चिंता हो तो क्लिनिक को बताएँ।</p>
+    </div>
+
+    <!-- 1 -->
+    <div class="sheet">
+        <h2><span class="en">BCG (TB)</span><span class="hi">BCG (टीबी)</span></h2>
+        <h3 class="en">Protects against</h3><h3 class="hi">किससे बचाव</h3>
+        <p class="en">Serious tuberculosis in babies, such as TB of the brain and lungs.</p><p class="hi">बच्चों में गंभीर टीबी, जैसे दिमाग़ और फेफड़ों की टीबी।</p>
+        <h3 class="en">Common after the vaccine</h3><h3 class="hi">टीके के बाद आम</h3>
+        <ul class="en"><li>A small red bump that becomes a sore and then a scar over several weeks.</li><li>Leave it alone. Do not put creams or oil on it.</li></ul>
+        <ul class="hi"><li>छोटी लाल गाँठ, जो कुछ हफ़्तों में घाव और फिर निशान बन जाती है।</li><li>इसे छोड़ दें। उस पर क्रीम या तेल न लगाएँ।</li></ul>
+        <div class="call"><p class="en"><b>Call the doctor if:</b> pus with a bad smell, a lump in the armpit that keeps growing, or fever that continues.</p><p class="hi"><b>डॉक्टर को कब दिखाएँ:</b> बदबूदार मवाद, बगल में गाँठ जो बढ़ती जाए, या लगातार बुखार।</p></div>
+        <p class="src en">Source: IAP schedule; WHO and national guidance on BCG.</p><p class="src hi">स्रोत: IAP चार्ट; BCG पर WHO और राष्ट्रीय दिशानिर्देश।</p>
+    </div>
+
+    <!-- 2 -->
+    <div class="sheet">
+        <h2><span class="en">Polio (OPV and IPV)</span><span class="hi">पोलियो (OPV और IPV)</span></h2>
+        <h3 class="en">Protects against</h3><h3 class="hi">किससे बचाव</h3>
+        <p class="en">Polio, which can cause permanent paralysis.</p><p class="hi">पोलियो, जिससे स्थायी लकवा हो सकता है।</p>
+        <h3 class="en">Common after the vaccine</h3><h3 class="hi">टीके के बाद आम</h3>
+        <ul class="en"><li>Usually none. Injection (IPV) may cause soreness where it was given.</li></ul>
+        <ul class="hi"><li>आमतौर पर कुछ नहीं। इंजेक्शन (IPV) वाली जगह पर दर्द हो सकता है।</li></ul>
+        <div class="call"><p class="en"><b>Call the doctor urgently if:</b> your child cannot move a leg or arm, or becomes weak after a dose.</p><p class="hi"><b>तुरंत डॉक्टर को बुलाएँ अगर:</b> बच्चा टाँग या हाथ नहीं हिला पाता, या खुराक के बाद कमज़ोर हो जाता है।</p></div>
+        <p class="src en">Source: CDC polio vaccine information (CDC Vaccine Information Statement list: cdc.gov/vaccines/hcp/about-vis/current-past-dates.html); IAP schedule for timing.</p><p class="src hi">स्रोत: CDC पोलियो टीका जानकारी (CDC VIS सूची: cdc.gov/vaccines/hcp/about-vis/current-past-dates.html); समय के लिए IAP चार्ट।</p>
+    </div>
+
+    <!-- 3 -->
+    <div class="sheet">
+        <h2><span class="en">Hepatitis B</span><span class="hi">हेपेटाइटिस-बी</span></h2>
+        <h3 class="en">Protects against</h3><h3 class="hi">किससे बचाव</h3>
+        <p class="en">Hepatitis B virus infection, which can cause long-term liver damage.</p><p class="hi">हेपेटाइटिस-बी वायरस का संक्रमण, जिससे लिवर को लंबे समय तक नुकसान हो सकता है।</p>
+        <h3 class="en">Common after the vaccine</h3><h3 class="hi">टीके के बाद आम</h3>
+        <ul class="en"><li>Soreness where the injection was given, or a mild fever for a day.</li></ul>
+        <ul class="hi"><li>इंजेक्शन की जगह दर्द, या एक दिन हल्का बुखार।</li></ul>
+        <div class="call"><p class="en"><b>Call the doctor if:</b> yellow eyes or skin, dark urine, or a high fever that does not settle.</p><p class="hi"><b>डॉक्टर को कब दिखाएँ:</b> आँखों या त्वचा में पीलापन, गहरे रंग का पेशाब, या तेज़ बुखार जो न उतरे।</p></div>
+        <p class="src en">Source: CDC hepatitis B vaccine information (CDC Vaccine Information Statement list: cdc.gov/vaccines/hcp/about-vis/current-past-dates.html); IAP schedule for timing.</p><p class="src hi">स्रोत: CDC हेपेटाइटिस-बी टीका जानकारी (CDC VIS सूची: cdc.gov/vaccines/hcp/about-vis/current-past-dates.html); समय के लिए IAP चार्ट।</p>
+    </div>
+
+    <!-- 4 -->
+    <div class="sheet">
+        <h2><span class="en">DTP / 6-in-1 (DTwP or DTaP)</span><span class="hi">DTP / 6-in-1 (DTwP या DTaP)</span></h2>
+        <h3 class="en">Protects against</h3><h3 class="hi">किससे बचाव</h3>
+        <p class="en">Diphtheria, tetanus and whooping cough. The 6-in-1 also covers polio, Hib and hepatitis B.</p><p class="hi">डिप्थीरिया, टिटनेस और काली खाँसी। 6-in-1 में पोलियो, Hib और हेपेटाइटिस-बी भी शामिल हैं।</p>
+        <h3 class="en">Common after the vaccine</h3><h3 class="hi">टीके के बाद आम</h3>
+        <ul class="en"><li>Redness, swelling or a firm lump where the injection was given.</li><li>Fever, fussiness or sleepiness for 1 to 2 days.</li><li>Feeding normally is fine. Keep the child cool and comfortable.</li></ul>
+        <ul class="hi"><li>इंजेक्शन की जगह लालिमा, सूजन या सख़्त गाँठ।</li><li>1 से 2 दिन बुखार, चिड़चिड़ापन या नींद।</li><li>सामान्य रूप से दूध या खाना दें। बच्चे को ठंडा और आरामदायक रखें।</li></ul>
+        <div class="call"><p class="en"><b>Call the doctor if:</b> fever lasts more than 2 to 3 days, the swelling is large, hot or spreading, your child cries for hours, or has a fit or is very sleepy.</p><p class="hi"><b>डॉक्टर को कब बुलाएँ:</b> बुखार 2 से 3 दिन से ज़्यादा रहे, सूजन बड़ी, गर्म या फैलती हो, बच्चा घंटों रोए, या दौरा पड़े या बहुत सुस्ती हो।</p></div>
+        <p class="src en">Source: CDC DTaP vaccine information (CDC Vaccine Information Statement list: cdc.gov/vaccines/hcp/about-vis/current-past-dates.html); IAP schedule for timing.</p><p class="src hi">स्रोत: CDC DTaP टीका जानकारी (CDC VIS सूची: cdc.gov/vaccines/hcp/about-vis/current-past-dates.html); समय के लिए IAP चार्ट।</p>
+    </div>
+
+    <!-- 5 -->
+    <div class="sheet">
+        <h2><span class="en">Hib (Haemophilus influenzae b)</span><span class="hi">Hib (हिब)</span></h2>
+        <h3 class="en">Protects against</h3><h3 class="hi">किससे बचाव</h3>
+        <p class="en">Serious infections such as meningitis and pneumonia in young children.</p><p class="hi">छोटे बच्चों में मेनिंजाइटिस और निमोनिया जैसे गंभीर संक्रमण।</p>
+        <h3 class="en">Common after the vaccine</h3><h3 class="hi">टीके के बाद आम</h3>
+        <ul class="en"><li>Redness, soreness or a mild fever at the injection site.</li></ul>
+        <ul class="hi"><li>इंजेक्शन की जगह लालिमा, दर्द या हल्का बुखार।</li></ul>
+        <div class="call"><p class="en"><b>Call the doctor if:</b> fever stays high, or your child is very sleepy or hard to wake.</p><p class="hi"><b>डॉक्टर को कब बुलाएँ:</b> तेज़ बुखार बना रहे, या बच्चा बहुत सुस्त हो या जगाने पर न जागे।</p></div>
+        <p class="src en">Source: CDC Hib vaccine information (CDC Vaccine Information Statement list: cdc.gov/vaccines/hcp/about-vis/current-past-dates.html); IAP schedule for timing.</p><p class="src hi">स्रोत: CDC Hib टीका जानकारी (CDC VIS सूची: cdc.gov/vaccines/hcp/about-vis/current-past-dates.html); समय के लिए IAP चार्ट।</p>
+    </div>
+
+    <!-- 6 -->
+    <div class="sheet">
+        <h2><span class="en">PCV (pneumococcal)</span><span class="hi">PCV (न्यूमोकोकल)</span></h2>
+        <h3 class="en">Protects against</h3><h3 class="hi">किससे बचाव</h3>
+        <p class="en">Pneumonia, ear infection and meningitis caused by pneumococcus bacteria.</p><p class="hi">न्यूमोकोकस बैक्टीरिया से होने वाला निमोनिया, कान का संक्रमण और मेनिंजाइटिस।</p>
+        <h3 class="en">Common after the vaccine</h3><h3 class="hi">टीके के बाद आम</h3>
+        <ul class="en"><li>Fever, irritability, sleepiness or less appetite for 1 to 2 days.</li><li>Redness or soreness at the injection site.</li></ul>
+        <ul class="hi"><li>1 से 2 दिन बुखार, चिड़चिड़ापन, नींद या भूख कम होना।</li><li>इंजेक्शन की जगह लालिमा या दर्द।</li></ul>
+        <div class="call"><p class="en"><b>Call the doctor if:</b> fever stays high, the swelling is large, or your child is unusually sleepy or breathing fast.</p><p class="hi"><b>डॉक्टर को कब बुलाएँ:</b> बुखार तेज़ रहे, सूजन बड़ी हो, या बच्चा असामान्य रूप से सुस्त हो या तेज़ साँस ले।</p></div>
+        <p class="src en">Source: CDC pneumococcal vaccine information (CDC Vaccine Information Statement list: cdc.gov/vaccines/hcp/about-vis/current-past-dates.html); IAP schedule for timing.</p><p class="src hi">स्रोत: CDC न्यूमोकोकल टीका जानकारी (CDC VIS सूची: cdc.gov/vaccines/hcp/about-vis/current-past-dates.html); समय के लिए IAP चार्ट।</p>
+    </div>
+
+    <!-- 7 -->
+    <div class="sheet">
+        <h2><span class="en">Rotavirus (oral drops)</span><span class="hi">रोटावायरस (मुँह से दवा)</span></h2>
+        <h3 class="en">Protects against</h3><h3 class="hi">किससे बचाव</h3>
+        <p class="en">Severe diarrhoea and vomiting in babies, which can cause dehydration.</p><p class="hi">बच्चों में गंभीर दस्त और उल्टी, जिससे शरीर में पानी की कमी हो सकती है।</p>
+        <h3 class="en">Common after the vaccine</h3><h3 class="hi">टीके के बाद आम</h3>
+        <ul class="en"><li>Mild fussiness or loose stools for a few days.</li><li>Keep feeding as usual.</li></ul>
+        <ul class="hi"><li>कुछ दिन हल्की चिड़चिड़ाहट या पतले दस्त।</li><li>दूध या खाना सामान्य रूप से जारी रखें।</li></ul>
+        <div class="call"><p class="en"><b>Call the doctor urgently if:</b> blood in stools, repeated vomiting, a swollen belly with severe pain, or fewer wet nappies.</p><p class="hi"><b>तुरंत डॉक्टर को बुलाएँ अगर:</b> मल में खून, बार-बार उल्टी, पेट में सूजन के साथ तेज़ दर्द, या पेशाब के गीले डायपर कम हों।</p></div>
+        <p class="src en">Source: CDC rotavirus vaccine information (CDC Vaccine Information Statement list: cdc.gov/vaccines/hcp/about-vis/current-past-dates.html); IAP schedule for timing.</p><p class="src hi">स्रोत: CDC रोटावायरस टीका जानकारी (CDC VIS सूची: cdc.gov/vaccines/hcp/about-vis/current-past-dates.html); समय के लिए IAP चार्ट।</p>
+    </div>
+
+    <!-- 8 -->
+    <div class="sheet">
+        <h2><span class="en">Influenza (flu)</span><span class="hi">फ्लू (इन्फ्लूएंजा)</span></h2>
+        <h3 class="en">Protects against</h3><h3 class="hi">किससे बचाव</h3>
+        <p class="en">Seasonal influenza, which can cause pneumonia. Given every year, as the virus changes.</p><p class="hi">मौसमी फ्लू, जिससे निमोनिया हो सकता है। वायरस बदलता है, इसलिए हर साल लगता है।</p>
+        <h3 class="en">Common after the vaccine</h3><h3 class="hi">टीके के बाद आम</h3>
+        <ul class="en"><li>Soreness where the injection was given, runny nose, or a low fever for 1 to 2 days.</li></ul>
+        <ul class="hi"><li>इंजेक्शन की जगह दर्द, नाक बहना, या 1 से 2 दिन हल्का बुखार।</li></ul>
+        <div class="call"><p class="en"><b>Call the doctor if:</b> breathing is fast or difficult, or the fever stays high.</p><p class="hi"><b>डॉक्टर को कब बुलाएँ:</b> साँस तेज़ या मुश्किल हो, या तेज़ बुखार बना रहे।</p></div>
+        <p class="src en">Source: CDC influenza vaccine information (CDC Vaccine Information Statement list: cdc.gov/vaccines/hcp/about-vis/current-past-dates.html); IAP schedule for timing.</p><p class="src hi">स्रोत: CDC फ्लू टीका जानकारी (CDC VIS सूची: cdc.gov/vaccines/hcp/about-vis/current-past-dates.html); समय के लिए IAP चार्ट।</p>
+    </div>
+
+    <!-- 9 -->
+    <div class="sheet">
+        <h2><span class="en">Typhoid conjugate (TCV)</span><span class="hi">टाइफाइड कंजुगेट (TCV)</span></h2>
+        <h3 class="en">Protects against</h3><h3 class="hi">किससे बचाव</h3>
+        <p class="en">Typhoid fever, a serious infection from contaminated food and water.</p><p class="hi">टाइफाइड बुखार, जो दूषित खाने और पानी से होने वाला गंभीर संक्रमण है।</p>
+        <h3 class="en">Common after the vaccine</h3><h3 class="hi">टीके के बाद आम</h3>
+        <ul class="en"><li>Pain or redness at the injection site, and a mild fever for a day or two.</li></ul>
+        <ul class="hi"><li>इंजेक्शन की जगह दर्द या लालिमा, और एक-दो दिन हल्का बुखार।</li></ul>
+        <div class="call"><p class="en"><b>Call the doctor if:</b> fever stays high for more than 2 to 3 days, or the swelling is large or spreading.</p><p class="hi"><b>डॉक्टर को कब बुलाएँ:</b> बुखार 2 से 3 दिन से ज़्यादा तेज़ रहे, या सूजन बड़ी या फैलती हुई हो।</p></div>
+        <p class="src en">Source: WHO typhoid vaccine guidance; IAP schedule.</p><p class="src hi">स्रोत: टाइफाइड टीके पर WHO मार्गदर्शन; IAP चार्ट।</p>
+    </div>
+
+    <!-- 10 -->
+    <div class="sheet">
+        <h2><span class="en">MMR (measles, mumps, rubella)</span><span class="hi">MMR (खसरा, गलसुआ, रूबेला)</span></h2>
+        <h3 class="en">Protects against</h3><h3 class="hi">किससे बचाव</h3>
+        <p class="en">Measles, mumps and rubella. Measles can cause serious complications.</p><p class="hi">खसरा, गलसुआ और रूबेला। खसरे से गंभीर जटिलताएँ हो सकती हैं।</p>
+        <h3 class="en">Common after the vaccine</h3><h3 class="hi">टीके के बाद आम</h3>
+        <ul class="en"><li>A mild fever and a light rash about 1 to 2 weeks later, which goes away on its own.</li><li>Sometimes slight swelling of the cheeks or glands.</li></ul>
+        <ul class="hi"><li>लगभग 1 से 2 हफ़्ते बाद हल्का बुखार और हल्के दाने, जो अपने-आप चले जाते हैं।</li><li>कभी-कभी गाल या ग्रंथियों में हल्की सूजन।</li></ul>
+        <div class="call"><p class="en"><b>Call the doctor if:</b> a high fever, a fit, unusual bruising or bleeding, or your child is very drowsy.</p><p class="hi"><b>डॉक्टर को कब बुलाएँ:</b> तेज़ बुखार, दौरा, असामान्य नीले निशान या खून बहना, या बच्चा बहुत सुस्त हो।</p></div>
+        <p class="src en">Source: CDC MMR vaccine information (CDC Vaccine Information Statement list: cdc.gov/vaccines/hcp/about-vis/current-past-dates.html); IAP schedule for timing.</p><p class="src hi">स्रोत: CDC MMR टीका जानकारी (CDC VIS सूची: cdc.gov/vaccines/hcp/about-vis/current-past-dates.html); समय के लिए IAP चार्ट।</p>
+    </div>
+
+    <!-- 11 -->
+    <div class="sheet">
+        <h2><span class="en">MenACWY (meningitis)</span><span class="hi">MenACWY (मेनिंजाइटिस)</span></h2>
+        <h3 class="en">Protects against</h3><h3 class="hi">किससे बचाव</h3>
+        <p class="en">Meningitis and serious blood infection caused by meningococcus bacteria.</p><p class="hi">मेनिंगोकोकस बैक्टीरिया से होने वाला मेनिंजाइटिस और खून का गंभीर संक्रमण।</p>
+        <h3 class="en">Common after the vaccine</h3><h3 class="hi">टीके के बाद आम</h3>
+        <ul class="en"><li>Pain, redness or swelling at the injection site, fever, headache or tiredness for 1 to 2 days.</li></ul>
+        <ul class="hi"><li>इंजेक्शन की जगह दर्द, लालिमा या सूजन, और 1 से 2 दिन बुखार, सिरदर्द या थकान।</li></ul>
+        <div class="call"><p class="en"><b>Get urgent care if:</b> high fever with a rash that does not fade when pressed, stiff neck, or your child is very drowsy.</p><p class="hi"><b>तुरंत अस्पताल जाएँ अगर:</b> तेज़ बुखार के साथ ऐसे दाने हों जो दबाने पर न मिटें, गर्दन अकड़ना, या बच्चा बहुत सुस्त हो।</p></div>
+        <p class="src en">Source: CDC meningococcal vaccine information (CDC Vaccine Information Statement list: cdc.gov/vaccines/hcp/about-vis/current-past-dates.html); IAP schedule for timing.</p><p class="src hi">स्रोत: CDC मेनिंगोकोकल टीका जानकारी (CDC VIS सूची: cdc.gov/vaccines/hcp/about-vis/current-past-dates.html); समय के लिए IAP चार्ट।</p>
+    </div>
+
+    <!-- 12 -->
+    <div class="sheet">
+        <h2><span class="en">Hepatitis A</span><span class="hi">हेपेटाइटिस-ए</span></h2>
+        <h3 class="en">Protects against</h3><h3 class="hi">किससे बचाव</h3>
+        <p class="en">Hepatitis A virus infection, which causes jaundice and liver inflammation.</p><p class="hi">हेपेटाइटिस-ए वायरस का संक्रमण, जिससे पीलिया और लिवर में सूजन होती है।</p>
+        <h3 class="en">Common after the vaccine</h3><h3 class="hi">टीके के बाद आम</h3>
+        <ul class="en"><li>Soreness at the injection site, mild headache or tiredness for a day or two.</li></ul>
+        <ul class="hi"><li>इंजेक्शन की जगह दर्द, एक-दो दिन हल्का सिरदर्द या थकान।</li></ul>
+        <div class="call"><p class="en"><b>Call the doctor if:</b> yellow eyes or skin, dark urine, or pain in the right upper belly.</p><p class="hi"><b>डॉक्टर को कब दिखाएँ:</b> आँखों या त्वचा में पीलापन, गहरे रंग का पेशाब, या पेट के ऊपरी दाहिने हिस्से में दर्द।</p></div>
+        <p class="src en">Source: CDC hepatitis A vaccine information (CDC Vaccine Information Statement list: cdc.gov/vaccines/hcp/about-vis/current-past-dates.html); IAP schedule for timing.</p><p class="src hi">स्रोत: CDC हेपेटाइटिस-ए टीका जानकारी (CDC VIS सूची: cdc.gov/vaccines/hcp/about-vis/current-past-dates.html); समय के लिए IAP चार्ट।</p>
+    </div>
+
+    <!-- 13 -->
+    <div class="sheet">
+        <h2><span class="en">Varicella (chickenpox)</span><span class="hi">वैरीसेला (चिकनपॉक्स)</span></h2>
+        <h3 class="en">Protects against</h3><h3 class="hi">किससे बचाव</h3>
+        <p class="en">Chickenpox, which can cause serious skin infection and other complications.</p><p class="hi">चिकनपॉक्स, जिससे त्वचा का गंभीर संक्रमण और दूसरी जटिलताएँ हो सकती हैं।</p>
+        <h3 class="en">Common after the vaccine</h3><h3 class="hi">टीके के बाद आम</h3>
+        <ul class="en"><li>Soreness at the injection site, and sometimes a few spots that heal quickly.</li></ul>
+        <ul class="hi"><li>इंजेक्शन की जगह दर्द, और कभी-कभी कुछ दाने जो जल्दी ठीक हो जाते हैं।</li></ul>
+        <div class="call"><p class="en"><b>Call the doctor if:</b> the rash spreads, looks infected (pus, pain), or fever is high.</p><p class="hi"><b>डॉक्टर को कब बुलाएँ:</b> दाने फैलें, संक्रमण लगें (मवाद, दर्द), या तेज़ बुखार हो।</p></div>
+        <p class="src en">Source: CDC varicella vaccine information (CDC Vaccine Information Statement list: cdc.gov/vaccines/hcp/about-vis/current-past-dates.html); IAP schedule for timing.</p><p class="src hi">स्रोत: CDC वैरीसेला टीका जानकारी (CDC VIS सूची: cdc.gov/vaccines/hcp/about-vis/current-past-dates.html); समय के लिए IAP चार्ट।</p>
+    </div>
+
+    <!-- 14 -->
+    <div class="sheet">
+        <h2><span class="en">HPV (cervical cancer prevention)</span><span class="hi">HPV (सर्वाइकल कैंसर से बचाव)</span></h2>
+        <h3 class="en">Protects against</h3><h3 class="hi">किससे बचाव</h3>
+        <p class="en">Human papillomavirus infections that can lead to cervical and other cancers, and genital warts.</p><p class="hi">ह्यूमन पैपिलोमावायरस संक्रमण, जिससे सर्वाइकल और दूसरे कैंसर, और जननांगों पर मस्से हो सकते हैं।</p>
+        <h3 class="en">Common after the vaccine</h3><h3 class="hi">टीके के बाद आम</h3>
+        <ul class="en"><li>Soreness, redness or swelling at the injection site, and sometimes dizziness or fainting.</li><li>Sit or lie down for about 15 minutes after the vaccine.</li></ul>
+        <ul class="hi"><li>इंजेक्शन की जगह दर्द, लालिमा या सूजन, और कभी-कभी चक्कर या बेहोशी।</li><li>टीके के बाद लगभग 15 मिनट बैठें या लेटें।</li></ul>
+        <div class="call"><p class="en"><b>Get urgent care if:</b> trouble breathing, swelling of the face or throat, or fainting that does not recover quickly.</p><p class="hi"><b>तुरंत मदद लें अगर:</b> साँस लेने में तकलीफ़, चेहरे या गले में सूजन, या बेहोशी जो जल्दी ठीक न हो।</p></div>
+        <p class="src en">Source: CDC HPV vaccine information (CDC Vaccine Information Statement list: cdc.gov/vaccines/hcp/about-vis/current-past-dates.html); IAP schedule for timing.</p><p class="src hi">स्रोत: CDC HPV टीका जानकारी (CDC VIS सूची: cdc.gov/vaccines/hcp/about-vis/current-past-dates.html); समय के लिए IAP चार्ट।</p>
+    </div>
+
+    <!-- 15 -->
+    <div class="sheet">
+        <h2><span class="en">Tdap booster (tetanus, whooping cough)</span><span class="hi">Tdap बूस्टर (टिटनेस, काली खाँसी)</span></h2>
+        <h3 class="en">Protects against</h3><h3 class="hi">किससे बचाव</h3>
+        <p class="en">Tetanus, diphtheria and whooping cough, as a booster in older children.</p><p class="hi">बड़े बच्चों में बूस्टर के रूप में टिटनेस, डिप्थीरिया और काली खाँसी से बचाव।</p>
+        <h3 class="en">Common after the vaccine</h3><h3 class="hi">टीके के बाद आम</h3>
+        <ul class="en"><li>Soreness, redness or swelling at the injection site, headache or mild fever for 1 to 2 days.</li></ul>
+        <ul class="hi"><li>इंजेक्शन की जगह दर्द, लालिमा या सूजन, और 1 से 2 दिन सिरदर्द या हल्का बुखार।</li></ul>
+        <div class="call"><p class="en"><b>Call the doctor if:</b> the swelling is large or spreading, fever lasts more than 2 to 3 days, or your child has trouble breathing.</p><p class="hi"><b>डॉक्टर को कब बुलाएँ:</b> सूजन बड़ी या फैलती हो, बुखार 2 से 3 दिन से ज़्यादा रहे, या साँस लेने में तकलीफ़ हो।</p></div>
+        <p class="src en">Source: CDC Tdap vaccine information (CDC Vaccine Information Statement list: cdc.gov/vaccines/hcp/about-vis/current-past-dates.html); IAP schedule for timing.</p><p class="src hi">स्रोत: CDC Tdap टीका जानकारी (CDC VIS सूची: cdc.gov/vaccines/hcp/about-vis/current-past-dates.html); समय के लिए IAP चार्ट।</p>
+    </div>
+
+    <div class="note">
+        <p class="en"><b>Please read:</b> This is health education material, based on public vaccine information from the CDC, WHO and the IAP schedule on this website. Reactions can vary between children. Give fever medicine only as your doctor prescribes or as printed on the label. Your child's doctor decides on vaccines and any special needs. This guide is not a substitute for a consultation.</p>
+        <p class="hi"><b>कृपया पढ़ें:</b> यह स्वास्थ्य शिक्षा की जानकारी है, जो CDC, WHO और इस वेबसाइट के IAP चार्ट की सार्वजनिक टीका जानकारी पर आधारित है। हर बच्चे में प्रतिक्रिया अलग हो सकती है। बुखार की दवा केवल डॉक्टर के बताए अनुसार या दवा के लेबल पर लिखे अनुसार दें। टीकों और किसी विशेष ज़रूरत पर बच्चे के डॉक्टर निर्णय लेते हैं। यह गाइड डॉक्टर से परामर्श का विकल्प नहीं है।</p>
+    </div>
+
+    <footer>
+        <div>Health education material · Dr. Dinesh Mittal Child Clinic</div>
+        <div><b>www.drdineshmittal.com</b></div>
+    </footer>
+</div>
+
+<script src="/site-nav.js" defer></script>
+<script>
+    (function () {
+        var btn = document.getElementById('langBtn');
+        function setLang(hi) {
+            document.body.classList.toggle('hi-mode', hi);
+            document.documentElement.lang = hi ? 'hi' : 'en';
+        }
+        var saved = 'en';
+        try { saved = localStorage.getItem('preferredClinicLang') === 'hi' ? 'hi' : 'en'; } catch (e) {}
+        setLang(saved === 'hi');
+        btn.addEventListener('click', function () {
+            var hi = !document.body.classList.contains('hi-mode');
+            setLang(hi);
+            try { localStorage.setItem('preferredClinicLang', hi ? 'hi' : 'en'); } catch (e) {}
+        });
+    })();
+</script>
+</body>
+</html>
