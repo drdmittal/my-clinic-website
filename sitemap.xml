@@ -141,4 +141,10 @@
     <loc>https://childspecialistrohini.com/health-articles.html</loc>
     <lastmod>2026-10-24</lastmod>
   </url>
+  <url>
+    <loc>https://childspecialistrohini.com/missed-vaccine-guide.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
