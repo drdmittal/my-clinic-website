@@ -103,6 +103,7 @@ footer a{color:#1f5fbf;font-weight:700}
   <div class="eyebrow" id="t-eyebrow"></div>
   <h1 id="t-title"></h1>
   <p class="lead" id="t-intro"></p>
+  <a id="guide-link" href="constipation-guide.html" style="font-weight:700;color:var(--accent)"></a>
 
   <div class="types" id="types"></div>
 
@@ -171,6 +172,8 @@ footer a{color:#1f5fbf;font-weight:700}
     title: ['Record each stool', 'हर बार की पॉटी दर्ज करें'],
     intro: ['After each stool, tap the type that matches it and save. Record every day for 15 days.',
             'हर बार पॉटी के बाद, मेल खाता प्रकार चुनें और सेव करें। 15 दिन तक रोज़ दर्ज करें।'],
+    guide: ['Read the constipation guide', 'कब्ज़ की गाइड पढ़ें'],
+    guideUrl: ['Constipation guide: www.childspecialistrohini.com/parent-tools/constipation-guide.html', 'कब्ज़ की गाइड: www.childspecialistrohini.com/parent-tools/constipation-guide.html'],
     time: ['Time', 'समय'],
     save: ['Save this stool', 'यह पॉटी सेव करें'],
     saved: ['Saved.', 'सेव हो गया।'],
@@ -250,6 +253,7 @@ footer a{color:#1f5fbf;font-weight:700}
     document.getElementById('t-title').textContent = T('title');
     document.getElementById('t-intro').textContent = T('intro');
     document.getElementById('t-time-lbl').textContent = T('time');
+    document.getElementById('guide-link').textContent = T('guide') + ' →';
     document.getElementById('save-btn').textContent = T('save');
     document.getElementById('t-progress-h').textContent = T('progressH');
     document.getElementById('t-s-days').textContent = T('sDays');
@@ -356,7 +360,8 @@ footer a{color:#1f5fbf;font-weight:700}
     return '<div class="ph"><div><b>Dr. Dinesh Mittal Child Clinic</b><br><span style="font-size:10.5pt">Dr. Dinesh Mittal, MBBS, DCH · DMC/R/00668<br>H-34/69, Sector 3, Rohini, Delhi 110085 · +91 81305 21456</span></div>'+
       '<span><b style="font-size:12pt;color:#000">'+esc(T('reportH'))+'</b><br>www.drdineshmittal.com</span></div>'+
       '<p><b>'+esc(lang==='hi'?'बच्चे का नाम':'Child')+':</b> '+esc(name || '—')+'</p>'+
-      '<p><b>'+esc(T('period'))+':</b> '+fmtDate(first)+' – '+fmtDate(last)+' ('+d.days.length+' '+esc(T('days'))+')</p>';
+      '<p><b>'+esc(T('period'))+':</b> '+fmtDate(first)+' – '+fmtDate(last)+' ('+d.days.length+' '+esc(T('days'))+')</p>'+
+      '<p style="font-size:10.5pt">'+esc(T('guideUrl'))+'</p>';
   }
 
   function renderReport(){
