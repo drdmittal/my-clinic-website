@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Mukta:wght@400;500;600;700&display=swap">
 <style>
-/* Layout: single phone column — episode entry, timeline chart (one lollipop per fever episode on a real time axis), episodes-per-day bars, trend verdict, episode list for the doctor. */
+/* Layout: single phone column — episode entry, timeline chart (one lollipop per fever episode on a real time axis), episodes-per-day bars, episode list for the doctor. */
 :root{
   --bg:#f3f6fa; --surface:#ffffff; --ink:#172234; --muted:#556175; --line:#dbe2ec;
   --accent:#1f5fbf; --accent-soft:#e3edfb; --temp:#eb6834; --bar:#2a78d6;
@@ -249,16 +249,6 @@ function perDay(days){
   return '<div class="chartbox"><svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+t('Number of fever episodes each day','हर दिन बुख़ार कितनी बार आया')+'">'+g+'</svg></div>';
 }
 
-function verdict(eps, days){
-  var up = '<svg viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="24" fill="var(--surface)"/><g class="bobu"><path d="M26 38 V16 M16 25 L26 14 L36 25" stroke="var(--bad)" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></svg>';
-  var down = '<svg viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="24" fill="var(--surface)"/><g class="bobd"><path d="M26 14 V36 M16 27 L26 38 L36 27" stroke="var(--good)" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></svg>';
-  var flat = '<svg viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="24" fill="var(--surface)"/><path d="M14 26 H38 M30 18 L38 26 L30 34" stroke="var(--warn)" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-  var lastEp = eps[eps.length-1], sinceLast = Date.now() - lastEp.ts, h = '';
-  var feverDays = days.filter(function(d){return d.n>0;}).length;
-  if(feverDays >= 3 && sinceLast < DAY) h += '<div class="verdict bad plain"><span><b>'+t('Fever on '+feverDays+' days','बुख़ार '+feverDays+' दिन से')+'</b>'+t('Fever lasting 3 days or more needs a doctor visit — blood tests may be needed.','3 दिन या ज़्यादा बुख़ार पर डॉक्टर को दिखाएँ — ख़ून की जाँच की ज़रूरत हो सकती है।')+'</span></div>';
-  if(eps.some(function(e){return e.max>=VERY_HIGH && Date.now()-e.ts < DAY;})) h += '<div class="verdict bad plain"><span><b>'+t('104°F or more in the last 24 hours','पिछले 24 घंटे में 104°F या ज़्यादा')+'</b>'+t('If it does not come down with medicine, or the child looks unwell, see the doctor.','दवा से न उतरे या बच्चा ठीक न लगे, तो डॉक्टर को दिखाएँ।')+'</span></div>';
-  return h;
-}
 
 function printReport(){
   var eps = sorted(), el = document.getElementById('print-report');
@@ -305,11 +295,11 @@ function render(){
     var peak = fev.length ? Math.max.apply(null, fev.map(function(e){return e.max;})) : null;
     var feverDays = days.filter(function(d){return d.n>0;}).length;
     h += '<div class="card"><h2>'+t('Fever timeline','बुख़ार की समय-रेखा')+'</h2>'+
-      '<p class="muted">'+t('Each pin is one fever, joined in time order. Pins close together = fever coming often. Shaded parts = night.','हर पिन एक बार का बुख़ार है, जो समय के क्रम में रेखा से जुड़े हैं। पास-पास पिन = बुख़ार जल्दी-जल्दी। हल्का रंग = रात।')+'</p>'+
+      '<p class="muted">'+t('Each pin is one reading, joined in time order. Shaded parts = night.','हर पिन एक रीडिंग है, जो समय के क्रम में रेखा से जुड़ी है। हल्का रंग = रात।')+'</p>'+
       timeline(eps)+'<div class="tip" id="tip">'+t('Tap a pin to see details','विवरण के लिए पिन पर टैप करें')+'</div>'+
       '<div class="legend"><span><span class="dot" style="background:var(--temp)"></span>'+t('Fever','बुख़ार')+' '+show(FEVER)+'+</span><span><span class="dot" style="background:var(--bad)"></span>'+t('High fever','तेज़ बुख़ार')+' '+show(HIGH)+'+</span><span><span class="sq" style="background:var(--night)"></span>'+t('Night 8 pm–6 am','रात 8–सुबह 6')+'</span></div>'+
       '<div class="stats"><div><b>'+fev.length+'</b><span>'+t('fevers in','बार बुख़ार,')+' '+feverDays+' '+t('days','दिन में')+'</span></div><div><b>'+(lastGap!==null?hrs(lastGap):'–')+'</b><span>'+t('gap before last fever','पिछले बुख़ार से पहले का अंतर')+'</span></div><div><b style="color:'+(peak!==null?col(peak):'var(--muted)')+'">'+(peak!==null?num(peak):'–')+'</b><span>'+t('highest','सबसे ज़्यादा')+' °'+S.unit+'</span></div></div></div>';
-    if(fev.length){ h += '<div class="card"><h2>'+t('How many times each day','हर दिन कितनी बार')+'</h2>'+perDay(days)+verdict(fev, days)+'</div>'; }
+    if(fev.length){ h += '<div class="card"><h2>'+t('How many times each day','हर दिन कितनी बार')+'</h2>'+perDay(days)+'</div>'; }
     else { h += '<div class="card"><p class="muted">'+t('No reading of 100.4°F or more yet.','अभी तक 100.4°F या ज़्यादा की कोई रीडिंग नहीं।')+'</p></div>'; }
     // episode list for doctor
     h += '<div class="card"><h2>'+t('All fevers (show the doctor)','सभी बुख़ार (डॉक्टर को दिखाएँ)')+'</h2>';
