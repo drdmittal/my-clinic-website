@@ -318,7 +318,7 @@ function render(){
     '<div class="grid"><label for="dt">'+t('Date','तारीख़')+'<input id="dt" type="date" value="'+nowDate()+'" max="'+nowDate()+'"></label>'+
     '<label for="tm">'+t('Time fever started','बुख़ार कब आया')+'<input id="tm" type="time" value="'+nowTime()+'"></label></div>'+
     '<label for="mx">'+t('Highest temperature in this fever','इस बुख़ार में सबसे ज़्यादा तापमान')+' (°'+S.unit+')<input id="mx" class="big" type="number" inputmode="decimal" step="0.1" placeholder="'+(S.unit==='F'?'101.0':'38.3')+'"></label>'+
-    '<label for="site">'+t('Where was the temperature taken?','तापमान कहाँ लिया?')+'<select id="site"><option value="">'+t('Choose','चुनें')+'</option><option value="armpit">'+t('Armpit','बगल')+'</option><option value="mouth">'+t('Mouth','मुँह')+'</option></select></label>'+
+    '<label for="site">'+t('Where was the temperature taken?','तापमान कहाँ लिया?')+'<select id="site"><option value=""'+(S.lastSite?'':' selected')+'>'+t('Choose','चुनें')+'</option><option value="armpit"'+(S.lastSite==='armpit'?' selected':'')+'>'+t('Armpit','बगल')+'</option><option value="mouth"'+(S.lastSite==='mouth'?' selected':'')+'>'+t('Mouth','मुँह')+'</option></select></label>'+
     '<button type="submit" class="btn">'+t('Add fever','बुख़ार जोड़ें')+'</button><div class="msg" id="msg" aria-live="polite"></div></form></div>';
 
   if(!eps.length){
@@ -376,6 +376,7 @@ document.addEventListener('submit', function(e){
   if(isNaN(raw)){ msg.className='msg err'; msg.textContent = t('Enter the highest temperature.','सबसे ज़्यादा तापमान लिखें।'); return; }
   var site = document.getElementById('site').value;
   if(site!=='armpit' && site!=='mouth'){ msg.className='msg err'; msg.textContent = t('Choose armpit or mouth.','बगल या मुँह चुनें।'); return; }
+  S.lastSite = site;
   var f = toF(raw);
   if(f < 90){ msg.className='msg err'; msg.textContent = t('That reading looks wrong. Check the thermometer.','यह रीडिंग गलत लगती है। थर्मामीटर जाँचें।'); return; }
   if(f > 108){ msg.className='msg err'; msg.textContent = t('That reading looks wrong. Check the thermometer.','यह रीडिंग गलत लगती है। थर्मामीटर जाँचें।'); return; }
