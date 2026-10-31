@@ -116,6 +116,22 @@ input:focus,select:focus{outline:3px solid var(--accent);outline-offset:1px}
 .empty{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;padding:10px 0}
 button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+#print-report{display:none}
+@media print{
+  @page{margin:12mm}
+  body{--bg:#fff;--surface:#fff;--ink:#000;--muted:#333;--line:#bbb;--night:rgba(0,0,0,.06);--band-fev:rgba(235,104,52,.08);--band-high:rgba(197,48,48,.09);background:#fff;color:#000}
+  body > *:not(.app){display:none!important}
+  .app > *{display:none!important}
+  .app > #print-report{display:block!important;color:#000;font-size:12.5pt}
+  .stem,.pop{animation:none!important}
+  #print-report .ph{display:flex;justify-content:space-between;align-items:center;gap:16px;border-bottom:2px solid #1f5fbf;padding-bottom:6px;margin-bottom:10px}
+  #print-report .ph b{font:800 15pt 'Baloo 2',Mukta,sans-serif;color:#1f5fbf}
+  #print-report .ph .r{font-size:10pt;text-align:right;line-height:1.4}
+  #print-report .ph .l{display:flex;gap:10px;align-items:center;font-size:10pt;line-height:1.4}
+  #print-report table{width:100%;border-collapse:collapse;font-size:11.5pt;margin-top:6px}
+  #print-report th,#print-report td{border-bottom:1px solid #bbb;padding:4px 6px;text-align:left}
+  #print-report .pfoot{font-size:9.5pt;color:#333;margin-top:14px;border-top:1px solid #999;padding-top:6px}
+}
 </style>
 
 <div class="app">
@@ -127,6 +143,7 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
     <div class="doc-title"><span id="ttl" style="flex:1">Fever Episode Chart</span><div class="seg" role="group" aria-label="Language"><button type="button" data-lang="hi">हिंदी</button><button type="button" data-lang="en">EN</button></div></div>
   </header>
   <div id="root"></div>
+<div id="print-report"></div>
   
 </div>
 
@@ -161,12 +178,15 @@ function byDay(eps){
   if(order.length){
     var out = [], s = dayStart(order[0]), e = dayStart(order[order.length-1]);
     for(var d=s; d<=e; d+=DAY){ var k=dkey(d+H1*2); out.push(map[k] || {k:k, eps:[]}); }
-    out.forEach(function(d){ d.n = d.eps.length; d.peak = d.n ? Math.max.apply(null, d.eps.map(function(x){return x.max;})) : null; });
+    out.forEach(function(d){ var fv = d.eps.filter(function(x){return x.max>=FEVER;}); d.n = fv.length; d.peak = d.n ? Math.max.apply(null, fv.map(function(x){return x.max;})) : null; });
     return out;
   }
   return [];
 }
 function gaps(eps){ var g=[]; for(var i=1;i<eps.length;i++) g.push(eps[i].ts-eps[i-1].ts); return g; }
+
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function fmtFull(ts){ var k=dkey(ts).split('-'); return k[2]+'/'+k[1]+'/'+k[0]; }
 
 /* timeline lollipop chart */
 function timeline(eps){
@@ -264,6 +284,26 @@ function verdict(eps, days){
   return h;
 }
 
+function printReport(){
+  var eps = sorted(), el = document.getElementById('print-report');
+  var name = (document.getElementById('cname') ? document.getElementById('cname').value : (S.name||'')).trim();
+  S.name = name; save();
+  var fev = eps.filter(function(e){ return e.max>=FEVER; });
+  var mark = document.querySelector('header.doc .mono');
+  var logo = mark ? '<span style="width:52px;height:52px;flex:none;display:inline-block">'+mark.outerHTML.replace('class="mono"','width="52" height="52"')+'</span>' : '';
+  var rows = eps.map(function(e){ return '<tr><td>'+fmtFull(e.ts)+'</td><td>'+hm(e.ts)+'</td><td>'+show(e.max)+'</td></tr>'; }).join('');
+  el.innerHTML =
+    '<div class="ph"><div class="l">'+logo+'<div><b>Dr. Dinesh Mittal Child Clinic</b><br>Dr. Dinesh Mittal, MBBS, DCH · DMC/R/00668</div></div>'+
+    '<div class="r">H-34/69, Sector 3, Rohini, Delhi 110085<br>+91 81305 21456 · www.drdineshmittal.com<br>Mon–Sat 10 am–1 pm, 6–8:30 pm · Sun 11 am–12 pm</div></div>'+
+    '<p style="margin:0 0 4px"><b>'+t('Fever chart','बुख़ार का चार्ट')+'</b></p>'+
+    '<p style="margin:0 0 4px"><b>'+t('Child','बच्चा')+':</b> '+(name ? esc(name) : '______________________________')+'</p>'+
+    '<p style="margin:0 0 4px"><b>'+t('Period','अवधि')+':</b> '+(eps.length ? fmtFull(eps[0].ts)+' – '+fmtFull(eps[eps.length-1].ts) : '–')+'</p>'+
+    '<p style="margin:0 0 8px"><b>'+t('Readings at '+show(FEVER)+' or more', show(FEVER)+' या ज़्यादा की रीडिंग')+':</b> '+fev.length+'</p>'+
+    (eps.length ? timeline(eps) : '')+
+    '<table><tr><th>'+t('Date','तारीख़')+'</th><th>'+t('Time','समय')+'</th><th>'+t('Highest','सबसे ज़्यादा')+' °'+S.unit+'</th></tr>'+rows+'</table>'+
+    '<p class="pfoot">'+t('Health education material for parents. General information only; it does not replace a consultation with your doctor. Dr. Dinesh Mittal, MBBS, DCH · DMC/R/00668 · www.drdineshmittal.com','माता-पिता के लिए स्वास्थ्य जानकारी। यह सामान्य जानकारी है, डॉक्टर से परामर्श का विकल्प नहीं। डॉ. दिनेश मित्तल, MBBS, DCH · DMC/R/00668 · www.drdineshmittal.com')+'</p>';
+}
+
 function render(){
   document.documentElement.lang = S.lang==='hi'?'hi':'en';
   document.getElementById('ttl').textContent = t('Fever Episode Chart','बुख़ार का चार्ट');
@@ -282,15 +322,18 @@ function render(){
   if(!eps.length){
     h += '<div class="card"><div class="empty"><svg width="140" height="80" viewBox="0 0 140 80" aria-hidden="true"><rect x="8" y="8" width="124" height="64" rx="8" fill="var(--bg)" stroke="var(--line)" stroke-width="2"/>'+[24,52,70,104,118].map(function(px,i){var ht=[30,22,34,18,26][i]; return '<line x1="'+px+'" x2="'+px+'" y1="64" y2="'+(64-ht)+'" stroke="var(--line)" stroke-width="3" stroke-linecap="round"/><circle cx="'+px+'" cy="'+(64-ht)+'" r="4" fill="var(--line)"/>';}).join('')+'</svg><p class="muted">'+t('Each fever will appear as a pin on a timeline, so you can see how often it comes.','हर बुख़ार समय-रेखा पर एक पिन की तरह दिखेगा, ताकि पता चले वह कितनी बार आ रहा है।')+'</p></div></div>';
   } else {
-    var days = byDay(eps), g = gaps(eps);
+    var fev = eps.filter(function(e){ return e.max>=FEVER; });
+    var days = byDay(eps), g = gaps(fev);
     var lastGap = g.length ? g[g.length-1] : null;
-    var peak = Math.max.apply(null, eps.map(function(e){return e.max;}));
+    var peak = fev.length ? Math.max.apply(null, fev.map(function(e){return e.max;})) : null;
+    var feverDays = days.filter(function(d){return d.n>0;}).length;
     h += '<div class="card"><h2>'+t('Fever timeline','बुख़ार की समय-रेखा')+'</h2>'+
       '<p class="muted">'+t('Each pin is one fever, joined in time order. Pins close together = fever coming often. Shaded parts = night.','हर पिन एक बार का बुख़ार है, जो समय के क्रम में रेखा से जुड़े हैं। पास-पास पिन = बुख़ार जल्दी-जल्दी। हल्का रंग = रात।')+'</p>'+
       timeline(eps)+'<div class="tip" id="tip">'+t('Tap a pin to see details','विवरण के लिए पिन पर टैप करें')+'</div>'+
       '<div class="legend"><span><span class="dot" style="background:var(--temp)"></span>'+t('Fever','बुख़ार')+' '+show(FEVER)+'+</span><span><span class="dot" style="background:var(--bad)"></span>'+t('High fever','तेज़ बुख़ार')+' '+show(HIGH)+'+</span><span><span class="sq" style="background:var(--night)"></span>'+t('Night 8 pm–6 am','रात 8–सुबह 6')+'</span></div>'+
-      '<div class="stats"><div><b>'+eps.length+'</b><span>'+t('fevers in','बार बुख़ार,')+' '+days.length+' '+t('days','दिन में')+'</span></div><div><b>'+(lastGap!==null?hrs(lastGap):'–')+'</b><span>'+t('gap before last fever','पिछले बुख़ार से पहले का अंतर')+'</span></div><div><b style="color:'+col(peak)+'">'+num(peak)+'</b><span>'+t('highest','सबसे ज़्यादा')+' °'+S.unit+'</span></div></div></div>';
-    h += '<div class="card"><h2>'+t('How many times each day','हर दिन कितनी बार')+'</h2>'+perDay(days)+verdict(eps, days)+'</div>';
+      '<div class="stats"><div><b>'+fev.length+'</b><span>'+t('fevers in','बार बुख़ार,')+' '+feverDays+' '+t('days','दिन में')+'</span></div><div><b>'+(lastGap!==null?hrs(lastGap):'–')+'</b><span>'+t('gap before last fever','पिछले बुख़ार से पहले का अंतर')+'</span></div><div><b style="color:'+(peak!==null?col(peak):'var(--muted)')+'">'+(peak!==null?num(peak):'–')+'</b><span>'+t('highest','सबसे ज़्यादा')+' °'+S.unit+'</span></div></div></div>';
+    if(fev.length){ h += '<div class="card"><h2>'+t('How many times each day','हर दिन कितनी बार')+'</h2>'+perDay(days)+verdict(fev, days)+'</div>'; }
+    else { h += '<div class="card"><p class="muted">'+t('No reading of 100.4°F or more yet.','अभी तक 100.4°F या ज़्यादा की कोई रीडिंग नहीं।')+'</p></div>'; }
     // episode list for doctor
     h += '<div class="card"><h2>'+t('All fevers (show the doctor)','सभी बुख़ार (डॉक्टर को दिखाएँ)')+'</h2>';
     days.slice().reverse().forEach(function(d){
@@ -304,6 +347,7 @@ function render(){
     });
     h += '<p class="muted">'+t('“+5 h” = time since the previous fever started.','“+5 घंटे” = पिछले बुख़ार के शुरू होने से अब तक का समय।')+'</p><div id="clr"><button type="button" class="btn ghost" id="clearAsk">'+t('Start a new illness (clear chart)','नई बीमारी शुरू करें (चार्ट साफ़ करें)')+'</button></div></div>';
   }
+  if(eps.length){ h += '<div class="card"><label for="cname">'+t("Child's name (shown on the printout)","बच्चे का नाम (छपाई पर दिखेगा)")+'<input id="cname" type="text" value="'+esc(S.name||'')+'" autocomplete="off"></label><button type="button" class="btn" id="printBtn">'+t('Print or save as PDF','प्रिंट या PDF सेव करें')+'</button></div>'; }
   h += '<div class="card"><div class="grid" style="align-items:end"><label for="unit">'+t('Thermometer unit','थर्मामीटर की इकाई')+'<select id="unit"><option value="F"'+(S.unit==='F'?' selected':'')+'>°F</option><option value="C"'+(S.unit==='C'?' selected':'')+'>°C</option></select></label>'+
     '<p class="muted">'+t('Saved only on this phone.','सिर्फ़ इसी फ़ोन में सेव।')+'</p></div></div>';
   document.getElementById('root').innerHTML = h;
@@ -316,12 +360,13 @@ document.addEventListener('click', function(e){
   if(b.dataset.del){ S.eps = S.eps.filter(function(x){return String(x.id)!==b.dataset.del;}); save(); render(); return; }
   if(b.dataset.id){ var eps = sorted(), i = -1; eps.forEach(function(x,j){ if(String(x.id)===b.dataset.id) i=j; }); var ep = eps[i], gp = i>0 ? ep.ts-eps[i-1].ts : null;
     document.getElementById('tip').textContent = dlabel(dkey(ep.ts))+' · '+hm(ep.ts)+' · '+show(ep.max)+(gp!==null ? ' · '+hrs(gp)+t(' after previous',' पिछले के बाद') : ''); return; }
+  if(b.id==='printBtn'){ printReport(); window.print(); return; }
   if(b.id==='clearAsk'){ document.getElementById('clr').innerHTML = '<p style="margin-bottom:8px">'+t('Sure? All fevers will be cleared.','पक्का? सारे बुख़ार मिट जाएँगे।')+'</p><div class="grid"><button type="button" class="btn" id="clearYes" style="background:var(--bad)">'+t('Yes, clear','हाँ, साफ़ करें')+'</button><button type="button" class="btn ghost" id="clearNo">'+t('No','नहीं')+'</button></div>'; return; }
   if(b.id==='clearYes'){ S.eps = []; save(); render(); return; }
   if(b.id==='clearNo'){ render(); return; }
 });
 document.addEventListener('keydown', function(e){ if((e.key==='Enter'||e.key===' ') && e.target.classList && e.target.classList.contains('pt')){ e.preventDefault(); e.target.dispatchEvent(new MouseEvent('click',{bubbles:true})); } });
-document.addEventListener('change', function(e){ if(e.target.id==='unit'){ S.unit = e.target.value; save(); render(); } });
+document.addEventListener('change', function(e){ if(e.target.id==='unit'){ S.unit = e.target.value; save(); render(); } if(e.target.id==='cname'){ S.name = e.target.value.trim(); save(); } });
 document.addEventListener('submit', function(e){
   if(e.target.id!=='f') return; e.preventDefault();
   var d = document.getElementById('dt').value, tm = document.getElementById('tm').value, raw = parseFloat(document.getElementById('mx').value), msg = document.getElementById('msg');
