@@ -254,34 +254,9 @@ function verdict(eps, days){
   var down = '<svg viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="24" fill="var(--surface)"/><g class="bobd"><path d="M26 14 V36 M16 27 L26 38 L36 27" stroke="var(--good)" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></svg>';
   var flat = '<svg viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="24" fill="var(--surface)"/><path d="M14 26 H38 M30 18 L38 26 L30 34" stroke="var(--warn)" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   var lastEp = eps[eps.length-1], sinceLast = Date.now() - lastEp.ts, h = '';
-  var today = nowDate(), lastDay = days[days.length-1], partial = lastDay.k===today;
-  if(days.length >= 2){
-    // compare the last complete day with the one before; if today has more already, it counts too
-    var a = lastDay, b = days[days.length-2];
-    if(partial && a.n <= b.n && days.length >= 3){ a = b; b = days[days.length-3]; }
-    var reasonsDown = [], reasonsUp = [];
-    if(a.n < b.n) reasonsDown.push(t('Fever came fewer times: ','बुख़ार कम बार आया: ')+b.n+' → '+a.n);
-    if(a.n > b.n) reasonsUp.push(t('Fever came more times: ','बुख़ार ज़्यादा बार आया: ')+b.n+' → '+a.n);
-    if(a.peak!==null && b.peak!==null){
-      if(a.peak < b.peak - 0.4) reasonsDown.push(t('Highest temperature lower: ','सबसे ज़्यादा बुख़ार कम: ')+num(b.peak)+' → '+num(a.peak));
-      if(a.peak > b.peak + 0.4) reasonsUp.push(t('Highest temperature higher: ','सबसे ज़्यादा बुख़ार ज़्यादा: ')+num(b.peak)+' → '+num(a.peak));
-    }
-    if(a.n===0 && b.n>0) reasonsDown.push(t('No fever that day','उस दिन बुख़ार नहीं आया'));
-    var cls, icon, head;
-    if(reasonsUp.length && !reasonsDown.length){ cls='bad'; icon=up; head=t('Fever is getting worse','बुख़ार बढ़ रहा है'); }
-    else if(reasonsDown.length && !reasonsUp.length){ cls='good'; icon=down; head=t('Fever is getting better','बुख़ार घट रहा है'); }
-    else if(!reasonsUp.length && !reasonsDown.length){ cls='warn'; icon=flat; head=t('Fever is about the same','बुख़ार लगभग वैसा ही है'); reasonsDown.push(t('Similar number of episodes and similar highest temperature.','लगभग उतनी ही बार और उतना ही बुख़ार।')); }
-    else { cls='warn'; icon=flat; head=t('Mixed picture — keep recording','मिली-जुली स्थिति — लिखते रहें'); }
-    var rs = reasonsDown.concat(reasonsUp);
-    h += '<div class="verdict '+cls+'">'+icon+'<span><b>'+head+'</b><span class="muted">'+t('Day ','दिन ')+(days.indexOf(a)+1)+t(' compared with day ',' की तुलना दिन ')+(days.indexOf(b)+1)+t('',' से')+'</span><ul>'+rs.map(function(r){return '<li>'+r+'</li>';}).join('')+'</ul></span></div>';
-    if(partial && a!==lastDay) h += '<p class="muted">'+t('Today is not over yet, so the comparison uses the previous full days.','आज का दिन अभी पूरा नहीं हुआ, इसलिए पिछले पूरे दिनों की तुलना की गई है।')+'</p>';
-  } else {
-    h += '<div class="verdict warn">'+flat+'<span><b>'+t('Keep recording','लिखते रहें')+'</b>'+t('After 2 days the chart will show whether fever is coming less often.','2 दिन बाद चार्ट बताएगा कि बुख़ार कम बार आ रहा है या नहीं।')+'</span></div>';
-  }
   var feverDays = days.filter(function(d){return d.n>0;}).length;
   if(feverDays >= 3 && sinceLast < DAY) h += '<div class="verdict bad plain"><span><b>'+t('Fever on '+feverDays+' days','बुख़ार '+feverDays+' दिन से')+'</b>'+t('Fever lasting 3 days or more needs a doctor visit — blood tests may be needed.','3 दिन या ज़्यादा बुख़ार पर डॉक्टर को दिखाएँ — ख़ून की जाँच की ज़रूरत हो सकती है।')+'</span></div>';
   if(eps.some(function(e){return e.max>=VERY_HIGH && Date.now()-e.ts < DAY;})) h += '<div class="verdict bad plain"><span><b>'+t('104°F or more in the last 24 hours','पिछले 24 घंटे में 104°F या ज़्यादा')+'</b>'+t('If it does not come down with medicine, or the child looks unwell, see the doctor.','दवा से न उतरे या बच्चा ठीक न लगे, तो डॉक्टर को दिखाएँ।')+'</span></div>';
-  if(sinceLast >= DAY) h += '<div class="verdict good plain"><span><b>'+t('No fever for '+hrs(sinceLast),'पिछले '+hrs(sinceLast)+' से बुख़ार नहीं')+'</b>'+t('A good sign if the child is active and eating.','अगर बच्चा चुस्त है और खा रहा है तो यह अच्छा संकेत है।')+'</span></div>';
   return h;
 }
 
