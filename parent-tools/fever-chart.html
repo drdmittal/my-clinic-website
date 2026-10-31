@@ -186,6 +186,7 @@ function byDay(eps){
 function gaps(eps){ var g=[]; for(var i=1;i<eps.length;i++) g.push(eps[i].ts-eps[i-1].ts); return g; }
 
 function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function siteLabel(v){ return v==='armpit' ? t('Armpit','बगल') : v==='mouth' ? t('Mouth','मुँह') : '–'; }
 function fmtFull(ts){ var k=dkey(ts).split('-'); return k[2]+'/'+k[1]+'/'+k[0]; }
 
 /* timeline lollipop chart */
@@ -291,7 +292,7 @@ function printReport(){
   var fev = eps.filter(function(e){ return e.max>=FEVER; });
   var mark = document.querySelector('header.doc .mono');
   var logo = mark ? '<span style="width:52px;height:52px;flex:none;display:inline-block">'+mark.outerHTML.replace('class="mono"','width="52" height="52"')+'</span>' : '';
-  var rows = eps.map(function(e){ return '<tr><td>'+fmtFull(e.ts)+'</td><td>'+hm(e.ts)+'</td><td>'+show(e.max)+'</td></tr>'; }).join('');
+  var rows = eps.map(function(e){ return '<tr><td>'+fmtFull(e.ts)+'</td><td>'+hm(e.ts)+'</td><td>'+show(e.max)+'</td><td>'+siteLabel(e.site)+'</td></tr>'; }).join('');
   el.innerHTML =
     '<div class="ph"><div class="l">'+logo+'<div><b>Dr. Dinesh Mittal Child Clinic</b><br>Dr. Dinesh Mittal, MBBS, DCH · DMC/R/00668</div></div>'+
     '<div class="r">H-34/69, Sector 3, Rohini, Delhi 110085<br>+91 81305 21456 · www.drdineshmittal.com<br>Mon–Sat 10 am–1 pm, 6–8:30 pm · Sun 11 am–12 pm</div></div>'+
@@ -300,7 +301,7 @@ function printReport(){
     '<p style="margin:0 0 4px"><b>'+t('Period','अवधि')+':</b> '+(eps.length ? fmtFull(eps[0].ts)+' – '+fmtFull(eps[eps.length-1].ts) : '–')+'</p>'+
     '<p style="margin:0 0 8px"><b>'+t('Readings at '+show(FEVER)+' or more', show(FEVER)+' या ज़्यादा की रीडिंग')+':</b> '+fev.length+'</p>'+
     (eps.length ? timeline(eps) : '')+
-    '<table><tr><th>'+t('Date','तारीख़')+'</th><th>'+t('Time','समय')+'</th><th>'+t('Highest','सबसे ज़्यादा')+' °'+S.unit+'</th></tr>'+rows+'</table>'+
+    '<table><tr><th>'+t('Date','तारीख़')+'</th><th>'+t('Time','समय')+'</th><th>'+t('Highest','सबसे ज़्यादा')+' °'+S.unit+'</th><th>'+t('Where taken','कहाँ लिया')+'</th></tr>'+rows+'</table>'+
     '<p class="pfoot">'+t('Health education material for parents. General information only; it does not replace a consultation with your doctor. Dr. Dinesh Mittal, MBBS, DCH · DMC/R/00668 · www.drdineshmittal.com','माता-पिता के लिए स्वास्थ्य जानकारी। यह सामान्य जानकारी है, डॉक्टर से परामर्श का विकल्प नहीं। डॉ. दिनेश मित्तल, MBBS, DCH · DMC/R/00668 · www.drdineshmittal.com')+'</p>';
 }
 
@@ -317,6 +318,7 @@ function render(){
     '<div class="grid"><label for="dt">'+t('Date','तारीख़')+'<input id="dt" type="date" value="'+nowDate()+'" max="'+nowDate()+'"></label>'+
     '<label for="tm">'+t('Time fever started','बुख़ार कब आया')+'<input id="tm" type="time" value="'+nowTime()+'"></label></div>'+
     '<label for="mx">'+t('Highest temperature in this fever','इस बुख़ार में सबसे ज़्यादा तापमान')+' (°'+S.unit+')<input id="mx" class="big" type="number" inputmode="decimal" step="0.1" placeholder="'+(S.unit==='F'?'101.0':'38.3')+'"></label>'+
+    '<label for="site">'+t('Where was the temperature taken?','तापमान कहाँ लिया?')+'<select id="site"><option value="">'+t('Choose','चुनें')+'</option><option value="armpit">'+t('Armpit','बगल')+'</option><option value="mouth">'+t('Mouth','मुँह')+'</option></select></label>'+
     '<button type="submit" class="btn">'+t('Add fever','बुख़ार जोड़ें')+'</button><div class="msg" id="msg" aria-live="polite"></div></form></div>';
 
   if(!eps.length){
@@ -341,7 +343,7 @@ function render(){
       h += '<div class="day"><div class="dayh"><b>'+t('Day ','दिन ')+idx+' · '+dlabel(d.k)+'</b><span class="muted">'+(d.n? d.n+' '+t(d.n>1?'times':'time','बार')+' · '+t('max ','सबसे ज़्यादा ')+show(d.peak) : '<span style="color:var(--good);font-weight:700">'+t('No fever','बुख़ार नहीं')+'</span>')+'</span></div>';
       d.eps.slice().reverse().forEach(function(e){
         var i = eps.indexOf(e), gp = i>0 ? e.ts - eps[i-1].ts : null;
-        h += '<div class="ep"><time>'+hm(e.ts)+'</time><span class="pill '+band(e.max)+'">'+show(e.max)+'</span><span class="gap">'+(gp!==null? '+'+hrs(gp) : '')+'</span><button type="button" class="x" data-del="'+e.id+'" aria-label="'+t('Delete','हटाएँ')+'">×</button></div>';
+        h += '<div class="ep"><time>'+hm(e.ts)+'</time><span class="pill '+band(e.max)+'">'+show(e.max)+'</span><span class="gap">'+siteLabel(e.site)+(gp!==null? ' · +'+hrs(gp) : '')+'</span><button type="button" class="x" data-del="'+e.id+'" aria-label="'+t('Delete','हटाएँ')+'">×</button></div>';
       });
       h += '</div>';
     });
@@ -359,7 +361,7 @@ document.addEventListener('click', function(e){
   if(b.dataset.lang){ S.lang = b.dataset.lang; save(); animate = true; render(); return; }
   if(b.dataset.del){ S.eps = S.eps.filter(function(x){return String(x.id)!==b.dataset.del;}); save(); render(); return; }
   if(b.dataset.id){ var eps = sorted(), i = -1; eps.forEach(function(x,j){ if(String(x.id)===b.dataset.id) i=j; }); var ep = eps[i], gp = i>0 ? ep.ts-eps[i-1].ts : null;
-    document.getElementById('tip').textContent = dlabel(dkey(ep.ts))+' · '+hm(ep.ts)+' · '+show(ep.max)+(gp!==null ? ' · '+hrs(gp)+t(' after previous',' पिछले के बाद') : ''); return; }
+    document.getElementById('tip').textContent = dlabel(dkey(ep.ts))+' · '+hm(ep.ts)+' · '+show(ep.max)+' · '+siteLabel(ep.site)+(gp!==null ? ' · '+hrs(gp)+t(' after previous',' पिछले के बाद') : ''); return; }
   if(b.id==='printBtn'){ printReport(); window.print(); return; }
   if(b.id==='clearAsk'){ document.getElementById('clr').innerHTML = '<p style="margin-bottom:8px">'+t('Sure? All fevers will be cleared.','पक्का? सारे बुख़ार मिट जाएँगे।')+'</p><div class="grid"><button type="button" class="btn" id="clearYes" style="background:var(--bad)">'+t('Yes, clear','हाँ, साफ़ करें')+'</button><button type="button" class="btn ghost" id="clearNo">'+t('No','नहीं')+'</button></div>'; return; }
   if(b.id==='clearYes'){ S.eps = []; save(); render(); return; }
@@ -372,6 +374,8 @@ document.addEventListener('submit', function(e){
   var d = document.getElementById('dt').value, tm = document.getElementById('tm').value, raw = parseFloat(document.getElementById('mx').value), msg = document.getElementById('msg');
   if(!d || !tm){ msg.className='msg err'; msg.textContent = t('Choose the date and time.','तारीख़ और समय चुनें।'); return; }
   if(isNaN(raw)){ msg.className='msg err'; msg.textContent = t('Enter the highest temperature.','सबसे ज़्यादा तापमान लिखें।'); return; }
+  var site = document.getElementById('site').value;
+  if(site!=='armpit' && site!=='mouth'){ msg.className='msg err'; msg.textContent = t('Choose armpit or mouth.','बगल या मुँह चुनें।'); return; }
   var f = toF(raw);
   if(f < 90){ msg.className='msg err'; msg.textContent = t('That reading looks wrong. Check the thermometer.','यह रीडिंग गलत लगती है। थर्मामीटर जाँचें।'); return; }
   if(f > 108){ msg.className='msg err'; msg.textContent = t('That reading looks wrong. Check the thermometer.','यह रीडिंग गलत लगती है। थर्मामीटर जाँचें।'); return; }
@@ -379,7 +383,7 @@ document.addEventListener('submit', function(e){
   if(ts > Date.now() + 5*60000){ msg.className='msg err'; msg.textContent = t('That time is in the future.','यह समय अभी आया नहीं है।'); return; }
   var near = S.eps.filter(function(x){ return Math.abs(x.ts-ts) < 2*H1; })[0];
   var id = Date.now();
-  S.eps.push({id:id, ts:ts, max:Math.round(f*10)/10});
+  S.eps.push({id:id, ts:ts, max:Math.round(f*10)/10, site:site});
   save(); flash = id; animate = true; render();
   var m2 = document.getElementById('msg'); m2.className='msg ok';
   m2.textContent = t('Added ','जोड़ा: ')+dlabel(dkey(ts))+' '+hm(ts)+' · '+show(f) + (near ? ' — '+t('another fever was logged within 2 hours; if it was the same fever, delete one.','2 घंटे के अंदर एक और बुख़ार लिखा है; अगर वही बुख़ार था तो एक हटा दें।') : '');
