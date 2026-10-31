@@ -174,7 +174,7 @@ function timeline(eps){
   var first = dayStart(dkey(eps[0].ts)), lastTs = eps[eps.length-1].ts;
   var end = Math.max(dayStart(dkey(lastTs)) + DAY, first + DAY);
   var vals = eps.map(function(e){return e.max;});
-  var lo = 98, hi = Math.max(105, Math.ceil(Math.max.apply(null, vals)));
+  var lo = Math.min(98, Math.floor(Math.min.apply(null, vals))), hi = Math.max(105, Math.ceil(Math.max.apply(null, vals)));
   function x(ts){ return L + (ts-first)/(end-first)*(W-L-R); }
   function y(v){ return T + (hi-v)/(hi-lo)*(H-B-T); }
   var g = '';
@@ -194,8 +194,8 @@ function timeline(eps){
   for(var i=0;i<=nDays;i++){ var dx = x(first+i*DAY); g += '<line x1="'+dx+'" x2="'+dx+'" y1="'+T+'" y2="'+(H-B+4)+'" stroke="var(--muted)" stroke-width="1" opacity=".45"/>';
     if(i<nDays){ var mid = x(first+i*DAY+DAY/2); g += '<text x="'+mid+'" y="'+(H-B+18)+'" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--ink)">'+t('Day ','दिन ')+(i+1)+'</text><text x="'+mid+'" y="'+(H-B+31)+'" text-anchor="middle" font-size="9.5" fill="var(--muted)">'+dlabel(dkey(first+i*DAY+H1*2))+'</text>'; } }
   // join the pins in time order (drawn under the stems and pins)
-  if(eps.length>1){ var pts = eps.map(function(e){ return x(e.ts).toFixed(1)+','+y(e.max).toFixed(1); }).join(' ');
-    g += '<polyline class="link" points="'+pts+'" fill="none" stroke="var(--muted)" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" opacity=".7"/>'; }
+  for(var k=1;k<eps.length;k++){ var a=eps[k-1], b=eps[k], lowSeg = a.max<FEVER && b.max<FEVER;
+    g += '<line class="link" x1="'+x(a.ts).toFixed(1)+'" y1="'+y(a.max).toFixed(1)+'" x2="'+x(b.ts).toFixed(1)+'" y2="'+y(b.max).toFixed(1)+'" stroke="'+(lowSeg?'var(--good)':'var(--muted)')+'" stroke-width="'+(lowSeg?2:1.6)+'" stroke-linecap="round" opacity=".75"/>'; }
   // lollipops
   var lastLabX = -99;
   eps.forEach(function(e,i){
@@ -328,7 +328,7 @@ document.addEventListener('submit', function(e){
   if(!d || !tm){ msg.className='msg err'; msg.textContent = t('Choose the date and time.','तारीख़ और समय चुनें।'); return; }
   if(isNaN(raw)){ msg.className='msg err'; msg.textContent = t('Enter the highest temperature.','सबसे ज़्यादा तापमान लिखें।'); return; }
   var f = toF(raw);
-  if(f < FEVER){ msg.className='msg err'; msg.textContent = t('Below '+show(FEVER)+' is not fever — no need to add it.',show(FEVER)+' से कम बुख़ार नहीं है — जोड़ने की ज़रूरत नहीं।'); return; }
+  if(f < 90){ msg.className='msg err'; msg.textContent = t('That reading looks wrong. Check the thermometer.','यह रीडिंग गलत लगती है। थर्मामीटर जाँचें।'); return; }
   if(f > 108){ msg.className='msg err'; msg.textContent = t('That reading looks wrong. Check the thermometer.','यह रीडिंग गलत लगती है। थर्मामीटर जाँचें।'); return; }
   var p = d.split('-'), q = tm.split(':'), ts = new Date(+p[0], +p[1]-1, +p[2], +q[0], +q[1]).getTime();
   if(ts > Date.now() + 5*60000){ msg.className='msg err'; msg.textContent = t('That time is in the future.','यह समय अभी आया नहीं है।'); return; }
