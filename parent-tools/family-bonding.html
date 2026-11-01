@@ -638,6 +638,321 @@ const SCENES = {
     {p:{x:100,s:'point'}, c:{x:200,s:'point'}, m:{x:280,s:'point'}},
     {p:{x:100,s:'idle'},  c:{x:200,s:'idle'},  m:{x:280,s:'idle'}},
     {p:{x:100,s:'up'},    c:{x:200,s:'up'},    m:{x:280,s:'up'}}
+  ],
+  'Animal sounds':[
+    {p:{x:110,s:'point'}, c:{x:200,s:'look'}, m:{x:290,s:'idle'}},
+    {p:{x:110,s:'idle'}, c:{x:200,s:'up'}, m:{x:290,s:'idle'}},
+    {p:{x:110,s:'idle'}, c:{x:200,s:'look'}, m:{x:290,s:'idle'}}
+  ],
+  'Stack and knock':[
+    {p:{x:110,s:'doc'}, c:{x:200,s:'doc'}, m:{x:290,s:'idle'}},
+    {p:{x:110,s:'clap'}, c:{x:200,s:'clap'}, m:{x:290,s:'clap'}},
+    {p:{x:110,s:'point'}, c:{x:200,s:'doc'}, m:{x:290,s:'idle'}}
+  ],
+  'Count the brush strokes':[
+    {p:{x:110,s:'look'}, c:{x:200,s:'doc'}, m:{x:290,s:'look'}},
+    {p:{x:110,s:'point'}, c:{x:200,s:'point'}, m:{x:290,s:'idle'}},
+    {p:{x:110,s:'clap'}, c:{x:200,s:'up'}, m:{x:290,s:'idle'}}
+  ],
+  'Pass the Ball':[
+    {p:{x:110,s:'wave'}, c:{x:200,s:'up'}, m:{x:290,s:'wave'}},
+    {p:{x:110,s:'point'}, c:{x:200,s:'point'}, m:{x:290,s:'look'}},
+    {p:{x:110,s:'idle'}, c:{x:200,s:'idle'}, m:{x:290,s:'idle'}}
+  ],
+  'Machli Jal ki Rani':[
+    {p:{x:110,s:'wave'}, c:{x:200,s:'wave'}, m:{x:290,s:'wave'}},
+    {p:{x:110,s:'idle'}, c:{x:200,s:'up'}, m:{x:290,s:'idle'}},
+    {p:{x:110,s:'idle'}, c:{x:200,s:'idle'}, m:{x:290,s:'idle'}}
+  ],
+  'Stop and go':[
+    {p:{x:110,s:'stomp'}, c:{x:200,s:'stomp'}, m:{x:290,s:'idle'}},
+    {p:{x:110,s:'point'}, c:{x:200,s:'idle'}, m:{x:290,s:'idle'}},
+    {p:{x:110,s:'hug'}, c:{x:200,s:'hug'}, m:{x:290,s:'idle'}}
+  ],
+  'Naam, Gaon, Jaanwar, Cheez':[
+    {p:{x:110,s:'doc'}, c:{x:200,s:'look'}, m:{x:290,s:'look'}},
+    {p:{x:110,s:'point'}, c:{x:200,s:'up'}, m:{x:290,s:'wave'}},
+    {p:{x:110,s:'clap'}, c:{x:200,s:'clap'}, m:{x:290,s:'clap'}}
+  ],
+  'Lullaby Antakshari':[
+    {p:{x:110,s:'up'}, c:{x:200,s:'idle'}, m:{x:290,s:'idle'}},
+    {p:{x:110,s:'point'}, c:{x:200,s:'look'}, m:{x:290,s:'look'}},
+    {p:{x:110,s:'hug'}, c:{x:200,s:'hug'}, m:{x:290,s:'hug'}}
+  ],
+  'Criss-cross':[
+    {p:{x:110,s:'doc'}, c:{x:200,s:'doc'}, m:{x:290,s:'doc'}},
+    {p:{x:110,s:'point'}, c:{x:200,s:'point'}, m:{x:290,s:'idle'}},
+    {p:{x:110,s:'clap'}, c:{x:200,s:'up'}, m:{x:290,s:'clap'}}
+  ],
+  'Criss-cross best of five':[
+    {p:{x:110,s:'doc'}, c:{x:200,s:'doc'}, m:{x:290,s:'doc'}},
+    {p:{x:110,s:'point'}, c:{x:200,s:'point'}, m:{x:290,s:'idle'}},
+    {p:{x:110,s:'clap'}, c:{x:200,s:'up'}, m:{x:290,s:'idle'}}
+  ],
+  'Story chain':[
+    {p:{x:110,s:'up'}, c:{x:200,s:'look'}, m:{x:290,s:'look'}},
+    {p:{x:110,s:'point'}, c:{x:200,s:'idle'}, m:{x:290,s:'wave'}},
+    {p:{x:110,s:'idle'}, c:{x:200,s:'up'}, m:{x:290,s:'idle'}}
+  ],
+  'Shadow puppets':[
+    {p:{x:110,s:'up'}, c:{x:200,s:'idle'}, m:{x:290,s:'look'}},
+    {p:{x:110,s:'idle'}, c:{x:200,s:'up'}, m:{x:290,s:'point'}},
+    {p:{x:110,s:'point'}, c:{x:200,s:'look'}, m:{x:290,s:'look'}}
+  ],
+  'Colour hunt':[
+    {p:{x:110,s:'point'}, c:{x:200,s:'look'}, m:{x:290,s:'idle'}},
+    {p:{x:110,s:'idle'}, c:{x:200,s:'point'}, m:{x:290,s:'look'}},
+    {p:{x:110,s:'idle'}, c:{x:200,s:'up'}, m:{x:290,s:'clap'}}
+  ],
+  'Memory tray':[
+    {p:{x:110,s:'doc'}, c:{x:200,s:'look'}, m:{x:290,s:'idle'}},
+    {p:{x:110,s:'idle'}, c:{x:200,s:'cover'}, m:{x:290,s:'idle'}},
+    {p:{x:110,s:'point'}, c:{x:200,s:'point'}, m:{x:290,s:'idle'}}
+  ],
+  'Pretend to blow out a candle':[
+    {p:{x:110,s:'up'}, c:{x:200,s:'up'}, m:{x:290,s:'up'}},
+    {p:{x:110,s:'idle'}, c:{x:200,s:'idle'}, m:{x:290,s:'idle'}},
+    {p:{x:110,s:'idle'}, c:{x:200,s:'clap'}, m:{x:290,s:'clap'}}
+  ],
+  'Ludo':[
+    {p:{x:110,s:'doc'}, c:{x:200,s:'doc'}, m:{x:290,s:'idle'}},
+    {p:{x:110,s:'point'}, c:{x:200,s:'point'}, m:{x:290,s:'look'}},
+    {p:{x:110,s:'up'}, c:{x:200,s:'up'}, m:{x:290,s:'clap'}}
+  ],
+  'Snakes and Ladders':[
+    {p:{x:110,s:'look'}, c:{x:200,s:'up'}, m:{x:290,s:'look'}},
+    {p:{x:110,s:'idle'}, c:{x:200,s:'point'}, m:{x:290,s:'idle'}},
+    {p:{x:110,s:'clap'}, c:{x:200,s:'clap'}, m:{x:290,s:'clap'}}
+  ],
+  'Tambola':[
+    {p:{x:110,s:'doc'}, c:{x:200,s:'doc'}, m:{x:290,s:'doc'}},
+    {p:{x:110,s:'up'}, c:{x:200,s:'point'}, m:{x:290,s:'point'}},
+    {p:{x:110,s:'clap'}, c:{x:200,s:'clap'}, m:{x:290,s:'clap'}}
+  ],
+  'Antakshari':[
+    {p:{x:110,s:'wave'}, c:{x:200,s:'idle'}, m:{x:290,s:'wave'}},
+    {p:{x:110,s:'idle'}, c:{x:200,s:'wave'}, m:{x:290,s:'idle'}},
+    {p:{x:110,s:'look'}, c:{x:200,s:'look'}, m:{x:290,s:'look'}}
+  ],
+  'Carrom':[
+    {p:{x:110,s:'doc'}, c:{x:200,s:'look'}, m:{x:290,s:'look'}},
+    {p:{x:110,s:'point'}, c:{x:200,s:'look'}, m:{x:290,s:'look'}},
+    {p:{x:110,s:'clap'}, c:{x:200,s:'clap'}, m:{x:290,s:'look'}}
+  ],
+  'Dumb charades':[
+    {p:{x:110,s:'doc'}, c:{x:200,s:'look'}, m:{x:290,s:'look'}},
+    {p:{x:110,s:'wave'}, c:{x:200,s:'look'}, m:{x:290,s:'look'}},
+    {p:{x:110,s:'point'}, c:{x:200,s:'up'}, m:{x:290,s:'point'}}
+  ],
+  '20 Questions':[
+    {p:{x:110,s:'idle'}, c:{x:200,s:'look'}, m:{x:290,s:'idle'}},
+    {p:{x:110,s:'point'}, c:{x:200,s:'up'}, m:{x:290,s:'point'}},
+    {p:{x:110,s:'idle'}, c:{x:200,s:'idle'}, m:{x:290,s:'idle'}}
+  ],
+  'Word building':[
+    {p:{x:110,s:'doc'}, c:{x:200,s:'doc'}, m:{x:290,s:'look'}},
+    {p:{x:110,s:'point'}, c:{x:200,s:'point'}, m:{x:290,s:'idle'}},
+    {p:{x:110,s:'clap'}, c:{x:200,s:'up'}, m:{x:290,s:'clap'}}
+  ],
+  'Rose, bud, thorn':[
+    {p:{x:110,s:'up'}, c:{x:200,s:'up'}, m:{x:290,s:'up'}},
+    {p:{x:110,s:'point'}, c:{x:200,s:'look'}, m:{x:290,s:'point'}},
+    {p:{x:110,s:'idle'}, c:{x:200,s:'idle'}, m:{x:290,s:'hug'}}
+  ],
+  'Chess':[
+    {p:{x:110,s:'doc'}, c:{x:200,s:'point'}, m:{x:290,s:'doc'}},
+    {p:{x:110,s:'up'}, c:{x:200,s:'up'}, m:{x:290,s:'up'}},
+    {p:{x:110,s:'hug'}, c:{x:200,s:'hug'}, m:{x:290,s:'idle'}}
+  ],
+  'Carrom doubles':[
+    {p:{x:110,s:'point'}, c:{x:200,s:'point'}, m:{x:290,s:'look'}},
+    {p:{x:110,s:'point'}, c:{x:200,s:'look'}, m:{x:290,s:'point'}},
+    {p:{x:110,s:'clap'}, c:{x:200,s:'clap'}, m:{x:290,s:'clap'}}
+  ],
+  'Tambola with small prizes':[
+    {p:{x:110,s:'doc'}, c:{x:200,s:'doc'}, m:{x:290,s:'doc'}},
+    {p:{x:110,s:'up'}, c:{x:200,s:'point'}, m:{x:290,s:'point'}},
+    {p:{x:110,s:'up'}, c:{x:200,s:'clap'}, m:{x:290,s:'clap'}}
+  ],
+  'Shabd Antakshari':[
+    {p:{x:110,s:'wave'}, c:{x:200,s:'look'}, m:{x:290,s:'wave'}},
+    {p:{x:110,s:'look'}, c:{x:200,s:'point'}, m:{x:290,s:'look'}},
+    {p:{x:110,s:'point'}, c:{x:200,s:'idle'}, m:{x:290,s:'idle'}}
+  ],
+  'Quick quiz':[
+    {p:{x:110,s:'up'}, c:{x:200,s:'look'}, m:{x:290,s:'look'}},
+    {p:{x:110,s:'doc'}, c:{x:200,s:'doc'}, m:{x:290,s:'idle'}},
+    {p:{x:110,s:'clap'}, c:{x:200,s:'up'}, m:{x:290,s:'clap'}}
+  ],
+  'Two truths and a lie':[
+    {p:{x:110,s:'up'}, c:{x:200,s:'idle'}, m:{x:290,s:'idle'}},
+    {p:{x:110,s:'idle'}, c:{x:200,s:'point'}, m:{x:290,s:'point'}},
+    {p:{x:110,s:'clap'}, c:{x:200,s:'clap'}, m:{x:290,s:'clap'}}
+  ],
+  'Guess who?':[
+    {p:{x:110,s:'look'}, c:{x:200,s:'look'}, m:{x:290,s:'look'}},
+    {p:{x:110,s:'point'}, c:{x:200,s:'up'}, m:{x:290,s:'idle'}},
+    {p:{x:110,s:'clap'}, c:{x:200,s:'clap'}, m:{x:290,s:'clap'}}
+  ],
+  'Chaupar':[
+    {p:{x:110,s:'doc'}, c:{x:200,s:'doc'}, m:{x:290,s:'doc'}},
+    {p:{x:110,s:'point'}, c:{x:200,s:'up'}, m:{x:290,s:'idle'}},
+    {p:{x:110,s:'clap'}, c:{x:200,s:'up'}, m:{x:290,s:'clap'}}
+  ],
+  'Easy sudoku together':[
+    {p:{x:110,s:'doc'}, c:{x:200,s:'doc'}, m:{x:290,s:'doc'}},
+    {p:{x:110,s:'point'}, c:{x:200,s:'point'}, m:{x:290,s:'point'}},
+    {p:{x:110,s:'look'}, c:{x:200,s:'look'}, m:{x:290,s:'look'}}
+  ],
+  'Ask-me-anything cards':[
+    {p:{x:110,s:'doc'}, c:{x:200,s:'doc'}, m:{x:290,s:'idle'}},
+    {p:{x:110,s:'idle'}, c:{x:200,s:'point'}, m:{x:290,s:'idle'}},
+    {p:{x:110,s:'wave'}, c:{x:200,s:'wave'}, m:{x:290,s:'wave'}}
+  ],
+  'Chess or carrom':[
+    {p:{x:110,s:'doc'}, c:{x:200,s:'doc'}, m:{x:290,s:'idle'}},
+    {p:{x:110,s:'look'}, c:{x:200,s:'point'}, m:{x:290,s:'idle'}},
+    {p:{x:110,s:'clap'}, c:{x:200,s:'clap'}, m:{x:290,s:'clap'}}
+  ],
+  'Antakshari: two generations':[
+    {p:{x:110,s:'wave'}, c:{x:200,s:'wave'}, m:{x:290,s:'wave'}},
+    {p:{x:110,s:'point'}, c:{x:200,s:'point'}, m:{x:290,s:'point'}},
+    {p:{x:110,s:'clap'}, c:{x:200,s:'clap'}, m:{x:290,s:'clap'}}
+  ],
+  'Quiz night':[
+    {p:{x:110,s:'doc'}, c:{x:200,s:'doc'}, m:{x:290,s:'doc'}},
+    {p:{x:110,s:'up'}, c:{x:200,s:'point'}, m:{x:290,s:'up'}},
+    {p:{x:110,s:'clap'}, c:{x:200,s:'clap'}, m:{x:290,s:'clap'}}
+  ],
+  'Crossword together':[
+    {p:{x:110,s:'doc'}, c:{x:200,s:'doc'}, m:{x:290,s:'doc'}},
+    {p:{x:110,s:'look'}, c:{x:200,s:'point'}, m:{x:290,s:'look'}},
+    {p:{x:110,s:'idle'}, c:{x:200,s:'idle'}, m:{x:290,s:'idle'}}
+  ],
+  'Dumb charades in pairs (jode)':[
+    {p:{x:110,s:'up'}, c:{x:200,s:'up'}, m:{x:290,s:'idle'}},
+    {p:{x:110,s:'wave'}, c:{x:200,s:'wave'}, m:{x:290,s:'look'}},
+    {p:{x:110,s:'point'}, c:{x:200,s:'point'}, m:{x:290,s:'up'}}
+  ],
+  'Two truths and a lie, deeper':[
+    {p:{x:110,s:'up'}, c:{x:200,s:'idle'}, m:{x:290,s:'look'}},
+    {p:{x:110,s:'look'}, c:{x:200,s:'point'}, m:{x:290,s:'point'}},
+    {p:{x:110,s:'hug'}, c:{x:200,s:'hug'}, m:{x:290,s:'hug'}}
+  ],
+  'Family tambola tournament':[
+    {p:{x:110,s:'doc'}, c:{x:200,s:'doc'}, m:{x:290,s:'doc'}},
+    {p:{x:110,s:'look'}, c:{x:200,s:'look'}, m:{x:290,s:'look'}},
+    {p:{x:110,s:'clap'}, c:{x:200,s:'clap'}, m:{x:290,s:'up'}}
+  ],
+  'Would you rather':[
+    {p:{x:110,s:'up'}, c:{x:200,s:'point'}, m:{x:290,s:'point'}},
+    {p:{x:110,s:'point'}, c:{x:200,s:'look'}, m:{x:290,s:'look'}},
+    {p:{x:110,s:'hug'}, c:{x:200,s:'hug'}, m:{x:290,s:'hug'}}
+  ],
+  'Storytelling with a twist':[
+    {p:{x:110,s:'up'}, c:{x:200,s:'idle'}, m:{x:290,s:'idle'}},
+    {p:{x:110,s:'idle'}, c:{x:200,s:'up'}, m:{x:290,s:'idle'}},
+    {p:{x:110,s:'hug'}, c:{x:200,s:'hug'}, m:{x:290,s:'hug'}}
+  ],
+  'Plan one family outing':[
+    {p:{x:110,s:'doc'}, c:{x:200,s:'look'}, m:{x:290,s:'look'}},
+    {p:{x:110,s:'point'}, c:{x:200,s:'point'}, m:{x:290,s:'doc'}},
+    {p:{x:110,s:'doc'}, c:{x:200,s:'doc'}, m:{x:290,s:'clap'}}
+  ],
+  'Pop the Bubbles':[
+    {p:{x:110,s:'up'}, c:{x:200,s:'up'}, m:{x:290,s:'up'}},
+    {p:{x:110,s:'point'}, c:{x:200,s:'point'}, m:{x:290,s:'look'}},
+    {p:{x:110,s:'idle'}, c:{x:200,s:'idle'}, m:{x:290,s:'idle'}}
+  ],
+  'I Spy':[
+    {p:{x:110,s:'point'}, c:{x:200,s:'look'}, m:{x:290,s:'look'}},
+    {p:{x:110,s:'idle'}, c:{x:200,s:'point'}, m:{x:290,s:'look'}},
+    {p:{x:110,s:'point'}, c:{x:200,s:'look'}, m:{x:290,s:'point'}}
+  ],
+  'Animal Walk':[
+    {p:{x:110,s:'stomp'}, c:{x:200,s:'stomp'}, m:{x:290,s:'stomp'}},
+    {p:{x:110,s:'stomp'}, c:{x:200,s:'stomp'}, m:{x:290,s:'idle'}},
+    {p:{x:110,s:'idle'}, c:{x:200,s:'idle'}, m:{x:290,s:'hug'}}
+  ],
+  'Tree Pose':[
+    {p:{x:110,s:'up'}, c:{x:200,s:'up'}, m:{x:290,s:'up'}},
+    {p:{x:110,s:'up'}, c:{x:200,s:'up'}, m:{x:290,s:'up'}},
+    {p:{x:110,s:'idle'}, c:{x:200,s:'idle'}, m:{x:290,s:'idle'}}
+  ],
+  'Sock Matching':[
+    {p:{x:110,s:'doc'}, c:{x:200,s:'look'}, m:{x:290,s:'doc'}},
+    {p:{x:110,s:'point'}, c:{x:200,s:'point'}, m:{x:290,s:'look'}},
+    {p:{x:110,s:'hug'}, c:{x:200,s:'idle'}, m:{x:290,s:'idle'}}
+  ],
+  'Hangman':[
+    {p:{x:110,s:'doc'}, c:{x:200,s:'look'}, m:{x:290,s:'look'}},
+    {p:{x:110,s:'look'}, c:{x:200,s:'point'}, m:{x:290,s:'point'}},
+    {p:{x:110,s:'point'}, c:{x:200,s:'look'}, m:{x:290,s:'look'}}
+  ],
+  'Number Magic':[
+    {p:{x:110,s:'point'}, c:{x:200,s:'look'}, m:{x:290,s:'idle'}},
+    {p:{x:110,s:'doc'}, c:{x:200,s:'doc'}, m:{x:290,s:'idle'}},
+    {p:{x:110,s:'up'}, c:{x:200,s:'up'}, m:{x:290,s:'clap'}}
+  ],
+  'Draw and Guess':[
+    {p:{x:110,s:'doc'}, c:{x:200,s:'look'}, m:{x:290,s:'look'}},
+    {p:{x:110,s:'doc'}, c:{x:200,s:'look'}, m:{x:290,s:'look'}},
+    {p:{x:110,s:'point'}, c:{x:200,s:'up'}, m:{x:290,s:'up'}}
+  ],
+  'Rhyme Time':[
+    {p:{x:110,s:'point'}, c:{x:200,s:'look'}, m:{x:290,s:'look'}},
+    {p:{x:110,s:'wave'}, c:{x:200,s:'up'}, m:{x:290,s:'wave'}},
+    {p:{x:110,s:'look'}, c:{x:200,s:'point'}, m:{x:290,s:'look'}}
+  ],
+  'Fact or Fiction':[
+    {p:{x:110,s:'up'}, c:{x:200,s:'look'}, m:{x:290,s:'look'}},
+    {p:{x:110,s:'point'}, c:{x:200,s:'up'}, m:{x:290,s:'up'}},
+    {p:{x:110,s:'clap'}, c:{x:200,s:'clap'}, m:{x:290,s:'clap'}}
+  ],
+  'Blind Drawing':[
+    {p:{x:110,s:'doc'}, c:{x:200,s:'look'}, m:{x:290,s:'look'}},
+    {p:{x:110,s:'cover'}, c:{x:200,s:'doc'}, m:{x:290,s:'doc'}},
+    {p:{x:110,s:'clap'}, c:{x:200,s:'clap'}, m:{x:290,s:'clap'}}
+  ],
+  'Paper Tower':[
+    {p:{x:110,s:'doc'}, c:{x:200,s:'doc'}, m:{x:290,s:'doc'}},
+    {p:{x:110,s:'up'}, c:{x:200,s:'up'}, m:{x:290,s:'up'}},
+    {p:{x:110,s:'look'}, c:{x:200,s:'look'}, m:{x:290,s:'look'}}
+  ],
+  'Story Cubes':[
+    {p:{x:110,s:'point'}, c:{x:200,s:'look'}, m:{x:290,s:'look'}},
+    {p:{x:110,s:'up'}, c:{x:200,s:'point'}, m:{x:290,s:'up'}},
+    {p:{x:110,s:'hug'}, c:{x:200,s:'hug'}, m:{x:290,s:'hug'}}
+  ],
+  'Word Meaning Guess':[
+    {p:{x:110,s:'doc'}, c:{x:200,s:'look'}, m:{x:290,s:'look'}},
+    {p:{x:110,s:'up'}, c:{x:200,s:'point'}, m:{x:290,s:'up'}},
+    {p:{x:110,s:'look'}, c:{x:200,s:'look'}, m:{x:290,s:'look'}}
+  ],
+  'Mystery Box':[
+    {p:{x:110,s:'doc'}, c:{x:200,s:'look'}, m:{x:290,s:'idle'}},
+    {p:{x:110,s:'idle'}, c:{x:200,s:'cover'}, m:{x:290,s:'idle'}},
+    {p:{x:110,s:'point'}, c:{x:200,s:'up'}, m:{x:290,s:'up'}}
+  ],
+  'Hum That Tune':[
+    {p:{x:110,s:'up'}, c:{x:200,s:'idle'}, m:{x:290,s:'idle'}},
+    {p:{x:110,s:'idle'}, c:{x:200,s:'look'}, m:{x:290,s:'look'}},
+    {p:{x:110,s:'idle'}, c:{x:200,s:'up'}, m:{x:290,s:'wave'}}
+  ],
+  'Dream Round':[
+    {p:{x:110,s:'up'}, c:{x:200,s:'up'}, m:{x:290,s:'up'}},
+    {p:{x:110,s:'point'}, c:{x:200,s:'look'}, m:{x:290,s:'point'}},
+    {p:{x:110,s:'hug'}, c:{x:200,s:'hug'}, m:{x:290,s:'hug'}}
+  ],
+  'Escape Box':[
+    {p:{x:110,s:'doc'}, c:{x:200,s:'doc'}, m:{x:290,s:'doc'}},
+    {p:{x:110,s:'look'}, c:{x:200,s:'look'}, m:{x:290,s:'point'}},
+    {p:{x:110,s:'clap'}, c:{x:200,s:'clap'}, m:{x:290,s:'clap'}}
+  ],
+  'Debate Light':[
+    {p:{x:110,s:'up'}, c:{x:200,s:'point'}, m:{x:290,s:'up'}},
+    {p:{x:110,s:'point'}, c:{x:200,s:'up'}, m:{x:290,s:'look'}},
+    {p:{x:110,s:'clap'}, c:{x:200,s:'look'}, m:{x:290,s:'clap'}}
   ]
 };
 
@@ -647,8 +962,16 @@ function humanHead(A){
     <circle cx="-7" cy="2" r="2.4" fill="#2a2a40"/><circle cx="7" cy="2" r="2.4" fill="#2a2a40"/>
     <path d="M-6,9 Q0,14 6,9" stroke="#2a2a40" stroke-width="2" fill="none" stroke-linecap="round"/>`;
 }
+// Lead parent alternates by game: odd games lead with Mumma, even games with Papa.
+function mumLeads(){ return gi % 2 === 1; }
+function actorKind(k){ return (k === 'c' || !mumLeads()) ? k : (k === 'p' ? 'm' : 'p'); }
+function swapText(t){
+  if(!mumLeads()) return t;
+  return t.replace(/Papa|पापा|Mumma|मम्मी/g, w => ({Papa:'Mumma', पापा:'मम्मी', Mumma:'Papa', मम्मी:'पापा'})[w]);
+}
+function LT(obj){ return swapText(T(obj)); }
 function actor(k, st){
-  const A = ACT[k], P = POSE[st.s] || POSE.idle;
+  const A = ACT[actorKind(k)], P = POSE[st.s] || POSE.idle;
   return `<g class="actor" style="transform:translate(${st.x}px,170px)"><g transform="scale(${A.scale})">
     <g class="pose ${P.cls || ''}">
       <line x1="-7" y1="-34" x2="-7" y2="0" stroke="#3b3b5c" stroke-width="10" stroke-linecap="round"/>
@@ -721,11 +1044,11 @@ function gameCards(){
   return `
     <div class="card">
       <h3>${T(UI.howToPlay)}</h3>
-      <ol class="how">${steps.map((x,i) => `<li class="${i===gsi?'cur':''}">${T(x)}</li>`).join('')}</ol>
+      <ol class="how">${steps.map((x,i) => `<li class="${i===gsi?'cur':''}">${LT(x)}</li>`).join('')}</ol>
     </div>
     <div class="card stage-card">
       ${stepPicture()}
-      <div class="bubble">${T(st)}</div>
+      <div class="bubble">${LT(st)}</div>
       <button class="listen noprint" data-act="listen">🔊 ${T(UI.listen)}</button>
     </div>
     <div class="card">
@@ -796,7 +1119,7 @@ function printSheet(){
     <h3>${T(UI.routineTitle)}</h3>
     <ul class="ps-list">${BEFORE.map(x => `<li>☐ ${T(x)}</li>`).join('')}</ul>
     <h3>${T(UI.howToPlay)}</h3>
-    <ol>${g.s.map(x => `<li>${T(x)}</li>`).join('')}</ol>
+    <ol>${g.s.map(x => `<li>${LT(x)}</li>`).join('')}</ol>
     <h3>${T(UI.nextRound)}</h3>
     <p>${T(UI.nextRoundText)}</p>
     <h3>${T(UI.closeTitle)}</h3>
@@ -846,7 +1169,7 @@ document.addEventListener('click', e => {
     if(gsi > 0) go('game', gsi - 1); else go('routine', 0);
     return;
   }
-  if(act === 'listen'){ speak(T(game().s[gsi])); return; }
+  if(act === 'listen'){ speak(LT(game().s[gsi])); return; }
   if(act === 'replay'){ render(); return; }
   if(act === 'list'){ listOpen = !listOpen; render(); return; }
   if(act === 'pick'){ gi = Number(b.dataset.i); listOpen = false; resetTicks(); go('routine', 0); return; }
