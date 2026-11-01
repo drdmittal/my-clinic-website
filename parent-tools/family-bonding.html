@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Family bonding before bedtime | Dr. Dinesh Mittal, Rohini</title>
+<meta name="description" content="Screen-free family games before bedtime, by age group, in Hindi and English. Dr. Dinesh Mittal, Child Clinic, Sector 3, Rohini.">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-768Y52R8SC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-768Y52R8SC');
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Anek+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--indigo:#2a2580;--pink:#e2457a;--turmeric:#f5ad1b;--teal:#0f9b8e;--sky:#2f8fe0;--grape:#8b4fd6;--green:#2f8f3a;--bg:#fff8f1;--ink:#1f1d3a}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Anek Devanagari',system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:18px;line-height:1.5}
+header{background:var(--indigo);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+header .clinic{font-weight:700}
+header .domain{font-size:14px;opacity:.9}
+.lang button{background:transparent;color:#fff;border:1px solid #fff;border-radius:20px;padding:4px 12px;margin-left:4px;font:inherit;cursor:pointer}
+.lang button[aria-pressed="true"]{background:#fff;color:var(--indigo)}
+main{max-width:640px;margin:0 auto;padding:16px}
+h1{font-size:26px;color:var(--indigo);margin:8px 0 2px}
+h2{font-size:21px;color:var(--indigo);margin:0 0 6px}
+h3{font-size:18px;color:var(--grape);margin:0 0 6px}
+.sub{color:var(--pink);font-weight:600;margin:0 0 16px}
+.card{background:#fff;border-radius:14px;padding:16px;box-shadow:0 2px 8px rgba(42,37,128,.12);margin-bottom:14px}
+.ages{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+button{font:inherit;border:0;border-radius:10px;padding:10px 14px;background:#efeaff;color:var(--indigo);cursor:pointer}
+button.age{background:var(--teal);color:#fff;font-weight:600;padding:14px 10px}
+button.age:nth-child(2){background:var(--sky)}
+button.age:nth-child(3){background:var(--grape)}
+button.age:nth-child(4){background:var(--turmeric);color:var(--ink)}
+button.age:nth-child(5){background:var(--pink)}
+button.primary{background:var(--green);color:#fff;font-weight:600}
+button:disabled{opacity:.4;cursor:default}
+button.link{background:none;color:var(--sky);padding:0;text-decoration:underline}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-top:10px}
+.muted{color:#6b6890;font-size:15px}
+.pill{background:var(--turmeric);color:var(--ink);border-radius:20px;padding:2px 10px;font-size:14px;vertical-align:middle}
+.big{font-size:21px;margin:10px 0}
+.clock{font-size:34px;font-weight:700;color:var(--indigo);text-align:center;margin:8px 0}
+.list{display:grid;gap:8px;margin-top:10px}
+.list button{text-align:left;background:#f6f3ff}
+.note{font-size:14px;color:#5a5778}
+.done{color:var(--green);font-weight:700;margin-top:10px}
+.print-only{display:none}
+@media print{
+  .print-only{display:block;border-bottom:2px solid var(--indigo);margin-bottom:12px;padding-bottom:6px}
+  .noprint{display:none!important}
+  header{background:#fff;color:#000}
+  .card{box-shadow:none;border:1px solid #ccc}
+  body{background:#fff}
+}
+@media (max-width:420px){.ages{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script>
+// ---------- Content ----------
+const UI = {
+  title:{en:'Family bonding before bedtime',hi:'सोने से पहले परिवार के साथ समय'},
+  sub:{en:'Spend time with your family without screen',hi:'स्क्रीन के बिना अपने परिवार के साथ समय बिताएँ'},
+  pick:{en:'Choose your child’s age',hi:'बच्चे की उम्र चुनें'},
+  howTitle:{en:'How it works',hi:'यह कैसे काम करता है'},
+  howText:{en:'Every evening: a short routine, one game, and a quiet close. A different game comes up each day so evenings do not feel the same. You can choose any other game for that age.',hi:'हर शाम: छोटी दिनचर्या, एक खेल और शांत समापन। हर दिन अलग खेल आएगा, ताकि शामें एक जैसी न लगें। आप उसी उम्र का कोई भी दूसरा खेल चुन सकते हैं।'},
+  changeAge:{en:'Change age',hi:'उम्र बदलें'},
+  todayTag:{en:'Today’s game',hi:'आज का खेल'},
+  about:{en:'About 15–20 minutes. Tap Next for each step.',hi:'लगभग 15–20 मिनट। हर चरण के लिए “आगे” दबाएँ।'},
+  step:{en:'Step',hi:'चरण'},
+  of:{en:'of',hi:'में से'},
+  back:{en:'Back',hi:'पीछे'},
+  next:{en:'Next',hi:'आगे'},
+  done:{en:'Goodnight. All done.',hi:'शुभ रात्रि। हो गया।'},
+  change:{en:'Choose another game',hi:'दूसरा खेल चुनें'},
+  todayBtn:{en:'Back to today’s game',hi:'आज के खेल पर वापस'},
+  timer:{en:'Show timer (optional)',hi:'टाइमर दिखाएँ (वैकल्पिक)'},
+  start:{en:'Start',hi:'शुरू'},
+  pause:{en:'Pause',hi:'रोकें'},
+  reset:{en:'Reset',hi:'फिर से'},
+  minutes:{en:'Minutes for this step',hi:'इस चरण के लिए मिनट'},
+  defTime:{en:'Use default time',hi:'डिफ़ॉल्ट समय रखें'},
+  home:{en:'← Back to clinic home',hi:'← क्लिनिक होम पर वापस'},
+  print:{en:'Print this game',hi:'यह खेल प्रिंट करें'},
+  stage:{
+    en:{routine:'Routine',game:'Game',close:'Quiet close'},
+    hi:{routine:'दिनचर्या',game:'खेल',close:'शांत समापन'}},
+  clinicLine:{en:'Dr. Dinesh Mittal Child Clinic · H-34/69, Sector 3, Rohini, Delhi 110085 · www.drdineshmittal.com',hi:'डॉ. दिनेश मित्तल चाइल्ड क्लिनिक · H-34/69, सेक्टर 3, रोहिणी, दिल्ली 110085 · www.drdineshmittal.com'},
+  note:{en:'Health education material for families. Every child is different, and this does not replace a consultation with a doctor. If you are worried, please speak with your child’s doctor.',hi:'यह परिवारों के लिए स्वास्थ्य शिक्षा सामग्री है। हर बच्चा अलग होता है, और यह डॉक्टर से परामर्श का विकल्प नहीं है। कोई चिंता हो तो बच्चे के डॉक्टर से बात करें।'}
+};
+
+// Every evening starts with the same routine and ends with the same close
+const BEFORE = [
+  {en:'Phones go into the basket, away from the bed.',hi:'फ़ोन टोकरी में रखें, बिस्तर से दूर।'},
+  {en:'Brush teeth together, then wash face and hands.',hi:'साथ में दांत साफ़ करें, फिर मुँह और हाथ धोएँ।'},
+  {en:'Change into night clothes. Lower the lights.',hi:'रात के कपड़े पहनें। रोशनी धीमी करें।'}
+];
+const AFTER = [
+  {en:'Candle breath: breathe in through the nose, blow out slowly. Do this three times.',hi:'मोमबत्ती साँस: नाक से साँस लें, धीरे-धीरे मुँह से छोड़ें। तीन बार करें।'},
+  {en:'Each person gives a goodnight wave.',hi:'हर व्यक्ति शुभ रात्रि की लहर दे।'}
+];
+
+const AGES = {
+  t:{label:{en:'Toddler (1–3 years)',hi:'छोटे बच्चे (1–3 साल)'},games:[
+    {n:{en:'Tota Udd, Maina Udd',hi:'तोता उड़, मैना उड़'},s:[
+      {en:'Say “Tota udd” and flap your arms like wings. Child copies.',hi:'“तोता उड़” बोलें और हाथ पंख की तरह हिलाएँ। बच्चा नकल करे।'},
+      {en:'Say “Maina udd” again. Then call a non-bird, such as “kutta”. Child stays still.',hi:'फिर “मैना उड़” बोलें। फिर “कुत्ता” जैसा गैर-पक्षी बोलें। बच्चा रुके।'},
+      {en:'Play slowly. Praise each correct move.',hi:'धीरे खेलें। हर सही चाल पर शाबाश कहें।'}]},
+    {n:{en:'Peek-a-boo',hi:'छुपम-छुपाई'},s:[
+      {en:'Hide your face behind a light cloth, then appear and say “Coo!”',hi:'हल्के कपड़े के पीछे चेहरा छुपाएँ, फिर दिखें और “कूऽऽ” बोलें।'},
+      {en:'Let the child hide and you find them.',hi:'बच्चे को छुपने दें, फिर आप ढूँढ़ें।'},
+      {en:'End with a hug.',hi:'अंत में गले लगाएँ।'}]},
+    {n:{en:'Where is your nose?',hi:'नाक कहाँ है?'},s:[
+      {en:'Ask “Naak kahan hai?” and let the child touch it.',hi:'“नाक कहाँ है?” पूछें और बच्चे को छूने दें।'},
+      {en:'Go on with ears, eyes, tummy and toes.',hi:'फिर कान, आँख, पेट और पैर की उंगलियाँ पूछें।'},
+      {en:'Slow down near the end.',hi:'अंत में धीमे हो जाएँ।'}]},
+    {n:{en:'Animal sounds',hi:'जानवर की आवाज़'},s:[
+      {en:'Make a sound, such as “moo” or “bow-wow”. Child guesses the animal.',hi:'आवाज़ निकालें, जैसे “म्यूँ” या “भौं-भौं”। बच्चा जानवर का नाम बताए।'},
+      {en:'Child copies the sound.',hi:'बच्चा आवाज़ की नकल करे।'},
+      {en:'Finish with a sleepy animal’s “zzz”.',hi:'अंत में सोते जानवर की तरह “ज़्ज़्ज़” बोलें।'}]},
+    {n:{en:'Stack and knock',hi:'टावर बनाओ, गिराओ'},s:[
+      {en:'Build a tower with 4–5 blocks together.',hi:'साथ में 4–5 ब्लॉक का टावर बनाएँ।'},
+      {en:'Gently knock it down together.',hi:'मिलकर धीरे से गिराएँ।'},
+      {en:'Put the blocks in the box, one by one.',hi:'ब्लॉक एक-एक करके डिब्बे में रखें।'}]},
+    {n:{en:'Count the brush strokes',hi:'ब्रश के स्ट्रोक गिनो'},s:[
+      {en:'While brushing, count strokes together up to 10.',hi:'ब्रश करते समय साथ में 10 तक गिनें।'},
+      {en:'Count the top teeth, then the bottom.',hi:'ऊपर के दाँत गिनें, फिर नीचे के।'},
+      {en:'Praise the child for brushing well.',hi:'अच्छे से ब्रश करने पर शाबाश कहें।'}]},
+    {n:{en:'Hand puppet story',hi:'हाथ की कठपुतली की कहानी'},s:[
+      {en:'Put a sock or cloth puppet on your hand.',hi:'हाथ में मोजे या कपड़े की कठपुतली पहनें।'},
+      {en:'Tell a two-line story about a sleepy animal.',hi:'एक नींद वाले जानवर की दो लाइन की कहानी सुनाएँ।'},
+      {en:'Let the child say the goodnight line.',hi:'शुभ रात्रि वाली लाइन बच्चे से बुलवाएँ।'}]},
+    {n:{en:'Pass the soft toy',hi:'नरम खिलौना पास करो'},s:[
+      {en:'Sing a short song and pass the soft toy around the circle.',hi:'एक छोटा गाना गाएँ और नरम खिलौना घेरे में घुमाएँ।'},
+      {en:'Stop singing. Whoever holds the toy names a body part.',hi:'गाना रोकें। जिसके पास खिलौना हो, वह शरीर का एक हिस्सा बताए।'},
+      {en:'Keep it slow and calm.',hi:'धीमा और शांत रखें।'}]},
+    {n:{en:'Machli Jal ki Rani',hi:'मछली जल की रानी'},s:[
+      {en:'Sing the rhyme with hand actions.',hi:'गाने के साथ हाथ से इशारे करें।'},
+      {en:'Let the child lead one action.',hi:'एक इशारा बच्चे से करवाएँ।'},
+      {en:'Sing the last line slowly.',hi:'आखिरी पंक्ति धीरे गाएँ।'}]},
+    {n:{en:'Wave to the moon',hi:'चाँद को हाथ हिलाओ'},s:[
+      {en:'Wave to the moon, the window and the door.',hi:'चाँद, खिड़की और दरवाज़े को हाथ हिलाएँ।'},
+      {en:'Each family member waves back.',hi:'हर सदस्य हाथ हिलाकर जवाब दे।'},
+      {en:'Repeat slowly until the child yawns.',hi:'बच्चा जम्हाई ले तो धीरे-धीरे दोहराएँ।'}]},
+    {n:{en:'Stop and go',hi:'रुको और चलो'},s:[
+      {en:'Call “chalo” and the child walks around the room.',hi:'“चलो” बोलें तो बच्चा कमरे में घूमे।'},
+      {en:'Call “so jao” and the child freezes like a statue.',hi:'“सो जाओ” बोलें तो बच्चा मूर्ति की तरह रुक जाए।'},
+      {en:'Slow down and end with a cuddle.',hi:'धीमे करें और अंत में गले लगाएँ।'}]}
+  ]},
+  p:{label:{en:'Preschool (3–5 years)',hi:'प्री-स्कूल (3–5 साल)'},games:[
+    {n:{en:'Doctor and Teddy',hi:'डॉक्टर और टेडी'},s:[
+      {en:'Child is the doctor: check teddy’s ears, tummy and heartbeat.',hi:'बच्चा डॉक्टर बने: टेडी के कान, पेट और धड़कन देखे।'},
+      {en:'Parent is the patient. Then swap roles.',hi:'माता-पिता मरीज़ बनें। फिर भूमिका बदलें।'},
+      {en:'Talk about what happens at the clinic, in simple words.',hi:'क्लिनिक में क्या होता है, सरल शब्दों में बताएँ।'}]},
+    {n:{en:'Naam, Gaon, Jaanwar, Cheez',hi:'नाम, गाँव, जानवर, चीज़'},s:[
+      {en:'Pick a letter, such as “M”.',hi:'एक अक्षर चुनें, जैसे “म”।'},
+      {en:'Each person says a name, a place, an animal and a thing starting with that letter.',hi:'हर व्यक्ति उस अक्षर से शुरू होने वाला नाम, गाँव, जानवर और चीज़ बोले।'},
+      {en:'Play three rounds with a new letter each time.',hi:'हर बार नए अक्षर से तीन दौर खेलें।'}]},
+    {n:{en:'Lullaby Antakshari',hi:'लोरी अंताक्षरी'},s:[
+      {en:'Hum one line of a lullaby.',hi:'लोरी की एक पंक्ति गुनगुनाएँ।'},
+      {en:'Others guess the song.',hi:'बाकी लोग गाना पहचानें।'},
+      {en:'Keep the voice soft.',hi:'आवाज़ धीमी रखें।'}]},
+    {n:{en:'Criss-cross',hi:'क्रिस-क्रॉस'},s:[
+      {en:'Draw a 3 × 3 grid on paper.',hi:'कागज़ पर 3 × 3 का खाना बनाएँ।'},
+      {en:'Take turns with X and O.',hi:'X और O से बारी-बारी खेलें।'},
+      {en:'Play best of three.',hi:'तीन में से जो दो जीते, वह जीते।'}]},
+    {n:{en:'Story chain',hi:'कहानी की कड़ी'},s:[
+      {en:'Start with a hero and a small problem.',hi:'एक नायक और छोटी-सी समस्या से शुरू करें।'},
+      {en:'Each person adds one sentence in turn.',hi:'हर व्यक्ति बारी-बारी से एक वाक्य जोड़े।'},
+      {en:'The child chooses the happy ending.',hi:'बच्चा सुखद अंत चुने।'}]},
+    {n:{en:'Shadow puppets',hi:'परछाई के खेल'},s:[
+      {en:'Shine a torch on the wall.',hi:'दीवार पर टॉर्च की रोशनी डालें।'},
+      {en:'Make a bird or dog shape with your hands.',hi:'हाथों से चिड़िया या कुत्ते की आकृति बनाएँ।'},
+      {en:'The child makes a shape; others guess it.',hi:'बच्चा आकृति बनाए; बाकी लोग पहचानें।'}]},
+    {n:{en:'Colour hunt',hi:'रंग खोजो'},s:[
+      {en:'Say “Find something blue.”',hi:'“कुछ नीला ढूँढो” बोलें।'},
+      {en:'The child finds it and names it.',hi:'बच्चा ढूँढकर नाम बताए।'},
+      {en:'Take turns, three colours each.',hi:'बारी-बारी से, हर एक के तीन रंग।'}]},
+    {n:{en:'Memory tray',hi:'याद का खेल'},s:[
+      {en:'Place five small objects on a tray.',hi:'एक ट्रे में पाँच छोटी चीज़ें रखें।'},
+      {en:'Child looks for 10 seconds, then covers eyes.',hi:'बच्चा 10 सेकंड देखे, फिर आँखें बंद करे।'},
+      {en:'Remove one object. Child guesses which one.',hi:'एक चीज़ हटाएँ। बच्चा बताए कौन-सी।'}]},
+    {n:{en:'Count the stars',hi:'तारे गिनो'},s:[
+      {en:'Go to the window together.',hi:'साथ में खिड़की पर जाएँ।'},
+      {en:'Count stars or lights together up to 10.',hi:'तारे या रोशनी साथ में 10 तक गिनें।'},
+      {en:'End with a goodnight to the moon.',hi:'अंत में चाँद को शुभ रात्रि कहें।'}]},
+    {n:{en:'Pretend to blow out a candle',hi:'मोमबत्ती बुझाने का खेल'},s:[
+      {en:'Pretend there is a candle in front of you.',hi:'सामने एक मोमबत्ती है, ऐसा मान लें।'},
+      {en:'Breathe in through the nose. Blow out slowly.',hi:'नाक से साँस लें। धीरे से फूँकें।'},
+      {en:'Do this three times, then count to 3 together.',hi:'तीन बार करें, फिर साथ में 3 तक गिनें।'}]}
+  ]},
+  s:{label:{en:'School age (6–9 years)',hi:'स्कूल जाने वाले (6–9 साल)'},games:[
+    {n:{en:'Ludo',hi:'लूडो'},s:[
+      {en:'Set a fixed number of turns, about 20 each.',hi:'हर खिलाड़ी के लिए लगभग 20 चालें तय करें।'},
+      {en:'Count each move aloud.',hi:'हर चाल ज़ोर से गिनें।'},
+      {en:'When turns end, the player with most tokens home wins.',hi:'चालें खत्म होने पर जिसकी सबसे ज़्यादा गोटियाँ घर पहुँचें, वह जीते।'}]},
+    {n:{en:'Snakes and Ladders',hi:'सांप सीढ़ी'},s:[
+      {en:'Each player rolls the dice and counts aloud.',hi:'हर खिलाड़ी पासा फेंके और ज़ोर से गिने।'},
+      {en:'Say the number and move your token.',hi:'संख्या बोलकर गोटी चलाएँ।'},
+      {en:'Stop at 15 minutes or when someone finishes.',hi:'15 मिनट पर या किसी के जीतने पर रोकें।'}]},
+    {n:{en:'Tambola',hi:'टम्बोला'},s:[
+      {en:'Give each player a ticket.',hi:'हर खिलाड़ी को एक टिकट दें।'},
+      {en:'Call numbers out loud. Players mark them.',hi:'नंबर ज़ोर से बोलें। खिलाड़ी निशान लगाएँ।'},
+      {en:'A line or a full ticket wins a small prize.',hi:'एक लाइन या पूरा टिकट पूरा होने पर छोटा इनाम।'}]},
+    {n:{en:'Antakshari',hi:'अंताक्षरी'},s:[
+      {en:'Start with a Hindi film song or rhyme.',hi:'कोई हिंदी फ़िल्मी गाना या कविता से शुरू करें।'},
+      {en:'Next player sings a song starting with the last letter.',hi:'अगला खिलाड़ी आखिरी अक्षर से शुरू होने वाला गाना गाए।'},
+      {en:'House rule: sing softly.',hi:'घर का नियम: धीमी आवाज़ में गाएँ।'}]},
+    {n:{en:'Criss-cross best of five',hi:'क्रिस-क्रॉस पाँच में से'},s:[
+      {en:'Draw a 3 × 3 grid on paper.',hi:'कागज़ पर 3 × 3 का खाना बनाएँ।'},
+      {en:'Take turns with X and O.',hi:'X और O से बारी-बारी खेलें।'},
+      {en:'Play best of five and keep score.',hi:'पाँच में से जीत तय करें और स्कोर लिखें।'}]},
+    {n:{en:'Carrom',hi:'कैरम'},s:[
+      {en:'Set up the board and place the coins.',hi:'बोर्ड सजाएँ और गोटियाँ रखें।'},
+      {en:'Take turns striking with the striker.',hi:'स्ट्राइकर से बारी-बारी से चोट करें।'},
+      {en:'Count points for each coin. Stop at 15 minutes.',hi:'हर गोटी के अंक गिनें। 15 मिनट पर रोकें।'}]},
+    {n:{en:'Dumb charades',hi:'अभिनय खेल'},s:[
+      {en:'Pick a card with an animal or an everyday thing.',hi:'जानवर या रोज़ की कोई चीज़ वाली पर्ची उठाएँ।'},
+      {en:'Act it out without speaking.',hi:'बिना बोले अभिनय करें।'},
+      {en:'Others guess within one minute.',hi:'बाकी लोग एक मिनट में अंदाज़ा लगाएँ।'}]},
+    {n:{en:'20 Questions',hi:'20 सवाल'},s:[
+      {en:'The child thinks of an object.',hi:'बच्चा कोई चीज़ सोचे।'},
+      {en:'Others ask yes or no questions.',hi:'बाकी लोग हाँ या ना वाले सवाल पूछें।'},
+      {en:'Stop after 20 questions.',hi:'20 सवाल के बाद रुकें।'}]},
+    {n:{en:'Word building',hi:'शब्द बनाओ'},s:[
+      {en:'Pick a long word, such as “hospital”.',hi:'एक लंबा शब्द चुनें, जैसे “अस्पताल”।'},
+      {en:'Make as many smaller words as you can from its letters.',hi:'उसके अक्षरों से जितने छोटे शब्द बना सकें, बनाएँ।'},
+      {en:'Count points for each word.',hi:'हर शब्द के अंक गिनें।'}]},
+    {n:{en:'Rose, bud, thorn',hi:'गुलाब, कली, काँटा'},s:[
+      {en:'Each person shares a happy moment (rose).',hi:'हर व्यक्ति एक खुशी का पल बताए (गुलाब)।'},
+      {en:'Something to look forward to (bud).',hi:'कोई बात जिसका इंतज़ार है (कली)।'},
+      {en:'Something that was hard (thorn). Parents listen first.',hi:'कुछ मुश्किल लगा हो (काँटा)। माता-पिता पहले सुनें।'}]}
+  ]},
+  pt:{label:{en:'Pre-teens (10–12 years)',hi:'प्री-टीन (10–12 साल)'},games:[
+    {n:{en:'Chess',hi:'शतरंज'},s:[
+      {en:'Play one game, or a simpler version with fewer pieces.',hi:'एक खेल खेलें, या कम मोहरों वाला आसान रूप।'},
+      {en:'Each player says one move they are proud of.',hi:'हर खिलाड़ी एक चाल बताए जिस पर उसे गर्व है।'},
+      {en:'Shake hands and set up for the next game.',hi:'हाथ मिलाएँ और अगला खेल सजाएँ।'}]},
+    {n:{en:'Carrom doubles',hi:'कैरम डबल्स'},s:[
+      {en:'Parent and child play against the other parent.',hi:'माता-पिता और बच्चा एक टीम, दूसरे माता-पिता के विरुद्ध।'},
+      {en:'Take turns striking and count points together.',hi:'बारी-बारी से चोट करें और मिलकर अंक गिनें।'},
+      {en:'Stop at 15 minutes.',hi:'15 मिनट पर रोकें।'}]},
+    {n:{en:'Tambola with small prizes',hi:'छोटे इनाम वाला टम्बोला'},s:[
+      {en:'Give each player a ticket.',hi:'हर खिलाड़ी को एक टिकट दें।'},
+      {en:'Call numbers. Players mark them.',hi:'नंबर बोलें। खिलाड़ी निशान लगाएँ।'},
+      {en:'A sweet or sticker for the first line and the full house.',hi:'पहली लाइन और पूरे टिकट पर एक मिठाई या स्टिकर।'}]},
+    {n:{en:'Shabd Antakshari',hi:'शब्द अंताक्षरी'},s:[
+      {en:'Each word must start with the last letter of the previous word.',hi:'हर शब्द पिछले शब्द के आखिरी अक्षर से शुरू हो।'},
+      {en:'Give 10 seconds per turn.',hi:'हर बारी के लिए 10 सेकंड।'},
+      {en:'The player who cannot answer is out.',hi:'जो जवाब न दे पाए, वह बाहर।'}]},
+    {n:{en:'Quick quiz',hi:'सामान्य ज्ञान क्विज़'},s:[
+      {en:'Ask 10 questions on states, capitals, planets or festivals.',hi:'राज्य, राजधानी, ग्रह या त्योहारों पर 10 सवाल पूछें।'},
+      {en:'Keep the score on paper.',hi:'स्कोर कागज़ पर लिखें।'},
+      {en:'The highest score picks the next game.',hi:'सबसे ज़्यादा स्कोर वाला अगला खेल चुने।'}]},
+    {n:{en:'Two truths and a lie',hi:'दो सच, एक झूठ'},s:[
+      {en:'Each person says three statements about themselves.',hi:'हर व्यक्ति अपने बारे में तीन बातें बताए।'},
+      {en:'Others guess which one is the lie.',hi:'बाकी लोग बताएँ कौन-सी बात झूठ है।'},
+      {en:'Parents play too.',hi:'माता-पिता भी खेलें।'}]},
+    {n:{en:'Guess who?',hi:'कौन है?'},s:[
+      {en:'Think of a famous person from history or science.',hi:'इतिहास या विज्ञान के किसी प्रसिद्ध व्यक्ति को सोचें।'},
+      {en:'Others ask yes or no questions.',hi:'बाकी लोग हाँ या ना वाले सवाल पूछें।'},
+      {en:'Switch turns.',hi:'बारी बदलें।'}]},
+    {n:{en:'Chaupar',hi:'चौपड़'},s:[
+      {en:'Set up the cloth board. Each player gets four tokens.',hi:'कपड़े का बोर्ड बिछाएँ। हर खिलाड़ी को चार गोटियाँ।'},
+      {en:'Roll the dice or cowries and move.',hi:'पासा या कौड़ी फेंककर चाल चलें।'},
+      {en:'Play for 15 minutes, then count the tokens home.',hi:'15 मिनट खेलें, फिर घर पहुँची गोटियाँ गिनें।'}]},
+    {n:{en:'Easy sudoku together',hi:'आसान सुडोकू साथ में'},s:[
+      {en:'Use a 4 × 4 sudoku on paper.',hi:'कागज़ पर 4 × 4 का सुडोकू लें।'},
+      {en:'Solve it together, one number per turn.',hi:'साथ में हल करें, हर बारी एक नंबर।'},
+      {en:'Check the answers at the end.',hi:'अंत में जवाब मिलाएँ।'}]},
+    {n:{en:'Ask-me-anything cards',hi:'कुछ भी पूछो कार्ड'},s:[
+      {en:'Each person writes questions on small slips.',hi:'हर व्यक्ति छोटी पर्चियों पर सवाल लिखे।'},
+      {en:'Draw one. The person answers honestly.',hi:'एक पर्ची उठाएँ। वह व्यक्ति ईमानदारी से जवाब दे।'},
+      {en:'Saying “pass” is always allowed.',hi:'“पास” कहना हमेशा ठीक है।'}]}
+  ]},
+  tn:{label:{en:'Teens (13–18 years)',hi:'किशोर (13–18 साल)'},games:[
+    {n:{en:'Chess or carrom',hi:'शतरंज या कैरम'},s:[
+      {en:'Teen plays a parent. Make it best of three.',hi:'किशोर माता-पिता में से एक के साथ खेले। तीन में से जीत।'},
+      {en:'Talk about one choice you would make differently.',hi:'एक चुनाव बताएँ जिसे आप अलग तरह से करते।'},
+      {en:'Rematch if both want.',hi:'दोनों चाहें तो दोबारा खेलें।'}]},
+    {n:{en:'Antakshari: two generations',hi:'अंताक्षरी: दो पीढ़ियाँ'},s:[
+      {en:'Parents sing songs from their youth. Teens sing songs they like.',hi:'माता-पिता अपनी युवावस्था के गाने गाएँ। किशोर अपनी पसंद के।'},
+      {en:'Take turns. The other side sings the next line.',hi:'बारी-बारी से। दूसरी टीम अगली पंक्ति गाए।'},
+      {en:'Score by round.',hi:'हर दौर का स्कोर रखें।'}]},
+    {n:{en:'Quiz night',hi:'क्विज़ नाइट'},s:[
+      {en:'Each person writes three questions.',hi:'हर व्यक्ति तीन सवाल लिखे।'},
+      {en:'Ask, answer and score.',hi:'पूछें, जवाब दें और स्कोर करें।'},
+      {en:'Keep it light and fair.',hi:'माहौल हल्का और निष्पक्ष रखें।'}]},
+    {n:{en:'Crossword together',hi:'क्रॉसवर्ड साथ में'},s:[
+      {en:'Choose an easy crossword on paper.',hi:'कागज़ पर एक आसान क्रॉसवर्ड चुनें।'},
+      {en:'Solve it together for 15 minutes.',hi:'15 मिनट साथ में हल करें।'},
+      {en:'Finish on another day if not done.',hi:'पूरा न हो तो किसी और दिन पूरा करें।'}]},
+    {n:{en:'Dumb charades in pairs',hi:'जोड़ी में अभिनय खेल'},s:[
+      {en:'Teen and parent form one pair, against the other pair.',hi:'किशोर और माता-पिता एक जोड़ी, दूसरी जोड़ी के विरुद्ध।'},
+      {en:'Act out a film, a book or a place.',hi:'किसी फ़िल्म, किताब या जगह का अभिनय करें।'},
+      {en:'One minute per clue.',hi:'हर संकेत के लिए एक मिनट।'}]},
+    {n:{en:'Two truths and a lie, deeper',hi:'दो सच, एक झूठ: गहरा'},s:[
+      {en:'Share one real fact from a childhood memory.',hi:'बचपन की एक याद से एक सच्ची बात बताएँ।'},
+      {en:'Others guess the lie.',hi:'बाकी लोग झूठ पहचानें।'},
+      {en:'Ask questions respectfully.',hi:'सवाल सम्मान से पूछें।'}]},
+    {n:{en:'Family tambola tournament',hi:'परिवार टम्बोला प्रतियोगिता'},s:[
+      {en:'Play three rounds, with a small prize for each.',hi:'तीन दौर खेलें, हर दौर का छोटा इनाम।'},
+      {en:'Use a timer for each round.',hi:'हर दौर के लिए टाइमर लगाएँ।'},
+      {en:'The final winner chooses the next game.',hi:'अंतिम विजेता अगला खेल चुने।'}]},
+    {n:{en:'Would you rather',hi:'आप क्या चुनेंगे'},s:[
+      {en:'Each person gives two choices.',hi:'हर व्यक्ति दो विकल्प दे।'},
+      {en:'Others pick one and explain why.',hi:'बाकी लोग एक चुनें और कारण बताएँ।'},
+      {en:'No judging anyone’s answer.',hi:'किसी के जवाब पर टोका-टाकी नहीं।'}]},
+    {n:{en:'Storytelling with a twist',hi:'मोड़ वाली कहानी'},s:[
+      {en:'One person starts. Each person adds a sentence.',hi:'एक व्यक्ति शुरू करे। हर व्यक्ति एक वाक्य जोड़े।'},
+      {en:'Add a surprise twist every third turn.',hi:'हर तीसरी बारी में एक नया मोड़ जोड़ें।'},
+      {en:'End with a happy line.',hi:'अंत में एक सुखद पंक्ति से खत्म करें।'}]},
+    {n:{en:'Plan one family outing',hi:'परिवार की एक यात्रा की योजना'},s:[
+      {en:'Choose a place within an hour of travel.',hi:'एक घंटे की दूरी के भीतर एक जगह चुनें।'},
+      {en:'Discuss the budget and the route together.',hi:'बजट और रास्ता मिलकर तय करें।'},
+      {en:'Write the plan down for the coming weekend.',hi:'आने वाले सप्ताहांत की योजना लिखें।'}]}
+  ]}
+};
+
+// ---------- State ----------
+let lang = (navigator.language||'').startsWith('hi') ? 'hi' : 'en';
+let age = null, gi = 0, si = 0, listOpen = false;
+let timerOn = false, left = 0, timerId = null;
+// Parent-chosen minutes per step, kept only on this phone
+let saved = {};
+try { saved = JSON.parse(localStorage.getItem('fbTimes') || '{}'); } catch(e) { saved = {}; }
+function saveTimes(){ try { localStorage.setItem('fbTimes', JSON.stringify(saved)); } catch(e) {} }
+
+const T = o => (o && (o[lang] || o.en)) || '';
+const fmt = s => String(Math.floor(s/60)).padStart(2,'0') + ':' + String(s%60).padStart(2,'0');
+function todayIndex(n){ const d=new Date(); const s=new Date(d.getFullYear(),0,0); return Math.floor((d-s)/864e5) % n; }
+
+function allSteps(){
+  const g = AGES[age].games[gi];
+  const per = Math.max(2, Math.round(15 / g.s.length));
+  const all = [
+    ...BEFORE.map(x => ({...x, stage:'routine', min:3})),
+    ...g.s.map(x => ({...x, stage:'game', min:per})),
+    ...AFTER.map(x => ({...x, stage:'close', min:2}))
+  ];
+  // apply any minutes the parent has chosen for a step
+  all.forEach((st, i) => { const v = saved[age + '|' + gi + '|' + i]; if (v) st.min = v; });
+  return all;
+}
+function setMins(v, i){
+  const n = Math.max(1, Math.min(60, Math.round(Number(v)) || 1));
+  saved[age + '|' + gi + '|' + i] = n; saveTimes();
+  if (i === si) { stopTimer(); left = n * 60; }
+  render();
+}
+function defaultMins(i){
+  delete saved[age + '|' + gi + '|' + i]; saveTimes();
+  if (i === si) { stopTimer(); left = allSteps()[si].min * 60; }
+  render();
+}
+function stopTimer(){ if(timerId){ clearInterval(timerId); timerId=null; } }
+function resetClock(){ stopTimer(); left = allSteps()[si].min * 60; }
+function goto(i){ si = i; resetClock(); render(); }
+
+// ---------- Views ----------
+function header(){
+  return `<header>
+    <div><div class="clinic">${T({en:'Dr. Dinesh Mittal Child Clinic',hi:'डॉ. दिनेश मित्तल चाइल्ड क्लिनिक'})}</div>
+    <div class="domain">www.drdineshmittal.com</div></div>
+    <div class="lang noprint">
+      <button data-act="lang" data-lang="en" aria-pressed="${lang==='en'}">EN</button>
+      <button data-act="lang" data-lang="hi" aria-pressed="${lang==='hi'}">हिंदी</button>
+    </div></header>`;
+}
+
+function ageView(){
+  return `<main>
+    <p><a href="../index.html">${T(UI.home)}</a></p>
+    <h1>${T(UI.title)}</h1>
+    <p class="sub">${T(UI.sub)}</p>
+    <div class="card"><h2>${T(UI.pick)}</h2>
+      <div class="ages">${Object.keys(AGES).map(k =>
+        `<button class="age" data-act="age" data-age="${k}">${T(AGES[k].label)}</button>`).join('')}
+      </div></div>
+    <div class="card"><h3>${T(UI.howTitle)}</h3><p>${T(UI.howText)}</p></div>
+    <p class="note">${T(UI.note)}</p>
+  </main>`;
+}
+
+function gameView(){
+  const steps = allSteps();
+  const g = AGES[age].games[gi];
+  const idx = todayIndex(AGES[age].games.length);
+  const st = steps[si];
+  const last = si === steps.length - 1;
+  const running = timerId !== null;
+  const timerBlock = `
+    <label class="noprint"><input type="checkbox" data-act="timer" ${timerOn?'checked':''}> ${T(UI.timer)}</label>
+    ${timerOn ? `<div class="clock" id="clock">${fmt(left)}</div>
+      <div class="row noprint">
+        <button data-act="tstart">${running ? T(UI.pause) : T(UI.start)}</button>
+        <button data-act="treset">${T(UI.reset)}</button>
+      </div>` : ''}`;
+  const list = listOpen ? `<div class="list">${AGES[age].games.map((x,i) =>
+      `<button data-act="pick" data-i="${i}">${i===idx?'★ ':''}${T(x.n)}</button>`).join('')}</div>` : '';
+  return `<main>
+    <div class="row noprint"><span class="muted">${T(AGES[age].label)}</span>
+      <button class="link" data-act="reset">${T(UI.changeAge)}</button></div>
+    <div class="card">
+      <h2>${T(g.n)} ${gi===idx ? `<span class="pill">${T(UI.todayTag)}</span>` : ''}</h2>
+      <p class="muted">${T(UI.about)}</p>
+    </div>
+    <div class="card">
+      <div class="muted">${T(UI.step)} ${si+1} ${T(UI.of)} ${steps.length} · ${T(UI.stage)[st.stage] || UI.stage[lang][st.stage]}</div>
+      <p class="big">${T(st)}</p>
+      <div class="row noprint">
+        <label>${T(UI.minutes)} <input type="number" min="1" max="60" value="${st.min}" data-act="mins" data-i="${si}" style="width:70px;font:inherit;padding:4px;border-radius:8px;border:1px solid #ccc"></label>
+        <button data-act="defmins" data-i="${si}">${T(UI.defTime)}</button>
+      </div>
+      ${timerBlock}
+      <div class="row noprint">
+        <button data-act="prev" ${si===0?'disabled':''}>${T(UI.back)}</button>
+        ${last ? '' : `<button class="primary" data-act="next">${T(UI.next)}</button>`}
+      </div>
+      ${last ? `<p class="done">${T(UI.done)}</p>` : ''}
+    </div>
+    <div class="card noprint">
+      <div class="row">
+        <button data-act="list">${T(UI.change)}</button>
+        ${gi!==idx ? `<button data-act="today">${T(UI.todayBtn)}</button>` : ''}
+        <button data-act="print">${T(UI.print)}</button>
+      </div>
+      ${list}
+    </div>
+    <p class="note">${T(UI.note)}</p>
+  </main>`;
+}
+
+function render(){
+  const body = age === null ? ageView() : gameView();
+  document.getElementById('root').innerHTML = `
+    ${header()}
+    <div class="print-only">${T(UI.clinicLine)}</div>
+    ${body}`;
+}
+
+// ---------- Events ----------
+document.addEventListener('change', e => {
+  const el = e.target;
+  if(el.dataset && el.dataset.act === 'mins') setMins(el.value, Number(el.dataset.i));
+});
+
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-act]');
+  if(!b) return;
+  const act = b.dataset.act;
+  if(act === 'lang'){ lang = b.dataset.lang; render(); return; }
+  if(act === 'age'){
+    age = b.dataset.age;
+    gi = todayIndex(AGES[age].games.length);
+    listOpen = false;
+    goto(0); return;
+  }
+  if(act === 'reset'){ age = null; stopTimer(); listOpen = false; render(); return; }
+  if(act === 'next'){ goto(Math.min(si+1, allSteps().length-1)); return; }
+  if(act === 'prev'){ goto(Math.max(si-1, 0)); return; }
+  if(act === 'list'){ listOpen = !listOpen; render(); return; }
+  if(act === 'pick'){ gi = Number(b.dataset.i); listOpen = false; goto(0); return; }
+  if(act === 'today'){ gi = todayIndex(AGES[age].games.length); listOpen = false; goto(0); return; }
+  if(act === 'print'){ window.print(); return; }
+  if(act === 'timer'){ timerOn = b.checked; resetClock(); render(); return; }
+  if(act === 'treset'){ resetClock(); render(); return; }
+  if(act === 'defmins'){ defaultMins(Number(b.dataset.i)); return; }
+  if(act === 'tstart'){
+    if(timerId){ stopTimer(); render(); return; }
+    if(left <= 0) left = allSteps()[si].min * 60;
+    timerId = setInterval(() => {
+      if(left > 0){ left--; const c = document.getElementById('clock'); if(c) c.textContent = fmt(left); }
+      if(left <= 0){ stopTimer(); const c = document.getElementById('clock'); if(c) c.textContent = '00:00'; render(); }
+    }, 1000);
+    render(); return;
+  }
+});
+
+render();
+</script>
+</body>
+</html>
