@@ -61,7 +61,7 @@ button.link{background:none;color:var(--sky);padding:0;text-decoration:underline
 .stage-card{text-align:center;background:linear-gradient(180deg,#fff,#f6f3ff)}
 .char{font-size:64px;animation:bob 1.2s ease-in-out infinite;display:inline-block}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
-.bubble (बुलबुला){background:#fff;border:2px solid var(--indigo);border-radius:16px;padding:12px;margin:10px auto 0;font-size:20px;max-width:460px;position:relative}
+.bubble{background:#fff;border:2px solid var(--indigo);border-radius:16px;padding:12px;margin:10px auto 0;font-size:20px;max-width:460px;position:relative}
 .listen{margin-top:12px;background:var(--sky);color:#fff;font-weight:600}
 .mins{width:70px;font:inherit;padding:4px;border-radius:8px;border:1px solid #ccc}
 @media print{
@@ -108,17 +108,17 @@ const UI = {
   minutes:{en:'Minutes for this step',hi:'इस चरण के लिए मिनट'},
   defTime:{en:'Use default time',hi:'डिफ़ॉल्ट समय रखें'},
   home:{en:'← Back to clinic home',hi:'← क्लिनिक होम पर वापस'},
-  routineTitle:{en:'Bedtime routine (सोने की दिनचर्या): tick each one as you do it',hi:'सोने की दिनचर्या: हर काम करके टिक करें'},
-  tickHelp:{en:'Tick (✓) each step when it is done. Then the game starts.',hi:'हर काम पूरा होने पर टिक करें। फिर खेल शुरू होगा।'},
+  routineTitle:{en:'Bedtime routine: tick each one as you do it',hi:'सोने की दिनचर्या: हर काम करके टिक करें'},
+  tickHelp:{en:'Tick each step when it is done. Then the game starts.',hi:'हर काम पूरा होने पर टिक करें। फिर खेल शुरू होगा।'},
   startGame:{en:'Start the game',hi:'खेल शुरू करें'},
-  closeTitle:{en:'Quiet close (शांत समापन): tick each one as you do it',hi:'शांत समापन: हर काम करके टिक करें'},
+  closeTitle:{en:'Quiet close: tick each one as you do it',hi:'शांत समापन: हर काम करके टिक करें'},
   allDone:{en:'Goodnight. All done.',hi:'शुभ रात्रि। सब हो गया।'},
   listen:{en:'Listen to the steps',hi:'चरण सुनें'},
   backGame:{en:'Back to the game',hi:'खेल पर वापस'},
   toClose:{en:'Finish with quiet close',hi:'शांत समापन पर जाएँ'},
   print:{en:'Print this game',hi:'यह खेल प्रिंट करें'},
   stage:{
-    en:{routine:'Routine (दिनचर्या)',game:'Game',close:'Quiet close (शांत समापन)'},
+    en:{routine:'Routine',game:'Game',close:'Quiet close'},
     hi:{routine:'दिनचर्या',game:'खेल',close:'शांत समापन'}},
   clinicLine:{en:'Dr. Dinesh Mittal Child Clinic · H-34/69, Sector 3, Rohini, Delhi 110085 · www.drdineshmittal.com',hi:'डॉ. दिनेश मित्तल चाइल्ड क्लिनिक · H-34/69, सेक्टर 3, रोहिणी, दिल्ली 110085 · www.drdineshmittal.com'},
   note:{en:'Health education material for families. Every child is different, and this does not replace a consultation with a doctor. If you are worried, please speak with your child’s doctor.',hi:'यह परिवारों के लिए स्वास्थ्य शिक्षा सामग्री है। हर बच्चा अलग होता है, और यह डॉक्टर से परामर्श का विकल्प नहीं है। कोई चिंता हो तो बच्चे के डॉक्टर से बात करें।'}
@@ -131,18 +131,18 @@ const BEFORE = [
   {en:'Change into night clothes. Lower the lights.',hi:'रात के कपड़े पहनें। रोशनी धीमी करें।'}
 ];
 const AFTER = [
-  {en:'Candle breath (मोमबत्ती साँस): breathe in through the nose, blow out slowly. Do this three times.',hi:'मोमबत्ती साँस: नाक से साँस लें, धीरे-धीरे मुँह से छोड़ें। तीन बार करें।'},
+  {en:'Candle breath: breathe in through the nose, blow out slowly. Do this three times.',hi:'मोमबत्ती साँस: नाक से साँस लें, धीरे-धीरे मुँह से छोड़ें। तीन बार करें।'},
   {en:'Each person gives a goodnight wave.',hi:'हर व्यक्ति शुभ रात्रि की लहर दे।'}
 ];
 
 const AGES = {
   t:{label:{en:'Toddler (1–3 years)',hi:'छोटे बच्चे (1–3 साल)'},games:[
-    {n:{en:'Tota Udd, Maina Udd (parrot and myna birds)',hi:'तोता उड़, मैना उड़'},s:[
+    {n:{en:'Tota Udd, Maina Udd',hi:'तोता उड़, मैना उड़'},s:[
       {en:'Say “Tota udd” and flap your arms like wings. Child copies.',hi:'“तोता उड़” बोलें और हाथ पंख की तरह हिलाएँ। बच्चा नकल करे।'},
       {en:'Say “Maina udd” again. Then call a non-bird, such as “kutta”. Child stays still.',hi:'फिर “मैना उड़” बोलें। फिर “कुत्ता” जैसा गैर-पक्षी बोलें। बच्चा रुके।'},
       {en:'Play slowly. Praise each correct move.',hi:'धीरे खेलें। हर सही चाल पर शाबाश कहें।'}]},
     {n:{en:'Peek-a-boo',hi:'छुपम-छुपाई'},s:[
-      {en:'Hide your face behind a light cloth, then appear and say “Coo!” (कूऽऽ)',hi:'हल्के कपड़े के पीछे चेहरा छुपाएँ, फिर दिखें और “कूऽऽ” बोलें।'},
+      {en:'Hide your face behind a light cloth, then appear and say “Coo!” (koo)',hi:'हल्के कपड़े के पीछे चेहरा छुपाएँ, फिर दिखें और “कूऽऽ” बोलें।'},
       {en:'Let the child hide and you find them.',hi:'बच्चे को छुपने दें, फिर आप ढूँढ़ें।'},
       {en:'End with a hug.',hi:'अंत में गले लगाएँ।'}]},
     {n:{en:'Where is your nose?',hi:'नाक कहाँ है?'},s:[
@@ -169,7 +169,7 @@ const AGES = {
       {en:'Sing a short song and pass the soft toy around the circle.',hi:'एक छोटा गाना गाएँ और नरम खिलौना घेरे में घुमाएँ।'},
       {en:'Stop singing. Whoever holds the toy names a body part.',hi:'गाना रोकें। जिसके पास खिलौना हो, वह शरीर का एक हिस्सा बताए।'},
       {en:'Keep it slow and calm.',hi:'धीमा और शांत रखें।'}]},
-    {n:{en:'Machli Jal ki Rani (fish, queen of water)',hi:'मछली जल की रानी'},s:[
+    {n:{en:'Machli Jal ki Rani',hi:'मछली जल की रानी'},s:[
       {en:'Sing the rhyme with hand actions.',hi:'गाने के साथ हाथ से इशारे करें।'},
       {en:'Let the child lead one action.',hi:'एक इशारा बच्चे से करवाएँ।'},
       {en:'Sing the last line slowly.',hi:'आखिरी पंक्ति धीरे गाएँ।'}]},
@@ -187,15 +187,15 @@ const AGES = {
       {en:'Child is the doctor: check teddy’s ears, tummy and heartbeat.',hi:'बच्चा डॉक्टर बने: टेडी के कान, पेट और धड़कन देखे।'},
       {en:'Parent is the patient. Then swap roles.',hi:'माता-पिता मरीज़ बनें। फिर भूमिका बदलें।'},
       {en:'Talk about what happens at the clinic, in simple words.',hi:'क्लिनिक में क्या होता है, सरल शब्दों में बताएँ।'}]},
-    {n:{en:'Naam, Gaon, Jaanwar, Cheez (name, place, animal, thing)',hi:'नाम, गाँव, जानवर, चीज़'},s:[
+    {n:{en:'Naam, Gaon, Jaanwar, Cheez',hi:'नाम, गाँव, जानवर, चीज़'},s:[
       {en:'Pick a letter, such as “M”.',hi:'एक अक्षर चुनें, जैसे “म”।'},
       {en:'Each person says a name, a place, an animal and a thing starting with that letter.',hi:'हर व्यक्ति उस अक्षर से शुरू होने वाला नाम, गाँव, जानवर और चीज़ बोले।'},
       {en:'Play three rounds with a new letter each time.',hi:'हर बार नए अक्षर से तीन दौर खेलें।'}]},
     {n:{en:'Lullaby Antakshari',hi:'लोरी अंताक्षरी'},s:[
-      {en:'Hum (गुनगुनाना) one line of a lullaby (लोरी).',hi:'लोरी की एक पंक्ति गुनगुनाएँ।'},
+      {en:'Hum (gungunana) one line of a lullaby (lori).',hi:'लोरी की एक पंक्ति गुनगुनाएँ।'},
       {en:'Others guess the song.',hi:'बाकी लोग गाना पहचानें।'},
       {en:'Keep the voice soft.',hi:'आवाज़ धीमी रखें।'}]},
-    {n:{en:'Criss-cross (tic-tac-toe)',hi:'क्रिस-क्रॉस'},s:[
+    {n:{en:'Criss-cross',hi:'क्रिस-क्रॉस'},s:[
       {en:'Draw a 3 × 3 grid on paper.',hi:'कागज़ पर 3 × 3 का खाना बनाएँ।'},
       {en:'Take turns with X and O.',hi:'X और O से बारी-बारी खेलें।'},
       {en:'Play best of three.',hi:'तीन में से जो दो जीते, वह जीते।'}]},
@@ -211,16 +211,16 @@ const AGES = {
       {en:'Say “Find something blue.”',hi:'“कुछ नीला ढूँढो” बोलें।'},
       {en:'The child finds it and names it.',hi:'बच्चा ढूँढकर नाम बताए।'},
       {en:'Take turns, three colours each.',hi:'बारी-बारी से, हर एक के तीन रंग।'}]},
-    {n:{en:'Memory tray (ट्रे)',hi:'याद का खेल'},s:[
-      {en:'Place five small objects on a tray (ट्रे).',hi:'एक ट्रे में पाँच छोटी चीज़ें रखें।'},
+    {n:{en:'Memory tray',hi:'याद का खेल'},s:[
+      {en:'Place five small objects on a tray.',hi:'एक ट्रे में पाँच छोटी चीज़ें रखें।'},
       {en:'Child looks for 10 seconds, then covers eyes.',hi:'बच्चा 10 सेकंड देखे, फिर आँखें बंद करे।'},
       {en:'Remove one object. Child guesses which one.',hi:'एक चीज़ हटाएँ। बच्चा बताए कौन-सी।'}]},
     {n:{en:'Count the stars',hi:'तारे गिनो'},s:[
       {en:'Go to the window together.',hi:'साथ में खिड़की पर जाएँ।'},
       {en:'Count stars or lights together up to 10.',hi:'तारे या रोशनी साथ में 10 तक गिनें।'},
       {en:'End with a goodnight to the moon.',hi:'अंत में चाँद को शुभ रात्रि कहें।'}]},
-    {n:{en:'Pretend to blow out a candle (मोमबत्ती)',hi:'मोमबत्ती बुझाने का खेल'},s:[
-      {en:'Pretend there is a candle (मोमबत्ती) in front of you.',hi:'सामने एक मोमबत्ती है, ऐसा मान लें।'},
+    {n:{en:'Pretend to blow out a candle',hi:'मोमबत्ती बुझाने का खेल'},s:[
+      {en:'Pretend there is a candle in front of you.',hi:'सामने एक मोमबत्ती है, ऐसा मान लें।'},
       {en:'Breathe in through the nose. Blow out slowly.',hi:'नाक से साँस लें। धीरे से फूँकें।'},
       {en:'Do this three times, then count to 3 together.',hi:'तीन बार करें, फिर साथ में 3 तक गिनें।'}]}
   ]},
@@ -229,15 +229,15 @@ const AGES = {
       {en:'Set a fixed number of turns, about 20 each.',hi:'हर खिलाड़ी के लिए लगभग 20 चालें तय करें।'},
       {en:'Count each move aloud.',hi:'हर चाल ज़ोर से गिनें।'},
       {en:'When turns end, the player with most tokens home wins.',hi:'चालें खत्म होने पर जिसकी सबसे ज़्यादा गोटियाँ घर पहुँचें, वह जीते।'}]},
-    {n:{en:'Snakes and Ladders (Saanp Seedi)',hi:'सांप सीढ़ी'},s:[
+    {n:{en:'Snakes and Ladders',hi:'सांप सीढ़ी'},s:[
       {en:'Each player rolls the dice and counts aloud.',hi:'हर खिलाड़ी पासा फेंके और ज़ोर से गिने।'},
       {en:'Say the number and move your token.',hi:'संख्या बोलकर गोटी चलाएँ।'},
       {en:'Stop at 15 minutes or when someone finishes.',hi:'15 मिनट पर या किसी के जीतने पर रोकें।'}]},
-    {n:{en:'Tambola (housie)',hi:'टम्बोला'},s:[
+    {n:{en:'Tambola',hi:'टम्बोला'},s:[
       {en:'Give each player a ticket.',hi:'हर खिलाड़ी को एक टिकट दें।'},
       {en:'Call numbers out loud. Players mark them.',hi:'नंबर ज़ोर से बोलें। खिलाड़ी निशान लगाएँ।'},
       {en:'A line or a full ticket wins a small prize.',hi:'एक लाइन या पूरा टिकट पूरा होने पर छोटा इनाम।'}]},
-    {n:{en:'Antakshari (song game)',hi:'अंताक्षरी'},s:[
+    {n:{en:'Antakshari',hi:'अंताक्षरी'},s:[
       {en:'Start with a Hindi film song or rhyme.',hi:'कोई हिंदी फ़िल्मी गाना या कविता से शुरू करें।'},
       {en:'Next player sings a song starting with the last letter.',hi:'अगला खिलाड़ी आखिरी अक्षर से शुरू होने वाला गाना गाए।'},
       {en:'House rule: sing softly.',hi:'घर का नियम: धीमी आवाज़ में गाएँ।'}]},
@@ -249,7 +249,7 @@ const AGES = {
       {en:'Set up the board and place the coins.',hi:'बोर्ड सजाएँ और गोटियाँ रखें।'},
       {en:'Take turns striking with the striker.',hi:'स्ट्राइकर से बारी-बारी से चोट करें।'},
       {en:'Count points for each coin. Stop at 15 minutes.',hi:'हर गोटी के अंक गिनें। 15 मिनट पर रोकें।'}]},
-    {n:{en:'Dumb charades (acting game)',hi:'अभिनय खेल'},s:[
+    {n:{en:'Dumb charades',hi:'अभिनय खेल'},s:[
       {en:'Pick a card with an animal or an everyday thing.',hi:'जानवर या रोज़ की कोई चीज़ वाली पर्ची उठाएँ।'},
       {en:'Act it out without speaking.',hi:'बिना बोले अभिनय करें।'},
       {en:'Others guess within one minute.',hi:'बाकी लोग एक मिनट में अंदाज़ा लगाएँ।'}]},
@@ -278,8 +278,8 @@ const AGES = {
     {n:{en:'Tambola with small prizes',hi:'छोटे इनाम वाला टम्बोला'},s:[
       {en:'Give each player a ticket.',hi:'हर खिलाड़ी को एक टिकट दें।'},
       {en:'Call numbers. Players mark them.',hi:'नंबर बोलें। खिलाड़ी निशान लगाएँ।'},
-      {en:'A sweet or sticker (स्टिकर) for the first line and the full house.',hi:'पहली लाइन और पूरे टिकट पर एक मिठाई या स्टिकर।'}]},
-    {n:{en:'Shabd Antakshari (word chain)',hi:'शब्द अंताक्षरी'},s:[
+      {en:'A sweet or sticker for the first line and the full house.',hi:'पहली लाइन और पूरे टिकट पर एक मिठाई या स्टिकर।'}]},
+    {n:{en:'Shabd Antakshari',hi:'शब्द अंताक्षरी'},s:[
       {en:'Each word must start with the last letter of the previous word.',hi:'हर शब्द पिछले शब्द के आखिरी अक्षर से शुरू हो।'},
       {en:'Give 10 seconds per turn.',hi:'हर बारी के लिए 10 सेकंड।'},
       {en:'The player who cannot answer is out.',hi:'जो जवाब न दे पाए, वह बाहर।'}]},
@@ -295,7 +295,7 @@ const AGES = {
       {en:'Think of a famous person from history or science.',hi:'इतिहास या विज्ञान के किसी प्रसिद्ध व्यक्ति को सोचें।'},
       {en:'Others ask yes or no questions.',hi:'बाकी लोग हाँ या ना वाले सवाल पूछें।'},
       {en:'Switch turns.',hi:'बारी बदलें।'}]},
-    {n:{en:'Chaupar (board game)',hi:'चौपड़'},s:[
+    {n:{en:'Chaupar',hi:'चौपड़'},s:[
       {en:'Set up the cloth board. Each player gets four tokens.',hi:'कपड़े का बोर्ड बिछाएँ। हर खिलाड़ी को चार गोटियाँ।'},
       {en:'Roll the dice or cowries and move.',hi:'पासा या कौड़ी फेंककर चाल चलें।'},
       {en:'Play for 15 minutes, then count the tokens home.',hi:'15 मिनट खेलें, फिर घर पहुँची गोटियाँ गिनें।'}]},
@@ -325,10 +325,10 @@ const AGES = {
       {en:'Choose an easy crossword on paper.',hi:'कागज़ पर एक आसान क्रॉसवर्ड चुनें।'},
       {en:'Solve it together for 15 minutes.',hi:'15 मिनट साथ में हल करें।'},
       {en:'Finish on another day if not done.',hi:'पूरा न हो तो किसी और दिन पूरा करें।'}]},
-    {n:{en:'Dumb charades in pairs (जोड़े)',hi:'जोड़ी में अभिनय खेल'},s:[
-      {en:'Teen and parent form one pair (जोड़ा), against the other pair (जोड़ा).',hi:'किशोर और माता-पिता एक जोड़ी, दूसरी जोड़ी के विरुद्ध।'},
+    {n:{en:'Dumb charades in pairs (jode)',hi:'जोड़ी में अभिनय खेल'},s:[
+      {en:'Teen and parent form one pair (jod), against the other pair (jod).',hi:'किशोर और माता-पिता एक जोड़ी, दूसरी जोड़ी के विरुद्ध।'},
       {en:'Act out a film, a book or a place.',hi:'किसी फ़िल्म, किताब या जगह का अभिनय करें।'},
-      {en:'One minute per clue (सुराग).',hi:'हर संकेत के लिए एक मिनट।'}]},
+      {en:'One minute per clue (suraag).',hi:'हर संकेत के लिए एक मिनट।'}]},
     {n:{en:'Two truths and a lie, deeper',hi:'दो सच, एक झूठ: गहरा'},s:[
       {en:'Share one real fact from a childhood memory.',hi:'बचपन की एक याद से एक सच्ची बात बताएँ।'},
       {en:'Others guess the lie.',hi:'बाकी लोग झूठ पहचानें।'},
@@ -357,19 +357,19 @@ const EN_EXTRA = {
   t:[
     {n:{en:'Clap and Stomp',hi:'ताली और पैर पटको'},s:[
       {en:'Clap once. Ask the child to clap once back.',hi:'एक बार ताली बजाएँ। बच्चे से एक बार ताली बजवाएँ।'},
-      {en:'Clap twice, then stomp (पैर पटकना) once. The child copies.',hi:'दो बार ताली, फिर एक बार पैर पटको। बच्चा नकल करे।'},
+      {en:'Clap twice, then stomp (pair (jod) patakna) once. The child copies.',hi:'दो बार ताली, फिर एक बार पैर पटको। बच्चा नकल करे।'},
       {en:'Slow it down until the child is calm.',hi:'धीरे-धीरे धीमा करें, जब तक बच्चा शांत न हो जाए।'}]},
     {n:{en:"Where's the Teddy?",hi:'टेडी कहाँ है?'},s:[
       {en:'Hide a soft toy under a light cloth while the child watches.',hi:'बच्चे के सामने टेडी को हल्के कपड़े के नीचे छुपाएँ।'},
       {en:'Ask “Where is teddy?” and let the child lift the cloth.',hi:'“टेडी कहाँ है?” पूछें और बच्चे को कपड़ा हटाने दें।'},
       {en:'Hide it again. Praise every find with a hug.',hi:'फिर से छुपाएँ। हर बार मिलने पर गले लगाकर शाबाश कहें।'}]},
     {n:{en:'Pop the Bubbles',hi:'बबल फोड़ो'},s:[
-      {en:'Pretend to blow bubbles (बुलबुले) into the air.',hi:'हवा में बुलबुले उड़ाने का नाटक करें।'},
-      {en:'The child points a finger and pops (फोड़ता है) each bubble (बुलबुला) with a sound.',hi:'बच्चा उंगली से बुलबुला फोड़े और “पॉप” बोले।'},
-      {en:'Blow slowly, as if the bubbles (बुलबुले) are floating down to rest.',hi:'धीरे फूँकें, जैसे बुलबुले नीचे आकर रुक रहे हों।'}]},
+      {en:'Pretend to blow bubbles into the air.',hi:'हवा में बुलबुले उड़ाने का नाटक करें।'},
+      {en:'The child points a finger and pops (phodta hai) each bubble with a sound.',hi:'बच्चा उंगली से बुलबुला फोड़े और “पॉप” बोले।'},
+      {en:'Blow slowly, as if the bubbles are floating down to rest.',hi:'धीरे फूँकें, जैसे बुलबुले नीचे आकर रुक रहे हों।'}]},
     {n:{en:'Big and Small',hi:'बड़ा और छोटा'},s:[
-      {en:'Say “Big!” and the child stretches (फैलाए) both arms wide.',hi:'“बड़ा!” बोलें, बच्चा दोनों हाथ फैलाए।'},
-      {en:'Say “Small!” and the child curls up (सिकुड़ना) tight.',hi:'“छोटा!” बोलें, बच्चा सिकुड़कर बैठे।'},
+      {en:'Say “Big!” and the child stretches (phailaye) both arms wide.',hi:'“बड़ा!” बोलें, बच्चा दोनों हाथ फैलाए।'},
+      {en:'Say “Small!” and the child curls up (sikud jaana) tight.',hi:'“छोटा!” बोलें, बच्चा सिकुड़कर बैठे।'},
       {en:'Mix them slowly, and end with “Sleepy!”',hi:'धीरे-धीरे मिलाएँ, और अंत में “नींद!” बोलें।'}]},
     {n:{en:'Find the Colour',hi:'रंग खोजो'},s:[
       {en:'Say a colour, such as “red”.',hi:'कोई रंग बोलें, जैसे “लाल”।'},
@@ -380,36 +380,36 @@ const EN_EXTRA = {
     {n:{en:'I Spy',hi:'मैं जासूस हूँ'},s:[
       {en:'Say “I spy something round.”',hi:'“मैं जासूस हूँ, कुछ गोल देख रहा हूँ” बोलें।'},
       {en:'The child looks around and names the object.',hi:'बच्चा चारों ओर देखकर चीज़ का नाम बताए।'},
-      {en:'Take turns. Give a clue (सुराग) such as “it starts with B”.',hi:'बारी-बारी से खेलें। संकेत दें, जैसे “ब से शुरू होता है”।'}]},
+      {en:'Take turns. Give a clue (suraag) such as “it starts with B”.',hi:'बारी-बारी से खेलें। संकेत दें, जैसे “ब से शुरू होता है”।'}]},
     {n:{en:'Simon Says',hi:'साइमन कहता है'},s:[
       {en:'Say “Simon says, touch your nose.” The child does it.',hi:'“साइमन कहता है, नाक छुओ” बोलें। बच्चा करे।'},
       {en:'Say “touch your nose” without “Simon says”. The child should not move.',hi:'“साइमन कहता है” के बिना “नाक छुओ” बोलें। बच्चा न हिले।'},
       {en:'Use hands, feet and arms. Keep it gentle.',hi:'हाथ, पैर और बाँह से खेलें। खेल को हल्का रखें।'}]},
     {n:{en:'Animal Walk',hi:'जानवर की चाल'},s:[
-      {en:'Walk slowly like a bear (भालू), on hands and feet.',hi:'भालू की तरह धीरे-धीरे हाथ-पैर के बल चलें।'},
-      {en:'Try a crab (केकड़ा) walk, then a frog (मेंढक) hop.',hi:'केकड़े की तरह चलें, फिर मेंढक की तरह कूदें।'},
+      {en:'Walk slowly like a bear (bhalu), on hands and feet.',hi:'भालू की तरह धीरे-धीरे हाथ-पैर के बल चलें।'},
+      {en:'Try a crab (kekda) walk, then a frog (mendhak) hop.',hi:'केकड़े की तरह चलें, फिर मेंढक की तरह कूदें।'},
       {en:'End by lying down like a sleeping animal.',hi:'अंत में सोते जानवर की तरह लेट जाएँ।'}]},
     {n:{en:'Tree Pose',hi:'पेड़ का आसन'},s:[
-      {en:'Stand on one leg, arms up like branches (डालियाँ).',hi:'एक पैर पर खड़े हों, हाथ पेड़ की डालियों की तरह ऊपर।'},
+      {en:'Stand on one leg, arms up like branches (daliyan).',hi:'एक पैर पर खड़े हों, हाथ पेड़ की डालियों की तरह ऊपर।'},
       {en:'Hold for a slow count of 5, then switch legs.',hi:'धीरे से 5 तक गिनें, फिर पैर बदलें।'},
       {en:'Breathe slowly. Lower the arms and sit down.',hi:'धीरे साँस लें। हाथ नीचे करके बैठ जाएँ।'}]},
     {n:{en:'Sock Matching',hi:'मोज़े मिलाओ'},s:[
-      {en:'Mix a pile of clean socks (मोज़े) on the floor.',hi:'फ़र्श पर साफ़ मोज़ों का ढेर बिखेरें।'},
-      {en:'The child finds pairs (जोड़े) and says the colour of each pair (जोड़ा).',hi:'बच्चा जोड़े खोजे और हर जोड़े का रंग बताए।'},
-      {en:'Fold the pairs (जोड़े) together and put them away.',hi:'जोड़े मोड़कर अलमारी में रखें।'}]}
+      {en:'Mix a pile of clean socks (moze) on the floor.',hi:'फ़र्श पर साफ़ मोज़ों का ढेर बिखेरें।'},
+      {en:'The child finds pairs (jode) and says the colour of each pair (jod).',hi:'बच्चा जोड़े खोजे और हर जोड़े का रंग बताए।'},
+      {en:'Fold the pairs (jode) together and put them away.',hi:'जोड़े मोड़कर अलमारी में रखें।'}]}
   ],
   s:[
     {n:{en:'Hangman',hi:'हैंगमैन'},s:[
       {en:'One person thinks of a short word, such as “moon”, and draws a line for each letter.',hi:'एक व्यक्ति एक छोटा शब्द सोचे, जैसे “चाँद”, और हर अक्षर के लिए एक लाइन बनाए।'},
-      {en:'Others guess one letter at a time. Each wrong guess adds one part of a stick figure (लकड़ी की आकृति).',hi:'बाकी लोग एक-एक अक्षर बताएँ। गलत होने पर पुतले का एक हिस्सा बनाएँ।'},
+      {en:'Others guess one letter at a time. Each wrong guess adds one part of a stick figure (lakdi ka putla).',hi:'बाकी लोग एक-एक अक्षर बताएँ। गलत होने पर पुतले का एक हिस्सा बनाएँ।'},
       {en:'Switch roles after each word.',hi:'हर शब्द के बाद भूमिका बदलें।'}]},
     {n:{en:'Number Magic',hi:'गणित का जादू'},s:[
       {en:'Ask the child to think of any number from 1 to 10.',hi:'बच्चे से 1 से 10 के बीच कोई संख्या सोचने को कहें।'},
-      {en:'Double it, add 10, halve (आधा करें) it, then take away the number first thought of.',hi:'उसे दोगुना करें, 10 जोड़ें, आधा करें, फिर पहली सोची हुई संख्या घटाएँ।'},
+      {en:'Double it, add 10, halve (aadha karein) it, then take away the number first thought of.',hi:'उसे दोगुना करें, 10 जोड़ें, आधा करें, फिर पहली सोची हुई संख्या घटाएँ।'},
       {en:'The answer is always 5. Show how it works, then let the child try on you.',hi:'जवाब हमेशा 5 आएगा। तरीका दिखाएँ, फिर बच्चा आपके साथ करे।'}]},
-    {n:{en:"Kim's Game (memory game)",hi:'किम्स गेम'},s:[
-      {en:'Place six small objects on a tray (ट्रे). Give the child 20 seconds to look.',hi:'ट्रे में छह छोटी चीज़ें रखें। बच्चे को 20 सेकंड देखने दें।'},
-      {en:'Cover the tray (ट्रे). The child names as many objects as they can remember.',hi:'ट्रे ढक दें। बच्चा जितनी चीज़ें याद हों, बताए।'},
+    {n:{en:"Kim's Game",hi:'किम्स गेम'},s:[
+      {en:'Place six small objects on a tray. Give the child 20 seconds to look.',hi:'ट्रे में छह छोटी चीज़ें रखें। बच्चे को 20 सेकंड देखने दें।'},
+      {en:'Cover the tray. The child names as many objects as they can remember.',hi:'ट्रे ढक दें। बच्चा जितनी चीज़ें याद हों, बताए।'},
       {en:'Uncover, check together, and remove one object for the next round.',hi:'ढक्कन हटाकर साथ में जाँचें, अगले दौर के लिए एक चीज़ हटाएँ।'}]},
     {n:{en:'Draw and Guess',hi:'बनाओ और पहचानो'},s:[
       {en:'Write a word on a small slip, such as “bicycle” or “kite”.',hi:'छोटी पर्ची पर एक शब्द लिखें, जैसे “साइकिल” या “पतंग”।'},
@@ -430,7 +430,7 @@ const EN_EXTRA = {
       {en:'The other person draws with eyes closed, following spoken directions only.',hi:'दूसरा व्यक्ति आँख बंद करके सिर्फ़ बोले गए निर्देशों से बनाए।'},
       {en:'Compare the drawings and laugh together.',hi:'दोनों चित्र मिलाएँ और साथ में हँसें।'}]},
     {n:{en:'Paper Tower',hi:'कागज़ का टावर'},s:[
-      {en:'Give each person 20 sheets of paper and some tape (टेप).',hi:'हर व्यक्ति को 20 कागज़ और थोड़ी टेप दें।'},
+      {en:'Give each person 20 sheets of paper and some tape.',hi:'हर व्यक्ति को 20 कागज़ और थोड़ी टेप दें।'},
       {en:'Build the tallest tower that stands for 10 seconds.',hi:'ऐसा सबसे ऊँचा टावर बनाएँ जो 10 सेकंड खड़ा रहे।'},
       {en:'Measure the heights and try again with a new idea.',hi:'ऊँचाई नापें और नए तरीके से फिर बनाएँ।'}]},
     {n:{en:'Story Cubes',hi:'कहानी के कार्ड'},s:[
@@ -438,7 +438,7 @@ const EN_EXTRA = {
       {en:'Each person picks one card and adds one sentence using that picture.',hi:'हर व्यक्ति एक कार्ड उठाकर उस चित्र से एक वाक्य जोड़े।'},
       {en:'The story ends when every card has been used.',hi:'हर कार्ड इस्तेमाल होने पर कहानी खत्म।'}]},
     {n:{en:'Word Meaning Guess',hi:'शब्द का मतलब बताओ'},s:[
-      {en:'Pick a new word from a dictionary (शब्दकोश) or a newspaper, such as “resilient (धैर्यवान)”.',hi:'शब्दकोश या अख़बार से कोई नया शब्द चुनें, जैसे “धैर्यवान”।'},
+      {en:'Pick a new word from a dictionary (shabdkosh) or a newspaper, such as “resilient (dhairyawan)”.',hi:'शब्दकोश या अख़बार से कोई नया शब्द चुनें, जैसे “धैर्यवान”।'},
       {en:'Each person guesses its meaning. The closest guess wins a point.',hi:'हर व्यक्ति उसका मतलब बताए। सबसे सही अंदाज़े को एक अंक।'},
       {en:'Check the real meaning together and use the word in a sentence.',hi:'असली मतलब मिलाएँ और शब्द को वाक्य में इस्तेमाल करें।'}]}
   ],
@@ -456,13 +456,13 @@ const EN_EXTRA = {
       {en:'The others ask one question about how they will reach it.',hi:'बाकी लोग पूछें कि वे वहाँ कैसे पहुँचेंगे।'},
       {en:'Everyone offers one small way they can help.',hi:'हर कोई एक छोटी मदद बताए जो वह कर सकता है।'}]},
     {n:{en:'Escape Box',hi:'घर पर एस्केप बॉक्स'},s:[
-      {en:'Hide a small reward (इनाम) in a box with a lock. Put clues (सुराग) on paper around the room.',hi:'ताले वाले डिब्बे में छोटा इनाम रखें। कमरे में कागज़ पर सुराग रखें।'},
-      {en:'Teens solve the clues (सुराग) in order to find the code. Parents may give one hint.',hi:'किशोर सुराग हल करके कोड खोजें। माता-पिता एक इशारा दे सकते हैं।'},
-      {en:'Open the box and read the reward (इनाम) note together.',hi:'डिब्बा खोलें और इनाम वाली पर्ची साथ में पढ़ें।'}]},
-    {n:{en:'Debate Light (friendly argument)',hi:'हल्की बहस'},s:[
+      {en:'Hide a small reward (inaam) in a box with a lock. Put clues (suraag) on paper around the room.',hi:'ताले वाले डिब्बे में छोटा इनाम रखें। कमरे में कागज़ पर सुराग रखें।'},
+      {en:'Teens solve the clues (suraag) in order to find the code. Parents may give one hint.',hi:'किशोर सुराग हल करके कोड खोजें। माता-पिता एक इशारा दे सकते हैं।'},
+      {en:'Open the box and read the reward (inaam) note together.',hi:'डिब्बा खोलें और इनाम वाली पर्ची साथ में पढ़ें।'}]},
+    {n:{en:'Debate Light',hi:'हल्की बहस'},s:[
       {en:'Pick a light topic, such as “homework on weekends” or “best snack”.',hi:'हल्का विषय चुनें, जैसे “वीकेंड पर होमवर्क” या “सबसे अच्छा नाश्ता”।'},
       {en:'Two people take opposite sides. Each speaks for one minute.',hi:'दो लोग अलग-अलग पक्ष लें। हर एक को एक मिनट।'},
-      {en:'Vote (वोट), then swap sides for a second round.',hi:'वोट करें, फिर दूसरे दौर में पक्ष बदलें।'}]}
+      {en:'Vote, then swap sides for a second round.',hi:'वोट करें, फिर दूसरे दौर में पक्ष बदलें।'}]}
   ]
 };
 Object.keys(EN_EXTRA).forEach(k => AGES[k].games.push(...EN_EXTRA[k]));
@@ -573,7 +573,7 @@ function gameCards(){
     </div>
     <div class="card stage-card">
       <div class="char" aria-hidden="true">${EMO[age]}</div>
-      <div class="bubble (बुलबुला)">${T(st)}</div>
+      <div class="bubble">${T(st)}</div>
       <button class="listen noprint" data-act="listen">🔊 ${T(UI.listen)}</button>
     </div>
     <div class="card">
