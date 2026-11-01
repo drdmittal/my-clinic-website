@@ -52,6 +52,17 @@ button.link{background:none;color:var(--sky);padding:0;text-decoration:underline
 .how li{margin:6px 0;padding:4px 6px;border-radius:8px}
 .how li.cur{background:var(--turmeric);color:var(--ink);font-weight:600}
 .print-only{display:none}
+.stagebar{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.stagebar span{background:#efeaff;color:var(--indigo);border-radius:20px;padding:4px 10px;font-size:15px}
+.stagebar span.on{background:var(--indigo);color:#fff;font-weight:600}
+.tick{display:flex;gap:10px;align-items:flex-start;padding:10px 0;font-size:19px;border-bottom:1px solid #f0ecf8}
+.tick input[type=checkbox]{width:24px;height:24px;margin-top:3px;flex:0 0 24px}
+.stage-card{text-align:center;background:linear-gradient(180deg,#fff,#f6f3ff)}
+.char{font-size:64px;animation:bob 1.2s ease-in-out infinite;display:inline-block}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.bubble{background:#fff;border:2px solid var(--indigo);border-radius:16px;padding:12px;margin:10px auto 0;font-size:20px;max-width:460px;position:relative}
+.listen{margin-top:12px;background:var(--sky);color:#fff;font-weight:600}
+.mins{width:70px;font:inherit;padding:4px;border-radius:8px;border:1px solid #ccc}
 @media print{
   .print-only{display:block;border-bottom:2px solid var(--indigo);margin-bottom:12px;padding-bottom:6px}
   .noprint{display:none!important}
@@ -92,6 +103,14 @@ const UI = {
   minutes:{en:'Minutes for this step',hi:'इस चरण के लिए मिनट'},
   defTime:{en:'Use default time',hi:'डिफ़ॉल्ट समय रखें'},
   home:{en:'← Back to clinic home',hi:'← क्लिनिक होम पर वापस'},
+  routineTitle:{en:'Bedtime routine: tick each one as you do it',hi:'सोने की दिनचर्या: हर काम करके टिक करें'},
+  tickHelp:{en:'Tick each step when it is done. Then the game starts.',hi:'हर काम पूरा होने पर टिक करें। फिर खेल शुरू होगा।'},
+  startGame:{en:'Start the game',hi:'खेल शुरू करें'},
+  closeTitle:{en:'Quiet close: tick each one as you do it',hi:'शांत समापन: हर काम करके टिक करें'},
+  allDone:{en:'Goodnight. All done.',hi:'शुभ रात्रि। सब हो गया।'},
+  listen:{en:'Listen to the steps',hi:'चरण सुनें'},
+  backGame:{en:'Back to the game',hi:'खेल पर वापस'},
+  toClose:{en:'Finish with quiet close',hi:'शांत समापन पर जाएँ'},
   print:{en:'Print this game',hi:'यह खेल प्रिंट करें'},
   stage:{
     en:{routine:'Routine',game:'Game',close:'Quiet close'},
@@ -330,9 +349,10 @@ const AGES = {
 
 // ---------- State ----------
 let lang = (navigator.language||'').startsWith('hi') ? 'hi' : 'en';
-let age = null, gi = 0, si = 0, listOpen = false;
+let age = null, gi = 0, phase = 'routine', gsi = 0, listOpen = false;
+let ticks = { routine:[false,false,false], close:[false,false] };
 let timerOn = false, left = 0, timerId = null;
-// Parent-chosen minutes per step, kept only on this phone
+// Parent-chosen minutes per game step, kept only on this phone
 let saved = {};
 try { saved = JSON.parse(localStorage.getItem('fbTimes') || '{}'); } catch(e) { saved = {}; }
 function saveTimes(){ try { localStorage.setItem('fbTimes', JSON.stringify(saved)); } catch(e) {} }
@@ -340,33 +360,41 @@ function saveTimes(){ try { localStorage.setItem('fbTimes', JSON.stringify(saved
 const T = o => (o && (o[lang] || o.en)) || '';
 const fmt = s => String(Math.floor(s/60)).padStart(2,'0') + ':' + String(s%60).padStart(2,'0');
 function todayIndex(n){ const d=new Date(); const s=new Date(d.getFullYear(),0,0); return Math.floor((d-s)/864e5) % n; }
+const EMO = {t:'🧸', p:'🐻', s:'🎲', pt:'♟️', tn:'🎯'};
 
-function allSteps(){
-  const g = AGES[age].games[gi];
-  const per = Math.max(2, Math.round(15 / g.s.length));
-  const all = [
-    ...BEFORE.map(x => ({...x, stage:'routine', min:3})),
-    ...g.s.map(x => ({...x, stage:'game', min:per})),
-    ...AFTER.map(x => ({...x, stage:'close', min:2}))
-  ];
-  // apply any minutes the parent has chosen for a step
-  all.forEach((st, i) => { const v = saved[age + '|' + gi + '|' + i]; if (v) st.min = v; });
-  return all;
+function game(){ return AGES[age].games[gi]; }
+function minsFor(i){ const v = saved[age+'|'+gi+'|'+i]; return v || Math.max(2, Math.round(15 / game().s.length)); }
+function stopTimer(){ if(timerId){ clearInterval(timerId); timerId = null; } }
+function resetTicks(){ ticks = { routine:BEFORE.map(()=>false), close:AFTER.map(()=>false) }; }
+const allTicked = k => ticks[k].every(Boolean);
+
+function go(p, i){
+  phase = p;
+  if(p === 'game') gsi = i;
+  stopTimer();
+  if(p === 'game') left = minsFor(gsi) * 60;
+  if('speechSynthesis' in window) speechSynthesis.cancel();
+  render();
 }
 function setMins(v, i){
   const n = Math.max(1, Math.min(60, Math.round(Number(v)) || 1));
-  saved[age + '|' + gi + '|' + i] = n; saveTimes();
-  if (i === si) { stopTimer(); left = n * 60; }
+  saved[age+'|'+gi+'|'+i] = n; saveTimes();
+  if(phase === 'game' && i === gsi){ stopTimer(); left = n * 60; }
   render();
 }
 function defaultMins(i){
-  delete saved[age + '|' + gi + '|' + i]; saveTimes();
-  if (i === si) { stopTimer(); left = allSteps()[si].min * 60; }
+  delete saved[age+'|'+gi+'|'+i]; saveTimes();
+  if(phase === 'game' && i === gsi){ stopTimer(); left = minsFor(i) * 60; }
   render();
 }
-function stopTimer(){ if(timerId){ clearInterval(timerId); timerId=null; } }
-function resetClock(){ stopTimer(); left = allSteps()[si].min * 60; }
-function goto(i){ si = i; resetClock(); render(); }
+function speak(text){
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = lang === 'hi' ? 'hi-IN' : 'en-IN';
+  u.rate = 0.9;
+  speechSynthesis.speak(u);
+}
 
 // ---------- Views ----------
 function header(){
@@ -393,51 +421,80 @@ function ageView(){
   </main>`;
 }
 
-function gameView(){
-  const steps = allSteps();
-  const g = AGES[age].games[gi];
-  const idx = todayIndex(AGES[age].games.length);
-  const st = steps[si];
-  const last = si === steps.length - 1;
+function stageBar(){
+  return `<div class="stagebar">${['routine','game','close'].map((k,i) =>
+    `<span class="${phase===k?'on':''}">${i+1}. ${T(UI.stage)[k]}</span>`).join('')}</div>`;
+}
+
+function tick(k, i, x){
+  return `<label class="tick"><input type="checkbox" data-act="tick" data-k="${k}" data-i="${i}" ${ticks[k][i]?'checked':''}><span>${T(x)}</span></label>`;
+}
+
+function routineCard(){
+  return `<div class="card">
+    <h3>${T(UI.routineTitle)}</h3>
+    <p class="muted">${T(UI.tickHelp)}</p>
+    ${BEFORE.map((x,i) => tick('routine', i, x)).join('')}
+    <div class="row"><span></span>
+      <button class="primary" data-act="startgame" ${allTicked('routine') ? '' : 'disabled'}>${T(UI.startGame)} →</button>
+    </div></div>`;
+}
+
+function gameCards(){
+  const g = game(), steps = g.s, st = steps[gsi], last = gsi === steps.length - 1;
   const running = timerId !== null;
-  const timerBlock = `
-    <label class="noprint"><input type="checkbox" data-act="timer" ${timerOn?'checked':''}> ${T(UI.timer)}</label>
-    ${timerOn ? `<div class="clock" id="clock">${fmt(left)}</div>
+  return `
+    <div class="card">
+      <h3>${T(UI.howToPlay)}</h3>
+      <ol class="how">${steps.map((x,i) => `<li class="${i===gsi?'cur':''}">${T(x)}</li>`).join('')}</ol>
+    </div>
+    <div class="card stage-card">
+      <div class="char" aria-hidden="true">${EMO[age]}</div>
+      <div class="bubble">${T(st)}</div>
+      <button class="listen noprint" data-act="listen">🔊 ${T(UI.listen)}</button>
+    </div>
+    <div class="card">
+      <div class="muted">${T(UI.step)} ${gsi+1} ${T(UI.of)} ${steps.length}</div>
       <div class="row noprint">
-        <button class="primary" data-act="tstart">${running ? T(UI.pause) : T(UI.start)}</button>
-        <button data-act="treset">${T(UI.reset)}</button>
-      </div>` : ''}`;
+        <label>${T(UI.minutes)} <input type="number" min="1" max="60" value="${minsFor(gsi)}" data-act="mins" data-i="${gsi}" class="mins"></label>
+        <button data-act="defmins" data-i="${gsi}">${T(UI.defTime)}</button>
+      </div>
+      <label class="tick noprint"><input type="checkbox" data-act="timer" ${timerOn?'checked':''}><span>${T(UI.timer)}</span></label>
+      ${timerOn ? `<div class="clock" id="clock">${fmt(left)}</div>
+        <div class="row noprint">
+          <button class="primary" data-act="tstart">${running ? T(UI.pause) : T(UI.start)}</button>
+          <button data-act="treset">${T(UI.reset)}</button>
+        </div>` : ''}
+      <div class="row noprint">
+        <button data-act="prev">${T(UI.back)}</button>
+        <button class="primary" data-act="next">${last ? T(UI.toClose) : T(UI.next)}</button>
+      </div>
+    </div>`;
+}
+
+function closeCard(){
+  return `<div class="card">
+    <h3>${T(UI.closeTitle)}</h3>
+    ${AFTER.map((x,i) => tick('close', i, x)).join('')}
+    ${allTicked('close') ? `<p class="done">${T(UI.allDone)}</p>` : ''}
+    <div class="row"><button data-act="backgame">${T(UI.backGame)}</button></div>
+  </div>`;
+}
+
+function gameView(){
+  const idx = todayIndex(AGES[age].games.length);
+  const body = phase === 'routine' ? routineCard() : phase === 'game' ? gameCards() : closeCard();
   const list = listOpen ? `<div class="list">${AGES[age].games.map((x,i) =>
       `<button data-act="pick" data-i="${i}">${i===idx?'★ ':''}${T(x.n)}</button>`).join('')}</div>` : '';
   return `<main>
     <div class="row noprint"><span class="muted">${T(AGES[age].label)}</span>
       <button class="link" data-act="reset">${T(UI.changeAge)}</button></div>
     <div class="card">
-      <h2>${T(g.n)} ${gi===idx ? `<span class="pill">${T(UI.todayTag)}</span>` : ''}</h2>
+      <h2>${T(game().n)} ${gi===idx ? `<span class="pill">${T(UI.todayTag)}</span>` : ''}</h2>
       <p class="muted">${T(UI.about)}</p>
+      ${stageBar()}
     </div>
-    <div class="card">
-      <h3>${T(UI.howToPlay)}</h3>
-      <ol class="how">${g.s.map((x,i) => {
-        const cur = st.stage === 'game' && T(x) === T(st);
-        return `<li${cur ? ' class="cur"' : ''}>${T(x)}</li>`;
-      }).join('')}</ol>
-      <p class="muted">${T(UI.routineNote)}</p>
-    </div>
-    <div class="card">
-      <div class="muted">${T(UI.step)} ${si+1} ${T(UI.of)} ${steps.length} · ${T(UI.stage)[st.stage] || UI.stage[lang][st.stage]}</div>
-      <p class="big">${T(st)}</p>
-      <div class="row noprint">
-        <label>${T(UI.minutes)} <input type="number" min="1" max="60" value="${st.min}" data-act="mins" data-i="${si}" style="width:70px;font:inherit;padding:4px;border-radius:8px;border:1px solid #ccc"></label>
-        <button data-act="defmins" data-i="${si}">${T(UI.defTime)}</button>
-      </div>
-      ${timerBlock}
-      <div class="row noprint">
-        <button data-act="prev" ${si===0?'disabled':''}>${T(UI.back)}</button>
-        ${last ? '' : `<button class="primary" data-act="next">${T(UI.next)}</button>`}
-      </div>
-      ${last ? `<p class="done">${T(UI.done)}</p>` : ''}
-    </div>
+    ${body}
     <div class="card noprint">
       <div class="row">
         <button data-act="list">${T(UI.change)}</button>
@@ -461,40 +518,51 @@ function render(){
 // ---------- Events ----------
 document.addEventListener('change', e => {
   const el = e.target;
-  if(el.dataset && el.dataset.act === 'mins') setMins(el.value, Number(el.dataset.i));
+  if(!el.dataset) return;
+  if(el.dataset.act === 'mins') setMins(el.value, Number(el.dataset.i));
+  if(el.dataset.act === 'tick'){ ticks[el.dataset.k][Number(el.dataset.i)] = el.checked; render(); }
 });
 
 document.addEventListener('click', e => {
   const b = e.target.closest('[data-act]');
-  if(!b) return;
+  if(!b || b.disabled) return;
   const act = b.dataset.act;
   if(act === 'lang'){ lang = b.dataset.lang; render(); return; }
   if(act === 'age'){
-    age = b.dataset.age;
-    gi = todayIndex(AGES[age].games.length);
-    listOpen = false;
-    goto(0); return;
+    age = b.dataset.age; gi = todayIndex(AGES[age].games.length);
+    listOpen = false; resetTicks(); go('routine', 0); return;
   }
   if(act === 'reset'){ age = null; stopTimer(); listOpen = false; render(); return; }
-  if(act === 'next'){ goto(Math.min(si+1, allSteps().length-1)); return; }
-  if(act === 'prev'){ goto(Math.max(si-1, 0)); return; }
+  if(act === 'startgame'){ go('game', 0); return; }
+  if(act === 'backgame'){ go('game', game().s.length - 1); return; }
+  if(act === 'next'){
+    if(gsi < game().s.length - 1) go('game', gsi + 1); else go('close', 0);
+    return;
+  }
+  if(act === 'prev'){
+    if(gsi > 0) go('game', gsi - 1); else go('routine', 0);
+    return;
+  }
+  if(act === 'listen'){ speak(T(game().s[gsi])); return; }
   if(act === 'list'){ listOpen = !listOpen; render(); return; }
-  if(act === 'pick'){ gi = Number(b.dataset.i); listOpen = false; goto(0); return; }
-  if(act === 'today'){ gi = todayIndex(AGES[age].games.length); listOpen = false; goto(0); return; }
+  if(act === 'pick'){ gi = Number(b.dataset.i); listOpen = false; resetTicks(); go('routine', 0); return; }
+  if(act === 'today'){ gi = todayIndex(AGES[age].games.length); listOpen = false; resetTicks(); go('routine', 0); return; }
   if(act === 'print'){ window.print(); return; }
   if(act === 'timer'){ timerOn = b.checked; resetClock(); render(); return; }
   if(act === 'treset'){ resetClock(); render(); return; }
   if(act === 'defmins'){ defaultMins(Number(b.dataset.i)); return; }
   if(act === 'tstart'){
     if(timerId){ stopTimer(); render(); return; }
-    if(left <= 0) left = allSteps()[si].min * 60;
+    if(left <= 0) left = minsFor(gsi) * 60;
     timerId = setInterval(() => {
       if(left > 0){ left--; const c = document.getElementById('clock'); if(c) c.textContent = fmt(left); }
-      if(left <= 0){ stopTimer(); const c = document.getElementById('clock'); if(c) c.textContent = '00:00'; render(); }
+      if(left <= 0){ stopTimer(); const c = document.getElementById('clock'); if(c) c.textContent = '00:00'; }
     }, 1000);
     render(); return;
   }
 });
+
+function resetClock(){ stopTimer(); left = minsFor(gsi) * 60; }
 
 render();
 </script>
