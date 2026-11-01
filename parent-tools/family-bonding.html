@@ -48,6 +48,9 @@ button.link{background:none;color:var(--sky);padding:0;text-decoration:underline
 .list button{text-align:left;background:#f6f3ff}
 .note{font-size:14px;color:#5a5778}
 .done{color:var(--green);font-weight:700;margin-top:10px}
+.how{margin:6px 0 4px;padding-left:22px;font-size:18px}
+.how li{margin:6px 0;padding:4px 6px;border-radius:8px}
+.how li.cur{background:var(--turmeric);color:var(--ink);font-weight:600}
 .print-only{display:none}
 @media print{
   .print-only{display:block;border-bottom:2px solid var(--indigo);margin-bottom:12px;padding-bottom:6px}
@@ -81,8 +84,10 @@ const UI = {
   change:{en:'Choose another game',hi:'दूसरा खेल चुनें'},
   todayBtn:{en:'Back to today’s game',hi:'आज के खेल पर वापस'},
   timer:{en:'Show timer (optional)',hi:'टाइमर दिखाएँ (वैकल्पिक)'},
-  start:{en:'Start',hi:'शुरू'},
-  pause:{en:'Pause',hi:'रोकें'},
+  start:{en:'Start timer',hi:'टाइमर शुरू करें'},
+  pause:{en:'Pause timer',hi:'टाइमर रोकें'},
+  howToPlay:{en:'How to play',hi:'कैसे खेलें'},
+  routineNote:{en:'Routine first, then the game, then a quiet close.',hi:'पहले दिनचर्या, फिर खेल, फिर शांत समापन।'},
   reset:{en:'Reset',hi:'फिर से'},
   minutes:{en:'Minutes for this step',hi:'इस चरण के लिए मिनट'},
   defTime:{en:'Use default time',hi:'डिफ़ॉल्ट समय रखें'},
@@ -399,7 +404,7 @@ function gameView(){
     <label class="noprint"><input type="checkbox" data-act="timer" ${timerOn?'checked':''}> ${T(UI.timer)}</label>
     ${timerOn ? `<div class="clock" id="clock">${fmt(left)}</div>
       <div class="row noprint">
-        <button data-act="tstart">${running ? T(UI.pause) : T(UI.start)}</button>
+        <button class="primary" data-act="tstart">${running ? T(UI.pause) : T(UI.start)}</button>
         <button data-act="treset">${T(UI.reset)}</button>
       </div>` : ''}`;
   const list = listOpen ? `<div class="list">${AGES[age].games.map((x,i) =>
@@ -410,6 +415,14 @@ function gameView(){
     <div class="card">
       <h2>${T(g.n)} ${gi===idx ? `<span class="pill">${T(UI.todayTag)}</span>` : ''}</h2>
       <p class="muted">${T(UI.about)}</p>
+    </div>
+    <div class="card">
+      <h3>${T(UI.howToPlay)}</h3>
+      <ol class="how">${g.s.map((x,i) => {
+        const cur = st.stage === 'game' && T(x) === T(st);
+        return `<li${cur ? ' class="cur"' : ''}>${T(x)}</li>`;
+      }).join('')}</ol>
+      <p class="muted">${T(UI.routineNote)}</p>
     </div>
     <div class="card">
       <div class="muted">${T(UI.step)} ${si+1} ${T(UI.of)} ${steps.length} · ${T(UI.stage)[st.stage] || UI.stage[lang][st.stage]}</div>
