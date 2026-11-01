@@ -52,6 +52,7 @@ button.link{background:none;color:var(--sky);padding:0;text-decoration:underline
 .how li{margin:6px 0;padding:4px 6px;border-radius:8px}
 .how li.cur{background:var(--turmeric);color:var(--ink);font-weight:600}
 .print-only{display:none}
+.print-sheet{display:none}
 .stagebar{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
 .stagebar span{background:#efeaff;color:var(--indigo);border-radius:20px;padding:4px 10px;font-size:15px}
 .stagebar span.on{background:var(--indigo);color:#fff;font-weight:600}
@@ -64,8 +65,12 @@ button.link{background:none;color:var(--sky);padding:0;text-decoration:underline
 .listen{margin-top:12px;background:var(--sky);color:#fff;font-weight:600}
 .mins{width:70px;font:inherit;padding:4px;border-radius:8px;border:1px solid #ccc}
 @media print{
-  .print-only{display:block;border-bottom:2px solid var(--indigo);margin-bottom:12px;padding-bottom:6px}
+  .print-only{display:none!important}
   .noprint{display:none!important}
+  header,main{display:none!important}
+  .print-sheet{display:block!important}
+  .ps-head{border-bottom:2px solid var(--indigo);margin-bottom:10px;padding-bottom:6px}
+  .ps-list li{list-style:none;margin:6px 0}
   header{background:#fff;color:#000}
   .card{box-shadow:none;border:1px solid #ccc}
   body{background:#fff}
@@ -347,6 +352,123 @@ const AGES = {
   ]}
 };
 
+// ---------- Extra English-friendly games (shown in English and Hindi) ----------
+const HI_ONLY = ['Tota Udd, Maina Udd','Machli Jal ki Rani','Lullaby Antakshari','Antakshari','Shabd Antakshari','Antakshari: two generations'];
+const EN_EXTRA = {
+  t:[
+    {n:{en:'Clap and Stomp',hi:'ताली और पैर पटको'},s:[
+      {en:'Clap once. Ask the child to clap once back.',hi:'एक बार ताली बजाएँ। बच्चे से एक बार ताली बजवाएँ।'},
+      {en:'Clap twice, then stomp once. The child copies.',hi:'दो बार ताली, फिर एक बार पैर पटको। बच्चा नकल करे।'},
+      {en:'Slow it down until the child is calm.',hi:'धीरे-धीरे धीमा करें, जब तक बच्चा शांत न हो जाए।'}]},
+    {n:{en:"Where's the Teddy?",hi:'टेडी कहाँ है?'},s:[
+      {en:'Hide a soft toy under a light cloth while the child watches.',hi:'बच्चे के सामने टेडी को हल्के कपड़े के नीचे छुपाएँ।'},
+      {en:'Ask “Where is teddy?” and let the child lift the cloth.',hi:'“टेडी कहाँ है?” पूछें और बच्चे को कपड़ा हटाने दें।'},
+      {en:'Hide it again. Praise every find with a hug.',hi:'फिर से छुपाएँ। हर बार मिलने पर गले लगाकर शाबाश कहें।'}]},
+    {n:{en:'Pop the Bubbles',hi:'बबल फोड़ो'},s:[
+      {en:'Pretend to blow bubbles into the air.',hi:'हवा में बुलबुले उड़ाने का नाटक करें।'},
+      {en:'The child points a finger and pops each bubble with a sound.',hi:'बच्चा उंगली से बुलबुला फोड़े और “पॉप” बोले।'},
+      {en:'Blow slowly, as if the bubbles are floating down to rest.',hi:'धीरे फूँकें, जैसे बुलबुले नीचे आकर रुक रहे हों।'}]},
+    {n:{en:'Big and Small',hi:'बड़ा और छोटा'},s:[
+      {en:'Say “Big!” and the child stretches both arms wide.',hi:'“बड़ा!” बोलें, बच्चा दोनों हाथ फैलाए।'},
+      {en:'Say “Small!” and the child curls up tight.',hi:'“छोटा!” बोलें, बच्चा सिकुड़कर बैठे।'},
+      {en:'Mix them slowly, and end with “Sleepy!”',hi:'धीरे-धीरे मिलाएँ, और अंत में “नींद!” बोलें।'}]},
+    {n:{en:'Find the Colour',hi:'रंग खोजो'},s:[
+      {en:'Say a colour, such as “red”.',hi:'कोई रंग बोलें, जैसे “लाल”।'},
+      {en:'The child touches something red in the room.',hi:'बच्चा कमरे में लाल चीज़ को छुए।'},
+      {en:'Take turns with a new colour each round.',hi:'हर बार नया रंग लेकर बारी-बारी से खेलें।'}]}
+  ],
+  p:[
+    {n:{en:'I Spy',hi:'मैं जासूस हूँ'},s:[
+      {en:'Say “I spy something round.”',hi:'“मैं जासूस हूँ, कुछ गोल देख रहा हूँ” बोलें।'},
+      {en:'The child looks around and names the object.',hi:'बच्चा चारों ओर देखकर चीज़ का नाम बताए।'},
+      {en:'Take turns. Give a clue such as “it starts with B”.',hi:'बारी-बारी से खेलें। संकेत दें, जैसे “ब से शुरू होता है”।'}]},
+    {n:{en:'Simon Says',hi:'साइमन कहता है'},s:[
+      {en:'Say “Simon says, touch your nose.” The child does it.',hi:'“साइमन कहता है, नाक छुओ” बोलें। बच्चा करे।'},
+      {en:'Say “touch your nose” without “Simon says”. The child should not move.',hi:'“साइमन कहता है” के बिना “नाक छुओ” बोलें। बच्चा न हिले।'},
+      {en:'Use hands, feet and arms. Keep it gentle.',hi:'हाथ, पैर और बाँह से खेलें। खेल को हल्का रखें।'}]},
+    {n:{en:'Animal Walk',hi:'जानवर की चाल'},s:[
+      {en:'Walk slowly like a bear, on hands and feet.',hi:'भालू की तरह धीरे-धीरे हाथ-पैर के बल चलें।'},
+      {en:'Try a crab walk, then a frog hop.',hi:'केकड़े की तरह चलें, फिर मेंढक की तरह कूदें।'},
+      {en:'End by lying down like a sleeping animal.',hi:'अंत में सोते जानवर की तरह लेट जाएँ।'}]},
+    {n:{en:'Tree Pose',hi:'पेड़ का आसन'},s:[
+      {en:'Stand on one leg, arms up like branches.',hi:'एक पैर पर खड़े हों, हाथ पेड़ की डालियों की तरह ऊपर।'},
+      {en:'Hold for a slow count of 5, then switch legs.',hi:'धीरे से 5 तक गिनें, फिर पैर बदलें।'},
+      {en:'Breathe slowly. Lower the arms and sit down.',hi:'धीरे साँस लें। हाथ नीचे करके बैठ जाएँ।'}]},
+    {n:{en:'Sock Matching',hi:'मोज़े मिलाओ'},s:[
+      {en:'Mix a pile of clean socks on the floor.',hi:'फ़र्श पर साफ़ मोज़ों का ढेर बिखेरें।'},
+      {en:'The child finds pairs and says the colour of each pair.',hi:'बच्चा जोड़े खोजे और हर जोड़े का रंग बताए।'},
+      {en:'Fold the pairs together and put them away.',hi:'जोड़े मोड़कर अलमारी में रखें।'}]}
+  ],
+  s:[
+    {n:{en:'Hangman',hi:'हैंगमैन'},s:[
+      {en:'One person thinks of a short word, such as “moon”, and draws a line for each letter.',hi:'एक व्यक्ति एक छोटा शब्द सोचे, जैसे “चाँद”, और हर अक्षर के लिए एक लाइन बनाए।'},
+      {en:'Others guess one letter at a time. Each wrong guess adds one part of a stick figure.',hi:'बाकी लोग एक-एक अक्षर बताएँ। गलत होने पर पुतले का एक हिस्सा बनाएँ।'},
+      {en:'Switch roles after each word.',hi:'हर शब्द के बाद भूमिका बदलें।'}]},
+    {n:{en:'Number Magic',hi:'गणित का जादू'},s:[
+      {en:'Ask the child to think of any number from 1 to 10.',hi:'बच्चे से 1 से 10 के बीच कोई संख्या सोचने को कहें।'},
+      {en:'Double it, add 10, halve it, then take away the number first thought of.',hi:'उसे दोगुना करें, 10 जोड़ें, आधा करें, फिर पहली सोची हुई संख्या घटाएँ।'},
+      {en:'The answer is always 5. Show how it works, then let the child try on you.',hi:'जवाब हमेशा 5 आएगा। तरीका दिखाएँ, फिर बच्चा आपके साथ करे।'}]},
+    {n:{en:"Kim's Game",hi:'किम्स गेम'},s:[
+      {en:'Place six small objects on a tray. Give the child 20 seconds to look.',hi:'ट्रे में छह छोटी चीज़ें रखें। बच्चे को 20 सेकंड देखने दें।'},
+      {en:'Cover the tray. The child names as many objects as they can remember.',hi:'ट्रे ढक दें। बच्चा जितनी चीज़ें याद हों, बताए।'},
+      {en:'Uncover, check together, and remove one object for the next round.',hi:'ढक्कन हटाकर साथ में जाँचें, अगले दौर के लिए एक चीज़ हटाएँ।'}]},
+    {n:{en:'Draw and Guess',hi:'बनाओ और पहचानो'},s:[
+      {en:'Write a word on a small slip, such as “bicycle” or “kite”.',hi:'छोटी पर्ची पर एक शब्द लिखें, जैसे “साइकिल” या “पतंग”।'},
+      {en:'One person draws it on paper in 60 seconds. No letters allowed.',hi:'एक व्यक्ति 60 सेकंड में कागज़ पर बनाए। अक्षर नहीं लिखने।'},
+      {en:'Others guess. The first correct guess wins a point.',hi:'बाकी लोग पहचानें। सही जवाब देने वाले को एक अंक।'}]},
+    {n:{en:'Rhyme Time',hi:'तुकबंदी का समय'},s:[
+      {en:'Say one word, such as “cat”.',hi:'एक शब्द बोलें, जैसे “बिल्ली”।'},
+      {en:'Each person says a rhyming word in turn: hat, mat, bat.',hi:'हर व्यक्ति बारी-बारी से तुक वाला शब्द बोले।'},
+      {en:'When someone is stuck, the next person starts a new word.',hi:'जो अटके, अगला व्यक्ति नया शब्द शुरू करे।'}]}
+  ],
+  pt:[
+    {n:{en:'Fact or Fiction',hi:'सच या कल्पना'},s:[
+      {en:'Read out one fact about history, space or animals. Make some up.',hi:'इतिहास, अंतरिक्ष या जानवरों की एक बात पढ़ें। कुछ बातें खुद बनाएँ।'},
+      {en:'Others say “fact” or “fiction”. Each correct answer is a point.',hi:'बाकी लोग “सच” या “कल्पना” बताएँ। सही जवाब पर एक अंक।'},
+      {en:'Reveal the answer and share one more detail.',hi:'जवाब बताएँ और एक और बात जोड़ें।'}]},
+    {n:{en:'Blind Drawing',hi:'आँख बंद चित्र'},s:[
+      {en:'One person draws a simple picture: a house, a fish or a rocket.',hi:'एक व्यक्ति एक सरल चित्र बनाए: घर, मछली या रॉकेट।'},
+      {en:'The other person draws with eyes closed, following spoken directions only.',hi:'दूसरा व्यक्ति आँख बंद करके सिर्फ़ बोले गए निर्देशों से बनाए।'},
+      {en:'Compare the drawings and laugh together.',hi:'दोनों चित्र मिलाएँ और साथ में हँसें।'}]},
+    {n:{en:'Paper Tower',hi:'कागज़ का टावर'},s:[
+      {en:'Give each person 20 sheets of paper and some tape.',hi:'हर व्यक्ति को 20 कागज़ और थोड़ी टेप दें।'},
+      {en:'Build the tallest tower that stands for 10 seconds.',hi:'ऐसा सबसे ऊँचा टावर बनाएँ जो 10 सेकंड खड़ा रहे।'},
+      {en:'Measure the heights and try again with a new idea.',hi:'ऊँचाई नापें और नए तरीके से फिर बनाएँ।'}]},
+    {n:{en:'Story Cubes',hi:'कहानी के कार्ड'},s:[
+      {en:'Draw six simple pictures on cards: a key, a tree, a dog, and so on.',hi:'कार्ड पर छह सरल चित्र बनाएँ: चाबी, पेड़, कुत्ता, आदि।'},
+      {en:'Each person picks one card and adds one sentence using that picture.',hi:'हर व्यक्ति एक कार्ड उठाकर उस चित्र से एक वाक्य जोड़े।'},
+      {en:'The story ends when every card has been used.',hi:'हर कार्ड इस्तेमाल होने पर कहानी खत्म।'}]},
+    {n:{en:'Word Meaning Guess',hi:'शब्द का मतलब बताओ'},s:[
+      {en:'Pick a new word from a dictionary or a newspaper, such as “resilient”.',hi:'शब्दकोश या अख़बार से कोई नया शब्द चुनें, जैसे “धैर्यवान”।'},
+      {en:'Each person guesses its meaning. The closest guess wins a point.',hi:'हर व्यक्ति उसका मतलब बताए। सबसे सही अंदाज़े को एक अंक।'},
+      {en:'Check the real meaning together and use the word in a sentence.',hi:'असली मतलब मिलाएँ और शब्द को वाक्य में इस्तेमाल करें।'}]}
+  ],
+  tn:[
+    {n:{en:'Mystery Box',hi:'रहस्य का डिब्बा'},s:[
+      {en:'Put one safe object in a box or bag.',hi:'एक सुरक्षित चीज़ डिब्बे या थैले में रखें।'},
+      {en:'Each person feels it with eyes closed and describes it.',hi:'हर व्यक्ति आँख बंद करके छूकर बताए।'},
+      {en:'Others guess. Reveal it, and talk about one memory it brings back.',hi:'बाकी लोग अंदाज़ा लगाएँ। चीज़ दिखाएँ, और उससे जुड़ी एक याद बताएँ।'}]},
+    {n:{en:'Hum That Tune',hi:'धुन पहचानो'},s:[
+      {en:'One person hums a tune quietly, with no words.',hi:'एक व्यक्ति बिना शब्दों के धीमे से धुन गुनगुनाए।'},
+      {en:'Others guess the song, with 20 seconds per guess.',hi:'बाकी लोग गाना पहचानें। हर अनुमान के लिए 20 सेकंड।'},
+      {en:'The next person hums a song from their own childhood.',hi:'अगला व्यक्ति अपने बचपन का कोई गाना गुनगुनाए।'}]},
+    {n:{en:'Dream Round',hi:'सपनों का दौर'},s:[
+      {en:'Each person names one goal for the next year.',hi:'हर व्यक्ति अगले साल का एक लक्ष्य बताए।'},
+      {en:'The others ask one question about how they will reach it.',hi:'बाकी लोग पूछें कि वे वहाँ कैसे पहुँचेंगे।'},
+      {en:'Everyone offers one small way they can help.',hi:'हर कोई एक छोटी मदद बताए जो वह कर सकता है।'}]},
+    {n:{en:'Escape Box',hi:'घर पर एस्केप बॉक्स'},s:[
+      {en:'Hide a small reward in a box with a lock. Put clues on paper around the room.',hi:'ताले वाले डिब्बे में छोटा इनाम रखें। कमरे में कागज़ पर सुराग रखें।'},
+      {en:'Teens solve the clues in order to find the code. Parents may give one hint.',hi:'किशोर सुराग हल करके कोड खोजें। माता-पिता एक इशारा दे सकते हैं।'},
+      {en:'Open the box and read the reward note together.',hi:'डिब्बा खोलें और इनाम वाली पर्ची साथ में पढ़ें।'}]},
+    {n:{en:'Debate Light',hi:'हल्की बहस'},s:[
+      {en:'Pick a light topic, such as “homework on weekends” or “best snack”.',hi:'हल्का विषय चुनें, जैसे “वीकेंड पर होमवर्क” या “सबसे अच्छा नाश्ता”।'},
+      {en:'Two people take opposite sides. Each speaks for one minute.',hi:'दो लोग अलग-अलग पक्ष लें। हर एक को एक मिनट।'},
+      {en:'Vote, then swap sides for a second round.',hi:'वोट करें, फिर दूसरे दौर में पक्ष बदलें।'}]}
+  ]
+};
+Object.keys(AGES).forEach(k => AGES[k].games.forEach(g => { if (HI_ONLY.includes(g.n.en)) g.hi = true; }));
+Object.keys(EN_EXTRA).forEach(k => AGES[k].games.push(...EN_EXTRA[k]));
+
 // ---------- State ----------
 let lang = (navigator.language||'').startsWith('hi') ? 'hi' : 'en';
 let age = null, gi = 0, phase = 'routine', gsi = 0, listOpen = false;
@@ -363,6 +485,9 @@ function todayIndex(n){ const d=new Date(); const s=new Date(d.getFullYear(),0,0
 const EMO = {t:'🧸', p:'🐻', s:'🎲', pt:'♟️', tn:'🎯'};
 
 function game(){ return AGES[age].games[gi]; }
+// Games shown in the current language (Hindi-only games are hidden in English)
+function list(){ return AGES[age].games.map((g,i) => ({g, i})).filter(x => lang === 'hi' || !x.g.hi); }
+function todayFull(){ const L = list(); return L[todayIndex(L.length)].i; }
 function minsFor(i){ const v = saved[age+'|'+gi+'|'+i]; return v || Math.max(2, Math.round(15 / game().s.length)); }
 function stopTimer(){ if(timerId){ clearInterval(timerId); timerId = null; } }
 function resetTicks(){ ticks = { routine:BEFORE.map(()=>false), close:AFTER.map(()=>false) }; }
@@ -482,10 +607,10 @@ function closeCard(){
 }
 
 function gameView(){
-  const idx = todayIndex(AGES[age].games.length);
+  const idx = todayFull();
   const body = phase === 'routine' ? routineCard() : phase === 'game' ? gameCards() : closeCard();
-  const list = listOpen ? `<div class="list">${AGES[age].games.map((x,i) =>
-      `<button data-act="pick" data-i="${i}">${i===idx?'★ ':''}${T(x.n)}</button>`).join('')}</div>` : '';
+  const opts = listOpen ? `<div class="list">${list().map(({g,i}) =>
+      `<button data-act="pick" data-i="${i}">${i===idx?'★ ':''}${T(g.n)}</button>`).join('')}</div>` : '';
   return `<main>
     <div class="row noprint"><span class="muted">${T(AGES[age].label)}</span>
       <button class="link" data-act="reset">${T(UI.changeAge)}</button></div>
@@ -501,14 +626,31 @@ function gameView(){
         ${gi!==idx ? `<button data-act="today">${T(UI.todayBtn)}</button>` : ''}
         <button data-act="print">${T(UI.print)}</button>
       </div>
-      ${list}
+      ${opts}
     </div>
     <p class="note">${T(UI.note)}</p>
   </main>`;
 }
 
+// Full routine, game and quiet close, for printing (timer is never printed)
+function printSheet(){
+  const g = game();
+  return `<div class="print-sheet">
+    <div class="ps-head">${T(UI.clinicLine)}</div>
+    <h2>${T(g.n)}</h2>
+    <p>${T(AGES[age].label)}</p>
+    <h3>${T(UI.routineTitle)}</h3>
+    <ul class="ps-list">${BEFORE.map(x => `<li>☐ ${T(x)}</li>`).join('')}</ul>
+    <h3>${T(UI.howToPlay)}</h3>
+    <ol>${g.s.map(x => `<li>${T(x)}</li>`).join('')}</ol>
+    <h3>${T(UI.closeTitle)}</h3>
+    <ul class="ps-list">${AFTER.map(x => `<li>☐ ${T(x)}</li>`).join('')}</ul>
+    <p class="note">${T(UI.note)}</p>
+  </div>`;
+}
+
 function render(){
-  const body = age === null ? ageView() : gameView();
+  const body = age === null ? ageView() : gameView() + printSheet();
   document.getElementById('root').innerHTML = `
     ${header()}
     <div class="print-only">${T(UI.clinicLine)}</div>
@@ -527,9 +669,14 @@ document.addEventListener('click', e => {
   const b = e.target.closest('[data-act]');
   if(!b || b.disabled) return;
   const act = b.dataset.act;
-  if(act === 'lang'){ lang = b.dataset.lang; render(); return; }
+  if(act === 'lang'){
+    lang = b.dataset.lang;
+    if(age !== null && !list().some(x => x.i === gi)){ gi = todayFull(); go('routine', 0); }
+    else render();
+    return;
+  }
   if(act === 'age'){
-    age = b.dataset.age; gi = todayIndex(AGES[age].games.length);
+    age = b.dataset.age; gi = todayFull();
     listOpen = false; resetTicks(); go('routine', 0); return;
   }
   if(act === 'reset'){ age = null; stopTimer(); listOpen = false; render(); return; }
@@ -546,7 +693,7 @@ document.addEventListener('click', e => {
   if(act === 'listen'){ speak(T(game().s[gsi])); return; }
   if(act === 'list'){ listOpen = !listOpen; render(); return; }
   if(act === 'pick'){ gi = Number(b.dataset.i); listOpen = false; resetTicks(); go('routine', 0); return; }
-  if(act === 'today'){ gi = todayIndex(AGES[age].games.length); listOpen = false; resetTicks(); go('routine', 0); return; }
+  if(act === 'today'){ gi = todayFull(); listOpen = false; resetTicks(); go('routine', 0); return; }
   if(act === 'print'){ window.print(); return; }
   if(act === 'timer'){ timerOn = b.checked; resetClock(); render(); return; }
   if(act === 'treset'){ resetClock(); render(); return; }
