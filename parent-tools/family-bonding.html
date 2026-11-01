@@ -956,6 +956,7 @@ const SCENES = {
   ]
 };
 
+const SEATED = new Set(['Peek-a-boo','Where is your nose?','Find the Colour','I Spy','Pass the Ball','Machli Jal ki Rani','Stack and knock','Lullaby Antakshari','Criss-cross','Criss-cross best of five','Story chain','Naam, Gaon, Jaanwar, Cheez','Memory tray','Ludo','Snakes and Ladders','Tambola','Antakshari','Carrom','Carrom doubles','Tambola with small prizes','20 Questions','Word building','Rose, bud, thorn','Chess','Shabd Antakshari','Quick quiz','Two truths and a lie','Two truths and a lie, deeper','Guess who?','Chaupar','Easy sudoku together','Ask-me-anything cards','Chess or carrom','Antakshari: two generations','Quiz night','Crossword together','Family tambola tournament','Would you rather','Storytelling with a twist','Plan one family outing','Sock Matching','Draw and Guess','Word Meaning Guess','Escape Box','Mystery Box','Paper Tower','Story Cubes','Blind Drawing','Hangman','Fact or Fiction','Rhyme Time','Hum That Tune','Dream Round','Debate Light','Number Magic','Pretend to blow out a candle','Shadow puppets','Colour hunt','Wave to the moon','Animal sounds']);
 function humanHead(A){
   return `<circle r="20" fill="${A.skin}"/>
     <path d="M-20,-4 Q-20,-24 0,-22 Q20,-24 20,-4 Q14,-14 0,-14 Q-14,-14 -20,-4Z" fill="${A.hair}"/>
@@ -974,23 +975,25 @@ function actor(k, st){
   const A = ACT[actorKind(k)], P = POSE[st.s] || POSE.idle;
   return `<g class="actor" style="transform:translate(${st.x}px,170px)"><g transform="scale(${A.scale})">
     <g class="pose ${P.cls || ''}">
-      <line x1="-7" y1="-34" x2="-7" y2="0" stroke="#3b3b5c" stroke-width="10" stroke-linecap="round"/>
-      <line x1="7" y1="-34" x2="7" y2="0" stroke="#3b3b5c" stroke-width="10" stroke-linecap="round"/>
-      <rect x="-22" y="-92" width="44" height="60" rx="16" fill="${A.body}"/>
-      <g transform="translate(0,-112)"><g class="head" style="--h:${P.h}deg">${humanHead(A)}</g></g>
-      <g transform="translate(-18,-86)"><g class="armL" style="--a:${P.aL}deg"><line x1="0" y1="0" x2="0" y2="40" stroke="${A.arm}" stroke-width="12" stroke-linecap="round"/></g></g>
-      <g transform="translate(18,-86)"><g class="armR" style="--a:${P.aR}deg"><line x1="0" y1="0" x2="0" y2="40" stroke="${A.arm}" stroke-width="12" stroke-linecap="round"/></g></g>
+      ${st.sit ? `<line x1="-8" y1="-16" x2="34" y2="-16" stroke="#3b3b5c" stroke-width="10" stroke-linecap="round"/>
+      <line x1="34" y1="-16" x2="34" y2="0" stroke="#3b3b5c" stroke-width="10" stroke-linecap="round"/>`
+      : `<line x1="-7" y1="-34" x2="-7" y2="0" stroke="#3b3b5c" stroke-width="10" stroke-linecap="round"/>
+      <line x1="7" y1="-34" x2="7" y2="0" stroke="#3b3b5c" stroke-width="10" stroke-linecap="round"/>`}
+      <rect x="-22" y="${st.sit ? -78 : -92}" width="44" height="60" rx="16" fill="${A.body}"/>
+      <g transform="translate(0,${st.sit ? -106 : -112})"><g class="head" style="--h:${P.h}deg">${humanHead(A)}</g></g>
+      <g transform="translate(-18,${st.sit ? -74 : -86})"><g class="armL" style="--a:${P.aL}deg"><line x1="0" y1="0" x2="0" y2="40" stroke="${A.arm}" stroke-width="12" stroke-linecap="round"/></g></g>
+      <g transform="translate(18,${st.sit ? -74 : -86})"><g class="armR" style="--a:${P.aR}deg"><line x1="0" y1="0" x2="0" y2="40" stroke="${A.arm}" stroke-width="12" stroke-linecap="round"/></g></g>
     </g></g></g>`;
 }
-function sceneSVG(sc){
+function sceneSVG(sc, sit){
   return `<svg class="scene" viewBox="0 0 360 180" role="img" aria-label="">
     <line x1="20" y1="170" x2="340" y2="170" class="ground"/>
-    ${['p','m','c'].filter(k => sc[k]).map(k => actor(k, sc[k])).join('')}
+    ${['p','m','c'].filter(k => sc[k]).map(k => actor(k, Object.assign({sit: !!sit}, sc[k]))).join('')}
   </svg>`;
 }
 function stepPicture(){
   const sc = SCENES[game().n.en];
-  if(sc && sc[gsi]) return `${sceneSVG(sc[gsi])}<button class="listen noprint" data-act="replay">↻ ${T(UI.replay)}</button>`;
+  if(sc && sc[gsi]) return `${sceneSVG(sc[gsi], SEATED.has(game().n.en))}<button class="listen noprint" data-act="replay">↻ ${T(UI.replay)}</button>`;
   return `<div class="char" aria-hidden="true">${EMO[age]}</div>`;
 }
 
