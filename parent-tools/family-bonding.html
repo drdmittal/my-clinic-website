@@ -353,7 +353,6 @@ const AGES = {
 };
 
 // ---------- Extra English-friendly games (shown in English and Hindi) ----------
-const HI_ONLY = ['Tota Udd, Maina Udd','Machli Jal ki Rani','Lullaby Antakshari','Antakshari','Shabd Antakshari','Antakshari: two generations'];
 const EN_EXTRA = {
   t:[
     {n:{en:'Clap and Stomp',hi:'ताली और पैर पटको'},s:[
@@ -466,7 +465,6 @@ const EN_EXTRA = {
       {en:'Vote, then swap sides for a second round.',hi:'वोट करें, फिर दूसरे दौर में पक्ष बदलें।'}]}
   ]
 };
-Object.keys(AGES).forEach(k => AGES[k].games.forEach(g => { if (HI_ONLY.includes(g.n.en)) g.hi = true; }));
 Object.keys(EN_EXTRA).forEach(k => AGES[k].games.push(...EN_EXTRA[k]));
 
 // ---------- State ----------
@@ -485,8 +483,8 @@ function todayIndex(n){ const d=new Date(); const s=new Date(d.getFullYear(),0,0
 const EMO = {t:'🧸', p:'🐻', s:'🎲', pt:'♟️', tn:'🎯'};
 
 function game(){ return AGES[age].games[gi]; }
-// Games shown in the current language (Hindi-only games are hidden in English)
-function list(){ return AGES[age].games.map((g,i) => ({g, i})).filter(x => lang === 'hi' || !x.g.hi); }
+// All games are shown in both languages
+function list(){ return AGES[age].games.map((g,i) => ({g, i})); }
 function todayFull(){ const L = list(); return L[todayIndex(L.length)].i; }
 function minsFor(i){ const v = saved[age+'|'+gi+'|'+i]; return v || Math.max(2, Math.round(15 / game().s.length)); }
 function stopTimer(){ if(timerId){ clearInterval(timerId); timerId = null; } }
