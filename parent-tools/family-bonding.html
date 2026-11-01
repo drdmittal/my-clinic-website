@@ -64,6 +64,20 @@ button.link{background:none;color:var(--sky);padding:0;text-decoration:underline
 .bubble{background:#fff;border:2px solid var(--indigo);border-radius:16px;padding:12px;margin:10px auto 0;font-size:20px;max-width:460px;position:relative}
 .listen{margin-top:12px;background:var(--sky);color:#fff;font-weight:600}
 .mins{width:70px;font:inherit;padding:4px;border-radius:8px;border:1px solid #ccc}
+.scene{width:100%;max-width:420px;display:block;margin:0 auto}
+.ground{stroke:#d8d2f0;stroke-width:4;stroke-linecap:round}
+.armL,.armR{animation:armPose .6s ease-out both}
+@keyframes armPose{from{transform:rotate(0deg)}to{transform:rotate(var(--a))}}
+.head{animation:tilt .6s ease-out both}
+@keyframes tilt{from{transform:rotate(0deg)}to{transform:rotate(var(--h))}}
+.clap .armL{animation:clapL .6s ease-in-out 3}
+.clap .armR{animation:clapR .6s ease-in-out 3}
+@keyframes clapL{0%,100%{transform:rotate(-170deg)}50%{transform:rotate(-95deg)}}
+@keyframes clapR{0%,100%{transform:rotate(170deg)}50%{transform:rotate(95deg)}}
+.wave .armR{animation:wave .8s ease-in-out infinite}
+@keyframes wave{0%,100%{transform:rotate(-140deg)}50%{transform:rotate(-165deg)}}
+.stomp{animation:stomp .5s ease-in-out 3}
+@keyframes stomp{0%,100%{transform:translateY(0)}40%{transform:translateY(-12px)}60%{transform:translateY(0)}}
 @media print{
   .print-only{display:none!important}
   .noprint{display:none!important}
@@ -113,6 +127,7 @@ const UI = {
   startGame:{en:'Start the game',hi:'खेल शुरू करें'},
   closeTitle:{en:'Quiet close: tick each one as you do it',hi:'शांत समापन: हर काम करके टिक करें'},
   allDone:{en:'Goodnight. All done.',hi:'शुभ रात्रि। सब हो गया।'},
+  replay:{en:'Watch again',hi:'फिर से देखें'},
   listen:{en:'Listen to the steps',hi:'चरण सुनें'},
   backGame:{en:'Back to the game',hi:'खेल पर वापस'},
   toClose:{en:'Finish with quiet close',hi:'शांत समापन पर जाएँ'},
@@ -142,9 +157,9 @@ const AGES = {
       {en:'Say “Maina udd” again. Then call a non-bird, such as “kutta”. Child stays still.',hi:'फिर “मैना उड़” बोलें। फिर “कुत्ता” जैसा गैर-पक्षी बोलें। बच्चा रुके।'},
       {en:'Play slowly. Praise each correct move.',hi:'धीरे खेलें। हर सही चाल पर शाबाश कहें।'}]},
     {n:{en:'Peek-a-boo',hi:'छुपम-छुपाई'},s:[
-      {en:'Hide your face behind a light cloth, then appear and say “Coo!” (koo)',hi:'हल्के कपड़े के पीछे चेहरा छुपाएँ, फिर दिखें और “कूऽऽ” बोलें।'},
-      {en:'Let the child hide and you find them.',hi:'बच्चे को छुपने दें, फिर आप ढूँढ़ें।'},
-      {en:'End with a hug.',hi:'अंत में गले लगाएँ।'}]},
+      {en:'Teddy covers its face. Ask “Where is teddy?”',hi:'टेडी अपना चेहरा छुपाए। पूछें “टेडी कहाँ है?”'},
+      {en:'Now the child covers their face. Ask “Where is the child?”',hi:'अब बच्चा अपना चेहरा छुपाए। पूछें “बच्चा कहाँ है?”'},
+      {en:'Find the child, say “Coo!”, and give a hug.',hi:'बच्चे को ढूँढें, “कूऽऽ” बोलें, और गले लगाएँ।'}]},
     {n:{en:'Where is your nose?',hi:'नाक कहाँ है?'},s:[
       {en:'Ask “Naak kahan hai?” and let the child touch it.',hi:'“नाक कहाँ है?” पूछें और बच्चे को छूने दें।'},
       {en:'Go on with ears, eyes, tummy and toes.',hi:'फिर कान, आँख, पेट और पैर की उंगलियाँ पूछें।'},
@@ -185,7 +200,7 @@ const AGES = {
   p:{label:{en:'Preschool (3–5 years)',hi:'प्री-स्कूल (3–5 साल)'},games:[
     {n:{en:'Doctor and Teddy',hi:'डॉक्टर और टेडी'},s:[
       {en:'Child is the doctor: check teddy’s ears, tummy and heartbeat.',hi:'बच्चा डॉक्टर बने: टेडी के कान, पेट और धड़कन देखे।'},
-      {en:'Parent is the patient. Then swap roles.',hi:'माता-पिता मरीज़ बनें। फिर भूमिका बदलें।'},
+      {en:'Now the parent is the patient. The child examines the parent.',hi:'अब माता-पिता मरीज़ हैं। बच्चा उनकी जाँच करे।'},
       {en:'Talk about what happens at the clinic, in simple words.',hi:'क्लिनिक में क्या होता है, सरल शब्दों में बताएँ।'}]},
     {n:{en:'Naam, Gaon, Jaanwar, Cheez',hi:'नाम, गाँव, जानवर, चीज़'},s:[
       {en:'Pick a letter, such as “M”.',hi:'एक अक्षर चुनें, जैसे “म”।'},
@@ -519,6 +534,85 @@ function speak(text){
   speechSynthesis.speak(u);
 }
 
+// ---------- Cartoon scenes: one drawing per step, shows how to play ----------
+const ACT = {
+  p:{body:'#2a2580', arm:'#1d1a5c', skin:'#f1c7a0', hair:'#3b2a20', scale:1.0, teddy:false},
+  c:{body:'#f5ad1b', arm:'#d98d0c', skin:'#f1c7a0', hair:'#2a1d16', scale:0.72, teddy:false},
+  t:{body:'#b07a4a', arm:'#94643a', skin:'#b07a4a', hair:'#b07a4a', scale:0.62, teddy:true}
+};
+const POSE = {
+  idle:{aL:0,aR:0,h:0},
+  look:{aL:0,aR:0,h:-14},
+  cover:{aL:-150,aR:150,h:0},
+  up:{aL:140,aR:-140,h:0},
+  point:{aL:0,aR:150,h:0},
+  hug:{aL:-80,aR:80,h:0},
+  doc:{aL:0,aR:-90,h:0},
+  clap:{aL:0,aR:0,h:0,cls:'clap'},
+  stomp:{aL:0,aR:0,h:0,cls:'stomp'},
+  wave:{aL:0,aR:0,h:0,cls:'wave'}
+};
+// Each game: one scene per step. x = position on the stage, s = pose.
+const SCENES = {
+  'Peek-a-boo':[
+    {p:{x:180,s:'look'}, c:{x:80,s:'idle'},  t:{x:280,s:'cover'}},
+    {p:{x:180,s:'look'}, c:{x:80,s:'cover'}, t:{x:280,s:'idle'}},
+    {p:{x:140,s:'hug'},  c:{x:105,s:'hug'},  t:{x:280,s:'up'}}
+  ],
+  'Clap and Stomp':[
+    {p:{x:150,s:'clap'},  c:{x:230,s:'clap'}},
+    {p:{x:150,s:'stomp'}, c:{x:230,s:'stomp'}},
+    {p:{x:150,s:'idle'},  c:{x:230,s:'idle'}}
+  ],
+  'Doctor and Teddy':[
+    {c:{x:90,s:'doc'},  t:{x:230,s:'idle'}, p:{x:310,s:'look'}},
+    {p:{x:230,s:'idle'}, c:{x:90,s:'doc'},  t:{x:320,s:'idle'}},
+    {c:{x:180,s:'hug'}, t:{x:225,s:'hug'},  p:{x:310,s:'wave'}}
+  ],
+  'Simon Says':[
+    {p:{x:140,s:'point'}, c:{x:240,s:'point'}},
+    {p:{x:140,s:'point'}, c:{x:240,s:'idle'}},
+    {p:{x:140,s:'up'},    c:{x:240,s:'up'}}
+  ]
+};
+
+function humanHead(A){
+  return `<circle r="20" fill="${A.skin}"/>
+    <path d="M-20,-4 Q-20,-24 0,-22 Q20,-24 20,-4 Q14,-14 0,-14 Q-14,-14 -20,-4Z" fill="${A.hair}"/>
+    <circle cx="-7" cy="2" r="2.4" fill="#2a2a40"/><circle cx="7" cy="2" r="2.4" fill="#2a2a40"/>
+    <path d="M-6,9 Q0,14 6,9" stroke="#2a2a40" stroke-width="2" fill="none" stroke-linecap="round"/>`;
+}
+function teddyHead(A){
+  return `<circle cx="-15" cy="-15" r="7" fill="${A.body}"/><circle cx="15" cy="-15" r="7" fill="${A.body}"/>
+    <circle r="19" fill="${A.body}"/>
+    <ellipse cx="0" cy="8" rx="8" ry="6" fill="#e6c59b"/>
+    <circle cx="-7" cy="-3" r="2.4" fill="#2a1d16"/><circle cx="7" cy="-3" r="2.4" fill="#2a1d16"/>
+    <circle cx="0" cy="4" r="2.2" fill="#2a1d16"/>`;
+}
+function actor(k, st){
+  const A = ACT[k], P = POSE[st.s] || POSE.idle;
+  return `<g class="actor" style="transform:translate(${st.x}px,170px)"><g transform="scale(${A.scale})">
+    <g class="pose ${P.cls || ''}">
+      <line x1="-7" y1="-34" x2="-7" y2="0" stroke="#3b3b5c" stroke-width="10" stroke-linecap="round"/>
+      <line x1="7" y1="-34" x2="7" y2="0" stroke="#3b3b5c" stroke-width="10" stroke-linecap="round"/>
+      <rect x="-22" y="-92" width="44" height="60" rx="16" fill="${A.body}"/>
+      <g transform="translate(0,-112)"><g class="head" style="--h:${P.h}deg">${A.teddy ? teddyHead(A) : humanHead(A)}</g></g>
+      <g transform="translate(-18,-86)"><g class="armL" style="--a:${P.aL}deg"><line x1="0" y1="0" x2="0" y2="40" stroke="${A.arm}" stroke-width="12" stroke-linecap="round"/></g></g>
+      <g transform="translate(18,-86)"><g class="armR" style="--a:${P.aR}deg"><line x1="0" y1="0" x2="0" y2="40" stroke="${A.arm}" stroke-width="12" stroke-linecap="round"/></g></g>
+    </g></g></g>`;
+}
+function sceneSVG(sc){
+  return `<svg class="scene" viewBox="0 0 360 180" role="img" aria-label="">
+    <line x1="20" y1="170" x2="340" y2="170" class="ground"/>
+    ${['p','c','t'].filter(k => sc[k]).map(k => actor(k, sc[k])).join('')}
+  </svg>`;
+}
+function stepPicture(){
+  const sc = SCENES[game().n.en];
+  if(sc && sc[gsi]) return `${sceneSVG(sc[gsi])}<button class="listen noprint" data-act="replay">↻ ${T(UI.replay)}</button>`;
+  return `<div class="char" aria-hidden="true">${EMO[age]}</div>`;
+}
+
 // ---------- Views ----------
 function header(){
   return `<header>
@@ -572,7 +666,7 @@ function gameCards(){
       <ol class="how">${steps.map((x,i) => `<li class="${i===gsi?'cur':''}">${T(x)}</li>`).join('')}</ol>
     </div>
     <div class="card stage-card">
-      <div class="char" aria-hidden="true">${EMO[age]}</div>
+      ${stepPicture()}
       <div class="bubble">${T(st)}</div>
       <button class="listen noprint" data-act="listen">🔊 ${T(UI.listen)}</button>
     </div>
@@ -689,6 +783,7 @@ document.addEventListener('click', e => {
     return;
   }
   if(act === 'listen'){ speak(T(game().s[gsi])); return; }
+  if(act === 'replay'){ render(); return; }
   if(act === 'list'){ listOpen = !listOpen; render(); return; }
   if(act === 'pick'){ gi = Number(b.dataset.i); listOpen = false; resetTicks(); go('routine', 0); return; }
   if(act === 'today'){ gi = todayFull(); listOpen = false; resetTicks(); go('routine', 0); return; }
