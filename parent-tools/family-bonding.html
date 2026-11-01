@@ -114,7 +114,7 @@ const UI = {
   next:{en:'Next',hi:'आगे'},
   done:{en:'Goodnight. All done.',hi:'शुभ रात्रि। हो गया।'},
   change:{en:'Choose another game',hi:'दूसरा खेल चुनें'},
-  todayBtn:{en:'Back to today’s game',hi:'आज के खेल पर वापस'},
+  todayBtn:{en:'Pick another game at random',hi:'दूसरा खेल रैंडम चुनें'},
   timer:{en:'Show timer (optional)',hi:'टाइमर दिखाएँ (वैकल्पिक)'},
   start:{en:'Start timer',hi:'टाइमर शुरू करें'},
   pause:{en:'Pause timer',hi:'टाइमर रोकें'},
@@ -523,6 +523,12 @@ function game(){ return AGES[age].games[gi]; }
 // All games are shown in both languages
 function list(){ return AGES[age].games.map((g,i) => ({g, i})); }
 function todayFull(){ const L = list(); return L[todayIndex(L.length)].i; }
+// Random game for this age group; 'avoid' keeps the same game from repeating straight away.
+function randomGi(avoid){
+  const L = list().map(x => x.i).filter(i => i !== avoid);
+  const pool = L.length ? L : list().map(x => x.i);
+  return pool[Math.floor(Math.random() * pool.length)];
+}
 function minsFor(i){ const v = saved[age+'|'+gi+'|'+i]; return v || Math.max(2, Math.round(15 / game().s.length)); }
 function stopTimer(){ if(timerId){ clearInterval(timerId); timerId = null; } }
 function resetTicks(){ ticks = { routine:BEFORE.map(()=>false), close:AFTER.map(()=>false) }; }
@@ -1087,15 +1093,14 @@ function closeCard(){
 }
 
 function gameView(){
-  const idx = todayFull();
   const body = phase === 'routine' ? routineCard() : phase === 'game' ? gameCards() : closeCard();
   const opts = listOpen ? `<div class="list">${list().map(({g,i}) =>
-      `<button data-act="pick" data-i="${i}">${i===idx?'★ ':''}${T(g.n)}</button>`).join('')}</div>` : '';
+      `<button data-act="pick" data-i="${i}">${T(g.n)}</button>`).join('')}</div>` : '';
   return `<main>
     <div class="row noprint"><span class="muted">${T(AGES[age].label)}</span>
       <button class="link" data-act="reset">${T(UI.changeAge)}</button></div>
     <div class="card">
-      <h2>${T(game().n)} ${gi===idx ? `<span class="pill">${T(UI.todayTag)}</span>` : ''}</h2>
+      <h2>${T(game().n)}</h2>
       <p class="muted">${T(UI.about)}</p>
       ${stageBar()}
     </div>
@@ -1103,7 +1108,7 @@ function gameView(){
     <div class="card noprint">
       <div class="row">
         <button data-act="list">${T(UI.change)}</button>
-        ${gi!==idx ? `<button data-act="today">${T(UI.todayBtn)}</button>` : ''}
+        <button data-act="today">${T(UI.todayBtn)}</button>
         <button data-act="print">${T(UI.print)}</button>
       </div>
       ${opts}
@@ -1158,7 +1163,7 @@ document.addEventListener('click', e => {
     return;
   }
   if(act === 'age'){
-    age = b.dataset.age; gi = todayFull();
+    age = b.dataset.age; gi = randomGi();
     listOpen = false; resetTicks(); go('routine', 0); return;
   }
   if(act === 'reset'){ age = null; stopTimer(); listOpen = false; render(); return; }
@@ -1176,7 +1181,7 @@ document.addEventListener('click', e => {
   if(act === 'replay'){ render(); return; }
   if(act === 'list'){ listOpen = !listOpen; render(); return; }
   if(act === 'pick'){ gi = Number(b.dataset.i); listOpen = false; resetTicks(); go('routine', 0); return; }
-  if(act === 'today'){ gi = todayFull(); listOpen = false; resetTicks(); go('routine', 0); return; }
+  if(act === 'today'){ gi = randomGi(gi); listOpen = false; resetTicks(); go('routine', 0); return; }
   if(act === 'print'){ window.print(); return; }
   if(act === 'timer'){ timerOn = b.checked; resetClock(); render(); return; }
   if(act === 'treset'){ resetClock(); render(); return; }
