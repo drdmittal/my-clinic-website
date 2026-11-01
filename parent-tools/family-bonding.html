@@ -48,6 +48,8 @@ button.link{background:none;color:var(--sky);padding:0;text-decoration:underline
 .list button{text-align:left;background:#f6f3ff}
 .note{font-size:14px;color:#5a5778}
 .done{color:var(--green);font-weight:700;margin-top:10px}
+.next-round{background:#f6f3ff}
+.next-round p{margin:6px 0 0}
 .how{margin:6px 0 4px;padding-left:22px;font-size:18px}
 .how li{margin:6px 0;padding:4px 6px;border-radius:8px}
 .how li.cur{background:var(--turmeric);color:var(--ink);font-weight:600}
@@ -128,6 +130,8 @@ const UI = {
   closeTitle:{en:'Quiet close: tick each one as you do it',hi:'शांत समापन: हर काम करके टिक करें'},
   allDone:{en:'Goodnight. All done.',hi:'शुभ रात्रि। सब हो गया।'},
   replay:{en:'Watch again',hi:'फिर से देखें'},
+  nextRound:{en:'Next round: change the player',hi:'अगला दौर: खिलाड़ी बदलें'},
+  nextRoundText:{en:'Play the same game again with a different player. Mumma can take Papa’s part, and the child can play with a brother or sister, if there is one. The grown-up watches, cheers and helps.',hi:'वही खेल किसी और के साथ दोबारा खेलें। मम्मी पापा की जगह खेल सकती हैं, और अगर भाई या बहन है तो बच्चा उनके साथ खेले। बड़े देखें, उत्साह बढ़ाएँ और मदद करें।'},
   listen:{en:'Listen to the steps',hi:'चरण सुनें'},
   backGame:{en:'Back to the game',hi:'खेल पर वापस'},
   toClose:{en:'Finish with quiet close',hi:'शांत समापन पर जाएँ'},
@@ -685,6 +689,10 @@ function gameCards(){
         <button data-act="prev">${T(UI.back)}</button>
         <button class="primary" data-act="next">${last ? T(UI.toClose) : T(UI.next)}</button>
       </div>
+    </div>
+    <div class="card next-round">
+      <h3>${T(UI.nextRound)}</h3>
+      <p>${T(UI.nextRoundText)}</p>
     </div>`;
 }
 
@@ -734,6 +742,8 @@ function printSheet(){
     <ul class="ps-list">${BEFORE.map(x => `<li>☐ ${T(x)}</li>`).join('')}</ul>
     <h3>${T(UI.howToPlay)}</h3>
     <ol>${g.s.map(x => `<li>${T(x)}</li>`).join('')}</ol>
+    <h3>${T(UI.nextRound)}</h3>
+    <p>${T(UI.nextRoundText)}</p>
     <h3>${T(UI.closeTitle)}</h3>
     <ul class="ps-list">${AFTER.map(x => `<li>☐ ${T(x)}</li>`).join('')}</ul>
     <p class="note">${T(UI.note)}</p>
