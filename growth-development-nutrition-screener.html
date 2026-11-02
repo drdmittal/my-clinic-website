@@ -448,10 +448,21 @@ function drawChart(c0){
     g.textAlign='right'; g.fillText(String(v),pl-5,Y(v));
   }
   if(c0.tgt){
+    var tzs=[c0.tgt.zLo,c0.tgt.zHi], tend=xmax*DAY;
     g.save(); g.setLineDash([6,4]); g.strokeStyle='#8b4fd6'; g.lineWidth=1.5;
-    [c0.tgt.lo,c0.tgt.hi].forEach(function(v){ if(v<ymin||v>ymax) return; g.beginPath(); g.moveTo(pl,Y(v)); g.lineTo(cssW-pr,Y(v)); g.stroke(); });
-    g.setLineDash([]); g.fillStyle='#8b4fd6'; g.textAlign='left'; g.textBaseline='bottom';
-    if(c0.tgt.hi<=ymax) g.fillText(fill(tr('tgtLabel'),{lo:c0.tgt.lo.toFixed(1),hi:c0.tgt.hi.toFixed(1)}),pl+4,Y(c0.tgt.hi)-2);
+    tzs.forEach(function(z){
+      var first=true; g.beginPath();
+      for(var d=2*365.25; d<=tend; d+=8){
+        var r=getLMS('l',c0.sex,d), v=xOf(z,r[0],r[1],r[2]);
+        if(v<ymin||v>ymax){first=true; continue;}
+        if(first){g.moveTo(X(d/DAY),Y(v));first=false;} else g.lineTo(X(d/DAY),Y(v));
+      }
+      g.stroke();
+    });
+    g.setLineDash([]);
+    var r2=getLMS('l',c0.sex,2*365.25), vhi=xOf(c0.tgt.zHi,r2[0],r2[1],r2[2]);
+    g.fillStyle='#8b4fd6'; g.textAlign='left'; g.textBaseline='bottom';
+    if(vhi>=ymin&&vhi<=ymax) g.fillText(fill(tr('tgtLabel'),{lo:c0.tgt.lo.toFixed(1),hi:c0.tgt.hi.toFixed(1)}),X(2*365.25/DAY)+4,Y(vhi)-2);
     g.restore();
   }
   var yrStep=xmax>60?2:1;
@@ -743,7 +754,8 @@ window.run=function(keepScroll){
   TGT=null;
   if(mph){
     var tgt=(mph.f+mph.m+(sex==='b'?13:-13))/2;
-    TGT={lo:tgt-8.5,hi:tgt+8.5};
+    var AR=GD['hfa5_'+sex], ar=AR[AR.length-1]; // 19-year reference row: L, M, S
+    TGT={lo:tgt-8.5,hi:tgt+8.5,zLo:zOf(tgt-8.5,ar[0],ar[1],ar[2]),zHi:zOf(tgt+8.5,ar[0],ar[1],ar[2])};
     msgs.push({cls:'ok',txt:fill(tr('mphRes'),{t:tgt.toFixed(1),lo:TGT.lo.toFixed(1),hi:TGT.hi.toFixed(1)})});
   }
   if(latest.w && !latest.w.na) msgs.push(flagFor('w',latest.w,latest.d));
@@ -773,7 +785,7 @@ window.run=function(keepScroll){
     var wmax=visits.some(function(v){return v.d>MAXD;})?120:60;
     html+='<div class="card chartcard chartwrap">'+chartHTML('w',sex,visits,wmax)+'</div>';
   }
-  if(visits.some(function(v){return v.lv!=null;})) html+='<div class="card chartcard chartwrap">'+chartHTML('l',sex,visits,TGT?228:xmax)+'</div>';
+  if(visits.some(function(v){return v.lv!=null;})) html+='<div class="card chartcard chartwrap">'+chartHTML('l',sex,visits,xmax)+'</div>';
   if(xmax===60 && visits.some(function(v){return v.hv!=null;})) html+='<div class="card chartcard chartwrap">'+chartHTML('h',sex,visits,60)+'</div>';
   if(visits.some(function(v){return v.bmi!=null;})) html+='<div class="card chartcard chartwrap">'+chartHTML('b',sex,visits,xmax)+'</div>';
   html+='<h2>'+(LANG==='hi'?'इसका मतलब':'What this means')+'</h2>';
