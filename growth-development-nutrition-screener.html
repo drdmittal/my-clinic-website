@@ -147,6 +147,7 @@ footer{font-size:13px;opacity:.85;margin:20px 0 40px;border-top:1px solid var(--
     <div class="fullrow"><label for="ga" data-i18n="gaLabel">Weeks of pregnancy at birth</label><input type="number" inputmode="numeric" step="1" min="24" max="36" id="ga" placeholder="e.g. 32"></div>
     <p class="note" data-i18n="gaNote">For babies born early, charts use corrected age (counted from the due date) until 2 years.</p>
   </div>
+  <p style="margin:6px 0 0"><button type="button" class="linkbtn none" id="mphbtn" data-i18n="mphBtn" onclick="toggleMph()">Check as per parents' height</button></p>
   <div id="mphBox" class="none">
     <h3 style="margin-top:14px" data-i18n="mphTitle">Family target height (from parents' heights)</h3>
     <p class="note" data-i18n="mphNote">From 2 years, you can add the parents' heights to see the family target height.</p>
@@ -196,7 +197,7 @@ en:{clinic:'Dr. Dinesh Mittal Child Clinic',h1:'Child growth check (birth to 19 
  sex:"Child's sex",boy:'Boy',girl:'Girl',dob:'Date of birth',latest:'Latest visit (or today)',prev:'Earlier visits (optional)',
  date:'Date',weight:'Weight (kg)',length:'Length / height (cm)',measnote:'Length is measured lying down up to 2 years, and standing height after that. Use the same method each time. BMI is checked from 2 years of age.',
  btn:'Check growth',results:'Results',latestT:'Latest visit',prevT:'Previous visit',age:'Age',bmi:'BMI',
- preBtn:'Child was born early (before 37 weeks)',gaLabel:'Weeks of pregnancy at birth',gaNote:'For babies born early, charts use corrected age (counted from the due date) until 2 years.',corrAge:'Corrected age',actualAge:'Actual age',errGa:'Please enter weeks between 24 and 36.',mphTitle:"Family target height (from parents' heights)",mphNote:"From 2 years, you can add the parents' heights to see the family target height. This is a guide only: a child can be taller or shorter than the family target and still be healthy.",fatherH:"Father's height (cm)",motherH:"Mother's height (cm)",mphRes:"Family target adult height is about {t} cm (range {lo}–{hi} cm), from the parents' heights. The dashed lines on the height chart mark this range. If your child's height stays between the two lines as they grow, growth is in line with the family. If it moves far outside, please show the doctor at the next visit.",errMph:"Please enter both parents' heights in cm (between 120 and 220).",tgtLabel:'Family range {lo}–{hi} cm (dashed lines)',wName:'Weight',lName:'Length / height',hName:'Head circumference',hc:'Head circumference (cm)',hChart:'Head circumference for age (cm)',
+ preBtn:'Child was born early (before 37 weeks)',gaLabel:'Weeks of pregnancy at birth',gaNote:'For babies born early, charts use corrected age (counted from the due date) until 2 years.',corrAge:'Corrected age',actualAge:'Actual age',errGa:'Please enter weeks between 24 and 36.',mphTitle:"Family target height (from parents' heights)",mphNote:"From 2 years, you can add the parents' heights to see the family target height. This is a guide only: a child can be taller or shorter than the family target and still be healthy.",fatherH:"Father's height (cm)",motherH:"Mother's height (cm)",mphRes:"Family target adult height is about {t} cm (range {lo}–{hi} cm), from the parents' heights. See the family target chart below.",errMph:"Please enter both parents' heights in cm (between 120 and 220).",tgtLabel:'Family range {lo}–{hi} cm',mphBtn:"Check as per parents' height",rulerTitle:'Family target height',rulerText:"Target adult height is about {t} cm (range {lo}–{hi} cm). The median target is about the {p} percentile of adult height, and the range covers the {p1} to {p2} percentile. Your child's current height is on the growth charts above.",wName:'Weight',lName:'Length / height',hName:'Head circumference',hc:'Head circumference (cm)',hChart:'Head circumference for age (cm)',
  low:'below the 3rd percentile',high:'above the 97th percentile',about:'about the {n} percentile',
  errDates:'Please enter the date of birth and the latest visit date.',
  errMeas:'Please enter at least the weight or the length of your child.',
@@ -223,7 +224,7 @@ hi:{clinic:'डॉ. दिनेश मित्तल चाइल्ड क्
  sex:'बच्चे का लिंग',boy:'लड़का',girl:'लड़की',dob:'जन्म की तारीख',latest:'ताज़ा जाँच (या आज की)',prev:'पहले की जाँचें (वैकल्पिक)',
  date:'तारीख',weight:'वजन (kg)',length:'लंबाई / कद (cm)',measnote:'2 साल तक बच्चे की लंबाई लेटाकर नापें, उसके बाद खड़े होकर कद। हर बार एक ही तरीका रखें। BMI 2 साल की उम्र से देखा जाता है।',
  btn:'जाँच करें',results:'नतीजे',latestT:'ताज़ा जाँच',prevT:'पहले की जाँच',age:'उम्र',bmi:'BMI',
- preBtn:'बच्चा समय से पहले (37 हफ़्ते से पहले) पैदा हुआ था',gaLabel:'जन्म के समय गर्भ के हफ़्ते',gaNote:'समय से पहले जन्मे बच्चों में 2 साल तक सुधरी हुई उम्र (due date से गिनी) से चार्ट देखे जाते हैं।',corrAge:'सुधरी हुई उम्र',actualAge:'असली उम्र',errGa:'कृपया 24 से 36 हफ़्ते के बीच लिखें।',mphTitle:'परिवार का लक्ष्य कद (माता-पिता की लंबाई से)',mphNote:'2 साल के बाद माता-पिता की लंबाई भरकर परिवार के हिसाब से अनुमानित कद देख सकते हैं। यह सिर्फ़ एक अनुमान है; कम या ज़्यादा कद वाला बच्चा भी स्वस्थ हो सकता है।',fatherH:'पिता की लंबाई (cm)',motherH:'माता की लंबाई (cm)',mphRes:'माता-पिता की लंबाई के हिसाब से परिवार का अनुमानित वयस्क कद लगभग {t} cm है (सीमा {lo}–{hi} cm)। ग्रोथ चार्ट पर डैश वाली रेखाएँ यही सीमा दिखाती हैं। अगर बढ़ते हुए बच्चे का कद इन दोनों रेखाओं के बीच रहे, तो बढ़त परिवार के हिसाब से ठीक है। अगर सीमा से काफ़ी बाहर जाए, तो अगली विज़िट में डॉक्टर को दिखाएँ।',errMph:'कृपया माता और पिता दोनों की लंबाई cm में भरें (120 से 220 के बीच)।',tgtLabel:'परिवार की सीमा {lo}–{hi} cm (डैश वाली रेखाएँ)',wName:'वजन',lName:'लंबाई / कद',hName:'सिर की परिधि',hc:'सिर की परिधि (cm)',hChart:'आयु अनुसार सिर की परिधि (cm)',
+ preBtn:'बच्चा समय से पहले (37 हफ़्ते से पहले) पैदा हुआ था',gaLabel:'जन्म के समय गर्भ के हफ़्ते',gaNote:'समय से पहले जन्मे बच्चों में 2 साल तक सुधरी हुई उम्र (due date से गिनी) से चार्ट देखे जाते हैं।',corrAge:'सुधरी हुई उम्र',actualAge:'असली उम्र',errGa:'कृपया 24 से 36 हफ़्ते के बीच लिखें।',mphTitle:'परिवार का लक्ष्य कद (माता-पिता की लंबाई से)',mphNote:'2 साल के बाद माता-पिता की लंबाई भरकर परिवार के हिसाब से अनुमानित कद देख सकते हैं। यह सिर्फ़ एक अनुमान है; कम या ज़्यादा कद वाला बच्चा भी स्वस्थ हो सकता है।',fatherH:'पिता की लंबाई (cm)',motherH:'माता की लंबाई (cm)',mphRes:'माता-पिता की लंबाई के हिसाब से परिवार का अनुमानित वयस्क कद लगभग {t} cm है (सीमा {lo}–{hi} cm)। नीचे परिवार लक्ष्य चार्ट देखें।',errMph:'कृपया माता और पिता दोनों की लंबाई cm में भरें (120 से 220 के बीच)।',tgtLabel:'परिवार की सीमा {lo}–{hi} cm',mphBtn:'माता-पिता की लंबाई से जाँचें',rulerTitle:'परिवार का लक्ष्य कद',rulerText:'वयस्क कद का लक्ष्य लगभग {t} cm है (सीमा {lo}–{hi} cm)। मध्य लक्ष्य वयस्क कद के लगभग {p} प्रतिशत पर है, और सीमा {p1} से {p2} प्रतिशत तक जाती है। बच्चे का अभी का कद ऊपर के ग्रोथ चार्ट पर है।',wName:'वजन',lName:'लंबाई / कद',hName:'सिर की परिधि',hc:'सिर की परिधि (cm)',hChart:'आयु अनुसार सिर की परिधि (cm)',
  low:'3वें प्रतिशत से नीचे',high:'97वें प्रतिशत से ऊपर',about:'लगभग {n}वें प्रतिशत पर',
  errDates:'कृपया जन्म की तारीख और ताज़ा जाँच की तारीख भरें।',
  errMeas:'कृपया कम से कम बच्चे का वजन या लंबाई भरें।',
@@ -401,6 +402,37 @@ function visitBlock(label,dob,vd,w,l,sex,h){
 }
 
 var CHARTS=[];
+function pctOfAdult(v,a){ return pct(zOf(v,a[0],a[1],a[2])); }
+function pn(p){ var n=Math.max(1,Math.min(99,Math.round(p))); return LANG==='hi'?String(n):ordinalEn(n); }
+function rulerHTML(T,sex){
+  var ar=GD['hfa5_'+sex], a=ar[ar.length-1];
+  var vals=ZS.map(function(z){return xOf(z,a[0],a[1],a[2]);});
+  var lo=Math.floor(Math.min(vals[0],T.lo)-6), hi=Math.ceil(Math.max(vals[4],T.hi)+6);
+  var W=320,H=270,top=16,bot=H-16,pl=64,xr=250,cx=167;
+  function Y(v){return bot-(v-lo)/(hi-lo)*(bot-top);}
+  var labs=LANG==='hi'?['3वें','15वें','50वें','85वें','97वें']:['3rd','15th','50th','85th','97th'];
+  var s='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+tr('rulerTitle')+'" style="max-width:360px;width:100%;margin:6px auto;display:block">';
+  s+='<line x1="'+pl+'" y1="'+top+'" x2="'+pl+'" y2="'+bot+'" stroke="#2a2580" stroke-width="1.2"/>';
+  for(var k=0;k<5;k++){
+    var y=Y(vals[k]);
+    s+='<line x1="'+pl+'" y1="'+y+'" x2="'+xr+'" y2="'+y+'" stroke="#c9c4e8" stroke-width="1" stroke-dasharray="2,3"/>';
+    s+='<text x="'+(pl-6)+'" y="'+(y+4)+'" text-anchor="end" font-size="12" fill="#2a2580">'+labs[k]+'</text>';
+    s+='<text x="'+(xr+6)+'" y="'+(y+4)+'" font-size="12" fill="#4a4a5a">'+Math.round(vals[k])+' cm</text>';
+  }
+  var yt=Y(T.t), yu=Y(T.hi), yd=Y(T.lo);
+  s+='<line x1="'+cx+'" y1="'+yu+'" x2="'+cx+'" y2="'+yd+'" stroke="#8b4fd6" stroke-width="2"/>';
+  s+='<polygon points="'+cx+','+yu+' '+(cx-5)+','+(yu+9)+' '+(cx+5)+','+(yu+9)+'" fill="#8b4fd6"/>';
+  s+='<polygon points="'+cx+','+yd+' '+(cx-5)+','+(yd-9)+' '+(cx+5)+','+(yd-9)+'" fill="#8b4fd6"/>';
+  s+='<text x="'+(cx+10)+'" y="'+(yu+4)+'" font-size="11" fill="#8b4fd6">+8.5 cm</text>';
+  s+='<text x="'+(cx+10)+'" y="'+(yd+4)+'" font-size="11" fill="#8b4fd6">-8.5 cm</text>';
+  s+='<circle cx="'+cx+'" cy="'+yt+'" r="6" fill="#8b4fd6" stroke="#fff" stroke-width="2"/>';
+  s+='<text x="'+(cx+10)+'" y="'+(yt+4)+'" font-size="13" font-weight="700" fill="#8b4fd6">'+T.t.toFixed(1)+' cm</text>';
+  s+='</svg>';
+  var pT=pn(pctOfAdult(T.t,a)), pL=pn(pctOfAdult(T.lo,a)), pH=pn(pctOfAdult(T.hi,a));
+  var txt=fill(tr('rulerText'),{t:T.t.toFixed(1),lo:T.lo.toFixed(1),hi:T.hi.toFixed(1),p:pT,p1:pL,p2:pH});
+  return '<div class="card chartcard"><h3>'+tr('rulerTitle')+'</h3>'+s+'<p class="note">'+txt+'</p></div>';
+}
+
 var TGT=null; // family target range {lo,hi} in cm, set in run()
 function valOf(kind,vs){ return kind==='w'?vs.wv:(kind==='l'?vs.lv:(kind==='h'?vs.hv:vs.bmi)); }
 function offRange(kind,d){ return kind==='h'?d>60*DAY:(kind==='w'?d>120*DAY:false); }
@@ -414,7 +446,7 @@ function chartCfg(kind,sex,xmax){
 }
 function chartHTML(kind,sex,visits,xmax){
   var id='chart'+CHARTS.length;
-  CHARTS.push({id:id,kind:kind,sex:sex,visits:visits,xmax:xmax,tgt:(kind==='l'?TGT:null)});
+  CHARTS.push({id:id,kind:kind,sex:sex,visits:visits,xmax:xmax});
   var cfg=chartCfg(kind,sex,xmax);
   return '<canvas id="'+id+'" class="chartc" role="img" aria-label="'+cfg.title+'"></canvas><p class="legend">'+cfg.title+'. '+tr('legend')+'</p><button type="button" class="cprint noprint" onclick="printOne(\''+id+'\')">'+(LANG==='hi'?'यह चार्ट प्रिंट करें':'Print this chart')+'</button>';
 }
@@ -446,24 +478,6 @@ function drawChart(c0){
   for(var v=ymin;v<=ymax;v+=step){
     g.beginPath(); g.moveTo(pl,Y(v)); g.lineTo(cssW-pr,Y(v)); g.stroke();
     g.textAlign='right'; g.fillText(String(v),pl-5,Y(v));
-  }
-  if(c0.tgt){
-    var tzs=[c0.tgt.zLo,c0.tgt.zHi], tend=xmax*DAY;
-    g.save(); g.setLineDash([6,4]); g.strokeStyle='#8b4fd6'; g.lineWidth=1.5;
-    tzs.forEach(function(z){
-      var first=true; g.beginPath();
-      for(var d=2*365.25; d<=tend; d+=8){
-        var r=getLMS('l',c0.sex,d), v=xOf(z,r[0],r[1],r[2]);
-        if(v<ymin||v>ymax){first=true; continue;}
-        if(first){g.moveTo(X(d/DAY),Y(v));first=false;} else g.lineTo(X(d/DAY),Y(v));
-      }
-      g.stroke();
-    });
-    g.setLineDash([]);
-    var r2=getLMS('l',c0.sex,2*365.25), vhi=xOf(c0.tgt.zHi,r2[0],r2[1],r2[2]);
-    g.fillStyle='#8b4fd6'; g.textAlign='left'; g.textBaseline='bottom';
-    if(vhi>=ymin&&vhi<=ymax) g.fillText(fill(tr('tgtLabel'),{lo:c0.tgt.lo.toFixed(1),hi:c0.tgt.hi.toFixed(1)}),X(2*365.25/DAY)+4,Y(vhi)-2);
-    g.restore();
   }
   var yrStep=xmax>60?2:1;
   g.textAlign='center'; g.textBaseline='alphabetic';
@@ -568,14 +582,16 @@ function syncAgeUI(){
   var dob=parseDate(document.getElementById('dob').value), vd=parseDate(document.getElementById('vdate').value);
   var old=!!(dob&&vd&&daysBetween(dob,vd)>=730);
   var pb=document.getElementById('prebtn'), pre=document.getElementById('preBox'), mb=document.getElementById('mphBox');
+  var mbtn=document.getElementById('mphbtn');
   if(old){
     if(!pre.classList.contains('none')){ document.getElementById('ga').value=''; pre.classList.add('none'); }
-    pb.classList.add('none'); mb.classList.remove('none');
+    pb.classList.add('none'); mbtn.classList.remove('none');
   } else {
-    mb.classList.add('none');
+    mb.classList.add('none'); mbtn.classList.add('none');
     pb.classList.toggle('none', !pre.classList.contains('none'));
   }
 }
+window.toggleMph=function(){ document.getElementById('mphBox').classList.toggle('none'); };
 document.addEventListener('input',function(e){
   if(e.target&&(e.target.id==='dob'||e.target.id==='vdate'||e.target.classList.contains('pd'))) updAges();
 });
@@ -754,8 +770,7 @@ window.run=function(keepScroll){
   TGT=null;
   if(mph){
     var tgt=(mph.f+mph.m+(sex==='b'?13:-13))/2;
-    var AR=GD['hfa5_'+sex], ar=AR[AR.length-1]; // 19-year reference row: L, M, S
-    TGT={lo:tgt-8.5,hi:tgt+8.5,zLo:zOf(tgt-8.5,ar[0],ar[1],ar[2]),zHi:zOf(tgt+8.5,ar[0],ar[1],ar[2])};
+    TGT={t:tgt,lo:tgt-8.5,hi:tgt+8.5};
     msgs.push({cls:'ok',txt:fill(tr('mphRes'),{t:tgt.toFixed(1),lo:TGT.lo.toFixed(1),hi:TGT.hi.toFixed(1)})});
   }
   if(latest.w && !latest.w.na) msgs.push(flagFor('w',latest.w,latest.d));
@@ -780,6 +795,7 @@ window.run=function(keepScroll){
   CHARTS=[];
   var html='<h2>'+(nm?fill(tr('resFor'),{name:nm}):tr('results'))+'</h2>';
   visits.forEach(function(v){ html+=v.html; });
+  if(TGT) html+=rulerHTML(TGT,sex);
   html+='<h2>'+tr('chartsT')+'</h2>';
   if(visits.some(function(v){return v.wv!=null&&v.d<=120*DAY;})){
     var wmax=visits.some(function(v){return v.d>MAXD;})?120:60;
