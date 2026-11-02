@@ -510,10 +510,11 @@ function drawChart(c0){
   if(c0.fam){
     var tx=X(216), tyt=Y(c0.fam.t), tyu=Y(c0.fam.hi), tyd=Y(c0.fam.lo);
     g.save(); g.strokeStyle='#8b4fd6'; g.fillStyle='#8b4fd6'; g.lineWidth=2;
-    g.beginPath(); g.moveTo(tx,tyu+9); g.lineTo(tx,tyd-9); g.stroke();
-    g.beginPath(); g.moveTo(tx,tyu); g.lineTo(tx-5,tyu+9); g.lineTo(tx+5,tyu+9); g.closePath(); g.fill();
-    g.beginPath(); g.moveTo(tx,tyd); g.lineTo(tx-5,tyd-9); g.lineTo(tx+5,tyd-9); g.closePath(); g.fill();
-    g.beginPath(); g.arc(tx,tyt,5,0,2*Math.PI); g.fill();
+    g.lineWidth=1.5;
+    g.beginPath(); g.moveTo(tx,tyu); g.lineTo(tx,tyd); g.stroke();
+    g.beginPath(); g.moveTo(tx-6,tyu); g.lineTo(tx+6,tyu); g.stroke();
+    g.beginPath(); g.moveTo(tx-6,tyd); g.lineTo(tx+6,tyd); g.stroke();
+    g.beginPath(); g.arc(tx,tyt,4.5,0,2*Math.PI); g.fill();
     g.font='bold 11px "Anek Devanagari", sans-serif'; g.textAlign='right'; g.textBaseline='middle';
     g.fillText(c0.fam.t.toFixed(1)+' cm',tx-9,tyt);
     g.restore();
