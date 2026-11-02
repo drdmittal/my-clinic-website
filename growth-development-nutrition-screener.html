@@ -455,7 +455,7 @@ function drawChart(c0){
   cv.style.height=cssH+'px';
   var g=cv.getContext('2d'); g.setTransform(dpr,0,0,dpr,0,0);
   g.fillStyle='#ffffff'; g.fillRect(0,0,cssW,cssH);
-  var pl=40,pr=12,pt=14,pb=28, ymin=cfg.ymin, ymax=cfg.ymax;
+  var pl=40,pr=c0.fam?70:12,pt=14,pb=28, ymin=cfg.ymin, ymax=cfg.ymax;
   function X(m){return pl+((m-xmin)/(xmax-xmin))*(cssW-pl-pr);}
   function Y(v){return pt+(1-(v-ymin)/(ymax-ymin))*(cssH-pt-pb);}
   var step=(ymax-ymin)>100?20:((ymax-ymin)>20?5:2);
@@ -515,8 +515,8 @@ function drawChart(c0){
     g.beginPath(); g.moveTo(tx-6,tyu); g.lineTo(tx+6,tyu); g.stroke();
     g.beginPath(); g.moveTo(tx-6,tyd); g.lineTo(tx+6,tyd); g.stroke();
     g.beginPath(); g.arc(tx,tyt,4.5,0,2*Math.PI); g.fill();
-    g.font='bold 11px "Anek Devanagari", sans-serif'; g.textAlign='right'; g.textBaseline='middle';
-    g.fillText(c0.fam.t.toFixed(1)+' cm',tx-9,tyt);
+    g.font='bold 11px "Anek Devanagari", sans-serif'; g.textAlign='left'; g.textBaseline='middle';
+    g.fillText(c0.fam.t.toFixed(1)+' cm',tx+10,tyt);
     g.restore();
   }
   cv._c=c0;
