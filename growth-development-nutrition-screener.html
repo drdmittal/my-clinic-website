@@ -147,6 +147,14 @@ footer{font-size:13px;opacity:.85;margin:20px 0 40px;border-top:1px solid var(--
     <div class="fullrow"><label for="ga" data-i18n="gaLabel">Weeks of pregnancy at birth</label><input type="number" inputmode="numeric" step="1" min="24" max="36" id="ga" placeholder="e.g. 32"></div>
     <p class="note" data-i18n="gaNote">For babies born early, charts use corrected age (counted from the due date) until 2 years.</p>
   </div>
+  <div id="mphBox" class="none">
+    <h3 style="margin-top:14px" data-i18n="mphTitle">Family target height (from parents' heights)</h3>
+    <p class="note" data-i18n="mphNote">From 2 years, you can add the parents' heights to see the family target height.</p>
+    <div class="row">
+      <div><label for="fh" data-i18n="fatherH">Father's height (cm)</label><input type="number" inputmode="decimal" step="0.1" id="fh" placeholder="e.g. 170"></div>
+      <div><label for="mh" data-i18n="motherH">Mother's height (cm)</label><input type="number" inputmode="decimal" step="0.1" id="mh" placeholder="e.g. 158"></div>
+    </div>
+  </div>
 
   <h3 style="margin-top:14px" data-i18n="latest">Latest visit (or today)</h3>
   <div class="fullrow"><label for="vdate" data-i18n="date">Date</label><input type="date" id="vdate" required><div class="agehint" id="vage"></div></div>
@@ -188,7 +196,7 @@ en:{clinic:'Dr. Dinesh Mittal Child Clinic',h1:'Child growth check (birth to 19 
  sex:"Child's sex",boy:'Boy',girl:'Girl',dob:'Date of birth',latest:'Latest visit (or today)',prev:'Earlier visits (optional)',
  date:'Date',weight:'Weight (kg)',length:'Length / height (cm)',measnote:'Length is measured lying down up to 2 years, and standing height after that. Use the same method each time. BMI is checked from 2 years of age.',
  btn:'Check growth',results:'Results',latestT:'Latest visit',prevT:'Previous visit',age:'Age',bmi:'BMI',
- preBtn:'Child was born early (before 37 weeks)',gaLabel:'Weeks of pregnancy at birth',gaNote:'For babies born early, charts use corrected age (counted from the due date) until 2 years.',corrAge:'Corrected age',actualAge:'Actual age',errGa:'Please enter weeks between 24 and 36.',wName:'Weight',lName:'Length / height',hName:'Head circumference',hc:'Head circumference (cm)',hChart:'Head circumference for age (cm)',
+ preBtn:'Child was born early (before 37 weeks)',gaLabel:'Weeks of pregnancy at birth',gaNote:'For babies born early, charts use corrected age (counted from the due date) until 2 years.',corrAge:'Corrected age',actualAge:'Actual age',errGa:'Please enter weeks between 24 and 36.',mphTitle:"Family target height (from parents' heights)",mphNote:"From 2 years, you can add the parents' heights to see the family target height. This is a guide only: a child can be taller or shorter than the family target and still be healthy.",fatherH:"Father's height (cm)",motherH:"Mother's height (cm)",mphRes:"Family target adult height is about {t} cm (range {lo}–{hi} cm), based on the parents' heights. Please discuss this with the doctor at the next visit, especially if your child's height is far from this range.",errMph:"Please enter both parents' heights in cm (between 120 and 220).",wName:'Weight',lName:'Length / height',hName:'Head circumference',hc:'Head circumference (cm)',hChart:'Head circumference for age (cm)',
  low:'below the 3rd percentile',high:'above the 97th percentile',about:'about the {n} percentile',
  errDates:'Please enter the date of birth and the latest visit date.',
  errMeas:'Please enter at least the weight or the length of your child.',
@@ -215,7 +223,7 @@ hi:{clinic:'डॉ. दिनेश मित्तल चाइल्ड क्
  sex:'बच्चे का लिंग',boy:'लड़का',girl:'लड़की',dob:'जन्म की तारीख',latest:'ताज़ा जाँच (या आज की)',prev:'पहले की जाँचें (वैकल्पिक)',
  date:'तारीख',weight:'वजन (kg)',length:'लंबाई / कद (cm)',measnote:'2 साल तक बच्चे की लंबाई लेटाकर नापें, उसके बाद खड़े होकर कद। हर बार एक ही तरीका रखें। BMI 2 साल की उम्र से देखा जाता है।',
  btn:'जाँच करें',results:'नतीजे',latestT:'ताज़ा जाँच',prevT:'पहले की जाँच',age:'उम्र',bmi:'BMI',
- preBtn:'बच्चा समय से पहले (37 हफ़्ते से पहले) पैदा हुआ था',gaLabel:'जन्म के समय गर्भ के हफ़्ते',gaNote:'समय से पहले जन्मे बच्चों में 2 साल तक सुधरी हुई उम्र (due date से गिनी) से चार्ट देखे जाते हैं।',corrAge:'सुधरी हुई उम्र',actualAge:'असली उम्र',errGa:'कृपया 24 से 36 हफ़्ते के बीच लिखें।',wName:'वजन',lName:'लंबाई / कद',hName:'सिर की परिधि',hc:'सिर की परिधि (cm)',hChart:'आयु अनुसार सिर की परिधि (cm)',
+ preBtn:'बच्चा समय से पहले (37 हफ़्ते से पहले) पैदा हुआ था',gaLabel:'जन्म के समय गर्भ के हफ़्ते',gaNote:'समय से पहले जन्मे बच्चों में 2 साल तक सुधरी हुई उम्र (due date से गिनी) से चार्ट देखे जाते हैं।',corrAge:'सुधरी हुई उम्र',actualAge:'असली उम्र',errGa:'कृपया 24 से 36 हफ़्ते के बीच लिखें।',mphTitle:'परिवार का लक्ष्य कद (माता-पिता की लंबाई से)',mphNote:'2 साल के बाद माता-पिता की लंबाई भरकर परिवार के हिसाब से अनुमानित कद देख सकते हैं। यह सिर्फ़ एक अनुमान है; कम या ज़्यादा कद वाला बच्चा भी स्वस्थ हो सकता है।',fatherH:'पिता की लंबाई (cm)',motherH:'माता की लंबाई (cm)',mphRes:'माता-पिता की लंबाई के हिसाब से परिवार का अनुमानित वयस्क कद लगभग {t} cm है (सीमा {lo}–{hi} cm)। अगली विज़िट में डॉक्टर से इस पर बात करें, खासकर अगर बच्चे का कद इस सीमा से काफ़ी दूर हो।',errMph:'कृपया माता और पिता दोनों की लंबाई cm में भरें (120 से 220 के बीच)।',wName:'वजन',lName:'लंबाई / कद',hName:'सिर की परिधि',hc:'सिर की परिधि (cm)',hChart:'आयु अनुसार सिर की परिधि (cm)',
  low:'3वें प्रतिशत से नीचे',high:'97वें प्रतिशत से ऊपर',about:'लगभग {n}वें प्रतिशत पर',
  errDates:'कृपया जन्म की तारीख और ताज़ा जाँच की तारीख भरें।',
  errMeas:'कृपया कम से कम बच्चे का वजन या लंबाई भरें।',
@@ -534,6 +542,20 @@ function updAges(){
   document.querySelectorAll('.prevrow').forEach(function(r){
     ageHint(r.querySelector('.agehint'),dob,parseDate(r.querySelector('.pd').value));
   });
+  syncAgeUI();
+}
+// Born-early option only up to 2 years; parents' heights only from 2 years.
+function syncAgeUI(){
+  var dob=parseDate(document.getElementById('dob').value), vd=parseDate(document.getElementById('vdate').value);
+  var old=!!(dob&&vd&&daysBetween(dob,vd)>=730);
+  var pb=document.getElementById('prebtn'), pre=document.getElementById('preBox'), mb=document.getElementById('mphBox');
+  if(old){
+    if(!pre.classList.contains('none')){ document.getElementById('ga').value=''; pre.classList.add('none'); }
+    pb.classList.add('none'); mb.classList.remove('none');
+  } else {
+    mb.classList.add('none');
+    pb.classList.toggle('none', !pre.classList.contains('none'));
+  }
 }
 document.addEventListener('input',function(e){
   if(e.target&&(e.target.id==='dob'||e.target.id==='vdate'||e.target.classList.contains('pd'))) updAges();
@@ -617,15 +639,19 @@ function fillForm(kid){
   togglePre(hasGa);
   document.getElementById('prevs').innerHTML='';
   vs.slice(0,-1).forEach(function(v){window.addPrev(v.date,v.w,v.l,v.h);});
+  var mp=kid&&kid.mph;
+  document.getElementById('fh').value=mp?mp.f:'';
+  document.getElementById('mh').value=mp?mp.m:'';
   document.getElementById('out').innerHTML='';
   updAges();
   if(kid&&kid.dob&&last&&(last.w!=null||last.l!=null||last.h!=null)){ setTimeout(function(){ window.run(true); },0); }
 }
 window.togglePre=function(show){ var b=document.getElementById('preBox'); b.classList.toggle('none', !show); document.getElementById('prebtn').classList.toggle('none', !!show); if(show) document.getElementById('ga').focus(); };
-function saveKid(nm,sex,dobRaw,vdRaw,latestW,latestL,earlierArr,latestH,ga){
+function saveKid(nm,sex,dobRaw,vdRaw,latestW,latestL,earlierArr,latestH,ga,mph){
   var kid=ST.cur?kidById(ST.cur):null;
   if(!kid){kid={id:newId(),name:'',sex:sex,dob:dobRaw,visits:[]};ST.kids.push(kid);}
   kid.name=nm; kid.sex=sex; kid.dob=dobRaw; kid.ga=ga||null;
+  if(mph!==undefined) kid.mph=mph;
   var map={};
   if(vdRaw&&(latestW!=null||latestL!=null||latestH!=null)) map[vdRaw]={date:vdRaw,w:latestW,l:latestL,h:latestH};
   earlierArr.forEach(function(e){ if(e.raw&&(e.w!=null||e.l!=null||e.h!=null)) map[e.raw]={date:e.raw,w:e.w,l:e.l,h:e.h}; });
@@ -680,6 +706,10 @@ window.run=function(keepScroll){
   if(!isNaN(gaV)&&(gaV<24||gaV>36||gaV%1!==0)){err(tr('errGa'));return;}
   var ga=isNaN(gaV)?null:gaV;
   CORR=ga?(40-ga)*7:0;
+  var mphOn=!document.getElementById('mphBox').classList.contains('none');
+  var fhV=parseFloat(document.getElementById('fh').value), mhV=parseFloat(document.getElementById('mh').value);
+  if(mphOn && (isNaN(fhV)!==isNaN(mhV) || (!isNaN(fhV) && (fhV<120||fhV>220||mhV<120||mhV>220)))){err(tr('errMph'));return;}
+  var mph=mphOn?((!isNaN(fhV)&&!isNaN(mhV))?{f:fhV,m:mhV}:null):undefined;
   var d1=daysBetween(dob,vd);
   if(d1<0||d1>MAX19){err(tr('errRange'));return;}
 
@@ -697,11 +727,15 @@ window.run=function(keepScroll){
     earlier.push({raw:r.querySelector('.pd').value,date:dv,w:isNaN(w)?null:w,l:isNaN(l)?null:l,h:isNaN(hh)?null:hh,d:d});
   });
   earlier.sort(function(a,b){return b.d-a.d;}); // most recent first
-  saveKid(nm,sex,dobRaw,vdRaw,isNaN(w1)?null:w1,isNaN(l1)?null:l1,earlier,isNaN(h1)?null:h1,ga);
+  saveKid(nm,sex,dobRaw,vdRaw,isNaN(w1)?null:w1,isNaN(l1)?null:l1,earlier,isNaN(h1)?null:h1,ga,mph);
   var visits=[latest];
   earlier.forEach(function(e){ visits.push(visitBlock(tr('prevT'),dob,e.date,e.w,e.l,sex,e.h)); });
   var prev=visits.length>1?visits[1]:null;
 
+  if(mph){
+    var tgt=(mph.f+mph.m+(sex==='b'?13:-13))/2;
+    msgs.push({cls:'ok',txt:fill(tr('mphRes'),{t:tgt.toFixed(1),lo:(tgt-8.5).toFixed(1),hi:(tgt+8.5).toFixed(1)})});
+  }
   if(latest.w && !latest.w.na) msgs.push(flagFor('w',latest.w,latest.d));
   if(latest.l) msgs.push(flagFor('l',latest.l,latest.d));
   if(latest.h) msgs.push(flagFor('h',latest.h,latest.d));
