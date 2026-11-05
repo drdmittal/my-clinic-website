@@ -991,11 +991,13 @@ const PHOTOS = {
   'Peek-a-boo': {src:'peek-a-boo.gif', en:'Papa and Mumma playing peek-a-boo with the child', hi:'पापा और मम्मी बच्चे के साथ छुपम-छुपाई खेल रहे हैं'},
   'Where is your nose?': {src:'where-is-your-nose.gif', en:'Papa and Mumma playing with the child on the floor', hi:'पापा और मम्मी बच्चे के साथ फर्श पर खेल रहे हैं'},
   'Animal sounds': {src:'animal-sounds.gif', en:'A happy toddler sitting on a play mat with teddy bears', hi:'गलीचे पर बैठा खुश छोटा बच्चा, पास में टेडी बियर'},
-  'Stack and knock': {src:'stack-and-knock.gif', en:'A happy toddler stacking colourful blocks on a play mat', hi:'गलीचे पर रंग-बिरंगे ब्लॉक जमाता खुश छोटा बच्चा'}
+  'Stack and knock': {src:'stack-and-knock.gif', en:'A happy toddler stacking colourful blocks on a play mat', hi:'गलीचे पर रंग-बिरंगे ब्लॉक जमाता खुश छोटा बच्चा'},
+  'Act the Sleepy Animal': {src:'act-sleepy-animal.gif', en:'Family acting out a sleepy animal, with a toddler watching and smiling', hi:'परिवार नींद वाले जानवर का अभिनय कर रहा है, बच्चा मुस्कुराते हुए देख रहा है'},
+  'Count the brush strokes': {src:'count-brush-strokes.gif', en:'Smiling toddler brushing teeth at the sink with Mumma and Papa', hi:'सिंक पर मुस्कुराता छोटा बच्चा मम्मी-पापा के साथ दाँत साफ़ कर रहा है'}
 };
 function stepPicture(){
   const ph = PHOTOS[game().n.en];
-  if(ph) return `<img class="peekgif" src="${ph.src}" width="360" height="360" alt="${lang==='hi' ? ph.hi : ph.en}">`;
+  if(ph) return `<img class="peekgif" src="${ph.src}" width="360" alt="${lang==='hi' ? ph.hi : ph.en}">`;
   const sc = SCENES[game().n.en];
   if(sc && sc[gsi]) return `${sceneSVG(sc[gsi], SEATED.has(game().n.en))}<button class="listen noprint" data-act="replay">↻ ${T(UI.replay)}</button>`;
   return `<div class="char" aria-hidden="true">${EMO[age]}</div>`;
