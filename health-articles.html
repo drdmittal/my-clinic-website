@@ -90,6 +90,15 @@ details .ans{margin-top:8px;color:var(--ink);font-size:16.5px;line-height:1.55}
 details .ans p+p{margin-top:6px}
 </style>
 <script src="/site-nav.js" defer></script>
+<style>
+.newtag{position:absolute;top:12px;right:12px;background:#fff;color:#c53030;font:800 12px/1 system-ui,sans-serif;letter-spacing:.06em;padding:5px 9px;border-radius:999px;z-index:1}
+.card[hidden]{display:none}
+.pager{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:18px 0 6px}
+.pager button{min-width:44px;min-height:44px;padding:0 12px;border-radius:999px;border:1px solid #2a2580;background:#fff;color:#2a2580;font:700 16px system-ui,sans-serif;cursor:pointer}
+.pager button[aria-current="page"]{background:#0f9b8e;border-color:#0f9b8e;color:#fff}
+.pager button:focus-visible{outline:3px solid #f5ad1b;outline-offset:2px}
+.pinfo{text-align:center;color:#565a85;font-size:15px;margin:10px 0 0}
+</style>
 </head>
 <body>
 <header class="top">
@@ -108,6 +117,7 @@ details .ans p+p{margin-top:6px}
   <form class="sitesearch" action="/search.html" method="get" role="search" style="display:flex;gap:8px;margin:12px 0 4px;width:100%"><input type="search" name="q" placeholder="Search" aria-label="Search the website" style="flex:1 1 0;min-width:0;font:500 16px 'Anek Devanagari',sans-serif;padding:11px 13px;border:2px solid #2a2580;border-radius:14px;min-height:48px;background:#fff;color:#1d2540"><button type="submit" style="flex:none;white-space:nowrap;font:700 16px 'Anek Devanagari',sans-serif;background:#2a2580;color:#fff;border:0;border-radius:14px;padding:0 16px;cursor:pointer"><span class="en">Search</span><span class="hi">खोजें</span></button></form>
 <h2 class="sh"><span class="en">Read articles</span><span class="hi">लेख पढ़ें</span></h2>
   <div class="grid">
+    <a class="card" href="diwali-safety-guide.html" style="--c:var(--red)"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg></span><span class="newtag">NEW</span><b><span class="en">Safe Diwali for children</span><span class="hi">बच्चों के लिए सुरक्षित दिवाली</span></b><small><span class="en">Prevention before, during and after bursting, first aid for burns, eyes and hands, and Delhi-NCR 2026 cracker timings</span><span class="hi">दिवाली से पहले, दौरान और बाद में बचाव, जलने, आँख और हाथ की चोट का प्राथमिक उपचार, और दिल्ली-NCR 2026 के पटाखा समय</span></small></a>
     <a class="card" href="parent-tools/teething-guide.html" style="--c:var(--pink)"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4c2 0 3 1.5 5 1.5S14 4 16 4c2 0 3 2 3 4 0 3-1.5 4-2 6s-1 6-2.5 6-1.5-3-2.5-3-1 3-2.5 3S8 19 7.5 15 4 11 4 8c0-2 1-4 3-4z"/></svg></span><b><span class="en">Teething: what to expect</span><span class="hi">दाँत निकलना: क्या उम्मीद रखें</span></b><small><span class="en">When teeth come, myths and facts, and when to see the doctor</span><span class="hi">दाँत कब आते हैं, मिथक और सच, और डॉक्टर को कब दिखाएँ</span></small></a>
 <a class="card" href="dengue-in-children-delhi.html" style="--c:var(--orange)"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg></span><b><span class="en">Dengue in children in Delhi</span><span class="hi">दिल्ली में बच्चों में डेंगू</span></b><small><span class="en">Warning signs, platelets, and home care</span><span class="hi">चेतावनी के संकेत, प्लेटलेट और घर पर देखभाल</span></small></a>
     <a class="card" href="cough-wheeze-children-guide.html" style="--c:var(--sky)"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h6a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H4z"/><path d="M20 4h-6a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h7z"/></svg></span><b><span class="en">Cough and wheezing in children</span><span class="hi">बच्चों में खाँसी और घरघराहट</span></b><small><span class="en">Viral cough or asthma, and when to see a doctor</span><span class="hi">वायरल खाँसी या अस्थमा, और डॉक्टर को कब दिखाएँ</span></small></a>
@@ -135,5 +145,34 @@ details .ans p+p{margin-top:6px}
 })();
 </script>
 <script>(function(){function set(){var hi=document.documentElement.getAttribute('data-lang')==='hi';document.querySelectorAll('form.sitesearch input[name=q]').forEach(function(i){i.placeholder=hi?'खोजें (बुखार, दाँत, आहार…)':'Search (fever, teething, diet…)';});}set();new MutationObserver(set).observe(document.documentElement,{attributes:true,attributeFilter:['data-lang']});})();</script>
+<script>
+(function(){
+  var grid=document.querySelector('main .grid'); if(!grid) return;
+  var cards=[].slice.call(grid.querySelectorAll('.card'));
+  var per=6, pages=Math.ceil(cards.length/per), cur=1;
+  var info=document.createElement('p'); info.className='pinfo';
+  var bar=document.createElement('nav'); bar.className='pager'; bar.setAttribute('aria-label','Pages');
+  grid.parentNode.insertBefore(info, grid.nextSibling);
+  grid.parentNode.insertBefore(bar, info.nextSibling);
+  function render(){
+    cards.forEach(function(c,i){ c.hidden = Math.floor(i/per)+1 !== cur; });
+    bar.innerHTML='';
+    for(var p=1;p<=pages;p++){
+      (function(n){
+        var b=document.createElement('button'); b.type='button'; b.textContent=String(n);
+        b.setAttribute('aria-label', document.documentElement.getAttribute('data-lang')==='hi' ? 'पेज '+n : 'Page '+n);
+        if(n===cur) b.setAttribute('aria-current','page');
+        b.addEventListener('click', function(){ cur=n; render(); grid.previousElementSibling && window.scrollTo({top:grid.getBoundingClientRect().top+window.pageYOffset-90, behavior:'smooth'}); });
+        bar.appendChild(b);
+      })(p);
+    }
+    var hi=document.documentElement.getAttribute('data-lang')==='hi';
+    var s=(cur-1)*per+1, e=Math.min(cur*per,cards.length);
+    info.textContent = hi ? (cards.length+' लेख हैं, '+s+' से '+e+' दिखाए जा रहे हैं') : ('Showing '+s+' to '+e+' of '+cards.length+' articles');
+  }
+  render();
+  new MutationObserver(render).observe(document.documentElement,{attributes:true,attributeFilter:['data-lang']});
+})();
+</script>
 </body>
 </html>
