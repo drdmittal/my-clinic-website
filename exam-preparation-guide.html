@@ -26,7 +26,7 @@
   --teal:#0f9b8e;--teal-soft:#dff5f2;--sky:#2f8fe0;--sky-soft:#e2f0fd;--grape:#8b4fd6;--grape-soft:#f0e7fc;
   --leaf:#2f8f3a;--leaf-soft:#e3f4e2;--red:#c53030;--red-soft:#fdeaea;--orange:#f08a1c;
   --font:'Anek Devanagari',system-ui,sans-serif;color-scheme:light}
-@media (prefers-color-scheme:dark){:root{--paper:#12112b;--surface:#1c1a3d;--ink:#eceafd;--muted:#aeacd2;--line:#2f2c5c;--indigo-soft:#262356;--pink-soft:#3a1a2a;--red-soft:#3a1c1c;--red:#ff8a80;color-scheme:dark}}
+@media (prefers-color-scheme:dark){:root{--paper:#12112b;--surface:#1c1a3d;--ink:#eceafd;--muted:#aeacd2;--line:#2f2c5c;--indigo-soft:#262356;--pink-soft:#3a1a2a;--red-soft:#3a1c1c;--red:#ff8a80;--sun-soft:#3a2d0f;--teal-soft:#0f2e2b;--leaf-soft:#183420;--sky-soft:#12283d;--grape-soft:#2b1d45;--c-text:#c9c6ff;color-scheme:dark}}
 *{box-sizing:border-box}
 html[data-lang="hi"] .en, html:not([data-lang="hi"]) .hi{display:none!important}
 body{margin:0;background:var(--paper);color:var(--ink);font:450 17.5px/1.55 var(--font)}
@@ -105,8 +105,21 @@ table.tt td.blank{height:34px}
   table.tt{min-width:0}
   table.tt th,table.tt td{border-color:#000}
   .sec{box-shadow:none;background:#fff}
+  body,.sec,.box,.step,.src{background:#fff!important;color:#000!important}
+  .box.red{background:#fdeaea!important}
 }
 .ill{margin:14px 0 4px}.ill img{width:100%;height:auto;border-radius:18px;display:block;aspect-ratio:4/3;object-fit:cover}.ill figcaption{font-size:15px;color:var(--muted);margin-top:6px;line-height:1.4}
+/* Dark mode: keep headings, icons and boxes readable */
+@media (prefers-color-scheme:dark){
+  .sec h3{color:var(--c-text)!important}
+  ul.dot li::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='4' fill='%23b9b5ff'/%3E%3C/svg%3E")}
+  ul.tick li::before{background-color:var(--leaf-soft);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237fd98a' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E")}
+  .box.teal,.box{color:var(--ink)}
+  .step .how,.step .stop{color:var(--muted)}
+  .step .stop{color:#ff8a80}
+  .sec{box-shadow:none}
+  img{opacity:.95}
+}
 @media (max-width:520px){ .hero h1{font-size:30px} .sec{padding:16px} }
 </style>
 <script src="/site-nav.js" defer></script>
