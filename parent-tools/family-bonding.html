@@ -986,8 +986,14 @@ function sceneSVG(sc, sit){
     ${['p','m','c'].filter(k => sc[k]).map(k => actor(k, Object.assign({sit: !!sit}, sc[k]))).join('')}
   </svg>`;
 }
+// Games with a family animation instead of the drawn scene.
+const PHOTOS = {
+  'Peek-a-boo': {src:'peek-a-boo.gif', en:'Papa and Mumma playing peek-a-boo with the child', hi:'पापा और मम्मी बच्चे के साथ छुपम-छुपाई खेल रहे हैं'},
+  'Where is your nose?': {src:'where-is-your-nose.gif', en:'Papa and Mumma playing with the child on the floor', hi:'पापा और मम्मी बच्चे के साथ फर्श पर खेल रहे हैं'}
+};
 function stepPicture(){
-  if(game().n.en === 'Peek-a-boo') return `<img class="peekgif" src="peek-a-boo.gif" width="360" height="360" alt="${lang==='hi' ? 'पापा और मम्मी बच्चे के साथ छुपम-छुपाई खेल रहे हैं' : 'Papa and Mumma playing peek-a-boo with the child'}">`;
+  const ph = PHOTOS[game().n.en];
+  if(ph) return `<img class="peekgif" src="${ph.src}" width="360" height="360" alt="${lang==='hi' ? ph.hi : ph.en}">`;
   const sc = SCENES[game().n.en];
   if(sc && sc[gsi]) return `${sceneSVG(sc[gsi], SEATED.has(game().n.en))}<button class="listen noprint" data-act="replay">↻ ${T(UI.replay)}</button>`;
   return `<div class="char" aria-hidden="true">${EMO[age]}</div>`;
