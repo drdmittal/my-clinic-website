@@ -18,13 +18,13 @@
         header h1 { margin:4px 0 2px; font-size:22px; font-weight:800; }
         .wrap { max-width:720px; margin:0 auto; padding:14px 14px 40px; }
         .bar { display:flex; justify-content:flex-end; margin:6px 0 12px; }
-        .lang { border:2px solid var(--indigo); background:#fff; color:var(--indigo); border-radius:10px; padding:6px 12px; font:700 14px "Anek Devanagari",sans-serif; cursor:pointer; }
-        .step { background:#fff; border-radius:14px; padding:12px 14px; margin-bottom:10px; box-shadow:0 1px 4px rgba(42,37,128,.08); border-left:6px solid var(--teal); }
+        .lang { border:2px solid var(--indigo); background:var(--surface,#fff); color:var(--indigo-tx,var(--indigo)); border-radius:10px; padding:6px 12px; font:700 14px "Anek Devanagari",sans-serif; cursor:pointer; }
+        .step { background:var(--surface,#fff); border-radius:14px; padding:12px 14px; margin-bottom:10px; box-shadow:0 1px 4px rgba(42,37,128,.08); border-left:6px solid var(--teal); }
         .step.key { border-left-color:var(--pink); }
-        .step b { font-size:17px; color:var(--indigo); }
+        .step b { font-size:17px; color:var(--indigo-tx,var(--indigo)); }
         .step p { margin:4px 0 0; font-size:15px; }
-        .box { margin-top:12px; background:#fff4dc; border-radius:12px; padding:12px 14px; font-size:14px; }
-        .note { margin-top:18px; background:#f1efff; border-radius:12px; padding:12px 14px; font-size:14px; color:var(--muted); }
+        .box { margin-top:12px; background:var(--surface,#fff4dc); border-radius:12px; padding:12px 14px; font-size:14px; }
+        .note { margin-top:18px; background:var(--surface,#f1efff); border-radius:12px; padding:12px 14px; font-size:14px; color:var(--muted); }
         footer { margin-top:18px; font-size:13px; color:var(--muted); text-align:center; }
         .hi { display:none; }
         body.hi-mode .hi { display:block; }
@@ -32,7 +32,15 @@
         body.hi-mode span.hi { display:inline; }
         body.hi-mode span.en { display:none; }
         body.hi-mode .step b.hi, body.hi-mode .step p.hi { display:block; }
-    </style>
+    
+/* Dark mode: follows the phone's dark setting */
+@media (prefers-color-scheme: dark){
+  :root{--bg:#0f1a19;--ink:#e8eeec;--muted:#aebdba;--surface:#172629;--tx:#e8eeec;--line:#2c4043;--indigo-tx:#b3aeff}
+  html,body{background:var(--bg);color:var(--ink)}
+  a{color:#8fd3ff}
+  input,select,textarea{background:#101f21;color:var(--ink);border-color:var(--line)}
+}
+</style>
 </head>
 <body>
 <header>

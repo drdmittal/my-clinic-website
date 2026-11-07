@@ -34,7 +34,7 @@
             --card-shadow: 0 12px 32px -4px rgba(8, 145, 178, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { color: var(--dark-text); background-color: #f8fafc; line-height: 1.6; padding-bottom: 75px; }
+        body { color: var(--dark-text); background-color: var(--surface,#f8fafc); line-height: 1.6; padding-bottom: 75px; }
 
         header {
             position: sticky; top: 0; background: rgba(255, 255, 255, 0.94); z-index: 1000;
@@ -45,11 +45,11 @@
         .logo i { color: var(--brand-accent); font-size: 1.35rem; }
 
         .container { max-width: 1120px; margin: 30px auto; padding: 0 20px; }
-        .category-header { font-family: 'Fredoka', cursive; font-size: 1.35rem; color: #083344; margin: 32px 0 16px; display: flex; align-items: center; gap: 10px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; }
+        .category-header { font-family: 'Fredoka', cursive; font-size: 1.35rem; color: var(--tx,#083344); margin: 32px 0 16px; display: flex; align-items: center; gap: 10px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; }
         
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
         .blog-card {
-            background: #ffffff; border-radius: 20px; border: 1px solid #f1f5f9;
+            background: var(--surface,#ffffff); border-radius: 20px; border: 1px solid #f1f5f9;
             box-shadow: var(--card-shadow); overflow: hidden; display: flex; flex-direction: column;
             transition: transform 0.2s ease;
         }
@@ -57,15 +57,28 @@
         .card-img { width: 100%; height: 170px; object-fit: cover; }
         .blog-content { padding: 18px; display: flex; flex-direction: column; flex: 1; }
         .blog-tag {
-            align-self: flex-start; background: #f0fdfa; color: var(--brand-secondary);
+            align-self: flex-start; background: var(--surface,#f0fdfa); color: var(--brand-secondary);
             font-size: 0.72rem; font-weight: 700; padding: 4px 10px; border-radius: 12px; margin-bottom: 8px;
         }
-        .blog-title { font-family: 'Fredoka', cursive; font-size: 1.1rem; color: #083344; margin-bottom: 6px; line-height: 1.3; }
+        .blog-title { font-family: 'Fredoka', cursive; font-size: 1.1rem; color: var(--tx,#083344); margin-bottom: 6px; line-height: 1.3; }
         .blog-snippet { font-size: 0.84rem; color: var(--muted-text); margin-bottom: 12px; flex: 1; }
         .read-btn { color: var(--brand-primary-dark); font-weight: 700; font-size: 0.86rem; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
 
         footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 24px 15px; font-size: 0.85rem; margin-top: 50px; }
-    </style>
+    
+/* Dark mode: follows the phone's dark setting */
+@media (prefers-color-scheme: dark){
+  :root{--bg:#0f1a19;--ink:#e8eeec;--muted:#aebdba;--surface:#172629;--tx:#e8eeec;--line:#2c4043;--indigo-tx:#b3aeff}
+  html,body{background:var(--bg);color:var(--ink)}
+  a{color:#8fd3ff}
+  input,select,textarea{background:#101f21;color:var(--ink);border-color:var(--line)}
+}
+
+/* Dark mode fixes */
+@media (prefers-color-scheme: dark){
+.read-btn{color:#8fd3ff !important}
+}
+</style>
 <script src="/site-nav.js" defer></script>
 <link rel="apple-touch-icon" href="/icons/icon-180.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
@@ -82,7 +95,7 @@
     <div class="container">
         <div style="text-align: center; margin-bottom: 30px;">
             <span style="font-size: 0.78rem; font-weight: 700; color: var(--brand-primary); text-transform: uppercase;">Medical Resource Center</span>
-            <h1 style="font-family: 'Fredoka', cursive; font-size: 2.1rem; color: #083344; margin: 4px 0 8px;">Child Health & Parenting Guides</h1>
+            <h1 style="font-family: 'Fredoka', cursive; font-size: 2.1rem; color: var(--tx,#083344); margin: 4px 0 8px;">Child Health & Parenting Guides</h1>
             <p style="font-size: 0.95rem; color: var(--muted-text); max-width: 650px; margin: 0 auto;">Evidence-based clinical guidance on immunization, fever management, Delhi pollution care, and child development.</p>
         </div>
 
@@ -160,7 +173,7 @@
         </div>
 
         <!-- CATEGORY 2: Fevers & Seasonal Illnesses -->
-        <h2 class="category-header"><i class="fa-solid fa-thermometer" style="color:#dc2626;"></i> Fevers & Seasonal Illnesses</h2>
+        <h2 class="category-header"><i class="fa-solid fa-thermometer" style="color:var(--tx,#dc2626);"></i> Fevers & Seasonal Illnesses</h2>
         <div class="grid">
             <div class="blog-card">
                 <img src="cough-wheeze-cover.svg" alt="Cough and wheezing in children" class="card-img" loading="lazy">
@@ -175,7 +188,7 @@
             <div class="blog-card">
                 <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&w=600&q=80" alt="Dengue in children Delhi" class="card-img" loading="lazy">
                 <div class="blog-content">
-                    <span class="blog-tag" style="background:#fee2e2; color:#991b1b;">Seasonal Alert</span>
+                    <span class="blog-tag" style="background:var(--surface,#fee2e2); color:var(--tx,#991b1b);">Seasonal Alert</span>
                     <h3 class="blog-title">Dengue in Children in Delhi: Symptoms & Guide</h3>
                     <p class="blog-snippet">Critical parent guide on high fever, platelet monitoring facts, emergency red flags, and home hydration care.</p>
                     <a href="dengue-in-children-delhi.html" class="read-btn">Read Article <i class="fa-solid fa-arrow-right"></i></a>
@@ -201,7 +214,7 @@
             <div class="blog-card">
                 <img src="https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=600&q=80" alt="Air purifiers Delhi pollution" class="card-img" loading="lazy">
                 <div class="blog-content">
-                    <span class="blog-tag" style="background:#fef3c7; color:#b45309;">Pollution & Lungs</span>
+                    <span class="blog-tag" style="background:var(--surface,#fef3c7); color:var(--tx,#b45309);">Pollution & Lungs</span>
                     <h3 class="blog-title">Air Purifiers for Delhi Pollution: Buying Guide</h3>
                     <p class="blog-snippet">Do purifiers protect child lungs? True HEPA buying criteria, CADR guidelines, and common household mistakes.</p>
                     <a href="air-purifier-delhi-pollution-children.html" class="read-btn">Read Article <i class="fa-solid fa-arrow-right"></i></a>
@@ -233,7 +246,7 @@
 
     <footer>
         <p><strong>Dr. Dinesh Mittal, MBBS, DCH</strong> | Delhi Medical Council Reg. No: <strong>DMC/R/00668</strong></p>
-        <p style="font-size: 0.78rem; color: #64748b; margin-top: 6px;">&copy; 2026 Dr. Dinesh Mittal Child Clinic, Sector 3 Rohini, New Delhi.</p>
+        <p style="font-size: 0.78rem; color: var(--tx,#64748b); margin-top: 6px;">&copy; 2026 Dr. Dinesh Mittal Child Clinic, Sector 3 Rohini, New Delhi.</p>
     </footer>
 
 </body>

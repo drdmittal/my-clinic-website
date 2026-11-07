@@ -30,6 +30,12 @@ a.tool small{display:block;color:var(--muted);font-size:14.5px}
 .chev{color:var(--muted);font-size:22px}
 footer{text-align:center;color:var(--muted);font-size:13px}
 footer b{display:block;font:800 16px var(--display);color:var(--brand)}
+
+/* Dark mode fixes */
+@media (prefers-color-scheme: dark){
+footer,footer *{color:#aebdba !important}
+footer a{color:#8fd3ff !important}
+}
 </style>
 <script src="/site-nav.js" defer></script>
 <link rel="apple-touch-icon" href="/icons/icon-180.png">

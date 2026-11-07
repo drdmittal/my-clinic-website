@@ -6,11 +6,19 @@
 <meta name="robots" content="noindex,nofollow,noarchive">
 <title>Voice test · Dr. Dinesh Mittal</title>
 <style>
-  body{margin:0;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:#f5f4fc;color:#1d1b3a;font-size:17px;line-height:1.5}
+  body{margin:0;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--surface,#f5f4fc);color:var(--tx,#1d1b3a);font-size:17px;line-height:1.5}
   .box{max-width:560px;margin:0 auto;padding:20px 16px}
-  h1{font-size:20px;color:#2a2580;margin:0 0 12px}
+  h1{font-size:20px;color:var(--tx,#2a2580);margin:0 0 12px}
   button{width:100%;padding:16px;border:0;border-radius:14px;background:#2a2580;color:#fff;font:inherit;font-size:18px;font-weight:700;cursor:pointer;margin:8px 0}
-  pre{background:#fff;border:1px solid #e4e1f3;border-radius:12px;padding:12px;white-space:pre-wrap;font-size:14px;min-height:80px}
+  pre{background:var(--surface,#fff);border:1px solid #e4e1f3;border-radius:12px;padding:12px;white-space:pre-wrap;font-size:14px;min-height:80px}
+
+/* Dark mode: follows the phone's dark setting */
+@media (prefers-color-scheme: dark){
+  :root{--bg:#0f1a19;--ink:#e8eeec;--muted:#aebdba;--surface:#172629;--tx:#e8eeec;--line:#2c4043;--indigo-tx:#b3aeff}
+  html,body{background:var(--bg);color:var(--ink)}
+  a{color:#8fd3ff}
+  input,select,textarea{background:#101f21;color:var(--ink);border-color:var(--line)}
+}
 </style>
 </head>
 <body>

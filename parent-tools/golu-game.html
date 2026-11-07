@@ -1,4 +1,12 @@
-<!doctype html><html lang="hi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style><link rel="apple-touch-icon" href="/icons/icon-180.png">
+<!doctype html><html lang="hi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}
+/* Dark mode: follows the phone's dark setting */
+@media (prefers-color-scheme: dark){
+  :root{--bg:#0f1a19;--ink:#e8eeec;--muted:#aebdba;--surface:#172629;--tx:#e8eeec;--line:#2c4043;--indigo-tx:#b3aeff}
+  html,body{background:var(--bg);color:var(--ink)}
+  a{color:#8fd3ff}
+  input,select,textarea{background:#101f21;color:var(--ink);border-color:var(--line)}
+}
+</style><link rel="apple-touch-icon" href="/icons/icon-180.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-768Y52R8SC"></script>
@@ -48,7 +56,7 @@ h2{margin:0;font-size:26px;line-height:1.1;font-weight:800;text-align:center;tex
 .tile:active{transform:translateY(3px);box-shadow:0 2px 0 rgba(33,48,74,.18)}
 .tile .ic{font-size:40px;line-height:1;flex:none}
 .tile small{display:block;font:600 15px var(--font);color:var(--muted)}
-.t-food{background:var(--sun)} .t-chart{background:#9be3b4} .t-timer{background:#ffc7d0}
+.t-food{background:var(--sun)} .t-chart{background:var(--surface,#9be3b4)} .t-timer{background:var(--surface,#ffc7d0)}
 .parents-link{border:0;background:transparent;font:700 15px var(--font);color:var(--muted);text-decoration:underline;cursor:pointer;align-self:center;min-height:40px}
 /* food game */
 .prog{display:flex;gap:5px;justify-content:center;flex-wrap:wrap}
@@ -72,7 +80,7 @@ h2{margin:0;font-size:26px;line-height:1.1;font-weight:800;text-align:center;tex
 .yes{background:var(--grass);box-shadow:0 6px 0 var(--grass-deep)} .no{background:var(--berry);box-shadow:0 6px 0 #a92a21}
 .yn button:active{transform:translateY(4px);box-shadow:none}
 .why{border-radius:18px;padding:12px 14px;font-size:19px;font-weight:600;text-align:center}
-.why.good{background:#d8f5e2;color:var(--grass-deep)} .why.bad{background:#ffe0dc;color:#a92a21}
+.why.good{background:var(--surface,#d8f5e2);color:var(--grass-deep)} .why.bad{background:var(--surface,#ffe0dc);color:var(--tx,#a92a21)}
 .go{border:0;border-radius:22px;min-height:64px;font:800 24px var(--font);background:var(--ink);color:#fff;cursor:pointer;box-shadow:0 5px 0 rgba(0,0,0,.25)}
 .go:active{transform:translateY(3px);box-shadow:none}
 .result{background:var(--card);border-radius:28px;padding:20px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;box-shadow:0 6px 0 rgba(33,48,74,.14)}
@@ -81,7 +89,7 @@ h2{margin:0;font-size:26px;line-height:1.1;font-weight:800;text-align:center;tex
 .today{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .task{border:3px solid transparent;background:var(--card);border-radius:22px;padding:12px 10px;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;font:700 17px var(--font);color:var(--ink);cursor:pointer;min-height:120px;justify-content:center;box-shadow:0 4px 0 rgba(33,48,74,.12);position:relative}
 .task .ic{font-size:38px;line-height:1}
-.task[aria-pressed="true"]{background:#fff6d6;border-color:var(--sun-deep)}
+.task[aria-pressed="true"]{background:var(--surface,#fff6d6);border-color:var(--sun-deep)}
 .task .got{position:absolute;top:6px;right:8px;font-size:22px;opacity:0;transform:scale(.3);transition:all .25s cubic-bezier(.3,1.6,.5,1)}
 .task[aria-pressed="true"] .got{opacity:1;transform:scale(1)}
 .counter{text-align:center;font-weight:800;font-size:22px}
@@ -115,10 +123,10 @@ h2{margin:0;font-size:26px;line-height:1.1;font-weight:800;text-align:center;tex
 .pcard{background:var(--card);border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:10px;font-family:system-ui,sans-serif;font-size:16px;box-shadow:0 4px 0 rgba(33,48,74,.1)}
 .pcard h3{margin:0;font:800 20px var(--font)}
 .pcard label{font-weight:600}
-.pcard input,.pcard select{font:500 17px system-ui,sans-serif;border:2px solid #cfd8e6;border-radius:12px;padding:10px 12px;min-height:48px;width:100%;box-sizing:border-box;color:var(--ink);background:#fff}
+.pcard input,.pcard select{font:500 17px system-ui,sans-serif;border:2px solid #cfd8e6;border-radius:12px;padding:10px 12px;min-height:48px;width:100%;box-sizing:border-box;color:var(--ink);background:var(--surface,#fff)}
 .pcard ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
 .save{border:0;border-radius:14px;min-height:50px;font:800 19px var(--font);background:var(--grass);color:#fff;cursor:pointer}
-.danger{border:2px solid var(--berry);background:#fff;color:var(--berry);border-radius:14px;min-height:46px;font:700 16px var(--font);cursor:pointer}
+.danger{border:2px solid var(--berry);background:var(--surface,#fff);color:var(--berry);border-radius:14px;min-height:46px;font:700 16px var(--font);cursor:pointer}
 .msg{font-weight:700;color:var(--grass-deep)}
 /* confetti */
 .confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:50}
@@ -126,24 +134,24 @@ h2{margin:0;font-size:26px;line-height:1.1;font-weight:800;text-align:center;tex
 @keyframes fall{to{transform:translateY(110vh) rotate(540deg);opacity:.8}}
 .fly{position:fixed;font-size:34px;z-index:60;pointer-events:none;animation:fly .8s ease-in forwards}
 @keyframes fly{to{transform:translate(var(--dx),var(--dy)) scale(.5);opacity:.3}}
-.t-story{background:#d9f7c4} .t-plate{background:#ffd9a8} .t-screen{background:#b9e4ff} .t-brush{background:#d4f5f0} .t-safe{background:#e4d4ff} .t-behave{background:#fff0b3}
+.t-story{background:var(--surface,#d9f7c4)} .t-plate{background:var(--surface,#ffd9a8)} .t-screen{background:var(--surface,#b9e4ff)} .t-brush{background:var(--surface,#d4f5f0)} .t-safe{background:var(--surface,#e4d4ff)} .t-behave{background:var(--surface,#fff0b3)}
 .opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
 .opt{border:0;border-radius:22px;min-height:88px;font:800 19px var(--font);color:#fff;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;box-shadow:0 6px 0 rgba(0,0,0,.2);padding:6px}
 .opt .ic{font-size:34px;line-height:1}
 .opt.g{background:var(--grass)} .opt.y{background:var(--sun-deep);color:var(--ink)} .opt.r{background:var(--berry)}
 .chips{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .chip.wide{grid-column:1 / -1;min-height:64px;flex-direction:row;gap:10px;justify-content:center}
-.chip.xj,.chip.xj[aria-pressed="true"]{border-color:#d7263d!important;background:#ffe9ec!important;color:#a92a21;text-decoration:line-through;text-decoration-thickness:3px}
+.chip.xj,.chip.xj[aria-pressed="true"]{border-color:#d7263d!important;background:var(--surface,#ffe9ec)!important;color:var(--tx,#a92a21);text-decoration:line-through;text-decoration-thickness:3px}
 .chip.xj .pic{opacity:.55}
-.junkbox{background:#fff1f0;border:2px solid #d7263d;border-radius:18px;padding:12px 14px;display:flex;flex-direction:column;gap:10px;color:#7a1a14}
+.junkbox{background:var(--surface,#fff1f0);border:2px solid #d7263d;border-radius:18px;padding:12px 14px;display:flex;flex-direction:column;gap:10px;color:var(--tx,#7a1a14)}
 .jx{display:flex;gap:10px;align-items:flex-start;font-size:16px;line-height:1.4}
 .jx .jp{font-size:28px;flex:none;opacity:.7}
-.jn{color:#c0271c;font-size:18px}
-.jnote{font-weight:700;color:#a92a21;font-size:16px}
+.jn{color:var(--tx,#c0271c);font-size:18px}
+.jnote{font-weight:700;color:var(--tx,#a92a21);font-size:16px}
 .chip{border:3px solid transparent;background:var(--card);border-radius:18px;padding:8px 4px;display:flex;flex-direction:column;align-items:center;font:700 15px var(--font);color:var(--ink);cursor:pointer;min-height:92px;justify-content:center;box-shadow:0 4px 0 rgba(33,48,74,.12);text-align:center}
 .chip .pic{font-size:34px;line-height:1.1}
-.chip[aria-pressed="true"]{border-color:var(--grass);background:#e6f8ea}
-.plate{background:#fff3d6;border:4px dashed var(--sun-deep);border-radius:50%;width:210px;height:210px;margin:0 auto;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:800;font-size:28px;line-height:1.3;padding:24px;box-sizing:border-box}
+.chip[aria-pressed="true"]{border-color:var(--grass);background:var(--surface,#e6f8ea)}
+.plate{background:var(--surface,#fff3d6);border:4px dashed var(--sun-deep);border-radius:50%;width:210px;height:210px;margin:0 auto;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:800;font-size:28px;line-height:1.3;padding:24px;box-sizing:border-box}
 .checklist{background:var(--card);border-radius:20px;padding:12px 14px;display:flex;flex-direction:column;gap:6px;font-weight:700}
 .step{background:var(--card);border-radius:24px;padding:18px;display:flex;flex-direction:column;gap:8px;align-items:center;text-align:center;box-shadow:0 6px 0 rgba(33,48,74,.14)}
 .step .n{font-size:17px;color:var(--muted);font-weight:800}
@@ -168,19 +176,19 @@ button:focus-visible{outline:4px solid var(--ink);outline-offset:3px}
 .intro .golu{width:120px;height:120px;animation:bobUp 2.4s ease-in-out infinite}
 .intro .wave{display:inline-block;transform-origin:70% 70%;animation:hello 1.2s ease-in-out infinite}
 .spark{position:absolute;font-size:22px;pointer-events:none;animation:twinkle 2.2s ease-in-out infinite}
-.kidbig{font:800 18px system-ui,sans-serif;border:none;border-radius:22px;padding:16px 12px;width:100%;box-shadow:0 6px 0 rgba(33,48,74,.18);cursor:pointer;color:#21304a;background:#fff}
-.kidbig[aria-pressed="true"]{background:#c8f7d7;animation:popIn .45s ease-out}
+.kidbig{font:800 18px system-ui,sans-serif;border:none;border-radius:22px;padding:16px 12px;width:100%;box-shadow:0 6px 0 rgba(33,48,74,.18);cursor:pointer;color:var(--tx,#21304a);background:var(--surface,#fff)}
+.kidbig[aria-pressed="true"]{background:var(--surface,#c8f7d7);animation:popIn .45s ease-out}
 .kidbig .em{display:block;font-size:34px;line-height:1.1;margin-bottom:4px}
 .kidrow{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
-.kidname{width:100%;box-sizing:border-box;font:700 22px system-ui,sans-serif;padding:14px;border-radius:20px;border:3px solid #9bd3ff;text-align:center;color:#21304a}
+.kidname{width:100%;box-sizing:border-box;font:700 22px system-ui,sans-serif;padding:14px;border-radius:20px;border:3px solid #9bd3ff;text-align:center;color:var(--tx,#21304a)}
 .kidname:focus{outline:4px solid #ffc93c;border-color:#ffc93c}
 .letsgo{width:100%;margin-top:16px;font:800 22px system-ui,sans-serif;padding:18px;border:none;border-radius:24px;background:#3fb66b;color:#fff;box-shadow:0 7px 0 #2a8a4d;cursor:pointer}
-.kidcard{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 8px;min-width:96px;border-radius:20px;border:3px solid transparent;background:#fff;font:700 16px system-ui,sans-serif;color:#21304a;cursor:pointer}
-.kidcard[aria-pressed="true"]{border-color:#3fb66b;background:#e9fbef}
+.kidcard{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 8px;min-width:96px;border-radius:20px;border:3px solid transparent;background:var(--surface,#fff);font:700 16px system-ui,sans-serif;color:var(--tx,#21304a);cursor:pointer}
+.kidcard[aria-pressed="true"]{border-color:#3fb66b;background:var(--surface,#e9fbef)}
 .kidcard .golu{width:64px;height:64px}
 .kidcards{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:10px 0 2px}
-.kidsmall{margin-top:14px;background:none;border:none;font:700 15px system-ui,sans-serif;color:#2563eb;cursor:pointer;text-decoration:underline}
-.parentnote{margin-top:22px;font:600 12px system-ui,sans-serif;color:#64748b;text-align:center}
+.kidsmall{margin-top:14px;background:none;border:none;font:700 15px system-ui,sans-serif;color:var(--tx,#2563eb);cursor:pointer;text-decoration:underline}
+.parentnote{margin-top:22px;font:600 12px system-ui,sans-serif;color:var(--tx,#64748b);text-align:center}
 @media (prefers-reduced-motion: reduce){.golu.bounce,.golu.shake,.confetti span,.fly,.intro .golu,.intro .wave,.spark,.kidbig[aria-pressed="true"]{animation:none}.balloon{transition:none}}
 </style>
 
@@ -559,7 +567,7 @@ function renderCharPick(){
   var cards = S.kids.length>1 ? '<div class="kidcards">'+S.kids.map(function(k){
     var gen = k.gender || 'girl';
     return '<button type="button" class="kidcard" data-kid="'+k.id+'" aria-pressed="'+(k.id===S.active)+'">'+goluSvg('happy','small',gen)+'<span>'+esc(k.name || tx('No name','बिना नाम'))+'</span><small>⭐ '+k.bonus+'</small></button>';
-  }).join('')+'</div><div style="text-align:center;font:700 16px system-ui,sans-serif;color:#21304a;margin-top:6px">'+tx('Who is playing?','कौन खेल रहा है?')+'</div>' : '';
+  }).join('')+'</div><div style="text-align:center;font:700 16px system-ui,sans-serif;color:var(--tx,#21304a);margin-top:6px">'+tx('Who is playing?','कौन खेल रहा है?')+'</div>' : '';
   document.getElementById('s-char').innerHTML =
     '<div class="intro">'+
       '<span class="spark" style="left:6%;top:8%">⭐</span><span class="spark" style="right:8%;top:4%;animation-delay:.6s">✨</span><span class="spark" style="left:14%;bottom:14%;animation-delay:1.1s">⭐</span><span class="spark" style="right:12%;bottom:18%;animation-delay:1.6s">✨</span>'+
@@ -568,17 +576,17 @@ function renderCharPick(){
     '</div>'+
     cards+
     '<input id="kidName" class="kidname" type="text" maxlength="20" autocomplete="off" placeholder="'+tx('Type your name','अपना नाम लिखो')+'" value="'+esc(kid.name)+'" style="margin-top:12px">'+
-    '<div style="text-align:center;font:700 18px system-ui,sans-serif;color:#21304a;margin:14px 0 2px">'+tx('I am a…','मैं हूँ…')+'</div>'+
+    '<div style="text-align:center;font:700 18px system-ui,sans-serif;color:var(--tx,#21304a);margin:14px 0 2px">'+tx('I am a…','मैं हूँ…')+'</div>'+
     '<div class="kidrow">'+
       '<button type="button" class="kidbig" data-gender="boy" aria-pressed="'+(kid.gender==='boy')+'"><span class="em">👦</span>'+tx('a boy','लड़का')+'</button>'+
       '<button type="button" class="kidbig" data-gender="girl" aria-pressed="'+(kid.gender==='girl')+'"><span class="em">👧</span>'+tx('a girl','लड़की')+'</button>'+
     '</div>'+
-    '<div id="genderHint" style="color:#b91c1c;font-weight:700;text-align:center;margin-top:8px" '+(kid.gender?'hidden':'')+'>'+tx('Pick boy or girl first','पहले लड़का या लड़की चुनो')+'</div>'+
+    '<div id="genderHint" style="color:var(--tx,#b91c1c);font-weight:700;text-align:center;margin-top:8px" '+(kid.gender?'hidden':'')+'>'+tx('Pick boy or girl first','पहले लड़का या लड़की चुनो')+'</div>'+
     '<button type="button" class="letsgo" data-kidsave="1">'+tx("Let's play!",'चलो खेलें!')+'</button>'+
     '<button type="button" class="kidsmall" data-kidnew="1">'+tx('+ Add another child','+ एक और बच्चा जोड़ो')+'</button>'+
     '<div class="parentnote">'+
       tx('Parents: to reset this child’s stars, press and hold the ⭐ counter for 3 seconds, or tap it 5 times.','माता-पिता: इस बच्चे के स्टार मिटाने के लिए ⭐ गिनती को 3 सेकंड दबाकर रखें, या 5 बार टैप करें।')+
-      (S.kids.length>1 ? '<br><button type="button" class="kidsmall" style="font-size:12px;color:#64748b;margin-top:6px" data-kidremove="1">'+tx('Remove this child','यह बच्चा हटाएँ')+'</button>' : '')+
+      (S.kids.length>1 ? '<br><button type="button" class="kidsmall" style="font-size:12px;color:var(--tx,#64748b);margin-top:6px" data-kidremove="1">'+tx('Remove this child','यह बच्चा हटाएँ')+'</button>' : '')+
     '</div>';
 }
 function applyLang(){
@@ -796,4 +804,4 @@ document.getElementById('app').addEventListener('click', function(e){
 applyLang(); updateBank(); show(KID().name && KID().gender ? 'home' : 'char');
 })();
 </script>
-<footer style="max-width:560px;margin:8px auto 24px;padding:0 16px;text-align:center;font:13px/1.5 Mukta,system-ui,sans-serif;color:#556175"><b style="display:block;font:800 16px 'Baloo 2',Mukta,sans-serif;color:#1f5fbf">Dr. Dinesh Mittal Child Clinic</b>Dr. Dinesh Mittal, MBBS, DCH · Child Specialist<br>H-34/69, Sector 3, Rohini, Delhi – 110085<br>Phone: <span style="user-select:all;font-weight:700">+91 81305 21456</span><br>Mon–Sat 10:00 AM–1:00 PM &amp; 6:00–8:30 PM · Sun 11:00 AM–12:00 PM<br><a href="https://www.drdineshmittal.com" style="color:#1f5fbf;font-weight:700">www.drdineshmittal.com</a></footer></body></html>
+<footer style="max-width:560px;margin:8px auto 24px;padding:0 16px;text-align:center;font:13px/1.5 Mukta,system-ui,sans-serif;color:var(--tx,#556175)"><b style="display:block;font:800 16px 'Baloo 2',Mukta,sans-serif;color:var(--tx,#1f5fbf)">Dr. Dinesh Mittal Child Clinic</b>Dr. Dinesh Mittal, MBBS, DCH · Child Specialist<br>H-34/69, Sector 3, Rohini, Delhi – 110085<br>Phone: <span style="user-select:all;font-weight:700">+91 81305 21456</span><br>Mon–Sat 10:00 AM–1:00 PM &amp; 6:00–8:30 PM · Sun 11:00 AM–12:00 PM<br><a href="https://www.drdineshmittal.com" style="color:var(--tx,#1f5fbf);font-weight:700">www.drdineshmittal.com</a></footer></body></html>
