@@ -331,6 +331,13 @@ dialog::backdrop{background:rgba(15,12,50,.55)}
 .vbook{margin-top:14px}
 .vbook .btn{width:100%}
 .areas-foot{font-size:12.5px;opacity:.7;margin-top:6px;line-height:1.5}
+.ticker{overflow:hidden;position:relative;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);margin-top:6px}
+.ticker-track{display:flex;gap:10px;width:max-content;padding:6px 0;animation:ticker-run 30s linear infinite}
+.ticker:hover .ticker-track,.ticker:focus-within .ticker-track,.ticker:active .ticker-track{animation-play-state:paused}
+.pill{display:inline-flex;align-items:center;gap:8px;white-space:nowrap;background:var(--surface);color:var(--ink);border:2px solid var(--c);border-radius:999px;padding:9px 16px;text-decoration:none;font-weight:700;font-size:16px}
+.pill .nt{background:var(--c);color:#fff;font-size:11px;font-weight:800;border-radius:999px;padding:2px 8px}
+@keyframes ticker-run{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.ticker{overflow-x:auto}.ticker-track{animation:none;width:auto}.ticker-dup{display:none!important}}
 </style>
 <script src="/site-nav.js" defer></script>
 <link rel="apple-touch-icon" href="/icons/icon-180.png">
@@ -406,11 +413,7 @@ dialog::backdrop{background:rgba(15,12,50,.55)}
     <section id="new-articles" style="padding-top:12px">
       <div class="wrap">
         <div class="sh"><h2><span class="en">New articles</span><span class="hi">नए लेख</span></h2><p><span class="en">Latest guides for parents, in Hindi or English.</span><span class="hi">माता-पिता के लिए ताज़ा लेख, हिंदी या अंग्रेज़ी में।</span></p></div>
-        <div class="tools">
-          <a class="tool" href="diwali-safety-guide.html" style="--c:var(--red)"><span class="newtag">NEW</span><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg></span><b><span class="en">Safe Diwali for children</span><span class="hi">बच्चों के लिए सुरक्षित दिवाली</span></b><small><span class="en">Prevention, first aid for burns, eyes and hands, and Delhi-NCR 2026 cracker timings</span><span class="hi">बचाव, जलने, आँख और हाथ की चोट का उपचार, और दिल्ली-NCR 2026 के पटाखा समय</span></small></a>
-          <a class="tool" href="exam-preparation-guide.html" style="--c:var(--sun)"><span class="newtag">NEW</span><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5V5a2 2 0 0 1 2-2h14v15H6a2 2 0 0 0-2 2z"/><path d="M4 19.5A2 2 0 0 0 6 22h14v-5"/></svg></span><b><span class="en">Exam preparation for children</span><span class="hi">बच्चों की परीक्षा की तैयारी</span></b><small><span class="en">Breaks, timetable, desk yoga, play, revision and family time</span><span class="hi">ब्रेक, टाइमटेबल, डेस्क योगा, खेल, रिवीजन और परिवार का समय</span></small></a>
-          <a class="tool" href="headache-children-guide.html" style="--c:var(--pink)"><span class="newtag">NEW</span><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg></span><b><span class="en">Headache in children</span><span class="hi">बच्चों में सिरदर्द</span></b><small><span class="en">Common types, migraine, and when to see a doctor</span><span class="hi">आम प्रकार, माइग्रेन, और डॉक्टर को कब दिखाएँ</span></small></a>
-        </div>
+        <div class="ticker" role="region" aria-label="New articles"><div class="ticker-track"><a class="pill" href="diwali-safety-guide.html" style="--c:var(--red)"><span class="nt">NEW</span><span class="en">Safe Diwali for children</span><span class="hi">बच्चों के लिए सुरक्षित दिवाली</span></a><a class="pill" href="exam-preparation-guide.html" style="--c:var(--sun)"><span class="nt">NEW</span><span class="en">Exam preparation for children</span><span class="hi">बच्चों की परीक्षा की तैयारी</span></a><a class="pill" href="headache-children-guide.html" style="--c:var(--pink)"><span class="nt">NEW</span><span class="en">Headache in children</span><span class="hi">बच्चों में सिरदर्द</span></a><span aria-hidden="true" class="ticker-dup" style="display:contents"><a class="pill" tabindex="-1" href="diwali-safety-guide.html" style="--c:var(--red)"><span class="nt">NEW</span><span class="en">Safe Diwali for children</span><span class="hi">बच्चों के लिए सुरक्षित दिवाली</span></a><a class="pill" tabindex="-1" href="exam-preparation-guide.html" style="--c:var(--sun)"><span class="nt">NEW</span><span class="en">Exam preparation for children</span><span class="hi">बच्चों की परीक्षा की तैयारी</span></a><a class="pill" tabindex="-1" href="headache-children-guide.html" style="--c:var(--pink)"><span class="nt">NEW</span><span class="en">Headache in children</span><span class="hi">बच्चों में सिरदर्द</span></a></span></div></div>
       </div>
     </section>
 
