@@ -339,6 +339,8 @@ dialog::backdrop{background:rgba(15,12,50,.55)}
 .pill{display:inline-flex;align-items:center;gap:8px;white-space:nowrap;background:var(--surface);color:var(--ink);border:2px solid var(--c);border-radius:999px;padding:9px 16px;text-decoration:none;font-weight:700;font-size:16px}
 .pill .nt{background:var(--c);color:#fff;font-size:11px;font-weight:800;border-radius:999px;padding:2px 8px}
 @keyframes ticker-run{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes ticker-run-rev{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+.pinned .ticker-track{animation-name:ticker-run-rev}
 @media (prefers-reduced-motion:reduce){.ticker{overflow-x:auto}.ticker-track{animation:none;width:auto}.ticker-dup{display:none!important}}
 </style>
 <script src="/site-nav.js" defer></script>
