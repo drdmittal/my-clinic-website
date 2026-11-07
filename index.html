@@ -413,7 +413,7 @@ dialog::backdrop{background:rgba(15,12,50,.55)}
     <section id="new-articles" style="padding-top:12px">
       <div class="wrap">
         <div class="sh"><h2><span class="en">Health guides</span><span class="hi">स्वास्थ्य गाइड</span></h2><p><span class="en">Latest guides for parents, in Hindi or English.</span><span class="hi">माता-पिता के लिए ताज़ा लेख, हिंदी या अंग्रेज़ी में।</span></p></div>
-        <div class="ticker" role="region" aria-label="Health guides"><div class="ticker-track"><a class="pill" href="allergic-rhinitis-guide.html" style="--c:var(--red)"><span class="nt">NEW</span><span class="en">Allergic rhinitis & adenoids</span><span class="hi">एलर्जिक राइनाइटिस और एडेनॉयड्स</span></a><a class="pill" href="diwali-safety-guide.html" style="--c:var(--red)"><span class="nt">NEW</span><span class="en">Safe Diwali for children</span><span class="hi">बच्चों के लिए सुरक्षित दिवाली</span></a><a class="pill" href="exam-preparation-guide.html" style="--c:var(--sun)"><span class="nt">NEW</span><span class="en">Exam preparation</span><span class="hi">बच्चों की परीक्षा की तैयारी</span></a><a class="pill" href="headache-children-guide.html" style="--c:var(--pink)"><span class="en">Headache in children</span><span class="hi">बच्चों में सिरदर्द</span></a><a class="pill" href="colic-care-guide.html" style="--c:var(--teal)"><span class="en">Colic in babies</span><span class="hi">बच्चों में कोलिक</span></a><a class="pill" href="child-fever-management-guide.html" style="--c:var(--orange)"><span class="en">High fever in toddlers</span><span class="hi">बच्चों में तेज़ बुखार</span></a><a class="pill" href="cough-wheeze-children-guide.html" style="--c:var(--teal)"><span class="en">Cough and wheezing</span><span class="hi">खाँसी और घरघराहट</span></a><a class="pill" href="dengue-in-children-delhi.html" style="--c:var(--orange)"><span class="en">Dengue in children</span><span class="hi">बच्चों में डेंगू</span></a><a class="pill" href="monsoon-flu-care-children.html" style="--c:var(--grape)"><span class="en">Monsoon and viral flu</span><span class="hi">मानसून और वायरल फ़्लू</span></a><a class="pill all" href="health-articles.html" style="--c:var(--indigo)"><span class="en">All guides →</span><span class="hi">सभी गाइड →</span></a><span aria-hidden="true" class="ticker-dup" style="display:contents"><a tabindex="-1" class="pill" href="allergic-rhinitis-guide.html" style="--c:var(--red)"><span class="nt">NEW</span><span class="en">Allergic rhinitis & adenoids</span><span class="hi">एलर्जिक राइनाइटिस और एडेनॉयड्स</span></a><a tabindex="-1" class="pill" href="diwali-safety-guide.html" style="--c:var(--red)"><span class="nt">NEW</span><span class="en">Safe Diwali for children</span><span class="hi">बच्चों के लिए सुरक्षित दिवाली</span></a><a tabindex="-1" class="pill" href="exam-preparation-guide.html" style="--c:var(--sun)"><span class="nt">NEW</span><span class="en">Exam preparation</span><span class="hi">बच्चों की परीक्षा की तैयारी</span></a><a tabindex="-1" class="pill" href="headache-children-guide.html" style="--c:var(--pink)"><span class="en">Headache in children</span><span class="hi">बच्चों में सिरदर्द</span></a><a tabindex="-1" class="pill" href="colic-care-guide.html" style="--c:var(--teal)"><span class="en">Colic in babies</span><span class="hi">बच्चों में कोलिक</span></a><a tabindex="-1" class="pill" href="child-fever-management-guide.html" style="--c:var(--orange)"><span class="en">High fever in toddlers</span><span class="hi">बच्चों में तेज़ बुखार</span></a><a tabindex="-1" class="pill" href="cough-wheeze-children-guide.html" style="--c:var(--teal)"><span class="en">Cough and wheezing</span><span class="hi">खाँसी और घरघराहट</span></a><a tabindex="-1" class="pill" href="dengue-in-children-delhi.html" style="--c:var(--orange)"><span class="en">Dengue in children</span><span class="hi">बच्चों में डेंगू</span></a><a tabindex="-1" class="pill" href="monsoon-flu-care-children.html" style="--c:var(--grape)"><span class="en">Monsoon and viral flu</span><span class="hi">मानसून और वायरल फ़्लू</span></a><a tabindex="-1" class="pill all" href="health-articles.html" style="--c:var(--indigo)"><span class="en">All guides →</span><span class="hi">सभी गाइड →</span></a></span></div></div>
+        <div class="ticker" id="guideTicker" role="region" aria-label="Health guides"></div>
       </div>
     </section>
 
@@ -548,5 +548,53 @@ dialog::backdrop{background:rgba(15,12,50,.55)}
 })();
 </script>
 <script>(function(){function set(){var hi=document.documentElement.getAttribute('data-lang')==='hi';document.querySelectorAll('form.sitesearch input[name=q]').forEach(function(i){i.placeholder=hi?'खोजें (बुखार, दाँत, आहार…)':'Search (fever, teething, diet…)';});}set();new MutationObserver(set).observe(document.documentElement,{attributes:true,attributeFilter:['data-lang']});})();</script>
+<script>
+/* Health guides strip. Add new articles at the TOP of GUIDES.
+   The strip shows the first MAX entries; the first 3 get the NEW tag. */
+(function(){
+  var MAX = 9, NEW_COUNT = 3;
+  var GUIDES = [
+    {href:'diwali-safety-guide.html', en:'Safe Diwali for children', hi:'बच्चों के लिए सुरक्षित दिवाली', c:'red'},
+    {href:'exam-preparation-guide.html', en:'Exam preparation', hi:'बच्चों की परीक्षा की तैयारी', c:'sun'},
+    {href:'headache-children-guide.html', en:'Headache in children', hi:'बच्चों में सिरदर्द', c:'pink'},
+    {href:'colic-care-guide.html', en:'Colic in babies', hi:'बच्चों में कोलिक', c:'teal'},
+    {href:'child-fever-management-guide.html', en:'High fever in toddlers', hi:'बच्चों में तेज़ बुखार', c:'orange'},
+    {href:'cough-wheeze-children-guide.html', en:'Cough and wheezing', hi:'खाँसी और घरघराहट', c:'teal'},
+    {href:'dengue-in-children-delhi.html', en:'Dengue in children', hi:'बच्चों में डेंगू', c:'orange'},
+    {href:'monsoon-flu-care-children.html', en:'Monsoon and viral flu', hi:'मानसून और वायरल फ़्लू', c:'grape'},
+    {href:'newborn-care-guide.html', en:'Newborn care tips', hi:'नवजात देखभाल के सुझाव', c:'sky'}
+  ];
+  var box = document.getElementById('guideTicker');
+  if (!box) return;
+  function pill(g, i, dup){
+    var a = document.createElement('a');
+    a.className = 'pill'; a.href = g.href; a.style.setProperty('--c','var(--'+g.c+')');
+    if (dup) a.tabIndex = -1;
+    if (i < NEW_COUNT){ var n = document.createElement('span'); n.className='nt'; n.textContent='NEW'; a.appendChild(n); }
+    var en = document.createElement('span'); en.className='en'; en.textContent = g.en;
+    var hi = document.createElement('span'); hi.className='hi'; hi.textContent = g.hi;
+    a.appendChild(en); a.appendChild(hi);
+    return a;
+  }
+  function allPill(dup){
+    var a = document.createElement('a');
+    a.className = 'pill all'; a.href = 'health-articles.html'; a.style.setProperty('--c','var(--indigo)');
+    if (dup) a.tabIndex = -1;
+    var en = document.createElement('span'); en.className='en'; en.textContent='All guides →';
+    var hi = document.createElement('span'); hi.className='hi'; hi.textContent='सभी गाइड →';
+    a.appendChild(en); a.appendChild(hi);
+    return a;
+  }
+  var track = document.createElement('div'); track.className = 'ticker-track';
+  var shown = GUIDES.slice(0, MAX);
+  shown.forEach(function(g,i){ track.appendChild(pill(g,i,false)); });
+  track.appendChild(allPill(false));
+  var dup = document.createElement('span'); dup.className='ticker-dup'; dup.setAttribute('aria-hidden','true'); dup.style.display='contents';
+  shown.forEach(function(g,i){ dup.appendChild(pill(g,i,true)); });
+  dup.appendChild(allPill(true));
+  track.appendChild(dup);
+  box.appendChild(track);
+})();
+</script>
 </body>
 </html>
