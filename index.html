@@ -332,7 +332,7 @@ dialog::backdrop{background:rgba(15,12,50,.55)}
 .vbook .btn{width:100%}
 .areas-foot{font-size:12.5px;opacity:.7;margin-top:6px;line-height:1.5}
 .ticker{overflow:hidden;position:relative;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);margin-top:6px}
-.ticker-track{display:flex;gap:10px;width:max-content;padding:6px 0;animation:ticker-run 110s linear infinite}
+.ticker-track{display:flex;gap:10px;width:max-content;padding:6px 0;animation:ticker-run 50s linear infinite}
 .ticker:hover .ticker-track,.ticker:focus-within .ticker-track,.ticker:active .ticker-track{animation-play-state:paused}
 .pill{display:inline-flex;align-items:center;gap:8px;white-space:nowrap;background:var(--surface);color:var(--ink);border:2px solid var(--c);border-radius:999px;padding:9px 16px;text-decoration:none;font-weight:700;font-size:16px}
 .pill .nt{background:var(--c);color:#fff;font-size:11px;font-weight:800;border-radius:999px;padding:2px 8px}
@@ -549,32 +549,20 @@ dialog::backdrop{background:rgba(15,12,50,.55)}
 </script>
 <script>(function(){function set(){var hi=document.documentElement.getAttribute('data-lang')==='hi';document.querySelectorAll('form.sitesearch input[name=q]').forEach(function(i){i.placeholder=hi?'खोजें (बुखार, दाँत, आहार…)':'Search (fever, teething, diet…)';});}set();new MutationObserver(set).observe(document.documentElement,{attributes:true,attributeFilter:['data-lang']});})();</script>
 <script>
-/* Health guides strip: every health article. Add new articles at the TOP of GUIDES;
-   the first 3 get the NEW tag. Allergic rhinitis is kept in Common diseases, not here. */
+/* Health guides strip: the same articles as the Important health articles page, newest first.
+   Items in GUIDES are shown in order; NEW_COUNT sets how many get the NEW tag. */
 (function(){
-  var MAX = 100, NEW_COUNT = 3;
+  var MAX = 100, NEW_COUNT = 2;
   var GUIDES = [
     {href:'diwali-safety-guide.html', en:'Safe Diwali for children', hi:'बच्चों के लिए सुरक्षित दिवाली', c:'red'},
     {href:'exam-preparation-guide.html', en:'Exam preparation', hi:'बच्चों की परीक्षा की तैयारी', c:'sun'},
-    {href:'headache-children-guide.html', en:'Headache in children', hi:'बच्चों में सिरदर्द', c:'pink'},
-    {href:'colic-care-guide.html', en:'Colic in babies', hi:'बच्चों में कोलिक', c:'teal'},
-    {href:'newborn-care-guide.html', en:'Newborn care tips', hi:'नवजात देखभाल के सुझाव', c:'sky'},
-    {href:'parent-tools/newborn-care.html', en:'Newborn care at home', hi:'घर पर नवजात देखभाल', c:'sky'},
-    {href:'child-fever-management-guide.html', en:'High fever in toddlers', hi:'बच्चों में तेज़ बुखार', c:'orange'},
-    {href:'cough-wheeze-children-guide.html', en:'Cough and wheezing', hi:'खाँसी और घरघराहट', c:'teal'},
+    {href:'parent-tools/teething-guide.html', en:'Teething', hi:'दाँत निकलना', c:'sun'},
     {href:'dengue-in-children-delhi.html', en:'Dengue in children', hi:'बच्चों में डेंगू', c:'orange'},
+    {href:'cough-wheeze-children-guide.html', en:'Cough and wheezing', hi:'खाँसी और घरघराहट', c:'teal'},
     {href:'monsoon-flu-care-children.html', en:'Monsoon and viral flu', hi:'मानसून और वायरल फ़्लू', c:'grape'},
     {href:'air-purifier-delhi-pollution-children.html', en:'Air purifiers and Delhi pollution', hi:'दिल्ली प्रदूषण और एयर प्यूरीफ़ायर', c:'grape'},
     {href:'reduce-screen-time-in-children.html', en:'Reducing screen time', hi:'स्क्रीन टाइम कम करना', c:'sky'},
-    {href:'parenting-behavior-guide.html', en:'Behaviour problems', hi:'व्यवहार की समस्याएँ', c:'pink'},
-    {href:'adolescent-health-puberty-guide.html', en:'Puberty and teen health', hi:'किशोरावस्था और यौवन', c:'grape'},
-    {href:'pediatric-vaccine-faqs-guide.html', en:'Vaccine FAQs', hi:'टीकों के सवाल-जवाब', c:'teal'},
-    {href:'painless-vs-painful-vaccines.html', en:'Painless vs painful vaccines', hi:'दर्द-रहित और दर्द वाले टीके', c:'teal'},
-    {href:'missed-vaccine-guide.html', en:'Missed vaccine? What to do', hi:'टीका छूट गया? अब क्या करें', c:'teal'},
-    {href:'parent-tools/teething-guide.html', en:'Teething', hi:'दाँत निकलना', c:'sun'},
-    {href:'parent-tools/constipation-guide.html', en:'Constipation in children', hi:'बच्चों में कब्ज़', c:'orange'},
-    {href:'parent-tools/diarrhoea-ors-guide.html', en:'Diarrhoea and ORS', hi:'दस्त और घर पर ORS', c:'orange'},
-    {href:'parent-tools/first-aid-guide.html', en:'First aid at home', hi:'घर पर प्राथमिक उपचार', c:'red'}
+    {href:'child-specialist-rohini-sector-3.html', en:'Child specialist in Rohini Sector 3', hi:'रोहिणी सेक्टर 3 में शिशु रोग विशेषज्ञ', c:'pink'}
   ];
   var box = document.getElementById('guideTicker');
   if (!box) return;
