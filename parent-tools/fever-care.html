@@ -13,5 +13,20 @@
       gtag('js', new Date());
       gtag('config', 'G-768Y52R8SC');
     </script>
+<style>
+/* Dark mode: follows the phone's dark setting */
+@media (prefers-color-scheme: dark){
+  :root{--bg:#0f1a19;--ink:#e8eeec;--muted:#aebdba;--surface:#172629;--tx:#e8eeec;--line:#2c4043;--indigo-tx:#b3aeff}
+  html,body{background:var(--bg);color:var(--ink)}
+  a{color:#8fd3ff}
+  input,select,textarea{background:#101f21;color:var(--ink);border-color:var(--line)}
+}
+
+/* Dark mode fixes */
+@media (prefers-color-scheme: dark){
+footer,footer *{color:#aebdba !important}
+footer a{color:#8fd3ff !important}
+}
+</style>
 </head>
 <body><p><a href="fever-chart.html">Open the fever chart</a></p></body></html>

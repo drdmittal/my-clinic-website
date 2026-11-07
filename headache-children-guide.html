@@ -95,6 +95,12 @@ th{color:var(--indigo)}
 .sec{border-top:6px solid var(--c);background:color-mix(in srgb,var(--c) 9%,var(--surface))}
 .sec > h2{color:var(--ink)}
 .pose{background:color-mix(in srgb,var(--sky) 14%,var(--surface))}
+
+/* Dark mode fixes */
+@media (prefers-color-scheme: dark){
+.n{color:#14122e !important}
+[style*="indigo"] .n,[style*="teal"] .n,[style*="grape"] .n,[style*="sky"] .n,[style*="green"] .n{color:#fff !important}
+}
 </style>
 <script src="/site-nav.js" defer></script>
 </head>

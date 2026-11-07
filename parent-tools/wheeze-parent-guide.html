@@ -25,7 +25,7 @@
   body.only-hi .en{display:none!important}
   .top{position:sticky;top:0;z-index:20;background:rgba(246,245,252,.96);backdrop-filter:blur(6px);margin:0;padding:10px 14px;border-bottom:1px solid var(--line);display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap}
   .switch{display:flex;gap:6px}
-  .switch button{font:inherit;font-weight:700;border:2px solid var(--indigo);background:#fff;color:var(--indigo);border-radius:999px;padding:6px 14px;cursor:pointer}
+  .switch button{font:inherit;font-weight:700;border:2px solid var(--indigo);background:var(--surface,#fff);color:var(--indigo-tx,var(--indigo));border-radius:999px;padding:6px 14px;cursor:pointer}
   .switch button[aria-pressed="true"]{background:var(--indigo);color:#fff}
   .print{font:inherit;font-weight:700;border:0;background:var(--pink);color:#fff;border-radius:999px;padding:7px 14px;cursor:pointer}
   .hero{background:linear-gradient(135deg,var(--indigo),var(--grape));color:#fff;border-radius:22px;padding:22px 22px}
@@ -33,12 +33,12 @@
   .hero h1{font-size:clamp(28px,6vw,40px);line-height:1.2;margin:10px 0 6px;font-weight:800}
   .hero p{opacity:.95}
   
-  .clinic b{color:var(--indigo)}
+  .clinic b{color:var(--indigo-tx,var(--indigo))}
   .card{background:var(--surface);border-radius:18px;padding:18px 20px;border:1px solid var(--line);position:relative}
   .card .num{position:absolute;top:-10px;left:16px;background:var(--pink);color:#fff;font-weight:800;font-size:14px;border-radius:999px;padding:2px 11px}
   .card .en,.card .hi{padding-top:8px}
   .card .hi{border-top:2px dashed var(--line);margin-top:12px;padding-top:14px}
-  .card .en .qq,.card .hi .qq{font-weight:800;font-size:19px;color:var(--indigo);margin-bottom:8px;line-height:1.35}
+  .card .en .qq,.card .hi .qq{font-weight:800;font-size:19px;color:var(--indigo-tx,var(--indigo));margin-bottom:8px;line-height:1.35}
   .card .hi .qq{color:var(--pink)}
   .card p+p,.card ul+p,.card p+ul,.card .pic+p{margin-top:8px}
   .card ul{margin:0;padding-left:20px}
@@ -48,14 +48,14 @@
   .card .qrow .en{border:0}
   .card .qrow .hi{background:none}
   .card .tagline{display:none}
-  .pic{margin:10px 0 4px;background:#eef9f7;border-radius:14px;padding:10px}
+  .pic{margin:10px 0 4px;background:var(--surface,#eef9f7);border-radius:14px;padding:10px}
   .pic svg{display:block;width:100%;height:auto;max-width:100%}
   .cap{font-size:13px;font-weight:600;text-align:center;margin-top:4px;opacity:.85}
-  .compare{width:100%;border-collapse:collapse;font-size:15px;background:#fff}
+  .compare{width:100%;border-collapse:collapse;font-size:15px;background:var(--surface,#fff)}
   .compare th,.compare td{padding:9px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
   .compare th{background:var(--teal);color:#fff}
   .table-wrap{overflow-x:auto;border-radius:14px}
-  .dose{background:#fff4d6;border:2px solid var(--turmeric);border-radius:18px;padding:16px 20px}
+  .dose{background:var(--surface,#fff4d6);border:2px solid var(--turmeric);border-radius:18px;padding:16px 20px}
   .dose h3{margin:0 0 6px;font-size:19px;color:var(--ink)}
   .callout{background:var(--indigo);color:#fff;border-radius:18px;padding:16px 20px}
   .callout strong{color:var(--turmeric)}
@@ -67,13 +67,26 @@
   .pic svg text{font-family:'Anek Devanagari',Arial,sans-serif}
   @media print{
     .top,.print{display:none!important}
-    body{background:#fff}
+    body{background:var(--surface,#fff)}
     .card{break-inside:avoid;border:1px solid #ccc}
   }
   @media (max-width:600px){
     body{font-size:16px}
     .card{padding:16px 14px}
   }
+
+/* Dark mode: follows the phone's dark setting */
+@media (prefers-color-scheme: dark){
+  :root{--bg:#0f1a19;--ink:#e8eeec;--muted:#aebdba;--surface:#172629;--tx:#e8eeec;--line:#2c4043;--indigo-tx:#b3aeff}
+  html,body{background:var(--bg);color:var(--ink)}
+  a{color:#8fd3ff}
+  input,select,textarea{background:#101f21;color:var(--ink);border-color:var(--line)}
+}
+
+/* Dark mode fixes */
+@media (prefers-color-scheme: dark){
+.tag{color:#14122e !important}
+}
 </style>
 </head>
 <body class="only-en">

@@ -16,39 +16,47 @@
   header .name{font-weight:800;font-size:1.05rem}
   header .sub{font-size:.85rem;opacity:.9}
   .wrap{max-width:720px;margin:0 auto;padding:14px}
-  .lang{float:right;background:#fff;color:var(--indigo);border:0;border-radius:999px;padding:6px 12px;font:600 .85rem "Anek Devanagari";cursor:pointer}
-  h1{font-size:1.4rem;margin:8px 0 4px;color:var(--indigo)}
+  .lang{float:right;background:var(--surface,#fff);color:var(--indigo-tx,var(--indigo));border:0;border-radius:999px;padding:6px 12px;font:600 .85rem "Anek Devanagari";cursor:pointer}
+  h1{font-size:1.4rem;margin:8px 0 4px;color:var(--indigo-tx,var(--indigo))}
   .lead{color:var(--muted);margin:0 0 12px}
-  .card{background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:14px;margin:12px 0}
+  .card{background:var(--surface,#fff);border:1.5px solid var(--line);border-radius:16px;padding:14px;margin:12px 0}
   .card h2{font-size:1.1rem;margin:0 0 8px;display:flex;align-items:center;gap:8px}
   .dot{width:12px;height:12px;border-radius:50%;display:inline-block}
   .ages{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
-  .age{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:6px 11px;font:600 .9rem "Anek Devanagari";cursor:pointer;color:var(--ink)}
-  .age[aria-pressed="true"]{background:var(--indigo);color:#fff;border-color:var(--indigo)}
+  .age{border:1.5px solid var(--line);background:var(--surface,#fff);border-radius:999px;padding:6px 11px;font:600 .9rem "Anek Devanagari";cursor:pointer;color:var(--ink)}
+  .age[aria-pressed="true"]{background:var(--indigo);color:#fff;border-color:var(--indigo-tx,var(--indigo))}
   .age.soon{opacity:.55}
   .field{display:flex;flex-direction:column;gap:4px;margin:8px 0}
   .field input{font:500 1rem "Anek Devanagari";padding:9px 10px;border:1.5px solid var(--line);border-radius:10px}
   .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
   @media (max-width:480px){.row{grid-template-columns:1fr}}
   .flag{border-radius:12px;padding:10px 12px;margin:8px 0;font-size:.95rem}
-  .g{background:#eaf7ec;border:1px solid #bfe5c6}.y{background:#fff6e0;border:1px solid #f6d68b}.r{background:#fdeaf0;border:1px solid #f4b8c9}.n{background:#f4f5fb;border:1px solid var(--line);color:var(--muted)}
+  .g{background:var(--surface,#eaf7ec);border:1px solid #bfe5c6}.y{background:var(--surface,#fff6e0);border:1px solid #f6d68b}.r{background:var(--surface,#fdeaf0);border:1px solid #f4b8c9}.n{background:var(--surface,#f4f5fb);border:1px solid var(--line);color:var(--muted)}
   ul{margin:6px 0 0;padding-left:20px}
   li{margin:3px 0}
   .btn{display:inline-block;background:var(--pink);color:#fff;text-decoration:none;border-radius:999px;padding:10px 16px;font-weight:700;border:0;cursor:pointer;font:700 .95rem "Anek Devanagari"}
   .btn.alt{background:var(--teal)}
-  .btn.ghost{background:#fff;color:var(--indigo);border:1.5px solid var(--indigo)}
+  .btn.ghost{background:var(--surface,#fff);color:var(--indigo-tx,var(--indigo));border:1.5px solid var(--indigo)}
   .links a{display:inline-block;margin:4px 6px 4px 0}
-  .tag{font-size:.78rem;font-weight:700;padding:2px 8px;border-radius:999px;background:#fff6e0;color:#8a5a00;margin-left:6px}
+  .tag{font-size:.78rem;font-weight:700;padding:2px 8px;border-radius:999px;background:var(--surface,#fff6e0);color:var(--tx,#8a5a00);margin-left:6px}
   .note{font-size:.85rem;color:var(--muted);margin-top:8px}
-  .please{background:#fff;border:1.5px dashed var(--turmeric);border-radius:12px;padding:10px 12px;font-size:.85rem;color:#6b4a00;margin-top:14px}
+  .please{background:var(--surface,#fff);border:1.5px dashed var(--turmeric);border-radius:12px;padding:10px 12px;font-size:.85rem;color:var(--tx,#6b4a00);margin-top:14px}
   footer{color:var(--muted);font-size:.8rem;text-align:center;padding:16px 10px 30px}
   .print-head{display:none}
   @media print{
     .noprint,.lang,header,.ages,.btn,.links,.field,.age-picker{display:none!important}
     .print-head{display:block;border-bottom:2px solid var(--indigo);padding-bottom:6px;margin-bottom:10px}
-    body{background:#fff}.card{break-inside:avoid;border-color:#ccc}
+    body{background:var(--surface,#fff)}.card{break-inside:avoid;border-color:#ccc}
   }
   [hidden]{display:none!important}
+
+/* Dark mode: follows the phone's dark setting */
+@media (prefers-color-scheme: dark){
+  :root{--bg:#0f1a19;--ink:#e8eeec;--muted:#aebdba;--surface:#172629;--tx:#e8eeec;--line:#2c4043;--indigo-tx:#b3aeff}
+  html,body{background:var(--bg);color:var(--ink)}
+  a{color:#8fd3ff}
+  input,select,textarea{background:#101f21;color:var(--ink);border-color:var(--line)}
+}
 </style>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-768Y52R8SC"></script>

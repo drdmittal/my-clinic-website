@@ -88,6 +88,16 @@ details summary::after{content:"+";float:right;color:var(--teal);font-size:22px;
 details[open] summary::after{content:"−"}
 details .ans{margin-top:8px;color:var(--ink);font-size:16.5px;line-height:1.55}
 details .ans p+p{margin-top:6px}
+
+/* Dark mode fixes */
+@media (prefers-color-scheme: dark){
+:root{--red:#c8453b;--orange:#a8570a}
+}
+
+/* Dark mode fixes (2) */
+@media (prefers-color-scheme: dark){
+.pinfo{color:#aebdba !important}
+}
 </style>
 <script src="/site-nav.js" defer></script>
 <style>
