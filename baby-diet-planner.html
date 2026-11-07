@@ -135,6 +135,12 @@ td b{font-weight:750}
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+section[style*="--c:var(--sun)"] .n,section[style*="--c:var(--orange)"] .n,section[style*="turmeric"] .n{color:#14122e}
+@media (prefers-color-scheme: light){
+.card[style*="--c:var(--turmeric)"],.card[style*="--c:var(--sun)"],.card[style*="--c:var(--orange)"]{color:#14122e}
+.card[style*="--c:var(--turmeric)"] small,.card[style*="--c:var(--sun)"] small,.card[style*="--c:var(--orange)"] small{color:#2b2440}
+}
 </style>
 <script src="/site-nav.js" defer></script>
 </head>

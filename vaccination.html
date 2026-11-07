@@ -88,6 +88,10 @@ details summary::after{content:"+";float:right;color:var(--teal);font-size:22px;
 details[open] summary::after{content:"−"}
 details .ans{margin-top:8px;color:var(--ink);font-size:16.5px;line-height:1.55}
 details .ans p+p{margin-top:6px}
+@media (prefers-color-scheme: light){
+.card[style*="--c:var(--turmeric)"],.card[style*="--c:var(--sun)"],.card[style*="--c:var(--orange)"]{color:#14122e}
+.card[style*="--c:var(--turmeric)"] small,.card[style*="--c:var(--sun)"] small,.card[style*="--c:var(--orange)"] small{color:#2b2440}
+}
 </style>
 <script src="/site-nav.js" defer></script>
 </head>
