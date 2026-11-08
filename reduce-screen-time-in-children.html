@@ -106,7 +106,6 @@ ul.warn li::before{background-color:var(--red-soft);background-image:url("data:i
 <header class="top">
   <div class="wrap">
     <a class="logo" href="/"><i>DM</i><span><b>Dr. Dinesh Mittal</b><small><span class="en">Child Specialist, Rohini</span><span class="hi">शिशु रोग विशेषज्ञ, रोहिणी</span></small></span></a>
-    <button type="button" class="print" onclick="window.print()"><span class="en">Print / PDF</span><span class="hi">प्रिंट / PDF</span></button>
     <div class="langs" role="group" aria-label="Language"><button type="button" data-lang="en" aria-pressed="true">English</button><button type="button" data-lang="hi" aria-pressed="false">हिन्दी</button></div>
   </div>
 </header>
@@ -431,6 +430,8 @@ ul.warn li::before{background-color:var(--red-soft);background-image:url("data:i
   </div>
 </main>
 
+<div class="print-end" style="max-width:860px;margin:24px auto 8px;padding:0 16px;text-align:center"><button type="button" onclick="window.print()" style="font:750 16px/1.2 'Anek Devanagari',system-ui,sans-serif;background:#2a2580;color:#fff;border:0;border-radius:14px;min-height:48px;padding:0 22px;cursor:pointer"><span class="en">Print / Save as PDF</span><span class="hi">प्रिंट / PDF</span></button></div>
+<style>@media print{.print-end{display:none!important}}</style>
 <footer class="clinic">
   <b>Dr. Dinesh Mittal, MBBS, DCH</b>
   <span class="en">Child Specialist · Delhi Medical Council Reg. No. DMC/R/00668</span><span class="hi">शिशु रोग विशेषज्ञ · दिल्ली मेडिकल काउंसिल पंजीकरण सं. DMC/R/00668</span><br>
