@@ -67,6 +67,7 @@ Last updated: 29 Oct 2026 (wheeze parent guide added as an unlisted page, `paren
   - No "best / expert / guaranteed" or other superlatives, and no testimonials.
   - Factual information only: name, MBBS DCH, registration number, address, timings, phone.
   - Printouts carry the clinic header and "Health education material… not a substitute for consultation".
+- **Logo (new, 17 Oct 2026 edit):** the Dr. Dinesh Mittal logo (child mascots + stethoscope) is the mark everywhere: header and side rail (`images/brand/logo-mark.png`), favicon and app icons (`icons/icon-*.png`), share image (`icons/share-card.png`). Full logo: `images/brand/clinic-logo.png`. Replace the file, keep the same name, and nothing else needs editing. `doctor.jpg` is not used anywhere.
 - **Print the brand domain** www.drdineshmittal.com on anything parents see or print.
 - **Booking must stay fast and minimal:** child's name + mobile only, and no slot counts shown to parents (colour only).
 - **Look:**

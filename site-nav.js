@@ -103,7 +103,7 @@
 
     function render() {
       l = lang();
-      rail.innerHTML = '<a class="dmr-logo" href="/" aria-label="Dr. Dinesh Mittal — home">DM</a>' + tiles();
+      rail.innerHTML = '<a class="dmr-logo" href="/" aria-label="Dr. Dinesh Mittal — home"><img src="/images/brand/logo-mark.png" alt="" style="width:100%;height:100%;object-fit:contain;border-radius:50%;background:#fff;display:block"></a>' + tiles();
       tab.innerHTML = '<i style="background:#e2457a"></i><i style="background:#f5ad1b"></i><i style="background:#0f9b8e"></i><i style="background:#2f8fe0"></i><b>' + (l === 'hi' ? 'मेन्यू' : 'Menu') + '</b>';
       drawer.innerHTML = '<div class="dmr-dh"><div><b>Dr. Dinesh Mittal</b><small>' + (l === 'hi' ? 'शिशु रोग विशेषज्ञ, रोहिणी' : 'Child Specialist, Rohini') + '</small></div><button type="button" class="dmr-x" aria-label="Close menu">×</button></div><div class="dmr-grid">' + tiles() + '</div>';
     }
