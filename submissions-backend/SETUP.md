@@ -11,3 +11,13 @@ This is its own Apps Script project. It does not read or write the booking or ap
    Until then the forms and chat simply skip saving; WhatsApp works as before.
 
 Keep the sheet and folder private. Share them only with the doctor and reception.
+
+## Pull token (for the clinic's own records software)
+
+The clinic's records server on the reception computer reads new submissions through a read-only link. It is protected by a secret token.
+
+1. In the script editor: Project Settings → Script properties → Add script property.
+   Name: `PULL_TOKEN`. Value: a long random string (20 or more characters). Do not share it in this repo or in chat.
+2. Deploy → Manage deployments → pencil → New version → Deploy. Do not use "New deployment"; the web app URL must stay the same.
+3. Put the same token and the web app URL into `config.json` in the clinic software folder on the reception computer.
+   Test in a browser: the URL followed by `?action=pull&token=YOUR_TOKEN` should show a list of items. Without the right token it shows `unauthorised`.

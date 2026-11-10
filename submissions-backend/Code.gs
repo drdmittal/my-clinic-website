@@ -29,7 +29,30 @@ function doPost(e) {
   }
 }
 
-function doGet() { return out({ ok: true, service: 'submissions' }); }
+function doGet(e) {
+  var p = (e && e.parameter) || {};
+  if (p.action === 'pull') return pullSubmissions(p);
+  return out({ ok: true, service: 'submissions' });
+}
+
+/* Read-only list of recent submissions for the clinic's own records server (reception computer).
+   Needs the secret PULL_TOKEN set in Script Properties (see SETUP.md). Returns the last 1000 rows.
+   Each row number is stable because rows are only ever appended. */
+function pullSubmissions(p) {
+  var props = PropertiesService.getScriptProperties();
+  var token = props.getProperty('PULL_TOKEN');
+  if (!token || String(p.token || '') !== token) return out({ ok: false, error: 'unauthorised' });
+  var sh = SpreadsheetApp.openById(props.getProperty('SUMMARY_SHEET_ID')).getSheetByName('Submissions');
+  var last = sh.getLastRow();
+  var start = Math.max(2, last - 999);
+  var items = [];
+  if (last >= start) {
+    sh.getRange(start, 1, last - start + 1, 5).getValues().forEach(function (r, i) {
+      items.push({ row: start + i, received: String(r[0]), form: String(r[1]), child: String(r[2]), code: String(r[3]), pdf: String(r[4]) });
+    });
+  }
+  return out({ ok: true, items: items });
+}
 
 function saveSubmission(body) {
   var props = PropertiesService.getScriptProperties();

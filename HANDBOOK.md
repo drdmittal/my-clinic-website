@@ -1,7 +1,7 @@
 # Clinic Website & Booking — Handbook
 
 Everything needed to keep working on Dr. Dinesh Mittal's website and online booking in any new chat.
-Last updated: 29 Oct 2026 (wheeze parent guide added as an unlisted page, `parent-tools/wheeze-parent-guide.html`; switched to English/Hindi, clinic details reduced to name and registration, reference line removed).
+Last updated: 10 Nov 2026 (wheeze parent guide added as an unlisted page, `parent-tools/wheeze-parent-guide.html`; switched to English/Hindi, clinic details reduced to name and registration, reference line removed).
 
 ## 1. Basics
 
@@ -110,6 +110,14 @@ Last updated: 29 Oct 2026 (wheeze parent guide added as an unlisted page, `paren
 - **Wheeze guide (added 29 Oct 2026):** listed as "Wheeze guide for parents". Its message sends the guide link only (English or Hindi, the page has its own toggle and print button). It has no "Submit to clinic" step, since it is information only.
 - **Add a form:** edit the `FORMS` list in the source, then encrypt it again with the reception password (same method as section 6). Forms marked `ready: false` show greyed out.
 - **Source:** kept on the developer's side only, never committed in plain form.
+
+### 6c. Website submissions into the clinic software (added 10 Nov 2026)
+
+- **What it does:** when a parent taps "Submit to clinic" on the under-5 or 6–12 history form, the answers are saved to the private submissions sheet (`submissions-backend/`) with a PDF. The clinic software on the reception computer can now read those rows through a read-only link protected by `PULL_TOKEN`.
+- **In the clinic software:** the Breathing/Wheeze tab B shows "Website submissions". **Use this** fills child's name, age (parsed from text like "2 years 4 months"), sex and phone. The MR no., weight, examination and treatment are still entered by reception or the doctor. The parent's note and the PDF link are kept with the saved record. The submission leaves the list only after the record is saved. **Dismiss** removes it without importing.
+- **Nothing is copied to the website.** The website forms are unchanged.
+- **Setup and token:** see `submissions-backend/SETUP.md`, "Pull token". The token is never written in this repo or in chat; it is kept only in the script's properties and in `config.json` on the reception computer.
+- **Limits:** the pull reads the last 1000 rows. The history answers themselves are not turned into the clinic's GINA questions; they are read from the PDF. The age parser reads a bare number as years.
 
 ### 6a. Doctor's resource hub (`?f=doctor-hub`)
 
