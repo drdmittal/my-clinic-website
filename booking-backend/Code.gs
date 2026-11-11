@@ -69,12 +69,15 @@ var DEFAULT_SETTINGS = [
   ['WA_LANG', 'en', 'Template language code (en or hi)'],
   ['WA_TEMPLATE_CONFIRM', 'appointment_confirmed', 'Approved template name'],
   ['WA_TEMPLATE_REMINDER', 'appointment_reminder', 'Approved template name'],
-  ['WA_TEMPLATE_CANCEL', 'appointment_cancelled', 'Approved template name']
+  ['WA_TEMPLATE_CANCEL', 'appointment_cancelled', 'Approved template name'],
+  ['WA_TEMPLATE_REVIEW', 'appointment_review', 'Approved template name: asks the parent for a Google review (has the review link in its text)'],
+  ['WA_REVIEW_DAYS', 7, 'Days after the visit when the review request is sent']
 ];
 
 var BOOKING_HEADERS = ['Booking ID', 'Created', 'Date', 'Time', 'Child name', 'Child age', 'Parent name', 'Phone', 'Reason', 'WhatsApp OK', 'Status', 'Reminded', 'Note', 'Visit type', 'Calendar'];
 var COL = { id: 0, created: 1, date: 2, time: 3, child: 4, age: 5, parent: 6, phone: 7, reason: 8, wa: 9, status: 10, reminded: 11, note: 12, visit: 13, cal: 14 };
 var VISITS = ['Consultation', 'Vaccination'];
+var REVIEW_COL = 16; // column P of Online Bookings: "Review asked" (kept separate so booking reads are unchanged)
 
 /* ------------------------------------------------------------------ setup */
 
@@ -732,4 +735,39 @@ function sendReminders() {
 function testWhatsApp() {
   var s = settings();
   return sendTemplate(s, s.WA_TEMPLATE_CONFIRM, String(s.CLINIC_PHONE).replace(/\D/g, '').slice(-10), ['Test Child', prettyDate(ymd(new Date())), '10:15 AM']);
+}
+
+/** Daily trigger: asks parents for a Google review, WA_REVIEW_DAYS (default 7) after the visit.
+    Only active bookings with WhatsApp consent. Each booking is asked once (column P marks it). */
+function sendReviewRequests() {
+  var s = settings();
+  if (String(s.WA_ENABLED).toUpperCase() !== 'YES') return;
+  var days = Math.max(1, Number(s.WA_REVIEW_DAYS) || 7);
+  var target = addDays(ymd(new Date()), -days);
+  var sh = SS().getSheetByName(TAB_BOOKINGS);
+  if (!sh || sh.getLastRow() < 2) return;
+  if (sh.getMaxColumns() < REVIEW_COL) sh.insertColumnsAfter(sh.getMaxColumns(), REVIEW_COL - sh.getMaxColumns());
+  if (!sh.getRange(1, REVIEW_COL).getDisplayValue()) sh.getRange(1, REVIEW_COL).setValue('Review asked').setFontWeight('bold');
+  sh.getRange(2, 1, sh.getLastRow() - 1, REVIEW_COL).getDisplayValues().forEach(function (r, i) {
+    var row = i + 2;
+    if (r[REVIEW_COL - 1] || !isActive(r) || r[COL.date] !== target || r[COL.wa] !== 'YES' || !r[COL.phone]) return;
+    if (sendTemplate(s, s.WA_TEMPLATE_REVIEW, r[COL.phone], [r[COL.child]])) {
+      sh.getRange(row, REVIEW_COL).setValue(Utilities.formatDate(new Date(), TZ, 'yyyy-MM-dd HH:mm'));
+    }
+  });
+}
+
+/** Run once from the editor (after deploying): sends review requests every morning at about 10 am. */
+function installReviewTrigger() {
+  ScriptApp.getProjectTriggers().forEach(function (t) {
+    if (t.getHandlerFunction() === 'sendReviewRequests') ScriptApp.deleteTrigger(t);
+  });
+  ScriptApp.newTrigger('sendReviewRequests').timeBased().everyDays(1).atHour(10).inTimezone(TZ).create();
+  return 'Review trigger installed (daily ~10 am)';
+}
+
+/** Optional: run from the editor to check the review template reaches your own phone. */
+function testReviewRequest() {
+  var s = settings();
+  return sendTemplate(s, s.WA_TEMPLATE_REVIEW, String(s.CLINIC_PHONE).replace(/\D/g, '').slice(-10), ['Test Child']);
 }
