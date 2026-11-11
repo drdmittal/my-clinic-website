@@ -79,6 +79,7 @@ var BOOKING_HEADERS = ['Booking ID', 'Created', 'Date', 'Time', 'Child name', 'C
 var COL = { id: 0, created: 1, date: 2, time: 3, child: 4, age: 5, parent: 6, phone: 7, reason: 8, wa: 9, status: 10, reminded: 11, note: 12, visit: 13, cal: 14 };
 var VISITS = ['Consultation', 'Vaccination'];
 var REVIEW_COL = 16; // column P of Online Bookings: "Review asked" (kept separate so booking reads are unchanged)
+var REVIEW_SKIP_COL = 17; // column Q: type YES to stop a review request for that booking
 
 /* ------------------------------------------------------------------ setup */
 
@@ -751,9 +752,10 @@ function sendReviewRequests() {
   var cutoff = Utilities.formatDate(new Date(Date.now() - gapDays * 86400000), TZ, 'yyyy-MM-dd HH:mm');
   var sh = SS().getSheetByName(TAB_BOOKINGS);
   if (!sh || sh.getLastRow() < 2) return;
-  if (sh.getMaxColumns() < REVIEW_COL) sh.insertColumnsAfter(sh.getMaxColumns(), REVIEW_COL - sh.getMaxColumns());
+  if (sh.getMaxColumns() < REVIEW_SKIP_COL) sh.insertColumnsAfter(sh.getMaxColumns(), REVIEW_SKIP_COL - sh.getMaxColumns());
   if (!sh.getRange(1, REVIEW_COL).getDisplayValue()) sh.getRange(1, REVIEW_COL).setValue('Review asked').setFontWeight('bold');
-  var rows = sh.getRange(2, 1, sh.getLastRow() - 1, REVIEW_COL).getDisplayValues();
+  if (!sh.getRange(1, REVIEW_SKIP_COL).getDisplayValue()) sh.getRange(1, REVIEW_SKIP_COL).setValue('No review request').setFontWeight('bold');
+  var rows = sh.getRange(2, 1, sh.getLastRow() - 1, REVIEW_SKIP_COL).getDisplayValues();
   // latest review request sent to each phone number
   var lastAsked = {};
   rows.forEach(function (r) {
@@ -763,6 +765,7 @@ function sendReviewRequests() {
   rows.forEach(function (r, i) {
     var row = i + 2;
     if (r[REVIEW_COL - 1] || !isActive(r) || r[COL.date] !== target || r[COL.wa] !== 'YES' || !r[COL.phone]) return;
+    if (String(r[REVIEW_SKIP_COL - 1]).trim().toUpperCase() === 'YES') return; // doctor chose not to ask this patient
     if (lastAsked[r[COL.phone]] && lastAsked[r[COL.phone]] >= cutoff) return;
     if (sendTemplate(s, s.WA_TEMPLATE_REVIEW, r[COL.phone], [r[COL.child]])) {
       var now = Utilities.formatDate(new Date(), TZ, 'yyyy-MM-dd HH:mm');
