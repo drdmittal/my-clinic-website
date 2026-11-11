@@ -463,8 +463,14 @@ var PT = {
   opt:{en:'if you like',hi:'मन हो तो'},
   junk:{en:'Junk food',hi:'जंक फूड'},
   count:{en:'{n} of {t} groups',hi:'{t} में से {n} समूह'},
-  parent:{en:'Parents: one food from each group is enough. Egg, meat and fish are optional; dal, paneer, curd and chana also give protein. Fill half the plate with vegetables and fruit, a quarter with roti or rice, and a quarter with dal, paneer, egg or meat.',
-          hi:'माता-पिता: हर समूह से एक चीज़ काफ़ी है। अंडा, मांस और मछली ज़रूरी नहीं; दाल, पनीर, दही और चने से भी प्रोटीन मिलता है। आधी थाली सब्ज़ी और फल, एक चौथाई रोटी या चावल, और एक चौथाई दाल, पनीर, अंडा या मांस से भरें।'}
+  parent:{
+    veg:{en:'Parents: one food from each group is enough. Fill half the plate with vegetables and fruit, a quarter with roti or rice, and a quarter with dal, paneer or chana.',
+         hi:'माता-पिता: हर समूह से एक चीज़ काफ़ी है। आधी थाली सब्ज़ी और फल, एक चौथाई रोटी या चावल, और एक चौथाई दाल, पनीर या चने से भरें।'},
+    egg:{en:'Parents: one food from each group is enough. Egg is optional; dal, paneer, curd and chana also give protein. Fill half the plate with vegetables and fruit, a quarter with roti or rice, and a quarter with dal, paneer or egg.',
+         hi:'माता-पिता: हर समूह से एक चीज़ काफ़ी है। अंडा ज़रूरी नहीं; दाल, पनीर, दही और चने से भी प्रोटीन मिलता है। आधी थाली सब्ज़ी और फल, एक चौथाई रोटी या चावल, और एक चौथाई दाल, पनीर या अंडे से भरें।'},
+    nv:{en:'Parents: one food from each group is enough. Egg, meat and fish are optional; dal, paneer, curd and chana also give protein. Fill half the plate with vegetables and fruit, a quarter with roti or rice, and a quarter with dal, paneer, egg or meat.',
+        hi:'माता-पिता: हर समूह से एक चीज़ काफ़ी है। अंडा, मांस और मछली ज़रूरी नहीं; दाल, पनीर, दही और चने से भी प्रोटीन मिलता है। आधी थाली सब्ज़ी और फल, एक चौथाई रोटी या चावल, और एक चौथाई दाल, पनीर, अंडे या मांस से भरें।'}
+  }
 };
 var QZ = {
   screen:{ask:'screenAsk', opts:[{ic:'🟢',cls:'g',v:'g',en:'Green: OK',hi:'हरा: ठीक है'},{ic:'🟡',cls:'y',v:'y',en:'Yellow: with a limit',hi:'पीला: समय सीमा के साथ'},{ic:'🔴',cls:'r',v:'r',en:'Red: no screen',hi:'लाल: स्क्रीन नहीं'}],
@@ -982,7 +988,7 @@ function plateRender(){
     rows+
     '<div class="grp" style="--c:#d7263d"><h3><span>'+L(PT.junk)+'</span></h3><div class="chips">'+junk.map(function(x){ return '<button type="button" class="chip" aria-pressed="'+(!!PL.junk[x.k])+'" data-pj="'+x.k+'"><span class="pic" aria-hidden="true">'+x.p+'</span>'+esc(L(x))+'</button>'; }).join('')+'</div></div>'+
     '<button type="button" class="go" data-pcheck="1">'+L(T.plateCheck)+'</button>'+
-    '<div id="plateRes"></div><div class="pnote">'+L(PT.parent)+'</div>';
+    '<div id="plateRes"></div><div class="pnote">'+L(PT.parent[d])+'</div>';
   if(PL.res) plateCheck(true);
 }
 function plateCheck(quiet){
