@@ -141,6 +141,13 @@ h2{margin:0;font-size:26px;line-height:1.1;font-weight:800;text-align:center;tex
 .grp .chip{min-height:78px;box-shadow:none;background:var(--surface,#f1f5fa);font-size:14px;line-height:1.15}
 .grp .chip .pic{font-size:28px}
 .grp .chip[aria-pressed="true"]{border-color:var(--grass);background:var(--surface,#e6f8ea)}
+.needbox{background:var(--surface,#fff8e6);border:2px solid var(--c);border-left-width:8px;border-radius:18px;padding:12px 14px;display:flex;flex-direction:column;gap:6px;font-size:16px;line-height:1.4;color:var(--tx,#21304a)}
+.needbox .nt{font-size:19px;line-height:1.2}
+.jday{border-top:2px dashed #d7263d;padding-top:10px;display:flex;flex-direction:column;gap:8px;font-size:16px;font-weight:700}
+.days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.days button{border:2px solid #d7263d;border-radius:12px;background:var(--surface,#fff);color:var(--tx,#7a1a14);font:700 14px var(--font);min-height:44px;padding:0;cursor:pointer}
+.days button[aria-pressed="true"]{background:#d7263d;color:#fff}
+.jset{font-weight:800;color:var(--tx,#7a1a14)}
 .dietrow{display:flex;flex-direction:column;gap:6px;align-items:center;font-size:16px}
 .dietseg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;width:100%}
 .dietseg button{border:3px solid transparent;border-radius:16px;background:var(--card);font:700 15px var(--font);color:var(--ink);min-height:48px;cursor:pointer;padding:4px}
@@ -314,9 +321,9 @@ var T = {
   plateEmpty:{en:'Empty plate',hi:'खाली थाली'},
   plateCheck:{en:'Check my plate',hi:'मेरी थाली जाँचो'},
   plateGood:{en:'Balanced plate! At least one food from every group. {N} is happy. +1 star',hi:'संतुलित थाली! हर समूह से कम से कम एक चीज़। {N} खुश है। +1 स्टार'},
-  plateJunk:{en:'Take away the junk food. It does not go on the plate.',hi:'जंक फूड हटाओ। यह थाली में नहीं जाता।'},
+  plateJunk:{en:'Take away the junk food. It does not go on the everyday plate. Read below why.',hi:'जंक फूड हटाओ। यह रोज़ की थाली में नहीं जाता। नीचे पढ़ो क्यों।'},
   junkNote:{en:'{N}, do not eat these. They are unhealthy for your body. Eat roti, dal, sabzi, fruit and milk instead.',hi:'{N}, ये न खाएँ। ये शरीर के लिए अच्छे नहीं हैं। इनकी जगह रोटी, दाल, सब्ज़ी, फल और दूध खाओ।'},
-  plateMissing:{en:'Some groups are still empty. Pick at least one food from each group.',hi:'कुछ समूह अभी खाली हैं। हर समूह से कम से कम एक चीज़ चुनो।'},
+  plateMissing:{en:'Some groups are still empty. Read below why {N} needs them, then pick at least one food from each.',hi:'कुछ समूह अभी खाली हैं। नीचे पढ़ो कि {N} को इनकी ज़रूरत क्यों है, फिर हर समूह से कम से कम एक चीज़ चुनो।'},
   brushDone:{en:'Brushing done! Clean teeth, happy {N}. +1 star',hi:'ब्रश हो गया! साफ़ दाँत, खुश {N}। +1 स्टार'},
   storyGame:{en:'Stories for {N}',hi:'{N} के लिए कहानियाँ'},
   storyGameSub:{en:'Short stories about everyday life',hi:'रोज़ की ज़िंदगी की छोटी कहानियाँ'},
@@ -430,17 +437,17 @@ var FOODS = [
    vegetarian protein are enough (doctor's rule). No atta pasta, atta noodles or atta bread as healthy choices:
    most packets in the market contain maida (doctor's rule). */
 var PLATE_GROUPS = [
-  {k:'grain',c:'#b07a10',en:'Grains and roots',hi:'अनाज और कंद',items:[
+  {k:'grain',c:'#b07a10',en:'Grains and roots',hi:'अनाज और कंद',good:{en:'Grains and roots give energy to play, study and grow.',hi:'अनाज और कंद से खेलने, पढ़ने और बढ़ने की ताक़त मिलती है।'},bad:{en:'Without them you feel tired and weak, and cannot play or study well.',hi:'इनके बिना थकान और कमज़ोरी रहती है, और खेल-पढ़ाई ठीक से नहीं हो पाती।'},items:[
     {k:'roti',p:'🫓',en:'Roti',hi:'रोटी'},{k:'rice',p:'🍚',en:'Rice',hi:'चावल'},{k:'daliya',p:'🌾',en:'Daliya',hi:'दलिया'},
     {k:'poha',p:'🍛',ag:'bc',en:'Poha',hi:'पोहा'},{k:'idli',p:'🍘',ag:'bc',en:'Idli',hi:'इडली'},{k:'paratha',p:'🥙',ag:'bc',en:'Atta paratha',hi:'आटे का पराठा'}]},
-  {k:'pulse',c:'#8a5a2b',en:'Dals, nuts and seeds',hi:'दालें, मेवे और बीज',items:[
+  {k:'pulse',c:'#8a5a2b',en:'Dals, nuts and seeds',hi:'दालें, मेवे और बीज',good:{en:'Dals, nuts and seeds give protein to build muscles and help you grow, and iron for your blood.',hi:'दालों, मेवों और बीजों से मांसपेशियाँ बनाने और बढ़ने के लिए प्रोटीन मिलता है, और खून के लिए आयरन।'},bad:{en:'Without enough protein, growth slows down, muscles stay weak and you fall ill more often.',hi:'प्रोटीन कम मिले तो बढ़त धीमी हो जाती है, मांसपेशियाँ कमज़ोर रहती हैं और बीमारी जल्दी लगती है।'},items:[
     {k:'dal',p:'🍲',en:'Dal',hi:'दाल'},{k:'rajma',p:'🥘',en:'Rajma',hi:'राजमा'},{k:'chana',p:'🧆',en:'Chana',hi:'चना'},
     {k:'sprouts',p:'🌱',ag:'bc',en:'Sprouts',hi:'अंकुरित दाल'},{k:'nuts',p:'🥜',ag:'bc',en:'Peanuts or almonds',hi:'मूँगफली या बादाम'}]},
-  {k:'dairy',c:'#2f8fe0',en:'Dairy',hi:'दूध से बनी चीज़ें',items:[
+  {k:'dairy',c:'#2f8fe0',en:'Dairy',hi:'दूध से बनी चीज़ें',good:{en:'Milk, curd and paneer give calcium and protein for strong bones and teeth.',hi:'दूध, दही और पनीर से मज़बूत हड्डियों और दाँतों के लिए कैल्शियम और प्रोटीन मिलता है।'},bad:{en:'Without enough calcium, bones and teeth become weak.',hi:'कैल्शियम कम मिले तो हड्डियाँ और दाँत कमज़ोर हो जाते हैं।'},items:[
     {k:'milk',p:'🥛',en:'Milk',hi:'दूध'},{k:'curd',p:'🥣',en:'Curd',hi:'दही'},{k:'paneer',p:'🧀',en:'Paneer',hi:'पनीर'}]},
-  {k:'vita',c:'#e07a10',en:'Orange and dark green',hi:'नारंगी और गहरी हरी',items:[
+  {k:'vita',c:'#e07a10',en:'Orange and dark green',hi:'नारंगी और गहरी हरी',good:{en:'Orange and dark green foods give vitamin A and iron, for sharp eyes, healthy skin and good blood.',hi:'नारंगी और गहरी हरी चीज़ों से विटामिन A और आयरन मिलता है, जो तेज़ आँखों, अच्छी त्वचा और अच्छे खून के लिए ज़रूरी है।'},bad:{en:'Without them, the eyes get weak and it becomes hard to see in dim light. You may look pale and feel tired.',hi:'इनके बिना आँखें कमज़ोर होती हैं और कम रोशनी में देखना मुश्किल हो जाता है। चेहरा पीला और शरीर थका हुआ रह सकता है।'},items:[
     {k:'carrot',p:'🥕',en:'Carrot',hi:'गाजर'},{k:'palak',p:'🥬',en:'Palak',hi:'पालक'},{k:'mango',p:'🥭',en:'Mango',hi:'आम'},{k:'kaddu',p:'🎃',en:'Kaddu',hi:'कद्दू'}]},
-  {k:'fv',c:'#2f8f3a',en:'Other fruits and vegetables',hi:'दूसरे फल और सब्ज़ियाँ',items:[
+  {k:'fv',c:'#2f8f3a',en:'Other fruits and vegetables',hi:'दूसरे फल और सब्ज़ियाँ',good:{en:'Fruits and vegetables give vitamins and fibre. They help the body fight illness and keep poop soft.',hi:'फलों और सब्ज़ियों से विटामिन और रेशा मिलता है। ये बीमारी से लड़ने में मदद करते हैं और पॉटी नरम रखते हैं।'},bad:{en:'Without them, poop becomes hard, and the body gets fewer vitamins to fight illness.',hi:'इनके बिना पॉटी सख़्त हो जाती है, और बीमारी से लड़ने के लिए शरीर को कम विटामिन मिलते हैं।'},items:[
     {k:'apple',p:'🍎',en:'Apple',hi:'सेब'},{k:'banana',p:'🍌',en:'Banana',hi:'केला'},{k:'orange',p:'🍊',en:'Orange',hi:'संतरा'},
     {k:'cucumber',p:'🥒',en:'Cucumber',hi:'खीरा'},{k:'tomato',p:'🍅',ag:'bc',en:'Tomato',hi:'टमाटर'},{k:'salad',p:'🥗',ag:'bc',en:'Salad',hi:'सलाद'}]},
   {k:'egg',c:'#c99a12',diet:'egg',opt:true,en:'Egg',hi:'अंडा',items:[
@@ -456,12 +463,19 @@ var PLATE_JUNK = [
   {k:'burger',p:'🍔',ag:'bc',en:'Burger',hi:'बर्गर',why:{en:'A burger bun is refined flour, and the patty is fried. It adds fat and salt, with very little fibre.',hi:'बर्गर का बन मैदे का होता है, और टिक्की तली हुई। इससे चर्बी और नमक मिलता है, रेशा बहुत कम।'}},
   {k:'noodles',p:'🍜',ag:'bc',en:'Instant noodles',hi:'इंस्टेंट नूडल्स',why:{en:'Instant noodles are refined flour with a lot of salt. They fill the tummy without giving what the body needs.',hi:'इंस्टेंट नूडल्स मैदे के होते हैं और इनमें बहुत नमक होता है। पेट भर जाता है, पर शरीर को ज़रूरी चीज़ें नहीं मिलतीं।'}}
 ];
+var WDAYS = [{s:{en:'Mon',hi:'सोम'},en:'Monday',hi:'सोमवार'},{s:{en:'Tue',hi:'मंगल'},en:'Tuesday',hi:'मंगलवार'},{s:{en:'Wed',hi:'बुध'},en:'Wednesday',hi:'बुधवार'},{s:{en:'Thu',hi:'गुरु'},en:'Thursday',hi:'गुरुवार'},{s:{en:'Fri',hi:'शुक्र'},en:'Friday',hi:'शुक्रवार'},{s:{en:'Sat',hi:'शनि'},en:'Saturday',hi:'शनिवार'},{s:{en:'Sun',hi:'रवि'},en:'Sunday',hi:'रविवार'}];
 var DIETS = [{k:'veg',p:'🥦',en:'Veg',hi:'शाकाहारी'},{k:'egg',p:'🥚',en:'Veg + egg',hi:'शाकाहारी + अंडा'},{k:'nv',p:'🍗',en:'Non-veg',hi:'नॉन-वेज'}];
 var PT = {
   diet:{en:'{N} eats:',hi:'{N} खाता/खाती है:'},
   one:{en:'at least one',hi:'कम से कम एक'},
   opt:{en:'if you like',hi:'मन हो तो'},
   junk:{en:'Junk food',hi:'जंक फूड'},
+  need:{en:'is needed',hi:'ज़रूरी'},
+  goodLbl:{en:'Why you need it:',hi:'क्यों ज़रूरी है:'},
+  badLbl:{en:'If you do not eat it:',hi:'न खाने पर:'},
+  junkRule:{en:'{N}, avoid junk food as far as you can. If you still want it, fix one day of the week, and have only one junk food on that day.',hi:'{N}, जहाँ तक हो सके जंक फूड से दूर रहो। फिर भी मन हो, तो हफ़्ते का एक दिन तय करो, और उस दिन सिर्फ़ एक जंक फूड खाओ।'},
+  dayAsk:{en:'Choose {N}’s junk food day with Mummy or Papa:',hi:'मम्मी या पापा के साथ {N} का जंक फूड का दिन चुनो:'},
+  daySet:{en:'{N}’s junk food day is {d}. Only one junk food on that day, and none on the other days.',hi:'{N} का जंक फूड का दिन {d} है। उस दिन सिर्फ़ एक जंक फूड, और बाक़ी दिन बिल्कुल नहीं।'},
   count:{en:'{n} of {t} groups',hi:'{t} में से {n} समूह'},
   parent:{
     veg:{en:'Parents: your child should eat at least one food from each group every day, and can have more than one. Fill half the plate with vegetables and fruit, a quarter with roti or rice, and a quarter with dal, paneer or chana.',
@@ -996,21 +1010,28 @@ function plateCheck(quiet){
   var rows = groups.filter(function(g){ return !g.opt || PL.sel[g.k]; }).map(function(g){ return '<div>'+(PL.sel[g.k]?'✅':'⬜')+' '+esc(L(g))+'</div>'; }).join('');
   var allOk = groups.every(function(g){ return g.opt || PL.sel[g.k]; }) && !junk.length;
   var msg = allOk ? L(T.plateGood) : (junk.length ? L(T.plateJunk) : L(T.plateMissing));
-  var junkBox = '';
+  var junkBox = '', jd = (typeof KID().junkDay === 'number') ? KID().junkDay : -1;
   if(junk.length){
     document.querySelectorAll('[data-pj]').forEach(function(b){ if(PL.junk[b.getAttribute('data-pj')]) b.classList.add('xj'); });
     junkBox = '<div class="junkbox">'+junk.map(function(x){
       return '<div class="jx"><span class="jp" aria-hidden="true">'+x.p+'</span><div><b class="jn">✖ '+esc(L(x))+'</b><br>'+esc(L(x.why))+'</div></div>';
-    }).join('')+'<div class="jnote">'+L(T.junkNote)+'</div></div>';
+    }).join('')+'<div class="jnote">'+L(PT.junkRule)+'</div>'+
+      '<div class="jday"><div>'+L(PT.dayAsk)+'</div><div class="days">'+WDAYS.map(function(w, n){ return '<button type="button" data-jday="'+n+'" aria-pressed="'+(jd===n)+'">'+L(w.s)+'</button>'; }).join('')+'</div>'+
+      (jd >= 0 && WDAYS[jd] ? '<div class="jset">'+L(PT.daySet).replace('{d}', L(WDAYS[jd]))+'</div>' : '')+'</div></div>';
   }
+  var needBox = groups.filter(function(g){ return !g.opt && !PL.sel[g.k]; }).map(function(g){
+    return '<div class="needbox" style="--c:'+g.c+'"><b class="nt">⬜ '+esc(L(g))+' '+L(PT.need)+'</b>'+
+      '<div><b>👍 '+L(PT.goodLbl)+'</b> '+esc(L(g.good))+'</div><div><b>⚠️ '+L(PT.badLbl)+'</b> '+esc(L(g.bad))+'</div></div>';
+  }).join('');
   PL.res = true;
   var box = document.getElementById('plateRes');
-  box.innerHTML = '<div class="checklist">'+rows+'</div><div class="why '+(allOk?'good':'bad')+'">'+msg+'</div>'+junkBox;
+  box.innerHTML = '<div class="checklist">'+rows+'</div><div class="why '+(allOk?'good':'bad')+'">'+msg+'</div>'+needBox+junkBox;
   if(!quiet) box.scrollIntoView({block:'nearest'});
   if(allOk && !PL.scored){ PL.scored = true; KID().bonus++; save(); updateBank(); confetti(); }
 }
 function plateTap(b){
   if(b.dataset.diet){ KID().diet = b.dataset.diet; save(); PL.res = false; plateRender(); return; }
+  if(b.dataset.jday !== undefined){ KID().junkDay = +b.dataset.jday; save(); plateCheck(true); return; }
   var y = window.scrollY;
   if(b.dataset.pg){ var gs = PL.sel[b.dataset.pg] = PL.sel[b.dataset.pg] || {}; if(gs[b.dataset.pi]) delete gs[b.dataset.pi]; else gs[b.dataset.pi] = true; if(!Object.keys(gs).length) delete PL.sel[b.dataset.pg]; }
   else if(b.dataset.pj){ PL.junk[b.dataset.pj] = !PL.junk[b.dataset.pj]; }
@@ -1358,7 +1379,7 @@ document.getElementById('app').addEventListener('click', function(e){
   if(b.dataset.qname !== undefined){ qAnswer(b.dataset.qname, +b.dataset.qi); return; }
   if(b.dataset.qnext){ qNext(b.dataset.qnext); return; }
   if(b.dataset.qstart){ qStart(b.dataset.qstart); return; }
-  if(b.dataset.pg || b.dataset.pj || b.dataset.diet){ plateTap(b); return; }
+  if(b.dataset.pg || b.dataset.pj || b.dataset.diet || b.dataset.jday !== undefined){ plateTap(b); return; }
   if(b.dataset.pcheck){ plateCheck(); return; }
   if(b.dataset.bnext){ brushNext(); return; }
   if(b.dataset.bagain){ BR.i = 0; brushRender(); return; }
