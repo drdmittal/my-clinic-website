@@ -411,8 +411,6 @@ var FOODS = [
   {ag:'bc',p:'🌱',en:'Sprouts chaat',hi:'अंकुरित चाट',g:1,why:{en:'Yes! Sprouts are full of fibre. Fibre keeps poop soft.',hi:'हाँ! अंकुरित दाल में भरपूर रेशा होता है। रेशा पॉटी को नरम रखता है।'}},
   {ag:'bc',p:'🥘',en:'Rajma chawal',hi:'राजमा चावल',g:1,why:{en:'Yes! Rajma has a lot of fibre and protein.',hi:'हाँ! राजमा में बहुत रेशा और प्रोटीन होता है।'}},
   {ag:'bc',p:'🥣',en:'Vegetable daliya or oats',hi:'सब्ज़ी वाला दलिया या ओट्स',g:1,why:{en:'Yes! Whole grains and vegetables give fibre.',hi:'हाँ! साबुत अनाज और सब्ज़ियों से रेशा मिलता है।'}},
-  {ag:'bc',p:'🍝',en:'Atta pasta with lots of vegetables',hi:'ढेर सारी सब्ज़ियों वाला आटा पास्ता',g:1,why:{en:'Yes! Whole-wheat pasta with vegetables has fibre. This is the healthy way to eat pasta.',hi:'हाँ! सब्ज़ियों वाले आटा पास्ता में रेशा होता है। पास्ता खाने का सही तरीका यही है।'}},
-  {ag:'bc',p:'🥪',en:'Atta bread sandwich with cucumber and tomato',hi:'खीरे-टमाटर वाला आटा ब्रेड सैंडविच',g:1,why:{en:'Yes! Whole-wheat bread and raw vegetables give fibre.',hi:'हाँ! आटा ब्रेड और कच्ची सब्ज़ियों से रेशा मिलता है।'}},
   {ag:'bc',p:'🍛',en:'Poha with peas and vegetables',hi:'मटर और सब्ज़ियों वाला पोहा',g:1,why:{en:'Yes! Vegetables in poha add fibre.',hi:'हाँ! पोहे की सब्ज़ियों से रेशा मिलता है।'}},
   {ag:'bc',p:'🥜',en:'A handful of peanuts or almonds',hi:'एक मुट्ठी मूँगफली या बादाम',g:1,why:{en:'Yes! Nuts have fibre and good fats.',hi:'हाँ! मेवों में रेशा और अच्छी चिकनाई होती है।'}},
   {ag:'bc',p:'🍿',en:'Plain home-made popcorn',hi:'घर का बना सादा पॉपकॉर्न',g:1,why:{en:'Yes! Popcorn is a whole grain with fibre. Make it at home with little salt.',hi:'हाँ! पॉपकॉर्न साबुत अनाज है और इसमें रेशा होता है। घर पर कम नमक के साथ बनाओ।'}},
@@ -428,11 +426,13 @@ var FOODS = [
 /* ---- habit games data ---- */
 /* Balanced Plate: the seven food groups of the diet guide (baby-diet-planner.html, without breast milk).
    The child picks ONE food from each group. A second tap in the same group replaces the first,
-   so roti and rice are never both needed. Egg and Meat & fish groups show only for the family's diet. */
+   so roti and rice are never both needed. Egg and Meat & fish groups show only for the family's diet and are optional: dal, paneer and other
+   vegetarian protein are enough (doctor's rule). No atta pasta, atta noodles or atta bread as healthy choices:
+   most packets in the market contain maida (doctor's rule). */
 var PLATE_GROUPS = [
   {k:'grain',c:'#b07a10',en:'Grains and roots',hi:'अनाज और कंद',items:[
     {k:'roti',p:'🫓',en:'Roti',hi:'रोटी'},{k:'rice',p:'🍚',en:'Rice',hi:'चावल'},{k:'daliya',p:'🌾',en:'Daliya',hi:'दलिया'},
-    {k:'pasta',p:'🍝',ag:'bc',en:'Atta pasta with vegetables',hi:'सब्ज़ियों वाला आटा पास्ता'},{k:'poha',p:'🍛',ag:'bc',en:'Poha',hi:'पोहा'},{k:'bread',p:'🍞',ag:'bc',en:'Atta bread sandwich',hi:'आटा ब्रेड सैंडविच'}]},
+    {k:'poha',p:'🍛',ag:'bc',en:'Poha',hi:'पोहा'},{k:'idli',p:'🍘',ag:'bc',en:'Idli',hi:'इडली'},{k:'paratha',p:'🥙',ag:'bc',en:'Atta paratha',hi:'आटे का पराठा'}]},
   {k:'pulse',c:'#8a5a2b',en:'Dals, nuts and seeds',hi:'दालें, मेवे और बीज',items:[
     {k:'dal',p:'🍲',en:'Dal',hi:'दाल'},{k:'rajma',p:'🥘',en:'Rajma',hi:'राजमा'},{k:'chana',p:'🧆',en:'Chana',hi:'चना'},
     {k:'sprouts',p:'🌱',ag:'bc',en:'Sprouts',hi:'अंकुरित दाल'},{k:'nuts',p:'🥜',ag:'bc',en:'Peanuts or almonds',hi:'मूँगफली या बादाम'}]},
@@ -443,9 +443,9 @@ var PLATE_GROUPS = [
   {k:'fv',c:'#2f8f3a',en:'Other fruits and vegetables',hi:'दूसरे फल और सब्ज़ियाँ',items:[
     {k:'apple',p:'🍎',en:'Apple',hi:'सेब'},{k:'banana',p:'🍌',en:'Banana',hi:'केला'},{k:'orange',p:'🍊',en:'Orange',hi:'संतरा'},
     {k:'cucumber',p:'🥒',en:'Cucumber',hi:'खीरा'},{k:'tomato',p:'🍅',ag:'bc',en:'Tomato',hi:'टमाटर'},{k:'salad',p:'🥗',ag:'bc',en:'Salad',hi:'सलाद'}]},
-  {k:'egg',c:'#c99a12',diet:'egg',en:'Egg',hi:'अंडा',items:[
+  {k:'egg',c:'#c99a12',diet:'egg',opt:true,en:'Egg',hi:'अंडा',items:[
     {k:'boiled',p:'🥚',en:'Boiled egg',hi:'उबला अंडा'},{k:'bhurji',p:'🍳',en:'Omelette or bhurji',hi:'ऑमलेट या भुर्जी'}]},
-  {k:'meat',c:'#c53030',diet:'nv',en:'Meat and fish',hi:'मांस और मछली',items:[
+  {k:'meat',c:'#c53030',diet:'nv',opt:true,en:'Meat and fish',hi:'मांस और मछली',items:[
     {k:'chicken',p:'🍗',en:'Chicken',hi:'चिकन'},{k:'fish',p:'🐟',en:'Fish',hi:'मछली'}]}
 ];
 var PLATE_JUNK = [
@@ -460,10 +460,11 @@ var DIETS = [{k:'veg',p:'🥦',en:'Veg',hi:'शाकाहारी'},{k:'egg',
 var PT = {
   diet:{en:'{N} eats:',hi:'{N} खाता/खाती है:'},
   one:{en:'pick one',hi:'एक चुनो'},
+  opt:{en:'if you like',hi:'मन हो तो'},
   junk:{en:'Junk food',hi:'जंक फूड'},
   count:{en:'{n} of {t} groups',hi:'{t} में से {n} समूह'},
-  parent:{en:'Parents: one food from each group is enough. Fill half the plate with vegetables and fruit, a quarter with roti or rice, and a quarter with dal, paneer, egg or meat.',
-          hi:'माता-पिता: हर समूह से एक चीज़ काफ़ी है। आधी थाली सब्ज़ी और फल, एक चौथाई रोटी या चावल, और एक चौथाई दाल, पनीर, अंडा या मांस से भरें।'}
+  parent:{en:'Parents: one food from each group is enough. Egg, meat and fish are optional; dal, paneer, curd and chana also give protein. Fill half the plate with vegetables and fruit, a quarter with roti or rice, and a quarter with dal, paneer, egg or meat.',
+          hi:'माता-पिता: हर समूह से एक चीज़ काफ़ी है। अंडा, मांस और मछली ज़रूरी नहीं; दाल, पनीर, दही और चने से भी प्रोटीन मिलता है। आधी थाली सब्ज़ी और फल, एक चौथाई रोटी या चावल, और एक चौथाई दाल, पनीर, अंडा या मांस से भरें।'}
 };
 var QZ = {
   screen:{ask:'screenAsk', opts:[{ic:'🟢',cls:'g',v:'g',en:'Green: OK',hi:'हरा: ठीक है'},{ic:'🟡',cls:'y',v:'y',en:'Yellow: with a limit',hi:'पीला: समय सीमा के साथ'},{ic:'🔴',cls:'r',v:'r',en:'Red: no screen',hi:'लाल: स्क्रीन नहीं'}],
@@ -965,11 +966,11 @@ function plateGroups(){
   return PLATE_GROUPS.filter(function(g){ return !g.diet || (g.diet === 'egg' && d !== 'veg') || (g.diet === 'nv' && d === 'nv'); });
 }
 function plateRender(){
-  var el = document.getElementById('s-plate'), groups = plateGroups(), d = plateDiet(), filled = 0, picked = '';
+  var el = document.getElementById('s-plate'), groups = plateGroups(), d = plateDiet(), filled = 0, picked = '', need = groups.filter(function(g){ return !g.opt; }).length;
   var rows = groups.map(function(g, n){
     var items = forAge(g.items), has = items.some(function(x){ return PL.sel[g.k] === x.k; });
-    if(!has) delete PL.sel[g.k]; else { filled++; picked += items.filter(function(x){ return PL.sel[g.k] === x.k; })[0].p + ' '; }
-    return '<div class="grp" style="--c:'+g.c+'"><h3><span>'+(n+1)+'. '+esc(L(g))+'</span><span class="one'+(has?' ok':'')+'">'+(has ? '✅' : L(PT.one))+'</span></h3>'+
+    if(!has) delete PL.sel[g.k]; else { if(!g.opt) filled++; picked += items.filter(function(x){ return PL.sel[g.k] === x.k; })[0].p + ' '; }
+    return '<div class="grp" style="--c:'+g.c+'"><h3><span>'+(n+1)+'. '+esc(L(g))+'</span><span class="one'+(has?' ok':'')+'">'+(has ? '✅' : L(g.opt ? PT.opt : PT.one))+'</span></h3>'+
       '<div class="chips">'+items.map(function(x){ return '<button type="button" class="chip" aria-pressed="'+(PL.sel[g.k]===x.k)+'" data-pg="'+g.k+'" data-pi="'+x.k+'"><span class="pic" aria-hidden="true">'+x.p+'</span>'+esc(L(x))+'</button>'; }).join('')+'</div></div>';
   }).join('');
   var junk = forAge(PLATE_JUNK);
@@ -977,7 +978,7 @@ function plateRender(){
   el.innerHTML = '<div class="bubble" style="text-align:center;align-self:center">'+L(T.plateAsk)+'</div>'+
     '<div class="dietrow"><b>'+L(PT.diet)+'</b><div class="dietseg">'+DIETS.map(function(x){ return '<button type="button" data-diet="'+x.k+'" aria-pressed="'+(d===x.k)+'">'+x.p+' '+esc(L(x))+'</button>'; }).join('')+'</div></div>'+
     '<div class="plate" aria-live="polite">'+(picked ? picked : esc(L(T.plateEmpty)))+'</div>'+
-    '<div class="counter">'+L(PT.count).replace('{n}', filled).replace('{t}', groups.length)+'</div>'+
+    '<div class="counter">'+L(PT.count).replace('{n}', filled).replace('{t}', need)+'</div>'+
     rows+
     '<div class="grp" style="--c:#d7263d"><h3><span>'+L(PT.junk)+'</span></h3><div class="chips">'+junk.map(function(x){ return '<button type="button" class="chip" aria-pressed="'+(!!PL.junk[x.k])+'" data-pj="'+x.k+'"><span class="pic" aria-hidden="true">'+x.p+'</span>'+esc(L(x))+'</button>'; }).join('')+'</div></div>'+
     '<button type="button" class="go" data-pcheck="1">'+L(T.plateCheck)+'</button>'+
@@ -986,8 +987,8 @@ function plateRender(){
 }
 function plateCheck(quiet){
   var groups = plateGroups(), junk = forAge(PLATE_JUNK).filter(function(x){ return PL.junk[x.k]; });
-  var rows = groups.map(function(g){ return '<div>'+(PL.sel[g.k]?'✅':'⬜')+' '+esc(L(g))+'</div>'; }).join('');
-  var allOk = groups.every(function(g){ return PL.sel[g.k]; }) && !junk.length;
+  var rows = groups.filter(function(g){ return !g.opt || PL.sel[g.k]; }).map(function(g){ return '<div>'+(PL.sel[g.k]?'✅':'⬜')+' '+esc(L(g))+'</div>'; }).join('');
+  var allOk = groups.every(function(g){ return g.opt || PL.sel[g.k]; }) && !junk.length;
   var msg = allOk ? L(T.plateGood) : (junk.length ? L(T.plateJunk) : L(T.plateMissing));
   var junkBox = '';
   if(junk.length){
