@@ -135,6 +135,16 @@ h2{margin:0;font-size:26px;line-height:1.1;font-weight:800;text-align:center;tex
 .fly{position:fixed;font-size:34px;z-index:60;pointer-events:none;animation:fly .8s ease-in forwards}
 @keyframes fly{to{transform:translate(var(--dx),var(--dy)) scale(.5);opacity:.3}}
 .t-story{background:var(--surface,#d9f7c4)} .t-plate{background:var(--surface,#ffd9a8)} .t-screen{background:var(--surface,#b9e4ff)} .t-brush{background:var(--surface,#d4f5f0)} .t-safe{background:var(--surface,#e4d4ff)} .t-behave{background:var(--surface,#fff0b3)}
+.grp{background:var(--card);border-radius:20px;padding:10px 10px 12px;border-left:8px solid var(--c);box-shadow:0 4px 0 rgba(33,48,74,.1)}
+.grp h3{margin:0 0 8px;font:800 18px var(--font);display:flex;justify-content:space-between;align-items:center;gap:8px;line-height:1.2}
+.grp .one{font:700 14px var(--font);color:var(--muted);white-space:nowrap}
+.grp .chip{min-height:78px;box-shadow:none;background:var(--surface,#f1f5fa);font-size:14px;line-height:1.15}
+.grp .chip .pic{font-size:28px}
+.grp .chip[aria-pressed="true"]{border-color:var(--grass);background:var(--surface,#e6f8ea)}
+.dietrow{display:flex;flex-direction:column;gap:6px;align-items:center;font-size:16px}
+.dietseg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;width:100%}
+.dietseg button{border:3px solid transparent;border-radius:16px;background:var(--card);font:700 15px var(--font);color:var(--ink);min-height:48px;cursor:pointer;padding:4px}
+.dietseg button[aria-pressed="true"]{border-color:var(--grass);background:var(--surface,#e6f8ea)}
 .t-wash{background:var(--surface,#cfe8ff)} .t-sleep{background:var(--surface,#d9d6ff)} .t-feel{background:var(--surface,#ffe1c2)} .t-drink{background:var(--surface,#c9f1ff)} .t-road{background:var(--surface,#d6f5c9)} .t-aid{background:var(--surface,#ffd9d6)}
 .tile[hidden]{display:none}
 .opts.col{grid-template-columns:1fr}
@@ -291,7 +301,7 @@ var T = {
   home:{en:'Home',hi:'होम'},
   title:{en:'Healthy Games for Kids',hi:'बच्चों के सेहतमंद खेल'},
   plateGame:{en:'Balanced Plate',hi:'संतुलित थाली'},
-  plateGameSub:{en:'Build a healthy plate for {N}',hi:'{N} के लिए सही थाली बनाओ'},
+  plateGameSub:{en:'One food from each food group',hi:'हर समूह से एक चीज़'},
   screenGame:{en:'Screen Time Traffic Light',hi:'स्क्रीन टाइम ट्रैफिक लाइट'},
   screenGameSub:{en:'Green, yellow or red? You decide!',hi:'हरा, पीला या लाल? फैसला तुम करो!'},
   brushGame:{en:'Brush Like a Hero',hi:'हीरो की तरह ब्रश करो'},
@@ -300,13 +310,13 @@ var T = {
   safeGameSub:{en:'Stay safe, say no, tell a grown-up',hi:'सुरक्षित रहो, ना कहो, बड़ों को बताओ'},
   behaveGame:{en:'Good or Not Good?',hi:'अच्छा या अच्छा नहीं?'},
   behaveGameSub:{en:'Kind words and good manners',hi:'प्यारे शब्द और अच्छे व्यवहार'},
-  plateAsk:{en:'Tap the foods to put on {N}\'s plate',hi:'{N} की थाली में खाना चुनो'},
+  plateAsk:{en:'Pick ONE food from each group for {N} today. If you take roti, you do not need rice.',hi:'{N} के लिए आज हर समूह से एक चीज़ चुनो। रोटी ली है, तो चावल ज़रूरी नहीं।'},
   plateEmpty:{en:'Empty plate',hi:'खाली थाली'},
   plateCheck:{en:'Check my plate',hi:'मेरी थाली जाँचो'},
-  plateGood:{en:'Balanced plate! {N} is happy. +1 star',hi:'संतुलित थाली! {N} खुश है। +1 स्टार'},
+  plateGood:{en:'Balanced plate! One food from every group. {N} is happy. +1 star',hi:'संतुलित थाली! हर समूह से एक चीज़। {N} खुश है। +1 स्टार'},
   plateJunk:{en:'Take away the junk food. It does not go on the plate.',hi:'जंक फूड हटाओ। यह थाली में नहीं जाता।'},
   junkNote:{en:'{N}, do not eat these. They are unhealthy for your body. Eat roti, dal, sabzi, fruit and milk instead.',hi:'{N}, ये न खाएँ। ये शरीर के लिए अच्छे नहीं हैं। इनकी जगह रोटी, दाल, सब्ज़ी, फल और दूध खाओ।'},
-  plateMissing:{en:'Add the groups still missing below. {N} needs all of them.',hi:'नीचे के छूटे हुए ग्रुप जोड़ो। {N} को सबकी ज़रूरत है।'},
+  plateMissing:{en:'Pick one food from each group that is still empty. One from each group is enough.',hi:'जो समूह खाली हैं, उनमें से एक-एक चीज़ चुनो। हर समूह से एक काफ़ी है।'},
   brushDone:{en:'Brushing done! Clean teeth, happy {N}. +1 star',hi:'ब्रश हो गया! साफ़ दाँत, खुश {N}। +1 स्टार'},
   storyGame:{en:'Stories for {N}',hi:'{N} के लिए कहानियाँ'},
   storyGameSub:{en:'Short stories about everyday life',hi:'रोज़ की ज़िंदगी की छोटी कहानियाँ'},
@@ -397,22 +407,63 @@ var FOODS = [
   {p:'🥤',en:'Cold drink',hi:'कोल्ड ड्रिंक',g:0,why:{en:'Sugar water. Plain water is {N}’s best friend!',hi:'चीनी वाला पानी। सादा पानी {N} का सबसे अच्छा दोस्त!'}},
   {p:'🍦',en:'Ice cream',hi:'आइसक्रीम',g:0,why:{en:'Too much milk and sugar make poop hard.',hi:'ज़्यादा दूध और चीनी से पॉटी सख़्त होती है।'}},
   {p:'🍰',en:'Cake / pastry',hi:'केक / पेस्ट्री',g:0,why:{en:'Maida plus sugar. {N} feels heavy!',hi:'मैदा और चीनी। {N} भारी हो जाता है!'}},
-  {p:'🍩',en:'Donut',hi:'डोनट',g:0,why:{en:'Fried maida. Not for a happy tummy.',hi:'तला हुआ मैदा। खुश पेट के लिए नहीं।'}}
+  {p:'🍩',en:'Donut',hi:'डोनट',g:0,why:{en:'Fried maida. Not for a happy tummy.',hi:'तला हुआ मैदा। खुश पेट के लिए नहीं।'}},
+  {ag:'bc',p:'🌱',en:'Sprouts chaat',hi:'अंकुरित चाट',g:1,why:{en:'Yes! Sprouts are full of fibre. Fibre keeps poop soft.',hi:'हाँ! अंकुरित दाल में भरपूर रेशा होता है। रेशा पॉटी को नरम रखता है।'}},
+  {ag:'bc',p:'🥘',en:'Rajma chawal',hi:'राजमा चावल',g:1,why:{en:'Yes! Rajma has a lot of fibre and protein.',hi:'हाँ! राजमा में बहुत रेशा और प्रोटीन होता है।'}},
+  {ag:'bc',p:'🥣',en:'Vegetable daliya or oats',hi:'सब्ज़ी वाला दलिया या ओट्स',g:1,why:{en:'Yes! Whole grains and vegetables give fibre.',hi:'हाँ! साबुत अनाज और सब्ज़ियों से रेशा मिलता है।'}},
+  {ag:'bc',p:'🍝',en:'Atta pasta with lots of vegetables',hi:'ढेर सारी सब्ज़ियों वाला आटा पास्ता',g:1,why:{en:'Yes! Whole-wheat pasta with vegetables has fibre. This is the healthy way to eat pasta.',hi:'हाँ! सब्ज़ियों वाले आटा पास्ता में रेशा होता है। पास्ता खाने का सही तरीका यही है।'}},
+  {ag:'bc',p:'🥪',en:'Atta bread sandwich with cucumber and tomato',hi:'खीरे-टमाटर वाला आटा ब्रेड सैंडविच',g:1,why:{en:'Yes! Whole-wheat bread and raw vegetables give fibre.',hi:'हाँ! आटा ब्रेड और कच्ची सब्ज़ियों से रेशा मिलता है।'}},
+  {ag:'bc',p:'🍛',en:'Poha with peas and vegetables',hi:'मटर और सब्ज़ियों वाला पोहा',g:1,why:{en:'Yes! Vegetables in poha add fibre.',hi:'हाँ! पोहे की सब्ज़ियों से रेशा मिलता है।'}},
+  {ag:'bc',p:'🥜',en:'A handful of peanuts or almonds',hi:'एक मुट्ठी मूँगफली या बादाम',g:1,why:{en:'Yes! Nuts have fibre and good fats.',hi:'हाँ! मेवों में रेशा और अच्छी चिकनाई होती है।'}},
+  {ag:'bc',p:'🍿',en:'Plain home-made popcorn',hi:'घर का बना सादा पॉपकॉर्न',g:1,why:{en:'Yes! Popcorn is a whole grain with fibre. Make it at home with little salt.',hi:'हाँ! पॉपकॉर्न साबुत अनाज है और इसमें रेशा होता है। घर पर कम नमक के साथ बनाओ।'}},
+  {ag:'bc',p:'🍝',en:'White pasta in cheese sauce',hi:'चीज़ सॉस वाला सफ़ेद पास्ता',g:0,why:{en:'Maida pasta and cheese have almost no fibre. Poop gets hard.',hi:'मैदे के पास्ता और चीज़ में रेशा लगभग नहीं होता। पॉटी सख़्त हो जाती है।'}},
+  {ag:'bc',p:'🥟',en:'Momos',hi:'मोमोज़',g:0,why:{en:'Momos are made of maida. Maida has no fibre.',hi:'मोमोज़ मैदे से बनते हैं। मैदे में रेशा नहीं होता।'}},
+  {ag:'bc',p:'🥐',en:'Bakery patty or puff',hi:'बेकरी की पैटी या पफ़',g:0,why:{en:'Bakery patties are maida and fat, with no fibre.',hi:'बेकरी की पैटी में मैदा और चिकनाई होती है, रेशा नहीं।'}},
+  {ag:'bc',p:'🧃',en:'Packet juice',hi:'पैकेट वाला जूस',g:0,why:{en:'Juice has sugar and no fibre. Eat the whole fruit.',hi:'जूस में चीनी होती है, रेशा नहीं। पूरा फल खाओ।'}},
+  {ag:'bc',p:'🍞',en:'White bread with jam',hi:'जैम लगी सफ़ेद ब्रेड',g:0,why:{en:'White bread is maida, and jam is sugar.',hi:'सफ़ेद ब्रेड मैदा है, और जैम चीनी।'}},
+  {ag:'bc',p:'🌭',en:'Nuggets or sausages',hi:'नगेट्स या सॉसेज',g:0,why:{en:'Fried and processed food has no fibre.',hi:'तले और प्रोसेस्ड खाने में रेशा नहीं होता।'}},
+  {ag:'bc',p:'🥨',en:'Namkeen and bhujia',hi:'नमकीन और भुजिया',g:0,why:{en:'Fried and salty, with no fibre. They dry up the poop.',hi:'तले और नमकीन, बिना रेशे के। पॉटी सुखा देते हैं।'}}
 ];
 
 /* ---- habit games data ---- */
-var PLATE_ITEMS = [
-  {k:'roti',p:'🫓',en:'Roti',hi:'रोटी',g:'grain'},{k:'rice',p:'🍚',en:'Rice',hi:'चावल',g:'grain'},
-  {k:'dal',p:'🍲',en:'Dal',hi:'दाल',g:'protein'},{k:'paneer',p:'🧀',en:'Paneer',hi:'पनीर',g:'protein'},
-  {k:'sabzi',p:'🥕',en:'Sabzi',hi:'सब्ज़ी',g:'veg'},{k:'salad',p:'🥗',en:'Salad',hi:'सलाद',g:'veg'},
-  {k:'apple',p:'🍎',en:'Apple',hi:'सेब',g:'fruit'},{k:'banana',p:'🍌',en:'Banana',hi:'केला',g:'fruit'},
-  {k:'milk',p:'🥛',en:'Milk',hi:'दूध',g:'dairy'},{k:'curd',p:'🥣',en:'Curd',hi:'दही',g:'dairy'},
-  {k:'chips',p:'🍟',en:'Chips',hi:'चिप्स',g:'junk',why:{en:'Chips have too much salt. Too much salt is not good for your kidneys and can raise blood pressure. They are fried, so they add fat and weight too.',hi:'चिप्स में बहुत ज़्यादा नमक होता है। ज़्यादा नमक किडनी के लिए अच्छा नहीं और बीपी बढ़ा सकता है। तले होने से चर्बी और वज़न भी बढ़ता है।'}},{k:'cola',p:'🥤',en:'Cold drink',hi:'कोल्ड ड्रिंक',g:'junk',why:{en:'Cold drink has a lot of sugar. Sugar causes tooth decay and weight gain, and can lead to diabetes later. Plain water is best.',hi:'कोल्ड ड्रिंक में बहुत चीनी होती है। चीनी से दाँत ख़राब होते हैं, वज़न बढ़ता है और आगे चलकर डायबिटीज़ का ख़तरा हो सकता है। सादा पानी सबसे अच्छा है।'}},{k:'biscuit',p:'🍪',en:'Biscuit',hi:'बिस्किट',g:'junk',why:{en:'Biscuits are made of refined flour and sugar. They give energy that does not last, cause tooth decay and weight gain.',hi:'बिस्किट मैदे और चीनी से बनते हैं। इनसे ऊर्जा जल्दी ख़त्म होती है, दाँत ख़राब होते हैं और वज़न बढ़ता है।'}},
-  {k:'nonveg',p:'🍗',en:'I also eat egg or non-veg',hi:'मैं अंडा या नॉन-वेज भी खाता/खाती हूँ',g:'protein',extra:true}
+/* Balanced Plate: the seven food groups of the diet guide (baby-diet-planner.html, without breast milk).
+   The child picks ONE food from each group. A second tap in the same group replaces the first,
+   so roti and rice are never both needed. Egg and Meat & fish groups show only for the family's diet. */
+var PLATE_GROUPS = [
+  {k:'grain',c:'#b07a10',en:'Grains and roots',hi:'अनाज और कंद',items:[
+    {k:'roti',p:'🫓',en:'Roti',hi:'रोटी'},{k:'rice',p:'🍚',en:'Rice',hi:'चावल'},{k:'daliya',p:'🌾',en:'Daliya',hi:'दलिया'},
+    {k:'pasta',p:'🍝',ag:'bc',en:'Atta pasta with vegetables',hi:'सब्ज़ियों वाला आटा पास्ता'},{k:'poha',p:'🍛',ag:'bc',en:'Poha',hi:'पोहा'},{k:'bread',p:'🍞',ag:'bc',en:'Atta bread sandwich',hi:'आटा ब्रेड सैंडविच'}]},
+  {k:'pulse',c:'#8a5a2b',en:'Dals, nuts and seeds',hi:'दालें, मेवे और बीज',items:[
+    {k:'dal',p:'🍲',en:'Dal',hi:'दाल'},{k:'rajma',p:'🥘',en:'Rajma',hi:'राजमा'},{k:'chana',p:'🧆',en:'Chana',hi:'चना'},
+    {k:'sprouts',p:'🌱',ag:'bc',en:'Sprouts',hi:'अंकुरित दाल'},{k:'nuts',p:'🥜',ag:'bc',en:'Peanuts or almonds',hi:'मूँगफली या बादाम'}]},
+  {k:'dairy',c:'#2f8fe0',en:'Dairy',hi:'दूध से बनी चीज़ें',items:[
+    {k:'milk',p:'🥛',en:'Milk',hi:'दूध'},{k:'curd',p:'🥣',en:'Curd',hi:'दही'},{k:'paneer',p:'🧀',en:'Paneer',hi:'पनीर'}]},
+  {k:'vita',c:'#e07a10',en:'Orange and dark green',hi:'नारंगी और गहरी हरी',items:[
+    {k:'carrot',p:'🥕',en:'Carrot',hi:'गाजर'},{k:'palak',p:'🥬',en:'Palak',hi:'पालक'},{k:'mango',p:'🥭',en:'Mango',hi:'आम'},{k:'kaddu',p:'🎃',en:'Kaddu',hi:'कद्दू'}]},
+  {k:'fv',c:'#2f8f3a',en:'Other fruits and vegetables',hi:'दूसरे फल और सब्ज़ियाँ',items:[
+    {k:'apple',p:'🍎',en:'Apple',hi:'सेब'},{k:'banana',p:'🍌',en:'Banana',hi:'केला'},{k:'orange',p:'🍊',en:'Orange',hi:'संतरा'},
+    {k:'cucumber',p:'🥒',en:'Cucumber',hi:'खीरा'},{k:'tomato',p:'🍅',ag:'bc',en:'Tomato',hi:'टमाटर'},{k:'salad',p:'🥗',ag:'bc',en:'Salad',hi:'सलाद'}]},
+  {k:'egg',c:'#c99a12',diet:'egg',en:'Egg',hi:'अंडा',items:[
+    {k:'boiled',p:'🥚',en:'Boiled egg',hi:'उबला अंडा'},{k:'bhurji',p:'🍳',en:'Omelette or bhurji',hi:'ऑमलेट या भुर्जी'}]},
+  {k:'meat',c:'#c53030',diet:'nv',en:'Meat and fish',hi:'मांस और मछली',items:[
+    {k:'chicken',p:'🍗',en:'Chicken',hi:'चिकन'},{k:'fish',p:'🐟',en:'Fish',hi:'मछली'}]}
 ];
-var PLATE_GROUPS = {
-  grain:{en:'Roti or rice',hi:'रोटी या चावल'}, protein:{en:'Dal or paneer (or egg / non-veg)',hi:'दाल या पनीर (या अंडा / नॉन-वेज)'},
-  veg:{en:'Vegetable or salad',hi:'सब्ज़ी या सलाद'}, fruit:{en:'Fruit',hi:'फल'}, dairy:{en:'Milk or curd',hi:'दूध या दही'}
+var PLATE_JUNK = [
+  {k:'chips',p:'🍟',en:'Chips',hi:'चिप्स',why:{en:'Chips have too much salt. Too much salt is not good for your kidneys and can raise blood pressure. They are fried, so they add fat and weight too.',hi:'चिप्स में बहुत ज़्यादा नमक होता है। ज़्यादा नमक किडनी के लिए अच्छा नहीं और बीपी बढ़ा सकता है। तले होने से चर्बी और वज़न भी बढ़ता है।'}},
+  {k:'cola',p:'🥤',en:'Cold drink',hi:'कोल्ड ड्रिंक',why:{en:'Cold drink has a lot of sugar. Sugar causes tooth decay and weight gain, and can lead to diabetes later. Plain water is best.',hi:'कोल्ड ड्रिंक में बहुत चीनी होती है। चीनी से दाँत ख़राब होते हैं, वज़न बढ़ता है और आगे चलकर डायबिटीज़ का ख़तरा हो सकता है। सादा पानी सबसे अच्छा है।'}},
+  {k:'biscuit',p:'🍪',en:'Biscuit',hi:'बिस्किट',why:{en:'Biscuits are made of refined flour and sugar. They give energy that does not last, cause tooth decay and weight gain.',hi:'बिस्किट मैदे और चीनी से बनते हैं। इनसे ऊर्जा जल्दी ख़त्म होती है, दाँत ख़राब होते हैं और वज़न बढ़ता है।'}},
+  {k:'pizza',p:'🍕',ag:'bc',en:'Pizza',hi:'पिज़्ज़ा',why:{en:'Pizza has a refined-flour base and a lot of cheese and salt. It is a sometimes food, not an everyday meal.',hi:'पिज़्ज़ा में मैदे का बेस और बहुत चीज़ और नमक होता है। यह कभी-कभी का खाना है, रोज़ का नहीं।'}},
+  {k:'burger',p:'🍔',ag:'bc',en:'Burger',hi:'बर्गर',why:{en:'A burger bun is refined flour, and the patty is fried. It adds fat and salt, with very little fibre.',hi:'बर्गर का बन मैदे का होता है, और टिक्की तली हुई। इससे चर्बी और नमक मिलता है, रेशा बहुत कम।'}},
+  {k:'noodles',p:'🍜',ag:'bc',en:'Instant noodles',hi:'इंस्टेंट नूडल्स',why:{en:'Instant noodles are refined flour with a lot of salt. They fill the tummy without giving what the body needs.',hi:'इंस्टेंट नूडल्स मैदे के होते हैं और इनमें बहुत नमक होता है। पेट भर जाता है, पर शरीर को ज़रूरी चीज़ें नहीं मिलतीं।'}}
+];
+var DIETS = [{k:'veg',p:'🥦',en:'Veg',hi:'शाकाहारी'},{k:'egg',p:'🥚',en:'Veg + egg',hi:'शाकाहारी + अंडा'},{k:'nv',p:'🍗',en:'Non-veg',hi:'नॉन-वेज'}];
+var PT = {
+  diet:{en:'{N} eats:',hi:'{N} खाता/खाती है:'},
+  one:{en:'pick one',hi:'एक चुनो'},
+  junk:{en:'Junk food',hi:'जंक फूड'},
+  count:{en:'{n} of {t} groups',hi:'{t} में से {n} समूह'},
+  parent:{en:'Parents: one food from each group is enough. Fill half the plate with vegetables and fruit, a quarter with roti or rice, and a quarter with dal, paneer, egg or meat.',
+          hi:'माता-पिता: हर समूह से एक चीज़ काफ़ी है। आधी थाली सब्ज़ी और फल, एक चौथाई रोटी या चावल, और एक चौथाई दाल, पनीर, अंडा या मांस से भरें।'}
 };
 var QZ = {
   screen:{ask:'screenAsk', opts:[{ic:'🟢',cls:'g',v:'g',en:'Green: OK',hi:'हरा: ठीक है'},{ic:'🟡',cls:'y',v:'y',en:'Yellow: with a limit',hi:'पीला: समय सीमा के साथ'},{ic:'🔴',cls:'r',v:'r',en:'Red: no screen',hi:'लाल: स्क्रीन नहीं'}],
@@ -805,8 +856,9 @@ function renderHome(){
 var G = null;
 function shuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
 function startGame(){
-  var good = shuffle(FOODS.filter(function(f){return f.g;})).slice(0,5);
-  var bad = shuffle(FOODS.filter(function(f){return !f.g;})).slice(0,5);
+  var pool = forAge(FOODS);
+  var good = shuffle(pool.filter(function(f){return f.g;})).slice(0,5);
+  var bad = shuffle(pool.filter(function(f){return !f.g;})).slice(0,5);
   G = {list: shuffle(good.concat(bad)), i:0, res:[], answered:false, won:0};
   renderFood();
 }
@@ -906,35 +958,56 @@ function qAnswer(name, k){
 function qNext(name){ var st = QS[name]; st.i++; st.answered = false; qRender(name); }
 
 /* ---------- balanced plate ---------- */
-var PL = {sel:{}, scored:false};
-function plateRender(){
-  var el = document.getElementById('s-plate');
-  var chips = PLATE_ITEMS.map(function(x,k){ if(x.extra) return ''; return '<button type="button" class="chip" aria-pressed="'+(!!PL.sel[k])+'" data-pl="'+k+'"><span class="pic" aria-hidden="true">'+x.p+'</span>'+esc(L(x))+'</button>'; }).join('');
-  var extraIdx = PLATE_ITEMS.findIndex(function(x){ return x.extra; });
-  var extra = extraIdx<0 ? '' : '<button type="button" class="chip wide" aria-pressed="'+(!!PL.sel[extraIdx])+'" data-pl="'+extraIdx+'"><span class="pic" aria-hidden="true">'+PLATE_ITEMS[extraIdx].p+'</span>'+esc(L(PLATE_ITEMS[extraIdx]))+'</button>';
-  var picked = PLATE_ITEMS.filter(function(x,k){ return PL.sel[k]; }).map(function(x){ return x.p; }).join(' ');
-  el.innerHTML = '<div class="bubble" style="text-align:center">'+L(T.plateAsk)+'</div>'+
-    '<div class="plate" aria-live="polite">'+(picked ? picked : esc(L(T.plateEmpty)))+'</div>'+
-    '<div class="chips">'+chips+'</div>'+
-    extra+
-    '<button type="button" class="go" data-pcheck="1">'+L(T.plateCheck)+'</button>'+
-    '<div id="plateRes"></div>';
+var PL = {sel:{}, junk:{}, scored:false, res:false};
+function plateDiet(){ return KID().diet || 'veg'; }
+function plateGroups(){
+  var d = plateDiet();
+  return PLATE_GROUPS.filter(function(g){ return !g.diet || (g.diet === 'egg' && d !== 'veg') || (g.diet === 'nv' && d === 'nv'); });
 }
-function plateCheck(){
-  var have = {}, junk = 0;
-  PLATE_ITEMS.forEach(function(x,k){ if(PL.sel[k]){ if(x.g==='junk') junk++; else have[x.g]=true; } });
-  var rows = Object.keys(PLATE_GROUPS).map(function(g){ return '<div>'+(have[g]?'✅':'⬜')+' '+esc(L(PLATE_GROUPS[g]))+'</div>'; }).join('');
-  var allOk = Object.keys(PLATE_GROUPS).every(function(g){ return have[g]; }) && junk === 0;
-  var msg = allOk ? L(T.plateGood) : (junk ? L(T.plateJunk) : L(T.plateMissing));
+function plateRender(){
+  var el = document.getElementById('s-plate'), groups = plateGroups(), d = plateDiet(), filled = 0, picked = '';
+  var rows = groups.map(function(g, n){
+    var items = forAge(g.items), has = items.some(function(x){ return PL.sel[g.k] === x.k; });
+    if(!has) delete PL.sel[g.k]; else { filled++; picked += items.filter(function(x){ return PL.sel[g.k] === x.k; })[0].p + ' '; }
+    return '<div class="grp" style="--c:'+g.c+'"><h3><span>'+(n+1)+'. '+esc(L(g))+'</span><span class="one'+(has?' ok':'')+'">'+(has ? '✅' : L(PT.one))+'</span></h3>'+
+      '<div class="chips">'+items.map(function(x){ return '<button type="button" class="chip" aria-pressed="'+(PL.sel[g.k]===x.k)+'" data-pg="'+g.k+'" data-pi="'+x.k+'"><span class="pic" aria-hidden="true">'+x.p+'</span>'+esc(L(x))+'</button>'; }).join('')+'</div></div>';
+  }).join('');
+  var junk = forAge(PLATE_JUNK);
+  junk.forEach(function(x){ if(PL.junk[x.k]) picked += x.p + ' '; });
+  el.innerHTML = '<div class="bubble" style="text-align:center;align-self:center">'+L(T.plateAsk)+'</div>'+
+    '<div class="dietrow"><b>'+L(PT.diet)+'</b><div class="dietseg">'+DIETS.map(function(x){ return '<button type="button" data-diet="'+x.k+'" aria-pressed="'+(d===x.k)+'">'+x.p+' '+esc(L(x))+'</button>'; }).join('')+'</div></div>'+
+    '<div class="plate" aria-live="polite">'+(picked ? picked : esc(L(T.plateEmpty)))+'</div>'+
+    '<div class="counter">'+L(PT.count).replace('{n}', filled).replace('{t}', groups.length)+'</div>'+
+    rows+
+    '<div class="grp" style="--c:#d7263d"><h3><span>'+L(PT.junk)+'</span></h3><div class="chips">'+junk.map(function(x){ return '<button type="button" class="chip" aria-pressed="'+(!!PL.junk[x.k])+'" data-pj="'+x.k+'"><span class="pic" aria-hidden="true">'+x.p+'</span>'+esc(L(x))+'</button>'; }).join('')+'</div></div>'+
+    '<button type="button" class="go" data-pcheck="1">'+L(T.plateCheck)+'</button>'+
+    '<div id="plateRes"></div><div class="pnote">'+L(PT.parent)+'</div>';
+  if(PL.res) plateCheck(true);
+}
+function plateCheck(quiet){
+  var groups = plateGroups(), junk = forAge(PLATE_JUNK).filter(function(x){ return PL.junk[x.k]; });
+  var rows = groups.map(function(g){ return '<div>'+(PL.sel[g.k]?'✅':'⬜')+' '+esc(L(g))+'</div>'; }).join('');
+  var allOk = groups.every(function(g){ return PL.sel[g.k]; }) && !junk.length;
+  var msg = allOk ? L(T.plateGood) : (junk.length ? L(T.plateJunk) : L(T.plateMissing));
   var junkBox = '';
-  if(junk){
-    document.querySelectorAll('[data-pl]').forEach(function(b){ var x=PLATE_ITEMS[+b.getAttribute('data-pl')]; if(x && x.g==='junk' && PL.sel[+b.getAttribute('data-pl')]) b.classList.add('xj'); });
-    junkBox = '<div class="junkbox">'+PLATE_ITEMS.filter(function(x,k){ return x.g==='junk' && PL.sel[k]; }).map(function(x){
+  if(junk.length){
+    document.querySelectorAll('[data-pj]').forEach(function(b){ if(PL.junk[b.getAttribute('data-pj')]) b.classList.add('xj'); });
+    junkBox = '<div class="junkbox">'+junk.map(function(x){
       return '<div class="jx"><span class="jp" aria-hidden="true">'+x.p+'</span><div><b class="jn">✖ '+esc(L(x))+'</b><br>'+esc(L(x.why))+'</div></div>';
     }).join('')+'<div class="jnote">'+L(T.junkNote)+'</div></div>';
   }
-  document.getElementById('plateRes').innerHTML = '<div class="checklist">'+rows+'</div><div class="why '+(allOk?'good':'bad')+'">'+msg+'</div>'+junkBox;
+  PL.res = true;
+  var box = document.getElementById('plateRes');
+  box.innerHTML = '<div class="checklist">'+rows+'</div><div class="why '+(allOk?'good':'bad')+'">'+msg+'</div>'+junkBox;
+  if(!quiet) box.scrollIntoView({block:'nearest'});
   if(allOk && !PL.scored){ PL.scored = true; KID().bonus++; save(); updateBank(); confetti(); }
+}
+function plateTap(b){
+  if(b.dataset.diet){ KID().diet = b.dataset.diet; save(); PL.res = false; plateRender(); return; }
+  var y = window.scrollY;
+  if(b.dataset.pg){ if(PL.sel[b.dataset.pg] === b.dataset.pi) delete PL.sel[b.dataset.pg]; else PL.sel[b.dataset.pg] = b.dataset.pi; }
+  else if(b.dataset.pj){ PL.junk[b.dataset.pj] = !PL.junk[b.dataset.pj]; }
+  PL.res = false; plateRender(); window.scrollTo(0, y);
 }
 
 /* ---------- brushing ---------- */
@@ -963,7 +1036,7 @@ var AGES = [
 ];
 function AGE(){ return KID().age || 'b'; }
 function forAge(list){ var a = AGE(); return list.filter(function(x){ return !x.ag || x.ag.indexOf(a) >= 0; }); }
-function resetRounds(){ QS = {}; VX = {phase:'', i:0, breaths:0, germs:[], stars:{}}; BD = {phase:'intro'}; if(WH.t) clearInterval(WH.t); WH = {phase:'steps', i:0, done:false, t:null, n:0}; SL = null; }
+function resetRounds(){ QS = {}; VX = {phase:'', i:0, breaths:0, germs:[], stars:{}}; BD = {phase:'intro'}; if(WH.t) clearInterval(WH.t); WH = {phase:'steps', i:0, done:false, t:null, n:0}; SL = null; PL = {sel:{}, junk:{}, scored:false, res:false}; }
 
 /* ---------- Brave Vaccine Day ----------
    2–4 years: give Teddy a vaccine, then slow "pinwheel" breaths.
@@ -1278,7 +1351,7 @@ document.getElementById('app').addEventListener('click', function(e){
   if(b.dataset.qname !== undefined){ qAnswer(b.dataset.qname, +b.dataset.qi); return; }
   if(b.dataset.qnext){ qNext(b.dataset.qnext); return; }
   if(b.dataset.qstart){ qStart(b.dataset.qstart); return; }
-  if(b.dataset.pl !== undefined){ var pk = +b.dataset.pl; PL.sel[pk] = !PL.sel[pk]; plateRender(); return; }
+  if(b.dataset.pg || b.dataset.pj || b.dataset.diet){ plateTap(b); return; }
   if(b.dataset.pcheck){ plateCheck(); return; }
   if(b.dataset.bnext){ brushNext(); return; }
   if(b.dataset.bagain){ BR.i = 0; brushRender(); return; }
