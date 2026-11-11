@@ -1,7 +1,7 @@
 # Clinic Website & Booking — Handbook
 
 Everything needed to keep working on Dr. Dinesh Mittal's website and online booking in any new chat.
-Last updated: 10 Nov 2026 (wheeze parent guide added as an unlisted page, `parent-tools/wheeze-parent-guide.html`; switched to English/Hindi, clinic details reduced to name and registration, reference line removed).
+Last updated: 11 Nov 2026 (games by age group, Brave Vaccine Day and My Body Belongs to Me added to `parent-tools/golu-game.html`). Before that: 10 Nov 2026 (wheeze parent guide added as an unlisted page, `parent-tools/wheeze-parent-guide.html`; switched to English/Hindi, clinic details reduced to name and registration, reference line removed).
 
 ## 1. Basics
 
