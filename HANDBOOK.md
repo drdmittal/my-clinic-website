@@ -60,7 +60,7 @@ Last updated: 11 Nov 2026 (games by age group and eight new games added to `pare
    - Then do the Meta setup in `booking-backend/SETUP.md` section C: business portfolio, app, number, 3 Utility templates, permanent token, Phone number ID.
    - Fill in Booking Settings, then run `testWhatsApp` and `installReminderTrigger`, and redeploy.
    - Messages end with "This is an automatic message … WhatsApp or call +91 81305 21456".
-   - **Google review request (11 Nov 2026):** `sendReviewRequests` sends the Utility template `appointment_review` (setting `WA_TEMPLATE_REVIEW`) to each consenting patient 7 days after the visit (`WA_REVIEW_DAYS`), once per booking (column P "Review asked" on Online Bookings). Google review link: https://g.page/r/CZbdcrNILSkGEBM/review (in the template text). After the paste: run `installReviewTrigger` once, and `testReviewRequest` to check the template on the clinic phone. Doctor to confirm: consent wording covers review requests, and NMC guidance on asking for reviews.
+   - **Google review request (11 Nov 2026):** `sendReviewRequests` sends the Utility template `appointment_review_2` (setting `WA_TEMPLATE_REVIEW`; set this in Booking Settings to the name Meta approved) to each consenting patient 7 days after a visit (`WA_REVIEW_DAYS`). Each phone number is asked at most once every 90 days (`WA_REVIEW_GAP_DAYS`). Column P "Review asked" on Online Bookings records each request. Google review link: https://g.page/r/CZbdcrNILSkGEBM/review (in the template text). After the paste: run `installReviewTrigger` once, and `testReviewRequest` to check the template on the clinic phone. Doctor to confirm: consent wording covers review requests, and NMC guidance on asking for reviews.
 
 ## 4. Rules for all website work
 

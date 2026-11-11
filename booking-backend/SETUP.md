@@ -60,8 +60,8 @@ The tick stays hidden on the website until WhatsApp is switched on (WA_ENABLED =
    **appointment_cancelled**
    > Sorry, Dr. Dinesh Mittal is not available for {{1}}'s appointment on {{2}} at {{3}}. Please book another time at childspecialistrohini.com/book.html. This is an automatic message. For any query, WhatsApp or call +91 81305 21456.
 
-   **appointment_review** (Category **Utility**; only {{1}} = child name; the link is fixed in the text)
-   > Thank you for visiting Dr. Dinesh Mittal with {{1}}. If you were happy with the care, please share a short review on Google: https://g.page/r/CZbdcrNILSkGEBM/review. This is an automatic message. For any query, WhatsApp or call +91 81305 21456.
+   **appointment_review_2** (Category **Utility**; only {{1}} = child name; the link is fixed in the text)
+   > Thank you for visiting Dr. Dinesh Mittal with {{1}}. We hope you were happy with the treatment. If you have not yet reviewed us on Google, your feedback helps other parents learn about our clinic: https://g.page/r/CZbdcrNILSkGEBM/review. This is an automatic message. For any query, WhatsApp or call +91 81305 21456.
 
 6. **Permanent token:** business.facebook.com → Settings → Users → **System users** → Add (Admin) → Assign assets: the app and the WhatsApp account (full control) → **Generate token** → expiry **Never** → permissions `whatsapp_business_messaging` and `whatsapp_business_management` → copy the token.
 7. From **WhatsApp → API Setup**, copy the **Phone number ID** (a number, not the phone number itself).

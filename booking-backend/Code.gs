@@ -70,8 +70,9 @@ var DEFAULT_SETTINGS = [
   ['WA_TEMPLATE_CONFIRM', 'appointment_confirmed', 'Approved template name'],
   ['WA_TEMPLATE_REMINDER', 'appointment_reminder', 'Approved template name'],
   ['WA_TEMPLATE_CANCEL', 'appointment_cancelled', 'Approved template name'],
-  ['WA_TEMPLATE_REVIEW', 'appointment_review', 'Approved template name: asks the parent for a Google review (has the review link in its text)'],
-  ['WA_REVIEW_DAYS', 7, 'Days after the visit when the review request is sent']
+  ['WA_TEMPLATE_REVIEW', 'appointment_review_2', 'Approved template name: asks the parent for a Google review (has the review link in its text)'],
+  ['WA_REVIEW_DAYS', 7, 'Days after the visit when the review request is sent'],
+  ['WA_REVIEW_GAP_DAYS', 90, 'Minimum days between review requests to the same phone number']
 ];
 
 var BOOKING_HEADERS = ['Booking ID', 'Created', 'Date', 'Time', 'Child name', 'Child age', 'Parent name', 'Phone', 'Reason', 'WhatsApp OK', 'Status', 'Reminded', 'Note', 'Visit type', 'Calendar'];
@@ -737,22 +738,37 @@ function testWhatsApp() {
   return sendTemplate(s, s.WA_TEMPLATE_CONFIRM, String(s.CLINIC_PHONE).replace(/\D/g, '').slice(-10), ['Test Child', prettyDate(ymd(new Date())), '10:15 AM']);
 }
 
-/** Daily trigger: asks parents for a Google review, WA_REVIEW_DAYS (default 7) after the visit.
-    Only active bookings with WhatsApp consent. Each booking is asked once (column P marks it). */
+/** Daily trigger: asks parents for a Google review, WA_REVIEW_DAYS (default 7) after a visit.
+    Only active bookings with WhatsApp consent. A phone number is asked at most once every
+    WA_REVIEW_GAP_DAYS (default 90), so a patient who returns later is asked again only after that gap.
+    Column P ("Review asked") holds the time each request was sent. */
 function sendReviewRequests() {
   var s = settings();
   if (String(s.WA_ENABLED).toUpperCase() !== 'YES') return;
   var days = Math.max(1, Number(s.WA_REVIEW_DAYS) || 7);
+  var gapDays = Math.max(1, Number(s.WA_REVIEW_GAP_DAYS) || 90);
   var target = addDays(ymd(new Date()), -days);
+  var cutoff = Utilities.formatDate(new Date(Date.now() - gapDays * 86400000), TZ, 'yyyy-MM-dd HH:mm');
   var sh = SS().getSheetByName(TAB_BOOKINGS);
   if (!sh || sh.getLastRow() < 2) return;
   if (sh.getMaxColumns() < REVIEW_COL) sh.insertColumnsAfter(sh.getMaxColumns(), REVIEW_COL - sh.getMaxColumns());
   if (!sh.getRange(1, REVIEW_COL).getDisplayValue()) sh.getRange(1, REVIEW_COL).setValue('Review asked').setFontWeight('bold');
-  sh.getRange(2, 1, sh.getLastRow() - 1, REVIEW_COL).getDisplayValues().forEach(function (r, i) {
+  var rows = sh.getRange(2, 1, sh.getLastRow() - 1, REVIEW_COL).getDisplayValues();
+  // latest review request sent to each phone number
+  var lastAsked = {};
+  rows.forEach(function (r) {
+    var t = r[REVIEW_COL - 1];
+    if (r[COL.phone] && t && (!lastAsked[r[COL.phone]] || t > lastAsked[r[COL.phone]])) lastAsked[r[COL.phone]] = t;
+  });
+  rows.forEach(function (r, i) {
     var row = i + 2;
     if (r[REVIEW_COL - 1] || !isActive(r) || r[COL.date] !== target || r[COL.wa] !== 'YES' || !r[COL.phone]) return;
+    if (lastAsked[r[COL.phone]] && lastAsked[r[COL.phone]] >= cutoff) return;
     if (sendTemplate(s, s.WA_TEMPLATE_REVIEW, r[COL.phone], [r[COL.child]])) {
-      sh.getRange(row, REVIEW_COL).setValue(Utilities.formatDate(new Date(), TZ, 'yyyy-MM-dd HH:mm'));
+      var now = Utilities.formatDate(new Date(), TZ, 'yyyy-MM-dd HH:mm');
+      // keep as text so Sheets does not turn it into a date and break the comparison above
+      sh.getRange(row, REVIEW_COL).setNumberFormat('@').setValue(now);
+      lastAsked[r[COL.phone]] = now;
     }
   });
 }
