@@ -301,7 +301,7 @@ var T = {
   home:{en:'Home',hi:'होम'},
   title:{en:'Healthy Games for Kids',hi:'बच्चों के सेहतमंद खेल'},
   plateGame:{en:'Balanced Plate',hi:'संतुलित थाली'},
-  plateGameSub:{en:'One food from each food group',hi:'हर समूह से एक चीज़'},
+  plateGameSub:{en:'At least one food from each group',hi:'हर समूह से कम से कम एक चीज़'},
   screenGame:{en:'Screen Time Traffic Light',hi:'स्क्रीन टाइम ट्रैफिक लाइट'},
   screenGameSub:{en:'Green, yellow or red? You decide!',hi:'हरा, पीला या लाल? फैसला तुम करो!'},
   brushGame:{en:'Brush Like a Hero',hi:'हीरो की तरह ब्रश करो'},
@@ -310,13 +310,13 @@ var T = {
   safeGameSub:{en:'Stay safe, say no, tell a grown-up',hi:'सुरक्षित रहो, ना कहो, बड़ों को बताओ'},
   behaveGame:{en:'Good or Not Good?',hi:'अच्छा या अच्छा नहीं?'},
   behaveGameSub:{en:'Kind words and good manners',hi:'प्यारे शब्द और अच्छे व्यवहार'},
-  plateAsk:{en:'Pick ONE food from each group for {N} today. If you take roti, you do not need rice.',hi:'{N} के लिए आज हर समूह से एक चीज़ चुनो। रोटी ली है, तो चावल ज़रूरी नहीं।'},
+  plateAsk:{en:'{N} should eat at least one food from each group every day. Pick at least one from each group. You can pick more.',hi:'{N} को रोज़ हर समूह से कम से कम एक चीज़ खानी चाहिए। हर समूह से कम से कम एक चुनो। ज़्यादा भी चुन सकते हो।'},
   plateEmpty:{en:'Empty plate',hi:'खाली थाली'},
   plateCheck:{en:'Check my plate',hi:'मेरी थाली जाँचो'},
-  plateGood:{en:'Balanced plate! One food from every group. {N} is happy. +1 star',hi:'संतुलित थाली! हर समूह से एक चीज़। {N} खुश है। +1 स्टार'},
+  plateGood:{en:'Balanced plate! At least one food from every group. {N} is happy. +1 star',hi:'संतुलित थाली! हर समूह से कम से कम एक चीज़। {N} खुश है। +1 स्टार'},
   plateJunk:{en:'Take away the junk food. It does not go on the plate.',hi:'जंक फूड हटाओ। यह थाली में नहीं जाता।'},
   junkNote:{en:'{N}, do not eat these. They are unhealthy for your body. Eat roti, dal, sabzi, fruit and milk instead.',hi:'{N}, ये न खाएँ। ये शरीर के लिए अच्छे नहीं हैं। इनकी जगह रोटी, दाल, सब्ज़ी, फल और दूध खाओ।'},
-  plateMissing:{en:'Pick one food from each group that is still empty. One from each group is enough.',hi:'जो समूह खाली हैं, उनमें से एक-एक चीज़ चुनो। हर समूह से एक काफ़ी है।'},
+  plateMissing:{en:'Some groups are still empty. Pick at least one food from each group.',hi:'कुछ समूह अभी खाली हैं। हर समूह से कम से कम एक चीज़ चुनो।'},
   brushDone:{en:'Brushing done! Clean teeth, happy {N}. +1 star',hi:'ब्रश हो गया! साफ़ दाँत, खुश {N}। +1 स्टार'},
   storyGame:{en:'Stories for {N}',hi:'{N} के लिए कहानियाँ'},
   storyGameSub:{en:'Short stories about everyday life',hi:'रोज़ की ज़िंदगी की छोटी कहानियाँ'},
@@ -425,8 +425,8 @@ var FOODS = [
 
 /* ---- habit games data ---- */
 /* Balanced Plate: the seven food groups of the diet guide (baby-diet-planner.html, without breast milk).
-   The child picks ONE food from each group. A second tap in the same group replaces the first,
-   so roti and rice are never both needed. Egg and Meat & fish groups show only for the family's diet and are optional: dal, paneer and other
+   The child picks AT LEAST ONE food from each group and may pick more (doctor's wording, 11 Nov 2026).
+   One is enough to fill a group, so roti and rice are never both needed. Egg and Meat & fish groups show only for the family's diet and are optional: dal, paneer and other
    vegetarian protein are enough (doctor's rule). No atta pasta, atta noodles or atta bread as healthy choices:
    most packets in the market contain maida (doctor's rule). */
 var PLATE_GROUPS = [
@@ -459,17 +459,17 @@ var PLATE_JUNK = [
 var DIETS = [{k:'veg',p:'🥦',en:'Veg',hi:'शाकाहारी'},{k:'egg',p:'🥚',en:'Veg + egg',hi:'शाकाहारी + अंडा'},{k:'nv',p:'🍗',en:'Non-veg',hi:'नॉन-वेज'}];
 var PT = {
   diet:{en:'{N} eats:',hi:'{N} खाता/खाती है:'},
-  one:{en:'pick one',hi:'एक चुनो'},
+  one:{en:'at least one',hi:'कम से कम एक'},
   opt:{en:'if you like',hi:'मन हो तो'},
   junk:{en:'Junk food',hi:'जंक फूड'},
   count:{en:'{n} of {t} groups',hi:'{t} में से {n} समूह'},
   parent:{
-    veg:{en:'Parents: one food from each group is enough. Fill half the plate with vegetables and fruit, a quarter with roti or rice, and a quarter with dal, paneer or chana.',
-         hi:'माता-पिता: हर समूह से एक चीज़ काफ़ी है। आधी थाली सब्ज़ी और फल, एक चौथाई रोटी या चावल, और एक चौथाई दाल, पनीर या चने से भरें।'},
-    egg:{en:'Parents: one food from each group is enough. Egg is optional; dal, paneer, curd and chana also give protein. Fill half the plate with vegetables and fruit, a quarter with roti or rice, and a quarter with dal, paneer or egg.',
-         hi:'माता-पिता: हर समूह से एक चीज़ काफ़ी है। अंडा ज़रूरी नहीं; दाल, पनीर, दही और चने से भी प्रोटीन मिलता है। आधी थाली सब्ज़ी और फल, एक चौथाई रोटी या चावल, और एक चौथाई दाल, पनीर या अंडे से भरें।'},
-    nv:{en:'Parents: one food from each group is enough. Egg, meat and fish are optional; dal, paneer, curd and chana also give protein. Fill half the plate with vegetables and fruit, a quarter with roti or rice, and a quarter with dal, paneer, egg or meat.',
-        hi:'माता-पिता: हर समूह से एक चीज़ काफ़ी है। अंडा, मांस और मछली ज़रूरी नहीं; दाल, पनीर, दही और चने से भी प्रोटीन मिलता है। आधी थाली सब्ज़ी और फल, एक चौथाई रोटी या चावल, और एक चौथाई दाल, पनीर, अंडे या मांस से भरें।'}
+    veg:{en:'Parents: your child should eat at least one food from each group every day, and can have more than one. Fill half the plate with vegetables and fruit, a quarter with roti or rice, and a quarter with dal, paneer or chana.',
+         hi:'माता-पिता: बच्चे को रोज़ हर समूह से कम से कम एक चीज़ खानी चाहिए, और एक से ज़्यादा भी खा सकता है। आधी थाली सब्ज़ी और फल, एक चौथाई रोटी या चावल, और एक चौथाई दाल, पनीर या चने से भरें।'},
+    egg:{en:'Parents: your child should eat at least one food from each group every day, and can have more than one. Egg is optional; dal, paneer, curd and chana also give protein. Fill half the plate with vegetables and fruit, a quarter with roti or rice, and a quarter with dal, paneer or egg.',
+         hi:'माता-पिता: बच्चे को रोज़ हर समूह से कम से कम एक चीज़ खानी चाहिए, और एक से ज़्यादा भी खा सकता है। अंडा ज़रूरी नहीं; दाल, पनीर, दही और चने से भी प्रोटीन मिलता है। आधी थाली सब्ज़ी और फल, एक चौथाई रोटी या चावल, और एक चौथाई दाल, पनीर या अंडे से भरें।'},
+    nv:{en:'Parents: your child should eat at least one food from each group every day, and can have more than one. Egg, meat and fish are optional; dal, paneer, curd and chana also give protein. Fill half the plate with vegetables and fruit, a quarter with roti or rice, and a quarter with dal, paneer, egg or meat.',
+        hi:'माता-पिता: बच्चे को रोज़ हर समूह से कम से कम एक चीज़ खानी चाहिए, और एक से ज़्यादा भी खा सकता है। अंडा, मांस और मछली ज़रूरी नहीं; दाल, पनीर, दही और चने से भी प्रोटीन मिलता है। आधी थाली सब्ज़ी और फल, एक चौथाई रोटी या चावल, और एक चौथाई दाल, पनीर, अंडे या मांस से भरें।'}
   }
 };
 var QZ = {
@@ -974,10 +974,10 @@ function plateGroups(){
 function plateRender(){
   var el = document.getElementById('s-plate'), groups = plateGroups(), d = plateDiet(), filled = 0, picked = '', need = groups.filter(function(g){ return !g.opt; }).length;
   var rows = groups.map(function(g, n){
-    var items = forAge(g.items), has = items.some(function(x){ return PL.sel[g.k] === x.k; });
-    if(!has) delete PL.sel[g.k]; else { if(!g.opt) filled++; picked += items.filter(function(x){ return PL.sel[g.k] === x.k; })[0].p + ' '; }
+    var items = forAge(g.items), mine = PL.sel[g.k] || {}, on = items.filter(function(x){ return mine[x.k]; }), has = on.length > 0;
+    if(!has) delete PL.sel[g.k]; else { if(!g.opt) filled++; on.forEach(function(x){ picked += x.p + ' '; }); }
     return '<div class="grp" style="--c:'+g.c+'"><h3><span>'+(n+1)+'. '+esc(L(g))+'</span><span class="one'+(has?' ok':'')+'">'+(has ? '✅' : L(g.opt ? PT.opt : PT.one))+'</span></h3>'+
-      '<div class="chips">'+items.map(function(x){ return '<button type="button" class="chip" aria-pressed="'+(PL.sel[g.k]===x.k)+'" data-pg="'+g.k+'" data-pi="'+x.k+'"><span class="pic" aria-hidden="true">'+x.p+'</span>'+esc(L(x))+'</button>'; }).join('')+'</div></div>';
+      '<div class="chips">'+items.map(function(x){ return '<button type="button" class="chip" aria-pressed="'+(!!mine[x.k])+'" data-pg="'+g.k+'" data-pi="'+x.k+'"><span class="pic" aria-hidden="true">'+x.p+'</span>'+esc(L(x))+'</button>'; }).join('')+'</div></div>';
   }).join('');
   var junk = forAge(PLATE_JUNK);
   junk.forEach(function(x){ if(PL.junk[x.k]) picked += x.p + ' '; });
@@ -1012,7 +1012,7 @@ function plateCheck(quiet){
 function plateTap(b){
   if(b.dataset.diet){ KID().diet = b.dataset.diet; save(); PL.res = false; plateRender(); return; }
   var y = window.scrollY;
-  if(b.dataset.pg){ if(PL.sel[b.dataset.pg] === b.dataset.pi) delete PL.sel[b.dataset.pg]; else PL.sel[b.dataset.pg] = b.dataset.pi; }
+  if(b.dataset.pg){ var gs = PL.sel[b.dataset.pg] = PL.sel[b.dataset.pg] || {}; if(gs[b.dataset.pi]) delete gs[b.dataset.pi]; else gs[b.dataset.pi] = true; if(!Object.keys(gs).length) delete PL.sel[b.dataset.pg]; }
   else if(b.dataset.pj){ PL.junk[b.dataset.pj] = !PL.junk[b.dataset.pj]; }
   PL.res = false; plateRender(); window.scrollTo(0, y);
 }
