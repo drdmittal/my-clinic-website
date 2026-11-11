@@ -16,7 +16,7 @@
       gtag('js', new Date());
       gtag('config', 'G-768Y52R8SC');
     </script>
-</head><body><title>Healthy Games for Kids | Dr. Dinesh Mittal Child Clinic</title><meta name="description" content="Free healthy-habit games for children on food, screen time, brushing, safety and manners, in English and Hindi. Dr. Dinesh Mittal Child Clinic, Rohini.">
+</head><body><title>Healthy Games for Kids | Dr. Dinesh Mittal Child Clinic</title><meta name="description" content="Free healthy-habit games for children by age, on food, screen time, brushing, vaccine day, body safety and manners, in English and Hindi. Dr. Dinesh Mittal Child Clinic, Rohini.">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -135,6 +135,26 @@ h2{margin:0;font-size:26px;line-height:1.1;font-weight:800;text-align:center;tex
 .fly{position:fixed;font-size:34px;z-index:60;pointer-events:none;animation:fly .8s ease-in forwards}
 @keyframes fly{to{transform:translate(var(--dx),var(--dy)) scale(.5);opacity:.3}}
 .t-story{background:var(--surface,#d9f7c4)} .t-plate{background:var(--surface,#ffd9a8)} .t-screen{background:var(--surface,#b9e4ff)} .t-brush{background:var(--surface,#d4f5f0)} .t-safe{background:var(--surface,#e4d4ff)} .t-behave{background:var(--surface,#fff0b3)}
+.t-vax{background:var(--surface,#ffd6e3)} .t-body{background:var(--surface,#cdeee9)}
+.kidrow.kidrow3{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:8px}
+.kidrow3 .kidbig{padding:12px 4px;font-size:16px}
+.teddy{width:170px;height:182px}
+.pw{width:140px;height:182px}
+.pw g{transform-origin:50px 50px}
+.pw.on g{animation:spin .6s linear 4}
+.breaths{display:flex;gap:8px;justify-content:center;font-size:26px}
+.field{position:relative;height:310px;background:var(--card);border-radius:28px;box-shadow:0 6px 0 rgba(33,48,74,.14);overflow:hidden}
+.field .me{position:absolute;left:50%;top:50%;width:128px;height:128px;margin:-64px 0 0 -64px;border-radius:50%;border:6px solid #2f8fe0;background:rgba(47,143,224,.12);display:grid;place-items:center}
+.field .me .golu{width:92px;height:92px}
+.germ{position:absolute;width:60px;height:60px;margin:-30px 0 0 -30px;border:0;padding:0;background:transparent;font-size:40px;line-height:1;cursor:pointer;animation:wob 1.6s ease-in-out infinite;transition:transform .35s,opacity .35s}
+.germ.pop{transform:scale(0) rotate(90deg);opacity:0;pointer-events:none;animation:none}
+@keyframes wob{0%,100%{transform:translateY(0) rotate(-8deg)}50%{transform:translateY(-6px) rotate(8deg)}}
+.rules{display:grid;gap:10px}
+.rule{display:flex;align-items:center;gap:12px;background:var(--card);border-radius:20px;padding:12px 14px;font-weight:800;font-size:22px;line-height:1.2;box-shadow:0 4px 0 rgba(33,48,74,.12)}
+.rule .ic{font-size:36px;line-height:1;flex:none}
+.rule small{display:block;font:600 16px var(--font);color:var(--muted)}
+.go:disabled{opacity:.55}
+@media (prefers-reduced-motion: reduce){.germ,.pw.on g{animation:none}}
 .opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
 .opt{border:0;border-radius:22px;min-height:88px;font:800 19px var(--font);color:#fff;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;box-shadow:0 6px 0 rgba(0,0,0,.2);padding:6px}
 .opt .ic{font-size:34px;line-height:1}
@@ -217,7 +237,9 @@ button:focus-visible{outline:4px solid var(--ink);outline-offset:3px}
       <button type="button" class="tile t-screen" data-go="screen"><span class="ic">🚦</span><span><span data-t="screenGame"></span><small data-t="screenGameSub"></small></span></button>
       <button type="button" class="tile t-story" data-go="story"><span class="ic">📖</span><span><span data-t="storyGame"></span><small data-t="storyGameSub"></small></span></button>
       <button type="button" class="tile t-brush" data-go="brush"><span class="ic">🪥</span><span><span data-t="brushGame"></span><small data-t="brushGameSub"></small></span></button>
+      <button type="button" class="tile t-vax" data-go="vax"><span class="ic">🧸</span><span><span data-t="vaxGame"></span><small data-t="vaxGameSub"></small></span></button>
       <button type="button" class="tile t-safe" data-go="safe"><span class="ic">🛡️</span><span><span data-t="safeGame"></span><small data-t="safeGameSub"></small></span></button>
+      <button type="button" class="tile t-body" data-go="body"><span class="ic">✋</span><span><span data-t="bodyGame"></span><small data-t="bodyGameSub"></small></span></button>
       <button type="button" class="tile t-behave" data-go="behave"><span class="ic">😊</span><span><span data-t="behaveGame"></span><small data-t="behaveGameSub"></small></span></button>
     </div>
   </section>
@@ -238,6 +260,8 @@ button:focus-visible{outline:4px solid var(--ink);outline-offset:3px}
   <section class="screen" id="s-behave" hidden></section>
   <section class="screen" id="s-char" hidden></section>
   <section class="screen" id="s-story" hidden></section>
+  <section class="screen" id="s-vax" hidden></section>
+  <section class="screen" id="s-body" hidden></section>
 </div>
 
 <script>
@@ -274,6 +298,11 @@ var T = {
   brushParent:{en:'Parents: help your child brush until about 7–8 years, and check the back teeth.',hi:'माता-पिता: 7–8 साल तक बच्चे के साथ ब्रश करवाएँ और पीछे के दाँत ज़रूर देखें।'},
   screenAsk:{en:'Which colour is this?',hi:'यह कौन सा रंग है?'},
   safeAsk:{en:'Is this safe?',hi:'क्या यह सुरक्षित है?'},
+  vaxGame:{en:'Brave Vaccine Day',hi:'टीके का बहादुर दिन'},
+  vaxGameSub:{en:'A small prick, a strong shield',hi:'छोटी सी चुभन, मज़बूत ढाल'},
+  vaxAsk:{en:'Is this right?',hi:'क्या यह सही है?'},
+  bodyGame:{en:'My Body Belongs to Me',hi:'मेरा शरीर मेरा है'},
+  bodyGameSub:{en:'Safe touch, unsafe touch, and who to tell',hi:'सुरक्षित और असुरक्षित छूना, और किसे बताना है'},
   behaveAsk:{en:'Is this good behaviour?',hi:'क्या यह अच्छा व्यवहार है?'},
   foodGame:{en:'Tummy Food Game',hi:'पेट का खाना गेम'},
   foodGameSub:{en:'Is it good for {N}? Yes or No!',hi:'{N} के लिए अच्छा? हाँ या ना!'},
@@ -283,7 +312,7 @@ var T = {
   reportSub:{en:'Came back from the potty? Tell {N}!',hi:'पॉटी से आए? {N} को बताओ!'},
   forParents:{en:'For parents: reward & stool diary',hi:'माता-पिता के लिए: इनाम और पॉटी डायरी'},
   pickTitle:{en:'Tell us about your child',hi:'बच्चे के बारे में बताएं'},
-  pickSub:{en:'The games use your child’s name. Each child gets their own stars. You can add more children below.',hi:'खेलों में बच्चे का नाम लिया जाएगा। हर बच्चे के अपने स्टार होंगे। नीचे और बच्चे जोड़ सकते हैं।'},
+  pickSub:{en:'The games use your child’s name and age. Each child gets their own stars. You can add more children below.',hi:'खेलों में बच्चे का नाम लिया जाएगा। हर बच्चे के अपने स्टार होंगे। नीचे और बच्चे जोड़ सकते हैं।'},
   homeSay:{en:"Hi {N}! Let's build good habits together!",hi:'नमस्ते {N}! आओ, मिलकर अच्छी आदतें सीखें!'},
   homeSayStars:{en:'Wow {N}, {n} stars! You are a superstar!',hi:'वाह {N}, {n} स्टार! तुम सुपरस्टार हो!'},
   ask:{en:'Is this good for {N}?',hi:'क्या यह {N} के लिए अच्छा है?'},
@@ -352,16 +381,16 @@ var PLATE_GROUPS = {
 var QZ = {
   screen:{ask:'screenAsk', opts:[{ic:'🟢',cls:'g',v:'g',en:'Green: OK',hi:'हरा: ठीक है'},{ic:'🟡',cls:'y',v:'y',en:'Yellow: with a limit',hi:'पीला: समय सीमा के साथ'},{ic:'🔴',cls:'r',v:'r',en:'Red: no screen',hi:'लाल: स्क्रीन नहीं'}],
     list:[
-      {p:'📖',en:'Reading a picture book with Mummy',hi:'मम्मी के साथ चित्रों वाली किताब पढ़ना',a:'g',why:{en:'Reading together builds words and closeness.',hi:'साथ पढ़ने से शब्द और प्यार बढ़ते हैं।'}},
-      {p:'🎨',en:'Colouring at the table',hi:'मेज़ पर रंग भरना',a:'g',why:{en:'Drawing makes the hands and mind strong.',hi:'चित्र बनाने से हाथ और दिमाग मज़बूत होते हैं।'}},
+      {p:'📖',ag:'ab',en:'Reading a picture book with Mummy',hi:'मम्मी के साथ चित्रों वाली किताब पढ़ना',a:'g',why:{en:'Reading together builds words and closeness.',hi:'साथ पढ़ने से शब्द और प्यार बढ़ते हैं।'}},
+      {p:'🎨',ag:'ab',en:'Colouring at the table',hi:'मेज़ पर रंग भरना',a:'g',why:{en:'Drawing makes the hands and mind strong.',hi:'चित्र बनाने से हाथ और दिमाग मज़बूत होते हैं।'}},
       {p:'⚽',en:'Playing outside in the park',hi:'पार्क में बाहर खेलना',a:'g',why:{en:'Running and jumping keep the body strong and sleep good.',hi:'दौड़ना-कूदना शरीर को मज़बूत और नींद को अच्छी रखता है।'}},
       {p:'📞',en:'A 10-minute video call with grandparents, with a grown-up next to you',hi:'दादा-दादी से 10 मिनट वीडियो कॉल, पास में कोई बड़ा हो',a:'y',why:{en:'Short calls are fine, with a grown-up present.',hi:'छोटी कॉल ठीक है, पास में बड़ा हो।'}},
-      {p:'📺',en:'30 minutes of cartoons after school (age 4)',hi:'स्कूल के बाद 30 मिनट कार्टून (4 साल)',a:'y',why:{en:'Under 5: keep it to 1 hour a day or less, and watch together.',hi:'5 साल से छोटे: रोज़ 1 घंटा या कम, और साथ में देखो।'}},
+      {p:'📺',ag:'a',en:'30 minutes of cartoons after school (age 4)',hi:'स्कूल के बाद 30 मिनट कार्टून (4 साल)',a:'y',why:{en:'Under 5: keep it to 1 hour a day or less, and watch together.',hi:'5 साल से छोटे: रोज़ 1 घंटा या कम, और साथ में देखो।'}},
       {p:'🍽️',en:'A phone at the dinner table',hi:'खाने की मेज़ पर फ़ोन',a:'r',why:{en:'No screens at meals. Talk and eat together.',hi:'खाने के समय स्क्रीन नहीं। साथ बैठो, बातें करो, खाओ।'}},
-      {p:'📚',en:'Homework on the laptop at the study table (age 8)',hi:'स्टडी टेबल पर लैपटॉप पर होमवर्क (8 साल)',a:'g',why:{en:'Required homework is not counted in the 2-hour limit. Take a short break after it.',hi:'ज़रूरी होमवर्क 2 घंटे की सीमा में नहीं गिना जाता। बाद में थोड़ा ब्रेक लो।'}},
-      {p:'🎮',en:'One hour of video games after school, and no other screen that day (age 8)',hi:'स्कूल के बाद 1 घंटा वीडियो गेम, और उस दिन कोई दूसरी स्क्रीन नहीं (8 साल)',a:'g',why:{en:'Up to 2 hours a day in total, across TV, phone, tablet, laptop and games.',hi:'TV, फ़ोन, टैबलेट, लैपटॉप और गेम मिलाकर रोज़ अधिकतम 2 घंटे।'}},
-      {p:'📱',en:'Homework on the phone, for a short task with a grown-up nearby (age 8)',hi:'फ़ोन पर छोटा होमवर्क, पास में कोई बड़ा हो (8 साल)',a:'y',why:{en:'A laptop or tablet is better for homework. Keep the phone away from bedtime.',hi:'होमवर्क के लिए लैपटॉप या टैबलेट बेहतर है। फ़ोन सोने के समय से दूर रखो।'}},
-      {p:'📺',en:'TV for 1.5 hours, then the phone for 1 hour (age 8)',hi:'TV 1.5 घंटे, फिर फ़ोन 1 घंटा (8 साल)',a:'r',why:{en:'That is 2.5 hours in total. Count all screens together.',hi:'यह कुल 2.5 घंटे हैं। सारी स्क्रीन मिलाकर गिनो।'}},
+      {p:'📚',ag:'bc',en:'Homework on the laptop at the study table (age 8)',hi:'स्टडी टेबल पर लैपटॉप पर होमवर्क (8 साल)',a:'g',why:{en:'Required homework is not counted in the 2-hour limit. Take a short break after it.',hi:'ज़रूरी होमवर्क 2 घंटे की सीमा में नहीं गिना जाता। बाद में थोड़ा ब्रेक लो।'}},
+      {p:'🎮',ag:'bc',en:'One hour of video games after school, and no other screen that day (age 8)',hi:'स्कूल के बाद 1 घंटा वीडियो गेम, और उस दिन कोई दूसरी स्क्रीन नहीं (8 साल)',a:'g',why:{en:'Up to 2 hours a day in total, across TV, phone, tablet, laptop and games.',hi:'TV, फ़ोन, टैबलेट, लैपटॉप और गेम मिलाकर रोज़ अधिकतम 2 घंटे।'}},
+      {p:'📱',ag:'bc',en:'Homework on the phone, for a short task with a grown-up nearby (age 8)',hi:'फ़ोन पर छोटा होमवर्क, पास में कोई बड़ा हो (8 साल)',a:'y',why:{en:'A laptop or tablet is better for homework. Keep the phone away from bedtime.',hi:'होमवर्क के लिए लैपटॉप या टैबलेट बेहतर है। फ़ोन सोने के समय से दूर रखो।'}},
+      {p:'📺',ag:'bc',en:'TV for 1.5 hours, then the phone for 1 hour (age 8)',hi:'TV 1.5 घंटे, फिर फ़ोन 1 घंटा (8 साल)',a:'r',why:{en:'That is 2.5 hours in total. Count all screens together.',hi:'यह कुल 2.5 घंटे हैं। सारी स्क्रीन मिलाकर गिनो।'}},
       {p:'🛏️',en:'A phone in bed before sleep',hi:'सोने से पहले बिस्तर पर फ़ोन',a:'r',why:{en:'Screens near bedtime keep the brain awake.',hi:'सोने से पहले की स्क्रीन दिमाग को जगाए रखती है।'}},
       {p:'👶',en:'A phone for a 1-year-old',hi:'1 साल के बच्चे को फ़ोन',a:'r',why:{en:'Under 2 years: no screens at all.',hi:'2 साल से छोटे: बिल्कुल स्क्रीन नहीं।'}}
     ]},
@@ -370,18 +399,18 @@ var QZ = {
       {p:'👵',en:'Grandma comes to pick you up from school, because Mummy told you this morning.',hi:'दादी तुम्हें स्कूल से लेने आईं, क्योंकि सुबह मम्मी ने बताया था।',a:1,why:{en:'Going with people your parents trust, when they have told you about it, is safe. If it is a surprise, call Mummy before you go.',hi:'माता-पिता के भरोसे के लोगों के साथ जाना ठीक है, जब उन्होंने पहले बताया हो। अचानक कोई आए तो जाने से पहले मम्मी को फ़ोन करो।'}},
       {p:'👨',en:'A family uncle that your parents know well takes you to the park, and you tell Mummy afterwards.',hi:'माता-पिता के जाने-पहचाने परिवार के अंकल तुम्हें पार्क ले जाते हैं, और बाद में तुम मम्मी को बताते हो।',a:1,why:{en:'Going with someone your parents know and trust is fine. Always tell them where you went.',hi:'माता-पिता के जाने-पहचाने और भरोसे के व्यक्ति के साथ जाना ठीक है। हमेशा बताओ कि कहाँ गए थे।'}},
       {p:'🍬',en:'A stranger offers you sweets and asks you to come with him.',hi:'एक अनजान आदमी मिठाई देकर तुम्हें अपने साथ चलने को कहे।',a:0,why:{en:'Do not go with a stranger, even for sweets. Say NO loudly, walk away, and go to a grown-up you know.',hi:'अनजान के साथ मिठाई के लिए भी मत जाओ। ज़ोर से ना कहो, वहाँ से चले जाओ, और किसी जाने-पहचाने बड़े के पास जाओ।'}},
-      {p:'🚑',en:'A stranger says, “Your mummy has had an accident. Come with me now.”',hi:'एक अनजान व्यक्ति कहे, “तुम्हारी मम्मी का एक्सीडेंट हो गया है। अभी मेरे साथ चलो।”',a:0,why:{en:'Do not go. Call your parent on the phone, or ask a shopkeeper or police uncle to call them. Stay with a grown-up you know.',hi:'मत जाओ। मम्मी-पापा को फ़ोन करो, या किसी दुकानदार या पुलिस अंकल से फ़ोन करवाओ। किसी जाने-पहचाने बड़े के साथ रहो।'}},
+      {p:'🚑',ag:'bc',en:'A stranger says, “Your mummy has had an accident. Come with me now.”',hi:'एक अनजान व्यक्ति कहे, “तुम्हारी मम्मी का एक्सीडेंट हो गया है। अभी मेरे साथ चलो।”',a:0,why:{en:'Do not go. Call your parent on the phone, or ask a shopkeeper or police uncle to call them. Stay with a grown-up you know.',hi:'मत जाओ। मम्मी-पापा को फ़ोन करो, या किसी दुकानदार या पुलिस अंकल से फ़ोन करवाओ। किसी जाने-पहचाने बड़े के साथ रहो।'}},
       {p:'🎁',en:'A stranger gives you a gift and asks you to come and see something.',hi:'एक अनजान व्यक्ति तोहफ़ा देकर कहे, “आओ, कुछ दिखाता हूँ।”',a:0,why:{en:'Strangers do not give gifts for free. Say NO and go away.',hi:'अनजान लोग मुफ़्त में तोहफ़े नहीं देते। ना कहो और वहाँ से चले जाओ।'}},
       {p:'🛒',en:'You get lost in the market. You stay where you are and ask a shopkeeper or police uncle for help.',hi:'तुम बाज़ार में खो गए। तुम जहाँ हो वहीं रुकते हो और दुकानदार या पुलिस अंकल से मदद माँगते हो।',a:1,why:{en:'Stay where you are. Tell the shopkeeper or police uncle your parent’s name and phone number. Do not go looking alone.',hi:'जहाँ हो वहीं रुको। दुकानदार या पुलिस अंकल को माता-पिता का नाम और फ़ोन नंबर बताओ। खुद ढूँढने मत निकलो।'}},
-      {p:'🏃',en:'You get lost in the market, so you wander off alone to look for Mummy, or go with a stranger who says he knows where she is.',hi:'तुम बाज़ार में खो गए, तो अकेले मम्मी को ढूँढने निकल पड़ते हो, या ऐसे अनजान के साथ जाते हो जो कहता है कि वह जानता है मम्मी कहाँ हैं।',a:0,why:{en:'Do not wander off. Do not go with a stranger, even if he says he knows Mummy.',hi:'भटको मत। किसी अनजान के साथ मत जाओ, भले ही वह कहे कि वह मम्मी को जानता है।'}},
-      {p:'🚪',en:'You are at home alone, and someone you do not know rings the bell. You open the door.',hi:'तुम घर पर अकेले हो, और कोई अनजान घंटी बजाता है। तुम दरवाज़ा खोल देते हो।',a:0,why:{en:'Never open the door for someone you do not know. Ask who it is, and call a parent.',hi:'जिसे नहीं जानते, उसके लिए दरवाज़ा मत खोलो। पूछो कौन है, और माता-पिता को फ़ोन करो।'}},
+      {p:'🏃',ag:'bc',en:'You get lost in the market, so you wander off alone to look for Mummy, or go with a stranger who says he knows where she is.',hi:'तुम बाज़ार में खो गए, तो अकेले मम्मी को ढूँढने निकल पड़ते हो, या ऐसे अनजान के साथ जाते हो जो कहता है कि वह जानता है मम्मी कहाँ हैं।',a:0,why:{en:'Do not wander off. Do not go with a stranger, even if he says he knows Mummy.',hi:'भटको मत। किसी अनजान के साथ मत जाओ, भले ही वह कहे कि वह मम्मी को जानता है।'}},
+      {p:'🚪',ag:'bc',en:'You are at home alone, and someone you do not know rings the bell. You open the door.',hi:'तुम घर पर अकेले हो, और कोई अनजान घंटी बजाता है। तुम दरवाज़ा खोल देते हो।',a:0,why:{en:'Never open the door for someone you do not know. Ask who it is, and call a parent.',hi:'जिसे नहीं जानते, उसके लिए दरवाज़ा मत खोलो। पूछो कौन है, और माता-पिता को फ़ोन करो।'}},
       {p:'🚸',en:'You hold a grown-up’s hand and cross the road at the zebra crossing.',hi:'तुम बड़े का हाथ पकड़कर ज़ेब्रा क्रॉसिंग से सड़क पार करते हो।',a:1,why:{en:'Holding a grown-up’s hand and using the crossing keeps you safe on roads.',hi:'बड़े का हाथ पकड़कर क्रॉसिंग से सड़क पार करना सुरक्षित है।'}},
       {p:'🔌',en:'You push a pin or your finger into an electric socket.',hi:'तुम सॉकेट में पिन या उँगली डालते हो।',a:0,why:{en:'Electricity can kill. Keep fingers and things away from sockets, and tell a grown-up.',hi:'बिजली जानलेवा हो सकती है। सॉकेट से उँगली और चीज़ें दूर रखो, और बड़ों को बताओ।'}},
-      {p:'📱',en:'Someone you met in an online game asks for your home address and school name.',hi:'ऑनलाइन गेम में मिला कोई व्यक्ति तुम्हारे घर का पता और स्कूल का नाम पूछता है।',a:0,why:{en:'Never share your address or school online. Tell a parent.',hi:'ऑनलाइन कभी अपना पता या स्कूल का नाम मत बताओ। माता-पिता को बताओ।'}},
-      {p:'🤫',en:'A grown-up asks you to keep a secret that feels uncomfortable.',hi:'कोई बड़ा ऐसा राज़ रखने को कहे जिससे तुम्हें असहज लगे।',a:0,why:{en:'Tell a parent right away. A secret that feels wrong must always be told.',hi:'तुरंत माता-पिता को बताओ। जो राज़ गलत लगे, वह ज़रूर बताना है।'}},
+      {p:'📱',ag:'bc',en:'Someone you met in an online game asks for your home address and school name.',hi:'ऑनलाइन गेम में मिला कोई व्यक्ति तुम्हारे घर का पता और स्कूल का नाम पूछता है।',a:0,why:{en:'Never share your address or school online. Tell a parent.',hi:'ऑनलाइन कभी अपना पता या स्कूल का नाम मत बताओ। माता-पिता को बताओ।'}},
+      {p:'🤫',ag:'bc',en:'A grown-up asks you to keep a secret that feels uncomfortable.',hi:'कोई बड़ा ऐसा राज़ रखने को कहे जिससे तुम्हें असहज लगे।',a:0,why:{en:'Tell a parent right away. A secret that feels wrong must always be told.',hi:'तुरंत माता-पिता को बताओ। जो राज़ गलत लगे, वह ज़रूर बताना है।'}},
       {p:'🙅',en:'Someone touches the parts of your body covered by your underwear.',hi:'कोई तुम्हारे अंडरवियर से ढके अंगों को छूता है।',a:0,why:{en:'Say NO loudly, move away, and tell a parent. Your body belongs to you.',hi:'ज़ोर से ना कहो, वहाँ से दूर हटो, और माता-पिता को बताओ। तुम्हारा शरीर तुम्हारा है।'}},
       {p:'🗣️',en:'Something makes you uncomfortable, so you tell your parents straight away.',hi:'कुछ असहज लगता है, तो तुम तुरंत माता-पिता को बताते हो।',a:1,why:{en:'Telling a parent right away is the right thing. You will not be in trouble for telling.',hi:'तुरंत बताना सही है। बताने पर तुम्हें डाँट नहीं पड़ेगी।'}},
-      {p:'📞',en:'You are in danger and cannot find a grown-up. You call 112.',hi:'तुम खतरे में हो और कोई बड़ा नहीं मिल रहा। तुम 112 पर फ़ोन करते हो।',a:1,why:{en:'112 is the emergency number in India. Childline 1098 is also free for children in trouble.',hi:'भारत में आपात स्थिति के लिए 112 नंबर है। मुसीबत में बच्चों के लिए चाइल्डलाइन 1098 भी मुफ़्त है।'}}
+      {p:'📞',ag:'bc',en:'You are in danger and cannot find a grown-up. You call 112.',hi:'तुम खतरे में हो और कोई बड़ा नहीं मिल रहा। तुम 112 पर फ़ोन करते हो।',a:1,why:{en:'112 is the emergency number in India. Childline 1098 is also free for children in trouble.',hi:'भारत में आपात स्थिति के लिए 112 नंबर है। मुसीबत में बच्चों के लिए चाइल्डलाइन 1098 भी मुफ़्त है।'}}
     ]},
   behave:{ask:'behaveAsk', opts:[{ic:'👍',cls:'g',v:1,en:'Good',hi:'अच्छा'},{ic:'👎',cls:'r',v:0,en:'Not good',hi:'अच्छा नहीं'}],
     list:[
@@ -392,7 +421,7 @@ var QZ = {
       {p:'🙅',en:'You break a friend’s toy and walk away without saying anything.',hi:'तुम दोस्त का खिलौना तोड़कर बिना कुछ कहे चले जाते हो।',a:0,why:{en:'Say sorry, and offer to help fix it or share your toy to make it right.',hi:'सॉरी कहो, और ठीक करने में मदद करो या अपना खिलौना दो।'}},
       {p:'💬',en:'You say “please” and “thank you”.',hi:'तुम “प्लीज़” और “थैंक यू” कहते हो।',a:1,why:{en:'Good manners make everyone smile.',hi:'अच्छे तौर-तरीके सबको खुश करते हैं।'}},
       {p:'🍚',en:'You throw food on the floor.',hi:'तुम खाना ज़मीन पर फेंकते हो।',a:0,why:{en:'Food is for eating. Say “I am full” when you have had enough.',hi:'खाना खाने के लिए है। पेट भर जाए तो कहो, “मेरा पेट भर गया।”'}},
-      {p:'🥄',en:'You sit at the table, eat with your mouth closed, and wait until everyone is served.',hi:'तुम मेज़ पर बैठकर मुँह बंद करके खाते हो, और सबको परोसे जाने तक इंतज़ार करते हो।',a:1,why:{en:'Eating politely shows respect for the family and the food.',hi:'तमीज़ से खाना परिवार और खाने दोनों का सम्मान है।'}},
+      {p:'🥄',ag:'bc',en:'You sit at the table, eat with your mouth closed, and wait until everyone is served.',hi:'तुम मेज़ पर बैठकर मुँह बंद करके खाते हो, और सबको परोसे जाने तक इंतज़ार करते हो।',a:1,why:{en:'Eating politely shows respect for the family and the food.',hi:'तमीज़ से खाना परिवार और खाने दोनों का सम्मान है।'}},
       {p:'📢',en:'You shout at your grandparents.',hi:'तुम दादा-दादी पर चिल्लाते हो।',a:0,why:{en:'Speak softly and kindly, even when upset.',hi:'परेशान हो तो भी धीरे और प्यार से बोलो।'}},
       {p:'🙏',en:'You say “Namaste” or touch your grandparents’ feet when you meet them.',hi:'तुम दादा-दादी से मिलते समय “नमस्ते” कहते हो या उनके पैर छूते हो।',a:1,why:{en:'Greeting elders with respect makes the whole family proud.',hi:'बड़ों का आदर से अभिवादन करना सबको अच्छा लगता है।'}},
       {p:'👂',en:'You keep talking while your friend is speaking.',hi:'दोस्त बोल रहा हो और तुम बीच में बोलते रहते हो।',a:0,why:{en:'Let the other person finish. Then take your turn to speak.',hi:'दूसरे को पूरी बात कहने दो। फिर अपनी बारी में बोलो।'}},
@@ -401,8 +430,51 @@ var QZ = {
       {p:'🧺',en:'You help put your toys back in the box.',hi:'तुम खिलौने वापस डिब्बे में रखने में मदद करते हो।',a:1,why:{en:'Tidying up is a helpful habit.',hi:'कमरा साफ़ रखना अच्छी आदत है।'}},
       {p:'🐶',en:'You kick the dog when it comes near you.',hi:'जब कुत्ता पास आता है, तुम उसे लात मारते हो।',a:0,why:{en:'Animals feel pain too. Be gentle, and call a grown-up if you are scared.',hi:'जानवरों को भी दर्द होता है। प्यार से रहो, और डर लगे तो बड़ों को बुलाओ।'}},
       {p:'🥛',en:'You break a cup and tell Mummy the truth.',hi:'कप टूट जाता है और तुम मम्मी को सच बताते हो।',a:1,why:{en:'Telling the truth builds trust.',hi:'सच बोलने से भरोसा बनता है।'}},
-      {p:'🤥',en:'You break a cup, and you blame the cat so you do not get into trouble.',hi:'कप तुम तोड़ते हो, पर डाँट से बचने के लिए बिल्ली पर इल्ज़ाम लगाते हो।',a:0,why:{en:'Telling a lie to avoid trouble makes people trust you less. Say what happened.',hi:'डाँट से बचने के लिए झूठ बोलने से लोग कम भरोसा करते हैं। जो हुआ वही बताओ।'}},
+      {p:'🤥',ag:'bc',en:'You break a cup, and you blame the cat so you do not get into trouble.',hi:'कप तुम तोड़ते हो, पर डाँट से बचने के लिए बिल्ली पर इल्ज़ाम लगाते हो।',a:0,why:{en:'Telling a lie to avoid trouble makes people trust you less. Say what happened.',hi:'डाँट से बचने के लिए झूठ बोलने से लोग कम भरोसा करते हैं। जो हुआ वही बताओ।'}},
       {p:'🎁',en:'Your friend has a birthday, and you say, “Happy birthday!” and give a card you made.',hi:'दोस्त का जन्मदिन है, और तुम “हैप्पी बर्थडे!” कहकर अपना बनाया कार्ड देते हो।',a:1,why:{en:'Kind words and small gifts show you care.',hi:'प्यार भरे शब्द और छोटे तोहफ़े दिखाते हैं कि तुम परवाह करते हो।'}}
+    ]},
+  vax:{ask:'vaxAsk', max:10, note:function(){ return L(VT.parent); }, opts:[{ic:'✅',cls:'g',v:1,en:'Right',hi:'सही'},{ic:'❌',cls:'r',v:0,en:'Not right',hi:'सही नहीं'}],
+    list:[
+      {ag:'b',p:'🤝',en:"You hold Mummy’s hand while you get your vaccine.",hi:'टीका लगते समय तुम मम्मी का हाथ पकड़ते हो।',a:1,why:{en:'Staying close to Mummy or Papa helps you feel safe.',hi:'मम्मी या पापा के पास रहने से डर कम लगता है।'}},
+      {ag:'b',p:'🌬️',en:'You take slow, deep breaths, like blowing a pinwheel.',hi:'तुम धीमी, गहरी साँसें लेते हो, जैसे फिरकी घुमा रहे हो।',a:1,why:{en:'Slow breaths help your body relax.',hi:'धीमी साँसों से शरीर ढीला और शांत रहता है।'}},
+      {ag:'b',p:'🧸',en:'You bring your favourite toy or book and look at it.',hi:'तुम अपना पसंदीदा खिलौना या किताब साथ लाते हो और उसे देखते हो।',a:1,why:{en:'Thinking about something you like makes the prick feel smaller.',hi:'पसंद की चीज़ पर ध्यान रहे तो चुभन कम महसूस होती है।'}},
+      {ag:'bc',p:'💪',en:'You keep your arm soft and still.',hi:'तुम बाँह को ढीला और स्थिर रखते हो।',a:1,why:{en:'A soft, still arm makes the vaccine quicker and easier.',hi:'ढीली और स्थिर बाँह में टीका जल्दी और आसानी से लगता है।'}},
+      {ag:'bc',p:'🏃',en:'You pull your arm away when the injection is coming.',hi:'इंजेक्शन आते ही तुम बाँह खींच लेते हो।',a:0,why:{en:'Moving makes it harder and can hurt more. Stay still. It is over in a few seconds.',hi:'हिलने से मुश्किल होती है और ज़्यादा दर्द हो सकता है। स्थिर रहो। कुछ सेकंड में हो जाता है।'}},
+      {ag:'bc',p:'💉',en:'“A vaccine does not hurt at all.”',hi:'“टीके में बिल्कुल दर्द नहीं होता।”',a:0,why:{en:'It is a small prick. It hurts a little for a few seconds, and then it is over.',hi:'यह एक छोटी सी चुभन है। कुछ सेकंड थोड़ा दर्द होता है, फिर खत्म।'}},
+      {ag:'bc',p:'🛡️',en:'A vaccine teaches your body to fight germs.',hi:'टीका तुम्हारे शरीर को कीटाणुओं से लड़ना सिखाता है।',a:1,why:{en:'After the vaccine, your body remembers the germ and is ready to fight it.',hi:'टीके के बाद शरीर उस कीटाणु को याद रखता है और लड़ने के लिए तैयार रहता है।'}},
+      {ag:'bc',p:'😠',en:'“A vaccine is a punishment for naughty children.”',hi:'“टीका शरारती बच्चों की सज़ा है।”',a:0,why:{en:'A vaccine is never a punishment. It is protection, and every child gets it.',hi:'टीका कभी सज़ा नहीं होता। यह सुरक्षा है, जो हर बच्चे को मिलती है।'}},
+      {ag:'bc',p:'😢',en:'It is OK to feel a little scared before a vaccine.',hi:'टीके से पहले थोड़ा डर लगना ठीक है।',a:1,why:{en:'Many children feel scared. Brave means you do it even when you are a little scared.',hi:'बहुत से बच्चों को डर लगता है। बहादुर वह है जो थोड़ा डरकर भी काम पूरा करे।'}},
+      {ag:'bc',p:'🗣️',en:'You tell the doctor, “I am scared.”',hi:'तुम डॉक्टर से कहते हो, “मुझे डर लग रहा है।”',a:1,why:{en:'Telling helps. The doctor can explain what will happen and go at your pace.',hi:'बताने से मदद मिलती है। डॉक्टर समझाएँगे कि क्या होगा।'}},
+      {ag:'c',p:'🔬',en:'A vaccine shows your body a weak or tiny part of a germ, so it learns to fight the real one.',hi:'टीका शरीर को कीटाणु का कमज़ोर या छोटा सा हिस्सा दिखाता है, ताकि शरीर असली कीटाणु से लड़ना सीखे।',a:1,why:{en:'Your body makes antibodies and memory cells. If the real germ comes later, they act fast.',hi:'शरीर एंटीबॉडी और याद रखने वाली कोशिकाएँ बनाता है। बाद में असली कीटाणु आए तो ये तुरंत काम करती हैं।'}},
+      {ag:'c',p:'🤒',en:'A sore arm or mild fever can happen for a day or two after a vaccine.',hi:'टीके के बाद एक-दो दिन बाँह में दर्द या हल्का बुखार हो सकता है।',a:1,why:{en:'This can happen while the body builds protection. Tell your parents how you feel.',hi:'शरीर सुरक्षा बना रहा होता है, तब ऐसा हो सकता है। कैसा लग रहा है, माता-पिता को बताओ।'}},
+      {ag:'c',p:'💪',en:'“I am healthy, so I do not need vaccines.”',hi:'“मैं स्वस्थ हूँ, इसलिए मुझे टीके की ज़रूरत नहीं।”',a:0,why:{en:'Vaccines work before you fall ill. They are given to healthy children to keep them protected.',hi:'टीका बीमार होने से पहले काम करता है। यह स्वस्थ बच्चों को ही लगाया जाता है, ताकि वे सुरक्षित रहें।'}},
+      {ag:'c',p:'👨‍👩‍👧',en:'When you take your vaccine, you also help protect babies and grandparents near you.',hi:'जब तुम टीका लगवाते हो, तो आसपास के छोटे बच्चों और दादा-दादी की सुरक्षा में भी मदद करते हो।',a:1,why:{en:'When you do not catch the disease, you cannot pass it on to them.',hi:'जब तुम्हें बीमारी नहीं होगी, तो तुमसे उन तक भी नहीं पहुँचेगी।'}},
+      {ag:'c',p:'👶',en:'“Vaccines are only for babies.”',hi:'“टीके सिर्फ़ छोटे बच्चों के लिए होते हैं।”',a:0,why:{en:'Older children need some vaccines and boosters too. Ask the doctor which ones are due.',hi:'बड़े बच्चों को भी कुछ टीके और बूस्टर लगते हैं। डॉक्टर से पूछो कि कौन से बाकी हैं।'}},
+      {ag:'c',p:'😬',en:'You hold your breath and make your arm tight.',hi:'तुम साँस रोक लेते हो और बाँह कड़ी कर लेते हो।',a:0,why:{en:'A tight arm hurts more. Breathe slowly and let the arm hang loose.',hi:'कड़ी बाँह में ज़्यादा दर्द होता है। धीरे साँस लो और बाँह ढीली छोड़ दो।'}}
+    ]},
+  body:{ask:'safeAsk', max:10, note:function(){ return L(BT.parent); }, end:function(){ return bodyEnd(); }, opts:[{ic:'✅',cls:'g',v:1,en:'Safe',hi:'सुरक्षित'},{ic:'⚠️',cls:'r',v:0,en:'Not safe',hi:'सुरक्षित नहीं'}],
+    list:[
+      {ag:'a',p:'🤗',en:'Mummy gives you a hug, and you feel happy.',hi:'मम्मी तुम्हें गले लगाती हैं, और तुम्हें अच्छा लगता है।',a:1,why:{en:'A hug from Mummy or Papa that you like is a safe touch.',hi:'मम्मी या पापा का गले लगाना, जो तुम्हें अच्छा लगे, सुरक्षित छूना है।'}},
+      {ag:'a',p:'🛁',en:'Mummy or Papa helps you bathe.',hi:'मम्मी या पापा तुम्हें नहलाते हैं।',a:1,why:{en:'Mummy and Papa help to keep you clean and healthy.',hi:'मम्मी और पापा तुम्हें साफ़ और स्वस्थ रखने में मदद करते हैं।'}},
+      {ag:'ab',p:'🩺',en:'The doctor checks you, and Mummy or Papa is with you.',hi:'डॉक्टर तुम्हारी जाँच करते हैं, और मम्मी या पापा साथ हैं।',a:1,why:{en:'The doctor checks you to keep you healthy. Mummy or Papa stays with you.',hi:'डॉक्टर तुम्हें स्वस्थ रखने के लिए जाँच करते हैं। मम्मी या पापा साथ रहते हैं।'}},
+      {ag:'ab',p:'🙅',en:'Someone touches the parts of your body covered by your underwear.',hi:'कोई तुम्हारे अंडरवियर से ढके अंगों को छूता है।',a:0,why:{en:'Say NO loudly, move away, and tell Mummy or Papa. Your body belongs to you.',hi:'ज़ोर से ना कहो, वहाँ से हटो, और मम्मी या पापा को बताओ। तुम्हारा शरीर तुम्हारा है।'}},
+      {ag:'a',p:'🤫',en:'Someone says, “Do not tell Mummy.”',hi:'कोई कहता है, “मम्मी को मत बताना।”',a:0,why:{en:'We do not keep secrets from Mummy and Papa. Tell them.',hi:'मम्मी और पापा से कोई बात नहीं छिपाते। उन्हें बताओ।'}},
+      {ag:'ab',p:'😣',en:'Someone holds you tight and does not stop when you say “No”.',hi:'कोई तुम्हें कसकर पकड़ता है और “ना” कहने पर भी नहीं छोड़ता।',a:0,why:{en:'You can say NO to any touch you do not like. Move away and tell Mummy or Papa.',hi:'जो छूना अच्छा न लगे, उसे ना कह सकते हो। वहाँ से हटो और मम्मी या पापा को बताओ।'}},
+      {ag:'abc',p:'✋',en:'A touch feels wrong, so you say “NO!” loudly.',hi:'कोई छूना गलत लगता है, तो तुम ज़ोर से “ना!” कहते हो।',a:1,why:{en:'Saying NO loudly is right. Then go away and tell a grown-up you trust.',hi:'ज़ोर से ना कहना सही है। फिर वहाँ से जाओ और भरोसे के बड़े को बताओ।'}},
+      {ag:'a',p:'🗣️',en:'A touch feels wrong, and you tell Mummy or Papa.',hi:'कोई छूना गलत लगता है, और तुम मम्मी या पापा को बताते हो।',a:1,why:{en:'Telling is always right. Mummy and Papa will not be angry with you.',hi:'बताना हमेशा सही है। मम्मी और पापा तुमसे नाराज़ नहीं होंगे।'}},
+      {ag:'ab',p:'👕',en:'Someone asks you to take off your clothes when Mummy and Papa are not there.',hi:'जब मम्मी और पापा पास नहीं हैं, तब कोई तुमसे कपड़े उतारने को कहता है।',a:0,why:{en:'Say NO, go away, and tell Mummy or Papa.',hi:'ना कहो, वहाँ से जाओ, और मम्मी या पापा को बताओ।'}},
+      {ag:'bc',p:'🍫',en:'A grown-up gives you a chocolate and says, “This is our secret. Do not tell anyone.”',hi:'कोई बड़ा तुम्हें चॉकलेट देकर कहता है, “यह हमारा राज़ है। किसी को मत बताना।”',a:0,why:{en:'A secret you must hide from Mummy and Papa is not safe. Tell them, even if you took the chocolate.',hi:'जो राज़ मम्मी और पापा से छिपाना पड़े, वह सुरक्षित नहीं। चॉकलेट ले ली हो, तब भी उन्हें बताओ।'}},
+      {ag:'bc',p:'🎂',en:"You keep Papa’s birthday gift a surprise until his birthday.",hi:'तुम पापा के जन्मदिन का तोहफ़ा जन्मदिन तक सरप्राइज़ रखते हो।',a:1,why:{en:'A happy surprise is fine. Everyone finds out soon, and no one feels bad.',hi:'खुशी वाला सरप्राइज़ ठीक है। जल्दी ही सबको पता चल जाता है, और किसी को बुरा नहीं लगता।'}},
+      {ag:'bc',p:'👤',en:'Someone you know well touches you in a way that feels wrong.',hi:'कोई जान-पहचान वाला तुम्हें ऐसे छूता है जो गलत लगता है।',a:0,why:{en:'An unsafe touch is not OK, even from a relative, neighbour or teacher. It is never your fault. Tell a grown-up you trust.',hi:'असुरक्षित छूना ठीक नहीं, चाहे वह रिश्तेदार, पड़ोसी या टीचर ही क्यों न हो। इसमें तुम्हारी कोई गलती नहीं। भरोसे के बड़े को बताओ।'}},
+      {ag:'bc',p:'📷',en:'Someone wants to take your photo without your clothes.',hi:'कोई बिना कपड़ों के तुम्हारी फ़ोटो लेना चाहता है।',a:0,why:{en:'No one should take such photos. Say NO, go away, and tell a parent.',hi:'ऐसी फ़ोटो कोई नहीं ले सकता। ना कहो, वहाँ से जाओ, और माता-पिता को बताओ।'}},
+      {ag:'bc',p:'🔁',en:'You told one grown-up, but they did not listen. So you tell another grown-up you trust.',hi:'तुमने एक बड़े को बताया, पर उन्होंने नहीं सुना। तो तुम दूसरे भरोसे के बड़े को बताते हो।',a:1,why:{en:'Keep telling until someone helps you.',hi:'जब तक कोई मदद न करे, बताते रहो।'}},
+      {ag:'bc',p:'👀',en:'Someone shows you their private parts, or pictures of people without clothes.',hi:'कोई तुम्हें अपने निजी अंग या बिना कपड़ों के लोगों की तस्वीरें दिखाता है।',a:0,why:{en:'This is not safe, even if no one touches you. Go away and tell a parent.',hi:'यह सुरक्षित नहीं, भले ही किसी ने छुआ न हो। वहाँ से जाओ और माता-पिता को बताओ।'}},
+      {ag:'bc',p:'🙏',en:'You do not want to hug a guest, so you say “Namaste” instead.',hi:'तुम मेहमान को गले नहीं लगाना चाहते, तो “नमस्ते” कहते हो।',a:1,why:{en:'You can choose. Namaste is polite, and your body belongs to you.',hi:'यह तुम चुन सकते हो। नमस्ते कहना भी आदर है, और तुम्हारा शरीर तुम्हारा है।'}},
+      {ag:'c',p:'🙅',en:'Someone touches the parts of your body covered by your underwear.',hi:'कोई तुम्हारे अंडरवियर से ढके अंगों को छूता है।',a:0,why:{en:'Say NO loudly, get away, and tell a parent or a grown-up you trust. It is never your fault.',hi:'ज़ोर से ना कहो, वहाँ से निकलो, और माता-पिता या भरोसे के बड़े को बताओ। इसमें तुम्हारी कोई गलती नहीं।'}},
+      {ag:'c',p:'📱',en:'Someone you chat with online asks for your photo and says, “Keep our chat secret.”',hi:'ऑनलाइन चैट करने वाला कोई तुम्हारी फ़ोटो माँगता है और कहता है, “हमारी चैट किसी को मत बताना।”',a:0,why:{en:'Do not send photos. Do not delete the chat. Show it to a parent.',hi:'फ़ोटो मत भेजो। चैट मिटाओ मत। माता-पिता को दिखाओ।'}},
+      {ag:'c',p:'🤝',en:'A friend tells you that someone touched them in a wrong way. You help your friend tell a trusted grown-up.',hi:'दोस्त बताता है कि किसी ने उसे गलत तरीके से छुआ। तुम उसे भरोसे के बड़े को बताने में मदद करते हो।',a:1,why:{en:'This is too big a secret for children to carry. A trusted grown-up can help your friend.',hi:'यह बात बच्चों के अकेले रखने की नहीं है। भरोसे के बड़े तुम्हारे दोस्त की मदद कर सकते हैं।'}},
+      {ag:'c',p:'😟',en:'Someone says, “If you tell anyone, you will be in trouble.”',hi:'कोई कहता है, “किसी को बताया तो तुम मुसीबत में पड़ोगे।”',a:0,why:{en:'This is a trick to keep you quiet. It is never your fault. Tell a parent, or call Childline 1098.',hi:'यह तुम्हें चुप रखने की चाल है। इसमें तुम्हारी कोई गलती नहीं। माता-पिता को बताओ, या चाइल्डलाइन 1098 पर फ़ोन करो।'}},
+      {ag:'c',p:'🚪',en:'You close the door when you change clothes, and ask others to knock.',hi:'कपड़े बदलते समय तुम दरवाज़ा बंद करते हो, और दूसरों से खटखटाकर आने को कहते हो।',a:1,why:{en:'Privacy is your right. Give others the same privacy.',hi:'निजता तुम्हारा हक़ है। दूसरों की निजता का भी ध्यान रखो।'}}
     ]}
 };
 var BRUSH_STEPS = [
@@ -482,6 +554,8 @@ var MTR = {
   screen:[[392,1],[392,1],[523,1],[523,1],[659,1],[659,1],[523,2]],
   brush:[[659,.5],[659,.5],[784,.5],[659,.5],[587,1],[523,.5],[587,.5],[659,2]],
   safe:[[523,1],[659,1],[784,1],[659,1],[523,1],[392,2]],
+  vax:[[392,1],[523,1],[659,1],[523,1],[587,1],[659,1],[784,2]],
+  body:[[523,1],[587,1],[659,2],[587,1],[659,1],[784,2]],
   behave:[[784,1],[659,1],[784,1],[880,1],[784,2],[659,1],[587,1],[523,2]],
   food:[[523,1],[659,1],[587,1],[523,1],[392,2],[523,1],[659,1],[784,2]]
 };
@@ -546,7 +620,7 @@ function show(name){
   current = name;
   updateBank(); applyLang();
   musicFor(name); syncMusicBtn();
-  ['home','food','plate','screen','brush','safe','behave','char','story'].forEach(function(n){ document.getElementById('s-'+n).hidden = (n!==name); });
+  ['home','food','plate','screen','brush','safe','behave','char','story','vax','body'].forEach(function(n){ document.getElementById('s-'+n).hidden = (n!==name); });
   document.getElementById('backBtn').hidden = (name==='home');
   if(name==='home') renderHome();
   if(name==='food') startGame();
@@ -554,6 +628,8 @@ function show(name){
   if(name==='brush') brushRender();
   if(name==='char') renderCharPick();
   if(name==='story') renderStories();
+  if(name==='vax') vaxRender();
+  if(name==='body') bodyRender();
   if(name==='screen' || name==='safe' || name==='behave') qRender(name);
   window.scrollTo(0,0);
 }
@@ -581,6 +657,9 @@ function renderCharPick(){
       '<button type="button" class="kidbig" data-gender="boy" aria-pressed="'+(kid.gender==='boy')+'"><span class="em">👦</span>'+tx('a boy','लड़का')+'</button>'+
       '<button type="button" class="kidbig" data-gender="girl" aria-pressed="'+(kid.gender==='girl')+'"><span class="em">👧</span>'+tx('a girl','लड़की')+'</button>'+
     '</div>'+
+    '<div style="text-align:center;font:700 18px system-ui,sans-serif;color:var(--tx,#21304a);margin:14px 0 2px">'+tx('My age is…','मेरी उम्र है…')+'</div>'+
+    '<div class="kidrow kidrow3">'+AGES.map(function(a){ return '<button type="button" class="kidbig" data-age="'+a.k+'" aria-pressed="'+(kid.age===a.k)+'"><span class="em">'+a.em+'</span>'+tx(a.en,a.hi)+'</button>'; }).join('')+'</div>'+
+    '<div id="ageHint" style="color:var(--tx,#b91c1c);font-weight:700;text-align:center;margin-top:8px" hidden>'+tx('Pick your age','अपनी उम्र चुनो')+'</div>'+
     '<div id="genderHint" style="color:var(--tx,#b91c1c);font-weight:700;text-align:center;margin-top:8px" '+(kid.gender?'hidden':'')+'>'+tx('Pick boy or girl first','पहले लड़का या लड़की चुनो')+'</div>'+
     '<button type="button" class="letsgo" data-kidsave="1">'+tx("Let's play!",'चलो खेलें!')+'</button>'+
     '<button type="button" class="kidsmall" data-kidnew="1">'+tx('+ Add another child','+ एक और बच्चा जोड़ो')+'</button>'+
@@ -667,14 +746,15 @@ function stopTimer(){}
 /* ---------- quiz games: screen, safe, behave ---------- */
 var QS = {};
 function progHtml2(st){ return '<div class="prog">'+st.list.map(function(f,k){ var c = k<st.res.length ? (st.res[k]?'ok':'no') : (k===st.i?'now':''); return '<i class="'+c+'"></i>'; }).join('')+'</div>'; }
-function qStart(name){ QS[name] = {list: shuffle(QZ[name].list), i:0, won:0, res:[], answered:false}; qRender(name); }
+function qStart(name){ var ql = shuffle(forAge(QZ[name].list)); if(QZ[name].max) ql = ql.slice(0, QZ[name].max); QS[name] = {list: ql, i:0, won:0, res:[], answered:false}; qRender(name); }
 function qRender(name){
   if(!QS[name]){ qStart(name); return; }
   var el = document.getElementById('s-'+name), cfg = QZ[name], st = QS[name];
   if(st.i >= st.list.length){
     var mood = st.won >= st.list.length-1 ? 'wow' : st.won >= Math.ceil(st.list.length/2) ? 'happy' : 'sad';
     el.innerHTML = progHtml2(st)+'<div class="result">'+goluSvg(mood,'bounce')+'<h2>'+L(T.done)+'</h2><div class="score">⭐ '+st.won+' / '+st.list.length+'</div></div>'+
-      '<button type="button" class="go" data-qstart="'+name+'">'+L(T.playAgain)+'</button>';
+      '<button type="button" class="go" data-qstart="'+name+'">'+L(T.playAgain)+'</button>'+
+      (cfg.end ? cfg.end() : '')+(cfg.note ? '<div class="pnote">'+cfg.note()+'</div>' : '');
     if(st.won >= st.list.length-1) confetti();
     return;
   }
@@ -751,6 +831,180 @@ function brushNext(){
   brushRender();
 }
 
+
+/* ---------- age groups ----------
+   Each child has an age group: a = 2–4 years, b = 5–8 years, c = 9–12 years.
+   A quiz question with ag:'bc' is shown only to those groups; no ag means every age. */
+var AGES = [
+  {k:'a', em:'🧸', en:'2–4 years', hi:'2–4 साल'},
+  {k:'b', em:'🎒', en:'5–8 years', hi:'5–8 साल'},
+  {k:'c', em:'🚲', en:'9–12 years', hi:'9–12 साल'}
+];
+function AGE(){ return KID().age || 'b'; }
+function forAge(list){ var a = AGE(); return list.filter(function(x){ return !x.ag || x.ag.indexOf(a) >= 0; }); }
+function resetRounds(){ QS = {}; VX = {phase:'', i:0, breaths:0, germs:[], stars:{}}; BD = {phase:'intro'}; }
+
+/* ---------- Brave Vaccine Day ----------
+   2–4 years: give Teddy a vaccine, then slow "pinwheel" breaths.
+   5–12 years: tap the germs away from the shield, then a Right / Not right quiz.
+   Wording stays honest: a small prick that hurts a little and is over in a few seconds. */
+var VAX_TEDDY = [
+  {btn:{en:'Hug Teddy 🤗',hi:'टेडी को गले लगाओ 🤗'}, en:"Teddy has a vaccine today. Teddy sits on Mummy’s lap.", hi:'आज टेडी को टीका लगेगा। टेडी मम्मी की गोद में बैठा है।'},
+  {btn:{en:'Clean the arm 🧼',hi:'बाँह साफ़ करो 🧼'}, en:"First, the doctor cleans Teddy’s arm with cotton. It feels cold!", hi:'पहले डॉक्टर रुई से टेडी की बाँह साफ़ करते हैं। ठंडा-ठंडा लगता है!'},
+  {btn:{en:'Count 1, 2, 3 💉',hi:'गिनो 1, 2, 3 💉'}, en:'Now a small prick. It hurts a little. Count 1, 2, 3 and it is over!', hi:'अब एक छोटी सी चुभन। थोड़ा सा दर्द होता है। 1, 2, 3 गिनो और हो गया!'},
+  {btn:{en:'Put the plaster 🩹',hi:'पट्टी लगाओ 🩹'}, en:"All done! Put a plaster on Teddy’s arm.", hi:'हो गया! टेडी की बाँह पर पट्टी लगाओ।'},
+  {en:"Teddy was brave! Now Teddy’s body can fight germs. Give Teddy a big hug.", hi:'टेडी बहादुर था! अब टेडी का शरीर कीटाणुओं से लड़ सकता है। टेडी को ज़ोर से गले लगाओ।'}
+];
+var VT = {
+  blowGo:{en:'Next: blow the pinwheel',hi:'आगे: फिरकी घुमाओ'},
+  blowSay:{en:'Breathe in through your nose. Now blow out slowly, and the pinwheel spins!',hi:'नाक से साँस अंदर लो। अब धीरे-धीरे फूँक मारो, फिरकी घूमेगी!'},
+  blowBtn:{en:'Blow 🌬️',hi:'फूँक मारो 🌬️'},
+  blowDone:{en:'Slow breaths keep {N} calm on vaccine day. +1 star',hi:'धीमी साँसें टीके के दिन {N} को शांत रखती हैं। +1 स्टार'},
+  teddyStar:{en:'{N} helped Teddy. +1 star',hi:'{N} ने टेडी की मदद की। +1 स्टार'},
+  shieldSay:{en:'The vaccine gave {N} a shield. Tap the germs to send them away!',hi:'टीके ने {N} को ढाल दी है। कीटाणुओं को टैप करके भगाओ!'},
+  shieldDone:{en:'All gone! The vaccine taught {N}’s body to fight these germs. +1 star',hi:'सब भाग गए! टीके ने {N} के शरीर को इन कीटाणुओं से लड़ना सिखाया। +1 स्टार'},
+  quizGo:{en:'Next: brave quiz',hi:'आगे: बहादुरी क्विज़'},
+  parent:{en:'Parents: tell your child about the vaccine before the visit, in simple, honest words. Do not say “it will not hurt”. Say “a small prick, over in a few seconds”. Never use an injection or the doctor as a threat. Hold your child close, stay calm, and praise them afterwards.',
+          hi:'माता-पिता: क्लिनिक आने से पहले बच्चे को टीके के बारे में सरल और सच्चे शब्दों में बताएँ। “दर्द नहीं होगा” न कहें। कहें, “छोटी सी चुभन होगी, कुछ सेकंड में खत्म।” इंजेक्शन या डॉक्टर के नाम से बच्चे को कभी न डराएँ। बच्चे को पास पकड़ें, खुद शांत रहें, और बाद में शाबाशी दें।'}
+};
+function teddySvg(step){
+  var squeeze = step === 2;
+  var eyes = squeeze ? '<path d="M60 47 l9 5 l-9 5 M100 47 l-9 5 l9 5" stroke="#21304a" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>'
+    : '<circle cx="65" cy="52" r="5" fill="#21304a"/><circle cx="95" cy="52" r="5" fill="#21304a"/>';
+  var mouth = squeeze ? '<ellipse cx="80" cy="80" rx="4" ry="5" fill="#4a2f1b"/>' : '<path d="M71 76 Q80 86 89 76" stroke="#4a2f1b" stroke-width="3" fill="none" stroke-linecap="round"/>';
+  var extra = '';
+  if(step === 1) extra = '<circle cx="128" cy="112" r="9" fill="#fff" stroke="#b9c6d8" stroke-width="2"/>';
+  if(step === 2) extra = '<g transform="rotate(35 132 104)"><rect x="126" y="78" width="12" height="22" rx="2" fill="#e8f4ff" stroke="#2f8fe0" stroke-width="2"/><rect x="123" y="74" width="18" height="4" rx="2" fill="#2f8fe0"/><path d="M132 100 v10" stroke="#56637a" stroke-width="2"/></g>';
+  if(step >= 3) extra = '<g transform="rotate(-20 124 112)"><rect x="113" y="107" width="22" height="10" rx="4" fill="#f6c9a0" stroke="#d99a66" stroke-width="1.5"/><rect x="120" y="108.5" width="8" height="7" rx="1.5" fill="#fff3e6"/></g>';
+  return '<svg class="teddy" viewBox="0 0 160 172" role="img" aria-label="Teddy">'+
+    '<circle cx="45" cy="32" r="18" fill="#b9783f"/><circle cx="115" cy="32" r="18" fill="#b9783f"/><circle cx="45" cy="32" r="9" fill="#e8b98a"/><circle cx="115" cy="32" r="9" fill="#e8b98a"/>'+
+    '<ellipse cx="80" cy="130" rx="36" ry="34" fill="#c98a4b"/><ellipse cx="80" cy="134" rx="22" ry="22" fill="#f0cfa3"/>'+
+    '<ellipse cx="42" cy="118" rx="12" ry="22" fill="#b9783f" transform="rotate(18 42 118)"/><ellipse cx="120" cy="118" rx="12" ry="22" fill="#b9783f" transform="rotate(-18 120 118)"/>'+
+    '<ellipse cx="58" cy="162" rx="15" ry="9" fill="#b9783f"/><ellipse cx="102" cy="162" rx="15" ry="9" fill="#b9783f"/>'+
+    '<circle cx="80" cy="60" r="42" fill="#c98a4b"/><ellipse cx="80" cy="73" rx="19" ry="15" fill="#f0cfa3"/><ellipse cx="80" cy="66" rx="6" ry="4" fill="#4a2f1b"/>'+
+    eyes+mouth+extra+'</svg>';
+}
+function pinwheelSvg(on){
+  var cols = ['#e2457a','#f5ad1b','#0f9b8e','#2f8fe0'], blades = '';
+  for(var k=0;k<4;k++) blades += '<path d="M50 50 L50 10 L80 30 Z" fill="'+cols[k]+'" transform="rotate('+(k*90)+' 50 50)"/>';
+  return '<svg class="pw'+(on?' on':'')+'" viewBox="0 0 100 130" aria-hidden="true"><path d="M50 50 V126" stroke="#8a6a4a" stroke-width="5" stroke-linecap="round"/><g>'+blades+'<circle cx="50" cy="50" r="6" fill="#21304a"/></g></svg>';
+}
+var VX = {phase:'', i:0, breaths:0, germs:[], stars:{}};
+function vaxStar(key, fromEl){ if(VX.stars[key]) return; VX.stars[key] = true; KID().bonus++; save(); confetti(); if(fromEl) flyStar(fromEl); else updateBank(); }
+function vaxRender(){
+  var el = document.getElementById('s-vax'), small = AGE() === 'a';
+  if(!VX.phase) VX.phase = small ? 'teddy' : 'shield';
+  if(small && (VX.phase === 'shield' || VX.phase === 'quiz')) VX.phase = 'teddy';
+  if(!small && (VX.phase === 'teddy' || VX.phase === 'blow')) VX.phase = 'shield';
+  var note = '<div class="pnote">'+L(VT.parent)+'</div>';
+  if(VX.phase === 'quiz'){ qRender('vax'); return; }
+  if(VX.phase === 'teddy'){
+    var s = VAX_TEDDY[VX.i], last = VX.i === VAX_TEDDY.length-1;
+    el.innerHTML = '<h2>'+L(T.vaxGame)+'</h2>'+
+      '<div class="step" id="vxCard"><div class="n">'+(VX.i+1)+' / '+VAX_TEDDY.length+'</div>'+teddySvg(VX.i)+'<div class="big">'+esc(L(s))+'</div></div>'+
+      (last ? '<div class="why good">'+L(VT.teddyStar)+'</div><button type="button" class="go" data-vx="blowgo">'+L(VT.blowGo)+' →</button>'
+            : '<button type="button" class="go" data-vx="step">'+esc(L(s.btn))+'</button>')+note;
+    return;
+  }
+  if(VX.phase === 'blow'){
+    var done = VX.breaths >= 5, dots = '';
+    for(var k=0;k<5;k++) dots += '<span>'+(k < VX.breaths ? '🌬️' : '⚪')+'</span>';
+    el.innerHTML = '<h2>'+L(T.vaxGame)+'</h2>'+
+      '<div class="step" id="vxCard">'+pinwheelSvg(false)+'<div class="big">'+L(VT.blowSay)+'</div><div class="breaths" aria-label="'+VX.breaths+' / 5">'+dots+'</div></div>'+
+      (done ? '<div class="why good">'+L(VT.blowDone)+'</div><button type="button" class="go" data-vx="again">'+L(T.playAgain)+'</button>'
+            : '<button type="button" class="go" data-vx="blow">'+L(VT.blowBtn)+'</button>')+note;
+    return;
+  }
+  /* shield */
+  if(!VX.germs.length){ for(var g=0;g<8;g++) VX.germs.push(false); }
+  var left = VX.germs.filter(function(x){ return !x; }).length, html = '';
+  VX.germs.forEach(function(gone, n){
+    var ang = (n/8)*Math.PI*2, x = 50 + Math.cos(ang)*38, y = 50 + Math.sin(ang)*37;
+    html += '<button type="button" class="germ'+(gone?' pop':'')+'" data-germ="'+n+'" style="left:'+x.toFixed(1)+'%;top:'+y.toFixed(1)+'%;animation-delay:'+(n*.17).toFixed(2)+'s" aria-label="germ"'+(gone?' disabled':'')+'>🦠</button>';
+  });
+  el.innerHTML = '<h2>'+L(T.vaxGame)+'</h2><div class="bubble" style="text-align:center;align-self:center">'+L(VT.shieldSay)+'</div>'+
+    '<div class="field" id="vxField"><div class="me">'+goluSvg(left ? 'happy' : 'wow','small')+'</div>'+html+'</div>'+
+    (left ? '' : '<div class="why good">'+L(VT.shieldDone)+'</div><button type="button" class="go" data-vx="quiz">'+L(VT.quizGo)+' →</button>')+note;
+}
+function vaxAct(a){
+  if(a === 'step'){ if(VX.i < VAX_TEDDY.length-1) VX.i++; vaxRender(); if(VX.i === VAX_TEDDY.length-1) vaxStar('teddy', document.getElementById('vxCard')); return; }
+  if(a === 'blowgo'){ VX.phase = 'blow'; VX.breaths = 0; vaxRender(); return; }
+  if(a === 'blow'){
+    var pw = document.querySelector('#s-vax .pw'), btn = document.querySelector('#s-vax [data-vx="blow"]');
+    if(!pw || pw.classList.contains('on')) return;
+    pw.classList.add('on'); if(btn) btn.disabled = true;
+    setTimeout(function(){ if(current !== 'vax' || VX.phase !== 'blow') return; VX.breaths++; vaxRender(); if(VX.breaths >= 5) vaxStar('blow', document.getElementById('vxCard')); }, 2400);
+    return;
+  }
+  if(a === 'again'){ VX.phase = ''; VX.i = 0; VX.breaths = 0; VX.germs = []; vaxRender(); return; }
+  if(a === 'quiz'){ VX.phase = 'quiz'; qStart('vax'); return; }
+}
+function germTap(n){
+  if(VX.germs[n]) return;
+  VX.germs[n] = true;
+  var b = document.querySelector('#s-vax [data-germ="'+n+'"]'); if(b){ b.classList.add('pop'); b.disabled = true; }
+  if(VX.germs.every(function(x){ return x; })) setTimeout(function(){ if(current !== 'vax') return; vaxRender(); vaxStar('shield', document.getElementById('vxField')); }, 380);
+}
+
+/* ---------- My Body Belongs to Me (safe and unsafe touch) ----------
+   Start card with the No, Go, Tell rule, then a Safe / Not safe quiz by age, then "My 5 trusted grown-ups". */
+var BT = {
+  ruleA:{en:'The parts of your body covered by your underwear are private. No one should touch them. Only Mummy or Papa may help to keep you clean, and the doctor may check you when Mummy or Papa is with you.',
+         hi:'अंडरवियर से ढके अंग तुम्हारे निजी अंग हैं। इन्हें कोई नहीं छू सकता। सिर्फ़ मम्मी या पापा सफ़ाई में मदद कर सकते हैं, और डॉक्टर तभी जाँच सकते हैं जब मम्मी या पापा साथ हों।'},
+  ruleC:{en:'The parts of your body covered by your underwear are private. No one should touch them, look at them or take photos of them. A doctor may need to check you, only with your parent present.',
+         hi:'अंडरवियर से ढके अंग तुम्हारे निजी अंग हैं। इन्हें कोई नहीं छू सकता, न देख सकता है, न इनकी फ़ोटो ले सकता है। ज़रूरत हो तो डॉक्टर जाँच कर सकते हैं, पर सिर्फ़ तब जब मम्मी या पापा साथ हों।'},
+  feel:{en:'If any touch feels wrong:',hi:'अगर कोई छूना गलत लगे:'},
+  no:{en:'NO',hi:'ना'}, noSub:{en:'Say NO loudly',hi:'ज़ोर से “ना” कहो'},
+  go:{en:'GO',hi:'जाओ'}, goSub:{en:'Go away to a safe place',hi:'वहाँ से हटकर सुरक्षित जगह जाओ'},
+  tell:{en:'TELL',hi:'बताओ'}, tellSub:{en:'Tell a grown-up you trust. Keep telling until someone helps.',hi:'भरोसे के बड़े को बताओ। जब तक कोई मदद न करे, बताते रहो।'},
+  start:{en:'Start the game',hi:'खेल शुरू करो'},
+  handGo:{en:'My 5 trusted grown-ups ✋',hi:'मेरे 5 भरोसे के बड़े ✋'},
+  handAsk:{en:'Choose 5 grown-ups {N} can tell anything. Ask Mummy or Papa to help you choose.',hi:'ऐसे 5 बड़े चुनो जिन्हें {N} कुछ भी बता सके। चुनने में मम्मी या पापा की मदद लो।'},
+  handDone:{en:'These are {N}’s 5 trusted grown-ups. If something feels wrong, tell one of them. +1 star',hi:'ये {N} के 5 भरोसे के बड़े हैं। कुछ गलत लगे तो इनमें से किसी को बताओ। +1 स्टार'},
+  handMore:{en:'Choose {n} more',hi:'{n} और चुनो'},
+  parent:{en:'Parents: play this game together with your child, in calm words. Tell your child they will never be in trouble for telling you. An unsafe touch can also come from someone the child knows. Childline 1098 is free, day and night.',
+          hi:'माता-पिता: यह खेल बच्चे के साथ बैठकर, शांत शब्दों में खेलें। बच्चे को बताएँ कि आपको बताने पर उसे कभी डाँट नहीं पड़ेगी। असुरक्षित छूना किसी जान-पहचान वाले की ओर से भी हो सकता है। चाइल्डलाइन 1098 दिन-रात मुफ़्त है।'}
+};
+var HAND = [
+  {k:'mum',p:'👩',en:'Mummy',hi:'मम्मी'},{k:'dad',p:'👨',en:'Papa',hi:'पापा'},{k:'gma',p:'👵',en:'Dadi or Nani',hi:'दादी या नानी'},
+  {k:'gpa',p:'👴',en:'Dada or Nana',hi:'दादा या नाना'},{k:'tch',p:'🏫',en:'Teacher',hi:'टीचर'},{k:'sib',p:'🧑',en:'Grown-up Didi or Bhaiya',hi:'बड़ी दीदी या भैया'},
+  {k:'aunt',p:'🙋',en:'Aunt',hi:'बुआ, मौसी या चाची'},{k:'unc',p:'🧔',en:'Uncle',hi:'चाचा या मामा'},{k:'doc',p:'🩺',en:'Doctor',hi:'डॉक्टर'}
+];
+var BD = {phase:'intro'};
+function bodyEnd(){ return '<button type="button" class="go" data-bd="hand" style="background:var(--grass);box-shadow:0 5px 0 var(--grass-deep)">'+L(BT.handGo)+'</button>'; }
+function bodyRender(){
+  var el = document.getElementById('s-body'), kid = KID(), note = '<div class="pnote">'+L(BT.parent)+'</div>';
+  if(BD.phase === 'quiz'){ qRender('body'); return; }
+  if(BD.phase === 'hand'){
+    var sel = kid.hand || [], n = sel.length;
+    el.innerHTML = '<h2>'+L(BT.handGo)+'</h2><div class="bubble" style="text-align:center;align-self:center">'+L(BT.handAsk)+'</div>'+
+      '<div class="chips">'+HAND.map(function(x){ return '<button type="button" class="chip" aria-pressed="'+(sel.indexOf(x.k)>=0)+'" data-hand="'+x.k+'"><span class="pic" aria-hidden="true">'+x.p+'</span>'+esc(L(x))+'</button>'; }).join('')+'</div>'+
+      (n >= 5 ? '<div class="why good" id="handRes">'+L(BT.handDone)+'</div>' : '<div class="counter" id="handRes">✋ '+n+' / 5 · '+L(BT.handMore).replace('{n}', 5-n)+'</div>')+
+      '<button type="button" class="go" data-bd="again">'+L(T.playAgain)+'</button>'+note;
+    return;
+  }
+  var rule = function(ic, a, b){ return '<div class="rule"><span class="ic" aria-hidden="true">'+ic+'</span><span>'+L(a)+'<small>'+L(b)+'</small></span></div>'; };
+  el.innerHTML = '<h2>'+L(T.bodyGame)+'</h2><div style="display:flex;justify-content:center">'+goluSvg('happy','small')+'</div>'+
+    '<div class="bubble" style="align-self:center">'+L(AGE()==='c' ? BT.ruleC : BT.ruleA)+'</div>'+
+    '<div class="ask">'+L(BT.feel)+'</div>'+
+    '<div class="rules">'+rule('✋',BT.no,BT.noSub)+rule('🏃',BT.go,BT.goSub)+rule('🗣️',BT.tell,BT.tellSub)+'</div>'+
+    '<button type="button" class="go" data-bd="start">'+L(BT.start)+' →</button>'+note;
+}
+function bodyAct(a){
+  if(a === 'start'){ BD.phase = 'quiz'; qStart('body'); return; }
+  if(a === 'hand'){ BD.phase = 'hand'; bodyRender(); window.scrollTo(0,0); return; }
+  if(a === 'again'){ BD.phase = 'intro'; delete QS.body; bodyRender(); window.scrollTo(0,0); return; }
+}
+function handTap(k){
+  var kid = KID(); kid.hand = kid.hand || [];
+  var at = kid.hand.indexOf(k);
+  if(at >= 0) kid.hand.splice(at,1); else if(kid.hand.length < 5) kid.hand.push(k); else return;
+  var first = kid.hand.length === 5 && !kid.handStar;
+  if(first){ kid.handStar = true; kid.bonus++; }
+  save(); bodyRender();
+  if(first){ confetti(); updateBank(); }
+}
+
 /* ---------- parents: reset stars ----------
    Hold the star counter for 3 seconds, or tap it 5 times quickly. Both ask for confirmation. */
 var holdT = null, tapN = 0, tapT = null, bankEl = document.getElementById('bankBox');
@@ -781,10 +1035,15 @@ document.getElementById('app').addEventListener('click', function(e){
   var b = e.target.closest('button'); if(!b) return;
   if(b.dataset.music !== undefined){ musicToggle(); return; }
   if(b.dataset.charopen !== undefined){ show('char'); return; }
-  if(b.dataset.kid){ stashName(); S.active = b.dataset.kid; save(); updateBank(); renderCharPick(); return; }
+  if(b.dataset.kid){ stashName(); S.active = b.dataset.kid; resetRounds(); save(); updateBank(); renderCharPick(); return; }
   if(b.dataset.kidnew!==undefined){ stashName(); var nk = {id:'k'+Date.now().toString(36), name:'', gender:'', bonus:0}; S.kids.push(nk); S.active = nk.id; save(); updateBank(); renderCharPick(); var ni = document.getElementById('kidName'); if(ni) ni.focus(); return; }
   if(b.dataset.gender){ stashName(); KID().gender = b.dataset.gender; save(); renderCharPick(); return; }
-  if(b.dataset.kidsave!==undefined){ if(!stashName()){ var ip = document.getElementById('kidName'); if(ip) ip.focus(); return; } if(!KID().gender){ var gh = document.getElementById('genderHint'); if(gh) gh.hidden = false; return; } save(); syncCharBtn(); confetti(); show('home'); return; }
+  if(b.dataset.age){ stashName(); KID().age = b.dataset.age; save(); resetRounds(); renderCharPick(); return; }
+  if(b.dataset.vx){ vaxAct(b.dataset.vx); return; }
+  if(b.dataset.germ !== undefined){ germTap(+b.dataset.germ); return; }
+  if(b.dataset.bd){ bodyAct(b.dataset.bd); return; }
+  if(b.dataset.hand){ handTap(b.dataset.hand); return; }
+  if(b.dataset.kidsave!==undefined){ if(!stashName()){ var ip = document.getElementById('kidName'); if(ip) ip.focus(); return; } if(!KID().gender){ var gh = document.getElementById('genderHint'); if(gh) gh.hidden = false; return; } if(!KID().age){ var ah = document.getElementById('ageHint'); if(ah) ah.hidden = false; return; } resetRounds(); save(); syncCharBtn(); confetti(); show('home'); return; }
   if(b.dataset.kidremove!==undefined){ var gone = KID(); if(window.confirm(S.lang==='hi' ? (gone.name||'यह बच्चा')+' की प्रोफ़ाइल और स्टार हटाएँ?' : 'Remove '+(gone.name||'this child')+' and their stars?')){ S.kids = S.kids.filter(function(k){ return k.id!==gone.id; }); S.active = S.kids[0].id; save(); renderCharPick(); } return; }
   if(b.dataset.lang){ S.lang = b.dataset.lang; save(); applyLang(); show(current==='food'?'home':current); return; }
   if(b.id==='backBtn'){ show('home'); return; }
@@ -801,7 +1060,9 @@ document.getElementById('app').addEventListener('click', function(e){
   if(b.id==='again'){ startGame(); return; }
 });
 
-applyLang(); updateBank(); show(KID().name && KID().gender ? 'home' : 'char');
+applyLang(); updateBank();
+var ready = KID().name && KID().gender && KID().age, want = (location.hash || '').slice(1);
+show(!ready ? 'char' : (want === 'vax' || want === 'body') ? want : 'home');
 })();
 </script>
 <footer style="max-width:560px;margin:8px auto 24px;padding:0 16px;text-align:center;font:13px/1.5 Mukta,system-ui,sans-serif;color:var(--tx,#556175)"><b style="display:block;font:800 16px 'Baloo 2',Mukta,sans-serif;color:var(--tx,#1f5fbf)">Dr. Dinesh Mittal Child Clinic</b>Dr. Dinesh Mittal, MBBS, DCH · Child Specialist<br>H-34/69, Sector 3, Rohini, Delhi – 110085<br>Phone: <span style="user-select:all;font-weight:700">+91 81305 21456</span><br>Mon–Sat 10:00 AM–1:00 PM &amp; 6:00–8:30 PM · Sun 11:00 AM–12:00 PM<br><a href="https://www.drdineshmittal.com" style="color:var(--tx,#1f5fbf);font-weight:700">www.drdineshmittal.com</a></footer></body></html>
