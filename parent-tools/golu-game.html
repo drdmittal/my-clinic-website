@@ -16,7 +16,7 @@
       gtag('js', new Date());
       gtag('config', 'G-768Y52R8SC');
     </script>
-</head><body><title>Healthy Games for Kids | Dr. Dinesh Mittal Child Clinic</title><meta name="description" content="Free healthy-habit games for children by age, on food, screen time, brushing, vaccine day, body safety and manners, in English and Hindi. Dr. Dinesh Mittal Child Clinic, Rohini.">
+</head><body><title>Healthy Games for Kids | Dr. Dinesh Mittal Child Clinic</title><meta name="description" content="Free healthy-habit games for children by age, on food, drinks, handwashing, sleep, screen time, brushing, vaccine day, road and body safety, feelings, first aid and manners, in English and Hindi. Dr. Dinesh Mittal Child Clinic, Rohini.">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -135,6 +135,15 @@ h2{margin:0;font-size:26px;line-height:1.1;font-weight:800;text-align:center;tex
 .fly{position:fixed;font-size:34px;z-index:60;pointer-events:none;animation:fly .8s ease-in forwards}
 @keyframes fly{to{transform:translate(var(--dx),var(--dy)) scale(.5);opacity:.3}}
 .t-story{background:var(--surface,#d9f7c4)} .t-plate{background:var(--surface,#ffd9a8)} .t-screen{background:var(--surface,#b9e4ff)} .t-brush{background:var(--surface,#d4f5f0)} .t-safe{background:var(--surface,#e4d4ff)} .t-behave{background:var(--surface,#fff0b3)}
+.t-wash{background:var(--surface,#cfe8ff)} .t-sleep{background:var(--surface,#d9d6ff)} .t-feel{background:var(--surface,#ffe1c2)} .t-drink{background:var(--surface,#c9f1ff)} .t-road{background:var(--surface,#d6f5c9)} .t-aid{background:var(--surface,#ffd9d6)}
+.tile[hidden]{display:none}
+.opts.col{grid-template-columns:1fr}
+.opt.n{background:var(--ink);font-size:18px;min-height:64px;padding:10px 14px;line-height:1.25}
+.count20{font-size:84px;font-weight:800;line-height:1;color:var(--grass-deep);font-variant-numeric:tabular-nums}
+.seqrow{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;min-height:62px}
+.seq{position:relative;width:58px;height:58px;border-radius:16px;background:var(--card);display:grid;place-items:center;font-size:32px;box-shadow:0 3px 0 rgba(33,48,74,.12)}
+.seq b{position:absolute;top:-6px;left:-6px;width:22px;height:22px;border-radius:50%;background:var(--grass);color:#fff;font-size:13px;display:grid;place-items:center}
+.seq.empty{background:transparent;border:3px dashed rgba(33,48,74,.3);box-shadow:none;font-size:20px;font-weight:800;color:var(--muted)}
 .t-vax{background:var(--surface,#ffd6e3)} .t-body{background:var(--surface,#cdeee9)}
 .kidrow.kidrow3{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:8px}
 .kidrow3 .kidbig{padding:12px 4px;font-size:16px}
@@ -234,13 +243,19 @@ button:focus-visible{outline:4px solid var(--ink);outline-offset:3px}
     <div class="menu">
       <button type="button" class="tile t-food" data-go="food"><span class="ic">🍎</span><span><span data-t="foodGame"></span><small data-t="foodGameSub"></small></span></button>
       <button type="button" class="tile t-plate" data-go="plate"><span class="ic">🍽️</span><span><span data-t="plateGame"></span><small data-t="plateGameSub"></small></span></button>
+      <button type="button" class="tile t-drink" data-go="drink"><span class="ic">💧</span><span><span data-t="drinkGame"></span><small data-t="drinkGameSub"></small></span></button>
       <button type="button" class="tile t-screen" data-go="screen"><span class="ic">🚦</span><span><span data-t="screenGame"></span><small data-t="screenGameSub"></small></span></button>
       <button type="button" class="tile t-story" data-go="story"><span class="ic">📖</span><span><span data-t="storyGame"></span><small data-t="storyGameSub"></small></span></button>
       <button type="button" class="tile t-brush" data-go="brush"><span class="ic">🪥</span><span><span data-t="brushGame"></span><small data-t="brushGameSub"></small></span></button>
+      <button type="button" class="tile t-wash" data-go="wash"><span class="ic">🧼</span><span><span data-t="washGame"></span><small data-t="washGameSub"></small></span></button>
+      <button type="button" class="tile t-sleep" data-go="sleep"><span class="ic">🌙</span><span><span data-t="sleepGame"></span><small data-t="sleepGameSub"></small></span></button>
       <button type="button" class="tile t-vax" data-go="vax"><span class="ic">🧸</span><span><span data-t="vaxGame"></span><small data-t="vaxGameSub"></small></span></button>
       <button type="button" class="tile t-safe" data-go="safe"><span class="ic">🛡️</span><span><span data-t="safeGame"></span><small data-t="safeGameSub"></small></span></button>
+      <button type="button" class="tile t-road" data-go="road"><span class="ic">🚲</span><span><span data-t="roadGame"></span><small data-t="roadGameSub"></small></span></button>
       <button type="button" class="tile t-body" data-go="body"><span class="ic">✋</span><span><span data-t="bodyGame"></span><small data-t="bodyGameSub"></small></span></button>
+      <button type="button" class="tile t-feel" data-go="feel"><span class="ic">🎭</span><span><span data-t="feelGame"></span><small data-t="feelGameSub"></small></span></button>
       <button type="button" class="tile t-behave" data-go="behave"><span class="ic">😊</span><span><span data-t="behaveGame"></span><small data-t="behaveGameSub"></small></span></button>
+      <button type="button" class="tile t-aid" data-go="aid" data-ages="c"><span class="ic">🚑</span><span><span data-t="aidGame"></span><small data-t="aidGameSub"></small></span></button>
     </div>
   </section>
 
@@ -261,6 +276,12 @@ button:focus-visible{outline:4px solid var(--ink);outline-offset:3px}
   <section class="screen" id="s-char" hidden></section>
   <section class="screen" id="s-story" hidden></section>
   <section class="screen" id="s-vax" hidden></section>
+  <section class="screen" id="s-wash" hidden></section>
+  <section class="screen" id="s-sleep" hidden></section>
+  <section class="screen" id="s-feel" hidden></section>
+  <section class="screen" id="s-drink" hidden></section>
+  <section class="screen" id="s-road" hidden></section>
+  <section class="screen" id="s-aid" hidden></section>
   <section class="screen" id="s-body" hidden></section>
 </div>
 
@@ -298,6 +319,21 @@ var T = {
   brushParent:{en:'Parents: help your child brush until about 7–8 years, and check the back teeth.',hi:'माता-पिता: 7–8 साल तक बच्चे के साथ ब्रश करवाएँ और पीछे के दाँत ज़रूर देखें।'},
   screenAsk:{en:'Which colour is this?',hi:'यह कौन सा रंग है?'},
   safeAsk:{en:'Is this safe?',hi:'क्या यह सुरक्षित है?'},
+  washGame:{en:'Handwash Hero',hi:'हाथ धोने का हीरो'},
+  washGameSub:{en:'Soap, rub, count to 20',hi:'साबुन, रगड़ो, 20 तक गिनो'},
+  sleepGame:{en:'Sleep Time',hi:'सोने का समय'},
+  sleepGameSub:{en:'Put bedtime in the right order',hi:'सोने की तैयारी सही क्रम में लगाओ'},
+  feelGame:{en:'Feelings Faces',hi:'भावनाओं के चेहरे'},
+  feelGameSub:{en:'Name the feeling, choose what to do',hi:'भावना पहचानो, सही काम चुनो'},
+  feelAsk:{en:'What is the best thing to do?',hi:'सबसे अच्छा क्या करना है?'},
+  drinkGame:{en:'Water or Sugary Drink?',hi:'पानी या मीठा पेय?'},
+  drinkGameSub:{en:'Which drinks are good every day?',hi:'रोज़ के लिए कौन से पेय अच्छे हैं?'},
+  drinkAsk:{en:'Is this a good drink for every day?',hi:'क्या यह रोज़ के लिए अच्छा पेय है?'},
+  roadGame:{en:'Road and Helmet Safety',hi:'सड़क और हेलमेट सुरक्षा'},
+  roadGameSub:{en:'Walk, cycle and ride safely',hi:'सुरक्षित चलो, साइकिल चलाओ, सफ़र करो'},
+  aidGame:{en:'First Aid Quiz',hi:'फ़र्स्ट एड क्विज़'},
+  aidGameSub:{en:'What do you do first? (9–12 years)',hi:'सबसे पहले क्या करोगे? (9–12 साल)'},
+  aidAsk:{en:'What do you do first?',hi:'सबसे पहले क्या करोगे?'},
   vaxGame:{en:'Brave Vaccine Day',hi:'टीके का बहादुर दिन'},
   vaxGameSub:{en:'A small prick, a strong shield',hi:'छोटी सी चुभन, मज़बूत ढाल'},
   vaxAsk:{en:'Is this right?',hi:'क्या यह सही है?'},
@@ -475,6 +511,87 @@ var QZ = {
       {ag:'c',p:'🤝',en:'A friend tells you that someone touched them in a wrong way. You help your friend tell a trusted grown-up.',hi:'दोस्त बताता है कि किसी ने उसे गलत तरीके से छुआ। तुम उसे भरोसे के बड़े को बताने में मदद करते हो।',a:1,why:{en:'This is too big a secret for children to carry. A trusted grown-up can help your friend.',hi:'यह बात बच्चों के अकेले रखने की नहीं है। भरोसे के बड़े तुम्हारे दोस्त की मदद कर सकते हैं।'}},
       {ag:'c',p:'😟',en:'Someone says, “If you tell anyone, you will be in trouble.”',hi:'कोई कहता है, “किसी को बताया तो तुम मुसीबत में पड़ोगे।”',a:0,why:{en:'This is a trick to keep you quiet. It is never your fault. Tell a parent, or call Childline 1098.',hi:'यह तुम्हें चुप रखने की चाल है। इसमें तुम्हारी कोई गलती नहीं। माता-पिता को बताओ, या चाइल्डलाइन 1098 पर फ़ोन करो।'}},
       {ag:'c',p:'🚪',en:'You close the door when you change clothes, and ask others to knock.',hi:'कपड़े बदलते समय तुम दरवाज़ा बंद करते हो, और दूसरों से खटखटाकर आने को कहते हो।',a:1,why:{en:'Privacy is your right. Give others the same privacy.',hi:'निजता तुम्हारा हक़ है। दूसरों की निजता का भी ध्यान रखो।'}}
+    ]},
+  wash:{ask:'vaxAsk', max:10, note:function(){ return L(WT.parent); }, opts:[{ic:'✅',cls:'g',v:1,en:'Right',hi:'सही'},{ic:'❌',cls:'r',v:0,en:'Not right',hi:'सही नहीं'}],
+    list:[
+      {p:'🍽️',en:'You wash your hands with soap before eating.',hi:'खाने से पहले तुम साबुन से हाथ धोते हो।',a:1,why:{en:'Germs on the hands go into the mouth with food. Soap washes them away.',hi:'हाथों के कीटाणु खाने के साथ मुँह में चले जाते हैं। साबुन उन्हें धो देता है।'}},
+      {p:'🚽',en:'After the toilet, you rinse your hands with water only.',hi:'टॉयलेट के बाद तुम सिर्फ़ पानी से हाथ धोते हो।',a:0,why:{en:'Water alone does not remove germs. Use soap every time after the toilet.',hi:'सिर्फ़ पानी से कीटाणु नहीं हटते। टॉयलेट के बाद हर बार साबुन लगाओ।'}},
+      {p:'⚽',en:'You come home from the park and wash your hands with soap.',hi:'पार्क से घर आकर तुम साबुन से हाथ धोते हो।',a:1,why:{en:'Hands pick up dirt and germs outside. Wash them when you come home.',hi:'बाहर हाथों पर मिट्टी और कीटाणु लग जाते हैं। घर आकर हाथ धोओ।'}},
+      {p:'🐶',en:'You pat a dog and then eat a biscuit without washing your hands.',hi:'कुत्ते को सहलाकर तुम बिना हाथ धोए बिस्किट खाते हो।',a:0,why:{en:'Wash your hands with soap after touching animals, and before you eat.',hi:'जानवरों को छूने के बाद और खाने से पहले साबुन से हाथ धोओ।'}},
+      {p:'🤧',en:'You sneeze into your hands and then pick up your friend’s toy.',hi:'तुम हाथों में छींकते हो और फिर दोस्त का खिलौना उठा लेते हो।',a:0,why:{en:'Sneeze into your elbow or a tissue. If you sneeze into your hands, wash them.',hi:'कोहनी या टिशू में छींको। हाथों में छींक आ जाए तो हाथ धो लो।'}},
+      {p:'⏱️',en:'You rub soap on your hands for 3 seconds and rinse.',hi:'तुम 3 सेकंड साबुन रगड़कर हाथ धो लेते हो।',a:0,why:{en:'Rub with soap for 20 seconds, so every part of the hand gets clean.',hi:'20 सेकंड तक साबुन रगड़ो, ताकि हाथ का हर हिस्सा साफ़ हो।'}},
+      {p:'👕',en:'You dry your washed hands on your dirty T-shirt.',hi:'धुले हाथ तुम अपनी गंदी टी-शर्ट से पोंछते हो।',a:0,why:{en:'Dirty cloth puts germs back on clean hands. Use a clean towel.',hi:'गंदे कपड़े से साफ़ हाथों पर फिर कीटाणु लग जाते हैं। साफ़ तौलिया लो।'}},
+      {p:'💅',en:'You keep your nails short and clean.',hi:'तुम नाखून छोटे और साफ़ रखते हो।',a:1,why:{en:'Dirt and germs hide under long nails.',hi:'लंबे नाखूनों के नीचे मैल और कीटाणु छिपे रहते हैं।'}},
+      {ag:'c',p:'🧴',en:'There is no soap and water, and your hands look clean. You use hand sanitiser.',hi:'साबुन और पानी नहीं है, और हाथ साफ़ दिख रहे हैं। तुम हैंड सैनिटाइज़र लगाते हो।',a:1,why:{en:'Sanitiser is fine when hands are not dirty. When you can see dirt, use soap and water.',hi:'हाथ गंदे न दिखें तो सैनिटाइज़र ठीक है। मैल दिखे तो साबुन और पानी से धोओ।'}}
+    ]},
+  drink:{ask:'drinkAsk', max:10, note:function(){ return L(DT.parent); }, opts:[{ic:'👍',cls:'g',v:1,en:'Good every day',hi:'रोज़ के लिए ठीक'},{ic:'👎',cls:'r',v:0,en:'Not every day',hi:'रोज़ नहीं'}],
+    list:[
+      {p:'💧',en:'Plain water',hi:'सादा पानी',a:1,why:{en:'Water is the best drink when you are thirsty.',hi:'प्यास लगे तो पानी सबसे अच्छा पेय है।'}},
+      {p:'🥛',en:'Plain milk',hi:'सादा दूध',a:1,why:{en:'Milk gives calcium and protein for strong bones. Drink it without added sugar.',hi:'दूध से हड्डियों के लिए कैल्शियम और प्रोटीन मिलता है। इसे बिना चीनी मिलाए पियो।'}},
+      {p:'🥤',en:'Cold drink',hi:'कोल्ड ड्रिंक',a:0,why:{en:'A cold drink is sugar water with gas. It harms the teeth and adds weight.',hi:'कोल्ड ड्रिंक गैस वाला चीनी का पानी है। यह दाँत खराब करता है और वज़न बढ़ाता है।'}},
+      {p:'🧃',en:'Packet fruit juice',hi:'पैकेट वाला फलों का जूस',a:0,why:{en:'Packet juice has a lot of sugar and almost no fibre. Eat the whole fruit.',hi:'पैकेट के जूस में बहुत चीनी होती है और रेशा लगभग नहीं। पूरा फल खाओ।'}},
+      {p:'🥥',en:'Fresh coconut water',hi:'ताज़ा नारियल पानी',a:1,why:{en:'Fresh coconut water has no added sugar.',hi:'ताज़े नारियल पानी में ऊपर से चीनी नहीं होती।'}},
+      {p:'🥣',en:'Chaas, or lassi without sugar',hi:'छाछ, या बिना चीनी की लस्सी',a:1,why:{en:'Chaas is made from curd. It is good for the tummy and has no added sugar.',hi:'छाछ दही से बनती है। यह पेट के लिए अच्छी है और इसमें चीनी नहीं होती।'}},
+      {p:'🍹',en:'Sweet sherbet or squash',hi:'मीठा शरबत या स्क्वैश',a:0,why:{en:'Sherbet and squash are mostly sugar and colour.',hi:'शरबत और स्क्वैश में ज़्यादातर चीनी और रंग होता है।'}},
+      {ag:'bc',p:'🍋',en:'Home-made nimbu pani with very little sugar',hi:'घर का बना नींबू पानी, बहुत कम चीनी के साथ',a:1,why:{en:'Nimbu pani with very little sugar is fine. With a lot of sugar it becomes a sugary drink.',hi:'बहुत कम चीनी वाला नींबू पानी ठीक है। ज़्यादा चीनी डालने पर यह मीठा पेय बन जाता है।'}},
+      {ag:'bc',p:'☕',en:'Tea or coffee',hi:'चाय या कॉफ़ी',a:0,why:{en:'Tea and coffee have caffeine, which can disturb sleep. They are not everyday drinks for children.',hi:'चाय और कॉफ़ी में कैफ़ीन होता है, जो नींद खराब कर सकता है। ये बच्चों के रोज़ के पेय नहीं हैं।'}},
+      {ag:'bc',p:'⚡',en:'Energy drink',hi:'एनर्जी ड्रिंक',a:0,why:{en:'Energy drinks have a lot of caffeine and sugar. They are not for children.',hi:'एनर्जी ड्रिंक में बहुत कैफ़ीन और चीनी होती है। ये बच्चों के लिए नहीं हैं।'}},
+      {ag:'bc',p:'🏃',en:'A sports drink after playing',hi:'खेलने के बाद स्पोर्ट्स ड्रिंक',a:0,why:{en:'After play, water is enough. Sports drinks add sugar.',hi:'खेलने के बाद पानी काफ़ी है। स्पोर्ट्स ड्रिंक में चीनी होती है।'}},
+      {ag:'bc',p:'🍫',en:'Chocolate milk from a packet',hi:'पैकेट वाला चॉकलेट दूध',a:0,why:{en:'Flavoured milk has added sugar. Plain milk is better.',hi:'फ्लेवर वाले दूध में चीनी मिली होती है। सादा दूध बेहतर है।'}},
+      {ag:'bc',p:'🍊',en:'A glass of fresh fruit juice every day',hi:'रोज़ एक गिलास ताज़ा फलों का जूस',a:0,why:{en:'Even fresh juice has the sugar of many fruits without their fibre. A whole fruit is better.',hi:'ताज़े जूस में भी कई फलों की चीनी होती है, पर रेशा नहीं। पूरा फल बेहतर है।'}}
+    ]},
+  road:{ask:'safeAsk', max:10, note:function(){ return L(RT.parent); }, opts:[{ic:'✅',cls:'g',v:1,en:'Safe',hi:'सुरक्षित'},{ic:'⚠️',cls:'r',v:0,en:'Not safe',hi:'सुरक्षित नहीं'}],
+    list:[
+      {p:'🤝',en:'You hold Papa’s hand while walking near the road.',hi:'सड़क के पास चलते समय तुम पापा का हाथ पकड़ते हो।',a:1,why:{en:'Holding a grown-up’s hand keeps you away from traffic.',hi:'बड़े का हाथ पकड़ने से तुम गाड़ियों से दूर रहते हो।'}},
+      {p:'⚽',en:'Your ball rolls onto the road, and you run after it.',hi:'गेंद सड़क पर चली जाती है, और तुम उसके पीछे भागते हो।',a:0,why:{en:'Stop at the edge. Ask a grown-up to get the ball.',hi:'किनारे पर रुक जाओ। गेंद लाने के लिए किसी बड़े से कहो।'}},
+      {p:'🛵',en:'You stand in front on the scooter, without a helmet.',hi:'तुम स्कूटर पर आगे खड़े होते हो, बिना हेलमेट के।',a:0,why:{en:'Everyone on a scooter needs a helmet, children too. Sit properly behind the driver and hold on.',hi:'स्कूटर पर हर किसी को हेलमेट चाहिए, बच्चों को भी। चलाने वाले के पीछे ठीक से बैठो और पकड़कर रखो।'}},
+      {p:'🚗',en:'In the car, you sit in the back seat with your seat belt on.',hi:'कार में तुम पीछे की सीट पर सीट बेल्ट लगाकर बैठते हो।',a:1,why:{en:'The back seat with a seat belt or child seat is the safest place for children.',hi:'बच्चों के लिए सबसे सुरक्षित जगह पीछे की सीट है, सीट बेल्ट या चाइल्ड सीट के साथ।'}},
+      {p:'👩',en:'In the car, you sit on Mummy’s lap in the front seat.',hi:'कार में तुम आगे की सीट पर मम्मी की गोद में बैठते हो।',a:0,why:{en:'A lap cannot hold you in a crash. Sit in the back seat with a belt or child seat.',hi:'टक्कर में गोद तुम्हें नहीं रोक सकती। पीछे की सीट पर बेल्ट या चाइल्ड सीट में बैठो।'}},
+      {p:'🚌',en:'You put your head or hand out of the bus window.',hi:'तुम बस की खिड़की से सिर या हाथ बाहर निकालते हो।',a:0,why:{en:'Keep your head and hands inside. Other vehicles pass very close.',hi:'सिर और हाथ अंदर रखो। दूसरी गाड़ियाँ बहुत पास से निकलती हैं।'}},
+      {p:'🚙',en:'You play behind a parked car.',hi:'तुम खड़ी कार के पीछे खेलते हो।',a:0,why:{en:'The driver cannot see you behind the car. Play in the park or a safe open place.',hi:'गाड़ी के पीछे ड्राइवर तुम्हें नहीं देख सकता। पार्क या सुरक्षित खुली जगह में खेलो।'}},
+      {ag:'bc',p:'👀',en:'Before crossing, you stop, look right, look left, and look right again.',hi:'सड़क पार करने से पहले तुम रुकते हो, दाएँ देखते हो, बाएँ देखते हो, और फिर दाएँ देखते हो।',a:1,why:{en:'Stop, look and listen every time. Cross only when the road is clear.',hi:'हर बार रुको, देखो और सुनो। सड़क खाली हो तभी पार करो।'}},
+      {ag:'bc',p:'🚲',en:'You wear a helmet when you ride your cycle.',hi:'साइकिल चलाते समय तुम हेलमेट पहनते हो।',a:1,why:{en:'A helmet protects your head if you fall.',hi:'गिरने पर हेलमेट सिर को बचाता है।'}},
+      {ag:'bc',p:'🚦',en:'The signal is about to change, so you run across the road.',hi:'सिग्नल बदलने वाला है, इसलिए तुम भागकर सड़क पार करते हो।',a:0,why:{en:'Do not run. Wait for the next green signal for walkers.',hi:'भागो मत। पैदल चलने वालों के अगले हरे सिग्नल का इंतज़ार करो।'}},
+      {ag:'bc',p:'🚌',en:'You jump off the bus before it stops fully.',hi:'बस पूरी रुकने से पहले तुम उतर जाते हो।',a:0,why:{en:'Get on and off only when the bus has stopped.',hi:'बस पूरी रुक जाए, तभी चढ़ो और उतरो।'}},
+      {ag:'bc',p:'🚶',en:'You walk on the footpath, not on the road.',hi:'तुम सड़क पर नहीं, फुटपाथ पर चलते हो।',a:1,why:{en:'The footpath is for walking. If there is none, walk at the side, facing the traffic.',hi:'फुटपाथ चलने के लिए है। फुटपाथ न हो तो किनारे पर, सामने से आती गाड़ियों की ओर मुँह करके चलो।'}},
+      {ag:'c',p:'📱',en:'You cross the road while looking at your phone, with earphones on.',hi:'तुम फ़ोन देखते हुए और ईयरफ़ोन लगाकर सड़क पार करते हो।',a:0,why:{en:'Phone away and earphones off near the road. You need your eyes and ears.',hi:'सड़क के पास फ़ोन रख दो और ईयरफ़ोन उतार दो। आँख और कान दोनों चाहिए।'}},
+      {ag:'c',p:'🌙',en:'You cycle in the evening with a light, reflectors and bright clothes.',hi:'शाम को तुम लाइट, रिफ़्लेक्टर और चमकीले कपड़ों के साथ साइकिल चलाते हो।',a:1,why:{en:'Drivers must be able to see you in the dark.',hi:'अँधेरे में गाड़ी वालों को तुम दिखने चाहिए।'}},
+      {ag:'c',p:'🛵',en:'You ride your cousin’s scooter on the road by yourself.',hi:'तुम चचेरे भाई की स्कूटी खुद सड़क पर चलाते हो।',a:0,why:{en:'Children must not drive. It is against the law and very dangerous.',hi:'बच्चों को गाड़ी नहीं चलानी चाहिए। यह कानून के खिलाफ़ और बहुत खतरनाक है।'}}
+    ]},
+  feel:{ask:'feelAsk', max:8, col:true, note:function(){ return L(FT.parent); },
+    list:[
+      {ag:'a',p:'😀',ask:{en:'How does this face feel?',hi:'यह चेहरा कैसा महसूस कर रहा है?'},opts:[{en:'Happy',hi:'खुश'},{en:'Sad',hi:'उदास'},{en:'Angry',hi:'गुस्सा'}],a:0,why:{en:'This face is happy. What makes {N} happy?',hi:'यह चेहरा खुश है। {N} को किस बात से खुशी मिलती है?'}},
+      {ag:'a',p:'😢',ask:{en:'How does this face feel?',hi:'यह चेहरा कैसा महसूस कर रहा है?'},opts:[{en:'Sleepy',hi:'नींद में'},{en:'Sad',hi:'उदास'},{en:'Happy',hi:'खुश'}],a:1,why:{en:'This face is sad. When you feel sad, tell Mummy or Papa. A hug helps.',hi:'यह चेहरा उदास है। उदास लगे तो मम्मी या पापा को बताओ। गले लगने से अच्छा लगता है।'}},
+      {ag:'a',p:'😠',ask:{en:'How does this face feel?',hi:'यह चेहरा कैसा महसूस कर रहा है?'},opts:[{en:'Angry',hi:'गुस्सा'},{en:'Scared',hi:'डरा हुआ'},{en:'Happy',hi:'खुश'}],a:0,why:{en:'This face is angry. When you feel angry, take a deep breath. Do not hit.',hi:'यह चेहरा गुस्से में है। गुस्सा आए तो गहरी साँस लो। मारो मत।'}},
+      {ag:'a',p:'😨',ask:{en:'How does this face feel?',hi:'यह चेहरा कैसा महसूस कर रहा है?'},opts:[{en:'Happy',hi:'खुश'},{en:'Sleepy',hi:'नींद में'},{en:'Scared',hi:'डरा हुआ'}],a:2,why:{en:'This face is scared. When you feel scared, go to Mummy or Papa.',hi:'यह चेहरा डरा हुआ है। डर लगे तो मम्मी या पापा के पास जाओ।'}},
+      {ag:'a',p:'😴',ask:{en:'How does this face feel?',hi:'यह चेहरा कैसा महसूस कर रहा है?'},opts:[{en:'Angry',hi:'गुस्सा'},{en:'Sleepy',hi:'नींद में'},{en:'Sad',hi:'उदास'}],a:1,why:{en:'This face is sleepy. When you feel sleepy, it is time for bed.',hi:'इस चेहरे को नींद आ रही है। नींद आए तो सोने का समय है।'}},
+      {ag:'a',p:'😲',ask:{en:'How does this face feel?',hi:'यह चेहरा कैसा महसूस कर रहा है?'},opts:[{en:'Surprised',hi:'हैरान'},{en:'Sad',hi:'उदास'},{en:'Angry',hi:'गुस्सा'}],a:0,why:{en:'This face is surprised. Something new happened!',hi:'यह चेहरा हैरान है। कुछ नया हुआ है!'}},
+      {ag:'b',p:'😠',en:'Your brother tears your drawing. You feel very angry.',hi:'भाई तुम्हारी ड्रॉइंग फाड़ देता है। तुम्हें बहुत गुस्सा आता है।',opts:[{en:'Hit him',hi:'उसे मार दो'},{en:'Take 3 deep breaths and say, “I am angry”',hi:'3 गहरी साँसें लो और कहो, “मुझे गुस्सा आ रहा है”'},{en:'Tear his book',hi:'उसकी किताब फाड़ दो'}],a:1,why:{en:'Feeling angry is OK. Hitting is not. Breathe slowly and say it in words.',hi:'गुस्सा आना ठीक है। मारना ठीक नहीं। धीरे साँस लो और बात शब्दों में कहो।'}},
+      {ag:'b',p:'😢',en:'Your friend does not play with you today. You feel sad.',hi:'आज दोस्त तुम्हारे साथ नहीं खेलता। तुम उदास हो।',opts:[{en:'Tell Mummy or Papa how you feel',hi:'मम्मी या पापा को बताओ कि कैसा लग रहा है'},{en:'Hide in your room and tell no one',hi:'कमरे में छिप जाओ और किसी को न बताओ'}],a:0,why:{en:'Talking about a sad feeling makes it lighter.',hi:'उदासी की बात बताने से मन हल्का होता है।'}},
+      {ag:'b',p:'😨',en:'You feel scared of the dark at night.',hi:'रात को तुम्हें अँधेरे से डर लगता है।',opts:[{en:'Stay awake quietly all night',hi:'चुपचाप पूरी रात जागते रहो'},{en:'Tell Mummy or Papa, and ask for a small night lamp',hi:'मम्मी या पापा को बताओ, और छोटा नाइट लैंप माँगो'}],a:1,why:{en:'Many children feel scared of the dark. Telling a grown-up helps.',hi:'बहुत से बच्चों को अँधेरे से डर लगता है। बड़ों को बताने से मदद मिलती है।'}},
+      {ag:'b',p:'😤',en:'You lose a game of ludo.',hi:'तुम लूडो का खेल हार जाते हो।',opts:[{en:'Say, “Good game!” and play again',hi:'कहो, “अच्छा खेले!” और फिर से खेलो'},{en:'Throw the board',hi:'बोर्ड फेंक दो'},{en:'Say, “You cheated!”',hi:'कहो, “तुमने बेईमानी की!”'}],a:0,why:{en:'Everyone loses sometimes. A good player stays kind.',hi:'कभी-कभी हर कोई हारता है। अच्छा खिलाड़ी प्यार से पेश आता है।'}},
+      {ag:'b',p:'😟',en:'You are worried about tomorrow’s test.',hi:'तुम्हें कल के टेस्ट की चिंता है।',opts:[{en:'Say you have a tummy ache and skip school',hi:'पेट दर्द का बहाना बनाकर स्कूल मत जाओ'},{en:'Tell Mummy or Papa, and revise a little',hi:'मम्मी या पापा को बताओ, और थोड़ा दोहरा लो'}],a:1,why:{en:'Sharing the worry and doing a little practice makes it smaller.',hi:'चिंता बताने और थोड़ा अभ्यास करने से वह छोटी हो जाती है।'}},
+      {ag:'b',p:'😭',en:'Your friend is crying in the playground.',hi:'खेल के मैदान में तुम्हारा दोस्त रो रहा है।',opts:[{en:'Laugh at your friend',hi:'दोस्त पर हँसो'},{en:'Walk away',hi:'वहाँ से चले जाओ'},{en:'Ask, “Are you OK?” and call the teacher',hi:'पूछो, “तुम ठीक हो?” और टीचर को बुलाओ'}],a:2,why:{en:'Kind words help a sad friend. A grown-up can help too.',hi:'प्यार के शब्द उदास दोस्त की मदद करते हैं। बड़े भी मदद कर सकते हैं।'}},
+      {ag:'bc',p:'😳',en:'You give a wrong answer in class, and some children laugh.',hi:'कक्षा में तुम्हारा जवाब गलत हो जाता है, और कुछ बच्चे हँसते हैं।',opts:[{en:'Never answer in class again',hi:'फिर कभी कक्षा में जवाब मत दो'},{en:'Tell yourself, “Mistakes help me learn,” and try again',hi:'खुद से कहो, “गलतियों से सीखते हैं,” और फिर कोशिश करो'}],a:1,why:{en:'Everyone makes mistakes. Trying again is how you learn.',hi:'गलती सबसे होती है। फिर कोशिश करने से ही सीखते हैं।'}},
+      {ag:'c',p:'😔',en:'A classmate teases you every day and calls you names.',hi:'एक सहपाठी रोज़ तुम्हें चिढ़ाता है और बुरे नाम से बुलाता है।',opts:[{en:'Keep quiet and bear it',hi:'चुप रहो और सहते रहो'},{en:'Tell a parent or teacher you trust',hi:'माता-पिता या भरोसे के टीचर को बताओ'},{en:'Hit the classmate',hi:'उसे मार दो'}],a:1,why:{en:'Teasing again and again is bullying. It is not your fault. A trusted grown-up can stop it.',hi:'बार-बार चिढ़ाना बुलिंग है। इसमें तुम्हारी गलती नहीं। भरोसे के बड़े इसे रोक सकते हैं।'}},
+      {ag:'c',p:'📚',en:'Exams are near, and you feel very tense.',hi:'परीक्षा पास है, और तुम बहुत तनाव में हो।',opts:[{en:'Make a study plan, take short breaks, and sleep on time',hi:'पढ़ाई की योजना बनाओ, छोटे ब्रेक लो, और समय पर सोओ'},{en:'Study all night without sleep',hi:'बिना सोए पूरी रात पढ़ो'}],a:0,why:{en:'A plan, breaks and good sleep help the brain remember. Tell your parents if the tension stays.',hi:'योजना, ब्रेक और अच्छी नींद से दिमाग याद रखता है। तनाव बना रहे तो माता-पिता को बताओ।'}},
+      {ag:'c',p:'😡',en:'Papa says no to a new phone. You feel angry.',hi:'पापा नए फ़ोन के लिए मना कर देते हैं। तुम्हें गुस्सा आता है।',opts:[{en:'Shout and bang the door',hi:'चिल्लाओ और दरवाज़ा पटको'},{en:'Calm down first, then talk about it politely',hi:'पहले शांत हो जाओ, फिर आराम से बात करो'}],a:1,why:{en:'Wait until the anger settles. A calm talk is heard better.',hi:'गुस्सा शांत होने दो। शांत होकर कही बात ज़्यादा सुनी जाती है।'}},
+      {ag:'c',p:'💬',en:'Someone writes a mean comment about you online.',hi:'कोई ऑनलाइन तुम्हारे बारे में बुरी बात लिखता है।',opts:[{en:'Write a mean reply',hi:'तुम भी बुरा जवाब लिखो'},{en:'Do not reply. Take a screenshot and show a parent',hi:'जवाब मत दो। स्क्रीनशॉट लो और माता-पिता को दिखाओ'}],a:1,why:{en:'An angry reply makes it worse. Save the proof and tell a parent.',hi:'गुस्से का जवाब बात बिगाड़ता है। सबूत रखो और माता-पिता को बताओ।'}},
+      {ag:'c',p:'😞',en:'You have felt sad for many days, and nothing feels fun.',hi:'तुम कई दिनों से उदास हो, और किसी चीज़ में मन नहीं लगता।',opts:[{en:'Tell a parent how you feel',hi:'माता-पिता को बताओ कि कैसा लग रहा है'},{en:'Wait alone for it to go away',hi:'अकेले इंतज़ार करो कि यह खुद ठीक हो जाए'}],a:0,why:{en:'Sadness that stays for many days needs help. Talk to a parent. The doctor can help too.',hi:'कई दिन तक रहने वाली उदासी में मदद चाहिए। माता-पिता से बात करो। डॉक्टर भी मदद कर सकते हैं।'}},
+      {ag:'c',p:'🙅',en:'Your friends push you to bunk a class with them. You do not want to.',hi:'दोस्त तुम पर क्लास छोड़ने का दबाव डालते हैं। तुम ऐसा नहीं चाहते।',opts:[{en:'Go with them so they do not laugh at you',hi:'साथ चले जाओ, ताकि वे हँसें नहीं'},{en:'Say, “No, I am not coming,” and go to class',hi:'कहो, “नहीं, मैं नहीं आ रहा,” और क्लास में जाओ'}],a:1,why:{en:'A real friend accepts your “no”. You can choose what is right for you.',hi:'सच्चा दोस्त तुम्हारी “ना” मान लेता है। जो सही है, वह तुम चुन सकते हो।'}}
+    ]},
+  aid:{ask:'aidAsk', max:10, col:true, note:function(){ return L(AT.parent); },
+    list:[
+      {p:'🔥',en:'You touch a hot pan and burn your finger.',hi:'गरम तवा छूने से तुम्हारी उँगली जल जाती है।',opts:[{en:'Put toothpaste or ice on it',hi:'टूथपेस्ट या बर्फ़ लगाओ'},{en:'Hold it under running tap water for 20 minutes, and tell a grown-up',hi:'20 मिनट तक नल के बहते पानी के नीचे रखो, और बड़ों को बताओ'}],a:1,why:{en:'Cool a burn under running tap water for about 20 minutes. No ice, toothpaste, butter or oil.',hi:'जली जगह को लगभग 20 मिनट नल के बहते पानी से ठंडा करो। बर्फ़, टूथपेस्ट, मक्खन या तेल नहीं।'}},
+      {p:'👃',en:'Your nose starts bleeding.',hi:'तुम्हारी नाक से खून आने लगता है।',opts:[{en:'Sit up, lean forward, and pinch the soft part of the nose for 10 minutes',hi:'सीधे बैठो, थोड़ा आगे झुको, और नाक का नरम हिस्सा 10 मिनट दबाकर रखो'},{en:'Tilt your head back',hi:'सिर पीछे झुकाओ'},{en:'Lie down flat',hi:'सीधे लेट जाओ'}],a:0,why:{en:'Lean forward and pinch for 10 minutes without letting go. Breathe through the mouth. Tell a grown-up.',hi:'आगे झुककर 10 मिनट लगातार दबाए रखो। मुँह से साँस लो। बड़ों को बताओ।'}},
+      {p:'🩸',en:'Your friend cuts a knee, and it is bleeding.',hi:'दोस्त के घुटने पर कट लग जाता है, और खून बह रहा है।',opts:[{en:'Put turmeric or mud on it',hi:'हल्दी या मिट्टी लगाओ'},{en:'Press firmly with a clean cloth, and call a grown-up',hi:'साफ़ कपड़े से ज़ोर से दबाओ, और बड़ों को बुलाओ'}],a:1,why:{en:'Firm pressure with a clean cloth for about 10 minutes stops most bleeding. No home remedies on the cut.',hi:'साफ़ कपड़े से लगभग 10 मिनट ज़ोर से दबाने पर ज़्यादातर खून रुक जाता है। कट पर कोई घरेलू नुस्खा नहीं।'}},
+      {p:'🤕',en:'Your little brother falls and bumps his head.',hi:'छोटा भाई गिर जाता है और उसके सिर पर चोट लगती है।',opts:[{en:'Tell a grown-up at once',hi:'तुरंत बड़ों को बताओ'},{en:'Tell no one, so he is not scolded',hi:'किसी को मत बताओ, ताकि डाँट न पड़े'}],a:0,why:{en:'A head bump must always be told to a grown-up. A cold pack wrapped in cloth helps the bump.',hi:'सिर की चोट हमेशा बड़ों को बतानी है। कपड़े में लपेटी ठंडी पट्टी गुमड़ पर आराम देती है।'}},
+      {p:'🐕',en:'A dog bites or scratches you.',hi:'कुत्ता तुम्हें काट लेता है या खरोंच मार देता है।',opts:[{en:'Hide it, because it is small',hi:'छोटा सा है, इसलिए छिपा लो'},{en:'Wash it with soap and running water, and tell a parent at once',hi:'साबुन और बहते पानी से धोओ, और तुरंत माता-पिता को बताओ'}],a:1,why:{en:'Every animal bite or scratch must be shown to a doctor the same day, even a small one.',hi:'जानवर का हर काटना या खरोंच उसी दिन डॉक्टर को दिखाना है, चाहे छोटा ही हो।'}},
+      {p:'⚡',en:'Your friend is getting an electric shock from a wire.',hi:'तुम्हारे दोस्त को तार से करंट लग रहा है।',opts:[{en:'Pull your friend away with your hands',hi:'हाथों से दोस्त को खींच लो'},{en:'Do not touch. Shout for a grown-up to switch off the power',hi:'छुओ मत। ज़ोर से बड़ों को बुलाओ कि बिजली बंद करें'}],a:1,why:{en:'If you touch the person, you get the shock too. The power must be switched off first.',hi:'छूने पर तुम्हें भी करंट लगेगा। पहले बिजली बंद करनी होगी।'}},
+      {p:'😵',en:'A classmate falls down and starts shaking (a fit).',hi:'एक सहपाठी गिर जाता है और उसका शरीर झटके खाने लगता है (दौरा)।',opts:[{en:'Put a spoon or water in the mouth',hi:'मुँह में चम्मच या पानी डालो'},{en:'Call a teacher at once, and move hard things away',hi:'तुरंत टीचर को बुलाओ, और कठोर चीज़ें दूर हटाओ'},{en:'Hold the arms and legs down',hi:'हाथ-पैर कसकर पकड़ लो'}],a:1,why:{en:'Never put anything in the mouth and never hold the person down. Get a grown-up immediately.',hi:'मुँह में कभी कुछ मत डालो और शरीर को मत दबाओ। तुरंत बड़ों को बुलाओ।'}},
+      {p:'📞',en:'Someone is badly hurt, and no grown-up is near.',hi:'कोई बुरी तरह घायल है, और पास में कोई बड़ा नहीं है।',opts:[{en:'Call 112',hi:'112 पर फ़ोन करो'},{en:'Wait and watch',hi:'रुककर देखते रहो'}],a:0,why:{en:'112 is the emergency number in India. Say your name, what happened and where you are.',hi:'भारत में आपात स्थिति का नंबर 112 है। अपना नाम, क्या हुआ और तुम कहाँ हो, यह बताओ।'}},
+      {p:'👁️',en:'Dust goes into your eye.',hi:'तुम्हारी आँख में धूल चली जाती है।',opts:[{en:'Rub the eye hard',hi:'आँख ज़ोर से मलो'},{en:'Do not rub. Wash the eye with clean water and tell a grown-up',hi:'मलो मत। साफ़ पानी से आँख धोओ और बड़ों को बताओ'}],a:1,why:{en:'Rubbing can scratch the eye. Clean water washes the dust out.',hi:'मलने से आँख में खरोंच आ सकती है। साफ़ पानी धूल को बहा देता है।'}},
+      {p:'💊',en:'Your little sister has swallowed some tablets from Dadi’s box.',hi:'छोटी बहन ने दादी के डिब्बे से कुछ गोलियाँ निगल ली हैं।',opts:[{en:'Tell a grown-up at once, and show them the box',hi:'तुरंत बड़ों को बताओ, और डिब्बा दिखाओ'},{en:'Give her water and wait',hi:'उसे पानी पिलाओ और इंतज़ार करो'}],a:0,why:{en:'This is an emergency. A grown-up must take her to hospital with the medicine box.',hi:'यह आपात स्थिति है। बड़ों को उसे दवा के डिब्बे के साथ अस्पताल ले जाना होगा।'}}
     ]}
 };
 var BRUSH_STEPS = [
@@ -559,6 +676,7 @@ var MTR = {
   behave:[[784,1],[659,1],[784,1],[880,1],[784,2],[659,1],[587,1],[523,2]],
   food:[[523,1],[659,1],[587,1],[523,1],[392,2],[523,1],[659,1],[784,2]]
 };
+MTR.wash = MTR.brush; MTR.sleep = [[523,2],[392,2],[440,2],[392,2],[330,2],[392,4]]; MTR.feel = MTR.behave; MTR.drink = MTR.food; MTR.road = MTR.safe; MTR.aid = MTR.screen;
 var MC = null, mTimer = null, mGame = null;
 function mNote(f,t,d){ var o=MC.createOscillator(), g=MC.createGain(); o.type='triangle'; o.frequency.value=f; g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(.25,t+.02); g.gain.linearRampToValueAtTime(0,t+d*.9); o.connect(g); g.connect(MC.destination); o.start(t); o.stop(t+d); }
 function mPlay(name){
@@ -620,7 +738,7 @@ function show(name){
   current = name;
   updateBank(); applyLang();
   musicFor(name); syncMusicBtn();
-  ['home','food','plate','screen','brush','safe','behave','char','story','vax','body'].forEach(function(n){ document.getElementById('s-'+n).hidden = (n!==name); });
+  ['home','food','plate','screen','brush','safe','behave','char','story','vax','body','wash','sleep','feel','drink','road','aid'].forEach(function(n){ document.getElementById('s-'+n).hidden = (n!==name); });
   document.getElementById('backBtn').hidden = (name==='home');
   if(name==='home') renderHome();
   if(name==='food') startGame();
@@ -630,7 +748,9 @@ function show(name){
   if(name==='story') renderStories();
   if(name==='vax') vaxRender();
   if(name==='body') bodyRender();
-  if(name==='screen' || name==='safe' || name==='behave') qRender(name);
+  if(name==='wash') washRender();
+  if(name==='sleep') sleepRender();
+  if(name==='screen' || name==='safe' || name==='behave' || name==='feel' || name==='drink' || name==='road' || name==='aid') qRender(name);
   window.scrollTo(0,0);
 }
 function syncCharBtn(){ var b = document.getElementById('charBtn'); if(b) b.textContent = '🙂 ' + charName() + ' ▾'; }
@@ -678,6 +798,7 @@ function renderHome(){
   var n = totalStars();
   document.getElementById('homeSay').textContent = n>0 ? LG('homeSayStars').replace('{n}', n) : LG('homeSay');
   document.getElementById('goluHome').innerHTML = goluSvg('happy','bounce');
+  document.querySelectorAll('.tile[data-ages]').forEach(function(t){ t.hidden = t.dataset.ages.indexOf(AGE()) < 0; });
 }
 
 /* ---------- food game ---------- */
@@ -741,7 +862,7 @@ function answer(v, btn){
   nx.focus();
 }
 
-function stopTimer(){}
+function stopTimer(){ if(typeof WH !== 'undefined' && WH && WH.t){ clearInterval(WH.t); WH.t = null; } }
 
 /* ---------- quiz games: screen, safe, behave ---------- */
 var QS = {};
@@ -760,10 +881,10 @@ function qRender(name){
   }
   var it = st.list[st.i];
   var h = progHtml2(st)+'<div style="display:flex;justify-content:center">'+goluSvg('happy','small')+'</div>'+
-    '<div class="food" id="qCard"><span class="pic" aria-hidden="true">'+it.p+'</span><span class="nm">'+esc(L(it))+'</span><span class="stamp" id="qStamp"></span></div>';
+    '<div class="food" id="qCard"><span class="pic" aria-hidden="true">'+it.p+'</span>'+(it.en ? '<span class="nm">'+esc(L(it))+'</span>' : '')+'<span class="stamp" id="qStamp"></span></div>';
   if(!st.answered){
-    h += '<div class="ask">'+L(T[cfg.ask])+'</div><div class="opts">'+cfg.opts.map(function(o,k){
-      return '<button type="button" class="opt '+o.cls+'" data-qname="'+name+'" data-qi="'+k+'"><span class="ic">'+o.ic+'</span>'+esc(L(o))+'</button>';
+    h += '<div class="ask">'+L(it.ask || T[cfg.ask])+'</div><div class="opts'+(cfg.col ? ' col' : '')+'">'+(it.opts || cfg.opts).map(function(o,k){
+      return '<button type="button" class="opt '+(o.cls || 'n')+'" data-qname="'+name+'" data-qi="'+k+'">'+(o.ic ? '<span class="ic">'+o.ic+'</span>' : '')+esc(L(o))+'</button>';
     }).join('')+'</div>';
   }
   el.innerHTML = h;
@@ -771,14 +892,14 @@ function qRender(name){
 function qAnswer(name, k){
   var st = QS[name], cfg = QZ[name];
   if(!st || st.answered) return;
-  var it = st.list[st.i], ok = (cfg.opts[k].v === it.a);
+  var it = st.list[st.i], ok = it.opts ? (k === it.a) : (cfg.opts[k].v === it.a);
   st.answered = true; st.res.push(ok);
   var el = document.getElementById('s-'+name), card = document.getElementById('qCard'), stamp = document.getElementById('qStamp');
   el.querySelector('.ask').remove(); el.querySelector('.opts').remove();
   if(ok){ st.won++; KID().bonus++; save(); stamp.className='stamp good show'; stamp.textContent='✓'; react(el,'wow'); flyStar(card); }
   else { stamp.className='stamp bad show'; stamp.textContent='✗'; react(el,'sad'); }
   var w = document.createElement('div'); w.className = 'why '+(ok?'good':'bad');
-  w.innerHTML = '<div style="font-size:22px;font-weight:800">'+(ok?L(T.right):L(T.wrong))+'</div>'+esc(L(it.why));
+  w.innerHTML = '<div style="font-size:22px;font-weight:800">'+(ok?L(T.right):L(T.wrong))+'</div>'+(it.opts ? '<div style="font-weight:800">✓ '+esc(L(it.opts[it.a]))+'</div>' : '')+esc(L(it.why));
   var nx = document.createElement('button'); nx.type='button'; nx.className='go'; nx.dataset.qnext = name; nx.textContent = L(T.next)+' →';
   el.appendChild(w); el.appendChild(nx); el.querySelector('.prog').outerHTML = progHtml2(st); nx.focus();
 }
@@ -842,7 +963,7 @@ var AGES = [
 ];
 function AGE(){ return KID().age || 'b'; }
 function forAge(list){ var a = AGE(); return list.filter(function(x){ return !x.ag || x.ag.indexOf(a) >= 0; }); }
-function resetRounds(){ QS = {}; VX = {phase:'', i:0, breaths:0, germs:[], stars:{}}; BD = {phase:'intro'}; }
+function resetRounds(){ QS = {}; VX = {phase:'', i:0, breaths:0, germs:[], stars:{}}; BD = {phase:'intro'}; if(WH.t) clearInterval(WH.t); WH = {phase:'steps', i:0, done:false, t:null, n:0}; SL = null; }
 
 /* ---------- Brave Vaccine Day ----------
    2–4 years: give Teddy a vaccine, then slow "pinwheel" breaths.
@@ -1005,6 +1126,109 @@ function handTap(k){
   if(first){ confetti(); updateBank(); }
 }
 
+
+/* ---------- parent notes for the quiz games ---------- */
+var WT = {
+  done:{en:'Clean hands! {N} is a Handwash Hero. +1 star',hi:'साफ़ हाथ! {N} हाथ धोने का हीरो है। +1 स्टार'},
+  quizGo:{en:'Next: handwash quiz',hi:'आगे: हाथ धोने की क्विज़'},
+  parent:{en:'Parents: children wash hands with soap before eating, after the toilet, and after coming home. Help children under 5 years.',hi:'माता-पिता: बच्चे खाने से पहले, टॉयलेट के बाद और बाहर से घर आकर साबुन से हाथ धोएँ। 5 साल से छोटे बच्चों की मदद करें।'}
+};
+var DT = {parent:{en:'Parents: water and plain milk are the everyday drinks. Keep sugary drinks out of the daily routine.',hi:'माता-पिता: पानी और सादा दूध रोज़ के पेय हैं। मीठे पेय रोज़ की आदत में न रखें।'}};
+var RT = {parent:{en:'Parents: children copy what you do. Wear your own helmet and seat belt on every trip.',hi:'माता-पिता: बच्चे वही करते हैं जो आप करते हैं। हर बार खुद हेलमेट और सीट बेल्ट लगाएँ।'}};
+var FT = {parent:{en:'Parents: name the feeling for your child (“You look sad”). All feelings are allowed. Hurting others is not.',hi:'माता-पिता: बच्चे की भावना को नाम दें (“तुम उदास लग रहे हो”)। हर भावना ठीक है। किसी को चोट पहुँचाना ठीक नहीं।'}};
+var AT = {parent:{en:'For children of 9–12 years. The first step is always to tell a grown-up. Emergency number: 112.',hi:'9–12 साल के बच्चों के लिए। पहला कदम हमेशा बड़ों को बताना है। आपात नंबर: 112।'}};
+
+/* ---------- Handwash Hero: steps for every age, then a quiz for 5–12 years ---------- */
+var WASH_STEPS = [
+  {ic:'🚰',a:'bob',en:'Wet your hands with clean water',hi:'साफ़ पानी से हाथ गीले करो'},
+  {ic:'🧼',a:'bob',en:'Take soap',hi:'साबुन लगाओ'},
+  {ic:'🙌',a:'scrub',en:'Rub your palms together',hi:'हथेलियाँ आपस में रगड़ो'},
+  {ic:'🤚',a:'scrub',en:'Rub the back of each hand',hi:'दोनों हाथों का पिछला हिस्सा रगड़ो'},
+  {ic:'🖐️',a:'scrub',en:'Rub between your fingers',hi:'उँगलियों के बीच रगड़ो'},
+  {ic:'👍',a:'scrub',en:'Rub your thumbs and under your nails',hi:'अँगूठे और नाखूनों के नीचे रगड़ो'},
+  {ic:'⏱️',a:'bob',count:true,en:'Keep rubbing for 20 seconds. Count with me!',hi:'20 सेकंड तक रगड़ते रहो। मेरे साथ गिनो!'},
+  {ic:'💦',a:'bob',en:'Rinse with clean water',hi:'साफ़ पानी से धो लो'},
+  {ic:'🧻',a:'bob',en:'Dry with a clean towel',hi:'साफ़ तौलिए से पोंछो'}
+];
+var WH = {phase:'steps', i:0, done:false, t:null, n:0};
+function washRender(){
+  if(WH.t){ clearInterval(WH.t); WH.t = null; }
+  if(WH.phase === 'quiz' && AGE() !== 'a'){ qRender('wash'); return; }
+  WH.phase = 'steps';
+  var el = document.getElementById('s-wash'), N = WASH_STEPS.length, s = WASH_STEPS[WH.i], last = WH.i === N-1;
+  el.innerHTML = '<h2>'+L(T.washGame)+'</h2><div class="step"><div class="n">'+(WH.i+1)+' / '+N+'</div>'+
+    (s.count ? '<div class="count20" id="count20" aria-live="off">1</div>' : '<div class="ic '+s.a+'" aria-hidden="true">'+s.ic+'</div>')+
+    '<div class="big">'+esc(L(s))+'</div></div>'+
+    (!last ? '<button type="button" class="go" data-wh="next">'+L(T.next)+' →</button>'
+           : '<div class="why good">'+L(WT.done)+'</div>'+(AGE() === 'a' ? '' : '<button type="button" class="go" data-wh="quiz">'+L(WT.quizGo)+' →</button>')+
+             '<button type="button" class="go" data-wh="again"'+(AGE() === 'a' ? '' : ' style="background:var(--card);color:var(--ink)"')+'>'+L(T.playAgain)+'</button>')+
+    '<div class="pnote">'+L(WT.parent)+'</div>';
+  if(s.count){
+    WH.n = 1;
+    WH.t = setInterval(function(){
+      var c = document.getElementById('count20');
+      if(!c || WH.n >= 20){ clearInterval(WH.t); WH.t = null; return; }
+      WH.n++; c.textContent = WH.n;
+    }, 1000);
+  }
+}
+function washAct(a){
+  if(a === 'next'){ if(WH.i < WASH_STEPS.length-1){ WH.i++; if(WH.i === WASH_STEPS.length-1 && !WH.done){ WH.done = true; KID().bonus++; save(); updateBank(); confetti(); } } washRender(); return; }
+  if(a === 'again'){ WH.i = 0; WH.phase = 'steps'; washRender(); return; }
+  if(a === 'quiz'){ WH.phase = 'quiz'; qStart('wash'); return; }
+}
+
+/* ---------- Sleep Time: put the bedtime routine in order ----------
+   Order is by stage, so brush / toilet / night clothes can come in any order:
+   0 screens off, 1 get ready, 2 story, 3 sleep. */
+var SLEEP_STEPS = [
+  {k:'off',r:0,ag:'bc',p:'📵',en:'Screens off',hi:'स्क्रीन बंद'},
+  {k:'brush',r:1,p:'🪥',en:'Brush teeth',hi:'ब्रश करो'},
+  {k:'toilet',r:1,ag:'bc',p:'🚽',en:'Toilet',hi:'टॉयलेट जाओ'},
+  {k:'pj',r:1,p:'👕',en:'Night clothes',hi:'रात के कपड़े'},
+  {k:'story',r:2,p:'📖',en:'Story or book',hi:'कहानी या किताब'},
+  {k:'sleep',r:3,p:'🌙',en:'Lights off, sleep',hi:'लाइट बंद, सो जाओ'}
+];
+var ST = {
+  ask:{en:'It is bedtime for {N}. Tap what comes first!',hi:'{N} के सोने का समय है। जो पहले आता है, उसे टैप करो!'},
+  hint:[
+    {en:'First, switch off all screens.',hi:'सबसे पहले सारी स्क्रीन बंद करो।'},
+    {en:'Get ready for bed first.',hi:'पहले सोने की तैयारी करो।'},
+    {en:'Now a quiet story, then sleep.',hi:'अब एक शांत कहानी, फिर नींद।'},
+    {en:'Sleep comes last.',hi:'नींद सबसे आख़िर में आती है।'}
+  ],
+  done:{en:'Good night, {N}! The same bedtime every day keeps you fresh. +1 star',hi:'शुभ रात्रि, {N}! रोज़ एक ही समय पर सोने से ताज़गी रहती है। +1 स्टार'},
+  hrs:{
+    a:{en:'Sleep needed in 24 hours, naps included: 11–14 hours at 1–2 years, and 10–13 hours at 3–5 years.',hi:'24 घंटे में ज़रूरी नींद, दिन की झपकी मिलाकर: 1–2 साल में 11–14 घंटे, और 3–5 साल में 10–13 घंटे।'},
+    b:{en:'Sleep needed every night: 9–12 hours at 6–12 years (10–13 hours at 5 years).',hi:'हर रात ज़रूरी नींद: 6–12 साल में 9–12 घंटे (5 साल में 10–13 घंटे)।'},
+    c:{en:'Sleep needed every night at 6–12 years: 9–12 hours.',hi:'6–12 साल में हर रात ज़रूरी नींद: 9–12 घंटे।'}
+  },
+  parent:{en:'Parents: keep the same bedtime and wake-up time every day, and no screens before bedtime.',hi:'माता-पिता: रोज़ सोने और उठने का समय एक ही रखें, और सोने से पहले स्क्रीन नहीं।'}
+};
+var SL = null;
+function sleepStart(){ SL = {left: shuffle(forAge(SLEEP_STEPS)), done: [], hint: -1, scored: false}; }
+function sleepRender(){
+  if(!SL) sleepStart();
+  var el = document.getElementById('s-sleep'), fin = !SL.left.length;
+  var row = SL.done.map(function(x, n){ return '<span class="seq"><b>'+(n+1)+'</b>'+x.p+'</span>'; }).join('');
+  el.innerHTML = '<h2>'+L(T.sleepGame)+'</h2><div class="bubble" style="text-align:center;align-self:center">'+L(ST.ask)+'</div>'+
+    '<div class="seqrow" aria-live="polite">'+(row || '<span class="seq empty">1</span>')+'</div>'+
+    '<div class="chips">'+SL.left.map(function(x){ return '<button type="button" class="chip" data-sl="'+x.k+'"><span class="pic" aria-hidden="true">'+x.p+'</span>'+esc(L(x))+'</button>'; }).join('')+'</div>'+
+    (fin ? '<div class="why good">'+L(ST.done)+'</div><div class="checklist">'+L(ST.hrs[AGE()])+'</div><button type="button" class="go" data-sl="again">'+L(T.playAgain)+'</button>'
+         : (SL.hint >= 0 ? '<div class="why bad">'+L(ST.hint[SL.hint])+'</div>' : ''))+
+    '<div class="pnote">'+L(ST.parent)+'</div>';
+}
+function sleepTap(k){
+  if(k === 'again'){ sleepStart(); sleepRender(); return; }
+  var it = SL.left.filter(function(x){ return x.k === k; })[0]; if(!it) return;
+  var min = Math.min.apply(null, SL.left.map(function(x){ return x.r; }));
+  if(it.r === min){
+    SL.left = SL.left.filter(function(x){ return x.k !== k; }); SL.done.push(it); SL.hint = -1;
+    if(!SL.left.length && !SL.scored){ SL.scored = true; KID().bonus++; save(); updateBank(); confetti(); }
+  } else { SL.hint = min; }
+  sleepRender();
+}
+
 /* ---------- parents: reset stars ----------
    Hold the star counter for 3 seconds, or tap it 5 times quickly. Both ask for confirmation. */
 var holdT = null, tapN = 0, tapT = null, bankEl = document.getElementById('bankBox');
@@ -1040,6 +1264,8 @@ document.getElementById('app').addEventListener('click', function(e){
   if(b.dataset.gender){ stashName(); KID().gender = b.dataset.gender; save(); renderCharPick(); return; }
   if(b.dataset.age){ stashName(); KID().age = b.dataset.age; save(); resetRounds(); renderCharPick(); return; }
   if(b.dataset.vx){ vaxAct(b.dataset.vx); return; }
+  if(b.dataset.wh){ washAct(b.dataset.wh); return; }
+  if(b.dataset.sl){ sleepTap(b.dataset.sl); return; }
   if(b.dataset.germ !== undefined){ germTap(+b.dataset.germ); return; }
   if(b.dataset.bd){ bodyAct(b.dataset.bd); return; }
   if(b.dataset.hand){ handTap(b.dataset.hand); return; }
@@ -1062,7 +1288,7 @@ document.getElementById('app').addEventListener('click', function(e){
 
 applyLang(); updateBank();
 var ready = KID().name && KID().gender && KID().age, want = (location.hash || '').slice(1);
-show(!ready ? 'char' : (want === 'vax' || want === 'body') ? want : 'home');
+show(!ready ? 'char' : (['vax','body','wash','sleep','feel','drink','road','aid'].indexOf(want) >= 0) ? want : 'home');
 })();
 </script>
 <footer style="max-width:560px;margin:8px auto 24px;padding:0 16px;text-align:center;font:13px/1.5 Mukta,system-ui,sans-serif;color:var(--tx,#556175)"><b style="display:block;font:800 16px 'Baloo 2',Mukta,sans-serif;color:var(--tx,#1f5fbf)">Dr. Dinesh Mittal Child Clinic</b>Dr. Dinesh Mittal, MBBS, DCH · Child Specialist<br>H-34/69, Sector 3, Rohini, Delhi – 110085<br>Phone: <span style="user-select:all;font-weight:700">+91 81305 21456</span><br>Mon–Sat 10:00 AM–1:00 PM &amp; 6:00–8:30 PM · Sun 11:00 AM–12:00 PM<br><a href="https://www.drdineshmittal.com" style="color:var(--tx,#1f5fbf);font-weight:700">www.drdineshmittal.com</a></footer></body></html>
