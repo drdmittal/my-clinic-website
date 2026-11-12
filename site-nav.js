@@ -110,6 +110,17 @@
     render();
     document.body.appendChild(rail); document.body.appendChild(tab); document.body.appendChild(back); document.body.appendChild(drawer);
 
+    // copyright line on every page that does not already carry one
+    function addCopy() {
+      if (/©/.test(document.body.textContent || '') || document.querySelector('.dmr-copy')) return;
+      var cp = document.createElement('p');
+      cp.className = 'dmr-copy';
+      cp.style.cssText = 'text-align:center;font-size:12px;color:#6b6b80;margin:28px 12px 18px;line-height:1.5';
+      cp.textContent = '© ' + new Date().getFullYear() + ' Dr. Dinesh Mittal, Child Clinic, Rohini · www.drdineshmittal.com · All content and design are original; copying without permission is not allowed.';
+      document.body.appendChild(cp);
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', addCopy); else addCopy();
+
     function setOpen(on) {
       document.documentElement.classList.toggle('dmr-open', on);
       tab.setAttribute('aria-expanded', String(on)); drawer.setAttribute('aria-hidden', String(!on));

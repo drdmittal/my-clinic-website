@@ -1,7 +1,7 @@
 # Clinic Website & Booking — Handbook
 
 Everything needed to keep working on Dr. Dinesh Mittal's website and online booking in any new chat.
-Last updated: 11 Nov 2026 (games by age group and eight new games added to `parent-tools/golu-game.html`; hub password removed from this file). Before that: 10 Nov 2026 (wheeze parent guide added as an unlisted page, `parent-tools/wheeze-parent-guide.html`; switched to English/Hindi, clinic details reduced to name and registration, reference line removed).
+Last updated: 13 Nov 2026 (copy protection: canonical tags, copyright line, security to-do list in section 5a). Before that: 11 Nov 2026 (games by age group and eight new games added to `parent-tools/golu-game.html`; hub password removed from this file). Before that: 10 Nov 2026 (wheeze parent guide added as an unlisted page, `parent-tools/wheeze-parent-guide.html`; switched to English/Hindi, clinic details reduced to name and registration, reference line removed).
 
 ## 1. Basics
 
@@ -96,6 +96,18 @@ Last updated: 11 Nov 2026 (games by age group and eight new games added to `pare
 - BLACKLIST support from the old sheet.
 - Bring older article pages to the new design. Next: review Vaccines and Growth check pages (old design).
 - Newborn corner additions (doctor approved the list on 17 Oct 2026): breastfeeding help (latch, positions, enough milk, expressing and storing), safe sleep, visit plan for the first 3 months, feeding and nappy log, common skin problems (nappy rash, heat rash, cradle cap), crying and colic, mother's wellbeing. **Do not add** a newborn screening checklist or kangaroo mother care (doctor's domain; would confuse parents).
+
+## 5a. Copy protection and security (13 Nov 2026)
+
+- **Done:** canonical tags on every indexed page (so Google treats this site as the original); `site-nav.js` adds a copyright line with www.drdineshmittal.com to every page that has none.
+- **Already in place:** booking honeypot, per-phone daily limit, input cleaning, 1.2 s delay on a wrong panel PIN; submissions read link needs `PULL_TOKEN`; `doctor-panel.html` and `booking-backend/` blocked in robots.txt.
+- **Pending, on the doctor's side:**
+  1. Change the private-tools passwords (doctor hub and reception) to long passphrases with the `rekey` command in section 6. The old hub password is still in the public repo history.
+  2. Make ADMIN_PIN and STAFF_PIN in Booking Settings at least 8 digits (the PIN is the only lock on the panel).
+  3. Turn on 2-step verification for GitHub, Google and the domain registrar; keep both domains on auto-renew with domain lock.
+  4. Verify both domains in Google Search Console; keep the Google Business Profile claimed.
+  5. Optional: the repo is public, so anyone can download the whole site. Making it private needs GitHub Pro for Pages, or a move to Cloudflare Pages (free, works with a private repo).
+- **If a copy appears:** Google copyright removal form (DMCA) plus a complaint to the copier's hosting company.
 
 ## 6. Password-protected section (`private-tools/`)
 
