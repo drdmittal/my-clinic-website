@@ -20,12 +20,14 @@
     games: '<circle cx="12" cy="12" r="9"/><path d="M8.5 14.5q3.5 3 7 0M9 9.5h.01M15 9.5h.01"/>',
     review: '<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>',
     wa: '<path d="M4 20l1.3-3.9A8 8 0 1 1 8 18.8z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 1a4 4 0 0 1-2-2l1-1-1-2z"/>',
+    age: '<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v3l2 2"/>',
     lock: '<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>'
   };
   var ITEMS = [
     { k: 'home', href: '/', en: 'Home', hi: 'होम', c: '#3d36b8' },
     { k: 'book', href: '/book.html', en: 'Book', hi: 'बुक करें', c: '#2f8f3a' },
     { k: 'diet', href: '/baby-diet-planner.html', en: 'Diet guide', hi: 'आहार गाइड', c: '#e0a100' },
+    { k: 'age', href: '/find-by-age.html', en: 'Find by age', hi: 'उम्र से खोजें', c: '#0f9b8e' },
     { k: 'newborn', href: '/newborn.html', en: 'Newborn', hi: 'नवजात', c: '#e2457a' },
     { k: 'chart', href: '/parent-tools/fever-chart.html', en: 'Fever chart', hi: 'बुख़ार चार्ट', c: '#f08a1c' },
     { k: 'tools', href: '/#tools', en: 'Parent tools', hi: 'पेरेंट टूल्स', c: '#c2410c' },
