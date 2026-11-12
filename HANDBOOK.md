@@ -102,7 +102,7 @@ Last updated: 13 Nov 2026 (copy protection: canonical tags, copyright line, secu
 - **Done:** canonical tags on every indexed page (so Google treats this site as the original); `site-nav.js` adds a copyright line with www.drdineshmittal.com to every page that has none.
 - **Already in place:** booking honeypot, per-phone daily limit, input cleaning, 1.2 s delay on a wrong panel PIN; submissions read link needs `PULL_TOKEN`; `doctor-panel.html` and `booking-backend/` blocked in robots.txt.
 - **Pending, on the doctor's side:**
-  1. Change the private-tools passwords (doctor hub and reception) to long passphrases with the `rekey` command in section 6. The old hub password is still in the public repo history.
+  1. Done 13 Nov 2026: doctor hub re-encrypted with a new long passphrase (given to the doctor in chat, not written here); the leaked old password no longer opens it. Reception and the two clinic forms never used the leaked password; change them too if their passwords are short.
   2. Make ADMIN_PIN and STAFF_PIN in Booking Settings at least 8 digits (the PIN is the only lock on the panel).
   3. Turn on 2-step verification for GitHub, Google and the domain registrar; keep both domains on auto-renew with domain lock.
   4. Verify both domains in Google Search Console; keep the Google Business Profile claimed.
