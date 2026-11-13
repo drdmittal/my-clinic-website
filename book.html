@@ -85,7 +85,7 @@ a{color:var(--brand)}
 form{display:flex;flex-direction:column;gap:12px}
 label{display:flex;flex-direction:column;gap:4px;font-weight:600;font-size:15px}
 label small{font-weight:500;color:var(--muted)}
-input[type=text],input[type=tel]{font:500 18px var(--body);color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;min-height:50px;width:100%}
+input[type=text],input[type=tel],input[type=email]{font:500 18px var(--body);color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;min-height:50px;width:100%}
 input:focus{outline:3px solid var(--brand);outline-offset:1px;border-color:var(--brand)}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .visit{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -164,6 +164,7 @@ section[style*="--c:var(--sun)"] .n,section[style*="--c:var(--orange)"] .n,secti
         <label for="child"><span><span class="en">Child’s name</span><span class="hi">बच्चे का नाम</span></span><input id="child" type="text" autocomplete="off" maxlength="60" required></label>
         <label for="phone"><span><span class="en">Mobile number</span><span class="hi">मोबाइल नंबर</span></span><input id="phone" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="10" placeholder="10 digits" required></label>
       </div>
+      <label for="email" id="emailBox" hidden><span><span class="en">Email (optional)</span><span class="hi">ईमेल (ज़रूरी नहीं)</span></span><input id="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" maxlength="100" placeholder="name@example.com"><small style="display:block;font-size:13px;font-weight:400;margin-top:4px;opacity:.8"><span class="en">Fill this to get the confirmation and reminder by email.</span><span class="hi">ईमेल लिखें तो पुष्टि और रिमाइंडर ईमेल पर भी आएगा।</span></small></label>
       <label class="tick" for="wa" id="waBox" hidden><input id="wa" type="checkbox"><span><span class="en">Send me booking confirmation and reminder on WhatsApp</span><span class="hi">बुकिंग की पुष्टि और रिमाइंडर WhatsApp पर भेजें</span></span></label>
       <p class="note good" id="waKnown" hidden style="font-size:14px"><span class="en">✓ Confirmation and reminder will come on WhatsApp.</span><span class="hi">✓ पुष्टि और रिमाइंडर WhatsApp पर आएगा।</span></p>
       <label class="hp" aria-hidden="true">Website <input id="website" type="text" tabindex="-1" autocomplete="off"></label>
@@ -207,6 +208,9 @@ section[style*="--c:var(--sun)"] .n,section[style*="--c:var(--orange)"] .n,secti
   var mem = {}; try{ mem = JSON.parse(localStorage.getItem('clinicBookingDetails')||'{}'); }catch(e){}
   if(mem.phone) document.getElementById('phone').value = mem.phone;
   if(mem.child) document.getElementById('child').value = mem.child;
+  if(mem.email) document.getElementById('email').value = mem.email;
+  var emailOn = false;
+  function emailRx(v){ return /^[A-Za-z0-9][A-Za-z0-9._%+-]{0,63}@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)+$/.test(v); }
   // WhatsApp permission is asked only the first time a number is used on this phone.
   // (The clinic also remembers numbers that agreed before, so other devices are covered too.)
   var waOn = false;
@@ -261,6 +265,7 @@ section[style*="--c:var(--sun)"] .n,section[style*="--c:var(--orange)"] .n,secti
   function apply(res, keep){
       state.days = res.days;
       waOn = !!res.whatsapp; updateWa();
+      emailOn = !!res.email; document.getElementById('emailBox').hidden = !emailOn;
       var nb = document.getElementById('notice'), lines = String(res.notice||'').split('\n').map(function(l){ return l.trim(); }).filter(String);
       nb.innerHTML = lines.map(function(l){ return '<p><span aria-hidden="true">📢</span><span>'+escapeHtml(l)+'</span></p>'; }).join(''); nb.hidden = !lines.length;
       if(!keep || !state.days.some(function(d){ return d.date===state.day; })){
@@ -359,9 +364,11 @@ section[style*="--c:var(--sun)"] .n,section[style*="--c:var(--orange)"] .n,secti
     if(!state.visit){ err.textContent = t('Please choose Consultation or Vaccination.','कृपया चुनें: डॉक्टर को दिखाना या टीका लगवाना।'); err.dataset.v='1'; return; }
     if(!child){ err.textContent = t('Please enter the child’s name.','कृपया बच्चे का नाम लिखें।'); document.getElementById('child').focus(); return; }
     if(!/^[6-9]\d{9}$/.test(phone)){ err.textContent = t('Please enter a valid 10-digit mobile number.','कृपया सही 10 अंकों का मोबाइल नंबर लिखें।'); document.getElementById('phone').focus(); return; }
+    var email = emailOn ? document.getElementById('email').value.trim() : '';
+    if(email && !emailRx(email)){ err.textContent = t('Please check the email address, or leave it empty.','कृपया ईमेल पता जाँच लें, या खाली छोड़ दें।'); document.getElementById('email').focus(); return; }
     err.textContent = '';
-    var body = { action:'book', date:state.day, time:state.slot, childName:child, childAge:'', parentName:'', phone:phone, reason:'', visit:state.visit, whatsapp:document.getElementById('wa').checked || !document.getElementById('waKnown').hidden, website:document.getElementById('website').value };
-    try{ localStorage.setItem('clinicBookingDetails', JSON.stringify({child:body.childName, phone:phone, wa:body.whatsapp})); }catch(e){}
+    var body = { action:'book', date:state.day, time:state.slot, childName:child, childAge:'', parentName:'', phone:phone, reason:'', visit:state.visit, email:email, whatsapp:document.getElementById('wa').checked || !document.getElementById('waKnown').hidden, website:document.getElementById('website').value };
+    try{ localStorage.setItem('clinicBookingDetails', JSON.stringify({child:body.childName, phone:phone, wa:body.whatsapp, email:email})); }catch(e){}
     state.busy = true;
     var go = document.getElementById('go'); go.disabled = true; go.innerHTML = '<span class="spin" aria-hidden="true"></span>'+t('Booking…','बुक हो रहा है…');
     apiPost(body).then(function(res){
@@ -371,6 +378,7 @@ section[style*="--c:var(--sun)"] .n,section[style*="--c:var(--orange)"] .n,secti
       var msg = code==='slot_full' ? t('Sorry, this slot just filled up. Please choose another time.','माफ़ कीजिए, यह स्लॉट अभी भर गया। दूसरा समय चुनें।')
         : code==='blocked' ? (res.message || t('The doctor is not available at this time.','इस समय डॉक्टर उपलब्ध नहीं हैं।'))
         : code==='too_many' ? t('This number already has the maximum bookings for this day. Please call the clinic.','इस नंबर से इस दिन की अधिकतम बुकिंग हो चुकी है। कृपया क्लिनिक को कॉल करें।')
+        : code==='bad_email' ? t('Please check the email address, or leave it empty.','कृपया ईमेल पता जाँच लें, या खाली छोड़ दें।')
         : code==='bad_phone' ? t('Please enter a valid 10-digit mobile number.','कृपया सही 10 अंकों का मोबाइल नंबर लिखें।')
         : t('Booking could not be completed. Please try again or call +91 81305 21456.','बुकिंग पूरी नहीं हो सकी। फिर कोशिश करें या +91 81305 21456 पर कॉल करें।');
       err.textContent = msg; renderBar();
@@ -390,8 +398,9 @@ section[style*="--c:var(--sun)"] .n,section[style*="--c:var(--orange)"] .n,secti
   function showDone(res, body){
     document.getElementById('bar').hidden = true;
     var p = dayParts(res.date);
-    if(res.whatsapp){ try{ localStorage.setItem('clinicBookingDetails', JSON.stringify({child:body.childName, phone:body.phone, wa:true})); mem = {child:body.childName, phone:body.phone, wa:true}; }catch(e){} }
+    if(res.whatsapp){ try{ localStorage.setItem('clinicBookingDetails', JSON.stringify({child:body.childName, phone:body.phone, wa:true, email:body.email||''})); mem = {child:body.childName, phone:body.phone, wa:true, email:body.email||''}; }catch(e){} }
     var waLine = res.whatsapp ? (res.whatsappSent ? '<p class="note good">'+t('A confirmation has been sent to your WhatsApp.','पुष्टि आपके WhatsApp पर भेज दी गई है।')+'</p>' : '<p class="note info">'+t('You will get a WhatsApp reminder the evening before.','आपको एक दिन पहले शाम को WhatsApp पर रिमाइंडर मिलेगा।')+'</p>') : '';
+    if(res.email) waLine += res.emailSent ? '<p class="note good">'+t('A confirmation has been sent to your email. If you do not see it, please check the Spam folder.','पुष्टि आपके ईमेल पर भेज दी गई है। न दिखे तो Spam फ़ोल्डर देखें।')+'</p>' : '<p class="note info">'+t('You will get an email reminder the evening before.','आपको एक दिन पहले शाम को ईमेल पर रिमाइंडर मिलेगा।')+'</p>';
     document.getElementById('app').innerHTML =
       '<div class="done-card" role="status">'+
       '<svg class="check" viewBox="0 0 76 76" aria-hidden="true"><circle cx="38" cy="38" r="36"/><path d="M23 39l10 10 20-22" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>'+
@@ -435,13 +444,13 @@ section[style*="--c:var(--sun)"] .n,section[style*="--c:var(--orange)"] .n,secti
         });
         days.push(day);
       }
-      res({ok:true, slotMinutes:15, whatsapp:true, notice:'Dr. Mittal will be on leave from 1 to 5 Nov. Clinic reopens on 6 Nov.\nFlu vaccine (2026–27) is now available at the clinic.', days:days});
+      res({ok:true, slotMinutes:15, whatsapp:true, email:true, notice:'Dr. Mittal will be on leave from 1 to 5 Nov. Clinic reopens on 6 Nov.\nFlu vaccine (2026–27) is now available at the clinic.', days:days});
     }, 400); });
   }
   function demoPost(b){
     return new Promise(function(res){ setTimeout(function(){
       var s = findSlot(b.date, b.time);
-      res({ok:true, id:'DM'+b.date.slice(2).replace(/-/g,'')+'-4821', date:b.date, time:b.time, timeLabel:s?s.label:b.time, childName:b.childName, whatsapp:!!b.whatsapp, whatsappSent:!!b.whatsapp});
+      res({ok:true, id:'DM'+b.date.slice(2).replace(/-/g,'')+'-4821', date:b.date, time:b.time, timeLabel:s?s.label:b.time, childName:b.childName, whatsapp:!!b.whatsapp, whatsappSent:!!b.whatsapp, email:!!b.email, emailSent:!!b.email});
     }, 700); });
   }
 

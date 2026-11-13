@@ -68,3 +68,18 @@ The tick stays hidden on the website until WhatsApp is switched on (WA_ENABLED =
 8. In the sheet's **Booking Settings** tab, fill **WA_TOKEN** and **WA_PHONE_NUMBER_ID**, and set **WA_ENABLED** to **YES**.
 9. In Apps Script: paste the latest `Code.gs` (section A, step 3) → run **setup** once (creates the WhatsApp Consent tab) → run **testWhatsApp** (sends a test to the clinic phone) → run **installReminderTrigger** (reminders go out daily around 7 pm for the next day).
 10. Deploy a new version (section A, step 8).
+
+## D. Email confirmations and reminders (13 Nov 2026)
+
+Free, no Meta setup. Sent from the Google account that owns the script (free Gmail: about 100 emails a day).
+
+- **What parents see:** an optional **Email** box on the booking page under the mobile number. Empty = booking works exactly as before.
+- **Emails sent:** confirmation at once; reminder the evening before (same ~7 pm daily job as WhatsApp); cancellation when the doctor or staff cancel with "Inform the parent" ticked, or block time with "cancel bookings" chosen.
+- **Sheet:** the address goes in column **R (Email)** of Online Bookings; column **S (Email reminded)** shows when the reminder went.
+- **Switch off:** set **EMAIL_ENABLED** to **NO** in Booking Settings (the box disappears from the booking page within a minute).
+
+**To turn it on (one time):**
+1. Apps Script → `Code.gs` → select all → paste the new `booking-backend/Code.gs`. Save.
+2. `appsscript.json` → replace with the new `booking-backend/appsscript.json` (adds the "send email" permission). Save.
+3. Run **setup** → allow the new permission ("Send email as you"). This adds EMAIL_ENABLED and the reminder job.
+4. Deploy → Manage deployments → pencil → Version: **New version** → Deploy (never New deployment).

@@ -20,7 +20,7 @@ Last updated: 13 Nov 2026 (clothing and layers article; Find by age page and hom
 | Page | What it is |
 |---|---|
 | `index.html` | Homepage: hero with "growth ruler" card, Book / Diet guide / Call buttons, live open-closed status, parent tools, services, guides, timings and map |
-| `book.html` | Parent booking: day → time (colour-coded, no counts) → child's name + mobile only. Message box at top (from doctor panel). WhatsApp tick only on a number's first booking. |
+| `book.html` | Parent booking: day → time (colour-coded, no counts) → child's name + mobile, plus an **optional email** box (13 Nov 2026, doctor's request) for the confirmation, reminder and cancellation by email (hidden when EMAIL_ENABLED = NO). Message box at top (from doctor panel). WhatsApp tick only on a number's first booking. |
 | `doctor-panel.html` | "Appointments" app (PIN). Tabs: Appointments (+ Walk-in, Cancel), Message, Block time, Slot settings (incl. Staff PIN). Installable on phone home screen. |
 | `baby-diet-planner.html` | Diet & feeding guide (`?age=m0|m6|y1|y2` opens an age): 4 age groups (0–6 m, 6–12 m with 6 / 7–8 / 9–11 m steps, 1–2 y, 2–18 y), Veg / +Egg / Non-veg, English or Hindi, print with clinic header |
 | `how-to-dress-children-by-weather.html` | Article (13 Nov 2026, leg-pain design, English/Hindi): how many clothes and layers by Delhi season (°F first), the chest check for over/under-dressing, layer counting (puffy jacket = 2), safe sleep in winter (no cap/razai for babies), room heaters section (fuel-burning never in a closed room; electric: dryness, burns, switch off before sleep, ventilation), child over 1 = one more layer when still (AAP), going out (car seat, scooter), children needing extra care, myths, FAQ, urgent-signs box. Linked from Blog, Health articles (NEW), home guide ticker (pinned first), Find by age (Safety, 0–2 years only, doctor's choice), Newborn corner (Care at home, last card), sitemap. |
@@ -57,6 +57,7 @@ Last updated: 13 Nov 2026 (clothing and layers article; Find by age page and hom
 ### Pending, on the doctor's side
 
 1. **Paste the newest Code.gs** (17 Oct 2026 evening: speed cache + calendar lock + calendar log message). Paste, Save, then Deploy → Manage deployments → ✏️ → New version → Deploy. No need to run setup again. (Earlier update with visit type and Calendar copy is done and working.)
+2. **Email confirmations (13 Nov 2026):** optional email box on `book.html`. `Code.gs` sends confirmation at booking, reminder ~7 pm the evening before (`sendReminders`, same trigger as WhatsApp, now installed by `setup`), and cancellation emails. Sent with MailApp from the script owner's Gmail (about 100 a day on free Gmail; a failed email never stops a booking). Columns R (Email) and S (Email reminded) in Online Bookings; setting `EMAIL_ENABLED`. Emails carry the doctor's name, MBBS, DCH, DMC/R/00668, address, phone and www.drdineshmittal.com, English + Hindi. Setup steps: `booking-backend/SETUP.md` section D.
 2. **WhatsApp confirmations** (Cloud API, direct with Meta):
    - Buy a new SIM for automatic messages only. The clinic number stays on WhatsApp Business.
    - Then do the Meta setup in `booking-backend/SETUP.md` section C: business portfolio, app, number, 3 Utility templates, permanent token, Phone number ID.

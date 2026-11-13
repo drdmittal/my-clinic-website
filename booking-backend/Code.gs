@@ -62,6 +62,7 @@ var DEFAULT_SETTINGS = [
   ['NOTICE_UNTIL', '', 'Hide the message after this date (YYYY-MM-DD). Empty = keep showing'],
   ['CAL_ENABLED', 'YES', 'YES = copy online bookings to Google Calendar every 5 minutes (never slows booking)'],
   ['CAL_NAME', 'Clinic Appointments', 'Name of the Google Calendar that receives the copies (created automatically)'],
+  ['EMAIL_ENABLED', 'YES', 'YES = the booking page shows an optional email box; parents who fill it get the confirmation, the reminder and any cancellation by email (free, sent from this Google account). NO = hide the box and send no emails'],
   ['WA_ENABLED', 'NO', 'YES after WhatsApp Cloud API is set up'],
   ['WA_TOKEN', '', 'Permanent access token from Meta (keep private)'],
   ['WA_PHONE_NUMBER_ID', '', 'Phone number ID from Meta WhatsApp settings'],
@@ -80,6 +81,8 @@ var COL = { id: 0, created: 1, date: 2, time: 3, child: 4, age: 5, parent: 6, ph
 var VISITS = ['Consultation', 'Vaccination'];
 var REVIEW_COL = 16; // column P of Online Bookings: "Review asked" (kept separate so booking reads are unchanged)
 var REVIEW_SKIP_COL = 17; // column Q: type YES to stop a review request for that booking
+var EMAIL_COL = 18; // column R: parent's email (optional, typed on the booking page)
+var EMAIL_REM_COL = 19; // column S: time the email reminder was sent
 
 /* ------------------------------------------------------------------ setup */
 
@@ -118,13 +121,15 @@ function setup() {
     var head = bk.getRange(1, 1, 1, BOOKING_HEADERS.length).getDisplayValues()[0];
     BOOKING_HEADERS.forEach(function (h, i) { if (!head[i]) bk.getRange(1, i + 1).setValue(h).setFontWeight('bold'); });
   }
+  emailColumns(bk);
   consentSheet();
   installCalendarSync();
+  installReminderTrigger();
   try { clinicCalendar(settings()); } catch (e) { console.warn('Calendar not created yet: ' + e); }
   return 'Setup done';
 }
 
-/** Run once after WhatsApp is ready: sends reminders every evening around 7 pm. */
+/** Sends reminders every evening around 7 pm (email and, once it is set up, WhatsApp). setup() installs it. */
 function installReminderTrigger() {
   ScriptApp.getProjectTriggers().forEach(function (t) {
     if (t.getHandlerFunction() === 'sendReminders') ScriptApp.deleteTrigger(t);
@@ -398,7 +403,7 @@ function getSlots(from, days) {
     day.closed = !sessions.length;
     outDays.push(day);
   }
-  return { ok: true, slotMinutes: s.SLOT_MINUTES, notice: activeNotice(s), whatsapp: String(s.WA_ENABLED).toUpperCase() === 'YES', days: outDays, clinic: { name: s.CLINIC_NAME, phone: s.CLINIC_PHONE, address: s.CLINIC_ADDRESS } };
+  return { ok: true, slotMinutes: s.SLOT_MINUTES, notice: activeNotice(s), whatsapp: String(s.WA_ENABLED).toUpperCase() === 'YES', email: emailOn(s), days: outDays, clinic: { name: s.CLINIC_NAME, phone: s.CLINIC_PHONE, address: s.CLINIC_ADDRESS } };
 }
 
 /* ------------------------------------------------------------------ book */
@@ -414,6 +419,8 @@ function book(b) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || !/^\d{2}:\d{2}$/.test(time)) return { ok: false, error: 'bad_slot' };
   if (!child) return { ok: false, error: 'need_child_name' };
   if (!/^[6-9]\d{9}$/.test(phone)) return { ok: false, error: 'bad_phone' };
+  var email = emailOn(s) ? String(b.email || '').trim().slice(0, 100) : '';
+  if (email && !validEmail(email)) return { ok: false, error: 'bad_email' };
   if (b.website) return { ok: true, id: 'X' }; // honeypot field filled by bots
 
   var lock = LockService.getScriptLock();
@@ -433,7 +440,7 @@ function book(b) {
     var id = 'DM' + Utilities.formatDate(new Date(), TZ, 'yyMMdd') + '-' + Math.floor(1000 + Math.random() * 9000);
     var wa = waConsent(phone, !!b.whatsapp) ? 'YES' : 'NO';
     var sheet = SS().getSheetByName(TAB_BOOKINGS);
-    sheet.appendRow([id, Utilities.formatDate(new Date(), TZ, 'yyyy-MM-dd HH:mm'), "'" + date, "'" + time, child, age, parent, "'" + phone, reason, wa, 'Booked', '', '', visit, '']);
+    sheet.appendRow([id, Utilities.formatDate(new Date(), TZ, 'yyyy-MM-dd HH:mm'), "'" + date, "'" + time, child, age, parent, "'" + phone, reason, wa, 'Booked', '', '', visit, '', '', '', email, '']);
     SpreadsheetApp.flush();
     slotsChanged();
   } finally {
@@ -442,7 +449,8 @@ function book(b) {
 
   var waSent = false;
   if (wa === 'YES') waSent = sendTemplate(s, s.WA_TEMPLATE_CONFIRM, phone, [child, prettyDate(date), label(toMin(time))]);
-  return { ok: true, id: id, date: date, dateLabel: prettyDate(date), time: time, timeLabel: label(toMin(time)), childName: child, visit: visit, whatsapp: wa === 'YES', whatsappSent: waSent };
+  var mailSent = email ? sendClinicEmail(s, 'confirm', email, child, date, time, id) : false;
+  return { ok: true, id: id, date: date, dateLabel: prettyDate(date), time: time, timeLabel: label(toMin(time)), childName: child, visit: visit, whatsapp: wa === 'YES', whatsappSent: waSent, email: !!email, emailSent: mailSent };
 }
 
 /* WhatsApp permission is asked only once per mobile number.
@@ -505,7 +513,7 @@ function admin(b) {
     var bl = blocks().filter(function (x) { return x.to > now; }).map(function (x) {
       return { row: x.row, from: Utilities.formatDate(x.from, TZ, "EEE d MMM, h:mm a"), to: Utilities.formatDate(x.to, TZ, "EEE d MMM, h:mm a"), msg: x.msg };
     });
-    return { ok: true, role: role, staffPinSet: !!String(s.STAFF_PIN || '').trim(), settings: editable, blocks: bl, notice: String(s.NOTICE || ''), noticeUntil: noticeDate(s.NOTICE_UNTIL), noticeLive: !!activeNotice(s), whatsapp: String(s.WA_ENABLED).toUpperCase() === 'YES' };
+    return { ok: true, role: role, staffPinSet: !!String(s.STAFF_PIN || '').trim(), settings: editable, blocks: bl, notice: String(s.NOTICE || ''), noticeUntil: noticeDate(s.NOTICE_UNTIL), noticeLive: !!activeNotice(s), whatsapp: String(s.WA_ENABLED).toUpperCase() === 'YES', email: emailOn(s) };
   }
 
   /* Walk-in: staff fill a place in a slot so it cannot be booked online. No name or phone needed. */
@@ -593,7 +601,10 @@ function admin(b) {
       affected.forEach(function (r) {
         sheet.getRange(r.row, COL.status + 1).setValue('Cancelled (doctor unavailable)');
         cancelled++;
-        if (r[COL.wa] === 'YES' && sendTemplate(s, s.WA_TEMPLATE_CANCEL, r[COL.phone], [r[COL.child], prettyDate(r[COL.date]), label(toMin(r[COL.time]))])) notified++;
+        var told = r[COL.wa] === 'YES' && sendTemplate(s, s.WA_TEMPLATE_CANCEL, r[COL.phone], [r[COL.child], prettyDate(r[COL.date]), label(toMin(r[COL.time]))]);
+        var em = rowEmail(sheet, r.row);
+        if (em && sendClinicEmail(s, 'cancel', em, r[COL.child], r[COL.date], r[COL.time], r[COL.id])) told = true;
+        if (told) notified++;
       });
     }
     return { ok: true, affected: affected.map(function (r) { return { date: r[COL.date], time: label(toMin(r[COL.time])), child: r[COL.child], phone: r[COL.phone] }; }), cancelled: cancelled, notified: notified };
@@ -629,6 +640,8 @@ function admin(b) {
     slotsChanged();
     var sent = false;
     if (b.notify && vals2[COL.wa] === 'YES') sent = sendTemplate(s, s.WA_TEMPLATE_CANCEL, vals2[COL.phone], [vals2[COL.child], prettyDate(vals2[COL.date]), label(toMin(vals2[COL.time]))]);
+    var em2 = b.notify ? rowEmail(sh, r) : '';
+    if (em2 && sendClinicEmail(s, 'cancel', em2, vals2[COL.child], vals2[COL.date], vals2[COL.time], vals2[COL.id])) sent = true;
     return { ok: true, notified: sent };
   }
 
@@ -719,18 +732,98 @@ function sendTemplate(s, templateName, phone, params) {
   }
 }
 
-/** Daily trigger: reminds parents about tomorrow's appointments. */
+/** Daily trigger (about 7 pm): reminds parents about tomorrow's appointments, on WhatsApp and by email.
+    The two are independent: WhatsApp needs WA_ENABLED and consent, email needs an address typed at booking. */
 function sendReminders() {
   var s = settings();
-  if (String(s.WA_ENABLED).toUpperCase() !== 'YES') return;
+  var waOn = String(s.WA_ENABLED).toUpperCase() === 'YES', mailOn = emailOn(s);
+  if (!waOn && !mailOn) return;
   var tomorrow = addDays(ymd(new Date()), 1);
   var sheet = SS().getSheetByName(TAB_BOOKINGS);
+  if (!sheet) return;
+  if (mailOn) emailColumns(sheet);
   bookingRows().forEach(function (r) {
-    if (!isActive(r) || r[COL.date] !== tomorrow || r[COL.wa] !== 'YES' || r[COL.reminded]) return;
-    if (sendTemplate(s, s.WA_TEMPLATE_REMINDER, r[COL.phone], [r[COL.child], prettyDate(r[COL.date]), label(toMin(r[COL.time]))])) {
-      sheet.getRange(r.row, COL.reminded + 1).setValue(Utilities.formatDate(new Date(), TZ, 'yyyy-MM-dd HH:mm'));
+    if (!isActive(r) || r[COL.date] !== tomorrow) return;
+    var now = Utilities.formatDate(new Date(), TZ, 'yyyy-MM-dd HH:mm');
+    if (waOn && r[COL.wa] === 'YES' && !r[COL.reminded]) {
+      if (sendTemplate(s, s.WA_TEMPLATE_REMINDER, r[COL.phone], [r[COL.child], prettyDate(r[COL.date]), label(toMin(r[COL.time]))])) {
+        sheet.getRange(r.row, COL.reminded + 1).setValue(now);
+      }
+    }
+    if (mailOn) {
+      var pair = sheet.getRange(r.row, EMAIL_COL, 1, 2).getDisplayValues()[0];
+      var em = String(pair[0]).trim();
+      if (em && !pair[1] && validEmail(em) && sendClinicEmail(s, 'remind', em, r[COL.child], r[COL.date], r[COL.time], r[COL.id])) {
+        sheet.getRange(r.row, EMAIL_REM_COL).setNumberFormat('@').setValue(now);
+      }
     }
   });
+}
+
+/* ------------------------------------------------------------------ Email */
+
+/* Email is optional for the parent. It is sent from the Google account that owns this script
+   (free Gmail: about 100 emails a day). A failed or blocked email never stops a booking. */
+
+function emailOn(s) { return String(s.EMAIL_ENABLED || '').trim().toUpperCase() === 'YES'; }
+
+function validEmail(e) { return /^[A-Za-z0-9][A-Za-z0-9._%+-]{0,63}@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)+$/.test(String(e)) && String(e).length <= 100; }
+
+/** Adds the Email and Email reminded headings (columns R and S) if they are missing. */
+function emailColumns(sh) {
+  if (sh.getMaxColumns() < EMAIL_REM_COL) sh.insertColumnsAfter(sh.getMaxColumns(), EMAIL_REM_COL - sh.getMaxColumns());
+  if (!sh.getRange(1, EMAIL_COL).getDisplayValue()) sh.getRange(1, EMAIL_COL).setValue('Email').setFontWeight('bold');
+  if (!sh.getRange(1, EMAIL_REM_COL).getDisplayValue()) sh.getRange(1, EMAIL_REM_COL).setValue('Email reminded').setFontWeight('bold');
+}
+
+function rowEmail(sh, row) {
+  if (sh.getMaxColumns() < EMAIL_COL) return '';
+  var e = String(sh.getRange(row, EMAIL_COL).getDisplayValue()).trim();
+  return validEmail(e) ? e : '';
+}
+
+function escHtml(v) { return String(v).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+
+/** kind: 'confirm', 'remind' or 'cancel'. Returns true if Google accepted the email. */
+function sendClinicEmail(s, kind, to, child, date, time, id) {
+  if (!emailOn(s) || !validEmail(to)) return false;
+  try {
+    if (MailApp.getRemainingDailyQuota() < 1) { console.warn('Email not sent: daily Gmail limit reached'); return false; }
+    var clinic = String(s.CLINIC_NAME || 'Dr. Dinesh Mittal Child Clinic');
+    var phone = String(s.CLINIC_PHONE || '+91 81305 21456');
+    var addr = String(s.CLINIC_ADDRESS || 'H-34/69, Sector 3, Rohini, Delhi 110085');
+    var when = prettyDate(date) + ', ' + label(toMin(time));
+    var subject, en, hi;
+    if (kind === 'cancel') {
+      subject = 'Appointment cancelled: ' + when;
+      en = 'Sorry, Dr. Dinesh Mittal is not available for ' + child + "'s appointment on " + when + '. Please book another time at www.drdineshmittal.com.';
+      hi = 'माफ़ कीजिए, ' + when + ' को ' + child + ' के अपॉइंटमेंट के समय डॉ. दिनेश मित्तल उपलब्ध नहीं हैं। कृपया www.drdineshmittal.com पर दूसरा समय बुक करें।';
+    } else if (kind === 'remind') {
+      subject = 'Reminder: appointment tomorrow, ' + when;
+      en = 'Reminder: ' + child + ' has an appointment with Dr. Dinesh Mittal tomorrow, ' + when + '. Please arrive 10 minutes early and bring the vaccination card.';
+      hi = 'रिमाइंडर: ' + child + ' का अपॉइंटमेंट कल है, ' + when + '। कृपया 10 मिनट पहले आएँ और टीकाकरण कार्ड साथ लाएँ।';
+    } else {
+      subject = 'Appointment confirmed: ' + when;
+      en = 'Appointment confirmed. ' + child + ' has an appointment with Dr. Dinesh Mittal on ' + when + '. Please arrive 10 minutes early and bring the vaccination card.';
+      hi = 'अपॉइंटमेंट पक्का हो गया। ' + child + ' का अपॉइंटमेंट ' + when + ' को है। कृपया 10 मिनट पहले आएँ और टीकाकरण कार्ड साथ लाएँ।';
+    }
+    var help = 'This is an automatic email. To change or cancel, or for any query, WhatsApp or call ' + phone + '.';
+    var helpHi = 'यह अपने आप भेजा गया ईमेल है। समय बदलने, रद्द करने या किसी सवाल के लिए ' + phone + ' पर WhatsApp या कॉल करें।';
+    var sign = 'Dr. Dinesh Mittal, MBBS, DCH · Delhi Medical Council Reg. No. DMC/R/00668';
+    var lines = [en, '', 'Clinic: ' + addr, 'Booking ID: ' + id, '', hi, '', help, helpHi, '', clinic, sign, phone + ' · www.drdineshmittal.com'];
+    var html = '<div style="font-family:Arial,sans-serif;font-size:16px;line-height:1.5;color:#1d2540;max-width:520px">'
+      + '<p style="font-size:18px;font-weight:bold;color:#2a2580;margin:0 0 10px">' + escHtml(subject) + '</p>'
+      + '<p>' + escHtml(en) + '</p>'
+      + '<p><b>Clinic:</b> ' + escHtml(addr) + '<br><b>Booking ID:</b> ' + escHtml(id) + '</p>'
+      + '<p>' + escHtml(hi) + '</p>'
+      + '<p style="font-size:14px;color:#556175">' + escHtml(help) + '<br>' + escHtml(helpHi) + '</p>'
+      + '<p style="font-size:14px;color:#556175;border-top:1px solid #e3e6f2;padding-top:10px">' + escHtml(clinic) + '<br>' + escHtml(sign) + '<br>' + escHtml(phone) + ' · <a href="https://www.drdineshmittal.com">www.drdineshmittal.com</a></p></div>';
+    MailApp.sendEmail({ to: to, subject: subject, body: lines.join('\n'), htmlBody: html, name: clinic });
+    return true;
+  } catch (e) {
+    console.warn('Email error: ' + e);
+    return false;
+  }
 }
 
 /** Optional: run from the editor to check a template reaches your own phone. */

@@ -194,7 +194,7 @@ textarea{min-height:120px;resize:vertical;line-height:1.45}
       if(!r.ok) return fail(r, out);
       out.className='msg ok'; out.textContent = 'Blocked. Parents will see your message on the booking page.';
       var a = r.affected || [];
-      document.getElementById('aff').innerHTML = a.length ? '<div class="affected"><b>'+a.length+' booking(s) fall in this period'+(r.cancelled?' — cancelled'+(r.notified?', '+r.notified+' informed on WhatsApp':''):'')+':</b><br>'+a.map(function(x){ return esc(x.date)+' '+esc(x.time)+' · '+esc(x.child)+' · <a href="tel:+91'+esc(x.phone)+'">'+esc(x.phone)+'</a>'; }).join('<br>')+(r.cancelled&&!r.notified?'<br>Please call these parents.':'')+'</div>' : '';
+      document.getElementById('aff').innerHTML = a.length ? '<div class="affected"><b>'+a.length+' booking(s) fall in this period'+(r.cancelled?' — cancelled'+(r.notified?', '+r.notified+' informed by WhatsApp or email':''):'')+':</b><br>'+a.map(function(x){ return esc(x.date)+' '+esc(x.time)+' · '+esc(x.child)+' · <a href="tel:+91'+esc(x.phone)+'">'+esc(x.phone)+'</a>'; }).join('<br>')+(r.cancelled&&!r.notified?'<br>Please call these parents.':'')+'</div>' : '';
       loadMeta(function(){ blockView.list(); });
     }).catch(function(){ btn.disabled=false; net(); });
   }
@@ -282,7 +282,7 @@ textarea{min-height:120px;resize:vertical;line-height:1.45}
     post({action:'admin_save_settings', settings:vals}).then(function(r){ btn.disabled=false; if(!r.ok) return fail(r,out); out.className='msg ok'; out.textContent='Saved ✓'; S.settings = Object.assign(S.settings, vals); }).catch(function(){ btn.disabled=false; net(); });
   }
 
-  function loadMeta(cb){ post({action:'admin_load'}).then(function(r){ if(!r.ok) return fail(r); S.notice=r.notice||''; S.noticeUntil=r.noticeUntil||''; S.noticeLive=!!r.noticeLive; S.role=r.role||'doctor'; S.staffPinSet=!!r.staffPinSet; S.settings=r.settings; S.blocks=r.blocks; S.wa=r.whatsapp; cb&&cb(); }).catch(net); }
+  function loadMeta(cb){ post({action:'admin_load'}).then(function(r){ if(!r.ok) return fail(r); S.notice=r.notice||''; S.noticeUntil=r.noticeUntil||''; S.noticeLive=!!r.noticeLive; S.role=r.role||'doctor'; S.staffPinSet=!!r.staffPinSet; S.settings=r.settings; S.blocks=r.blocks; S.wa=r.whatsapp; S.em=r.email; cb&&cb(); }).catch(net); }
   function fail(r, el){ if(r.error==='wrong_pin'){ S.pin=''; try{sessionStorage.removeItem('drPanelPin');}catch(e){} return gate('Wrong PIN. Try again.'); } var m = r.error==='doctor_only' ? 'Only the doctor can change this.' : r.error==='unknown_action' ? 'Could not complete: the Google script needs updating (see setup steps).' : r.error==='staff_pin_same' ? 'Staff PIN must be different from your own PIN.' : 'Could not complete: '+(r.error||'error'); if(el){ el.className='msg err'; el.textContent=m; } else alertBox(m); }
   function net(){ alertBox('No connection to the booking system. Check the internet and try again.'); }
   function alertBox(m){ var v=document.getElementById('view'); if(v) v.insertAdjacentHTML('afterbegin','<div class="card" style="background:var(--rose-soft)">'+esc(m)+'</div>'); }
@@ -290,7 +290,7 @@ textarea{min-height:120px;resize:vertical;line-height:1.45}
   document.addEventListener('submit', function(e){
     if(e.target.id!=='pinForm') return; e.preventDefault();
     S.pin = document.getElementById('pin').value.trim(); if(!S.pin) return;
-    post({action:'admin_load'}).then(function(r){ if(!r.ok) return fail(r); S.role=r.role||'doctor'; S.staffPinSet=!!r.staffPinSet; S.settings=r.settings; S.blocks=r.blocks; S.wa=r.whatsapp; try{ sessionStorage.setItem('drPanelPin', S.pin); }catch(x){} shell(); }).catch(function(){ gate('Could not reach the booking system.'); });
+    post({action:'admin_load'}).then(function(r){ if(!r.ok) return fail(r); S.role=r.role||'doctor'; S.staffPinSet=!!r.staffPinSet; S.settings=r.settings; S.blocks=r.blocks; S.wa=r.whatsapp; S.em=r.email; try{ sessionStorage.setItem('drPanelPin', S.pin); }catch(x){} shell(); }).catch(function(){ gate('Could not reach the booking system.'); });
   });
   document.addEventListener('input', function(e){ if(e.target.id==='nt') prev(); });
   document.addEventListener('change', function(e){ if(e.target.id==='pick' && e.target.value){ S.date=e.target.value; appts(); } });
@@ -301,7 +301,7 @@ textarea{min-height:120px;resize:vertical;line-height:1.45}
     if(b.dataset.nav!==undefined){ S.date = b.dataset.nav==='0' ? today() : addDays(S.date, +b.dataset.nav); return appts(); }
     if(b.dataset.cx){
       var row = b.closest('.appt'); if(row.querySelector('.confirm')) return;
-      row.insertAdjacentHTML('beforeend','<div class="confirm"><b>Cancel this booking?</b>'+(S.wa?'<label class="tick"><input type="checkbox" class="notify" checked> Inform the parent on WhatsApp</label>':'<span class="muted">Please call the parent to inform them.</span>')+'<div class="row"><button class="btn red sm" data-yes="'+b.dataset.cx+'" data-id="'+b.dataset.id+'">Yes, cancel</button><button class="btn ghost sm" data-no="1">Keep</button></div></div>');
+      row.insertAdjacentHTML('beforeend','<div class="confirm"><b>Cancel this booking?</b>'+((S.wa||S.em)?'<label class="tick"><input type="checkbox" class="notify" checked> Inform the parent'+(S.wa&&S.em?' (WhatsApp, and email if given)':S.wa?' on WhatsApp':' by email (if given)')+'</label>'+(S.wa?'':'<span class="muted">Parents without email: please call them.</span>'):'<span class="muted">Please call the parent to inform them.</span>')+'<div class="row"><button class="btn red sm" data-yes="'+b.dataset.cx+'" data-id="'+b.dataset.id+'">Yes, cancel</button><button class="btn ghost sm" data-no="1">Keep</button></div></div>');
       return;
     }
     if(b.dataset.no){ b.closest('.confirm').remove(); return; }
@@ -332,7 +332,7 @@ textarea{min-height:120px;resize:vertical;line-height:1.45}
   var DM = { settings:{SLOT_MINUTES:15,PER_SLOT:2,DAYS_AHEAD:3,MIN_NOTICE_MINUTES:30,SESSIONS_MON:'10:00-13:00, 18:00-20:30',SESSIONS_TUE:'10:00-13:00, 18:00-20:30',SESSIONS_WED:'10:00-13:00, 18:00-20:30',SESSIONS_THU:'10:00-13:00, 18:00-20:30',SESSIONS_FRI:'10:00-13:00, 18:00-20:30',SESSIONS_SAT:'10:00-13:00, 18:00-20:30',SESSIONS_SUN:'11:00-12:00'}, blocks:[{row:2, from:'Mon 20 Oct, 10:00 AM', to:'Mon 27 Oct, 8:30 PM', msg:'Dr. Mittal is on leave. Clinic reopens on 28 Oct.'}],
     appts:[['10:00','Aarav Sharma','3 yrs','Neha Sharma','9810012345','Fever / cough / cold','YES'],['10:00','Myra Gupta','8 months','Rohit Gupta','9899012345','Vaccination','YES'],['10:15','Kabir Jain','6 yrs','Pooja Jain','9711012345','Stomach problem','NO'],['10:45','Anaya Singh','1.5 yrs','','9958012345','Follow-up','YES'],['18:00','Vivaan Arora','10 yrs','Sunil Arora','9873012345','Growth / routine check','NO'],['18:15','Ishaan Bansal','4 yrs','Ritu Bansal','9650012345','Fever / cough / cold','YES']] };
   function demo(b){ return new Promise(function(res){ setTimeout(function(){
-    if(b.action==='admin_load') return res({ok:true, role: b.pin==='2' ? 'staff' : 'doctor', staffPinSet: !!DM.spin, settings:DM.settings, blocks:DM.blocks, whatsapp:true, notice:DM.notice||'', noticeUntil:DM.until||'', noticeLive:!!DM.notice});
+    if(b.action==='admin_load') return res({ok:true, role: b.pin==='2' ? 'staff' : 'doctor', staffPinSet: !!DM.spin, settings:DM.settings, blocks:DM.blocks, whatsapp:true, email:true, notice:DM.notice||'', noticeUntil:DM.until||'', noticeLive:!!DM.notice});
     if(b.action==='admin_day'){ var p=b.date.split('-'); var d=new Date(+p[0],+p[1]-1,+p[2]); return res({ok:true, date:b.date, dateLabel:d.toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short',year:'numeric'}), bookings: DM.appts.map(function(a,i){ var h=+a[0].slice(0,2), m=a[0].slice(3); return {row:i+2, id:'DM'+b.date.slice(2).replace(/-/g,'')+'-'+(4100+i*37), time:a[0], timeLabel:(((h+11)%12)+1)+':'+m+' '+(h>=12?'PM':'AM'), child:a[1], age:a[2], parent:a[3], phone:a[4], reason:a[5], wa:a[6], visit: i%3===1 ? 'Vaccination' : 'Consultation', status: DM['cx'+i] ? 'Cancelled' : 'Booked'}; })}); }
     if(b.action==='admin_cancel'){ DM['cx'+(b.row-2)] = true; return res({ok:true}); }
     if(b.action==='admin_block'){ DM.blocks.push({row:DM.blocks.length+2, from:b.from.replace('T',' ').slice(0,16), to:b.to.replace('T',' ').slice(0,16), msg:b.message||'Dr. Mittal is not available at this time.'}); return res({ok:true, affected:[], cancelled:0, notified:0}); }
@@ -345,7 +345,7 @@ textarea{min-height:120px;resize:vertical;line-height:1.45}
     res({ok:false});
   }, 300); }); }
 
-  if(S.pin) { post({action:'admin_load'}).then(function(r){ if(!r.ok) return gate(); S.role=r.role||'doctor'; S.staffPinSet=!!r.staffPinSet; S.settings=r.settings; S.blocks=r.blocks; S.wa=r.whatsapp; shell(); }).catch(function(){ gate(); }); }
+  if(S.pin) { post({action:'admin_load'}).then(function(r){ if(!r.ok) return gate(); S.role=r.role||'doctor'; S.staffPinSet=!!r.staffPinSet; S.settings=r.settings; S.blocks=r.blocks; S.wa=r.whatsapp; S.em=r.email; shell(); }).catch(function(){ gate(); }); }
   else gate();
 })();
 </script>
