@@ -776,13 +776,13 @@ function sendReviewRequests() {
   });
 }
 
-/** Run once from the editor (after deploying): sends review requests every morning at about 10 am. */
+/** Run once from the editor (after deploying): sends review requests every evening at about 9 pm. */
 function installReviewTrigger() {
   ScriptApp.getProjectTriggers().forEach(function (t) {
     if (t.getHandlerFunction() === 'sendReviewRequests') ScriptApp.deleteTrigger(t);
   });
-  ScriptApp.newTrigger('sendReviewRequests').timeBased().everyDays(1).atHour(10).inTimezone(TZ).create();
-  return 'Review trigger installed (daily ~10 am)';
+  ScriptApp.newTrigger('sendReviewRequests').timeBased().everyDays(1).atHour(21).inTimezone(TZ).create();
+  return 'Review trigger installed (daily ~9 pm)';
 }
 
 /** Optional: run from the editor to check the review template reaches your own phone. */
