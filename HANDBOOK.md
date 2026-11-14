@@ -1,7 +1,7 @@
 # Clinic Website & Booking — Handbook
 
 Everything needed to keep working on Dr. Dinesh Mittal's website and online booking in any new chat.
-Last updated: 14 Nov 2026 (diet guide: picky-eating and iron sections for 1–2 and 2–18 years, katori equivalent fixed to 1 katori ≈ 150 ml, static text for search engines and no-JavaScript browsers). Before that: 13 Nov 2026 (clothing and layers article; Find by age page and home-page age box; copy protection: canonical tags, copyright line, security to-do list in section 5a). Before that: 11 Nov 2026 (games by age group and eight new games added to `parent-tools/golu-game.html`; hub password removed from this file). Before that: 10 Nov 2026 (wheeze parent guide added as an unlisted page, `parent-tools/wheeze-parent-guide.html`; switched to English/Hindi, clinic details reduced to name and registration, reference line removed).
+Last updated: 14 Nov 2026 (diet guide: MedicalWebPage structured data added; feeding PDF losslessly recompressed, 1.24 MB to 1.03 MB, same rendering; picky-eating and iron sections for 1–2 and 2–18 years, katori equivalent fixed to 1 katori ≈ 150 ml, static text for search engines and no-JavaScript browsers). Before that: 13 Nov 2026 (clothing and layers article; Find by age page and home-page age box; copy protection: canonical tags, copyright line, security to-do list in section 5a). Before that: 11 Nov 2026 (games by age group and eight new games added to `parent-tools/golu-game.html`; hub password removed from this file). Before that: 10 Nov 2026 (wheeze parent guide added as an unlisted page, `parent-tools/wheeze-parent-guide.html`; switched to English/Hindi, clinic details reduced to name and registration, reference line removed).
 
 ## 1. Basics
 
