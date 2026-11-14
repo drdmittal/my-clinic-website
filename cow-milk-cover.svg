@@ -1,0 +1,15 @@
+<svg viewBox="0 0 1200 800" role="img" aria-label="Cartoon baby with a feeding bottle, illustration" xmlns="http://www.w3.org/2000/svg">
+<rect width="1200" height="800" fill="#dff5f2"/>
+<circle cx="250" cy="180" r="90" fill="#f5ad1b" opacity=".35"/><circle cx="980" cy="620" r="120" fill="#8b4fd6" opacity=".2"/>
+<ellipse cx="600" cy="560" rx="260" ry="90" fill="#0f9b8e"/>
+<circle cx="600" cy="380" r="150" fill="#f1c59b"/>
+<path d="M460 360 C450 260 500 220 600 220 C700 220 750 260 740 360 C720 300 680 280 600 282 C520 280 480 300 460 360Z" fill="#3b2a4f"/>
+<path d="M525 390 Q545 372 565 390 M635 390 Q655 372 675 390" stroke="#2a1d4d" stroke-width="8" fill="none" stroke-linecap="round"/>
+<path d="M555 440 Q600 475 645 440" stroke="#8b1a2b" stroke-width="7" fill="none" stroke-linecap="round"/>
+<circle cx="500" cy="430" r="24" fill="#e2457a" opacity=".4"/><circle cx="700" cy="430" r="24" fill="#e2457a" opacity=".4"/>
+<rect x="800" y="330" width="110" height="200" rx="34" fill="#fff" stroke="#2a2580" stroke-width="8"/>
+<rect x="835" y="290" width="40" height="46" rx="10" fill="#2a2580"/>
+<rect x="818" y="390" width="74" height="110" fill="#2f8fe0" opacity=".5"/>
+<text x="600" y="120" text-anchor="middle" font-size="54" font-weight="700" fill="#2a2580">Is your baby allergic</text>
+<text x="600" y="184" text-anchor="middle" font-size="54" font-weight="700" fill="#2a2580">to cow milk?</text>
+</svg>
